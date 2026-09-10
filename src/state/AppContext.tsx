@@ -1,0 +1,431 @@
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import type {
+  User,
+  BankAccount,
+  Transaction,
+  AppNotification,
+  Contact,
+  ElectricityBill,
+  MoneyRequest,
+  DeviceSession,
+  ScreenId,
+  BottomTab,
+} from '../types';
+import { authService } from '../services/authService';
+import { bankService } from '../services/bankService';
+import { transactionService } from '../services/transactionService';
+import { notificationService } from '../services/notificationService';
+import { billPaymentService } from '../services/billPaymentService';
+
+interface AppContextType {
+  // Navigation & Screen Stack
+  currentScreen: ScreenId;
+  navigateTo: (screen: ScreenId, params?: Record<string, any>) => void;
+  goBack: () => void;
+  screenParams: Record<string, any>;
+  activeTab: BottomTab;
+  setActiveTab: (tab: BottomTab) => void;
+
+  // App Data State
+  user: User;
+  bankAccounts: BankAccount[];
+  transactions: Transaction[];
+  notifications: AppNotification[];
+  contacts: Contact[];
+  merchants: Contact[];
+  moneyRequests: MoneyRequest[];
+  deviceSessions: DeviceSession[];
+  lastTransaction: Transaction | null;
+  electricityBill: ElectricityBill | null;
+  language: string;
+  isRtl: boolean;
+
+  // Actions
+  updateUser: (updatedData: Partial<User>) => void;
+  toggleShowBalance: (bankId: string) => void;
+  addBankAccount: (bankName: string) => Promise<void>;
+  removeBankAccount: (bankId: string) => void;
+  setPrimaryBank: (bankId: string) => void;
+  fetchElectricityBill: (consumerNo: string) => Promise<ElectricityBill>;
+  completePayment: (params: {
+    title: string;
+    subTitle: string;
+    amount: number;
+    avatarInitials?: string;
+    category?: string;
+  }) => Promise<Transaction>;
+
+  // Modals & Bottom Sheets
+  isPinModalOpen: boolean;
+  openPinModal: (paymentData: { title: string; amount: number; subTitle: string; onSuccess?: () => void }) => void;
+  closePinModal: () => void;
+  pendingPaymentData: { title: string; amount: number; subTitle: string; onSuccess?: () => void } | null;
+
+  isLanguageModalOpen: boolean;
+  setIsLanguageModalOpen: (open: boolean) => void;
+  setAppLanguage: (lang: string) => void;
+
+  isLogoutModalOpen: boolean;
+  setIsLogoutModalOpen: (open: boolean) => void;
+  performLogout: () => void;
+
+  isAddBankModalOpen: boolean;
+  setIsAddBankModalOpen: (open: boolean) => void;
+
+  isScanModalOpen: boolean;
+  setIsScanModalOpen: (open: boolean) => void;
+
+  isAppLinksModalOpen: boolean;
+  setIsAppLinksModalOpen: (open: boolean) => void;
+
+  terminateSession: (sessionId: string) => void;
+  addMoneyRequest: (req: { name: string; upiId: string; amount: number; note?: string }) => void;
+}
+
+const AppContext = createContext<AppContextType | undefined>(undefined);
+
+const FREQUENT_CONTACTS: Contact[] = [
+  { id: 'c-1', name: 'Rahul Sharma', upiId: 'rahul@upi', mobile: '+91 98123 45678', avatarInitials: 'RS' },
+  { id: 'c-2', name: 'Ajay Singh', upiId: 'ajay@okicici', mobile: '+91 98234 56789', avatarInitials: 'AS' },
+  { id: 'c-3', name: 'Priya Menon', upiId: 'priya@paytm', mobile: '+91 98345 67890', avatarInitials: 'PM' },
+  { id: 'c-4', name: 'Amit Verma', upiId: 'amit@ybl', mobile: '+91 98456 78901', avatarInitials: 'AV' },
+  { id: 'c-5', name: 'Sara Al Mansoori', upiId: 'sara@qtpay', mobile: '+971 50 123 4567', avatarInitials: 'SM' },
+  { id: 'c-6', name: 'Omar Khalid', upiId: 'omar@qtpay', mobile: '+971 52 987 6543', avatarInitials: 'OK' },
+];
+
+const MERCHANTS: Contact[] = [
+  { id: 'm-1', name: 'Star Supermarket', upiId: 'starsuper@icici', mobile: 'Merchant #8491', avatarInitials: 'SS', isMerchant: true },
+  { id: 'm-2', name: 'Cafe Aroma', upiId: 'cafearoma@paytm', mobile: 'Merchant #2041', avatarInitials: 'CA', isMerchant: true },
+];
+
+const INITIAL_SESSIONS: DeviceSession[] = [
+  { id: 's-1', deviceName: 'QTPay app (mobile)', deviceType: 'mobile', location: 'Primary Phone - Android 14', lastActive: 'Active Now', isCurrent: true },
+  { id: 's-2', deviceName: 'QTPay app (mobile)', deviceType: 'mobile', location: 'iPhone 15 Pro', lastActive: '2 days ago', isCurrent: false },
+  { id: 's-3', deviceName: 'QTPay app (mobile)', deviceType: 'mobile', location: 'Samsung Galaxy S23', lastActive: '1 week ago', isCurrent: false },
+  { id: 's-4', deviceName: 'Windows browser', deviceType: 'browser', location: 'Chrome 128 / Windows 11', lastActive: 'Active Now', isCurrent: false },
+  { id: 's-5', deviceName: 'Windows browser', deviceType: 'browser', location: 'Edge 126 / Windows 11', lastActive: '3 days ago', isCurrent: false },
+  { id: 's-6', deviceName: 'Windows browser', deviceType: 'browser', location: 'Firefox 120 / Windows 10', lastActive: '2 weeks ago', isCurrent: false },
+];
+
+export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [currentScreen, setCurrentScreen] = useState<ScreenId>('SPLASH');
+  const [screenStack, setScreenStack] = useState<{ screen: ScreenId; params?: Record<string, any> }[]>([
+    { screen: 'SPLASH' },
+  ]);
+  const [screenParams, setScreenParams] = useState<Record<string, any>>({});
+  const [activeTab, setActiveTabState] = useState<BottomTab>('home');
+
+  const [user, setUser] = useState<User>({
+    name: 'Anu',
+    avatarInitials: 'AN',
+    upiId: 'anu@qtpay',
+    mobile: '+91 98765 43210',
+    email: 'anu@qtpay.com',
+  });
+
+  const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [notifications, setNotifications] = useState<AppNotification[]>([]);
+  const [lastTransaction, setLastTransaction] = useState<Transaction | null>(null);
+  const [electricityBill, setElectricityBill] = useState<ElectricityBill | null>(null);
+  const [moneyRequests, setMoneyRequests] = useState<MoneyRequest[]>([
+    {
+      id: 'req-1',
+      requesterName: 'Priya Menon',
+      upiId: 'priya@paytm',
+      amount: 450.0,
+      note: 'Dinner split',
+      date: '1 day ago',
+      status: 'pending',
+    },
+  ]);
+  const [deviceSessions, setDeviceSessions] = useState<DeviceSession[]>(INITIAL_SESSIONS);
+
+  const [language, setLanguage] = useState<string>('English');
+  const [isRtl, setIsRtl] = useState<boolean>(false);
+
+  // Modals state
+  const [isPinModalOpen, setIsPinModalOpen] = useState<boolean>(false);
+  const [pendingPaymentData, setPendingPaymentData] = useState<{
+    title: string;
+    amount: number;
+    subTitle: string;
+    onSuccess?: () => void;
+  } | null>(null);
+
+  const [isLanguageModalOpen, setIsLanguageModalOpen] = useState<boolean>(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
+  const [isAddBankModalOpen, setIsAddBankModalOpen] = useState<boolean>(false);
+  const [isScanModalOpen, setIsScanModalOpen] = useState<boolean>(false);
+  const [isAppLinksModalOpen, setIsAppLinksModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Load initial data
+    authService.getCurrentUser().then(setUser);
+    bankService.getBankAccounts().then(setBankAccounts);
+    transactionService.getInitialTransactions().then(setTransactions);
+    notificationService.getInitialNotifications().then(setNotifications);
+
+    // Splash transition logic
+    const timer = setTimeout(() => {
+      const hasSeen = localStorage.getItem('hasSeenOnboarding') === 'true';
+      const targetScreen: ScreenId = hasSeen ? 'HOME' : 'ONBOARDING';
+      setCurrentScreen(targetScreen);
+      setScreenStack([{ screen: targetScreen }]);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const navigateTo = (screen: ScreenId, params?: Record<string, any>) => {
+    setScreenParams(params || {});
+    setCurrentScreen(screen);
+    setScreenStack((prev) => [...prev, { screen, params }]);
+
+    // Sync bottom navigation active tab
+    if (screen === 'HOME') setActiveTabState('home');
+    else if (screen === 'PAY_ANYONE') setActiveTabState('pay');
+    else if (screen === 'HISTORY') setActiveTabState('history');
+    else if (screen === 'PROFILE') setActiveTabState('profile');
+  };
+
+  const goBack = () => {
+    if (screenStack.length > 1) {
+      const newStack = [...screenStack];
+      newStack.pop();
+      const prev = newStack[newStack.length - 1];
+      setScreenStack(newStack);
+      setCurrentScreen(prev.screen);
+      setScreenParams(prev.params || {});
+
+      if (prev.screen === 'HOME') setActiveTabState('home');
+      else if (prev.screen === 'PAY_ANYONE') setActiveTabState('pay');
+      else if (prev.screen === 'HISTORY') setActiveTabState('history');
+      else if (prev.screen === 'PROFILE') setActiveTabState('profile');
+    } else {
+      navigateTo('HOME');
+    }
+  };
+
+  const setActiveTab = (tab: BottomTab) => {
+    setActiveTabState(tab);
+    switch (tab) {
+      case 'home':
+        navigateTo('HOME');
+        break;
+      case 'pay':
+        navigateTo('PAY_ANYONE');
+        break;
+      case 'scan':
+        setIsScanModalOpen(true);
+        break;
+      case 'history':
+        navigateTo('HISTORY');
+        break;
+      case 'profile':
+        navigateTo('PROFILE');
+        break;
+    }
+  };
+
+  const toggleShowBalance = (bankId: string) => {
+    setBankAccounts((prev) =>
+      prev.map((acc) => (acc.id === bankId ? { ...acc, showBalance: !acc.showBalance } : acc))
+    );
+  };
+
+  const addBankAccount = async (bankName: string) => {
+    const newBank = await bankService.addBankAccount(bankName);
+    setBankAccounts((prev) => [...prev, newBank]);
+
+    const newNotif: AppNotification = {
+      id: `notif-${Date.now()}`,
+      title: 'Bank linked',
+      description: `${bankName} was linked successfully.`,
+      timestamp: 'Just now',
+      read: false,
+      type: 'info',
+    };
+    setNotifications((prev) => [newNotif, ...prev]);
+  };
+
+  const removeBankAccount = (bankId: string) => {
+    setBankAccounts((prev) => {
+      const remaining = prev.filter((acc) => acc.id !== bankId);
+      if (remaining.length > 0 && !remaining.some((a) => a.isPrimary)) {
+        remaining[0].isPrimary = true;
+      }
+      return remaining;
+    });
+  };
+
+  const setPrimaryBank = (bankId: string) => {
+    setBankAccounts((prev) =>
+      prev.map((acc) => ({
+        ...acc,
+        isPrimary: acc.id === bankId,
+      }))
+    );
+  };
+
+  const fetchElectricityBill = async (consumerNo: string) => {
+    const bill = await billPaymentService.fetchElectricityBill(consumerNo);
+    setElectricityBill(bill);
+    return bill;
+  };
+
+  const completePayment = async (params: {
+    title: string;
+    subTitle: string;
+    amount: number;
+    avatarInitials?: string;
+    category?: string;
+  }) => {
+    const newTxn: Transaction = {
+      id: 'QT' + Math.floor(10000000000 + Math.random() * 90000000000).toString(),
+      title: params.title,
+      subTitle: params.subTitle,
+      amount: params.amount,
+      type: 'sent',
+      date: 'TODAY',
+      timestamp: new Date(),
+      utr: 'UTR' + Math.floor(100000000000 + Math.random() * 900000000000).toString(),
+      avatarInitials: params.avatarInitials || params.title.substring(0, 2).toUpperCase(),
+      category: params.category || 'Payment',
+    };
+
+    setTransactions((prev) => [newTxn, ...prev]);
+    setLastTransaction(newTxn);
+
+    const formattedAmt = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(params.amount);
+    const newNotif: AppNotification = {
+      id: `notif-${Date.now()}`,
+      title: 'Payment successful',
+      description: `${formattedAmt} paid to ${params.title}`,
+      timestamp: 'Just now',
+      read: false,
+      type: 'success',
+    };
+    setNotifications((prev) => [newNotif, ...prev]);
+
+    return newTxn;
+  };
+
+  const openPinModal = (data: { title: string; amount: number; subTitle: string; onSuccess?: () => void }) => {
+    setPendingPaymentData(data);
+    setIsPinModalOpen(true);
+  };
+
+  const closePinModal = () => {
+    setIsPinModalOpen(false);
+    setPendingPaymentData(null);
+  };
+
+  const updateUser = (updatedData: Partial<User>) => {
+    setUser((prev) => {
+      const newName = updatedData.name !== undefined ? updatedData.name : prev.name;
+      const initials = newName
+        .split(' ')
+        .map((n) => n[0])
+        .join('')
+        .substring(0, 2)
+        .toUpperCase() || 'QT';
+
+      return {
+        ...prev,
+        ...updatedData,
+        avatarInitials: initials,
+      };
+    });
+  };
+
+  const setAppLanguage = (lang: string) => {
+    setLanguage(lang);
+    setIsRtl(lang === 'العربية');
+    setIsLanguageModalOpen(false);
+  };
+
+  const performLogout = () => {
+    localStorage.removeItem('hasSeenOnboarding');
+    setIsLogoutModalOpen(false);
+    setScreenStack([{ screen: 'MOBILE_NUMBER' }]);
+    setCurrentScreen('MOBILE_NUMBER');
+  };
+
+  const terminateSession = (sessionId: string) => {
+    setDeviceSessions((prev) => prev.filter((s) => s.id !== sessionId));
+  };
+
+  const addMoneyRequest = (req: { name: string; upiId: string; amount: number; note?: string }) => {
+    const newReq: MoneyRequest = {
+      id: `req-${Date.now()}`,
+      requesterName: req.name,
+      upiId: req.upiId,
+      amount: req.amount,
+      note: req.note,
+      date: 'Just now',
+      status: 'pending',
+    };
+    setMoneyRequests((prev) => [newReq, ...prev]);
+  };
+
+  return (
+    <AppContext.Provider
+      value={{
+        currentScreen,
+        navigateTo,
+        goBack,
+        screenParams,
+        activeTab,
+        setActiveTab,
+        user,
+        bankAccounts,
+        transactions,
+        notifications,
+        contacts: FREQUENT_CONTACTS,
+        merchants: MERCHANTS,
+        moneyRequests,
+        deviceSessions,
+        lastTransaction,
+        electricityBill,
+        language,
+        isRtl,
+        updateUser,
+        toggleShowBalance,
+        addBankAccount,
+        removeBankAccount,
+        setPrimaryBank,
+        fetchElectricityBill,
+        completePayment,
+        isPinModalOpen,
+        openPinModal,
+        closePinModal,
+        pendingPaymentData,
+        isLanguageModalOpen,
+        setIsLanguageModalOpen,
+        setAppLanguage,
+        isLogoutModalOpen,
+        setIsLogoutModalOpen,
+        performLogout,
+        isAddBankModalOpen,
+        setIsAddBankModalOpen,
+        isScanModalOpen,
+        setIsScanModalOpen,
+        isAppLinksModalOpen,
+        setIsAppLinksModalOpen,
+        terminateSession,
+        addMoneyRequest,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+export const useApp = () => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error('useApp must be used within an AppProvider');
+  }
+  return context;
+};

@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@500;600;700;800&display=swap');
+
+:root {
+  /* Official Brand Guidelines Color Palette System */
+  --luster-white: #F4F1EC;
+  --aster-flower-blue: #7B96D4;
+  --aster-flower-light: #A4BCEE;
+  --habanero-orange: #F98513;
+  --habanero-hover: #E0720A;
+  --jodhpur-tan: #DAD1C8;
+  --deep-space-royal: #223382;
+  --deadly-depths: #111144;
+
+  /* Legacy & Helper Tokens mapped to New Palette */
+  --emerald-primary: #F98513;
+  --emerald-dark: #E0720A;
+  --emerald-light: #FDE8D7;
+  --emerald-glow: rgba(249, 133, 19, 0.35);
+
+  --navy-deep: #111144;
+  --navy-surface: #223382;
+  --navy-soft: #2E429C;
+
+  --blue-accent: #7B96D4;
+  --blue-light: #F0F4FD;
+
+  /* System Tokens */
+  --bg-page: #F4F1EC;
+  --bg-secondary: #EBE6DF;
+  --bg-pale-mint: #FDE8D7;
+  --bg-dark: #111144;
+
+  --mint-soft: #F98513;
+  --mint-light: rgba(249, 133, 19, 0.12);
+  --accent-mint: #F98513;
+  --mint-tint: #FDE8D7;
+  --mint-border: #DAD1C8;
+  --accent-lavender: #F0F4FD;
+
+  --graphite-main: #111144;
+  --graphite-dark: #111144;
+  --graphite-soft: #223382;
+
+  --brand-deep: #111144;
+  --brand-forest: #223382;
+  --green-brand: #F98513;
+  --neon-primary: #F98513;
+  --neon-glow: rgba(249, 133, 19, 0.35);
+
+  --card-white: #FFFFFF;
+  --border-color: #DAD1C8;
+  --card-border: #DAD1C8;
+  --text-primary: #111144;
+  --text-secondary: #5C564D;
+  --text-muted: #8E887E;
+  --text-dark: #111144;
+  --text-on-dark: #FFFFFF;
+
+  --shadow-subtle: 0 4px 20px rgba(17, 17, 68, 0.06);
+  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: #111144;
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+/* RTL Support */
+body.rtl {
+  direction: rtl;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile Frame Container */
+.app-viewport {
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  max-height: 900px;
+  background-color: var(--bg-page);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(17, 17, 68, 0.5), 0 0 30px rgba(249, 133, 19, 0.2);
+}
+
+@media (min-width: 440px) {
+  .app-viewport {
+    height: 860px;
+    border-radius: 40px;
+    border: 3px solid rgba(249, 133, 19, 0.4);
+  }
+}
+
+/* Scrollable Screen Content Container */
+.screen-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 90px;
+  position: relative;
+  scrollbar-width: none;
+}
+
+.screen-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+p, span, label {
+  font-size: 14px;
+}
+
+/* Transitions */
+.fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Diamond Rotated Square Checkmark Animation */
+.diamond-check-container {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.diamond-shape {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  background: var(--habanero-orange);
+  transform: rotate(45deg);
+  border-radius: 18px;
+  box-shadow: 0 0 30px rgba(249, 133, 19, 0.4), 0 0 15px var(--habanero-orange);
+  animation: pulseDiamond 2s infinite alternate;
+}
+
+@keyframes pulseDiamond {
+  0% {
+    box-shadow: 0 0 20px rgba(249, 133, 19, 0.4);
+    transform: rotate(45deg) scale(0.96);
+  }
+  100% {
+    box-shadow: 0 0 40px rgba(249, 133, 19, 0.6), 0 0 18px var(--habanero-orange);
+    transform: rotate(45deg) scale(1.04);
+  }
+}
+
+.diamond-icon {
+  position: relative;
+  z-index: 2;
+  color: #FFFFFF;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-page);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}

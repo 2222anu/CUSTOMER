@@ -2,23 +2,46 @@ import React, { useState, useRef } from 'react';
 import type { BankAccount } from '../types';
 import { formatCurrency } from '../utils/formatters';
 import { useApp } from '../state/AppContext';
-import { designSystem } from '../design-system';
+import { Landmark, Eye, EyeOff, Plus, Wifi, ChevronRight } from 'lucide-react';
 
 interface BankCardCarouselProps {
   banks: BankAccount[];
 }
 
-const getBankLogoTag = (bankName: string) => {
+const getBankStyle = (bankName: string) => {
   const nameUpper = bankName.toUpperCase();
-  if (nameUpper.includes('HDFC')) return { text: 'HDFC' };
-  if (nameUpper.includes('STATE') || nameUpper.includes('SBI')) return { text: 'SBI' };
-  if (nameUpper.includes('ICICI')) return { text: 'ICICI' };
-  if (nameUpper.includes('AXIS')) return { text: 'AXIS' };
-  return { text: bankName.substring(0, 4).toUpperCase() };
+  if (nameUpper.includes('HDFC')) {
+    return {
+      gradient: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%)',
+      tagText: 'HDFC BANK',
+    };
+  }
+  if (nameUpper.includes('STATE') || nameUpper.includes('SBI')) {
+    return {
+      gradient: 'linear-gradient(135deg, #0369a1 0%, #0284c7 100%)',
+      tagText: 'SBI BANK',
+    };
+  }
+  if (nameUpper.includes('ICICI')) {
+    return {
+      gradient: 'linear-gradient(135deg, #991b1b 0%, #c2410c 100%)',
+      tagText: 'ICICI BANK',
+    };
+  }
+  if (nameUpper.includes('AXIS')) {
+    return {
+      gradient: 'linear-gradient(135deg, #831843 0%, #9d174d 100%)',
+      tagText: 'AXIS BANK',
+    };
+  }
+  return {
+    gradient: 'linear-gradient(135deg, #1e1b4b 0%, #3730a3 100%)',
+    tagText: bankName.toUpperCase(),
+  };
 };
 
 export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => {
-  const { navigateTo, openPinModal, toggleShowBalance } = useApp();
+  const { navigateTo, openPinModal, toggleShowBalance, setIsAddBankModalOpen } = useApp();
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -43,18 +66,6 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
     carouselRef.current.scrollLeft = scrollLeftState - walk;
   };
 
-  const handleSwipeClick = () => {
-    if (carouselRef.current) {
-      const container = carouselRef.current;
-      const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10;
-      if (isAtEnd) {
-        container.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-        container.scrollBy({ left: 280, behavior: 'smooth' });
-      }
-    }
-  };
-
   const handleCardBalanceClick = (bank: BankAccount, e: React.MouseEvent) => {
     e.stopPropagation();
     if (bank.showBalance) {
@@ -70,38 +81,55 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
   };
 
   return (
-    <div style={{ marginBottom: designSystem.spacing['2xl'] }}>
-      {/* Section Header */}
+    <div style={{ marginBottom: '20px' }}>
+      {/* Header Bar */}
       <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '0 20px',
-          marginBottom: designSystem.spacing.md,
+          marginBottom: '12px',
         }}
       >
-        <h3 style={{ fontSize: '16px', fontWeight: designSystem.typography.weights.extrabold, color: designSystem.colors.textPrimary }}>My Bank Accounts</h3>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+            My Bank Accounts
+          </h3>
+          <span
+            style={{
+              fontSize: '11px',
+              fontWeight: 700,
+              backgroundColor: '#eef5ff',
+              color: '#2563eb',
+              padding: '2px 8px',
+              borderRadius: '12px',
+              border: '1px solid #d6e6ff',
+            }}
+          >
+            {banks.length} Linked
+          </span>
+        </div>
+
         <button
-          onClick={handleSwipeClick}
+          onClick={() => navigateTo('BANK_ACCOUNTS')}
           style={{
             background: 'none',
             border: 'none',
-            fontSize: '13px',
-            fontWeight: designSystem.typography.weights.extrabold,
-            color: designSystem.colors.primary,
+            fontSize: '12px',
+            fontWeight: 700,
+            color: '#2563eb',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '2px',
           }}
-          title="Click to scroll next bank account card"
         >
-          Swipe &rarr;
+          Manage <ChevronRight size={14} />
         </button>
       </div>
 
-      {/* Swipable Carousel with Partial Next Card Preview (Peek) */}
+      {/* Swipable Cards Container */}
       <div
         ref={carouselRef}
         onMouseDown={handleMouseDown}
@@ -121,7 +149,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
         }}
       >
         {banks.map((bank) => {
-          const logoTag = getBankLogoTag(bank.bankName);
+          const style = getBankStyle(bank.bankName);
 
           return (
             <div
@@ -129,102 +157,167 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               onClick={() => navigateTo('BANK_ACCOUNTS')}
               style={{
                 scrollSnapAlign: 'start',
-                flex: '0 0 270px',
-                backgroundColor: designSystem.colors.surface,
-                border: bank.isPrimary ? `2px solid ${designSystem.colors.primary}` : `1px solid ${designSystem.colors.borderHairline}`,
-                borderRadius: designSystem.radii.md,
-                padding: '16px 18px',
-                boxShadow: designSystem.shadows.none,
+                flex: '0 0 280px',
+                height: '160px',
+                background: style.gradient,
+                borderRadius: '16px',
+                padding: '18px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 boxSizing: 'border-box',
                 cursor: 'pointer',
-                color: designSystem.colors.textPrimary,
+                color: '#ffffff',
+                position: 'relative',
+                overflow: 'hidden',
+                boxShadow: bank.isPrimary ? '0 8px 20px rgba(37, 99, 235, 0.25)' : 'none',
+                border: bank.isPrimary ? '2px solid rgba(255, 255, 255, 0.4)' : '1px solid rgba(255, 255, 255, 0.15)',
               }}
             >
-              {/* Top Row: Logo Box & Primary Tag */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div
-                  style={{
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: designSystem.radii.md,
-                    backgroundColor: designSystem.colors.primaryLight,
-                    color: designSystem.colors.primary,
-                    fontWeight: designSystem.typography.weights.extrabold,
-                    fontSize: '12px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    border: `1px solid ${designSystem.colors.primaryBorder}`,
-                  }}
-                >
-                  {logoTag.text}
-                </div>
+              {/* Background Glow */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '-30%',
+                  right: '-20%',
+                  width: '180px',
+                  height: '180px',
+                  borderRadius: '50%',
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  pointerEvents: 'none',
+                }}
+              />
 
-                {bank.isPrimary && (
-                  <span
+              {/* Card Header */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 2 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div
                     style={{
-                      fontSize: '10px',
-                      fontWeight: designSystem.typography.weights.extrabold,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      backgroundColor: designSystem.colors.primary,
-                      color: designSystem.colors.textOnPrimary,
-                      padding: '3px 8px',
-                      borderRadius: designSystem.radii.xs,
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '8px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                      backdropFilter: 'blur(4px)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                     }}
                   >
-                    Primary
+                    <Landmark size={18} color="#ffffff" />
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#ffffff', letterSpacing: '0.02em' }}>
+                      {style.tagText}
+                    </span>
+                    <div style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.75)' }}>
+                      {bank.accountType}
+                    </div>
+                  </div>
+                </div>
+
+                {/* EMV Chip & Primary Badge */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {bank.isPrimary && (
+                    <span
+                      style={{
+                        fontSize: '9px',
+                        fontWeight: 800,
+                        backgroundColor: '#ffffff',
+                        color: '#2563eb',
+                        padding: '2px 8px',
+                        borderRadius: '10px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.04em',
+                      }}
+                    >
+                      Primary
+                    </span>
+                  )}
+                  <Wifi size={16} color="rgba(255, 255, 255, 0.7)" />
+                </div>
+              </div>
+
+              {/* Account Number Masked */}
+              <div style={{ zIndex: 2, margin: '8px 0' }}>
+                <div style={{ fontSize: '13px', fontWeight: 600, letterSpacing: '0.15em', color: 'rgba(255, 255, 255, 0.85)', fontFamily: 'monospace' }}>
+                  •••• •••• {bank.accountNumberMasked.replace(/[^0-9]/g, '') || '4892'}
+                </div>
+              </div>
+
+              {/* Card Footer: Balance & PIN Button */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', zIndex: 2 }}>
+                <div>
+                  <span style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.75)', textTransform: 'uppercase', fontWeight: 600 }}>
+                    Balance
                   </span>
-                )}
-              </div>
+                  <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff' }}>
+                    {bank.showBalance !== false ? formatCurrency(bank.balance) : '₹ ••••••••'}
+                  </div>
+                </div>
 
-              {/* Middle Section: Bank Name & Account Type */}
-              <div style={{ marginTop: '12px' }}>
-                <div
-                  style={{
-                    fontWeight: designSystem.typography.weights.extrabold,
-                    fontSize: '15px',
-                    color: designSystem.colors.textPrimary,
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                  }}
-                >
-                  {bank.bankName}
-                </div>
-                <div style={{ fontSize: '12px', color: designSystem.colors.textSecondary, marginTop: '2px' }}>
-                  {bank.accountType} &bull; {bank.accountNumberMasked}
-                </div>
-              </div>
-
-              {/* Bottom Section: Balance with PIN Check */}
-              <div style={{ marginTop: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ fontSize: '18px', fontWeight: designSystem.typography.weights.extrabold, color: designSystem.colors.textPrimary }}>
-                  {bank.showBalance !== false ? formatCurrency(bank.balance) : '₹ ••••••••'}
-                </div>
                 <button
                   onClick={(e) => handleCardBalanceClick(bank, e)}
                   style={{
-                    backgroundColor: bank.showBalance ? designSystem.colors.subSurface : designSystem.colors.primary,
-                    border: bank.showBalance ? `1px solid ${designSystem.colors.borderHairline}` : 'none',
-                    borderRadius: designSystem.radii.sm,
-                    color: bank.showBalance ? designSystem.colors.textPrimary : designSystem.colors.textOnPrimary,
-                    padding: '4px 10px',
+                    backgroundColor: bank.showBalance ? 'rgba(255, 255, 255, 0.2)' : '#ffffff',
+                    color: bank.showBalance ? '#ffffff' : '#2563eb',
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '6px 12px',
                     fontSize: '11px',
-                    fontWeight: designSystem.typography.weights.bold,
+                    fontWeight: 700,
                     cursor: 'pointer',
-                    boxShadow: designSystem.shadows.none,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    backdropFilter: 'blur(4px)',
                   }}
                 >
+                  {bank.showBalance ? <EyeOff size={14} /> : <Eye size={14} />}
                   {bank.showBalance ? 'Hide' : 'PIN Check'}
                 </button>
               </div>
             </div>
           );
         })}
+
+        {/* Add New Bank Card CTA Tile */}
+        <div
+          onClick={() => setIsAddBankModalOpen(true)}
+          style={{
+            scrollSnapAlign: 'start',
+            flex: '0 0 140px',
+            height: '160px',
+            backgroundColor: '#ffffff',
+            border: '2px dashed #cbd5e1',
+            borderRadius: '16px',
+            padding: '16px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            cursor: 'pointer',
+            boxSizing: 'border-box',
+            textAlign: 'center',
+          }}
+        >
+          <div
+            style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              backgroundColor: '#eef5ff',
+              color: '#2563eb',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Plus size={20} />
+          </div>
+          <span style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a' }}>Add Bank</span>
+          <span style={{ fontSize: '10px', color: '#64748b' }}>Link new account</span>
+        </div>
       </div>
     </div>
   );

@@ -112,9 +112,9 @@ const INITIAL_SESSIONS: DeviceSession[] = [
 ];
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currentScreen, setCurrentScreen] = useState<ScreenId>('SPLASH');
-  const [screenStack, setScreenStack] = useState<{ screen: ScreenId; params?: Record<string, any> }[]>([
-    { screen: 'SPLASH' },
+  const [currentScreen, setCurrentScreen] = useState<ScreenId>('HOME');
+  const [screenStack, setScreenStack] = useState<{ screen: ScreenId; params?: Record<string, any> }>([
+    { screen: 'HOME' },
   ]);
   const [screenParams, setScreenParams] = useState<Record<string, any>>({});
   const [activeTab, setActiveTabState] = useState<BottomTab>('home');
@@ -170,14 +170,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     bankService.getBankAccounts().then(setBankAccounts);
     transactionService.getInitialTransactions().then(setTransactions);
     notificationService.getInitialNotifications().then(setNotifications);
-
-    // Initial load: show Splash logo screen for 2 seconds, then transition to ONBOARDING
-    const timer = setTimeout(() => {
-      setCurrentScreen('ONBOARDING');
-      setScreenStack([{ screen: 'ONBOARDING' }]);
-    }, 2000);
-
-    return () => clearTimeout(timer);
   }, []);
 
   const startOnboardingFlow = () => {

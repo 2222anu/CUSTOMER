@@ -4,6 +4,7 @@ import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
+import { designSystem } from '../design-system';
 
 export const MoneyRequestsScreen: React.FC = () => {
   const { moneyRequests, openPinModal, completePayment, navigateTo } = useApp();
@@ -26,12 +27,12 @@ export const MoneyRequestsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in">
+    <div className="fade-in" style={{ fontFamily: designSystem.typography.fontFamily }}>
       <AppHeader title="Money Requests" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {moneyRequests.length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '40px 0' }}>
+          <div style={{ textAlign: 'center', color: designSystem.colors.textSecondary, padding: '40px 0' }}>
             No pending money requests.
           </div>
         ) : (
@@ -39,23 +40,31 @@ export const MoneyRequestsScreen: React.FC = () => {
             <div
               key={req.id}
               style={{
-                backgroundColor: 'var(--card-bg)',
-                border: '1px solid var(--card-border)',
-                borderRadius: '20px',
+                backgroundColor: designSystem.colors.surface,
+                border: `1px solid ${designSystem.colors.borderHairline}`,
+                borderRadius: designSystem.radii.md,
                 padding: '20px',
                 marginBottom: '16px',
+                boxShadow: designSystem.shadows.none,
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  marginBottom: '12px',
+                }}
+              >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <div
                     style={{
                       width: '42px',
                       height: '42px',
-                      borderRadius: '50%',
-                      backgroundColor: 'rgba(158, 240, 26, 0.15)',
-                      color: 'var(--neon-primary)',
-                      fontWeight: '800',
+                      borderRadius: designSystem.radii.full,
+                      backgroundColor: designSystem.colors.primaryLight,
+                      color: designSystem.colors.primaryDark,
+                      fontWeight: designSystem.typography.weights.extrabold,
                       fontSize: '16px',
                       display: 'flex',
                       alignItems: 'center',
@@ -65,12 +74,14 @@ export const MoneyRequestsScreen: React.FC = () => {
                     {req.requesterName.substring(0, 2).toUpperCase()}
                   </div>
                   <div>
-                    <div style={{ fontWeight: '700', fontSize: '16px' }}>{req.requesterName}</div>
-                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{req.upiId}</div>
+                    <div style={{ fontWeight: '700', fontSize: '15px', color: designSystem.colors.textPrimary }}>
+                      {req.requesterName}
+                    </div>
+                    <div style={{ fontSize: '12px', color: designSystem.colors.textSecondary }}>{req.upiId}</div>
                   </div>
                 </div>
 
-                <div style={{ fontSize: '18px', fontWeight: '800', color: 'var(--neon-primary)' }}>
+                <div style={{ fontSize: '17px', fontWeight: '800', color: designSystem.colors.primaryDark }}>
                   {formatCurrency(req.amount)}
                 </div>
               </div>
@@ -78,11 +89,11 @@ export const MoneyRequestsScreen: React.FC = () => {
               {req.note && (
                 <div
                   style={{
-                    backgroundColor: 'rgba(0,0,0,0.2)',
-                    borderRadius: '12px',
-                    padding: '10px 14px',
+                    backgroundColor: designSystem.colors.subSurface,
+                    borderRadius: designSystem.radii.xs,
+                    padding: '8px 12px',
                     fontSize: '13px',
-                    color: 'var(--text-secondary)',
+                    color: designSystem.colors.textSecondary,
                     marginBottom: '16px',
                   }}
                 >
@@ -94,11 +105,11 @@ export const MoneyRequestsScreen: React.FC = () => {
                 <button
                   style={{
                     flex: 1,
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                    border: '1px solid rgba(239, 68, 68, 0.2)',
-                    color: '#EF4444',
-                    borderRadius: '14px',
-                    padding: '12px',
+                    backgroundColor: designSystem.colors.dangerLight,
+                    border: `1px solid ${designSystem.colors.dangerLight}`,
+                    color: designSystem.colors.danger,
+                    borderRadius: designSystem.radii.sm,
+                    padding: '10px',
                     fontWeight: '600',
                     fontSize: '13px',
                     cursor: 'pointer',

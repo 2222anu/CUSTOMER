@@ -6,6 +6,7 @@ import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
 import { useApp } from '../state/AppContext';
 import { qrService } from '../services/qrService';
+import { designSystem } from '../design-system';
 
 export const ReceiveScreen: React.FC = () => {
   const { user, navigateTo } = useApp();
@@ -13,18 +14,20 @@ export const ReceiveScreen: React.FC = () => {
 
   const handleShare = () => {
     if (navigator.share) {
-      navigator.share({
-        title: 'QTPay UPI ID',
-        text: `Pay ${user.name} via QTPay: ${user.upiId}`,
-      }).catch(() => {});
+      navigator
+        .share({
+          title: 'QTPay UPI ID',
+          text: `Pay ${user.name} via QTPay: ${user.upiId}`,
+        })
+        .catch(() => {});
     } else {
       alert(`UPI Details copied: ${user.upiId}`);
     }
   };
 
   return (
-    <div className="fade-in">
-      <AppHeader title="Receive" showBack showSettings />
+    <div className="fade-in" style={{ fontFamily: designSystem.typography.fontFamily }}>
+      <AppHeader title="Receive Money" showBack />
 
       <div style={{ padding: '24px 20px', textAlign: 'center' }}>
         {/* User Card */}
@@ -33,22 +36,31 @@ export const ReceiveScreen: React.FC = () => {
             style={{
               width: '60px',
               height: '60px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--neon-primary)',
-              color: 'var(--text-dark)',
-              fontWeight: '800',
+              borderRadius: designSystem.radii.full,
+              backgroundColor: designSystem.colors.primary,
+              color: designSystem.colors.textOnPrimary,
+              fontWeight: designSystem.typography.weights.extrabold,
               fontSize: '22px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 10px auto',
-              boxShadow: '0 4px 15px rgba(158, 240, 26, 0.4)',
+              boxShadow: designSystem.shadows.none,
             }}
           >
             {user.avatarInitials}
           </div>
-          <h2 style={{ fontSize: '20px', fontWeight: '700', color: 'var(--text-primary)' }}>{user.name}</h2>
-          <div style={{ fontSize: '13px', color: '#071913', fontWeight: '700', marginTop: '2px' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: '700', color: designSystem.colors.textPrimary }}>
+            {user.name}
+          </h2>
+          <div
+            style={{
+              fontSize: '13px',
+              color: designSystem.colors.primaryDark,
+              fontWeight: '700',
+              marginTop: '2px',
+            }}
+          >
             {user.upiId}
           </div>
         </div>
@@ -56,8 +68,15 @@ export const ReceiveScreen: React.FC = () => {
         {/* Real Machine Readable QR Code View */}
         <div style={{ margin: '20px 0 24px 0' }}>
           <QRCodeView value={upiQrString} size={190} />
-          <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '16px', fontWeight: '600' }}>
-            Scan QR code to pay
+          <p
+            style={{
+              fontSize: '13px',
+              color: designSystem.colors.textSecondary,
+              marginTop: '16px',
+              fontWeight: '600',
+            }}
+          >
+            Scan QR code with any UPI app to pay
           </p>
         </div>
 
@@ -67,7 +86,7 @@ export const ReceiveScreen: React.FC = () => {
             <Download size={18} /> Request Money
           </PrimaryButton>
           <SecondaryButton onClick={handleShare}>
-            <Share2 size={18} /> Share
+            <Share2 size={18} /> Share QR / UPI ID
           </SecondaryButton>
         </div>
       </div>

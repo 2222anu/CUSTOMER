@@ -13,11 +13,19 @@
 
   --border-color: #e2e8f0;
   --border-strong: #cbd5e1;
+  --card-border: #e2e8f0;
+  --card-bg: #ffffff;
 
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-muted: #64748b;
   --text-white: #ffffff;
+  --text-dark: #0f172a;
+
+  --primary: #2e83ff;
+  --accent: #2e83ff;
+  --neon-primary: #2e83ff;
+  --neon-glow: rgba(46, 131, 255, 0.35);
 
   /* Global Google Sans Flex Typography System */
   --font-family: 'Google Sans Flex', 'Google Sans', 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;

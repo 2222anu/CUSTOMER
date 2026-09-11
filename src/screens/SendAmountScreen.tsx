@@ -3,17 +3,20 @@ import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
 import type { Contact } from '../types';
+import { designSystem } from '../design-system';
 
 export const SendAmountScreen: React.FC = () => {
-  const { screenParams, openPinModal, completePayment, navigateTo } = useApp();
-  const contact: Contact = screenParams.contact || {
-    name: 'Rahul Sharma',
-    upiId: 'rahul@upi',
-    mobile: '+91 98123 45678',
-    avatarInitials: 'RS',
+  const { screenParams, openPinModal, contacts, navigateTo } = useApp();
+  const contact: Contact = screenParams.contact || contacts[0] || {
+    id: 'default',
+    name: 'Priya Menon',
+    upiId: 'priya@paytm',
+    avatarInitials: 'PM',
+    mobile: '+91 98765 00001',
   };
 
-  const [amountStr, setAmountStr] = useState<string>('500');
+  const initialAmount = screenParams.defaultAmount ? String(screenParams.defaultAmount) : '';
+  const [amountStr, setAmountStr] = useState<string>(initialAmount);
   const [note, setNote] = useState<string>('');
 
   const numAmount = parseFloat(amountStr) || 0;
@@ -22,63 +25,71 @@ export const SendAmountScreen: React.FC = () => {
     if (numAmount <= 0) return;
 
     openPinModal({
-      title: contact.name,
+      title: `Pay ${contact.name}`,
       amount: numAmount,
-      subTitle: note ? `Note: ${note}` : 'Direct Transfer',
-      onSuccess: async () => {
-        const txn = await completePayment({
-          title: contact.name,
-          subTitle: note ? `Note: ${note}` : 'UPI Transfer',
+      subTitle: `To ${contact.upiId}`,
+      onSuccess: () => {
+        navigateTo('PAYMENT_SUCCESS', {
+          recipientName: contact.name,
           amount: numAmount,
-          avatarInitials: contact.avatarInitials,
-          category: 'Transfer',
+          upiId: contact.upiId,
+          type: 'sent',
         });
-        navigateTo('PAYMENT_SUCCESS', { transaction: txn });
       },
     });
   };
 
   return (
-    <div className="fade-in">
-      <AppHeader title="Send Money" showBack showSettings />
+    <div className="fade-in" style={{ fontFamily: designSystem.typography.fontFamily }}>
+      <AppHeader title="Send Money" showBack />
 
       <div style={{ padding: '20px', textAlign: 'center' }}>
         {/* Contact Header Card */}
         <div
           style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid var(--card-border)',
-            borderRadius: '24px',
+            backgroundColor: designSystem.colors.surface,
+            border: `1px solid ${designSystem.colors.borderHairline}`,
+            borderRadius: designSystem.radii.md,
             padding: '24px',
-            marginBottom: '30px',
-            boxShadow: '0 4px 20px rgba(7, 25, 19, 0.04)',
+            marginBottom: '24px',
+            boxShadow: designSystem.shadows.none,
           }}
         >
           <div
             style={{
               width: '64px',
               height: '64px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--neon-primary)',
-              color: 'var(--text-dark)',
-              fontWeight: '800',
+              borderRadius: designSystem.radii.full,
+              backgroundColor: designSystem.colors.primary,
+              color: designSystem.colors.textOnPrimary,
+              fontWeight: designSystem.typography.weights.extrabold,
               fontSize: '24px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 12px auto',
-              boxShadow: '0 4px 15px rgba(158, 240, 26, 0.4)',
+              boxShadow: designSystem.shadows.none,
             }}
           >
             {contact.avatarInitials}
           </div>
-          <h2 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '4px', color: 'var(--text-primary)' }}>{contact.name}</h2>
-          <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>{contact.upiId}</div>
+          <h2 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '4px', color: designSystem.colors.textPrimary }}>
+            {contact.name}
+          </h2>
+          <div style={{ fontSize: '13px', color: designSystem.colors.textSecondary }}>{contact.upiId}</div>
         </div>
 
         {/* Amount Input */}
         <div style={{ marginBottom: '24px' }}>
-          <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '700', letterSpacing: '0.05em', marginBottom: '8px' }}>
+          <div
+            style={{
+              fontSize: '12px',
+              color: designSystem.colors.textSecondary,
+              fontWeight: '700',
+              letterSpacing: '0.05em',
+              marginBottom: '8px',
+            }}
+          >
             ENTER AMOUNT (₹)
           </div>
           <div
@@ -89,20 +100,21 @@ export const SendAmountScreen: React.FC = () => {
               gap: '4px',
             }}
           >
-            <span style={{ fontSize: '36px', fontWeight: '800', color: '#071913' }}>₹</span>
+            <span style={{ fontSize: '36px', fontWeight: '800', color: designSystem.colors.primary }}>₹</span>
             <input
               type="number"
               value={amountStr}
               onChange={(e) => setAmountStr(e.target.value)}
               placeholder="0"
+              autoFocus
               style={{
                 fontSize: '44px',
                 fontWeight: '800',
-                color: 'var(--text-primary)',
+                color: designSystem.colors.textPrimary,
                 background: 'none',
                 border: 'none',
                 outline: 'none',
-                width: '180px',
+                width: '200px',
                 textAlign: 'center',
               }}
             />
@@ -110,7 +122,7 @@ export const SendAmountScreen: React.FC = () => {
         </div>
 
         {/* Optional Note */}
-        <div style={{ marginBottom: '30px' }}>
+        <div style={{ marginBottom: '24px' }}>
           <input
             type="text"
             placeholder="Add a note (e.g. Dinner, Rent)"
@@ -118,34 +130,35 @@ export const SendAmountScreen: React.FC = () => {
             onChange={(e) => setNote(e.target.value)}
             style={{
               width: '100%',
-              backgroundColor: '#FFFFFF',
-              border: '1px solid var(--card-border)',
-              borderRadius: '16px',
-              padding: '14px 18px',
-              color: 'var(--text-primary)',
+              backgroundColor: designSystem.colors.surface,
+              border: `1px solid ${designSystem.colors.borderHairline}`,
+              borderRadius: designSystem.radii.sm,
+              padding: '12px 16px',
+              color: designSystem.colors.textPrimary,
               fontSize: '14px',
               outline: 'none',
               textAlign: 'center',
-              boxShadow: '0 2px 10px rgba(7, 25, 19, 0.02)',
+              boxShadow: designSystem.shadows.none,
             }}
           />
         </div>
 
         {/* Quick Amount Buttons */}
-        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '30px' }}>
+        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '28px' }}>
           {['100', '500', '1000', '2500'].map((val) => (
             <button
               key={val}
               onClick={() => setAmountStr(val)}
               style={{
-                backgroundColor: amountStr === val ? 'rgba(158, 240, 26, 0.25)' : '#FFFFFF',
-                border: amountStr === val ? '1px solid var(--neon-primary)' : '1px solid var(--card-border)',
-                color: amountStr === val ? '#071913' : 'var(--text-primary)',
-                borderRadius: '12px',
+                backgroundColor: amountStr === val ? designSystem.colors.primaryLight : designSystem.colors.surface,
+                border: amountStr === val ? `1px solid ${designSystem.colors.primary}` : `1px solid ${designSystem.colors.borderHairline}`,
+                color: amountStr === val ? designSystem.colors.primaryDark : designSystem.colors.textPrimary,
+                borderRadius: designSystem.radii.sm,
                 padding: '8px 14px',
                 fontSize: '13px',
                 fontWeight: '700',
                 cursor: 'pointer',
+                transition: 'all 0.15s ease',
               }}
             >
               +₹{val}

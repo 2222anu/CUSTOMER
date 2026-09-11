@@ -3,6 +3,7 @@ import { Search } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { TransactionRow } from '../components/TransactionRow';
 import { useApp } from '../state/AppContext';
+import { designSystem } from '../design-system';
 
 type FilterType = 'all' | 'sent' | 'received' | 'pending';
 
@@ -53,13 +54,13 @@ export const HistoryScreen: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
-              backgroundColor: '#FFFFFF',
-              border: '1px solid var(--card-border)',
-              borderRadius: '14px',
+              backgroundColor: designSystem.colors.surface,
+              border: `1px solid ${designSystem.colors.borderHairline}`,
+              borderRadius: designSystem.radii.sm,
               padding: '10px 14px',
             }}
           >
-            <Search size={16} color="#071913" />
+            <Search size={16} color={designSystem.colors.textSecondary} />
             <input
               type="text"
               placeholder="Search by payee or UTR..."
@@ -95,17 +96,17 @@ export const HistoryScreen: React.FC = () => {
               key={f}
               onClick={() => setFilter(f)}
               style={{
-                backgroundColor: isActive ? 'var(--neon-primary)' : '#FFFFFF',
-                border: isActive ? 'none' : '1px solid var(--card-border)',
-                color: isActive ? 'var(--text-dark)' : 'var(--text-primary)',
-                borderRadius: '20px',
-                padding: '8px 16px',
+                backgroundColor: isActive ? designSystem.colors.primary : designSystem.colors.surface,
+                border: isActive ? `1px solid ${designSystem.colors.primary}` : `1px solid ${designSystem.colors.borderHairline}`,
+                color: isActive ? designSystem.colors.textOnPrimary : designSystem.colors.textPrimary,
+                borderRadius: designSystem.radii.sm,
+                padding: '7px 16px',
                 fontSize: '13px',
-                fontWeight: '700',
+                fontWeight: designSystem.typography.weights.bold,
                 textTransform: 'capitalize',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
-                boxShadow: isActive ? '0 4px 12px rgba(158, 240, 26, 0.4)' : 'none',
+                boxShadow: designSystem.shadows.none,
               }}
             >
               {f}

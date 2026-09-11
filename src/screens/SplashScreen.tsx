@@ -18,105 +18,68 @@ export const SplashScreen: React.FC = () => {
       className="fade-in"
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #1e70e6 0%, #2e83ff 100%)',
+        backgroundColor: '#2563eb', // Vivid Electric Blue matching reference image
         color: '#ffffff',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '60px 24px 40px 24px',
+        padding: '50px 28px 48px 28px',
         boxSizing: 'border-box',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Subtle Background Glow Spheres */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '-10%',
-          right: '-20%',
-          width: '300px',
-          height: '300px',
-          borderRadius: '50%',
-          background: 'rgba(255, 255, 255, 0.08)',
-          pointerEvents: 'none',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '-10%',
-          left: '-20%',
-          width: '350px',
-          height: '350px',
-          borderRadius: '50%',
-          background: 'rgba(255, 255, 255, 0.06)',
-          pointerEvents: 'none',
-        }}
-      />
-
+      {/* Top spacer for status bar */}
       <div />
 
-      {/* Hero Vector SVG Logo & Tagline */}
+      {/* Hero Centered Logo */}
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '24px',
+          gap: '16px',
           textAlign: 'center',
           zIndex: 2,
         }}
       >
-        <div
+        <QtPayLogo variant="splash" themeMode="dark" size={180} showTagline={false} />
+        <h1
           style={{
-            padding: '24px 36px',
-            backgroundColor: 'rgba(255, 255, 255, 0.12)',
-            borderRadius: '24px',
-            backdropFilter: 'blur(8px)',
-            border: '1px solid rgba(255, 255, 255, 0.25)',
+            fontSize: '32px',
+            fontWeight: 800,
+            color: '#ffffff',
+            letterSpacing: '0.04em',
+            margin: 0,
+            fontFamily: designSystem.typography.fontFamily,
           }}
         >
-          <QtPayLogo variant="splash" themeMode="dark" size={160} showTagline={true} />
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <h1 style={{ fontSize: '22px', fontWeight: designSystem.typography.weights.extrabold, color: '#ffffff', letterSpacing: '-0.02em', margin: 0 }}>
-            QTPay Digital Wallet
-          </h1>
-          <p style={{ fontSize: '13px', fontWeight: designSystem.typography.weights.medium, color: 'rgba(255, 255, 255, 0.85)', margin: 0 }}>
-            Unified Payments Interface & Instant Banking
-          </p>
-        </div>
+          QTPAY
+        </h1>
       </div>
 
-      {/* Bottom Loading Progress Pill */}
-      <div style={{ zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', width: '100%', maxWidth: '240px' }}>
-        <div
+      {/* Bottom Muted Description Text (matching reference image) */}
+      <div
+        style={{
+          zIndex: 2,
+          textAlign: 'center',
+          maxWidth: '300px',
+        }}
+      >
+        <p
           style={{
-            width: '100%',
-            height: '4px',
-            backgroundColor: 'rgba(255, 255, 255, 0.25)',
-            borderRadius: '2px',
-            overflow: 'hidden',
-            position: 'relative',
+            fontSize: '12px',
+            fontWeight: designSystem.typography.weights.medium,
+            color: 'rgba(255, 255, 255, 0.8)',
+            lineHeight: '1.6',
+            margin: 0,
           }}
         >
-          <div
-            style={{
-              width: '65%',
-              height: '100%',
-              backgroundColor: '#ffffff',
-              borderRadius: '2px',
-              animation: 'fadeIn 1.8s ease-in-out forwards',
-            }}
-          />
-        </div>
-        <span style={{ fontSize: '10px', fontWeight: designSystem.typography.weights.extrabold, color: 'rgba(255, 255, 255, 0.75)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-          NPCI & UPI Certified
-        </span>
+          QtPay is a mobile application that connects instant UPI payments, bill recharges, and banking services.
+        </p>
       </div>
     </div>
   );
 };
+

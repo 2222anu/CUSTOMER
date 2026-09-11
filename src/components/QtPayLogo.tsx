@@ -10,163 +10,80 @@ interface QtPayLogoProps {
 export const QtPayLogo: React.FC<QtPayLogoProps> = ({
   variant = 'full',
   size,
-  showTagline = true,
-  themeMode = 'light',
+  showTagline = false,
+  themeMode = 'dark',
 }) => {
   const isDark = themeMode === 'dark';
-  const textColor = isDark ? '#FFFFFF' : '#111144';
-  const subTextColor = '#F98513';
+  
+  // Colors for logo paths
+  const emblemColor = isDark ? '#ffffff' : '#2e83ff';
+  const textColor = isDark ? '#ffffff' : '#0f172a';
 
-  const renderSymbolSVG = (symbolDim: number) => (
-    <svg
-      width={symbolDim}
-      height={symbolDim}
-      viewBox="0 0 140 140"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ display: 'block' }}
-    >
-      <defs>
-        {/* Aster Flower Blue Gradient for Q */}
-        <linearGradient id="asterBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#A4BCEE" />
-          <stop offset="50%" stopColor="#7B96D4" />
-          <stop offset="100%" stopColor="#5872B8" />
-        </linearGradient>
-
-        {/* Deep Space Royal Gradient for T */}
-        <linearGradient id="deepSpaceRoyalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#2A3D9E" />
-          <stop offset="60%" stopColor="#223382" />
-          <stop offset="100%" stopColor="#111144" />
-        </linearGradient>
-
-        {/* Habanero Orange Gradient for Sweeping Arrow */}
-        <linearGradient id="habaneroOrangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FF9E1B" />
-          <stop offset="50%" stopColor="#F98513" />
-          <stop offset="100%" stopColor="#D96404" />
-        </linearGradient>
-      </defs>
-
-      {/* Outer Q Circle Loop (Aster Flower Blue) */}
-      <path
-        d="M 56 26 C 32 26 16 44 16 70 C 16 96 34 112 60 112 C 74 112 86 104 94 93"
-        stroke="url(#asterBlueGrad)"
-        strokeWidth="15"
-        strokeLinecap="round"
-      />
-
-      {/* Inner Q Tail (Aster Flower Blue) */}
-      <path
-        d="M 50 84 C 62 84 76 92 94 104 C 102 108 108 100 102 92 C 86 76 72 62 56 48"
-        stroke="url(#asterBlueGrad)"
-        strokeWidth="12"
-        strokeLinecap="round"
-      />
-
-      {/* T Horizontal Bar (Deep Space Royal) */}
-      <path
-        d="M 62 32 L 110 32"
-        stroke="url(#deepSpaceRoyalGrad)"
-        strokeWidth="14"
-        strokeLinecap="round"
-      />
-
-      {/* T Stem (Deep Space Royal) */}
-      <path
-        d="M 94 102 L 94 36"
-        stroke="url(#deepSpaceRoyalGrad)"
-        strokeWidth="14"
-        strokeLinecap="round"
-      />
-
-      {/* Sweeping Habanero Orange Arrow arching under Q and over T */}
-      <path
-        d="M 22 72 C 22 100 52 116 88 88 C 106 74 122 52 134 32"
-        stroke="url(#habaneroOrangeGrad)"
-        strokeWidth="12"
-        strokeLinecap="round"
-      />
-
-      {/* Arrowhead Pointing Up-Right (Habanero Orange) */}
-      <path
-        d="M 118 30 L 138 24 L 132 46 Z"
-        fill="url(#habaneroOrangeGrad)"
-      />
-    </svg>
-  );
+  // Sizing dimensions
+  const height = size || (variant === 'splash' ? 64 : variant === 'header' ? 28 : 36);
 
   if (variant === 'icon') {
-    const iconDim = size || 44;
+    const iconDim = size || 36;
     return (
-      <div
-        style={{
-          width: `${iconDim}px`,
-          height: `${iconDim}px`,
-          borderRadius: '14px',
-          backgroundColor: '#111144',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 4px 14px rgba(17, 17, 68, 0.25)',
-        }}
+      <svg
+        width={iconDim}
+        height={iconDim}
+        viewBox="0 0 841.9 841.9"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ display: 'block' }}
       >
-        {renderSymbolSVG(iconDim * 0.75)}
-      </div>
+        <g fill={emblemColor}>
+          <path d="M414.9,385.6l106.6,106.8c43-67.8,30.4-155.5-28.2-209.1-53.9-49.3-134.2-57.2-196.4-18.8l48.6,48.6-39.8,39.8-157.9-157.9,28.7-28.6,11.3-10.5c26.3,26.1,66.7,35.8,102.1,21.9,53.9-21,113.1-24.1,168.3-5.8,71.9,23.8,129.4,79.7,154.7,151.1,21.2,59.7,18.3,125.7-8.2,183.2-12.9,28.9-7.1,62.6,15.7,85.4l-38.5,38.5-206-206,38.5-38.5h.3Z"/>
+          <path d="M450.3,554.1l59.3,59.3c-100.4,61.2-230.2,41.8-308.2-45.2-72.6-79.4-83.8-198.9-27.8-290.8l59.3,59.2c-27.2,61.3-14.9,133.1,30.9,180.9,47.7,50,122.5,64.7,186.5,36.4h0Z"/>
+        </g>
+      </svg>
     );
   }
-
-  const symbolDim = variant === 'splash' ? 84 : variant === 'header' ? 36 : 44;
 
   return (
     <div
       style={{
         display: 'inline-flex',
-        flexDirection: variant === 'splash' ? 'column' : 'row',
+        flexDirection: 'column',
         alignItems: 'center',
-        gap: variant === 'splash' ? '12px' : '8px',
         userSelect: 'none',
       }}
     >
-      {renderSymbolSVG(symbolDim)}
-
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: variant === 'splash' ? 'center' : 'flex-start',
-        }}
+      <svg
+        height={height}
+        viewBox="0 0 2270.5 841.9"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ display: 'block', maxWidth: '100%' }}
       >
-        {/* Exact Wordmark Typography matching New Guidelines Image */}
+        {/* Pay Text Path */}
+        <g fill={textColor}>
+          <path d="M901.7,605.1V192h168.2c22.4,0,42.8,5.6,61.1,16.8,18.3,11.2,32.9,26.5,44,45.7,11,19.3,16.5,40.7,16.5,64.3s-5.5,45.1-16.5,64.3c-11,19.3-25.7,34.7-44,46.3-18.3,11.6-38.7,17.4-61.1,17.4h-104.5v158.2h-63.7ZM965.4,385.6h103.3c10.6,0,20.3-3,28.9-9.1,8.6-6.1,15.6-14.2,21-24.2,5.3-10,8-21.1,8-33.3s-2.7-23.2-8-33.1c-5.3-9.8-12.3-17.7-21-23.6-8.7-5.9-18.3-8.9-28.9-8.9h-103.3v132.2Z"/>
+          <path d="M1373.8,611c-25.6,0-48.9-7.1-69.9-21.2-21.1-14.2-37.9-33.4-50.5-57.8-12.6-24.4-18.9-51.9-18.9-82.6s6.4-58.7,19.2-82.9c12.8-24.2,30.1-43.2,51.9-57,21.8-13.8,46.3-20.7,73.5-20.7s30.9,2.4,44.3,7.1c13.4,4.7,25.1,11.3,35.1,19.8,10,8.5,18.3,18.2,24.8,29.2,6.5,11,10.5,22.8,12.1,35.4l-13.6-4.7v-80.3h61.4v309.9h-61.4v-73.8l14.2-4.1c-2.4,10.6-7.2,21-14.5,31-7.3,10-16.5,19-27.7,26.9-11.2,7.9-23.6,14.2-37.2,18.9-13.6,4.7-27.8,7.1-42.8,7.1ZM1389.8,555c18.5,0,34.8-4.5,49-13.6,14.2-9,25.3-21.5,33.3-37.5,8.1-15.9,12.1-34.1,12.1-54.6s-4-38-12.1-53.7c-8.1-15.7-19.2-28.1-33.3-37.2-14.2-9-30.5-13.6-49-13.6s-34.1,4.5-48.1,13.6c-14,9.1-25,21.5-33.1,37.2-8.1,15.7-12.1,33.6-12.1,53.7s4,38.7,12.1,54.6c8.1,15.9,19.1,28.4,33.1,37.5,14,9.1,30,13.6,48.1,13.6Z"/>
+          <path d="M1673,740.9l62.6-144.6.6,48.4-154.6-349.4h70.8l96.8,227.8c2,3.9,4.3,9.9,7.1,18,2.7,8.1,5.1,16,7.1,23.9l-15.3,3.5c3.1-8.3,6.2-16.5,9.1-24.8,3-8.3,5.8-16.5,8.6-24.8l80.9-223.7h72l-127.5,309.9-52.5,135.7h-65.5Z"/>
+        </g>
+        {/* Emblem Loop Paths */}
+        <g fill={emblemColor}>
+          <path d="M564.9,385.6l106.6,106.8c43-67.8,30.4-155.5-28.2-209.1-53.9-49.3-134.2-57.2-196.4-18.8l48.6,48.6-39.8,39.8-157.9-157.9,28.7-28.6,11.3-10.5c26.3,26.1,66.7,35.8,102.1,21.9,53.9-21,113.1-24.1,168.3-5.8,71.9,23.8,129.4,79.7,154.7,151.1,21.2,59.7,18.3,125.7-8.2,183.2-12.9,28.9-7.1,62.6,15.7,85.4l-38.5,38.5-206-206,38.5-38.5h.3Z"/>
+          <path d="M600.3,554.1l59.3,59.3c-100.4,61.2-230.2,41.8-308.2-45.2-72.6-79.4-83.8-198.9-27.8-290.8l59.3,59.2c-27.2,61.3-14.9,133.1,30.9,180.9,47.7,50,122.5,64.7,186.5,36.4h0Z"/>
+        </g>
+      </svg>
+
+      {showTagline && (
         <span
           style={{
-            fontSize: variant === 'splash' ? '34px' : variant === 'header' ? '20px' : '22px',
-            fontWeight: '900',
-            color: textColor,
-            letterSpacing: '0.04em',
-            lineHeight: '1',
-            fontFamily: 'Inter, system-ui, sans-serif',
+            fontSize: '9px',
+            fontWeight: '800',
+            color: emblemColor,
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            marginTop: '4px',
           }}
         >
-          QT PAY
+          QUICK. TRUSTED. PAYMENTS.
         </span>
-
-        {showTagline && (
-          <span
-            style={{
-              fontSize: variant === 'splash' ? '9.5px' : '7px',
-              fontWeight: '800',
-              color: subTextColor,
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase',
-              marginTop: variant === 'splash' ? '6px' : '3px',
-            }}
-          >
-            QUICK. TRUSTED. PAYMENTS.
-          </span>
-        )}
-      </div>
+      )}
     </div>
   );
 };

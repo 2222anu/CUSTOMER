@@ -1,63 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Official Brand Guidelines Color Palette System */
-  --luster-white: #F4F1EC;
-  --aster-flower-blue: #7B96D4;
-  --aster-flower-light: #A4BCEE;
-  --habanero-orange: #F98513;
-  --habanero-hover: #E0720A;
-  --jodhpur-tan: #DAD1C8;
-  --deep-space-royal: #223382;
-  --deadly-depths: #111144;
+  /* MobiKwik Signature Blue & Clean White/Black Palette */
+  --blue-base: #2e83ff;
+  --blue-hover: #1e70e6;
+  --blue-light: #eef5ff;
+  --blue-tint: #d6e6ff;
+  
+  --bg-page: #f4f6f8;
+  --bg-card: #ffffff;
+  --bg-secondary: #f8fafc;
 
-  /* Legacy & Helper Tokens mapped to New Palette */
-  --emerald-primary: #F98513;
-  --emerald-dark: #E0720A;
-  --emerald-light: #FDE8D7;
-  --emerald-glow: rgba(249, 133, 19, 0.35);
+  --border-color: #e2e8f0;
+  --border-strong: #cbd5e1;
 
-  --navy-deep: #111144;
-  --navy-surface: #223382;
-  --navy-soft: #2E429C;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-white: #ffffff;
 
-  --blue-accent: #7B96D4;
-  --blue-light: #F0F4FD;
+  /* Global Google Sans Flex Typography System */
+  --font-family: 'Google Sans Flex', 'Google Sans', 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* System Tokens */
-  --bg-page: #F4F1EC;
-  --bg-secondary: #EBE6DF;
-  --bg-pale-mint: #FDE8D7;
-  --bg-dark: #111144;
+  /* Global Spacing Scale */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
 
-  --mint-soft: #F98513;
-  --mint-light: rgba(249, 133, 19, 0.12);
-  --accent-mint: #F98513;
-  --mint-tint: #FDE8D7;
-  --mint-border: #DAD1C8;
-  --accent-lavender: #F0F4FD;
-
-  --graphite-main: #111144;
-  --graphite-dark: #111144;
-  --graphite-soft: #223382;
-
-  --brand-deep: #111144;
-  --brand-forest: #223382;
-  --green-brand: #F98513;
-  --neon-primary: #F98513;
-  --neon-glow: rgba(249, 133, 19, 0.35);
-
-  --card-white: #FFFFFF;
-  --border-color: #DAD1C8;
-  --card-border: #DAD1C8;
-  --text-primary: #111144;
-  --text-secondary: #5C564D;
-  --text-muted: #8E887E;
-  --text-dark: #111144;
-  --text-on-dark: #FFFFFF;
-
-  --shadow-subtle: 0 4px 20px rgba(17, 17, 68, 0.06);
-  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* NO DROP SHADOWS (Strictly 0 Shadows) */
+  --shadow-subtle: none;
 }
 
 * {
@@ -66,18 +41,36 @@
   padding: 0;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+  font-family: var(--font-family);
+  /* Enforce 0 drop shadows globally */
+  box-shadow: none !important;
 }
 
-body {
-  font-family: var(--font-family);
-  background-color: #111144;
+/* WCAG 2.1 AA Keyboard Focus Rings */
+:focus-visible {
+  outline: 2.5px solid #2e83ff !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2.5px solid #2e83ff !important;
+  outline-offset: 2px !important;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-page);
   color: var(--text-primary);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  overflow: hidden;
+  font-family: var(--font-family);
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 /* RTL Support */
@@ -87,31 +80,37 @@ body.rtl {
 
 #root {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  background-color: var(--bg-page);
+  font-family: var(--font-family);
 }
 
-/* Mobile Frame Container */
+/* Responsive Browser Viewport (NO Mockup Frame, NO Borders, NO Phone Notches) */
 .app-viewport {
   width: 100%;
-  max-width: 430px;
-  height: 100vh;
-  max-height: 900px;
-  background-color: var(--bg-page);
+  max-width: 600px;
+  min-height: 100vh;
+  background-color: #ffffff;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 20px 50px rgba(17, 17, 68, 0.5), 0 0 30px rgba(249, 133, 19, 0.2);
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-top: none;
+  border-bottom: none;
+  border-radius: 0 !important;
+  margin: 0 auto;
 }
 
-@media (min-width: 440px) {
+@media (max-width: 600px) {
   .app-viewport {
-    height: 860px;
-    border-radius: 40px;
-    border: 3px solid rgba(249, 133, 19, 0.4);
+    max-width: 100%;
+    border-left: none;
+    border-right: none;
   }
 }
 
@@ -120,60 +119,73 @@ body.rtl {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-bottom: 90px;
+  padding-bottom: 85px;
   position: relative;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  background-color: var(--bg-page);
 }
 
-.screen-content::-webkit-scrollbar {
-  display: none;
-}
-
-/* Typography Helpers */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
+/* Global Typescale Helpers */
+h1 {
+  font-size: 24px;
+  font-weight: 800;
   color: var(--text-primary);
   letter-spacing: -0.02em;
+  font-family: var(--font-family);
 }
 
-p, span, label {
+h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  font-family: var(--font-family);
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  font-family: var(--font-family);
+}
+
+h4, h5, h6 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-family);
+}
+
+p, span, label, input, button {
+  font-family: var(--font-family);
   font-size: 14px;
 }
 
 /* Transitions */
 .fade-in {
-  animation: fadeIn 0.25s ease-out forwards;
+  animation: fadeIn 0.2s ease-out forwards;
 }
 
 .slide-up {
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes slideUp {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }
 
-/* Diamond Rotated Square Checkmark Animation */
+/* Diamond Checkmark Icon (0 Shadows) */
 .diamond-check-container {
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,30 +194,17 @@ p, span, label {
 
 .diamond-shape {
   position: absolute;
-  width: 76px;
-  height: 76px;
-  background: var(--habanero-orange);
+  width: 64px;
+  height: 64px;
+  background: #2e83ff;
   transform: rotate(45deg);
-  border-radius: 18px;
-  box-shadow: 0 0 30px rgba(249, 133, 19, 0.4), 0 0 15px var(--habanero-orange);
-  animation: pulseDiamond 2s infinite alternate;
-}
-
-@keyframes pulseDiamond {
-  0% {
-    box-shadow: 0 0 20px rgba(249, 133, 19, 0.4);
-    transform: rotate(45deg) scale(0.96);
-  }
-  100% {
-    box-shadow: 0 0 40px rgba(249, 133, 19, 0.6), 0 0 18px var(--habanero-orange);
-    transform: rotate(45deg) scale(1.04);
-  }
+  border-radius: 8px;
 }
 
 .diamond-icon {
   position: relative;
   z-index: 2;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 /* Custom Scrollbar */

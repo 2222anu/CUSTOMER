@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
+import { designSystem } from '../design-system';
 
 interface ModalProps {
   isOpen: boolean;
@@ -14,20 +15,36 @@ export const Modal: React.FC<ModalProps> = ({
   title,
   children,
 }) => {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={title ? 'modal-title' : undefined}
       style={{
-        position: 'absolute',
+        position: 'fixed',
         inset: 0,
-        backgroundColor: 'rgba(7, 25, 19, 0.65)',
-        backdropFilter: 'blur(6px)',
+        backgroundColor: designSystem.colors.overlay,
+        backdropFilter: 'blur(4px)',
         zIndex: 50,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '20px',
+        padding: designSystem.spacing.xl,
       }}
       onClick={onClose}
     >
@@ -36,29 +53,37 @@ export const Modal: React.FC<ModalProps> = ({
         onClick={(e) => e.stopPropagation()}
         style={{
           width: '100%',
-          maxWidth: '380px',
-          backgroundColor: '#FFFFFF',
-          border: '1px solid var(--card-border)',
-          borderRadius: '24px',
-          padding: '24px',
-          boxShadow: '0 20px 50px rgba(7, 25, 19, 0.2)',
+          maxWidth: '420px',
+          backgroundColor: designSystem.colors.surface,
+          border: `1px solid ${designSystem.colors.borderHairline}`,
+          borderRadius: designSystem.radii.lg,
+          padding: designSystem.spacing['2xl'],
+          boxShadow: designSystem.shadows.none,
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-          {title ? <h3 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-primary)' }}>{title}</h3> : <div />}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: designSystem.spacing.lg }}>
+          {title ? (
+            <h3 id="modal-title" style={{ fontSize: '18px', fontWeight: designSystem.typography.weights.extrabold, color: designSystem.colors.textPrimary }}>
+              {title}
+            </h3>
+          ) : (
+            <div />
+          )}
           <button
             onClick={onClose}
+            aria-label="Close modal"
             style={{
-              backgroundColor: 'var(--bg-secondary)',
+              backgroundColor: designSystem.colors.subSurface,
               border: 'none',
-              color: 'var(--text-secondary)',
+              color: designSystem.colors.textSecondary,
               width: '32px',
               height: '32px',
-              borderRadius: '50%',
+              borderRadius: designSystem.radii.full,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
+              boxShadow: designSystem.shadows.none,
             }}
           >
             <X size={18} />

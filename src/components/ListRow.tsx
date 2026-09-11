@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
+import { designSystem } from '../design-system';
 
 interface ListRowProps {
   icon?: React.ReactNode;
@@ -20,33 +21,41 @@ export const ListRow: React.FC<ListRowProps> = ({
 }) => {
   return (
     <div
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
       onClick={onClick}
+      onKeyDown={(e) => {
+        if (onClick && (e.key === 'Enter' || e.key === ' ')) {
+          onClick();
+        }
+      }}
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '16px 18px',
-        backgroundColor: '#FFFFFF',
-        border: '1.5px solid #DAD1C8',
-        borderRadius: '16px',
-        marginBottom: '10px',
+        padding: '14px 16px',
+        backgroundColor: designSystem.colors.surface,
+        border: `1px solid ${danger ? designSystem.colors.dangerLight : designSystem.colors.borderHairline}`,
+        borderRadius: designSystem.radii.md,
+        marginBottom: designSystem.spacing.sm,
         cursor: onClick ? 'pointer' : 'default',
         transition: 'background-color 0.15s ease',
-        boxShadow: '0 2px 10px rgba(17, 17, 68, 0.02)',
+        boxShadow: designSystem.shadows.none,
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: designSystem.spacing.md }}>
         {icon && (
           <div
             style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '12px',
-              backgroundColor: danger ? '#FDE8D7' : '#FDE8D7',
-              color: danger ? '#D96404' : '#F98513',
+              width: '36px',
+              height: '36px',
+              borderRadius: designSystem.radii.md,
+              backgroundColor: danger ? designSystem.colors.dangerLight : designSystem.colors.primaryLight,
+              color: danger ? designSystem.colors.danger : designSystem.colors.primary,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              border: `1px solid ${danger ? designSystem.colors.dangerLight : designSystem.colors.primaryBorder}`,
             }}
           >
             {icon}
@@ -56,14 +65,14 @@ export const ListRow: React.FC<ListRowProps> = ({
           <div
             style={{
               fontSize: '15px',
-              fontWeight: '700',
-              color: danger ? '#D96404' : '#111144',
+              fontWeight: designSystem.typography.weights.bold,
+              color: danger ? designSystem.colors.danger : designSystem.colors.textPrimary,
             }}
           >
             {label}
           </div>
           {subLabel && (
-            <div style={{ fontSize: '12px', color: '#5C564D', marginTop: '2px' }}>
+            <div style={{ fontSize: '12px', color: designSystem.colors.textSecondary, marginTop: '2px' }}>
               {subLabel}
             </div>
           )}
@@ -72,7 +81,7 @@ export const ListRow: React.FC<ListRowProps> = ({
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         {rightElement}
-        {onClick && !rightElement && <ChevronRight size={18} color="#5C564D" />}
+        {onClick && !rightElement && <ChevronRight size={18} color={designSystem.colors.textMuted} />}
       </div>
     </div>
   );

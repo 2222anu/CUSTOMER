@@ -1,6 +1,8 @@
 export interface User {
   name: string;
   avatarInitials: string;
+  avatarUrl?: string;
+  avatarBgColor?: string;
   upiId: string;
   mobile: string;
   email: string;
@@ -107,4 +109,4 @@ export type ScreenId =
   | 'REWARDS'
   | 'FOOD';
 
-export type BottomTab = 'home' | 'pay' | 'scan' | 'history' | 'profile';
+export type BottomTab = 'home' | 'account' | 'pay' | 'scan' | 'history' | 'profile';

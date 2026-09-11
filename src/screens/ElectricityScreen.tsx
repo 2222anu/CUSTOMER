@@ -45,7 +45,7 @@ export const ElectricityScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in">
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '24px' }}>
       <AppHeader title="Electricity" showBack showSettings />
 
       <div style={{ padding: '24px 20px' }}>
@@ -55,56 +55,58 @@ export const ElectricityScreen: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#FFFFFF',
-            border: '1px solid var(--card-border)',
-            borderRadius: '24px',
+            backgroundColor: '#ffffff',
+            border: '1px solid #e2e8f0',
+            borderRadius: '8px',
             padding: '24px',
             marginBottom: '24px',
-            boxShadow: '0 4px 20px rgba(7, 25, 19, 0.04)',
+            boxShadow: 'none',
           }}
         >
           <div
             style={{
-              width: '64px',
-              height: '64px',
-              borderRadius: '20px',
-              backgroundColor: 'rgba(158, 240, 26, 0.18)',
-              color: '#071913',
+              width: '56px',
+              height: '56px',
+              borderRadius: '50%',
+              backgroundColor: '#eef5ff',
+              color: '#2e83ff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: '12px',
+              border: '1px solid #d6e6ff',
             }}
           >
-            <Zap size={36} />
+            <Zap size={30} />
           </div>
-          <h2 style={{ fontSize: '20px', fontWeight: '700', color: 'var(--text-primary)' }}>Electricity Bill</h2>
-          <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '4px' }}>
-            State Power Corporation
+          <h2 style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a' }}>Electricity Bill</h2>
+          <p style={{ fontSize: '13px', color: '#475569', marginTop: '4px' }}>
+            State Power Corporation (TSSPDCL)
           </p>
         </div>
 
         {/* Input Consumer ID */}
         <div style={{ marginBottom: '20px' }}>
-          <label style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '700', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>
+          <label htmlFor="elec-consumer-input" style={{ fontSize: '12px', color: '#475569', fontWeight: '800', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>
             Consumer Number / ID
           </label>
           <input
+            id="elec-consumer-input"
             type="text"
             value={consumerNo}
             onChange={(e) => setConsumerNo(e.target.value)}
             placeholder="Enter Consumer Number"
             style={{
               width: '100%',
-              backgroundColor: '#FFFFFF',
-              border: '1px solid var(--card-border)',
-              borderRadius: '16px',
-              padding: '16px',
-              color: 'var(--text-primary)',
-              fontSize: '16px',
-              fontWeight: '600',
+              backgroundColor: '#ffffff',
+              border: '1px solid #cbd5e1',
+              borderRadius: '8px',
+              padding: '14px',
+              color: '#0f172a',
+              fontSize: '15px',
+              fontWeight: '700',
               outline: 'none',
-              boxShadow: '0 2px 10px rgba(7, 25, 19, 0.02)',
+              boxShadow: 'none',
             }}
           />
         </div>
@@ -117,7 +119,7 @@ export const ElectricityScreen: React.FC = () => {
                 Fetching Bill...
               </>
             ) : (
-              'Fetch Bill'
+              'Fetch Bill Details'
             )}
           </PrimaryButton>
         ) : (
@@ -125,30 +127,30 @@ export const ElectricityScreen: React.FC = () => {
             {/* Fetched Bill Info Card */}
             <div
               style={{
-                backgroundColor: '#FFFFFF',
-                border: '1px solid var(--neon-primary)',
-                borderRadius: '20px',
-                padding: '20px',
+                backgroundColor: '#ffffff',
+                border: '2px solid #2e83ff',
+                borderRadius: '8px',
+                padding: '18px',
                 marginBottom: '24px',
-                boxShadow: '0 8px 25px rgba(7, 25, 19, 0.06)',
+                boxShadow: 'none',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
-                <span style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>Provider:</span>
-                <span style={{ fontWeight: '700', fontSize: '13px', color: 'var(--text-primary)' }}>{bill.providerName}</span>
+                <span style={{ color: '#475569', fontSize: '13px' }}>Provider:</span>
+                <span style={{ fontWeight: '700', fontSize: '13px', color: '#0f172a' }}>{bill.providerName}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
-                <span style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>Consumer No:</span>
-                <span style={{ fontWeight: '700', fontSize: '13px', color: 'var(--text-primary)' }}>{bill.consumerNumber}</span>
+                <span style={{ color: '#475569', fontSize: '13px' }}>Consumer No:</span>
+                <span style={{ fontWeight: '700', fontSize: '13px', color: '#0f172a' }}>{bill.consumerNumber}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
-                <span style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>Due Date:</span>
-                <span style={{ fontWeight: '600', fontSize: '13px', color: '#D97706' }}>{bill.dueDate}</span>
+                <span style={{ color: '#475569', fontSize: '13px' }}>Due Date:</span>
+                <span style={{ fontWeight: '700', fontSize: '13px', color: '#dc2626' }}>{bill.dueDate}</span>
               </div>
 
-              <div style={{ borderTop: '1px solid var(--card-border)', paddingTop: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Total Amount Due:</span>
-                <span style={{ fontSize: '24px', fontWeight: '800', color: '#071913' }}>
+              <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ color: '#475569', fontSize: '14px', fontWeight: '600' }}>Total Amount Due:</span>
+                <span style={{ fontSize: '24px', fontWeight: '900', color: '#2e83ff' }}>
                   {formatCurrency(bill.amount)}
                 </span>
               </div>

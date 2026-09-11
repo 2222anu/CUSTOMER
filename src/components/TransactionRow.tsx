@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Transaction } from '../types';
 import { formatCurrency } from '../utils/formatters';
+import { designSystem } from '../design-system';
 
 interface TransactionRowProps {
   transaction: Transaction;
@@ -15,31 +16,38 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
 
   return (
     <div
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
       onClick={onClick}
+      onKeyDown={(e) => {
+        if (onClick && (e.key === 'Enter' || e.key === ' ')) {
+          onClick();
+        }
+      }}
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '14px 16px',
-        backgroundColor: '#FFFFFF',
-        border: '1px solid rgba(37, 39, 44, 0.12)',
-        borderRadius: '16px',
-        marginBottom: '8px',
+        backgroundColor: designSystem.colors.surface,
+        border: `1px solid ${designSystem.colors.borderHairline}`,
+        borderRadius: designSystem.radii.md,
+        marginBottom: designSystem.spacing.sm,
         cursor: onClick ? 'pointer' : 'default',
-        boxShadow: '0 2px 10px rgba(37, 39, 44, 0.03)',
+        boxShadow: designSystem.shadows.none,
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: designSystem.spacing.md }}>
         <div
           style={{
-            width: '42px',
-            height: '42px',
-            borderRadius: '50%',
-            backgroundColor: isReceived ? '#B8F7E4' : 'rgba(37, 39, 44, 0.06)',
-            border: isReceived ? '1px solid rgba(184, 247, 228, 0.6)' : '1px solid rgba(37, 39, 44, 0.12)',
-            color: '#25272C',
-            fontWeight: '700',
-            fontSize: '14px',
+            width: '40px',
+            height: '40px',
+            borderRadius: designSystem.radii.full,
+            backgroundColor: isReceived ? designSystem.colors.successLight : designSystem.colors.primaryLight,
+            border: `1px solid ${isReceived ? '#a7f3d0' : designSystem.colors.primaryBorder}`,
+            color: isReceived ? designSystem.colors.successText : designSystem.colors.primary,
+            fontWeight: designSystem.typography.weights.extrabold,
+            fontSize: '13px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -48,10 +56,10 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
           {transaction.avatarInitials || transaction.title.substring(0, 2).toUpperCase()}
         </div>
         <div>
-          <div style={{ fontWeight: '700', fontSize: '14px', color: '#25272C' }}>
+          <div style={{ fontWeight: designSystem.typography.weights.bold, fontSize: '14px', color: designSystem.colors.textPrimary }}>
             {transaction.title}
           </div>
-          <div style={{ fontSize: '11px', color: 'rgba(37, 39, 44, 0.65)', marginTop: '2px' }}>
+          <div style={{ fontSize: '11px', color: designSystem.colors.textSecondary, marginTop: '2px' }}>
             {transaction.subTitle || (isReceived ? 'Received' : 'Paid')} &bull; {transaction.utr.substring(0, 10)}
           </div>
         </div>
@@ -60,14 +68,14 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
       <div style={{ textAlign: 'right' }}>
         <div
           style={{
-            fontWeight: '700',
+            fontWeight: designSystem.typography.weights.extrabold,
             fontSize: '15px',
-            color: '#25272C',
+            color: isReceived ? designSystem.colors.successText : designSystem.colors.textPrimary,
           }}
         >
           {isReceived ? '+' : '-'}{formatCurrency(transaction.amount)}
         </div>
-        <div style={{ fontSize: '10px', color: 'rgba(37, 39, 44, 0.65)', marginTop: '2px' }}>
+        <div style={{ fontSize: '10px', color: designSystem.colors.textMuted, marginTop: '2px' }}>
           {transaction.date}
         </div>
       </div>

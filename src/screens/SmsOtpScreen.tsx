@@ -3,6 +3,7 @@ import { ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
+import { designSystem } from '../design-system';
 
 export const SmsOtpScreen: React.FC = () => {
   const { navigateTo, screenParams } = useApp();
@@ -30,49 +31,50 @@ export const SmsOtpScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in">
+    <div className="fade-in" style={{ backgroundColor: designSystem.colors.background, minHeight: '100vh' }}>
       <AppHeader title="OTP Verification" showBack showSettings={false} />
 
-      <div style={{ padding: '24px 20px', minHeight: '82vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-        <div>
-          {/* Header Card */}
-          <div
-            style={{
-              backgroundColor: '#FFFFFF',
-              border: '1.5px solid #DAD1C8',
-              borderRadius: '24px',
-              padding: '24px',
-              marginBottom: '28px',
-              textAlign: 'center',
-              boxShadow: '0 4px 20px rgba(17, 17, 68, 0.04)',
-            }}
-          >
+      <div style={{ padding: '24px 20px 32px 20px', minHeight: '82vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div
+          style={{
+            backgroundColor: designSystem.colors.surface,
+            border: `1px solid ${designSystem.colors.borderHairline}`,
+            borderRadius: designSystem.radii.lg,
+            padding: '28px 24px',
+            boxShadow: designSystem.shadows.none,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+          }}
+        >
+          {/* Top Emblem & Header */}
+          <div style={{ textAlign: 'center' }}>
             <div
               style={{
                 width: '56px',
                 height: '56px',
-                borderRadius: '50%',
-                backgroundColor: '#FDE8D7',
-                color: '#F98513',
+                borderRadius: designSystem.radii.full,
+                backgroundColor: designSystem.colors.primaryLight,
+                color: designSystem.colors.primary,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                margin: '0 auto 14px auto',
-                border: '1px solid #F98513',
+                margin: '0 auto 16px auto',
+                border: `1px solid ${designSystem.colors.primaryBorder}`,
               }}
             >
               <ShieldCheck size={28} />
             </div>
-            <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#111144', margin: 0 }}>
-              Auto-Detecting OTP
+            <h3 style={{ fontSize: '18px', fontWeight: designSystem.typography.weights.extrabold, color: designSystem.colors.textPrimary, margin: 0 }}>
+              Verify Phone Number
             </h3>
-            <p style={{ fontSize: '13px', color: '#5C564D', marginTop: '6px', marginBottom: 0 }}>
-              Verification code sent to <strong style={{ color: '#111144' }}>+91 {mobile}</strong>
+            <p style={{ fontSize: '13px', color: designSystem.colors.textSecondary, marginTop: '6px', marginBottom: 0 }}>
+              Enter the 6-digit OTP code sent via SMS to <strong style={{ color: designSystem.colors.textPrimary }}>+91 {mobile}</strong>
             </p>
           </div>
 
-          {/* 6-Digit OTP Boxes */}
-          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '24px' }}>
+          {/* 6-Digit OTP Input Boxes */}
+          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
             {otp.map((digit, i) => (
               <input
                 key={i}
@@ -85,17 +87,17 @@ export const SmsOtpScreen: React.FC = () => {
                   setOtp(newOtp);
                 }}
                 style={{
-                  width: '46px',
-                  height: '52px',
-                  borderRadius: '14px',
-                  backgroundColor: '#FFFFFF',
-                  border: '1.5px solid #F98513',
-                  fontSize: '22px',
-                  fontWeight: '800',
-                  color: '#111144',
+                  width: '42px',
+                  height: '48px',
+                  borderRadius: designSystem.radii.md,
+                  backgroundColor: designSystem.colors.inputFill,
+                  border: `1.5px solid ${designSystem.colors.primary}`,
+                  fontSize: '20px',
+                  fontWeight: designSystem.typography.weights.extrabold,
+                  color: designSystem.colors.textPrimary,
                   textAlign: 'center',
                   outline: 'none',
-                  boxShadow: '0 2px 10px rgba(249, 133, 19, 0.15)',
+                  boxShadow: designSystem.shadows.none,
                 }}
               />
             ))}
@@ -108,21 +110,20 @@ export const SmsOtpScreen: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '8px',
-              backgroundColor: '#FDE8D7',
-              border: '1px solid #F98513',
+              backgroundColor: designSystem.colors.primaryLight,
+              border: `1px solid ${designSystem.colors.primaryBorder}`,
               padding: '12px 16px',
-              borderRadius: '14px',
+              borderRadius: designSystem.radii.md,
               fontSize: '13px',
-              fontWeight: '700',
-              color: '#F98513',
-              marginBottom: '20px',
+              fontWeight: designSystem.typography.weights.bold,
+              color: designSystem.colors.primary,
             }}
           >
             <CheckCircle2 size={18} /> SMS OTP Auto-Detected Successfully
           </div>
 
           {/* Resend Link */}
-          <div style={{ textAlign: 'center', fontSize: '13px', color: '#5C564D' }}>
+          <div style={{ textAlign: 'center', fontSize: '13px', color: designSystem.colors.textSecondary }}>
             Didn't receive code?{' '}
             <button
               disabled={timer > 0}
@@ -130,8 +131,8 @@ export const SmsOtpScreen: React.FC = () => {
               style={{
                 background: 'none',
                 border: 'none',
-                color: timer > 0 ? '#8E887E' : '#F98513',
-                fontWeight: '700',
+                color: timer > 0 ? designSystem.colors.textDisabled : designSystem.colors.primary,
+                fontWeight: designSystem.typography.weights.bold,
                 cursor: timer > 0 ? 'not-allowed' : 'pointer',
               }}
             >
@@ -140,15 +141,17 @@ export const SmsOtpScreen: React.FC = () => {
           </div>
 
           {isResent && (
-            <div style={{ textAlign: 'center', fontSize: '12px', color: '#F98513', fontWeight: '600', marginTop: '8px' }}>
+            <div style={{ textAlign: 'center', fontSize: '12px', color: designSystem.colors.primary, fontWeight: designSystem.typography.weights.semibold }}>
               New OTP sent to +91 {mobile}
             </div>
           )}
         </div>
 
-        <PrimaryButton onClick={handleVerify}>
-          Verify & Continue
-        </PrimaryButton>
+        <div style={{ marginTop: '20px' }}>
+          <PrimaryButton onClick={handleVerify}>
+            Verify & Proceed →
+          </PrimaryButton>
+        </div>
       </div>
     </div>
   );

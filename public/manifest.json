@@ -1,0 +1,27 @@
+{
+  "id": "/",
+  "name": "QTPay — Quick. Trusted. Payments.",
+  "short_name": "QTPay",
+  "description": "Fast, secure, and instant UPI payments, bill payments, and recharge.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "categories": ["finance", "shopping", "utilities"],
+  "icons": [
+    {
+      "src": "/qtpay-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/qtpay-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

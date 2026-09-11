@@ -2,6 +2,7 @@ import React from 'react';
 import { Check } from 'lucide-react';
 import { BottomSheet } from '../components/BottomSheet';
 import { useApp } from '../state/AppContext';
+import { designSystem } from '../design-system';
 
 export const LanguageModal: React.FC = () => {
   const { isLanguageModalOpen, setIsLanguageModalOpen, language, setAppLanguage } = useApp();
@@ -20,35 +21,44 @@ export const LanguageModal: React.FC = () => {
       title="Select Language"
       themeMode="light"
     >
-      <div style={{ marginBottom: '16px' }}>
+      <div role="radiogroup" aria-label="App Language Options" style={{ marginBottom: designSystem.spacing.lg }}>
         {languages.map((lang) => {
           const isSelected = language === lang.name;
           return (
             <div
               key={lang.name}
+              role="radio"
+              aria-checked={isSelected}
+              tabIndex={0}
               onClick={() => setAppLanguage(lang.name)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setAppLanguage(lang.name);
+                }
+              }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                padding: '16px 18px',
-                backgroundColor: isSelected ? '#FDE8D7' : '#FFFFFF',
-                border: isSelected ? '1.5px solid #F98513' : '1.5px solid #DAD1C8',
-                borderRadius: '16px',
-                marginBottom: '10px',
+                padding: '14px 16px',
+                backgroundColor: isSelected ? designSystem.colors.primaryLight : designSystem.colors.surface,
+                border: isSelected ? `2px solid ${designSystem.colors.primary}` : `1px solid ${designSystem.colors.borderHairline}`,
+                borderRadius: designSystem.radii.md,
+                marginBottom: designSystem.spacing.sm,
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
+                boxShadow: designSystem.shadows.none,
               }}
             >
               <div>
-                <div style={{ fontWeight: '700', fontSize: '15px', color: '#111144' }}>
+                <div style={{ fontWeight: designSystem.typography.weights.bold, fontSize: '15px', color: designSystem.colors.textPrimary }}>
                   {lang.name}
                 </div>
-                <div style={{ fontSize: '12px', color: '#5C564D' }}>
+                <div style={{ fontSize: '12px', color: designSystem.colors.textSecondary }}>
                   {lang.native}
                 </div>
               </div>
-              {isSelected && <Check size={20} color="#F98513" />}
+              {isSelected && <Check size={20} color={designSystem.colors.primary} />}
             </div>
           );
         })}

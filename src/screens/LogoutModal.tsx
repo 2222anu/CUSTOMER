@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { LogOut, CheckCircle2 } from 'lucide-react';
 import { BottomSheet } from '../components/BottomSheet';
 import { useApp } from '../state/AppContext';
+import { designSystem } from '../design-system';
 
 export const LogoutModal: React.FC = () => {
   const { isLogoutModalOpen, setIsLogoutModalOpen, performLogout } = useApp();
@@ -30,22 +31,23 @@ export const LogoutModal: React.FC = () => {
             style={{
               width: '60px',
               height: '60px',
-              borderRadius: '50%',
-              backgroundColor: '#FDE8D7',
-              color: '#F98513',
+              borderRadius: designSystem.radii.full,
+              backgroundColor: designSystem.colors.primaryLight,
+              color: designSystem.colors.primary,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 14px auto',
-              boxShadow: '0 4px 15px rgba(249, 133, 19, 0.4)',
+              boxShadow: designSystem.shadows.none,
+              border: `2px solid ${designSystem.colors.primary}`,
             }}
           >
             <CheckCircle2 size={32} />
           </div>
-          <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#111144' }}>
+          <h3 style={{ fontSize: '20px', fontWeight: designSystem.typography.weights.extrabold, color: designSystem.colors.textPrimary }}>
             Logged Out Successfully
           </h3>
-          <p style={{ color: '#5C564D', fontSize: '13px', marginTop: '6px' }}>
+          <p style={{ color: designSystem.colors.textSecondary, fontSize: '13px', marginTop: '6px' }}>
             Returning to mobile registration screen...
           </p>
         </div>
@@ -55,22 +57,23 @@ export const LogoutModal: React.FC = () => {
             style={{
               width: '56px',
               height: '56px',
-              borderRadius: '50%',
-              backgroundColor: '#FDE8D7',
-              color: '#F98513',
+              borderRadius: designSystem.radii.full,
+              backgroundColor: designSystem.colors.primaryLight,
+              color: designSystem.colors.primary,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 16px auto',
+              border: `1px solid ${designSystem.colors.borderHairline}`,
             }}
           >
             <LogOut size={26} />
           </div>
 
-          <h3 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px', color: '#111144' }}>
+          <h3 style={{ fontSize: '18px', fontWeight: designSystem.typography.weights.extrabold, marginBottom: '8px', color: designSystem.colors.textPrimary }}>
             Confirm Logout
           </h3>
-          <p style={{ color: '#5C564D', fontSize: '14px', marginBottom: '24px' }}>
+          <p style={{ color: designSystem.colors.textSecondary, fontSize: '14px', marginBottom: '24px' }}>
             Are you sure you want to log out of QTPay? Your session will be safely cleared.
           </p>
 
@@ -79,14 +82,15 @@ export const LogoutModal: React.FC = () => {
               onClick={() => setIsLogoutModalOpen(false)}
               style={{
                 flex: 1,
-                backgroundColor: '#F4F1EC',
-                border: '1.5px solid #DAD1C8',
-                borderRadius: '16px',
-                padding: '16px',
-                color: '#5C564D',
-                fontWeight: '700',
-                fontSize: '15px',
+                backgroundColor: designSystem.colors.surface,
+                border: `1px solid ${designSystem.colors.borderStrong}`,
+                borderRadius: designSystem.radii.md,
+                padding: '14px',
+                color: designSystem.colors.textSecondary,
+                fontWeight: designSystem.typography.weights.bold,
+                fontSize: '14px',
                 cursor: 'pointer',
+                boxShadow: designSystem.shadows.none,
               }}
             >
               Cancel
@@ -95,15 +99,15 @@ export const LogoutModal: React.FC = () => {
               onClick={handleConfirmLogout}
               style={{
                 flex: 1,
-                backgroundColor: '#F98513',
+                backgroundColor: designSystem.colors.danger,
                 border: 'none',
-                borderRadius: '16px',
-                padding: '16px',
-                color: '#FFFFFF',
-                fontWeight: '800',
-                fontSize: '15px',
+                borderRadius: designSystem.radii.md,
+                padding: '14px',
+                color: designSystem.colors.textOnPrimary,
+                fontWeight: designSystem.typography.weights.extrabold,
+                fontSize: '14px',
                 cursor: 'pointer',
-                boxShadow: '0 4px 15px rgba(249, 133, 19, 0.35)',
+                boxShadow: designSystem.shadows.none,
               }}
             >
               Log Out

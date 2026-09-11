@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Delete } from 'lucide-react';
+import { designSystem } from '../design-system';
 
 interface PinPadProps {
   length?: number;
@@ -29,12 +30,29 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
     }
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key >= '0' && e.key <= '9') {
+        handleKeyPress(e.key);
+      } else if (e.key === 'Backspace') {
+        handleDelete();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [pin, length]);
+
   const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', 'delete'];
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
       {/* PIN Dots Display */}
-      <div style={{ display: 'flex', gap: '16px', margin: '20px 0 30px 0' }}>
+      <div
+        role="group"
+        aria-label={`UPI PIN input, ${pin.length} of ${length} digits entered`}
+        style={{ display: 'flex', gap: designSystem.spacing.lg, margin: '20px 0 30px 0' }}
+      >
         {Array.from({ length }).map((_, index) => {
           const isFilled = index < pin.length;
           return (
@@ -43,10 +61,10 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
               style={{
                 width: '18px',
                 height: '18px',
-                borderRadius: '50%',
-                backgroundColor: isFilled ? '#B8F7E4' : 'rgba(37, 39, 44, 0.1)',
-                border: isFilled ? '1px solid #B8F7E4' : '1px solid rgba(37, 39, 44, 0.25)',
-                boxShadow: isFilled ? '0 0 12px rgba(184, 247, 228, 0.6)' : 'none',
+                borderRadius: designSystem.radii.full,
+                backgroundColor: isFilled ? designSystem.colors.primary : designSystem.colors.primaryLight,
+                border: isFilled ? `2px solid ${designSystem.colors.primary}` : `2px solid ${designSystem.colors.borderStrong}`,
+                boxShadow: designSystem.shadows.none,
                 transition: 'all 0.15s ease',
               }}
             />
@@ -55,17 +73,19 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
       </div>
 
       {error && (
-        <div style={{ color: '#25272C', fontSize: '13px', marginBottom: '16px', fontWeight: '700' }}>
+        <div role="alert" style={{ color: designSystem.colors.danger, fontSize: '13px', marginBottom: designSystem.spacing.lg, fontWeight: designSystem.typography.weights.bold }}>
           {error}
         </div>
       )}
 
       {/* Numeric Keypad Grid */}
       <div
+        role="group"
+        aria-label="Numeric PIN keypad"
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '16px',
+          gap: designSystem.spacing.md,
           width: '100%',
           maxWidth: '300px',
         }}
@@ -78,17 +98,19 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
               <button
                 key={i}
                 onClick={handleDelete}
+                aria-label="Delete last digit"
                 style={{
-                  height: '60px',
-                  borderRadius: '16px',
-                  backgroundColor: 'rgba(37, 39, 44, 0.05)',
-                  border: '1px solid rgba(37, 39, 44, 0.1)',
-                  color: '#25272C',
+                  height: '56px',
+                  borderRadius: designSystem.radii.md,
+                  backgroundColor: designSystem.colors.subSurface,
+                  border: `1px solid ${designSystem.colors.borderStrong}`,
+                  color: designSystem.colors.textPrimary,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
                   fontSize: '20px',
+                  boxShadow: designSystem.shadows.none,
                 }}
               >
                 <Delete size={22} />
@@ -100,19 +122,21 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
             <button
               key={i}
               onClick={() => handleKeyPress(key)}
+              aria-label={`Digit ${key}`}
               style={{
-                height: '60px',
-                borderRadius: '16px',
-                backgroundColor: 'rgba(37, 39, 44, 0.05)',
-                border: '1px solid rgba(37, 39, 44, 0.1)',
-                color: '#25272C',
-                fontSize: '24px',
-                fontWeight: '700',
+                height: '56px',
+                borderRadius: designSystem.radii.md,
+                backgroundColor: designSystem.colors.surface,
+                border: `1px solid ${designSystem.colors.borderStrong}`,
+                color: designSystem.colors.textPrimary,
+                fontSize: '22px',
+                fontWeight: designSystem.typography.weights.extrabold,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
                 transition: 'background-color 0.15s ease',
+                boxShadow: designSystem.shadows.none,
               }}
             >
               {key}

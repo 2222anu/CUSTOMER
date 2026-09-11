@@ -1,4 +1,5 @@
 import React from 'react';
+import { designSystem } from '../design-system';
 
 interface ServiceCardProps {
   label: string;
@@ -16,14 +17,22 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   icon,
   onClick,
   badge,
-  bgColor = '#FFFFFF',
-  iconBg = '#FDE8D7',
-  iconColor = '#F98513',
-  borderColor = '#DAD1C8',
+  bgColor = designSystem.colors.surface,
+  iconBg = designSystem.colors.primaryLight,
+  iconColor = designSystem.colors.primary,
+  borderColor = designSystem.colors.borderHairline,
 }) => {
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          onClick();
+        }
+      }}
+      aria-label={label}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -31,13 +40,13 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         justifyContent: 'center',
         padding: '14px 6px',
         backgroundColor: bgColor,
-        border: `1.5px solid ${borderColor}`,
-        borderRadius: '18px',
+        border: `1px solid ${borderColor}`,
+        borderRadius: designSystem.radii.md,
         cursor: 'pointer',
         position: 'relative',
         transition: 'all 0.15s ease',
         textAlign: 'center',
-        boxShadow: '0 4px 14px rgba(17, 17, 68, 0.04)',
+        boxShadow: designSystem.shadows.none,
       }}
     >
       {badge && (
@@ -47,11 +56,11 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             top: '-6px',
             right: '4px',
             fontSize: '9px',
-            fontWeight: '800',
-            backgroundColor: '#F98513',
-            color: '#FFFFFF',
+            fontWeight: designSystem.typography.weights.extrabold,
+            backgroundColor: designSystem.colors.primary,
+            color: designSystem.colors.textOnPrimary,
             padding: '2px 6px',
-            borderRadius: '10px',
+            borderRadius: designSystem.radii.xs,
             textTransform: 'uppercase',
           }}
         >
@@ -62,22 +71,23 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         style={{
           width: '38px',
           height: '38px',
-          borderRadius: '50%',
+          borderRadius: designSystem.radii.full,
           backgroundColor: iconBg,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: iconColor,
-          marginBottom: '8px',
+          marginBottom: designSystem.spacing.sm,
+          border: `1px solid ${designSystem.colors.primaryBorder}`,
         }}
       >
         {icon}
       </div>
       <span
         style={{
-          fontSize: '12px',
-          fontWeight: '700',
-          color: '#111144',
+          fontSize: '11px',
+          fontWeight: designSystem.typography.weights.bold,
+          color: designSystem.colors.textPrimary,
           lineHeight: '1.2',
         }}
       >

@@ -1,5 +1,6 @@
 import React from 'react';
 import { QRCodeSVG } from 'qrcode.react';
+import { designSystem } from '../design-system';
 
 interface QRCodeViewProps {
   value: string;
@@ -11,20 +12,20 @@ interface QRCodeViewProps {
 export const QRCodeView: React.FC<QRCodeViewProps> = ({
   value,
   size = 200,
-  fgColor = '#061611',
-  bgColor = '#FFFFFF',
+  fgColor = designSystem.colors.textPrimary,
+  bgColor = designSystem.colors.surface,
 }) => {
   return (
     <div
       style={{
-        backgroundColor: '#FFFFFF',
-        padding: '18px',
-        borderRadius: '24px',
+        backgroundColor: designSystem.colors.surface,
+        padding: '16px',
+        borderRadius: designSystem.radii.md,
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: '0 12px 35px rgba(0,0,0,0.4), 0 0 30px rgba(158, 240, 26, 0.2)',
-        border: '4px solid var(--neon-primary)',
+        boxShadow: designSystem.shadows.none,
+        border: `3px solid ${designSystem.colors.primary}`,
       }}
     >
       <QRCodeSVG

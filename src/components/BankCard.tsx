@@ -3,6 +3,7 @@ import { Eye, EyeOff, Send, Download, Settings2, CreditCard } from 'lucide-react
 import type { BankAccount } from '../types';
 import { formatCurrency } from '../utils/formatters';
 import { useApp } from '../state/AppContext';
+import { designSystem } from '../design-system';
 
 interface BankCardProps {
   bank: BankAccount;
@@ -17,38 +18,52 @@ export const BankCard: React.FC<BankCardProps> = ({
   onRequestClick,
   onManageClick,
 }) => {
-  const { toggleShowBalance, navigateTo } = useApp();
+  const { toggleShowBalance, openPinModal, navigateTo } = useApp();
+
+  const handleCheckBalance = () => {
+    if (bank.showBalance) {
+      toggleShowBalance(bank.id);
+    } else {
+      openPinModal({
+        title: `Check ${bank.bankName} Balance`,
+        subTitle: `${bank.accountType} • ${bank.accountNumberMasked}`,
+        amount: bank.balance,
+        onSuccess: () => toggleShowBalance(bank.id),
+      });
+    }
+  };
 
   return (
     <div
       style={{
-        backgroundColor: 'var(--card-bg)',
-        border: '1px solid var(--card-border)',
-        borderRadius: '24px',
-        padding: '20px',
-        margin: '16px 20px',
-        boxShadow: '0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)',
+        backgroundColor: designSystem.colors.surface,
+        border: `1px solid ${designSystem.colors.borderHairline}`,
+        borderRadius: designSystem.radii.md,
+        padding: '16px',
+        margin: '12px 16px',
+        boxShadow: designSystem.shadows.none,
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div
             style={{
               width: '40px',
               height: '40px',
-              borderRadius: '12px',
-              backgroundColor: 'rgba(158, 240, 26, 0.1)',
+              borderRadius: designSystem.radii.md,
+              backgroundColor: designSystem.colors.primaryLight,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--neon-primary)',
+              color: designSystem.colors.primary,
+              border: `1px solid ${designSystem.colors.primaryBorder}`,
             }}
           >
             <CreditCard size={22} />
           </div>
           <div>
-            <div style={{ fontWeight: '700', fontSize: '16px' }}>{bank.bankName}</div>
-            <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+            <div style={{ fontWeight: designSystem.typography.weights.extrabold, fontSize: '15px', color: designSystem.colors.textPrimary }}>{bank.bankName}</div>
+            <div style={{ fontSize: '12px', color: designSystem.colors.textSecondary }}>
               {bank.accountType} &bull; {bank.accountNumberMasked}
             </div>
           </div>
@@ -58,14 +73,14 @@ export const BankCard: React.FC<BankCardProps> = ({
           <span
             style={{
               fontSize: '10px',
-              fontWeight: '700',
+              fontWeight: designSystem.typography.weights.extrabold,
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
-              backgroundColor: 'rgba(158, 240, 26, 0.15)',
-              color: 'var(--neon-primary)',
-              padding: '4px 10px',
-              borderRadius: '20px',
-              border: '1px solid rgba(158, 240, 26, 0.3)',
+              backgroundColor: designSystem.colors.primaryLight,
+              color: designSystem.colors.primary,
+              padding: '3px 8px',
+              borderRadius: designSystem.radii.full,
+              border: `1px solid ${designSystem.colors.primaryBorder}`,
             }}
           >
             Primary
@@ -75,38 +90,40 @@ export const BankCard: React.FC<BankCardProps> = ({
 
       <div
         style={{
-          backgroundColor: 'rgba(7, 25, 19, 0.6)',
-          borderRadius: '16px',
-          padding: '14px 16px',
+          backgroundColor: designSystem.colors.subSurface,
+          borderRadius: designSystem.radii.md,
+          padding: '12px 14px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: '16px',
+          marginBottom: '14px',
+          border: `1px solid ${designSystem.colors.borderHairline}`,
         }}
       >
         <div>
-          <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <div style={{ fontSize: '10px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: designSystem.typography.weights.bold }}>
             Available Balance
           </div>
-          <div style={{ fontSize: '20px', fontWeight: '800', marginTop: '2px', color: 'var(--text-primary)' }}>
+          <div style={{ fontSize: '18px', fontWeight: designSystem.typography.weights.black, marginTop: '2px', color: designSystem.colors.textPrimary }}>
             {bank.showBalance ? formatCurrency(bank.balance) : '••••••••'}
           </div>
         </div>
 
         <button
-          onClick={() => toggleShowBalance(bank.id)}
+          onClick={handleCheckBalance}
           style={{
-            backgroundColor: 'var(--neon-primary)',
-            color: 'var(--text-dark)',
+            backgroundColor: designSystem.colors.primary,
+            color: designSystem.colors.textOnPrimary,
             border: 'none',
-            borderRadius: '12px',
-            padding: '8px 14px',
+            borderRadius: designSystem.radii.sm,
+            padding: '6px 12px',
             fontSize: '12px',
-            fontWeight: '700',
+            fontWeight: designSystem.typography.weights.bold,
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
+            boxShadow: designSystem.shadows.none,
           }}
         >
           {bank.showBalance ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -119,21 +136,22 @@ export const BankCard: React.FC<BankCardProps> = ({
           onClick={onSendClick || (() => navigateTo('PAY_ANYONE'))}
           style={{
             flex: 1,
-            backgroundColor: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: '12px',
-            padding: '10px',
+            backgroundColor: designSystem.colors.surface,
+            border: `1px solid ${designSystem.colors.borderHairline}`,
+            borderRadius: designSystem.radii.sm,
+            padding: '8px',
             fontSize: '13px',
-            fontWeight: '600',
-            color: 'var(--text-primary)',
+            fontWeight: designSystem.typography.weights.semibold,
+            color: designSystem.colors.textPrimary,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '6px',
             cursor: 'pointer',
+            boxShadow: designSystem.shadows.none,
           }}
         >
-          <Send size={14} color="var(--neon-primary)" />
+          <Send size={14} color={designSystem.colors.primary} />
           Send
         </button>
 
@@ -141,21 +159,22 @@ export const BankCard: React.FC<BankCardProps> = ({
           onClick={onRequestClick || (() => navigateTo('REQUEST_MONEY'))}
           style={{
             flex: 1,
-            backgroundColor: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: '12px',
-            padding: '10px',
+            backgroundColor: designSystem.colors.surface,
+            border: `1px solid ${designSystem.colors.borderHairline}`,
+            borderRadius: designSystem.radii.sm,
+            padding: '8px',
             fontSize: '13px',
-            fontWeight: '600',
-            color: 'var(--text-primary)',
+            fontWeight: designSystem.typography.weights.semibold,
+            color: designSystem.colors.textPrimary,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '6px',
             cursor: 'pointer',
+            boxShadow: designSystem.shadows.none,
           }}
         >
-          <Download size={14} color="var(--neon-primary)" />
+          <Download size={14} color={designSystem.colors.primary} />
           Request
         </button>
 
@@ -163,21 +182,22 @@ export const BankCard: React.FC<BankCardProps> = ({
           onClick={onManageClick || (() => navigateTo('BANK_ACCOUNTS'))}
           style={{
             flex: 1,
-            backgroundColor: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: '12px',
-            padding: '10px',
+            backgroundColor: designSystem.colors.surface,
+            border: `1px solid ${designSystem.colors.borderHairline}`,
+            borderRadius: designSystem.radii.sm,
+            padding: '8px',
             fontSize: '13px',
-            fontWeight: '600',
-            color: 'var(--text-primary)',
+            fontWeight: designSystem.typography.weights.semibold,
+            color: designSystem.colors.textPrimary,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '6px',
             cursor: 'pointer',
+            boxShadow: designSystem.shadows.none,
           }}
         >
-          <Settings2 size={14} color="var(--text-secondary)" />
+          <Settings2 size={14} color={designSystem.colors.textSecondary} />
           Manage
         </button>
       </div>

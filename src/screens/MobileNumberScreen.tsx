@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { User as UserIcon, Smartphone, ArrowRight, ShieldCheck } from 'lucide-react';
+import { User as UserIcon, ArrowRight, ShieldCheck, Lock } from 'lucide-react';
 import { QtPayLogo } from '../components/QtPayLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
+import { designSystem } from '../design-system';
 
 export const MobileNumberScreen: React.FC = () => {
   const { navigateTo, user, updateUser } = useApp();
   const [fullName, setFullName] = useState<string>(user.name || 'Anu');
   const [mobileNumber, setMobileNumber] = useState<string>('9876543210');
 
-  const handleContinue = () => {
+  const handleContinue = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (mobileNumber.length >= 10 && fullName.trim().length > 0) {
       updateUser({ name: fullName, mobile: `+91 ${mobileNumber}` });
       navigateTo('SMS_OTP', { mobile: mobileNumber, name: fullName });
@@ -20,114 +22,101 @@ export const MobileNumberScreen: React.FC = () => {
     <div
       className="fade-in"
       style={{
-        height: '100%',
-        maxHeight: '100vh',
-        backgroundColor: '#F4F1EC',
+        minHeight: '100vh',
+        backgroundColor: designSystem.colors.background,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: '16px 20px 20px 20px',
+        padding: '24px 20px 32px 20px',
         boxSizing: 'border-box',
-        overflow: 'hidden',
       }}
     >
-      {/* Header Logo */}
-      <div style={{ textAlign: 'center', margin: '4px 0 8px 0' }}>
-        <QtPayLogo variant="splash" size={100} showTagline={false} themeMode="light" />
+      {/* Top Header Logo */}
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '8px 0 16px 0' }}>
+        <QtPayLogo variant="horizontal" size={28} themeMode="light" showTagline={true} />
       </div>
 
-      {/* Main Content Card */}
-      <div
+      {/* Main Registration Card */}
+      <form
+        onSubmit={handleContinue}
         style={{
-          backgroundColor: '#FFFFFF',
-          border: '1.5px solid #DAD1C8',
-          borderRadius: '20px',
-          padding: '18px 20px',
-          boxShadow: '0 8px 24px rgba(17, 17, 68, 0.04)',
+          backgroundColor: designSystem.colors.surface,
+          border: `1px solid ${designSystem.colors.borderHairline}`,
+          borderRadius: designSystem.radii.lg,
+          padding: '28px 24px',
+          boxShadow: designSystem.shadows.none,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-          <div
-            style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '12px',
-              backgroundColor: '#FDE8D7',
-              border: '1px solid #F98513',
-              color: '#F98513',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}
-          >
-            <Smartphone size={20} />
-          </div>
-          <div>
-            <h2 style={{ fontSize: '16px', fontWeight: '800', color: '#111144', margin: 0 }}>
-              Registration & Login
-            </h2>
-            <p style={{ fontSize: '11.5px', color: '#5C564D', margin: '2px 0 0 0' }}>
-              Enter your details to link UPI account
-            </p>
-          </div>
+        <div>
+          <h2 style={{ fontSize: '20px', fontWeight: designSystem.typography.weights.extrabold, color: designSystem.colors.textPrimary, margin: 0, letterSpacing: '-0.01em' }}>
+            Welcome to QTPay
+          </h2>
+          <p style={{ fontSize: '13px', color: designSystem.colors.textSecondary, margin: '4px 0 0 0', lineHeight: '1.4' }}>
+            Enter your mobile number to link your bank account & set up UPI
+          </p>
         </div>
 
         {/* Full Name Input Field */}
-        <div style={{ marginBottom: '12px' }}>
-          <label style={{ fontSize: '10.5px', color: '#5C564D', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
-            Full Name
+        <div>
+          <label htmlFor="name-input" style={{ fontSize: '11px', color: designSystem.colors.textSecondary, fontWeight: designSystem.typography.weights.bold, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
+            Full Name (As in Bank Account)
           </label>
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              backgroundColor: '#F4F1EC',
-              border: '1.5px solid #DAD1C8',
-              borderRadius: '14px',
-              padding: '10px 14px',
+              backgroundColor: designSystem.colors.inputFill,
+              border: `1px solid ${designSystem.colors.borderStrong}`,
+              borderRadius: designSystem.radii.md,
+              padding: '12px 14px',
             }}
           >
-            <UserIcon size={18} style={{ color: '#F98513', marginRight: '10px', flexShrink: 0 }} />
+            <UserIcon size={18} style={{ color: designSystem.colors.primary, marginRight: '12px', flexShrink: 0 }} />
             <input
+              id="name-input"
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              placeholder="Enter your name"
+              placeholder="Enter full name"
               required
               style={{
                 background: 'none',
                 border: 'none',
                 outline: 'none',
                 fontSize: '15px',
-                fontWeight: '700',
-                color: '#111144',
+                fontWeight: designSystem.typography.weights.bold,
+                color: designSystem.colors.textPrimary,
                 width: '100%',
               }}
             />
           </div>
         </div>
 
-        {/* Mobile Number Input Field with +91 Prefix Only */}
-        <div style={{ marginBottom: '14px' }}>
-          <label style={{ fontSize: '10.5px', color: '#5C564D', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
+        {/* Mobile Number Input Field with +91 Country Badge */}
+        <div>
+          <label htmlFor="mobile-input" style={{ fontSize: '11px', color: designSystem.colors.textSecondary, fontWeight: designSystem.typography.weights.bold, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
             Mobile Number
           </label>
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              backgroundColor: '#F4F1EC',
-              border: '1.5px solid #DAD1C8',
-              borderRadius: '14px',
-              padding: '10px 14px',
+              backgroundColor: designSystem.colors.inputFill,
+              border: `1.5px solid ${designSystem.colors.primaryBorder}`,
+              borderRadius: designSystem.radii.md,
+              padding: '12px 14px',
             }}
           >
-            <span style={{ fontWeight: '800', fontSize: '15px', color: '#111144', marginRight: '8px' }}>
-              +91
-            </span>
-            <div style={{ width: '1px', height: '18px', backgroundColor: '#DAD1C8', marginRight: '10px' }} />
+            {/* Country Flag Pill */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: designSystem.colors.primaryLight, padding: '4px 8px', borderRadius: designSystem.radii.xs, marginRight: '10px' }}>
+              <span style={{ fontSize: '14px' }}>🇮🇳</span>
+              <span style={{ fontWeight: designSystem.typography.weights.extrabold, fontSize: '14px', color: designSystem.colors.primary }}>+91</span>
+            </div>
             <input
+              id="mobile-input"
               type="tel"
               value={mobileNumber}
               onChange={(e) => setMobileNumber(e.target.value)}
@@ -138,26 +127,30 @@ export const MobileNumberScreen: React.FC = () => {
                 background: 'none',
                 border: 'none',
                 outline: 'none',
-                fontSize: '16px',
-                fontWeight: '700',
-                color: '#111144',
+                fontSize: '17px',
+                fontWeight: designSystem.typography.weights.extrabold,
+                color: designSystem.colors.textPrimary,
                 width: '100%',
+                letterSpacing: '0.05em',
               }}
             />
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11.5px', color: '#5C564D' }}>
-          <ShieldCheck size={15} color="#F98513" />
-          An SMS with 6-digit OTP will be auto-detected
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: designSystem.colors.textSecondary, backgroundColor: designSystem.colors.background, padding: '10px 12px', borderRadius: designSystem.radii.sm, border: `1px solid ${designSystem.colors.borderHairline}` }}>
+          <ShieldCheck size={16} color={designSystem.colors.primary} />
+          <span>A 6-digit SMS OTP will be automatically generated</span>
         </div>
-      </div>
 
-      {/* Continue Action Button - Guaranteed to fit inside mobile screen viewport */}
-      <div style={{ marginTop: '12px' }}>
-        <PrimaryButton onClick={handleContinue} disabled={mobileNumber.length < 10 || fullName.trim().length === 0}>
-          Continue <ArrowRight size={18} />
+        <PrimaryButton type="submit" disabled={mobileNumber.length < 10 || fullName.trim().length === 0}>
+          Get OTP <ArrowRight size={18} />
         </PrimaryButton>
+      </form>
+
+      {/* Security Footer */}
+      <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '11px', color: designSystem.colors.textMuted, fontWeight: designSystem.typography.weights.bold }}>
+        <Lock size={12} color={designSystem.colors.textMuted} />
+        <span>256-Bit Bank Grade Encryption • NPCI & UPI Verified</span>
       </div>
     </div>
   );

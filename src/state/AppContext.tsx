@@ -25,6 +25,7 @@ interface AppContextType {
   screenParams: Record<string, any>;
   activeTab: BottomTab;
   setActiveTab: (tab: BottomTab) => void;
+  startOnboardingFlow: () => void;
 
   // App Data State
   user: User;
@@ -77,6 +78,9 @@ interface AppContextType {
 
   isAppLinksModalOpen: boolean;
   setIsAppLinksModalOpen: (open: boolean) => void;
+
+  isEditProfileModalOpen: boolean;
+  setIsEditProfileModalOpen: (open: boolean) => void;
 
   terminateSession: (sessionId: string) => void;
   addMoneyRequest: (req: { name: string; upiId: string; amount: number; note?: string }) => void;
@@ -158,6 +162,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isAddBankModalOpen, setIsAddBankModalOpen] = useState<boolean>(false);
   const [isScanModalOpen, setIsScanModalOpen] = useState<boolean>(false);
   const [isAppLinksModalOpen, setIsAppLinksModalOpen] = useState<boolean>(false);
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     // Load initial data
@@ -166,16 +171,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     transactionService.getInitialTransactions().then(setTransactions);
     notificationService.getInitialNotifications().then(setNotifications);
 
-    // Splash transition logic
+    // Initial load: show Splash logo screen for 2 seconds, then transition to ONBOARDING
     const timer = setTimeout(() => {
-      const hasSeen = localStorage.getItem('hasSeenOnboarding') === 'true';
-      const targetScreen: ScreenId = hasSeen ? 'HOME' : 'ONBOARDING';
-      setCurrentScreen(targetScreen);
-      setScreenStack([{ screen: targetScreen }]);
+      setCurrentScreen('ONBOARDING');
+      setScreenStack([{ screen: 'ONBOARDING' }]);
     }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  const startOnboardingFlow = () => {
+    localStorage.removeItem('hasSeenOnboarding');
+    setCurrentScreen('SPLASH');
+    setScreenStack([{ screen: 'SPLASH' }]);
+    setTimeout(() => {
+      setCurrentScreen('ONBOARDING');
+      setScreenStack([{ screen: 'ONBOARDING' }]);
+    }, 1800);
+  };
 
   const navigateTo = (screen: ScreenId, params?: Record<string, any>) => {
     setScreenParams(params || {});
@@ -184,6 +197,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     // Sync bottom navigation active tab
     if (screen === 'HOME') setActiveTabState('home');
+    else if (screen === 'BANK_ACCOUNTS') setActiveTabState('account');
     else if (screen === 'PAY_ANYONE') setActiveTabState('pay');
     else if (screen === 'HISTORY') setActiveTabState('history');
     else if (screen === 'PROFILE') setActiveTabState('profile');
@@ -199,6 +213,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setScreenParams(prev.params || {});
 
       if (prev.screen === 'HOME') setActiveTabState('home');
+      else if (prev.screen === 'BANK_ACCOUNTS') setActiveTabState('account');
       else if (prev.screen === 'PAY_ANYONE') setActiveTabState('pay');
       else if (prev.screen === 'HISTORY') setActiveTabState('history');
       else if (prev.screen === 'PROFILE') setActiveTabState('profile');
@@ -212,6 +227,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     switch (tab) {
       case 'home':
         navigateTo('HOME');
+        break;
+      case 'account':
+        navigateTo('BANK_ACCOUNTS');
         break;
       case 'pay':
         navigateTo('PAY_ANYONE');
@@ -348,8 +366,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const performLogout = () => {
     localStorage.removeItem('hasSeenOnboarding');
     setIsLogoutModalOpen(false);
-    setScreenStack([{ screen: 'MOBILE_NUMBER' }]);
-    setCurrentScreen('MOBILE_NUMBER');
+    setCurrentScreen('SPLASH');
+    setScreenStack([{ screen: 'SPLASH' }]);
+    setTimeout(() => {
+      setCurrentScreen('ONBOARDING');
+      setScreenStack([{ screen: 'ONBOARDING' }]);
+    }, 1800);
   };
 
   const terminateSession = (sessionId: string) => {
@@ -378,6 +400,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         screenParams,
         activeTab,
         setActiveTab,
+        startOnboardingFlow,
         user,
         bankAccounts,
         transactions,
@@ -413,6 +436,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsScanModalOpen,
         isAppLinksModalOpen,
         setIsAppLinksModalOpen,
+        isEditProfileModalOpen,
+        setIsEditProfileModalOpen,
         terminateSession,
         addMoneyRequest,
       }}

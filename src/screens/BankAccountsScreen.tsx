@@ -18,7 +18,7 @@ export const BankAccountsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in">
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '24px' }}>
       <AppHeader title="Bank Accounts" showBack showSettings />
 
       <div style={{ padding: '20px' }}>
@@ -27,33 +27,34 @@ export const BankAccountsScreen: React.FC = () => {
             <div
               key={bank.id}
               style={{
-                backgroundColor: '#FFFFFF',
-                border: bank.isPrimary ? '1px solid var(--neon-primary)' : '1px solid var(--card-border)',
-                borderRadius: '20px',
-                padding: '20px',
-                marginBottom: '16px',
-                boxShadow: bank.isPrimary ? '0 6px 20px rgba(158, 240, 26, 0.2)' : '0 4px 15px rgba(7, 25, 19, 0.03)',
+                backgroundColor: '#ffffff',
+                border: bank.isPrimary ? '2px solid #2e83ff' : '1px solid #e2e8f0',
+                borderRadius: '8px',
+                padding: '18px',
+                marginBottom: '14px',
+                boxShadow: 'none',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <div
                     style={{
-                      width: '42px',
-                      height: '42px',
-                      borderRadius: '14px',
-                      backgroundColor: 'rgba(158, 240, 26, 0.18)',
-                      color: '#071913',
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '8px',
+                      backgroundColor: '#eef5ff',
+                      color: '#2e83ff',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
+                      border: '1px solid #d6e6ff',
                     }}
                   >
-                    <Landmark size={22} />
+                    <Landmark size={20} />
                   </div>
                   <div>
-                    <div style={{ fontWeight: '700', fontSize: '16px', color: 'var(--text-primary)' }}>{bank.bankName}</div>
-                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                    <div style={{ fontWeight: '800', fontSize: '15px', color: '#0f172a' }}>{bank.bankName}</div>
+                    <div style={{ fontSize: '12px', color: '#475569', marginTop: '2px' }}>
                       {bank.accountType} &bull; {bank.accountNumberMasked}
                     </div>
                   </div>
@@ -65,10 +66,11 @@ export const BankAccountsScreen: React.FC = () => {
                       fontSize: '10px',
                       fontWeight: '800',
                       textTransform: 'uppercase',
-                      backgroundColor: 'var(--neon-primary)',
-                      color: 'var(--text-dark)',
-                      padding: '4px 10px',
-                      borderRadius: '12px',
+                      backgroundColor: '#eef5ff',
+                      color: '#2e83ff',
+                      padding: '4px 8px',
+                      borderRadius: '4px',
+                      border: '1px solid #2e83ff',
                     }}
                   >
                     Primary
@@ -79,9 +81,10 @@ export const BankAccountsScreen: React.FC = () => {
               {/* Balance Bar */}
               <div
                 style={{
-                  backgroundColor: 'var(--bg-secondary)',
-                  borderRadius: '14px',
-                  padding: '12px 14px',
+                  backgroundColor: '#f8fafc',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '6px',
+                  padding: '10px 14px',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
@@ -89,75 +92,76 @@ export const BankAccountsScreen: React.FC = () => {
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>Account Balance</div>
-                  <div style={{ fontSize: '18px', fontWeight: '700', marginTop: '2px', color: 'var(--text-primary)' }}>
+                  <div style={{ fontSize: '11px', color: '#475569', fontWeight: '700' }}>Account Balance</div>
+                  <div style={{ fontSize: '18px', fontWeight: '800', marginTop: '2px', color: '#0f172a' }}>
                     {bank.showBalance ? formatCurrency(bank.balance) : '••••••••'}
                   </div>
                 </div>
 
                 <button
                   onClick={() => toggleShowBalance(bank.id)}
+                  aria-label={bank.showBalance ? "Hide bank balance" : "Show bank balance"}
                   style={{
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid var(--card-border)',
-                    borderRadius: '10px',
+                    backgroundColor: '#ffffff',
+                    border: '1px solid #cbd5e1',
+                    color: '#2e83ff',
                     padding: '6px 12px',
-                    color: 'var(--text-primary)',
+                    borderRadius: '6px',
                     fontSize: '12px',
-                    fontWeight: '600',
-                    cursor: 'pointer',
+                    fontWeight: '700',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px',
+                    cursor: 'pointer',
+                    boxShadow: 'none',
                   }}
                 >
-                  {bank.showBalance ? <EyeOff size={14} /> : <Eye size={14} />}
-                  {bank.showBalance ? 'Hide' : 'Check Balance'}
+                  {bank.showBalance ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {bank.showBalance ? 'Hide' : 'Check'}
                 </button>
               </div>
 
-              {/* Account Action Buttons */}
-              <div style={{ display: 'flex', gap: '8px', borderTop: '1px solid var(--card-border)', paddingTop: '12px' }}>
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', gap: '10px' }}>
                 {!bank.isPrimary && (
                   <button
                     onClick={() => setPrimaryBank(bank.id)}
                     style={{
                       flex: 1,
-                      backgroundColor: 'rgba(158, 240, 26, 0.2)',
-                      border: '1px solid var(--neon-primary)',
-                      color: '#071913',
-                      borderRadius: '10px',
+                      backgroundColor: '#ffffff',
+                      border: '1px solid #2e83ff',
+                      color: '#2e83ff',
                       padding: '8px',
+                      borderRadius: '6px',
                       fontSize: '12px',
                       fontWeight: '700',
                       cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '4px',
+                      boxShadow: 'none',
                     }}
                   >
-                    <CheckCircle size={14} /> Set as Primary
+                    Set Primary
                   </button>
                 )}
-
                 <button
                   onClick={() => setBankToRemove(bank.id)}
+                  aria-label={`Remove ${bank.bankName} account`}
                   style={{
-                    backgroundColor: 'rgba(239, 68, 68, 0.08)',
-                    border: '1px solid rgba(239, 68, 68, 0.2)',
-                    color: '#EF4444',
-                    borderRadius: '10px',
-                    padding: '8px 12px',
+                    backgroundColor: '#fef2f2',
+                    border: '1px solid #fecaca',
+                    color: '#dc2626',
+                    padding: '8px 14px',
+                    borderRadius: '6px',
                     fontSize: '12px',
-                    fontWeight: '600',
-                    cursor: 'pointer',
+                    fontWeight: '700',
                     display: 'flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     gap: '4px',
+                    cursor: 'pointer',
+                    boxShadow: 'none',
                   }}
                 >
-                  <Trash2 size={14} /> Remove
+                  <Trash2 size={16} /> Remove
                 </button>
               </div>
             </div>
@@ -165,48 +169,58 @@ export const BankAccountsScreen: React.FC = () => {
         </div>
 
         <PrimaryButton onClick={() => setIsAddBankModalOpen(true)}>
-          <Plus size={18} /> Add Bank Account
+          <Plus size={18} /> Add New Bank Account
         </PrimaryButton>
       </div>
 
-      {/* Remove Confirmation Modal */}
-      <Modal isOpen={!!bankToRemove} onClose={() => setBankToRemove(null)} title="Remove Bank Account">
-        <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '20px' }}>
-          Are you sure you want to remove this bank account from QTPay? You can link it again anytime.
-        </p>
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <button
-            onClick={() => setBankToRemove(null)}
-            style={{
-              flex: 1,
-              backgroundColor: 'var(--bg-secondary)',
-              border: 'none',
-              borderRadius: '14px',
-              padding: '14px',
-              color: 'var(--text-primary)',
-              fontWeight: '600',
-              cursor: 'pointer',
-            }}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={confirmRemove}
-            style={{
-              flex: 1,
-              backgroundColor: '#EF4444',
-              border: 'none',
-              borderRadius: '14px',
-              padding: '14px',
-              color: '#FFFFFF',
-              fontWeight: '700',
-              cursor: 'pointer',
-            }}
-          >
-            Remove Bank
-          </button>
-        </div>
-      </Modal>
+      {/* Delete Confirmation Modal */}
+      {bankToRemove && (
+        <Modal
+          isOpen={Boolean(bankToRemove)}
+          onClose={() => setBankToRemove(null)}
+          title="Remove Bank Account"
+        >
+          <div style={{ textAlign: 'center', padding: '10px 0' }}>
+            <p style={{ color: '#475569', fontSize: '14px', marginBottom: '20px' }}>
+              Are you sure you want to unlink this bank account from QTPay?
+            </p>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button
+                onClick={() => setBankToRemove(null)}
+                style={{
+                  flex: 1,
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: '6px',
+                  padding: '12px',
+                  color: '#475569',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  boxShadow: 'none',
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmRemove}
+                style={{
+                  flex: 1,
+                  backgroundColor: '#dc2626',
+                  border: 'none',
+                  borderRadius: '6px',
+                  padding: '12px',
+                  color: '#ffffff',
+                  fontWeight: '800',
+                  cursor: 'pointer',
+                  boxShadow: 'none',
+                }}
+              >
+                Unlink Account
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

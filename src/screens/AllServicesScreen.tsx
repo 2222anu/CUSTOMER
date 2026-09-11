@@ -76,13 +76,13 @@ export const AllServicesScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in">
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '24px' }}>
       <AppHeader title="All Services" showBack showSettings />
 
       <div style={{ padding: '20px' }}>
         {/* Bill Payments Grid */}
         <div style={{ marginBottom: '24px' }}>
-          <div style={{ fontSize: '13px', fontWeight: '700', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '14px' }}>
+          <div style={{ fontSize: '12px', fontWeight: '800', color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '14px' }}>
             Recharge & Bill Payments
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
@@ -127,7 +127,7 @@ export const AllServicesScreen: React.FC = () => {
 
         {/* Financial Services */}
         <div style={{ marginBottom: '24px' }}>
-          <div style={{ fontSize: '13px', fontWeight: '700', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '14px' }}>
+          <div style={{ fontSize: '12px', fontWeight: '800', color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '14px' }}>
             Financial & Insurance
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
@@ -152,7 +152,7 @@ export const AllServicesScreen: React.FC = () => {
 
         {/* Travel & Bookings */}
         <div style={{ marginBottom: '24px' }}>
-          <div style={{ fontSize: '13px', fontWeight: '700', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '14px' }}>
+          <div style={{ fontSize: '12px', fontWeight: '800', color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '14px' }}>
             Travel & Entertainment
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
@@ -182,33 +182,35 @@ export const AllServicesScreen: React.FC = () => {
           onClose={() => setSelectedService(null)}
           title={selectedService.title}
         >
-          <div style={{ padding: '8px 0' }}>
+          <div style={{ padding: '4px 0' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
               <div
                 style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: '14px',
-                  backgroundColor: 'rgba(5, 150, 105, 0.15)',
-                  color: '#059669',
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '8px',
+                  backgroundColor: '#eef5ff',
+                  color: '#2e83ff',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  border: '1px solid #d6e6ff',
                 }}
               >
                 {selectedService.icon}
               </div>
               <div>
-                <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0B1F3A' }}>{selectedService.title}</h3>
-                <p style={{ fontSize: '12px', color: '#64748B' }}>{selectedService.subTitle}</p>
+                <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0f172a' }}>{selectedService.title}</h3>
+                <p style={{ fontSize: '12px', color: '#475569' }}>{selectedService.subTitle}</p>
               </div>
             </div>
 
             <div style={{ marginBottom: '16px' }}>
-              <label style={{ fontSize: '11px', fontWeight: '700', color: '#64748B', textTransform: 'uppercase', marginBottom: '6px', display: 'block' }}>
+              <label htmlFor="modal-acc-input" style={{ fontSize: '11px', fontWeight: '800', color: '#475569', textTransform: 'uppercase', marginBottom: '6px', display: 'block' }}>
                 Account / Consumer Number
               </label>
               <input
+                id="modal-acc-input"
                 type="text"
                 value={accountNumber}
                 onChange={(e) => setAccountNumber(e.target.value)}
@@ -216,22 +218,23 @@ export const AllServicesScreen: React.FC = () => {
                 style={{
                   width: '100%',
                   padding: '12px 14px',
-                  borderRadius: '14px',
-                  backgroundColor: '#F8FAFC',
-                  border: '1px solid #E2E8F0',
-                  fontSize: '15px',
+                  borderRadius: '8px',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #cbd5e1',
+                  fontSize: '14px',
                   fontWeight: '700',
-                  color: '#0B1F3A',
+                  color: '#0f172a',
                   outline: 'none',
                 }}
               />
             </div>
 
             <div style={{ marginBottom: '24px' }}>
-              <label style={{ fontSize: '11px', fontWeight: '700', color: '#64748B', textTransform: 'uppercase', marginBottom: '6px', display: 'block' }}>
+              <label htmlFor="modal-amt-input" style={{ fontSize: '11px', fontWeight: '800', color: '#475569', textTransform: 'uppercase', marginBottom: '6px', display: 'block' }}>
                 Payment Amount (₹)
               </label>
               <input
+                id="modal-amt-input"
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
@@ -239,12 +242,12 @@ export const AllServicesScreen: React.FC = () => {
                 style={{
                   width: '100%',
                   padding: '12px 14px',
-                  borderRadius: '14px',
-                  backgroundColor: '#F8FAFC',
-                  border: '1.5px solid #059669',
+                  borderRadius: '8px',
+                  backgroundColor: '#ffffff',
+                  border: '2px solid #2e83ff',
                   fontSize: '20px',
-                  fontWeight: '800',
-                  color: '#059669',
+                  fontWeight: '900',
+                  color: '#2e83ff',
                   outline: 'none',
                 }}
               />

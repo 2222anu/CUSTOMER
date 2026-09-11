@@ -41,6 +41,7 @@ import { LanguageModal } from './screens/LanguageModal';
 import { LogoutModal } from './screens/LogoutModal';
 import { AddBankModal } from './screens/AddBankModal';
 import { AppLinksModal } from './screens/AppLinksModal';
+import { EditProfileModal } from './screens/EditProfileModal';
 
 const AppContent: React.FC = () => {
   const { currentScreen, isRtl } = useApp();
@@ -133,6 +134,7 @@ const AppContent: React.FC = () => {
       <LogoutModal />
       <AddBankModal />
       <AppLinksModal />
+      <EditProfileModal />
     </div>
   );
 };

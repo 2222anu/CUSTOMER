@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreditCard, Landmark, Wallet, Plus } from 'lucide-react';
+import { CreditCard, Landmark, Plus } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { ListRow } from '../components/ListRow';
 import { PrimaryButton } from '../components/PrimaryButton';
@@ -51,15 +51,8 @@ export const PaymentMethodsScreen: React.FC = () => {
             margin: '24px 0 12px 0',
           }}
         >
-          Wallets & Cards
+          Saved Credit & Debit Cards
         </div>
-
-        <ListRow
-          icon={<Wallet size={18} />}
-          label="QTPay Wallet"
-          subLabel="Balance: ₹1,250.00"
-          rightElement={<span style={{ fontSize: '11px', color: 'var(--neon-primary)', fontWeight: '700' }}>Enabled</span>}
-        />
         <ListRow
           icon={<CreditCard size={18} />}
           label="ICICI RuPay Credit Card"

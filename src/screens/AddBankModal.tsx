@@ -3,6 +3,7 @@ import { Landmark, Check } from 'lucide-react';
 import { BottomSheet } from '../components/BottomSheet';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
+import { designSystem } from '../design-system';
 
 export const AddBankModal: React.FC = () => {
   const { isAddBankModalOpen, setIsAddBankModalOpen, addBankAccount } = useApp();
@@ -32,39 +33,50 @@ export const AddBankModal: React.FC = () => {
       title="Add Bank Account"
       themeMode="light"
     >
-      <div style={{ marginBottom: '24px' }}>
-        <p style={{ color: '#5C564D', fontSize: '13px', marginBottom: '16px' }}>
+      <div style={{ marginBottom: designSystem.spacing['2xl'] }}>
+        <p style={{ color: designSystem.colors.textSecondary, fontSize: '13px', marginBottom: designSystem.spacing.lg }}>
           Select your bank to link with your QTPay UPI ID:
         </p>
 
-        {availableBanks.map((bankName) => {
-          const isSelected = selectedBank === bankName;
-          return (
-            <div
-              key={bankName}
-              onClick={() => setSelectedBank(bankName)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '14px 16px',
-                backgroundColor: isSelected ? '#FDE8D7' : '#FFFFFF',
-                border: isSelected ? '1.5px solid #F98513' : '1.5px solid #DAD1C8',
-                borderRadius: '16px',
-                marginBottom: '10px',
-                cursor: 'pointer',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <Landmark size={20} color={isSelected ? '#F98513' : '#5C564D'} />
-                <span style={{ fontWeight: '700', fontSize: '14px', color: '#111144' }}>
-                  {bankName}
-                </span>
+        <div role="radiogroup" aria-label="Available Banks">
+          {availableBanks.map((bankName) => {
+            const isSelected = selectedBank === bankName;
+            return (
+              <div
+                key={bankName}
+                role="radio"
+                aria-checked={isSelected}
+                tabIndex={0}
+                onClick={() => setSelectedBank(bankName)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setSelectedBank(bankName);
+                  }
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '14px 16px',
+                  backgroundColor: isSelected ? designSystem.colors.primaryLight : designSystem.colors.surface,
+                  border: isSelected ? `2px solid ${designSystem.colors.primary}` : `1px solid ${designSystem.colors.borderHairline}`,
+                  borderRadius: designSystem.radii.md,
+                  marginBottom: designSystem.spacing.sm,
+                  cursor: 'pointer',
+                  boxShadow: designSystem.shadows.none,
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: designSystem.spacing.md }}>
+                  <Landmark size={20} color={isSelected ? designSystem.colors.primary : designSystem.colors.textSecondary} />
+                  <span style={{ fontWeight: designSystem.typography.weights.bold, fontSize: '14px', color: designSystem.colors.textPrimary }}>
+                    {bankName}
+                  </span>
+                </div>
+                {isSelected && <Check size={18} color={designSystem.colors.primary} />}
               </div>
-              {isSelected && <Check size={18} color="#F98513" />}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
       <PrimaryButton onClick={handleAdd} disabled={isLoading}>

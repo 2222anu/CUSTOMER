@@ -1,35 +1,38 @@
 import React from 'react';
-import { Home, Send, Scan, History, User } from 'lucide-react';
+import { Home, FileText, QrCode, Clock, User } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import type { BottomTab } from '../types';
+import { designSystem } from '../design-system';
 
 export const BottomNavigation: React.FC = () => {
   const { activeTab, setActiveTab } = useApp();
 
   const tabs: { id: BottomTab; label: string; icon: React.ReactNode }[] = [
     { id: 'home', label: 'Home', icon: <Home size={20} /> },
-    { id: 'pay', label: 'Pay', icon: <Send size={20} /> },
-    { id: 'scan', label: 'Scan', icon: <Scan size={26} /> },
-    { id: 'history', label: 'History', icon: <History size={20} /> },
+    { id: 'account', label: 'Account', icon: <FileText size={20} /> },
+    { id: 'scan', label: 'Scan & Pay', icon: <QrCode size={24} /> },
+    { id: 'history', label: 'History', icon: <Clock size={20} /> },
     { id: 'profile', label: 'Profile', icon: <User size={20} /> },
   ];
 
   return (
     <nav
+      role="navigation"
+      aria-label="Bottom Navigation"
       style={{
         position: 'absolute',
         bottom: 0,
         left: 0,
         right: 0,
-        height: '75px',
-        backgroundColor: '#111144',
-        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+        height: '70px',
+        backgroundColor: designSystem.colors.surface,
+        borderTop: `1px solid ${designSystem.colors.borderHairline}`,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
-        padding: '0 10px',
+        padding: '0 4px',
         zIndex: 40,
-        boxShadow: '0 -8px 25px rgba(17, 17, 68, 0.4)',
+        boxShadow: designSystem.shadows.none,
       }}
     >
       {tabs.map((tab) => {
@@ -40,10 +43,18 @@ export const BottomNavigation: React.FC = () => {
           return (
             <div
               key={tab.id}
+              role="tab"
+              aria-selected={isActive}
+              tabIndex={0}
               onClick={() => setActiveTab(tab.id)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setActiveTab(tab.id);
+                }
+              }}
               style={{
                 position: 'relative',
-                top: '-22px',
+                top: '-18px',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -53,17 +64,16 @@ export const BottomNavigation: React.FC = () => {
             >
               <div
                 style={{
-                  width: '60px',
-                  height: '60px',
-                  borderRadius: '50%',
-                  backgroundColor: '#F98513',
-                  color: '#FFFFFF',
+                  width: '56px',
+                  height: '56px',
+                  borderRadius: designSystem.radii.full,
+                  backgroundColor: designSystem.colors.primary,
+                  color: designSystem.colors.textOnPrimary,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: '0 8px 25px rgba(249, 133, 19, 0.45), 0 0 15px rgba(249, 133, 19, 0.25)',
-                  border: '4px solid #111144',
-                  transition: 'transform 0.15s ease',
+                  boxShadow: designSystem.shadows.none,
+                  border: `3px solid ${designSystem.colors.surface}`,
                 }}
               >
                 {tab.icon}
@@ -71,9 +81,9 @@ export const BottomNavigation: React.FC = () => {
               <span
                 style={{
                   fontSize: '10px',
-                  fontWeight: '800',
-                  color: '#F98513',
-                  marginTop: '4px',
+                  fontWeight: designSystem.typography.weights.extrabold,
+                  color: designSystem.colors.primary,
+                  marginTop: '2px',
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em',
                 }}
@@ -87,7 +97,15 @@ export const BottomNavigation: React.FC = () => {
         return (
           <div
             key={tab.id}
+            role="tab"
+            aria-selected={isActive}
+            tabIndex={0}
             onClick={() => setActiveTab(tab.id)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                setActiveTab(tab.id);
+              }
+            }}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -96,19 +114,18 @@ export const BottomNavigation: React.FC = () => {
               flex: 1,
               height: '100%',
               cursor: 'pointer',
-              color: isActive ? '#F98513' : 'rgba(255, 255, 255, 0.65)',
-              transition: 'color 0.15s ease',
+              color: isActive ? designSystem.colors.primary : designSystem.colors.textMuted,
             }}
           >
             {React.cloneElement(tab.icon as React.ReactElement<any>, {
-              color: isActive ? '#F98513' : 'rgba(255, 255, 255, 0.65)',
+              color: isActive ? designSystem.colors.primary : designSystem.colors.textMuted,
             })}
             <span
               style={{
                 fontSize: '11px',
-                fontWeight: isActive ? '700' : '500',
-                color: isActive ? '#F98513' : 'rgba(255, 255, 255, 0.65)',
-                marginTop: '4px',
+                fontWeight: isActive ? designSystem.typography.weights.bold : designSystem.typography.weights.medium,
+                color: isActive ? designSystem.colors.primary : designSystem.colors.textMuted,
+                marginTop: '3px',
               }}
             >
               {tab.label}

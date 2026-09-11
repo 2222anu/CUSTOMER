@@ -1,4 +1,5 @@
 import React from 'react';
+import { designSystem } from '../design-system';
 
 interface QuickActionProps {
   label: string;
@@ -15,30 +16,35 @@ export const QuickAction: React.FC<QuickActionProps> = ({
 }) => {
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          onClick();
+        }
+      }}
       style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '8px',
+        gap: designSystem.spacing.sm,
         cursor: 'pointer',
         flex: 1,
       }}
     >
       <div
         style={{
-          width: '56px',
-          height: '56px',
-          borderRadius: '20px',
-          backgroundColor: highlighted ? '#F98513' : '#FFFFFF',
-          border: highlighted ? 'none' : '1.5px solid #DAD1C8',
-          color: highlighted ? '#FFFFFF' : '#111144',
+          width: '52px',
+          height: '52px',
+          borderRadius: designSystem.radii.full,
+          backgroundColor: highlighted ? designSystem.colors.primary : designSystem.colors.primaryLight,
+          border: `1px solid ${highlighted ? designSystem.colors.primary : designSystem.colors.primaryBorder}`,
+          color: highlighted ? designSystem.colors.textOnPrimary : designSystem.colors.primary,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: highlighted
-            ? '0 8px 20px rgba(249, 133, 19, 0.35)'
-            : '0 4px 14px rgba(17, 17, 68, 0.05)',
+          boxShadow: designSystem.shadows.none,
           transition: 'transform 0.15s ease',
         }}
       >
@@ -47,10 +53,11 @@ export const QuickAction: React.FC<QuickActionProps> = ({
       <span
         style={{
           fontSize: '11px',
-          fontWeight: '800',
+          fontWeight: designSystem.typography.weights.extrabold,
           letterSpacing: '0.04em',
-          color: '#111144',
+          color: designSystem.colors.textPrimary,
           textTransform: 'uppercase',
+          textAlign: 'center',
         }}
       >
         {label}

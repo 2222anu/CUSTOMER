@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Landmark, Plus, Trash2, CheckCircle, Eye, EyeOff } from 'lucide-react';
+import { Landmark, Plus, Trash2, Eye, EyeOff } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { Modal } from '../components/Modal';

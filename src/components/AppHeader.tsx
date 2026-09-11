@@ -69,34 +69,41 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             <ArrowLeft size={18} />
           </button>
         ) : (
-          <div
-            onClick={() => navigateTo('PROFILE')}
-            role="button"
-            tabIndex={0}
-            aria-label="View user profile"
-            style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              backgroundColor: '#2e83ff',
-              color: '#ffffff',
-              fontWeight: '800',
-              fontSize: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              boxShadow: 'none',
-              overflow: 'hidden',
-              border: '2px solid #ffffff',
-            }}
-          >
-            {user.avatarUrl ? (
-              <img src={user.avatarUrl} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            ) : (
-              user.avatarInitials
+          <>
+            <div
+              onClick={() => navigateTo('PROFILE')}
+              role="button"
+              tabIndex={0}
+              aria-label="View user profile"
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                backgroundColor: '#2e83ff',
+                color: '#ffffff',
+                fontWeight: '800',
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                boxShadow: 'none',
+                overflow: 'hidden',
+                border: '2px solid #ffffff',
+              }}
+            >
+              {user.avatarUrl ? (
+                <img src={user.avatarUrl} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
+                user.avatarInitials
+              )}
+            </div>
+            {showUserInfo && (
+              <span style={{ fontSize: '13px', fontWeight: '800', color: '#0f172a', marginLeft: '8px' }}>
+                {user.name}
+              </span>
             )}
-          </div>
+          </>
         )}
       </div>
 

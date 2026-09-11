@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Briefcase, Compass, ArrowRight, Wallet, CheckCircle, ShieldCheck, QrCode, CreditCard, Sparkles } from 'lucide-react';
+import { Briefcase, Compass, Sparkles } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { designSystem } from '../design-system';
 

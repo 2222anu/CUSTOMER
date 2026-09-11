@@ -165,12 +165,37 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
+    // Check URL query parameters for test automation (e.g. ?screen=ELECTRICITY)
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialScreen = urlParams.get('screen') as ScreenId | null;
+    if (initialScreen) {
+      setCurrentScreen(initialScreen);
+      setScreenStack([{ screen: initialScreen }]);
+    }
+
     // Load initial data
     authService.getCurrentUser().then(setUser);
     bankService.getBankAccounts().then(setBankAccounts);
     transactionService.getInitialTransactions().then(setTransactions);
     notificationService.getInitialNotifications().then(setNotifications);
   }, []);
+
+  // Expose global test helpers for Playwright / automation verification
+  useEffect(() => {
+    (window as any).__qtpay = {
+      navigateTo,
+      goBack,
+      openPinModal,
+      closePinModal,
+      setIsLanguageModalOpen,
+      setIsLogoutModalOpen,
+      setIsAddBankModalOpen,
+      setIsScanModalOpen,
+      setIsAppLinksModalOpen,
+      setIsEditProfileModalOpen,
+      currentScreen,
+    };
+  });
 
   const startOnboardingFlow = () => {
     localStorage.removeItem('hasSeenOnboarding');

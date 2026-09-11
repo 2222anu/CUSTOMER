@@ -92,7 +92,8 @@ body.rtl {
 .app-viewport {
   width: 100%;
   max-width: 600px;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   background-color: #ffffff;
   position: relative;
   overflow: hidden;
@@ -123,6 +124,7 @@ body.rtl {
   position: relative;
   scrollbar-width: thin;
   background-color: var(--bg-page);
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Global Typescale Helpers */

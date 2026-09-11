@@ -20,10 +20,12 @@ export const BottomNavigation: React.FC = () => {
       role="navigation"
       aria-label="Bottom Navigation"
       style={{
-        position: 'absolute',
+        position: 'fixed',
         bottom: 0,
         left: 0,
         right: 0,
+        maxWidth: '600px',
+        margin: '0 auto',
         height: '70px',
         backgroundColor: designSystem.colors.surface,
         borderTop: `1px solid ${designSystem.colors.borderHairline}`,
@@ -31,7 +33,7 @@ export const BottomNavigation: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'space-around',
         padding: '0 4px',
-        zIndex: 40,
+        zIndex: 50,
         boxShadow: designSystem.shadows.none,
       }}
     >

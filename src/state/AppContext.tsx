@@ -113,7 +113,7 @@ const INITIAL_SESSIONS: DeviceSession[] = [
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentScreen, setCurrentScreen] = useState<ScreenId>('HOME');
-  const [screenStack, setScreenStack] = useState<{ screen: ScreenId; params?: Record<string, any> }>([
+  const [screenStack, setScreenStack] = useState<{ screen: ScreenId; params?: Record<string, any> }[]>([
     { screen: 'HOME' },
   ]);
   const [screenParams, setScreenParams] = useState<Record<string, any>>({});

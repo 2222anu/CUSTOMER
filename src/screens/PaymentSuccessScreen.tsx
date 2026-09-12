@@ -115,8 +115,8 @@ export const PaymentSuccessScreen: React.FC = () => {
         </div>
 
         {downloadMsg && (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '12px', color: '#10b981', fontWeight: '700', marginBottom: '16px' }}>
-            <CheckCircle2 size={16} /> Receipt details saved successfully!
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '12px', color: '#2e83ff', fontWeight: '700', marginBottom: '16px' }}>
+            <CheckCircle2 size={16} color="#2e83ff" /> Receipt details saved successfully!
           </div>
         )}
 

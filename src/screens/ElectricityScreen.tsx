@@ -82,9 +82,9 @@ export const ElectricityScreen: React.FC = () => {
           <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: 0 }}>
             Electricity Bill Payment
           </h2>
-          <p style={{ fontSize: '13px', color: '#64748b', marginTop: '4px', marginBottom: 0 }}>
-            State Power Corporation (TSSPDCL) &bull; Verified Biller
-          </p>
+          <div style={{ fontSize: '12px', color: '#2e83ff', fontWeight: 800, marginTop: '4px' }}>
+            TSSPDCL &bull; Verified
+          </div>
         </div>
 
         {/* Input Consumer ID */}

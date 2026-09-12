@@ -89,8 +89,6 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
       category: 'INSTANT PAYMENTS',
       title: 'PAY',
       headline: ['Pay everywhere.', 'Pay instantly.'],
-      description: 'Send money, scan QR codes and make everyday payments with QPay.',
-      tags: ['Send', 'Scan', 'Pay'],
       visual: <PayScene />,
     },
     {
@@ -98,8 +96,6 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
       category: 'FINANCIAL COMMAND',
       title: 'MANAGE',
       headline: ['All your money.', 'One simple place.'],
-      description: 'Connect your accounts, track your balance, manage payments and stay in control of your finances.',
-      tags: ['Multi-Bank', 'Wallet', 'Control'],
       visual: <ManageScene />,
     },
     {
@@ -107,8 +103,6 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
       category: 'MIL-SPEC DEFENSE',
       title: 'PROTECT',
       headline: ['Your money.', 'Your control.'],
-      description: 'Secure every payment with PIN, biometrics, device protection and intelligent fraud alerts.',
-      tags: ['Biometrics', 'Intelligent Shield', '256-Bit'],
       visual: <ProtectScene />,
     },
   ];

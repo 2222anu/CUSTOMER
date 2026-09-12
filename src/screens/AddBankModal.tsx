@@ -33,10 +33,6 @@ export const AddBankModal: React.FC = () => {
       themeMode="light"
     >
       <div style={{ marginBottom: '24px' }}>
-        <p style={{ color: '#64748b', fontSize: '13px', marginBottom: '16px', lineHeight: '18px' }}>
-          Select your bank to link securely via NPCI UPI 2.0 with your registered mobile number:
-        </p>
-
         <div role="radiogroup" aria-label="Available Banks" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {availableBanks.map((bank) => {
             const isSelected = selectedBank === bank.name;
@@ -84,14 +80,9 @@ export const AddBankModal: React.FC = () => {
                   >
                     <Landmark size={18} />
                   </div>
-                  <div>
-                    <span style={{ fontWeight: 700, fontSize: '14px', color: '#0f172a' }}>
-                      {bank.name}
-                    </span>
-                    <div style={{ fontSize: '11px', color: '#64748b', display: 'flex', alignItems: 'center', gap: '3px' }}>
-                      <ShieldCheck size={12} color="#10b981" /> UPI Instant Verification
-                    </div>
-                  </div>
+                  <span style={{ fontWeight: 700, fontSize: '14px', color: '#0f172a' }}>
+                    {bank.name}
+                  </span>
                 </div>
 
                 <div

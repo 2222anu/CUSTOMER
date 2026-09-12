@@ -80,7 +80,7 @@ export const SendAmountScreen: React.FC = () => {
           <div style={{ fontSize: '13px', color: '#64748b', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
             <span>{contact.upiId}</span>
             <span>&bull;</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '2px', color: '#10b981', fontWeight: 700 }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '2px', color: '#2e83ff', fontWeight: 700 }}>
               <ShieldCheck size={14} /> Verified
             </span>
           </div>

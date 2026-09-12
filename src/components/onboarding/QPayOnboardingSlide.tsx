@@ -5,8 +5,6 @@ export interface OnboardingSlideData {
   category: string;
   title: string;
   headline: string[];
-  description: string;
-  tags: string[];
   visual: React.ReactNode;
 }
 
@@ -49,7 +47,7 @@ export const QPayOnboardingSlide: React.FC<QPayOnboardingSlideProps> = ({
         {slide.visual}
       </div>
 
-      {/* Editorial Content Container */}
+      {/* Editorial Content Container - Minimal, Oversized, Pure Headline Only */}
       <div
         style={{
           width: '100%',
@@ -57,20 +55,21 @@ export const QPayOnboardingSlide: React.FC<QPayOnboardingSlideProps> = ({
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
-          padding: '0 16px',
+          padding: '0 20px',
           boxSizing: 'border-box',
           marginTop: 'auto',
+          marginBottom: '8px',
         }}
       >
         {/* Dominant Feature Word (Oversized Brand Statement) */}
         <div
           style={{
-            fontSize: '38px',
+            fontSize: '40px',
             fontWeight: 900,
             letterSpacing: '0.14em',
             color: '#0e274d',
             lineHeight: 1,
-            marginBottom: '8px',
+            marginBottom: '10px',
             textTransform: 'uppercase',
             background: 'linear-gradient(180deg, #0a192f 0%, #1d4ed8 100%)',
             WebkitBackgroundClip: 'text',
@@ -80,54 +79,19 @@ export const QPayOnboardingSlide: React.FC<QPayOnboardingSlideProps> = ({
           {slide.title}
         </div>
 
-        {/* 2-Line Headline */}
+        {/* 2-Line Bold Headline (No unnecessary supporting paragraphs or tags) */}
         <div
           style={{
-            fontSize: '20px',
+            fontSize: '22px',
             fontWeight: 800,
             color: '#0f172a',
             lineHeight: '1.28',
             letterSpacing: '-0.02em',
-            marginBottom: '8px',
           }}
         >
           {slide.headline.map((line, idx) => (
             <div key={idx}>{line}</div>
           ))}
-        </div>
-
-        {/* Supporting Concise Text */}
-        <p
-          style={{
-            fontSize: '13px',
-            color: '#64748b',
-            lineHeight: '1.5',
-            margin: '0 0 14px 0',
-            maxWidth: '320px',
-            fontWeight: 500,
-          }}
-        >
-          {slide.description}
-        </p>
-
-        {/* Subtle Minimal Pill Tagline */}
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '4px 14px',
-            borderRadius: '20px',
-            backgroundColor: '#eef5ff',
-            border: '1px solid #d6e6ff',
-            color: '#1d4ed8',
-            fontSize: '11px',
-            fontWeight: 700,
-            letterSpacing: '0.04em',
-            marginBottom: '12px',
-          }}
-        >
-          {slide.tags.join('  •  ')}
         </div>
       </div>
     </div>

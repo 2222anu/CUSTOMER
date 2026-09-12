@@ -107,17 +107,20 @@ export const ReceiveScreen: React.FC = () => {
             <QRCodeView value={upiQrString} size={200} />
           </div>
 
-          <p
+          <div
             style={{
-              fontSize: '12px',
-              color: '#64748b',
+              fontSize: '11px',
+              color: '#2e83ff',
               marginTop: '16px',
-              marginBottom: 0,
-              fontWeight: 600,
+              fontWeight: 800,
+              backgroundColor: '#eef5ff',
+              padding: '4px 12px',
+              borderRadius: '12px',
+              border: '1px solid #d6e6ff',
             }}
           >
-            Scan with Google Pay, PhonePe, Paytm or any UPI app
-          </p>
+            Accepts Any UPI App
+          </div>
         </div>
 
         {/* Bottom Actions */}

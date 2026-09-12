@@ -55,9 +55,6 @@ export const PrivacyScreen: React.FC = () => {
             </div>
             <h3 style={{ fontSize: '17px', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>Banking-Grade Encryption</h3>
           </div>
-          <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: '1.5', margin: 0 }}>
-            QTPay employs 256-bit AES end-to-end hardware encryption for all financial transactions, UPI tokens, and personal credentials.
-          </p>
         </div>
 
         <div style={{ fontSize: '11.5px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '12px', paddingLeft: '4px' }}>
@@ -75,21 +72,18 @@ export const PrivacyScreen: React.FC = () => {
           <ListRow
             icon={<Eye size={20} color="#2e83ff" />}
             label="Data Sharing Preferences"
-            subLabel="Manage analytics & third-party data access"
             onClick={() => setActiveModal('preferences')}
           />
           <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
           <ListRow
             icon={<Database size={20} color="#2e83ff" />}
             label="Download Account Data"
-            subLabel="Export statements and full user history"
             onClick={() => setActiveModal('export')}
           />
           <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
           <ListRow
             icon={<ShieldCheck size={20} color="#2e83ff" />}
             label="Terms of Service & Privacy Statement"
-            subLabel="Read detailed NPCI & RBI privacy compliance"
             onClick={() => setActiveModal('terms')}
           />
         </div>

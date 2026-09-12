@@ -69,14 +69,11 @@ export const SmsOtpScreen: React.FC = () => {
               >
                 <Smartphone size={28} />
               </div>
-              <h2 style={{ fontSize: '19px', fontWeight: 800, color: '#0f172a', margin: '0 0 6px 0' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', margin: '0 0 8px 0' }}>
                 Verify Mobile Number
               </h2>
-              <p style={{ fontSize: '13px', color: '#64748b', margin: 0 }}>
-                Enter the 6-digit verification code sent via SMS to
-              </p>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: '#f1f5f9', border: '1px solid #cbd5e1', padding: '4px 12px', borderRadius: '12px', marginTop: '8px' }}>
-                <span className="tabular-nums" style={{ fontSize: '13.5px', fontWeight: 800, color: '#0f172a' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: '#eef5ff', border: '1px solid #d6e6ff', padding: '4px 14px', borderRadius: '12px' }}>
+                <span className="tabular-nums" style={{ fontSize: '13.5px', fontWeight: 800, color: '#2e83ff' }}>
                   +91 {mobile}
                 </span>
               </div>
@@ -120,16 +117,16 @@ export const SmsOtpScreen: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                backgroundColor: '#ecfdf5',
-                border: '1px solid #a7f3d0',
+                backgroundColor: '#eef5ff',
+                border: '1px solid #d6e6ff',
                 padding: '10px 14px',
                 borderRadius: '12px',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <CheckCircle2 size={18} color="#10b981" />
-                <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#065f46' }}>
-                  SMS OTP Auto-Detected (589204)
+                <CheckCircle2 size={18} color="#2e83ff" />
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#0e274d' }}>
+                  Auto-Detected (589204)
                 </span>
               </div>
               <button
@@ -137,7 +134,7 @@ export const SmsOtpScreen: React.FC = () => {
                 onClick={handleAutofillDemo}
                 className="interactive-tap"
                 style={{
-                  backgroundColor: '#10b981',
+                  backgroundColor: '#2e83ff',
                   color: '#ffffff',
                   border: 'none',
                   borderRadius: '6px',
@@ -180,18 +177,11 @@ export const SmsOtpScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Button & Bank Security Note */}
+      {/* Bottom Button */}
       <div style={{ padding: '0 20px' }}>
         <PrimaryButton onClick={handleVerify} disabled={otp.some((d) => !d)}>
           Verify & Bind Device <ArrowRight size={18} />
         </PrimaryButton>
-
-        <div style={{ textAlign: 'center', marginTop: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-          <Lock size={12} color="#64748b" />
-          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
-            Do not share your OTP or UPI PIN with anyone
-          </span>
-        </div>
       </div>
     </div>
   );

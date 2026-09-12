@@ -40,15 +40,10 @@ export const SecurityScreen: React.FC = () => {
           >
             <ShieldCheck size={26} />
           </div>
-          <div>
             <div style={{ fontWeight: 800, fontSize: '15px', color: '#0f172a' }}>
               App Security Active
             </div>
-            <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>
-              2FA and Biometrics protection enabled
-            </div>
           </div>
-        </div>
 
         <div
           style={{

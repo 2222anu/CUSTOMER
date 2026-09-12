@@ -71,7 +71,7 @@ export const MobileNumberScreen: React.FC = () => {
             boxShadow: '0 8px 20px rgba(14, 39, 77, 0.12)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div
               style={{
                 width: '34px',
@@ -88,9 +88,6 @@ export const MobileNumberScreen: React.FC = () => {
             </div>
             <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#ffffff' }}>UPI Device Registration</div>
           </div>
-          <p style={{ fontSize: '12.5px', color: '#cbd5e1', margin: 0, lineHeight: '1.45' }}>
-            Verify your mobile number linked to your bank account to enable instant payments.
-          </p>
         </div>
 
         {/* Main Input Form Card - Simple, Clean, Streamlined (No SIM selector clutter) */}
@@ -238,22 +235,7 @@ export const MobileNumberScreen: React.FC = () => {
             </div>
           </div>
 
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              fontSize: '11.5px',
-              color: '#475569',
-              backgroundColor: '#f8fafc',
-              padding: '10px 12px',
-              borderRadius: '10px',
-              border: '1px solid #e2e8f0',
-            }}
-          >
-            <ShieldCheck size={16} color="#2e83ff" />
-            <span>An automated encrypted SMS will verify your bank UPI profile</span>
-          </div>
+
 
           <PrimaryButton type="submit" disabled={mobileNumber.length < 10 || fullName.trim().length === 0}>
             Get OTP Verification Code <ArrowRight size={18} />

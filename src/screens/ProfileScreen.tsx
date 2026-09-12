@@ -187,11 +187,11 @@ export const ProfileScreen: React.FC = () => {
             Payment & Accounts
           </div>
           <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-            <ListRow icon={<Landmark size={18} color="#2e83ff" />} label="Bank Accounts" subLabel="Manage linked bank accounts & balances" onClick={() => navigateTo('BANK_ACCOUNTS')} />
+            <ListRow icon={<Landmark size={18} color="#2e83ff" />} label="Bank Accounts" onClick={() => navigateTo('BANK_ACCOUNTS')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Zap size={18} color="#2e83ff" />} label="UPI Settings & AutoPay" subLabel="Change UPI PIN, manage mandates" onClick={() => navigateTo('UPI_SETTINGS')} />
+            <ListRow icon={<Zap size={18} color="#2e83ff" />} label="UPI Settings & AutoPay" onClick={() => navigateTo('UPI_SETTINGS')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<CreditCard size={18} color="#2e83ff" />} label="Payment Methods & Cards" subLabel="Saved credit & debit cards" onClick={() => navigateTo('PAYMENT_METHODS')} />
+            <ListRow icon={<CreditCard size={18} color="#2e83ff" />} label="Payment Methods & Cards" onClick={() => navigateTo('PAYMENT_METHODS')} />
           </div>
         </div>
 
@@ -201,11 +201,11 @@ export const ProfileScreen: React.FC = () => {
             Transfers & Requests
           </div>
           <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-            <ListRow icon={<Download size={18} color="#2e83ff" />} label="Money Requests" subLabel="Pending payment requests from contacts" onClick={() => navigateTo('MONEY_REQUESTS')} />
+            <ListRow icon={<Download size={18} color="#2e83ff" />} label="Money Requests" onClick={() => navigateTo('MONEY_REQUESTS')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<History size={18} color="#2e83ff" />} label="Transaction History" subLabel="View all past statements & receipts" onClick={() => navigateTo('HISTORY')} />
+            <ListRow icon={<History size={18} color="#2e83ff" />} label="Transaction History" onClick={() => navigateTo('HISTORY')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<QrCode size={18} color="#2e83ff" />} label="Receive Money / QR Code" subLabel="Share QR code or UPI ID to get paid" onClick={() => navigateTo('RECEIVE')} />
+            <ListRow icon={<QrCode size={18} color="#2e83ff" />} label="Receive Money / QR Code" onClick={() => navigateTo('RECEIVE')} />
           </div>
         </div>
 
@@ -215,15 +215,15 @@ export const ProfileScreen: React.FC = () => {
             Lifestyle & Rewards
           </div>
           <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-            <ListRow icon={<Gift size={18} color="#2e83ff" />} label="Rewards & Cashback" subLabel="Scratch cards, cashback offers & points" onClick={() => navigateTo('REWARDS')} />
+            <ListRow icon={<Gift size={18} color="#2e83ff" />} label="Rewards & Cashback" onClick={() => navigateTo('REWARDS')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<ShoppingBag size={18} color="#2e83ff" />} label="Shopping Deals" subLabel="Exclusive partner discounts" onClick={() => navigateTo('SHOPPING')} />
+            <ListRow icon={<ShoppingBag size={18} color="#2e83ff" />} label="Shopping Deals" onClick={() => navigateTo('SHOPPING')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<MessageSquare size={18} color="#2e83ff" />} label="Messages & Alerts" subLabel="Promotions and account notifications" onClick={() => navigateTo('MESSAGES')} />
+            <ListRow icon={<MessageSquare size={18} color="#2e83ff" />} label="Messages & Alerts" onClick={() => navigateTo('MESSAGES')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Plane size={18} color="#2e83ff" />} label="Travel Bookings" subLabel="Flights, trains & bus tickets" onClick={() => navigateTo('TRAVEL')} />
+            <ListRow icon={<Plane size={18} color="#2e83ff" />} label="Travel Bookings" onClick={() => navigateTo('TRAVEL')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Utensils size={18} color="#2e83ff" />} label="Food & Dining" subLabel="Discounts at popular restaurants" onClick={() => navigateTo('FOOD')} />
+            <ListRow icon={<Utensils size={18} color="#2e83ff" />} label="Food & Dining" onClick={() => navigateTo('FOOD')} />
           </div>
         </div>
 
@@ -233,15 +233,20 @@ export const ProfileScreen: React.FC = () => {
             Settings & Security
           </div>
           <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-            <ListRow icon={<ShieldCheck size={18} color="#2e83ff" />} label="Security & Biometrics" subLabel="Screen lock, active sessions" onClick={() => navigateTo('SECURITY')} />
+            <ListRow icon={<ShieldCheck size={18} color="#2e83ff" />} label="Security & Biometrics" onClick={() => navigateTo('SECURITY')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Bell size={18} color="#2e83ff" />} label="Notifications & Alerts" subLabel="Push notifications and SMS alerts" onClick={() => navigateTo('NOTIFICATIONS')} />
+            <ListRow icon={<Bell size={18} color="#2e83ff" />} label="Notifications & Alerts" onClick={() => navigateTo('NOTIFICATIONS')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Globe size={18} color="#2e83ff" />} label="App Language" subLabel={`Current: ${language}`} onClick={() => setIsLanguageModalOpen(true)} />
+            <ListRow
+              icon={<Globe size={18} color="#2e83ff" />}
+              label="App Language"
+              rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#2e83ff' }}>{language}</span>}
+              onClick={() => setIsLanguageModalOpen(true)}
+            />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<HelpCircle size={18} color="#2e83ff" />} label="Help & Support" subLabel="24/7 customer care & FAQs" onClick={() => navigateTo('HELP_SUPPORT')} />
+            <ListRow icon={<HelpCircle size={18} color="#2e83ff" />} label="Help & Support" onClick={() => navigateTo('HELP_SUPPORT')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Lock size={18} color="#2e83ff" />} label="Privacy Policy & Terms" subLabel="Data security and user agreement" onClick={() => navigateTo('PRIVACY')} />
+            <ListRow icon={<Lock size={18} color="#2e83ff" />} label="Privacy Policy & Terms" onClick={() => navigateTo('PRIVACY')} />
           </div>
         </div>
 

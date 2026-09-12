@@ -98,22 +98,19 @@ export const UPISettingsScreen: React.FC = () => {
           <ListRow
             icon={<QrCode size={18} color="#2e83ff" />}
             label="My QR Code"
-            subLabel="View and share personal payment QR code"
             onClick={() => navigateTo('RECEIVE')}
           />
           <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
           <ListRow
             icon={<Key size={18} color="#2e83ff" />}
             label="Change UPI PIN"
-            subLabel="Reset or change your 4-digit UPI PIN"
             onClick={() => setIsPinModalOpen(true)}
           />
           <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
           <ListRow
             icon={<ShieldCheck size={18} color="#2e83ff" />}
             label="UPI Payment Limit"
-            subLabel="₹1,00,000 / day standard bank limit"
-            rightElement={<span style={{ fontSize: '11px', color: '#10b981', fontWeight: '700', backgroundColor: '#ecfdf5', padding: '3px 8px', borderRadius: '6px' }}>Active</span>}
+            rightElement={<span style={{ fontSize: '11px', color: '#2e83ff', fontWeight: '800', backgroundColor: '#eef5ff', border: '1px solid #d6e6ff', padding: '3px 8px', borderRadius: '6px' }}>₹1,00,000 / day</span>}
           />
         </div>
       </div>

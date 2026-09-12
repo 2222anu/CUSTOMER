@@ -35,7 +35,7 @@ export const ProfileScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '36px' }}>
-      <AppHeader title="Profile" showSettings={false} />
+      <AppHeader title="Profile" showSettings={false} showBack={true} onBack={() => navigateTo('HOME')} />
 
       {/* User Header Profile Hero Card */}
       <div
@@ -71,6 +71,11 @@ export const ProfileScreen: React.FC = () => {
         {/* Avatar with Edit Badge */}
         <div style={{ position: 'relative', marginBottom: '14px' }}>
           <div
+            onClick={() => navigateTo('HOME')}
+            role="button"
+            tabIndex={0}
+            aria-label="Go to Home"
+            className="interactive-tap"
             style={{
               width: '76px',
               height: '76px',
@@ -84,6 +89,7 @@ export const ProfileScreen: React.FC = () => {
               justifyContent: 'center',
               overflow: 'hidden',
               border: '3px solid rgba(255, 255, 255, 0.25)',
+              cursor: 'pointer',
             }}
           >
             {user.avatarUrl ? (

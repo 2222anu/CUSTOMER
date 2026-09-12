@@ -24,11 +24,19 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   showUserInfo = false,
   rightAction,
 }) => {
-  const { user, goBack, navigateTo } = useApp();
+  const { user, goBack, navigateTo, currentScreen } = useApp();
 
   const handleBack = () => {
     if (onBack) onBack();
     else goBack();
+  };
+
+  const handleAvatarClick = () => {
+    if (currentScreen === 'PROFILE') {
+      navigateTo('HOME');
+    } else {
+      navigateTo('PROFILE');
+    }
   };
 
   return (
@@ -73,10 +81,10 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         ) : (
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div
-              onClick={() => navigateTo('PROFILE')}
+              onClick={handleAvatarClick}
               role="button"
               tabIndex={0}
-              aria-label="View user profile"
+              aria-label={currentScreen === 'PROFILE' ? 'Go to home' : 'View user profile'}
               style={{
                 width: '38px',
                 height: '38px',

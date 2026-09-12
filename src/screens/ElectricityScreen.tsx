@@ -48,7 +48,7 @@ export const ElectricityScreen: React.FC = () => {
     <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '24px' }}>
       <AppHeader title="Electricity" showBack showSettings />
 
-      <div style={{ padding: '24px 20px' }}>
+      <div style={{ padding: '20px' }}>
         {/* Electricity Header Card */}
         <div
           style={{
@@ -57,66 +57,91 @@ export const ElectricityScreen: React.FC = () => {
             alignItems: 'center',
             backgroundColor: '#ffffff',
             border: '1px solid #e2e8f0',
-            borderRadius: '8px',
-            padding: '24px',
-            marginBottom: '24px',
-            boxShadow: 'none',
+            borderRadius: '16px',
+            padding: '24px 20px',
+            marginBottom: '20px',
+            textAlign: 'center',
           }}
         >
           <div
             style={{
               width: '56px',
               height: '56px',
-              borderRadius: '50%',
+              borderRadius: '16px',
               backgroundColor: '#eef5ff',
               color: '#2e83ff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: '12px',
-              border: '1px solid #d6e6ff',
+              border: '1.5px solid #d6e6ff',
             }}
           >
-            <Zap size={30} />
+            <Zap size={28} />
           </div>
-          <h2 style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a' }}>Electricity Bill</h2>
-          <p style={{ fontSize: '13px', color: '#475569', marginTop: '4px' }}>
-            State Power Corporation (TSSPDCL)
+          <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: 0 }}>
+            Electricity Bill Payment
+          </h2>
+          <p style={{ fontSize: '13px', color: '#64748b', marginTop: '4px', marginBottom: 0 }}>
+            State Power Corporation (TSSPDCL) &bull; Verified Biller
           </p>
         </div>
 
         {/* Input Consumer ID */}
         <div style={{ marginBottom: '20px' }}>
-          <label htmlFor="elec-consumer-input" style={{ fontSize: '12px', color: '#475569', fontWeight: '800', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>
-            Consumer Number / ID
-          </label>
-          <input
-            id="elec-consumer-input"
-            type="text"
-            value={consumerNo}
-            onChange={(e) => setConsumerNo(e.target.value)}
-            placeholder="Enter Consumer Number"
+          <label
+            htmlFor="elec-consumer-input"
             style={{
-              width: '100%',
-              backgroundColor: '#ffffff',
-              border: '1px solid #cbd5e1',
-              borderRadius: '8px',
-              padding: '14px',
-              color: '#0f172a',
-              fontSize: '15px',
-              fontWeight: '700',
-              outline: 'none',
-              boxShadow: 'none',
+              fontSize: '11px',
+              color: '#64748b',
+              fontWeight: '800',
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              marginBottom: '8px',
+              display: 'block',
+              marginLeft: '4px',
             }}
-          />
+          >
+            Consumer Number / Service ID
+          </label>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              backgroundColor: '#ffffff',
+              border: '1.5px solid #cbd5e1',
+              borderRadius: '12px',
+              padding: '12px 14px',
+              transition: 'border-color 0.15s ease',
+            }}
+          >
+            <Zap size={18} color="#2e83ff" style={{ marginRight: '10px', flexShrink: 0 }} />
+            <input
+              id="elec-consumer-input"
+              type="text"
+              value={consumerNo}
+              onChange={(e) => setConsumerNo(e.target.value)}
+              placeholder="Enter 6 to 10 digit Consumer Number"
+              style={{
+                width: '100%',
+                background: 'none',
+                border: 'none',
+                color: '#0f172a',
+                fontSize: '15px',
+                fontWeight: '700',
+                outline: 'none',
+                fontVariantNumeric: 'tabular-nums',
+              }}
+            />
+          </div>
         </div>
 
         {!bill ? (
           <PrimaryButton onClick={handleFetchBill} disabled={isLoading || !consumerNo}>
             {isLoading ? (
               <>
-                <Loader2 size={20} className="spin" style={{ animation: 'spin 1s linear infinite' }} />
-                Fetching Bill...
+                <Loader2 size={18} className="spin" style={{ animation: 'spin 1s linear infinite' }} />
+                Fetching Live Bill...
               </>
             ) : (
               'Fetch Bill Details'
@@ -128,29 +153,28 @@ export const ElectricityScreen: React.FC = () => {
             <div
               style={{
                 backgroundColor: '#ffffff',
-                border: '2px solid #2e83ff',
-                borderRadius: '8px',
-                padding: '18px',
-                marginBottom: '24px',
-                boxShadow: 'none',
+                border: '1.5px solid rgba(46, 131, 255, 0.4)',
+                borderRadius: '16px',
+                padding: '20px',
+                marginBottom: '20px',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
-                <span style={{ color: '#475569', fontSize: '13px' }}>Provider:</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <span style={{ color: '#64748b', fontSize: '13px' }}>Biller:</span>
                 <span style={{ fontWeight: '700', fontSize: '13px', color: '#0f172a' }}>{bill.providerName}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
-                <span style={{ color: '#475569', fontSize: '13px' }}>Consumer No:</span>
-                <span style={{ fontWeight: '700', fontSize: '13px', color: '#0f172a' }}>{bill.consumerNumber}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <span style={{ color: '#64748b', fontSize: '13px' }}>Consumer Number:</span>
+                <span style={{ fontWeight: '700', fontSize: '13px', color: '#0f172a', fontVariantNumeric: 'tabular-nums' }}>{bill.consumerNumber}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
-                <span style={{ color: '#475569', fontSize: '13px' }}>Due Date:</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <span style={{ color: '#64748b', fontSize: '13px' }}>Due Date:</span>
                 <span style={{ fontWeight: '700', fontSize: '13px', color: '#dc2626' }}>{bill.dueDate}</span>
               </div>
 
               <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ color: '#475569', fontSize: '14px', fontWeight: '600' }}>Total Amount Due:</span>
-                <span style={{ fontSize: '24px', fontWeight: '900', color: '#2e83ff' }}>
+                <span style={{ color: '#64748b', fontSize: '13px', fontWeight: '700' }}>Total Amount Due:</span>
+                <span style={{ fontSize: '22px', fontWeight: '900', color: '#2e83ff', fontVariantNumeric: 'tabular-nums' }}>
                   {formatCurrency(bill.amount)}
                 </span>
               </div>

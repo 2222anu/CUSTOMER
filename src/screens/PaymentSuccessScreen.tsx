@@ -44,32 +44,34 @@ export const PaymentSuccessScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#F4F1EC', minHeight: '100%' }}>
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
       <AppHeader title="Receipt" showSettings={false} />
 
       <div style={{ padding: '24px 20px', textAlign: 'center' }}>
         {/* Animated Diamond Checkmark */}
-        <div style={{ margin: '16px 0 24px 0' }}>
+        <div style={{ margin: '12px 0 20px 0' }}>
           <div className="diamond-check-container">
             <div className="diamond-shape" />
-            <Check size={42} className="diamond-icon" strokeWidth={3.5} />
+            <Check size={38} className="diamond-icon" strokeWidth={3.5} />
           </div>
         </div>
 
-        <h2 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '4px', color: '#111144' }}>
+        <h2 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '4px', color: '#0f172a', letterSpacing: '-0.01em' }}>
           Payment Successful
         </h2>
-        <div style={{ fontSize: '13px', color: '#5C564D', marginBottom: '16px' }}>
-          Paid to <strong style={{ color: '#111144' }}>{txn.title}</strong>
+        <div style={{ fontSize: '13px', color: '#64748b', marginBottom: '14px' }}>
+          Paid to <strong style={{ color: '#0f172a' }}>{txn.title}</strong>
         </div>
 
         {/* Large Amount Display */}
         <div
           style={{
-            fontSize: '34px',
+            fontSize: '32px',
             fontWeight: '900',
-            color: '#111144',
-            marginBottom: '24px',
+            color: '#0f172a',
+            marginBottom: '20px',
+            fontVariantNumeric: 'tabular-nums',
+            letterSpacing: '-0.02em',
           }}
         >
           {formatCurrency(txn.amount)}
@@ -78,49 +80,48 @@ export const PaymentSuccessScreen: React.FC = () => {
         {/* Transaction Details Breakdown Card */}
         <div
           style={{
-            backgroundColor: '#FFFFFF',
-            border: '1.5px solid #DAD1C8',
+            backgroundColor: '#ffffff',
+            border: '1px solid #e2e8f0',
             borderRadius: '20px',
             padding: '20px',
-            marginBottom: '24px',
+            marginBottom: '20px',
             textAlign: 'left',
-            boxShadow: '0 4px 20px rgba(17, 17, 68, 0.04)',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px' }}>
-            <span style={{ color: '#5C564D', fontSize: '13px' }}>Provider / Payee</span>
-            <span style={{ fontWeight: '700', fontSize: '13px', color: '#111144' }}>{txn.title}</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+            <span style={{ color: '#64748b', fontSize: '13px' }}>Provider / Payee</span>
+            <span style={{ fontWeight: '700', fontSize: '13px', color: '#0f172a' }}>{txn.title}</span>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px' }}>
-            <span style={{ color: '#5C564D', fontSize: '13px' }}>Transaction ID</span>
-            <span style={{ fontWeight: '600', fontSize: '12px', color: '#111144', fontFamily: 'monospace' }}>{txn.id}</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+            <span style={{ color: '#64748b', fontSize: '13px' }}>Transaction ID</span>
+            <span style={{ fontWeight: '600', fontSize: '12px', color: '#0f172a', fontFamily: 'monospace' }}>{txn.id}</span>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px' }}>
-            <span style={{ color: '#5C564D', fontSize: '13px' }}>UTR / Reference No</span>
-            <span style={{ fontWeight: '600', fontSize: '12px', color: '#111144', fontFamily: 'monospace' }}>{txn.utr}</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+            <span style={{ color: '#64748b', fontSize: '13px' }}>UTR / Reference No</span>
+            <span style={{ fontWeight: '600', fontSize: '12px', color: '#0f172a', fontFamily: 'monospace' }}>{txn.utr}</span>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px' }}>
-            <span style={{ color: '#5C564D', fontSize: '13px' }}>Date & Time</span>
-            <span style={{ fontWeight: '600', fontSize: '13px', color: '#111144' }}>{formatDate(txn.timestamp)}</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+            <span style={{ color: '#64748b', fontSize: '13px' }}>Date & Time</span>
+            <span style={{ fontWeight: '600', fontSize: '13px', color: '#0f172a' }}>{formatDate(txn.timestamp)}</span>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1.5px solid #DAD1C8', paddingTop: '14px' }}>
-            <span style={{ color: '#5C564D', fontSize: '13px' }}>Payment Method</span>
-            <span style={{ fontWeight: '700', fontSize: '13px', color: '#111144' }}>ICICI Bank Savings **** 3616</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #f1f5f9', paddingTop: '12px' }}>
+            <span style={{ color: '#64748b', fontSize: '13px' }}>Payment Method</span>
+            <span style={{ fontWeight: '700', fontSize: '13px', color: '#2e83ff' }}>ICICI Bank Savings **** 3616</span>
           </div>
         </div>
 
         {downloadMsg && (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '12px', color: '#F98513', fontWeight: '700', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '12px', color: '#10b981', fontWeight: '700', marginBottom: '16px' }}>
             <CheckCircle2 size={16} /> Receipt details saved successfully!
           </div>
         )}
 
         {/* Action Buttons */}
-        <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
+        <div style={{ display: 'flex', gap: '12px', marginBottom: '14px' }}>
           <SecondaryButton onClick={handleShare}>
             <Share2 size={16} /> Share
           </SecondaryButton>

@@ -37,11 +37,12 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '12px 16px',
-        backgroundColor: '#ffffff',
+        padding: '12px 18px',
+        backgroundColor: 'rgba(255, 255, 255, 0.96)',
+        backdropFilter: 'blur(10px)',
         position: 'sticky',
         top: 0,
-        zIndex: 20,
+        zIndex: 30,
         borderBottom: '1px solid #e2e8f0',
         boxShadow: 'none',
       }}
@@ -53,36 +54,37 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             onClick={handleBack}
             aria-label="Go back"
             style={{
-              backgroundColor: '#f1f5f9',
-              border: '1px solid #cbd5e1',
+              backgroundColor: '#f8fafc',
+              border: '1px solid #e2e8f0',
               color: '#0f172a',
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
+              width: '38px',
+              height: '38px',
+              borderRadius: '10px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
               boxShadow: 'none',
+              transition: 'background-color 0.15s ease, transform 0.1s ease',
             }}
           >
             <ArrowLeft size={18} />
           </button>
         ) : (
-          <>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <div
               onClick={() => navigateTo('PROFILE')}
               role="button"
               tabIndex={0}
               aria-label="View user profile"
               style={{
-                width: '36px',
-                height: '36px',
+                width: '38px',
+                height: '38px',
                 borderRadius: '50%',
                 backgroundColor: '#2e83ff',
                 color: '#ffffff',
                 fontWeight: '800',
-                fontSize: '14px',
+                fontSize: '13.5px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -90,6 +92,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                 boxShadow: 'none',
                 overflow: 'hidden',
                 border: '2px solid #ffffff',
+                outline: '1.5px solid #2e83ff',
+                transition: 'transform 0.15s ease',
               }}
             >
               {user.avatarUrl ? (
@@ -99,22 +103,27 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               )}
             </div>
             {showUserInfo && (
-              <span style={{ fontSize: '13px', fontWeight: '800', color: '#0f172a', marginLeft: '8px' }}>
-                {user.name}
-              </span>
+              <div style={{ marginLeft: '10px' }}>
+                <span style={{ fontSize: '13.5px', fontWeight: '800', color: '#0f172a', display: 'block', lineHeight: '16px' }}>
+                  {user.name}
+                </span>
+                <span style={{ fontSize: '10.5px', fontWeight: '600', color: '#64748b' }}>
+                  Standard Plan
+                </span>
+              </div>
             )}
-          </>
+          </div>
         )}
       </div>
 
       {/* Center Slot: Official Vector Logo or Page Title */}
-      <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0 10px' }}>
+      <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0 8px' }}>
         {title ? (
-          <h2 style={{ fontSize: '17px', fontWeight: '800', color: '#0f172a', margin: 0, textAlign: 'center' }}>
+          <h2 style={{ fontSize: '17px', fontWeight: '800', color: '#0f172a', margin: 0, textAlign: 'center', letterSpacing: '-0.01em' }}>
             {title}
           </h2>
         ) : (
-          <div onClick={() => navigateTo('HOME')} style={{ cursor: 'pointer' }}>
+          <div onClick={() => navigateTo('HOME')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
             <QtPayLogo variant="header" size={26} themeMode="light" />
           </div>
         )}
@@ -127,17 +136,18 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             onClick={onSearchClick}
             aria-label="Search"
             style={{
-              backgroundColor: '#f1f5f9',
-              border: '1px solid #cbd5e1',
+              backgroundColor: '#f8fafc',
+              border: '1px solid #e2e8f0',
               color: '#0f172a',
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
+              width: '38px',
+              height: '38px',
+              borderRadius: '10px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
               boxShadow: 'none',
+              transition: 'background-color 0.15s ease',
             }}
           >
             <Search size={18} />
@@ -151,17 +161,18 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             onClick={() => navigateTo('UPI_SETTINGS')}
             aria-label="UPI Settings"
             style={{
-              backgroundColor: '#f1f5f9',
-              border: '1px solid #cbd5e1',
+              backgroundColor: '#f8fafc',
+              border: '1px solid #e2e8f0',
               color: '#0f172a',
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
+              width: '38px',
+              height: '38px',
+              borderRadius: '10px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
               boxShadow: 'none',
+              transition: 'background-color 0.15s ease',
             }}
           >
             <Settings size={18} />

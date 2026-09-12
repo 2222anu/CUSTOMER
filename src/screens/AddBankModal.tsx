@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Landmark, Check } from 'lucide-react';
+import { Landmark, Check, ShieldCheck } from 'lucide-react';
 import { BottomSheet } from '../components/BottomSheet';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
-import { designSystem } from '../design-system';
 
 export const AddBankModal: React.FC = () => {
   const { isAddBankModalOpen, setIsAddBankModalOpen, addBankAccount } = useApp();
@@ -11,12 +10,12 @@ export const AddBankModal: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const availableBanks = [
-    'ICICI Bank',
-    'Yes Bank',
-    'Kotak Mahindra Bank',
-    'HDFC Bank',
-    'SBI (State Bank of India)',
-    'Axis Bank',
+    { name: 'State Bank of India', code: 'SBI' },
+    { name: 'HDFC Bank', code: 'HDFC' },
+    { name: 'ICICI Bank', code: 'ICICI' },
+    { name: 'Axis Bank', code: 'AXIS' },
+    { name: 'Kotak Mahindra Bank', code: 'KOTAK' },
+    { name: 'Yes Bank', code: 'YES' },
   ];
 
   const handleAdd = async () => {
@@ -30,49 +29,85 @@ export const AddBankModal: React.FC = () => {
     <BottomSheet
       isOpen={isAddBankModalOpen}
       onClose={() => setIsAddBankModalOpen(false)}
-      title="Add Bank Account"
+      title="Link Bank Account"
       themeMode="light"
     >
-      <div style={{ marginBottom: designSystem.spacing['2xl'] }}>
-        <p style={{ color: designSystem.colors.textSecondary, fontSize: '13px', marginBottom: designSystem.spacing.lg }}>
-          Select your bank to link with your QTPay UPI ID:
+      <div style={{ marginBottom: '24px' }}>
+        <p style={{ color: '#64748b', fontSize: '13px', marginBottom: '16px', lineHeight: '18px' }}>
+          Select your bank to link securely via NPCI UPI 2.0 with your registered mobile number:
         </p>
 
-        <div role="radiogroup" aria-label="Available Banks">
-          {availableBanks.map((bankName) => {
-            const isSelected = selectedBank === bankName;
+        <div role="radiogroup" aria-label="Available Banks" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {availableBanks.map((bank) => {
+            const isSelected = selectedBank === bank.name;
             return (
               <div
-                key={bankName}
+                key={bank.name}
                 role="radio"
                 aria-checked={isSelected}
                 tabIndex={0}
-                onClick={() => setSelectedBank(bankName)}
+                onClick={() => setSelectedBank(bank.name)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
-                    setSelectedBank(bankName);
+                    setSelectedBank(bank.name);
                   }
                 }}
+                className="interactive-tap"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '14px 16px',
-                  backgroundColor: isSelected ? designSystem.colors.primaryLight : designSystem.colors.surface,
-                  border: isSelected ? `2px solid ${designSystem.colors.primary}` : `1px solid ${designSystem.colors.borderHairline}`,
-                  borderRadius: designSystem.radii.md,
-                  marginBottom: designSystem.spacing.sm,
+                  padding: '13px 16px',
+                  backgroundColor: isSelected ? '#eef5ff' : '#ffffff',
+                  border: isSelected ? '1.5px solid #2e83ff' : '1px solid #e2e8f0',
+                  borderRadius: '12px',
                   cursor: 'pointer',
-                  boxShadow: designSystem.shadows.none,
+                  boxShadow: 'none',
+                  transition: 'all 0.15s ease',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: designSystem.spacing.md }}>
-                  <Landmark size={20} color={isSelected ? designSystem.colors.primary : designSystem.colors.textSecondary} />
-                  <span style={{ fontWeight: designSystem.typography.weights.bold, fontSize: '14px', color: designSystem.colors.textPrimary }}>
-                    {bankName}
-                  </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div
+                    style={{
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '10px',
+                      backgroundColor: isSelected ? '#ffffff' : '#f8fafc',
+                      color: isSelected ? '#2e83ff' : '#64748b',
+                      border: `1px solid ${isSelected ? '#d6e6ff' : '#e2e8f0'}`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 800,
+                      fontSize: '11px',
+                    }}
+                  >
+                    <Landmark size={18} />
+                  </div>
+                  <div>
+                    <span style={{ fontWeight: 700, fontSize: '14px', color: '#0f172a' }}>
+                      {bank.name}
+                    </span>
+                    <div style={{ fontSize: '11px', color: '#64748b', display: 'flex', alignItems: 'center', gap: '3px' }}>
+                      <ShieldCheck size={12} color="#10b981" /> UPI Instant Verification
+                    </div>
+                  </div>
                 </div>
-                {isSelected && <Check size={18} color={designSystem.colors.primary} />}
+
+                <div
+                  style={{
+                    width: '20px',
+                    height: '20px',
+                    borderRadius: '50%',
+                    border: isSelected ? 'none' : '1.5px solid #cbd5e1',
+                    backgroundColor: isSelected ? '#2e83ff' : 'transparent',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {isSelected && <Check size={13} color="#ffffff" strokeWidth={3} />}
+                </div>
               </div>
             );
           })}
@@ -80,7 +115,7 @@ export const AddBankModal: React.FC = () => {
       </div>
 
       <PrimaryButton onClick={handleAdd} disabled={isLoading}>
-        {isLoading ? 'Linking Account...' : `Link ${selectedBank}`}
+        {isLoading ? 'Verifying & Linking...' : `Link ${selectedBank}`}
       </PrimaryButton>
     </BottomSheet>
   );

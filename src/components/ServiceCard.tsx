@@ -1,5 +1,4 @@
 import React from 'react';
-import { designSystem } from '../design-system';
 
 interface ServiceCardProps {
   label: string;
@@ -17,10 +16,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   icon,
   onClick,
   badge,
-  bgColor = designSystem.colors.surface,
-  iconBg = designSystem.colors.primaryLight,
-  iconColor = designSystem.colors.primary,
-  borderColor = designSystem.colors.borderHairline,
+  bgColor = '#ffffff',
+  iconBg = '#eef5ff',
+  iconColor = '#2e83ff',
+  borderColor = '#e2e8f0',
 }) => {
   return (
     <div
@@ -33,35 +32,38 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         }
       }}
       aria-label={label}
+      className="interactive-tap"
       style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '14px 6px',
+        padding: '16px 8px',
         backgroundColor: bgColor,
         border: `1px solid ${borderColor}`,
-        borderRadius: designSystem.radii.md,
+        borderRadius: '12px',
         cursor: 'pointer',
         position: 'relative',
-        transition: 'all 0.15s ease',
+        transition: 'border-color 0.2s ease, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
         textAlign: 'center',
-        boxShadow: designSystem.shadows.none,
+        boxShadow: 'none',
+        userSelect: 'none',
       }}
     >
       {badge && (
         <span
           style={{
             position: 'absolute',
-            top: '-6px',
-            right: '4px',
+            top: '-7px',
+            right: '6px',
             fontSize: '9px',
-            fontWeight: designSystem.typography.weights.extrabold,
-            backgroundColor: designSystem.colors.primary,
-            color: designSystem.colors.textOnPrimary,
-            padding: '2px 6px',
-            borderRadius: designSystem.radii.xs,
+            fontWeight: 800,
+            backgroundColor: '#2e83ff',
+            color: '#ffffff',
+            padding: '2px 7px',
+            borderRadius: '6px',
             textTransform: 'uppercase',
+            letterSpacing: '0.04em',
           }}
         >
           {badge}
@@ -69,26 +71,27 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       )}
       <div
         style={{
-          width: '38px',
-          height: '38px',
-          borderRadius: designSystem.radii.full,
+          width: '42px',
+          height: '42px',
+          borderRadius: '12px',
           backgroundColor: iconBg,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: iconColor,
-          marginBottom: designSystem.spacing.sm,
-          border: `1px solid ${designSystem.colors.primaryBorder}`,
+          marginBottom: '10px',
+          border: '1px solid #d6e6ff',
         }}
       >
         {icon}
       </div>
       <span
         style={{
-          fontSize: '11px',
-          fontWeight: designSystem.typography.weights.bold,
-          color: designSystem.colors.textPrimary,
-          lineHeight: '1.2',
+          fontSize: '11.5px',
+          fontWeight: 700,
+          color: '#0f172a',
+          lineHeight: '14px',
+          letterSpacing: '-0.01em',
         }}
       >
         {label}

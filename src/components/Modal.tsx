@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
-import { designSystem } from '../design-system';
 
 interface ModalProps {
   isOpen: boolean;
@@ -38,13 +37,13 @@ export const Modal: React.FC<ModalProps> = ({
       style={{
         position: 'fixed',
         inset: 0,
-        backgroundColor: designSystem.colors.overlay,
-        backdropFilter: 'blur(4px)',
+        backgroundColor: 'rgba(15, 23, 42, 0.65)',
+        backdropFilter: 'blur(8px)',
         zIndex: 50,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: designSystem.spacing.xl,
+        padding: '20px',
       }}
       onClick={onClose}
     >
@@ -54,16 +53,16 @@ export const Modal: React.FC<ModalProps> = ({
         style={{
           width: '100%',
           maxWidth: '420px',
-          backgroundColor: designSystem.colors.surface,
-          border: `1px solid ${designSystem.colors.borderHairline}`,
-          borderRadius: designSystem.radii.lg,
-          padding: designSystem.spacing['2xl'],
-          boxShadow: designSystem.shadows.none,
+          backgroundColor: '#ffffff',
+          border: '1px solid #e2e8f0',
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: 'none',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: designSystem.spacing.lg }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
           {title ? (
-            <h3 id="modal-title" style={{ fontSize: '18px', fontWeight: designSystem.typography.weights.extrabold, color: designSystem.colors.textPrimary }}>
+            <h3 id="modal-title" style={{ fontSize: '17px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.01em' }}>
               {title}
             </h3>
           ) : (
@@ -72,21 +71,22 @@ export const Modal: React.FC<ModalProps> = ({
           <button
             onClick={onClose}
             aria-label="Close modal"
+            className="interactive-tap"
             style={{
-              backgroundColor: designSystem.colors.subSurface,
-              border: 'none',
-              color: designSystem.colors.textSecondary,
+              backgroundColor: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              color: '#64748b',
               width: '32px',
               height: '32px',
-              borderRadius: designSystem.radii.full,
+              borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              boxShadow: designSystem.shadows.none,
+              boxShadow: 'none',
             }}
           >
-            <X size={18} />
+            <X size={16} />
           </button>
         </div>
         {children}

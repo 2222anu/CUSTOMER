@@ -84,20 +84,19 @@ export const RewardsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#F4F1EC', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
       <AppHeader title="Rewards & Scratch Cards" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* QTPoints Balance Hero Banner */}
         <div
           style={{
-            background: 'linear-gradient(135deg, #1E295D 0%, #111144 100%)',
-            border: '1.5px solid #F98513',
-            borderRadius: '24px',
-            padding: '24px',
+            background: 'linear-gradient(145deg, #0e274d 0%, #0a1c36 100%)',
+            border: '1.5px solid rgba(46, 131, 255, 0.35)',
+            borderRadius: '20px',
+            padding: '24px 20px',
             textAlign: 'center',
-            marginBottom: '24px',
-            boxShadow: '0 10px 30px rgba(17, 17, 68, 0.45), 0 0 15px rgba(249, 133, 19, 0.25)',
+            marginBottom: '20px',
             color: '#FFFFFF',
           }}
         >
@@ -105,65 +104,64 @@ export const RewardsScreen: React.FC = () => {
             style={{
               width: '56px',
               height: '56px',
-              borderRadius: '50%',
-              backgroundColor: '#F98513',
-              color: '#FFFFFF',
+              borderRadius: '16px',
+              backgroundColor: '#eef5ff',
+              color: '#2e83ff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 12px auto',
-              boxShadow: '0 0 20px rgba(249, 133, 19, 0.5)',
+              border: '1.5px solid #d6e6ff',
             }}
           >
             <Trophy size={28} />
           </div>
-          <div style={{ fontSize: '12px', fontWeight: '700', color: '#A4BCEE', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <div style={{ fontSize: '11px', fontWeight: '800', color: '#82b5ff', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Total Reward Balance
           </div>
-          <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#FFFFFF', margin: '4px 0 6px 0' }}>
+          <h2 style={{ fontSize: '26px', fontWeight: '800', color: '#FFFFFF', margin: '4px 0 6px 0', fontVariantNumeric: 'tabular-nums' }}>
             {points.toLocaleString()} QTPoints
           </h2>
-          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', margin: 0 }}>
-            Earn 10 QTPoints on every ₹100 spent via QTPay UPI
+          <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0 }}>
+            Earn 10 QTPoints on every ₹100 spent via QPay UPI
           </p>
         </div>
 
         {/* Unlocked Scratch Cards Grid */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#111144' }}>Unlocked Scratch Cards</h3>
-          <span style={{ fontSize: '12px', fontWeight: '700', color: '#F98513' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+          <h3 style={{ fontSize: '14px', fontWeight: '800', color: '#0f172a', margin: 0 }}>Unlocked Scratch Cards</h3>
+          <span style={{ fontSize: '12px', fontWeight: '700', color: '#2e83ff' }}>
             {cards.filter((c) => !c.isScratched).length} Unopened
           </span>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '14px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
           {cards.map((card) => (
             <div
               key={card.id}
               onClick={() => handleCardClick(card)}
+              className="interactive-tap"
               style={{
-                backgroundColor: card.isScratched ? '#FFFFFF' : '#111144',
-                border: card.isScratched ? '1.5px solid #DAD1C8' : '1.5px dashed #F98513',
-                borderRadius: '20px',
+                backgroundColor: card.isScratched ? '#ffffff' : '#0e274d',
+                border: card.isScratched ? '1px solid #e2e8f0' : '1.5px dashed #2e83ff',
+                borderRadius: '16px',
                 padding: '18px 14px',
                 textAlign: 'center',
                 cursor: 'pointer',
-                boxShadow: card.isScratched ? '0 4px 14px rgba(0,0,0,0.05)' : '0 6px 20px rgba(17, 17, 68, 0.3)',
-                transition: 'transform 0.15s ease',
-                color: card.isScratched ? '#111144' : '#FFFFFF',
+                color: card.isScratched ? '#0f172a' : '#ffffff',
               }}
             >
               {card.isScratched ? (
                 <>
-                  <CheckCircle size={30} color="#10B981" style={{ margin: '0 auto 8px auto' }} />
-                  <div style={{ fontWeight: '800', fontSize: '13px', color: '#111144' }}>{card.rewardText}</div>
+                  <CheckCircle size={28} color="#10B981" style={{ margin: '0 auto 8px auto' }} />
+                  <div style={{ fontWeight: '800', fontSize: '13px', color: '#0f172a' }}>{card.rewardText}</div>
                   <div style={{ fontSize: '11px', color: '#10B981', marginTop: '4px', fontWeight: '700' }}>Claimed</div>
                 </>
               ) : (
                 <>
-                  <Sparkles size={30} color="#F98513" style={{ margin: '0 auto 8px auto' }} />
-                  <div style={{ fontWeight: '800', fontSize: '13px', color: '#FFFFFF' }}>Tap to Scratch</div>
-                  <div style={{ fontSize: '11px', color: '#F98513', marginTop: '4px', fontWeight: '700' }}>
+                  <Sparkles size={28} color="#2e83ff" style={{ margin: '0 auto 8px auto' }} />
+                  <div style={{ fontWeight: '800', fontSize: '13px', color: '#ffffff' }}>Tap to Scratch</div>
+                  <div style={{ fontSize: '11px', color: '#82b5ff', marginTop: '4px', fontWeight: '700' }}>
                     {card.title}
                   </div>
                 </>
@@ -178,12 +176,9 @@ export const RewardsScreen: React.FC = () => {
         <div
           style={{
             position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(17, 17, 68, 0.75)',
-            backdropFilter: 'blur(8px)',
+            inset: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.65)',
+            backdropFilter: 'blur(6px)',
             zIndex: 1000,
             display: 'flex',
             alignItems: 'center',
@@ -197,10 +192,9 @@ export const RewardsScreen: React.FC = () => {
               width: '100%',
               maxWidth: '360px',
               backgroundColor: '#FFFFFF',
-              borderRadius: '24px',
+              borderRadius: '20px',
               padding: '24px',
               textAlign: 'center',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.4)',
               position: 'relative',
               animation: 'scaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
@@ -208,6 +202,7 @@ export const RewardsScreen: React.FC = () => {
           >
             <button
               onClick={() => setActiveCard(null)}
+              aria-label="Close"
               style={{
                 position: 'absolute',
                 top: '16px',
@@ -215,54 +210,53 @@ export const RewardsScreen: React.FC = () => {
                 width: '32px',
                 height: '32px',
                 borderRadius: '50%',
-                backgroundColor: '#F4F1EC',
+                backgroundColor: '#f1f5f9',
                 border: 'none',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                color: '#5C564D',
+                color: '#64748b',
               }}
             >
               <X size={18} />
             </button>
 
-            <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#111144', margin: '8px 0 4px 0' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '8px 0 4px 0' }}>
               {activeCard.title}
             </h3>
-            <p style={{ fontSize: '12px', color: '#5C564D', margin: '0 0 20px 0' }}>{activeCard.subtitle}</p>
+            <p style={{ fontSize: '12px', color: '#64748b', margin: '0 0 20px 0' }}>{activeCard.subtitle}</p>
 
             {/* Scratch Surface Box */}
             <div
               onClick={handleScratchAction}
               style={{
-                width: '220px',
-                height: '220px',
+                width: '200px',
+                height: '200px',
                 margin: '0 auto 20px auto',
-                borderRadius: '24px',
-                backgroundColor: isRevealed ? '#F4F1EC' : '#111144',
-                border: isRevealed ? '2px solid #F98513' : '2px dashed #F98513',
+                borderRadius: '20px',
+                backgroundColor: isRevealed ? '#eef5ff' : '#0e274d',
+                border: isRevealed ? '2px solid #2e83ff' : '2px dashed #2e83ff',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: isRevealed ? 'default' : 'pointer',
-                boxShadow: isRevealed ? '0 6px 20px rgba(249, 133, 19, 0.2)' : '0 10px 30px rgba(17, 17, 68, 0.4)',
                 position: 'relative',
                 overflow: 'hidden',
               }}
             >
               {isScratching ? (
                 <div>
-                  <Sparkles size={40} color="#F98513" style={{ animation: 'spin 1s linear infinite' }} />
+                  <Sparkles size={36} color="#2e83ff" style={{ animation: 'spin 1s linear infinite' }} />
                   <div style={{ fontSize: '13px', fontWeight: '800', color: '#FFFFFF', marginTop: '10px' }}>
                     Revealing Reward...
                   </div>
                 </div>
               ) : isRevealed ? (
                 <div style={{ padding: '16px' }}>
-                  <Gift size={44} color="#F98513" style={{ margin: '0 auto 10px auto' }} />
-                  <div style={{ fontSize: '20px', fontWeight: '800', color: '#111144' }}>
+                  <Gift size={40} color="#2e83ff" style={{ margin: '0 auto 10px auto' }} />
+                  <div style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a' }}>
                     {activeCard.rewardText}
                   </div>
                   {activeCard.code && (
@@ -271,11 +265,11 @@ export const RewardsScreen: React.FC = () => {
                         marginTop: '10px',
                         padding: '6px 12px',
                         backgroundColor: '#FFFFFF',
-                        border: '1px dashed #F98513',
+                        border: '1px dashed #2e83ff',
                         borderRadius: '10px',
-                        fontSize: '13px',
+                        fontSize: '12px',
                         fontWeight: '800',
-                        color: '#F98513',
+                        color: '#2e83ff',
                         letterSpacing: '0.05em',
                       }}
                     >
@@ -285,9 +279,9 @@ export const RewardsScreen: React.FC = () => {
                 </div>
               ) : (
                 <div>
-                  <Sparkles size={44} color="#F98513" style={{ margin: '0 auto 10px auto' }} />
-                  <div style={{ fontSize: '15px', fontWeight: '800', color: '#FFFFFF' }}>Tap to Scratch</div>
-                  <div style={{ fontSize: '11px', color: '#F98513', marginTop: '4px' }}>Click to reveal your reward!</div>
+                  <Sparkles size={40} color="#2e83ff" style={{ margin: '0 auto 10px auto' }} />
+                  <div style={{ fontSize: '14px', fontWeight: '800', color: '#FFFFFF' }}>Tap to Scratch</div>
+                  <div style={{ fontSize: '11px', color: '#82b5ff', marginTop: '4px' }}>Click to reveal your reward!</div>
                 </div>
               )}
             </div>
@@ -295,17 +289,17 @@ export const RewardsScreen: React.FC = () => {
             {isRevealed ? (
               <button
                 onClick={() => setActiveCard(null)}
+                className="interactive-tap"
                 style={{
                   width: '100%',
-                  padding: '14px',
-                  borderRadius: '16px',
-                  backgroundColor: '#F98513',
+                  padding: '12px',
+                  borderRadius: '12px',
+                  backgroundColor: '#2e83ff',
                   border: 'none',
                   color: '#FFFFFF',
                   fontSize: '14px',
                   fontWeight: '800',
                   cursor: 'pointer',
-                  boxShadow: '0 4px 14px rgba(249, 133, 19, 0.35)',
                 }}
               >
                 Claimed & Saved
@@ -313,12 +307,13 @@ export const RewardsScreen: React.FC = () => {
             ) : (
               <button
                 onClick={handleScratchAction}
+                className="interactive-tap"
                 style={{
                   width: '100%',
-                  padding: '14px',
-                  borderRadius: '16px',
-                  backgroundColor: '#111144',
-                  border: '1.5px solid #F98513',
+                  padding: '12px',
+                  borderRadius: '12px',
+                  backgroundColor: '#0e274d',
+                  border: '1.5px solid #2e83ff',
                   color: '#FFFFFF',
                   fontSize: '14px',
                   fontWeight: '800',

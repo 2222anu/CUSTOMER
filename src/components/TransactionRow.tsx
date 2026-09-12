@@ -1,7 +1,6 @@
 import React from 'react';
 import type { Transaction } from '../types';
 import { formatCurrency } from '../utils/formatters';
-import { designSystem } from '../design-system';
 
 interface TransactionRowProps {
   transaction: Transaction;
@@ -24,58 +23,62 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
           onClick();
         }
       }}
+      className={onClick ? 'interactive-tap' : ''}
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '14px 16px',
-        backgroundColor: designSystem.colors.surface,
-        border: `1px solid ${designSystem.colors.borderHairline}`,
-        borderRadius: designSystem.radii.md,
-        marginBottom: designSystem.spacing.sm,
+        backgroundColor: '#ffffff',
+        border: '1px solid #e2e8f0',
+        borderRadius: '12px',
+        marginBottom: '10px',
         cursor: onClick ? 'pointer' : 'default',
-        boxShadow: designSystem.shadows.none,
+        boxShadow: 'none',
+        transition: 'border-color 0.15s ease',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: designSystem.spacing.md }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <div
           style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: designSystem.radii.full,
-            backgroundColor: isReceived ? designSystem.colors.successLight : designSystem.colors.primaryLight,
-            border: `1px solid ${isReceived ? '#a7f3d0' : designSystem.colors.primaryBorder}`,
-            color: isReceived ? designSystem.colors.successText : designSystem.colors.primary,
-            fontWeight: designSystem.typography.weights.extrabold,
+            width: '42px',
+            height: '42px',
+            borderRadius: '12px',
+            backgroundColor: isReceived ? '#ecfdf5' : '#eef5ff',
+            border: `1px solid ${isReceived ? '#a7f3d0' : '#d6e6ff'}`,
+            color: isReceived ? '#059669' : '#2e83ff',
+            fontWeight: 800,
             fontSize: '13px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            flexShrink: 0,
           }}
         >
           {transaction.avatarInitials || transaction.title.substring(0, 2).toUpperCase()}
         </div>
         <div>
-          <div style={{ fontWeight: designSystem.typography.weights.bold, fontSize: '14px', color: designSystem.colors.textPrimary }}>
+          <div style={{ fontWeight: 800, fontSize: '14px', color: '#0f172a', lineHeight: '18px' }}>
             {transaction.title}
           </div>
-          <div style={{ fontSize: '11px', color: designSystem.colors.textSecondary, marginTop: '2px' }}>
-            {transaction.subTitle || (isReceived ? 'Received' : 'Paid')} &bull; {transaction.utr.substring(0, 10)}
+          <div style={{ fontSize: '11.5px', color: '#64748b', marginTop: '2px' }}>
+            {transaction.subTitle || (isReceived ? 'Received via UPI' : 'Paid via UPI')} &bull; {transaction.utr.substring(0, 10)}
           </div>
         </div>
       </div>
 
       <div style={{ textAlign: 'right' }}>
         <div
+          className="tabular-nums"
           style={{
-            fontWeight: designSystem.typography.weights.extrabold,
+            fontWeight: 900,
             fontSize: '15px',
-            color: isReceived ? designSystem.colors.successText : designSystem.colors.textPrimary,
+            color: isReceived ? '#059669' : '#0f172a',
           }}
         >
           {isReceived ? '+' : '-'}{formatCurrency(transaction.amount)}
         </div>
-        <div style={{ fontSize: '10px', color: designSystem.colors.textMuted, marginTop: '2px' }}>
+        <div style={{ fontSize: '10.5px', color: '#94a3b8', marginTop: '2px', fontWeight: 600 }}>
           {transaction.date}
         </div>
       </div>

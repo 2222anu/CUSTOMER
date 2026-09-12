@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, ChevronRight, Store } from 'lucide-react';
+import { Search, ChevronRight, Store, X, ArrowRight } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
 import type { Contact } from '../types';
@@ -26,24 +26,22 @@ export const PayAnyoneScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '20px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '24px' }}>
       <AppHeader title="Pay Anyone" showBack showSettings />
 
       {/* Search Input Field */}
       <div style={{ padding: '0 20px', margin: '16px 0 20px 0' }}>
-        <label htmlFor="search-contact-input" className="sr-only" style={{ display: 'none' }}>
-          Search UPI ID or mobile number
-        </label>
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
             backgroundColor: '#ffffff',
-            border: '1px solid #cbd5e1',
+            border: '1.5px solid #cbd5e1',
             borderRadius: '12px',
             padding: '12px 16px',
             boxShadow: 'none',
+            transition: 'border-color 0.2s ease',
           }}
         >
           <Search size={18} color="#2e83ff" />
@@ -59,11 +57,31 @@ export const PayAnyoneScreen: React.FC = () => {
               border: 'none',
               outline: 'none',
               color: '#0f172a',
-              fontSize: '14px',
-              fontWeight: '600',
+              fontSize: '14.5px',
+              fontWeight: 600,
               width: '100%',
+              padding: 0,
             }}
           />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              aria-label="Clear search"
+              className="interactive-tap"
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#94a3b8',
+                padding: '2px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+              }}
+            >
+              <X size={16} />
+            </button>
+          )}
         </div>
       </div>
 
@@ -71,19 +89,30 @@ export const PayAnyoneScreen: React.FC = () => {
       <div style={{ padding: '0 20px', marginBottom: '24px' }}>
         <div
           style={{
-            fontSize: '12px',
-            fontWeight: '800',
-            color: '#475569',
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
             marginBottom: '12px',
           }}
         >
-          Frequent Contacts
+          <span
+            style={{
+              fontSize: '12px',
+              fontWeight: 800,
+              color: '#475569',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+            }}
+          >
+            Frequent Contacts
+          </span>
+          <span style={{ fontSize: '11px', color: '#2e83ff', fontWeight: 700 }}>
+            {filteredContacts.length} available
+          </span>
         </div>
 
         {filteredContacts.length === 0 ? (
-          <div style={{ color: '#64748b', fontSize: '13px', padding: '10px 0' }}>
+          <div style={{ color: '#64748b', fontSize: '13px', padding: '16px', textAlign: 'center', backgroundColor: '#ffffff', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
             No contacts found matching "{searchQuery}"
           </div>
         ) : (
@@ -91,7 +120,7 @@ export const PayAnyoneScreen: React.FC = () => {
             style={{
               backgroundColor: '#ffffff',
               border: '1px solid #e2e8f0',
-              borderRadius: '16px',
+              borderRadius: '14px',
               overflow: 'hidden',
               boxShadow: 'none',
             }}
@@ -107,6 +136,7 @@ export const PayAnyoneScreen: React.FC = () => {
                     handleSelectContact(contact);
                   }
                 }}
+                className="interactive-tap"
                 aria-label={`Pay ${contact.name}, UPI ID ${contact.upiId}`}
                 style={{
                   display: 'flex',
@@ -116,36 +146,54 @@ export const PayAnyoneScreen: React.FC = () => {
                   borderBottom: index < filteredContacts.length - 1 ? '1px solid #f1f5f9' : 'none',
                   cursor: 'pointer',
                   backgroundColor: '#ffffff',
+                  transition: 'background-color 0.15s ease',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div
                     style={{
-                      width: '42px',
-                      height: '42px',
-                      borderRadius: '50%',
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '12px',
                       backgroundColor: '#eef5ff',
                       color: '#2e83ff',
-                      fontWeight: '800',
+                      fontWeight: 800,
                       fontSize: '15px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       border: '1px solid #d6e6ff',
+                      flexShrink: 0,
                     }}
                   >
                     {contact.avatarInitials}
                   </div>
                   <div>
-                    <div style={{ fontWeight: '800', fontSize: '15px', color: '#0f172a' }}>
+                    <div style={{ fontWeight: 800, fontSize: '15px', color: '#0f172a', lineHeight: '18px' }}>
                       {contact.name}
                     </div>
-                    <div style={{ fontSize: '12px', color: '#2e83ff', fontWeight: '600', marginTop: '2px' }}>
-                      {contact.upiId} &bull; {contact.mobile}
+                    <div style={{ fontSize: '12px', color: '#2e83ff', fontWeight: 600, marginTop: '2px' }}>
+                      {contact.upiId} &bull; <span style={{ color: '#64748b' }}>{contact.mobile}</span>
                     </div>
                   </div>
                 </div>
-                <ChevronRight size={18} color="#94a3b8" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span
+                    style={{
+                      fontSize: '11px',
+                      fontWeight: 800,
+                      color: '#2e83ff',
+                      backgroundColor: '#eef5ff',
+                      padding: '4px 10px',
+                      borderRadius: '8px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '3px',
+                    }}
+                  >
+                    Pay <ArrowRight size={12} />
+                  </span>
+                </div>
               </div>
             ))}
           </div>
@@ -158,7 +206,7 @@ export const PayAnyoneScreen: React.FC = () => {
           <div
             style={{
               fontSize: '12px',
-              fontWeight: '800',
+              fontWeight: 800,
               color: '#475569',
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
@@ -172,7 +220,7 @@ export const PayAnyoneScreen: React.FC = () => {
             style={{
               backgroundColor: '#ffffff',
               border: '1px solid #e2e8f0',
-              borderRadius: '8px',
+              borderRadius: '14px',
               overflow: 'hidden',
               boxShadow: 'none',
             }}
@@ -188,6 +236,7 @@ export const PayAnyoneScreen: React.FC = () => {
                     handleSelectContact(merchant);
                   }
                 }}
+                className="interactive-tap"
                 aria-label={`Pay merchant ${merchant.name}`}
                 style={{
                   display: 'flex',
@@ -197,31 +246,33 @@ export const PayAnyoneScreen: React.FC = () => {
                   borderBottom: index < filteredMerchants.length - 1 ? '1px solid #f1f5f9' : 'none',
                   cursor: 'pointer',
                   backgroundColor: '#ffffff',
+                  transition: 'background-color 0.15s ease',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div
                     style={{
-                      width: '42px',
-                      height: '42px',
-                      borderRadius: '50%',
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '12px',
                       backgroundColor: '#eef5ff',
                       color: '#2e83ff',
-                      fontWeight: '800',
+                      fontWeight: 800,
                       fontSize: '15px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       border: '1px solid #d6e6ff',
+                      flexShrink: 0,
                     }}
                   >
                     <Store size={20} />
                   </div>
                   <div>
-                    <div style={{ fontWeight: '800', fontSize: '15px', color: '#0f172a' }}>
+                    <div style={{ fontWeight: 800, fontSize: '15px', color: '#0f172a', lineHeight: '18px' }}>
                       {merchant.name}
                     </div>
-                    <div style={{ fontSize: '12px', color: '#2e83ff', fontWeight: '600', marginTop: '2px' }}>
+                    <div style={{ fontSize: '12px', color: '#2e83ff', fontWeight: 600, marginTop: '2px' }}>
                       {merchant.upiId}
                     </div>
                   </div>

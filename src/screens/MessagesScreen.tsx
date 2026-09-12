@@ -94,64 +94,65 @@ export const MessagesScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#F4F1EC', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
       <AppHeader title="Messages & Alerts" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
-        <div style={{ fontSize: '12px', fontWeight: '800', color: '#5C564D', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '12px', marginLeft: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
           Conversations & System Alerts
         </div>
 
-        {threads.map((thread) => (
-          <div
-            key={thread.id}
-            onClick={() => handleOpenChat(thread)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '16px',
-              backgroundColor: '#FFFFFF',
-              border: thread.unread ? '1.5px solid #F98513' : '1.5px solid #DAD1C8',
-              borderRadius: '20px',
-              marginBottom: '12px',
-              cursor: 'pointer',
-              boxShadow: thread.unread ? '0 4px 14px rgba(249, 133, 19, 0.15)' : '0 4px 10px rgba(0,0,0,0.03)',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, minWidth: 0 }}>
-              <div
-                style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: '50%',
-                  backgroundColor: thread.isSupport ? '#111144' : '#F98513',
-                  color: '#FFFFFF',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: '800',
-                  fontSize: '14px',
-                  flexShrink: 0,
-                }}
-              >
-                {thread.avatarInitials}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          {threads.map((thread) => (
+            <div
+              key={thread.id}
+              onClick={() => handleOpenChat(thread)}
+              className="interactive-tap"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '16px',
+                backgroundColor: '#FFFFFF',
+                border: thread.unread ? '1.5px solid #2e83ff' : '1px solid #e2e8f0',
+                borderRadius: '16px',
+                cursor: 'pointer',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, minWidth: 0 }}>
+                <div
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '12px',
+                    backgroundColor: thread.isSupport ? '#0e274d' : '#2e83ff',
+                    color: '#FFFFFF',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: '800',
+                    fontSize: '14px',
+                    flexShrink: 0,
+                  }}
+                >
+                  {thread.avatarInitials}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontWeight: '800', fontSize: '15px', color: '#0f172a' }}>{thread.name}</span>
+                    {thread.isSupport && <Shield size={14} color="#2e83ff" />}
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {thread.messages[thread.messages.length - 1]?.text}
+                  </div>
+                </div>
               </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ fontWeight: '800', fontSize: '15px', color: '#111144' }}>{thread.name}</span>
-                  {thread.isSupport && <Shield size={14} color="#F98513" />}
-                </div>
-                <div style={{ fontSize: '12px', color: '#5C564D', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                  {thread.messages[thread.messages.length - 1]?.text}
-                </div>
+              <div style={{ fontSize: '11px', fontWeight: '700', color: thread.unread ? '#2e83ff' : '#64748b', marginLeft: '10px' }}>
+                {thread.time}
               </div>
             </div>
-            <div style={{ fontSize: '11px', fontWeight: '700', color: thread.unread ? '#F98513' : '#5C564D', marginLeft: '10px' }}>
-              {thread.time}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Live Interactive Chat Modal Window */}
@@ -159,12 +160,9 @@ export const MessagesScreen: React.FC = () => {
         <div
           style={{
             position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(17, 17, 68, 0.65)',
-            backdropFilter: 'blur(8px)',
+            inset: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.65)',
+            backdropFilter: 'blur(6px)',
             zIndex: 1000,
             display: 'flex',
             alignItems: 'flex-end',
@@ -178,12 +176,12 @@ export const MessagesScreen: React.FC = () => {
               maxWidth: '440px',
               height: '85vh',
               backgroundColor: '#FFFFFF',
-              borderTopLeftRadius: '24px',
-              borderTopRightRadius: '24px',
+              borderTopLeftRadius: '20px',
+              borderTopRightRadius: '20px',
               display: 'flex',
               flexDirection: 'column',
-              boxShadow: '0 -10px 40px rgba(17, 17, 68, 0.2)',
               animation: 'slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+              overflow: 'hidden',
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -194,11 +192,9 @@ export const MessagesScreen: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '16px 20px',
-                borderBottom: '1px solid #DAD1C8',
-                backgroundColor: '#111144',
+                borderBottom: '1px solid #e2e8f0',
+                backgroundColor: '#0e274d',
                 color: '#FFFFFF',
-                borderTopLeftRadius: '24px',
-                borderTopRightRadius: '24px',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -206,8 +202,8 @@ export const MessagesScreen: React.FC = () => {
                   style={{
                     width: '36px',
                     height: '36px',
-                    borderRadius: '50%',
-                    backgroundColor: '#F98513',
+                    borderRadius: '10px',
+                    backgroundColor: '#2e83ff',
                     color: '#FFFFFF',
                     fontWeight: '800',
                     fontSize: '13px',
@@ -220,11 +216,12 @@ export const MessagesScreen: React.FC = () => {
                 </div>
                 <div>
                   <div style={{ fontSize: '15px', fontWeight: '800', color: '#FFFFFF' }}>{activeChat.name}</div>
-                  <div style={{ fontSize: '11px', color: '#A4BCEE' }}>Online • QTPay Messaging</div>
+                  <div style={{ fontSize: '11px', color: '#82b5ff' }}>Online • QPay Messaging</div>
                 </div>
               </div>
               <button
                 onClick={() => setActiveChat(null)}
+                aria-label="Close"
                 style={{
                   width: '32px',
                   height: '32px',
@@ -243,25 +240,25 @@ export const MessagesScreen: React.FC = () => {
             </div>
 
             {/* Chat Messages Body */}
-            <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px', backgroundColor: '#F4F1EC' }}>
+            <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', backgroundColor: '#f8fafc' }}>
               {activeChat.messages.map((msg, idx) => (
                 <div
                   key={idx}
                   style={{
                     alignSelf: msg.sender === 'me' ? 'flex-end' : 'flex-start',
                     maxWidth: '80%',
-                    backgroundColor: msg.sender === 'me' ? '#F98513' : '#FFFFFF',
-                    color: msg.sender === 'me' ? '#FFFFFF' : '#111144',
+                    backgroundColor: msg.sender === 'me' ? '#2e83ff' : '#FFFFFF',
+                    color: msg.sender === 'me' ? '#FFFFFF' : '#0f172a',
                     padding: '12px 16px',
-                    borderRadius: msg.sender === 'me' ? '18px 18px 2px 18px' : '18px 18px 18px 2px',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+                    borderRadius: msg.sender === 'me' ? '16px 16px 2px 16px' : '16px 16px 16px 2px',
+                    border: msg.sender === 'me' ? 'none' : '1px solid #e2e8f0',
                   }}
                 >
-                  <div style={{ fontSize: '14px', fontWeight: '600', lineHeight: '1.4' }}>{msg.text}</div>
+                  <div style={{ fontSize: '13px', fontWeight: '600', lineHeight: '1.45' }}>{msg.text}</div>
                   <div
                     style={{
                       fontSize: '10px',
-                      color: msg.sender === 'me' ? 'rgba(255,255,255,0.8)' : '#5C564D',
+                      color: msg.sender === 'me' ? 'rgba(255,255,255,0.8)' : '#64748b',
                       textAlign: 'right',
                       marginTop: '4px',
                       display: 'flex',
@@ -278,7 +275,7 @@ export const MessagesScreen: React.FC = () => {
             </div>
 
             {/* Chat Send Input Box */}
-            <form onSubmit={handleSendMessage} style={{ padding: '14px 16px', borderTop: '1px solid #DAD1C8', backgroundColor: '#FFFFFF', display: 'flex', gap: '10px' }}>
+            <form onSubmit={handleSendMessage} style={{ padding: '12px 16px', borderTop: '1px solid #e2e8f0', backgroundColor: '#FFFFFF', display: 'flex', gap: '10px', alignItems: 'center' }}>
               <input
                 type="text"
                 value={inputText}
@@ -288,31 +285,32 @@ export const MessagesScreen: React.FC = () => {
                   flex: 1,
                   padding: '12px 16px',
                   borderRadius: '20px',
-                  border: '1.5px solid #DAD1C8',
-                  backgroundColor: '#F4F1EC',
-                  fontSize: '14px',
+                  border: '1.5px solid #cbd5e1',
+                  backgroundColor: '#f8fafc',
+                  fontSize: '13px',
                   fontWeight: '600',
-                  color: '#111144',
+                  color: '#0f172a',
                   outline: 'none',
                 }}
               />
               <button
                 type="submit"
+                className="interactive-tap"
                 style={{
-                  width: '44px',
-                  height: '44px',
+                  width: '42px',
+                  height: '42px',
                   borderRadius: '50%',
-                  backgroundColor: '#F98513',
+                  backgroundColor: '#2e83ff',
                   border: 'none',
                   color: '#FFFFFF',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  boxShadow: '0 4px 12px rgba(249, 133, 19, 0.35)',
+                  flexShrink: 0,
                 }}
               >
-                <Send size={18} />
+                <Send size={16} />
               </button>
             </form>
           </div>

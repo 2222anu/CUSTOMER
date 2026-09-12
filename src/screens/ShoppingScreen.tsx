@@ -89,23 +89,22 @@ export const ShoppingScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#F4F1EC', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
       <AppHeader title="Shopping & Deals" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Shopping Hero Banner */}
         <div
           style={{
-            background: 'linear-gradient(135deg, #1E295D 0%, #111144 100%)',
-            border: '1.5px solid #F98513',
-            borderRadius: '24px',
+            background: 'linear-gradient(145deg, #0e274d 0%, #0a1c36 100%)',
+            border: '1.5px solid rgba(46, 131, 255, 0.35)',
+            borderRadius: '20px',
             padding: '20px',
             marginBottom: '20px',
             display: 'flex',
             alignItems: 'center',
             gap: '14px',
             color: '#FFFFFF',
-            boxShadow: '0 10px 30px rgba(17, 17, 68, 0.45)',
           }}
         >
           <div
@@ -113,70 +112,72 @@ export const ShoppingScreen: React.FC = () => {
               width: '50px',
               height: '50px',
               borderRadius: '16px',
-              backgroundColor: '#F98513',
-              color: '#FFFFFF',
+              backgroundColor: '#eef5ff',
+              color: '#2e83ff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
+              border: '1.5px solid #d6e6ff',
             }}
           >
-            <ShoppingBag size={26} />
+            <ShoppingBag size={24} />
           </div>
           <div>
-            <h3 style={{ fontSize: '17px', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>QTPay Partner Deals</h3>
-            <p style={{ fontSize: '12px', color: '#A4BCEE', margin: '4px 0 0 0' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>QPay Partner Deals</h3>
+            <p style={{ fontSize: '12px', color: '#94a3b8', margin: '3px 0 0 0' }}>
               Exclusive promo codes & instant discounts on top shopping brands
             </p>
           </div>
         </div>
 
-        <div style={{ fontSize: '12px', fontWeight: '800', color: '#5C564D', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '12px', marginLeft: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
           Featured Partner Offers
         </div>
 
-        {deals.map((deal) => (
-          <div
-            key={deal.id}
-            onClick={() => setSelectedDeal(deal)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '16px',
-              backgroundColor: '#FFFFFF',
-              border: '1.5px solid #DAD1C8',
-              borderRadius: '20px',
-              marginBottom: '12px',
-              cursor: 'pointer',
-              boxShadow: '0 4px 14px rgba(17, 17, 68, 0.04)',
-              transition: 'transform 0.15s ease',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-              <div
-                style={{
-                  width: '42px',
-                  height: '42px',
-                  borderRadius: '12px',
-                  backgroundColor: '#FDE8D7',
-                  color: '#F98513',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Tag size={20} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          {deals.map((deal) => (
+            <div
+              key={deal.id}
+              onClick={() => setSelectedDeal(deal)}
+              className="interactive-tap"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '16px',
+                backgroundColor: '#FFFFFF',
+                border: '1px solid #e2e8f0',
+                borderRadius: '16px',
+                cursor: 'pointer',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                <div
+                  style={{
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '12px',
+                    backgroundColor: '#eef5ff',
+                    color: '#2e83ff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px solid #d6e6ff',
+                  }}
+                >
+                  <Tag size={20} />
+                </div>
+                <div>
+                  <div style={{ fontWeight: '800', fontSize: '15px', color: '#0f172a' }}>{deal.merchant}</div>
+                  <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>{deal.title}</div>
+                  <div style={{ fontSize: '12px', color: '#2e83ff', marginTop: '3px', fontWeight: '800' }}>{deal.offer}</div>
+                </div>
               </div>
-              <div>
-                <div style={{ fontWeight: '800', fontSize: '15px', color: '#111144' }}>{deal.merchant}</div>
-                <div style={{ fontSize: '12px', color: '#5C564D', marginTop: '2px' }}>{deal.title}</div>
-                <div style={{ fontSize: '12px', color: '#F98513', marginTop: '4px', fontWeight: '800' }}>{deal.offer}</div>
-              </div>
+              <ChevronRight size={18} color="#64748b" />
             </div>
-            <ChevronRight size={18} color="#5C564D" />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Deal Checkout Modal */}
@@ -184,12 +185,9 @@ export const ShoppingScreen: React.FC = () => {
         <div
           style={{
             position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(17, 17, 68, 0.65)',
-            backdropFilter: 'blur(8px)',
+            inset: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.65)',
+            backdropFilter: 'blur(6px)',
             zIndex: 1000,
             display: 'flex',
             alignItems: 'flex-end',
@@ -202,41 +200,41 @@ export const ShoppingScreen: React.FC = () => {
               width: '100%',
               maxWidth: '440px',
               backgroundColor: '#FFFFFF',
-              borderTopLeftRadius: '24px',
-              borderTopRightRadius: '24px',
-              padding: '24px',
-              boxShadow: '0 -10px 40px rgba(17, 17, 68, 0.2)',
+              borderTopLeftRadius: '20px',
+              borderTopRightRadius: '20px',
+              padding: '24px 20px',
               animation: 'slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
             onClick={(e) => e.stopPropagation()}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div>
-                <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#111144', margin: 0 }}>{selectedDeal.merchant}</h3>
-                <p style={{ fontSize: '12px', color: '#5C564D', margin: '2px 0 0 0' }}>{selectedDeal.category}</p>
+                <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: 0 }}>{selectedDeal.merchant}</h3>
+                <p style={{ fontSize: '12px', color: '#64748b', margin: '2px 0 0 0' }}>{selectedDeal.category}</p>
               </div>
               <button
                 onClick={() => setSelectedDeal(null)}
+                aria-label="Close"
                 style={{
                   width: '32px',
                   height: '32px',
                   borderRadius: '50%',
-                  backgroundColor: '#F4F1EC',
+                  backgroundColor: '#f1f5f9',
                   border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  color: '#5C564D',
+                  color: '#64748b',
                 }}
               >
                 <X size={18} />
               </button>
             </div>
 
-            <div style={{ padding: '16px', backgroundColor: '#F4F1EC', borderRadius: '16px', marginBottom: '20px' }}>
-              <div style={{ fontSize: '15px', fontWeight: '800', color: '#111144' }}>{selectedDeal.title}</div>
-              <div style={{ fontSize: '13px', fontWeight: '800', color: '#F98513', marginTop: '4px' }}>
+            <div style={{ padding: '16px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', marginBottom: '20px' }}>
+              <div style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a' }}>{selectedDeal.title}</div>
+              <div style={{ fontSize: '13px', fontWeight: '800', color: '#2e83ff', marginTop: '4px' }}>
                 {selectedDeal.offer}
               </div>
 
@@ -249,21 +247,22 @@ export const ShoppingScreen: React.FC = () => {
                   marginTop: '14px',
                   padding: '10px 14px',
                   backgroundColor: '#FFFFFF',
-                  border: '1.5px dashed #F98513',
+                  border: '1.5px dashed #2e83ff',
                   borderRadius: '12px',
                 }}
               >
                 <div>
-                  <span style={{ fontSize: '11px', color: '#5C564D', display: 'block' }}>Coupon Code</span>
-                  <span style={{ fontSize: '15px', fontWeight: '800', color: '#111144', letterSpacing: '0.05em' }}>
+                  <span style={{ fontSize: '11px', color: '#64748b', display: 'block' }}>Coupon Code</span>
+                  <span style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', letterSpacing: '0.05em' }}>
                     {selectedDeal.couponCode}
                   </span>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleCopyCode(selectedDeal.couponCode)}
+                  className="interactive-tap"
                   style={{
-                    backgroundColor: copiedCode ? '#10B981' : '#F98513',
+                    backgroundColor: copiedCode ? '#10B981' : '#2e83ff',
                     border: 'none',
                     borderRadius: '8px',
                     color: '#FFFFFF',
@@ -281,13 +280,13 @@ export const ShoppingScreen: React.FC = () => {
                 </button>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px', paddingTop: '10px', borderTop: '1px dashed #DAD1C8' }}>
-                <span style={{ fontSize: '13px', fontWeight: '700', color: '#5C564D' }}>Special Discount Price</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px', paddingTop: '10px', borderTop: '1px dashed #cbd5e1' }}>
+                <span style={{ fontSize: '13px', fontWeight: '700', color: '#64748b' }}>Special Discount Price</span>
                 <div>
-                  <span style={{ fontSize: '13px', color: '#9CA3AF', textDecoration: 'line-through', marginRight: '8px' }}>
+                  <span style={{ fontSize: '13px', color: '#9CA3AF', textDecoration: 'line-through', marginRight: '8px', fontVariantNumeric: 'tabular-nums' }}>
                     ₹{selectedDeal.originalPrice.toLocaleString()}
                   </span>
-                  <span style={{ fontSize: '20px', fontWeight: '800', color: '#111144' }}>
+                  <span style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a', fontVariantNumeric: 'tabular-nums' }}>
                     ₹{selectedDeal.discountedPrice.toLocaleString()}
                   </span>
                 </div>
@@ -296,20 +295,20 @@ export const ShoppingScreen: React.FC = () => {
 
             <button
               onClick={handleBuyNow}
+              className="interactive-tap"
               style={{
                 width: '100%',
-                padding: '16px',
-                borderRadius: '16px',
-                backgroundColor: '#F98513',
+                padding: '14px',
+                borderRadius: '12px',
+                backgroundColor: '#2e83ff',
                 border: 'none',
                 color: '#FFFFFF',
-                fontSize: '15px',
+                fontSize: '14px',
                 fontWeight: '800',
                 cursor: 'pointer',
-                boxShadow: '0 4px 14px rgba(249, 133, 19, 0.35)',
               }}
             >
-              Order Now via QTPay UPI PIN (₹{selectedDeal.discountedPrice.toLocaleString()})
+              Order Now via QPay UPI PIN (₹{selectedDeal.discountedPrice.toLocaleString()})
             </button>
           </div>
         </div>
@@ -320,12 +319,9 @@ export const ShoppingScreen: React.FC = () => {
         <div
           style={{
             position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(17, 17, 68, 0.75)',
-            backdropFilter: 'blur(8px)',
+            inset: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.65)',
+            backdropFilter: 'blur(6px)',
             zIndex: 1000,
             display: 'flex',
             alignItems: 'center',
@@ -339,36 +335,53 @@ export const ShoppingScreen: React.FC = () => {
               width: '100%',
               maxWidth: '360px',
               backgroundColor: '#FFFFFF',
-              borderRadius: '24px',
+              borderRadius: '20px',
               padding: '24px',
               textAlign: 'center',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.4)',
               position: 'relative',
+              animation: 'scaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <CheckCircle2 size={54} color="#10B981" style={{ margin: '0 auto 12px auto' }} />
-            <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#111144', margin: '0 0 4px 0' }}>
+            <div
+              style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '16px',
+                backgroundColor: '#ecfdf5',
+                color: '#10B981',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 12px auto',
+                border: '1.5px solid #a7f3d0',
+              }}
+            >
+              <CheckCircle2 size={32} />
+            </div>
+
+            <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0' }}>
               Order Placed!
             </h3>
-            <p style={{ fontSize: '12px', color: '#5C564D', margin: '0 0 20px 0' }}>
+            <p style={{ fontSize: '12px', color: '#64748b', margin: '0 0 20px 0' }}>
               Discount voucher redeemed at {purchasedDeal.merchant}
             </p>
 
-            <div style={{ backgroundColor: '#F4F1EC', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
-              <div style={{ fontSize: '14px', fontWeight: '800', color: '#111144' }}>{purchasedDeal.title}</div>
-              <div style={{ fontSize: '13px', fontWeight: '800', color: '#10B981', marginTop: '6px' }}>
+            <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
+              <div style={{ fontSize: '14px', fontWeight: '800', color: '#0f172a' }}>{purchasedDeal.title}</div>
+              <div style={{ fontSize: '13px', fontWeight: '800', color: '#10B981', marginTop: '6px', fontVariantNumeric: 'tabular-nums' }}>
                 Paid ₹{purchasedDeal.paidAmount.toLocaleString()} via UPI
               </div>
             </div>
 
             <button
               onClick={() => setPurchasedDeal(null)}
+              className="interactive-tap"
               style={{
                 width: '100%',
-                padding: '14px',
-                borderRadius: '14px',
-                backgroundColor: '#111144',
+                padding: '12px',
+                borderRadius: '12px',
+                backgroundColor: '#2e83ff',
                 border: 'none',
                 color: '#FFFFFF',
                 fontSize: '14px',

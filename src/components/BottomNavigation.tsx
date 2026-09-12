@@ -2,17 +2,16 @@ import React from 'react';
 import { Home, FileText, QrCode, Clock, User } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import type { BottomTab } from '../types';
-import { designSystem } from '../design-system';
 
 export const BottomNavigation: React.FC = () => {
   const { activeTab, setActiveTab } = useApp();
 
-  const tabs: { id: BottomTab; label: string; icon: React.ReactNode }[] = [
-    { id: 'home', label: 'Home', icon: <Home size={20} /> },
-    { id: 'account', label: 'Account', icon: <FileText size={20} /> },
-    { id: 'scan', label: 'Scan & Pay', icon: <QrCode size={24} /> },
-    { id: 'history', label: 'History', icon: <Clock size={20} /> },
-    { id: 'profile', label: 'Profile', icon: <User size={20} /> },
+  const tabs: { id: BottomTab; label: string; icon: (active: boolean) => React.ReactNode }[] = [
+    { id: 'home', label: 'Home', icon: (a) => <Home size={20} strokeWidth={a ? 2.5 : 1.8} /> },
+    { id: 'account', label: 'Services', icon: (a) => <FileText size={20} strokeWidth={a ? 2.5 : 1.8} /> },
+    { id: 'scan', label: 'Scan', icon: () => <QrCode size={24} strokeWidth={2.2} /> },
+    { id: 'history', label: 'History', icon: (a) => <Clock size={20} strokeWidth={a ? 2.5 : 1.8} /> },
+    { id: 'profile', label: 'Profile', icon: (a) => <User size={20} strokeWidth={a ? 2.5 : 1.8} /> },
   ];
 
   return (
@@ -26,15 +25,16 @@ export const BottomNavigation: React.FC = () => {
         right: 0,
         maxWidth: '600px',
         margin: '0 auto',
-        height: '70px',
-        backgroundColor: designSystem.colors.surface,
-        borderTop: `1px solid ${designSystem.colors.borderHairline}`,
+        height: '68px',
+        backgroundColor: 'rgba(255, 255, 255, 0.96)',
+        backdropFilter: 'blur(12px)',
+        borderTop: '1px solid #e2e8f0',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
-        padding: '0 4px',
+        padding: '0 8px',
         zIndex: 50,
-        boxShadow: designSystem.shadows.none,
+        boxShadow: 'none',
       }}
     >
       {tabs.map((tab) => {
@@ -62,32 +62,34 @@ export const BottomNavigation: React.FC = () => {
                 alignItems: 'center',
                 cursor: 'pointer',
                 zIndex: 45,
+                transition: 'transform 0.12s ease',
               }}
             >
               <div
                 style={{
                   width: '56px',
                   height: '56px',
-                  borderRadius: designSystem.radii.full,
-                  backgroundColor: designSystem.colors.primary,
-                  color: designSystem.colors.textOnPrimary,
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+                  color: '#ffffff',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: designSystem.shadows.none,
-                  border: `3px solid ${designSystem.colors.surface}`,
+                  border: '3.5px solid #ffffff',
+                  outline: '1.5px solid #d6e6ff',
+                  transition: 'transform 0.15s ease',
                 }}
               >
-                {tab.icon}
+                {tab.icon(isActive)}
               </div>
               <span
                 style={{
                   fontSize: '10px',
-                  fontWeight: designSystem.typography.weights.extrabold,
-                  color: designSystem.colors.primary,
+                  fontWeight: 800,
+                  color: '#2e83ff',
                   marginTop: '2px',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
+                  letterSpacing: '0.04em',
                 }}
               >
                 {tab.label}
@@ -116,22 +118,39 @@ export const BottomNavigation: React.FC = () => {
               flex: 1,
               height: '100%',
               cursor: 'pointer',
-              color: isActive ? designSystem.colors.primary : designSystem.colors.textMuted,
+              color: isActive ? '#2e83ff' : '#64748b',
+              transition: 'color 0.15s ease',
+              position: 'relative',
             }}
           >
-            {React.cloneElement(tab.icon as React.ReactElement<any>, {
-              color: isActive ? designSystem.colors.primary : designSystem.colors.textMuted,
-            })}
+            <div style={{ transform: isActive ? 'scale(1.06)' : 'scale(1)', transition: 'transform 0.15s ease' }}>
+              {tab.icon(isActive)}
+            </div>
             <span
               style={{
                 fontSize: '11px',
-                fontWeight: isActive ? designSystem.typography.weights.bold : designSystem.typography.weights.medium,
-                color: isActive ? designSystem.colors.primary : designSystem.colors.textMuted,
+                fontWeight: isActive ? 800 : 600,
+                color: isActive ? '#2e83ff' : '#64748b',
                 marginTop: '3px',
+                letterSpacing: '-0.01em',
               }}
             >
               {tab.label}
             </span>
+
+            {/* Active Subtle Bottom Indicator Pill */}
+            {isActive && (
+              <span
+                style={{
+                  position: 'absolute',
+                  bottom: '4px',
+                  width: '14px',
+                  height: '2.5px',
+                  borderRadius: '2px',
+                  backgroundColor: '#2e83ff',
+                }}
+              />
+            )}
           </div>
         );
       })}

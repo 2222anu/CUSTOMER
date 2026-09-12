@@ -2,49 +2,49 @@ import React from 'react';
 import { Smartphone, Monitor, ShieldCheck, LogOut } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
-import { designSystem } from '../design-system';
 
 export const SecurityScreen: React.FC = () => {
   const { deviceSessions, terminateSession } = useApp();
 
   return (
-    <div className="fade-in" style={{ fontFamily: designSystem.typography.fontFamily }}>
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100vh', paddingBottom: '32px' }}>
       <AppHeader title="Security & Devices" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Biometrics / Security Status Card */}
         <div
           style={{
-            backgroundColor: designSystem.colors.surface,
-            border: `1px solid ${designSystem.colors.borderHairline}`,
-            borderRadius: designSystem.radii.md,
+            backgroundColor: '#ffffff',
+            border: '1px solid #e2e8f0',
+            borderRadius: '16px',
             padding: '18px',
             marginBottom: '24px',
             display: 'flex',
             alignItems: 'center',
             gap: '14px',
-            boxShadow: designSystem.shadows.none,
           }}
         >
           <div
             style={{
-              width: '44px',
-              height: '44px',
-              borderRadius: designSystem.radii.sm,
-              backgroundColor: designSystem.colors.primaryLight,
-              color: designSystem.colors.primary,
+              width: '46px',
+              height: '46px',
+              borderRadius: '14px',
+              backgroundColor: '#eef5ff',
+              color: '#2e83ff',
+              border: '1px solid #d6e6ff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              flexShrink: 0,
             }}
           >
-            <ShieldCheck size={24} />
+            <ShieldCheck size={26} />
           </div>
           <div>
-            <div style={{ fontWeight: '700', fontSize: '15px', color: designSystem.colors.textPrimary }}>
+            <div style={{ fontWeight: 800, fontSize: '15px', color: '#0f172a' }}>
               App Security Active
             </div>
-            <div style={{ fontSize: '12px', color: designSystem.colors.textSecondary }}>
+            <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>
               2FA and Biometrics protection enabled
             </div>
           </div>
@@ -52,95 +52,106 @@ export const SecurityScreen: React.FC = () => {
 
         <div
           style={{
-            fontSize: '12px',
-            fontWeight: '700',
-            color: designSystem.colors.textSecondary,
+            fontSize: '11.5px',
+            fontWeight: 800,
+            color: '#64748b',
             textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-            marginBottom: '14px',
+            letterSpacing: '0.06em',
+            marginBottom: '12px',
+            paddingLeft: '4px',
           }}
         >
           Active Sessions & Devices ({deviceSessions.length})
         </div>
 
-        {deviceSessions.map((session) => (
-          <div
-            key={session.id}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '16px',
-              backgroundColor: designSystem.colors.surface,
-              border: session.isCurrent
-                ? `1px solid ${designSystem.colors.primary}`
-                : `1px solid ${designSystem.colors.borderHairline}`,
-              borderRadius: designSystem.radii.sm,
-              marginBottom: '10px',
-              boxShadow: designSystem.shadows.none,
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        <div
+          style={{
+            backgroundColor: '#ffffff',
+            borderRadius: '16px',
+            border: '1px solid #e2e8f0',
+            overflow: 'hidden',
+          }}
+        >
+          {deviceSessions.map((session, index) => (
+            <React.Fragment key={session.id}>
+              {index > 0 && <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />}
               <div
                 style={{
-                  width: '38px',
-                  height: '38px',
-                  borderRadius: designSystem.radii.xs,
-                  backgroundColor: designSystem.colors.subSurface,
-                  color: designSystem.colors.primaryDark,
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
+                  justifyContent: 'space-between',
+                  padding: '16px',
+                  backgroundColor: session.isCurrent ? '#f8fafc' : '#ffffff',
                 }}
               >
-                {session.deviceType === 'mobile' ? <Smartphone size={20} /> : <Monitor size={20} />}
-              </div>
-              <div>
-                <div style={{ fontWeight: '700', fontSize: '14px', color: designSystem.colors.textPrimary }}>
-                  {session.deviceName}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div
+                    style={{
+                      width: '42px',
+                      height: '42px',
+                      borderRadius: '12px',
+                      backgroundColor: session.isCurrent ? '#eef5ff' : '#f8fafc',
+                      color: session.isCurrent ? '#2e83ff' : '#475569',
+                      border: session.isCurrent ? '1px solid #d6e6ff' : '1px solid #e2e8f0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {session.deviceType === 'mobile' ? <Smartphone size={20} /> : <Monitor size={20} />}
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 800, fontSize: '14px', color: '#0f172a' }}>
+                      {session.deviceName}
+                    </div>
+                    <div style={{ fontSize: '11.5px', color: '#64748b', marginTop: '2px' }}>
+                      {session.location} &bull; {session.lastActive}
+                    </div>
+                  </div>
                 </div>
-                <div style={{ fontSize: '11px', color: designSystem.colors.textSecondary, marginTop: '2px' }}>
-                  {session.location} &bull; {session.lastActive}
-                </div>
-              </div>
-            </div>
 
-            {session.isCurrent ? (
-              <span
-                style={{
-                  fontSize: '11px',
-                  fontWeight: '700',
-                  color: designSystem.colors.primaryDark,
-                  backgroundColor: designSystem.colors.primaryLight,
-                  padding: '4px 8px',
-                  borderRadius: designSystem.radii.xs,
-                  textTransform: 'uppercase',
-                }}
-              >
-                This Device
-              </span>
-            ) : (
-              <button
-                onClick={() => terminateSession(session.id)}
-                style={{
-                  backgroundColor: designSystem.colors.dangerLight,
-                  border: 'none',
-                  color: designSystem.colors.danger,
-                  padding: '6px 10px',
-                  borderRadius: designSystem.radii.xs,
-                  fontSize: '11px',
-                  fontWeight: '700',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                }}
-              >
-                <LogOut size={12} /> End
-              </button>
-            )}
-          </div>
-        ))}
+                {session.isCurrent ? (
+                  <span
+                    style={{
+                      fontSize: '10.5px',
+                      fontWeight: 800,
+                      color: '#2e83ff',
+                      backgroundColor: '#eef5ff',
+                      border: '1px solid #d6e6ff',
+                      padding: '4px 10px',
+                      borderRadius: '12px',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    This Device
+                  </span>
+                ) : (
+                  <button
+                    onClick={() => terminateSession(session.id)}
+                    className="interactive-tap"
+                    style={{
+                      backgroundColor: '#fef2f2',
+                      border: '1px solid #fee2e2',
+                      color: '#ef4444',
+                      padding: '6px 12px',
+                      borderRadius: '10px',
+                      fontSize: '11.5px',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    <LogOut size={12} /> End
+                  </button>
+                )}
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
       </div>
     </div>
   );

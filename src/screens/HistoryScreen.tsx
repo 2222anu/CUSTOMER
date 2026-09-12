@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+import { Search, X, Receipt } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { TransactionRow } from '../components/TransactionRow';
 import { useApp } from '../state/AppContext';
-import { designSystem } from '../design-system';
 
 type FilterType = 'all' | 'sent' | 'received' | 'pending';
 
@@ -39,7 +38,7 @@ export const HistoryScreen: React.FC = () => {
   });
 
   return (
-    <div className="fade-in">
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
       <AppHeader
         title="Transactions"
         showSearch
@@ -48,33 +47,51 @@ export const HistoryScreen: React.FC = () => {
       />
 
       {showSearchInput && (
-        <div style={{ padding: '0 20px', marginBottom: '12px' }}>
+        <div style={{ padding: '0 20px', marginBottom: '16px' }}>
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
-              backgroundColor: designSystem.colors.surface,
-              border: `1px solid ${designSystem.colors.borderHairline}`,
-              borderRadius: designSystem.radii.sm,
+              backgroundColor: '#ffffff',
+              border: '1.5px solid #2e83ff',
+              borderRadius: '12px',
               padding: '10px 14px',
             }}
           >
-            <Search size={16} color={designSystem.colors.textSecondary} />
+            <Search size={16} color="#2e83ff" />
             <input
               type="text"
-              placeholder="Search by payee or UTR..."
+              placeholder="Search by payee name or UTR number..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              autoFocus
               style={{
                 background: 'none',
                 border: 'none',
                 outline: 'none',
-                color: 'var(--text-primary)',
+                color: '#0f172a',
                 fontSize: '13px',
+                fontWeight: 600,
                 width: '100%',
               }}
             />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                aria-label="Clear search"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#64748b',
+                  cursor: 'pointer',
+                  padding: 0,
+                  display: 'flex',
+                }}
+              >
+                <X size={15} />
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -85,7 +102,7 @@ export const HistoryScreen: React.FC = () => {
           display: 'flex',
           gap: '8px',
           padding: '0 20px',
-          marginBottom: '20px',
+          marginBottom: '18px',
           overflowX: 'auto',
         }}
       >
@@ -95,18 +112,19 @@ export const HistoryScreen: React.FC = () => {
             <button
               key={f}
               onClick={() => setFilter(f)}
+              className="interactive-tap"
               style={{
-                backgroundColor: isActive ? designSystem.colors.primary : designSystem.colors.surface,
-                border: isActive ? `1px solid ${designSystem.colors.primary}` : `1px solid ${designSystem.colors.borderHairline}`,
-                color: isActive ? designSystem.colors.textOnPrimary : designSystem.colors.textPrimary,
-                borderRadius: designSystem.radii.sm,
+                backgroundColor: isActive ? '#2e83ff' : '#ffffff',
+                border: isActive ? '1.5px solid #2e83ff' : '1px solid #e2e8f0',
+                color: isActive ? '#ffffff' : '#475569',
+                borderRadius: '20px',
                 padding: '7px 16px',
-                fontSize: '13px',
-                fontWeight: designSystem.typography.weights.bold,
+                fontSize: '12px',
+                fontWeight: 700,
                 textTransform: 'capitalize',
                 cursor: 'pointer',
+                whiteSpace: 'nowrap',
                 transition: 'all 0.15s ease',
-                boxShadow: designSystem.shadows.none,
               }}
             >
               {f}
@@ -118,27 +136,65 @@ export const HistoryScreen: React.FC = () => {
       {/* Grouped Transaction Lists */}
       <div style={{ padding: '0 20px', marginBottom: '24px' }}>
         {Object.keys(groupedByDate).length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '40px 0' }}>
-            No transactions found.
+          <div
+            style={{
+              textAlign: 'center',
+              backgroundColor: '#ffffff',
+              border: '1px solid #e2e8f0',
+              borderRadius: '16px',
+              padding: '40px 20px',
+              color: '#64748b',
+            }}
+          >
+            <div
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '14px',
+                backgroundColor: '#eef5ff',
+                color: '#2e83ff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 12px auto',
+              }}
+            >
+              <Receipt size={24} />
+            </div>
+            <div style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a' }}>No transactions found</div>
+            <div style={{ fontSize: '13px', marginTop: '4px' }}>Try changing search or filter parameters</div>
           </div>
         ) : (
           Object.entries(groupedByDate).map(([dateLabel, items]) => (
             <div key={dateLabel} style={{ marginBottom: '20px' }}>
               <div
                 style={{
-                  fontSize: '12px',
-                  fontWeight: '700',
-                  color: 'var(--text-secondary)',
-                  letterSpacing: '0.08em',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  color: '#64748b',
+                  letterSpacing: '0.06em',
                   textTransform: 'uppercase',
-                  marginBottom: '10px',
+                  marginBottom: '8px',
+                  marginLeft: '4px',
                 }}
               >
                 {dateLabel}
               </div>
-              {items.map((txn) => (
-                <TransactionRow key={txn.id} transaction={txn} />
-              ))}
+              <div
+                style={{
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                }}
+              >
+                {items.map((txn, index) => (
+                  <React.Fragment key={txn.id}>
+                    {index > 0 && <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />}
+                    <TransactionRow transaction={txn} />
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
           ))
         )}

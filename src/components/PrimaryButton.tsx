@@ -1,5 +1,4 @@
 import React from 'react';
-import { designSystem } from '../design-system';
 
 interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -12,26 +11,31 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   fullWidth = true,
   className = '',
   disabled,
+  style,
   ...props
 }) => {
   return (
     <button
+      className={`interactive-tap ${className}`}
       style={{
         width: fullWidth ? '100%' : 'auto',
-        backgroundColor: disabled ? designSystem.colors.borderStrong : designSystem.colors.primary,
-        color: disabled ? designSystem.colors.textMuted : designSystem.colors.textOnPrimary,
+        backgroundColor: disabled ? '#cbd5e1' : '#2e83ff',
+        color: disabled ? '#64748b' : '#ffffff',
         border: 'none',
-        borderRadius: designSystem.radii.md,
+        borderRadius: '10px',
         padding: '14px 20px',
         fontSize: '15px',
-        fontWeight: designSystem.typography.weights.extrabold,
+        fontWeight: 800,
+        letterSpacing: '0.01em',
         cursor: disabled ? 'not-allowed' : 'pointer',
-        boxShadow: designSystem.shadows.none,
-        transition: 'all 0.15s ease',
+        boxShadow: 'none',
+        transition: 'all 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: designSystem.spacing.sm,
+        gap: '8px',
+        userSelect: 'none',
+        ...style,
       }}
       disabled={disabled}
       {...props}

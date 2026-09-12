@@ -91,24 +91,31 @@ export const HomeScreen: React.FC = () => {
         </div>
       )}
 
-      {/* 4. Quick Actions Container Card (0 Shadows, MobiKwik Style) */}
+      {/* 4. Quick Actions Container Card */}
       <div
         style={{
           margin: '0 20px 20px 20px',
           backgroundColor: '#ffffff',
           border: '1px solid #e2e8f0',
-          borderRadius: '8px',
-          padding: '18px',
+          borderRadius: '14px',
+          padding: '20px 18px',
           boxShadow: 'none',
         }}
       >
-        <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', marginBottom: '16px' }}>
-          Transfer & Pay
-        </h3>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
+          <h3 style={{ fontSize: '15.5px', fontWeight: '800', color: '#0f172a', letterSpacing: '-0.01em', margin: 0 }}>
+            Transfer & Pay
+          </h3>
+          <span style={{ fontSize: '11px', fontWeight: '700', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '2px 8px', borderRadius: '10px', border: '1px solid #d6e6ff' }}>
+            Instant UPI
+          </span>
+        </div>
+
         <div style={{ display: 'flex', justifyContent: 'space-around', gap: '8px' }}>
           {/* Scan & Pay */}
           <div
             onClick={() => setIsScanModalOpen(true)}
+            className="interactive-tap"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -120,9 +127,9 @@ export const HomeScreen: React.FC = () => {
           >
             <div
               style={{
-                width: '52px',
-                height: '52px',
-                borderRadius: '50%',
+                width: '54px',
+                height: '54px',
+                borderRadius: '16px',
                 backgroundColor: '#eef5ff',
                 color: '#2e83ff',
                 display: 'flex',
@@ -134,7 +141,7 @@ export const HomeScreen: React.FC = () => {
             >
               <Camera size={22} />
             </div>
-            <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center' }}>
+            <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center', letterSpacing: '-0.01em' }}>
               Scan & Pay
             </span>
           </div>
@@ -142,6 +149,7 @@ export const HomeScreen: React.FC = () => {
           {/* Send Money */}
           <div
             onClick={() => navigateTo('PAY_ANYONE')}
+            className="interactive-tap"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -153,9 +161,9 @@ export const HomeScreen: React.FC = () => {
           >
             <div
               style={{
-                width: '52px',
-                height: '52px',
-                borderRadius: '50%',
+                width: '54px',
+                height: '54px',
+                borderRadius: '16px',
                 backgroundColor: '#eef5ff',
                 color: '#2e83ff',
                 display: 'flex',
@@ -167,7 +175,7 @@ export const HomeScreen: React.FC = () => {
             >
               <Send size={22} />
             </div>
-            <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center' }}>
+            <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center', letterSpacing: '-0.01em' }}>
               Send Money
             </span>
           </div>
@@ -175,6 +183,7 @@ export const HomeScreen: React.FC = () => {
           {/* Check Balance */}
           <div
             onClick={handleCheckBalanceClick}
+            className="interactive-tap"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -186,9 +195,9 @@ export const HomeScreen: React.FC = () => {
           >
             <div
               style={{
-                width: '52px',
-                height: '52px',
-                borderRadius: '50%',
+                width: '54px',
+                height: '54px',
+                borderRadius: '16px',
                 backgroundColor: '#eef5ff',
                 color: '#2e83ff',
                 display: 'flex',
@@ -196,12 +205,11 @@ export const HomeScreen: React.FC = () => {
                 justifyContent: 'center',
                 boxShadow: 'none',
                 border: '1px solid #d6e6ff',
-                position: 'relative',
               }}
             >
               <Landmark size={22} />
             </div>
-            <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center' }}>
+            <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center', letterSpacing: '-0.01em' }}>
               Check Balance
             </span>
           </div>
@@ -209,6 +217,7 @@ export const HomeScreen: React.FC = () => {
           {/* Pay Bills */}
           <div
             onClick={() => navigateTo('ALL_SERVICES')}
+            className="interactive-tap"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -220,9 +229,9 @@ export const HomeScreen: React.FC = () => {
           >
             <div
               style={{
-                width: '52px',
-                height: '52px',
-                borderRadius: '50%',
+                width: '54px',
+                height: '54px',
+                borderRadius: '16px',
                 backgroundColor: '#eef5ff',
                 color: '#2e83ff',
                 display: 'flex',
@@ -234,33 +243,36 @@ export const HomeScreen: React.FC = () => {
             >
               <FileText size={22} />
             </div>
-            <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center' }}>
+            <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center', letterSpacing: '-0.01em' }}>
               Pay Bills
             </span>
           </div>
         </div>
       </div>
 
-      {/* 5. BBPS Services Container Card (0 Shadows) */}
+      {/* 5. BBPS Services Container Card */}
       <div
         style={{
           margin: '0 20px 20px 20px',
           backgroundColor: '#ffffff',
           border: '1px solid #e2e8f0',
-          borderRadius: '8px',
-          padding: '18px',
+          borderRadius: '14px',
+          padding: '20px 18px',
           boxShadow: 'none',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a' }}>Recharge & Utilities</h3>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
+          <h3 style={{ fontSize: '15.5px', fontWeight: '800', color: '#0f172a', letterSpacing: '-0.01em', margin: 0 }}>
+            Recharge & Utilities
+          </h3>
           <button
             onClick={() => navigateTo('ALL_SERVICES')}
+            className="interactive-tap"
             style={{
-              backgroundColor: '#ffffff',
-              border: '1px solid #2e83ff',
+              backgroundColor: '#eef5ff',
+              border: '1px solid #d6e6ff',
               borderRadius: '8px',
-              padding: '4px 12px',
+              padding: '5px 12px',
               fontSize: '12px',
               fontWeight: '800',
               color: '#2e83ff',
@@ -276,6 +288,7 @@ export const HomeScreen: React.FC = () => {
           {/* Electricity */}
           <div
             onClick={() => navigateTo('ELECTRICITY')}
+            className="interactive-tap"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -287,16 +300,16 @@ export const HomeScreen: React.FC = () => {
           >
             <div
               style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '12px',
+                width: '50px',
+                height: '50px',
+                borderRadius: '14px',
                 backgroundColor: '#eef5ff',
                 color: '#2e83ff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #e2e8f0',
+                border: '1px solid #d6e6ff',
               }}
             >
               <Zap size={22} />
@@ -309,6 +322,7 @@ export const HomeScreen: React.FC = () => {
           {/* Mobile */}
           <div
             onClick={() => navigateTo('ALL_SERVICES')}
+            className="interactive-tap"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -320,16 +334,16 @@ export const HomeScreen: React.FC = () => {
           >
             <div
               style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '12px',
+                width: '50px',
+                height: '50px',
+                borderRadius: '14px',
                 backgroundColor: '#eef5ff',
                 color: '#2e83ff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #e2e8f0',
+                border: '1px solid #d6e6ff',
               }}
             >
               <Smartphone size={22} />
@@ -342,6 +356,7 @@ export const HomeScreen: React.FC = () => {
           {/* DTH */}
           <div
             onClick={() => navigateTo('ALL_SERVICES')}
+            className="interactive-tap"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -353,16 +368,16 @@ export const HomeScreen: React.FC = () => {
           >
             <div
               style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '12px',
+                width: '50px',
+                height: '50px',
+                borderRadius: '14px',
                 backgroundColor: '#eef5ff',
                 color: '#2e83ff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #e2e8f0',
+                border: '1px solid #d6e6ff',
               }}
             >
               <Tv size={22} />
@@ -375,6 +390,7 @@ export const HomeScreen: React.FC = () => {
           {/* FASTag */}
           <div
             onClick={() => navigateTo('ALL_SERVICES')}
+            className="interactive-tap"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -386,16 +402,16 @@ export const HomeScreen: React.FC = () => {
           >
             <div
               style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '12px',
+                width: '50px',
+                height: '50px',
+                borderRadius: '14px',
                 backgroundColor: '#eef5ff',
                 color: '#2e83ff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #e2e8f0',
+                border: '1px solid #d6e6ff',
               }}
             >
               <Car size={22} />

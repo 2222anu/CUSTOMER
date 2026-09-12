@@ -172,6 +172,66 @@ p, span, label, input, button {
   font-size: 14px;
 }
 
+/* Universal Advanced Input & Field Styling */
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+textarea,
+select {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background-color: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #2e83ff !important;
+  background-color: #ffffff !important;
+}
+
+/* Universal Interactive Button & Icon Touch Feedback */
+button,
+[role="button"],
+.interactive-tap {
+  cursor: pointer;
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  will-change: transform;
+}
+
+button:active:not(:disabled),
+[role="button"]:active,
+.interactive-tap:active {
+  transform: scale(0.975);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Financial Tabular Numbers */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
 /* Transitions */
 .fade-in {
   animation: fadeIn 0.2s ease-out forwards;

@@ -1,36 +1,42 @@
 import React from 'react';
-import { designSystem } from '../design-system';
 
 interface SecondaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   fullWidth?: boolean;
+  className?: string;
 }
 
 export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
   children,
   fullWidth = true,
   className = '',
+  disabled,
+  style,
   ...props
 }) => {
   return (
     <button
+      className={`interactive-tap ${className}`}
       style={{
         width: fullWidth ? '100%' : 'auto',
-        backgroundColor: designSystem.colors.surface,
-        color: designSystem.colors.textPrimary,
-        border: `1px solid ${designSystem.colors.borderStrong}`,
-        borderRadius: designSystem.radii.md,
-        padding: '14px 20px',
+        backgroundColor: '#ffffff',
+        color: disabled ? '#94a3b8' : '#0f172a',
+        border: '1.5px solid #cbd5e1',
+        borderRadius: '10px',
+        padding: '13px 20px',
         fontSize: '15px',
-        fontWeight: designSystem.typography.weights.bold,
-        cursor: 'pointer',
-        boxShadow: designSystem.shadows.none,
-        transition: 'all 0.15s ease',
+        fontWeight: 700,
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        boxShadow: 'none',
+        transition: 'all 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: designSystem.spacing.sm,
+        gap: '8px',
+        userSelect: 'none',
+        ...style,
       }}
+      disabled={disabled}
       {...props}
     >
       {children}

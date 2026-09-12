@@ -1,5 +1,4 @@
 import React from 'react';
-import { designSystem } from '../design-system';
 
 interface QuickActionProps {
   label: string;
@@ -24,40 +23,42 @@ export const QuickAction: React.FC<QuickActionProps> = ({
           onClick();
         }
       }}
+      className="interactive-tap"
       style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: designSystem.spacing.sm,
+        gap: '8px',
         cursor: 'pointer',
         flex: 1,
+        userSelect: 'none',
       }}
     >
       <div
         style={{
           width: '52px',
           height: '52px',
-          borderRadius: designSystem.radii.full,
-          backgroundColor: highlighted ? designSystem.colors.primary : designSystem.colors.primaryLight,
-          border: `1px solid ${highlighted ? designSystem.colors.primary : designSystem.colors.primaryBorder}`,
-          color: highlighted ? designSystem.colors.textOnPrimary : designSystem.colors.primary,
+          borderRadius: '16px',
+          backgroundColor: highlighted ? '#2e83ff' : '#eef5ff',
+          border: `1px solid ${highlighted ? '#2e83ff' : '#d6e6ff'}`,
+          color: highlighted ? '#ffffff' : '#2e83ff',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: designSystem.shadows.none,
-          transition: 'transform 0.15s ease',
+          boxShadow: 'none',
+          transition: 'all 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
         {icon}
       </div>
       <span
         style={{
-          fontSize: '11px',
-          fontWeight: designSystem.typography.weights.extrabold,
-          letterSpacing: '0.04em',
-          color: designSystem.colors.textPrimary,
-          textTransform: 'uppercase',
+          fontSize: '11.5px',
+          fontWeight: 700,
+          color: '#0f172a',
           textAlign: 'center',
+          lineHeight: '14px',
+          letterSpacing: '-0.01em',
         }}
       >
         {label}

@@ -120,23 +120,22 @@ export const FoodScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#F4F1EC', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
       <AppHeader title="Food & Dining" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Dining Offer Banner */}
         <div
           style={{
-            background: 'linear-gradient(135deg, #1E295D 0%, #111144 100%)',
-            border: '1.5px solid #F98513',
-            borderRadius: '24px',
+            background: 'linear-gradient(145deg, #0e274d 0%, #0a1c36 100%)',
+            border: '1.5px solid rgba(46, 131, 255, 0.35)',
+            borderRadius: '20px',
             padding: '20px',
             marginBottom: '20px',
             display: 'flex',
             alignItems: 'center',
             gap: '14px',
             color: '#FFFFFF',
-            boxShadow: '0 10px 30px rgba(17, 17, 68, 0.45)',
           }}
         >
           <div
@@ -144,72 +143,74 @@ export const FoodScreen: React.FC = () => {
               width: '50px',
               height: '50px',
               borderRadius: '16px',
-              backgroundColor: '#F98513',
-              color: '#FFFFFF',
+              backgroundColor: '#eef5ff',
+              color: '#2e83ff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
+              border: '1.5px solid #d6e6ff',
             }}
           >
-            <Utensils size={26} />
+            <Utensils size={24} />
           </div>
           <div>
-            <h3 style={{ fontSize: '17px', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>QTPay Food & Dining</h3>
-            <p style={{ fontSize: '12px', color: '#A4BCEE', margin: '4px 0 0 0' }}>
-              Order food online with instant QTPay discounts & 0 delivery fee
+            <h3 style={{ fontSize: '16px', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>QPay Food & Dining</h3>
+            <p style={{ fontSize: '12px', color: '#94a3b8', margin: '3px 0 0 0' }}>
+              Order food online with instant QPay discounts & 0 delivery fee
             </p>
           </div>
         </div>
 
-        <div style={{ fontSize: '12px', fontWeight: '800', color: '#5C564D', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '12px', marginLeft: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
           Nearby Partner Restaurants
         </div>
 
-        {restaurants.map((res) => (
-          <div
-            key={res.id}
-            onClick={() => handleOpenRes(res)}
-            style={{
-              padding: '18px',
-              backgroundColor: '#FFFFFF',
-              border: '1.5px solid #DAD1C8',
-              borderRadius: '20px',
-              marginBottom: '14px',
-              cursor: 'pointer',
-              boxShadow: '0 4px 14px rgba(17, 17, 68, 0.04)',
-              transition: 'transform 0.15s ease',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h4 style={{ fontSize: '16px', fontWeight: '800', color: '#111144', margin: 0 }}>{res.name}</h4>
-              <span
-                style={{
-                  fontSize: '12px',
-                  fontWeight: '800',
-                  backgroundColor: '#FDE8D7',
-                  color: '#F98513',
-                  padding: '4px 10px',
-                  borderRadius: '12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                }}
-              >
-                <Star size={13} fill="#F98513" /> {res.rating}
-              </span>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {restaurants.map((res) => (
+            <div
+              key={res.id}
+              onClick={() => handleOpenRes(res)}
+              className="interactive-tap"
+              style={{
+                padding: '16px',
+                backgroundColor: '#FFFFFF',
+                border: '1px solid #e2e8f0',
+                borderRadius: '16px',
+                cursor: 'pointer',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h4 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', margin: 0 }}>{res.name}</h4>
+                <span
+                  style={{
+                    fontSize: '12px',
+                    fontWeight: '800',
+                    backgroundColor: '#ecfdf5',
+                    color: '#10b981',
+                    padding: '3px 8px',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    border: '1px solid #a7f3d0',
+                  }}
+                >
+                  <Star size={12} fill="#10b981" /> {res.rating}
+                </span>
+              </div>
+              <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>{res.cuisine}</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px' }}>
+                <span style={{ fontSize: '11px', fontWeight: '700', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '3px 8px', borderRadius: '6px' }}>
+                  {res.offer}
+                </span>
+                <span style={{ fontSize: '11px', color: '#64748b', display: 'flex', alignItems: 'center', gap: '4px', marginLeft: 'auto' }}>
+                  <Clock size={12} /> {res.deliveryTime}
+                </span>
+              </div>
             </div>
-            <div style={{ fontSize: '12px', color: '#5C564D', marginTop: '4px' }}>{res.cuisine}</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '12px' }}>
-              <span style={{ fontSize: '11px', fontWeight: '800', color: '#F98513', backgroundColor: 'rgba(249,133,19,0.1)', padding: '4px 8px', borderRadius: '8px' }}>
-                {res.offer}
-              </span>
-              <span style={{ fontSize: '11px', color: '#5C564D', display: 'flex', alignItems: 'center', gap: '4px', marginLeft: 'auto' }}>
-                <Clock size={12} /> {res.deliveryTime}
-              </span>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Interactive Restaurant Menu & Checkout Modal */}
@@ -217,12 +218,9 @@ export const FoodScreen: React.FC = () => {
         <div
           style={{
             position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(17, 17, 68, 0.65)',
-            backdropFilter: 'blur(8px)',
+            inset: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.65)',
+            backdropFilter: 'blur(6px)',
             zIndex: 1000,
             display: 'flex',
             alignItems: 'flex-end',
@@ -235,10 +233,9 @@ export const FoodScreen: React.FC = () => {
               width: '100%',
               maxWidth: '440px',
               backgroundColor: '#FFFFFF',
-              borderTopLeftRadius: '24px',
-              borderTopRightRadius: '24px',
-              padding: '24px',
-              boxShadow: '0 -10px 40px rgba(17, 17, 68, 0.2)',
+              borderTopLeftRadius: '20px',
+              borderTopRightRadius: '20px',
+              padding: '24px 20px',
               animation: 'slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
               maxHeight: '85vh',
               overflowY: 'auto',
@@ -247,29 +244,30 @@ export const FoodScreen: React.FC = () => {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div>
-                <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#111144', margin: 0 }}>{selectedRes.name}</h3>
-                <p style={{ fontSize: '12px', color: '#5C564D', margin: '2px 0 0 0' }}>Select items to order</p>
+                <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: 0 }}>{selectedRes.name}</h3>
+                <p style={{ fontSize: '12px', color: '#64748b', margin: '2px 0 0 0' }}>Select items to order</p>
               </div>
               <button
                 onClick={() => setSelectedRes(null)}
+                aria-label="Close"
                 style={{
                   width: '32px',
                   height: '32px',
                   borderRadius: '50%',
-                  backgroundColor: '#F4F1EC',
+                  backgroundColor: '#f1f5f9',
                   border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  color: '#5C564D',
+                  color: '#64748b',
                 }}
               >
                 <X size={18} />
               </button>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>
               {menuItems.map((item) => (
                 <div
                   key={item.id}
@@ -278,13 +276,14 @@ export const FoodScreen: React.FC = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     padding: '12px 14px',
-                    backgroundColor: '#F4F1EC',
-                    borderRadius: '16px',
+                    backgroundColor: '#f8fafc',
+                    border: '1px solid #e2e8f0',
+                    borderRadius: '14px',
                   }}
                 >
                   <div>
-                    <div style={{ fontSize: '14px', fontWeight: '800', color: '#111144' }}>{item.name}</div>
-                    <div style={{ fontSize: '13px', fontWeight: '700', color: '#F98513', marginTop: '2px' }}>
+                    <div style={{ fontSize: '14px', fontWeight: '800', color: '#0f172a' }}>{item.name}</div>
+                    <div style={{ fontSize: '13px', fontWeight: '700', color: '#2e83ff', marginTop: '2px', fontVariantNumeric: 'tabular-nums' }}>
                       ₹{item.price}
                     </div>
                   </div>
@@ -292,30 +291,33 @@ export const FoodScreen: React.FC = () => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <button
                       onClick={() => handleUpdateQty(item.id, -1)}
+                      className="interactive-tap"
                       style={{
                         width: '28px',
                         height: '28px',
                         borderRadius: '8px',
                         backgroundColor: '#FFFFFF',
-                        border: '1px solid #DAD1C8',
+                        border: '1px solid #cbd5e1',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         cursor: 'pointer',
+                        color: '#0f172a',
                       }}
                     >
-                      <Minus size={14} color="#111144" />
+                      <Minus size={14} />
                     </button>
-                    <span style={{ fontSize: '14px', fontWeight: '800', minWidth: '16px', textAlign: 'center' }}>
+                    <span style={{ fontSize: '14px', fontWeight: '800', minWidth: '16px', textAlign: 'center', fontVariantNumeric: 'tabular-nums' }}>
                       {item.qty}
                     </span>
                     <button
                       onClick={() => handleUpdateQty(item.id, 1)}
+                      className="interactive-tap"
                       style={{
                         width: '28px',
                         height: '28px',
                         borderRadius: '8px',
-                        backgroundColor: '#F98513',
+                        backgroundColor: '#2e83ff',
                         border: 'none',
                         color: '#FFFFFF',
                         display: 'flex',
@@ -331,9 +333,9 @@ export const FoodScreen: React.FC = () => {
               ))}
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', paddingTop: '12px', borderTop: '1px dashed #DAD1C8' }}>
-              <span style={{ fontSize: '14px', fontWeight: '700', color: '#5C564D' }}>Total Bill Amount</span>
-              <span style={{ fontSize: '22px', fontWeight: '800', color: '#F98513' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', paddingTop: '12px', borderTop: '1px dashed #cbd5e1' }}>
+              <span style={{ fontSize: '13px', fontWeight: '700', color: '#64748b' }}>Total Bill Amount</span>
+              <span style={{ fontSize: '20px', fontWeight: '900', color: '#2e83ff', fontVariantNumeric: 'tabular-nums' }}>
                 ₹{calculateSubtotal().toLocaleString()}
               </span>
             </div>
@@ -341,17 +343,17 @@ export const FoodScreen: React.FC = () => {
             <button
               onClick={handlePlaceOrder}
               disabled={calculateSubtotal() <= 0}
+              className="interactive-tap"
               style={{
                 width: '100%',
-                padding: '16px',
-                borderRadius: '16px',
-                backgroundColor: calculateSubtotal() > 0 ? '#F98513' : '#DAD1C8',
+                padding: '14px',
+                borderRadius: '12px',
+                backgroundColor: calculateSubtotal() > 0 ? '#2e83ff' : '#cbd5e1',
                 border: 'none',
                 color: '#FFFFFF',
-                fontSize: '15px',
+                fontSize: '14px',
                 fontWeight: '800',
                 cursor: calculateSubtotal() > 0 ? 'pointer' : 'not-allowed',
-                boxShadow: calculateSubtotal() > 0 ? '0 4px 14px rgba(249, 133, 19, 0.35)' : 'none',
               }}
             >
               Order & Pay ₹{calculateSubtotal().toLocaleString()} via UPI PIN
@@ -365,12 +367,9 @@ export const FoodScreen: React.FC = () => {
         <div
           style={{
             position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(17, 17, 68, 0.75)',
-            backdropFilter: 'blur(8px)',
+            inset: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.65)',
+            backdropFilter: 'blur(6px)',
             zIndex: 1000,
             display: 'flex',
             alignItems: 'center',
@@ -384,41 +383,58 @@ export const FoodScreen: React.FC = () => {
               width: '100%',
               maxWidth: '360px',
               backgroundColor: '#FFFFFF',
-              borderRadius: '24px',
+              borderRadius: '20px',
               padding: '24px',
               textAlign: 'center',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.4)',
               position: 'relative',
+              animation: 'scaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <CheckCircle2 size={54} color="#10B981" style={{ margin: '0 auto 12px auto' }} />
-            <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#111144', margin: '0 0 4px 0' }}>
+            <div
+              style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '16px',
+                backgroundColor: '#ecfdf5',
+                color: '#10B981',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 12px auto',
+                border: '1.5px solid #a7f3d0',
+              }}
+            >
+              <CheckCircle2 size={32} />
+            </div>
+
+            <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0' }}>
               Order Confirmed!
             </h3>
-            <p style={{ fontSize: '12px', color: '#5C564D', margin: '0 0 20px 0' }}>
+            <p style={{ fontSize: '12px', color: '#64748b', margin: '0 0 20px 0' }}>
               {orderConfirmed.restaurantName} is preparing your meal
             </p>
 
-            <div style={{ backgroundColor: '#F4F1EC', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                <Clock size={18} color="#F98513" />
-                <span style={{ fontSize: '13px', fontWeight: '800', color: '#F98513' }}>
+            <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <Clock size={16} color="#2e83ff" />
+                <span style={{ fontSize: '12px', fontWeight: '800', color: '#2e83ff' }}>
                   Delivering in {orderConfirmed.estimatedTime}
                 </span>
               </div>
-              <div style={{ fontSize: '13px', fontWeight: '700', color: '#111144' }}>
-                Paid ₹{orderConfirmed.totalAmount} via QTPay UPI
+              <div style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>
+                Paid ₹{orderConfirmed.totalAmount} via QPay UPI
               </div>
             </div>
 
             <button
               onClick={() => setOrderConfirmed(null)}
+              className="interactive-tap"
               style={{
                 width: '100%',
-                padding: '14px',
-                borderRadius: '14px',
-                backgroundColor: '#111144',
+                padding: '12px',
+                borderRadius: '12px',
+                backgroundColor: '#2e83ff',
                 border: 'none',
                 color: '#FFFFFF',
                 fontSize: '14px',

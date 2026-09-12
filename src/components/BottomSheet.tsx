@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
-import { designSystem } from '../design-system';
 
 interface BottomSheetProps {
   isOpen: boolean;
@@ -37,8 +36,8 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
       style={{
         position: 'fixed',
         inset: 0,
-        backgroundColor: designSystem.colors.overlay,
-        backdropFilter: 'blur(4px)',
+        backgroundColor: 'rgba(15, 23, 42, 0.65)',
+        backdropFilter: 'blur(8px)',
         zIndex: 50,
         display: 'flex',
         flexDirection: 'column',
@@ -50,15 +49,15 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
         className="slide-up"
         onClick={(e) => e.stopPropagation()}
         style={{
-          backgroundColor: isDark ? designSystem.colors.textPrimary : designSystem.colors.surface,
-          color: isDark ? designSystem.colors.surface : designSystem.colors.textPrimary,
-          borderTopLeftRadius: designSystem.radii.lg,
-          borderTopRightRadius: designSystem.radii.lg,
-          borderTop: isDark ? '1px solid #1e293b' : `1px solid ${designSystem.colors.borderHairline}`,
+          backgroundColor: isDark ? '#0f172a' : '#ffffff',
+          color: isDark ? '#ffffff' : '#0f172a',
+          borderTopLeftRadius: '20px',
+          borderTopRightRadius: '20px',
+          borderTop: isDark ? '1px solid #1e293b' : '1px solid #e2e8f0',
           padding: '24px 20px',
           maxHeight: '88vh',
           overflowY: 'auto',
-          boxShadow: designSystem.shadows.none,
+          boxShadow: 'none',
           maxWidth: '600px',
           width: '100%',
           margin: '0 auto',
@@ -68,15 +67,15 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
           style={{
             width: '40px',
             height: '4px',
-            backgroundColor: isDark ? 'rgba(255, 255, 255, 0.2)' : designSystem.colors.borderStrong,
+            backgroundColor: isDark ? 'rgba(255, 255, 255, 0.2)' : '#e2e8f0',
             borderRadius: '2px',
             margin: '0 auto 16px auto',
           }}
         />
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: designSystem.spacing.xl }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           {title ? (
-            <h3 id="bottom-sheet-title" style={{ fontSize: '18px', fontWeight: designSystem.typography.weights.extrabold, color: isDark ? designSystem.colors.surface : designSystem.colors.textPrimary }}>
+            <h3 id="bottom-sheet-title" style={{ fontSize: '18px', fontWeight: 800, color: isDark ? '#ffffff' : '#0f172a', margin: 0, letterSpacing: '-0.01em' }}>
               {title}
             </h3>
           ) : (
@@ -85,24 +84,24 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
           <button
             onClick={onClose}
             aria-label="Close sheet"
+            className="interactive-tap"
             style={{
-              backgroundColor: isDark ? 'rgba(255, 255, 255, 0.1)' : designSystem.colors.subSurface,
-              border: 'none',
-              color: isDark ? designSystem.colors.surface : designSystem.colors.textSecondary,
+              backgroundColor: isDark ? 'rgba(255, 255, 255, 0.1)' : '#f8fafc',
+              border: `1px solid ${isDark ? '#334155' : '#e2e8f0'}`,
+              color: isDark ? '#ffffff' : '#64748b',
               width: '32px',
               height: '32px',
-              borderRadius: designSystem.radii.full,
+              borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              boxShadow: designSystem.shadows.none,
+              boxShadow: 'none',
             }}
           >
-            <X size={18} />
+            <X size={16} />
           </button>
         </div>
-
         {children}
       </div>
     </div>

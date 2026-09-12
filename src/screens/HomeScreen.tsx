@@ -14,6 +14,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
+import { QPayHeroBanner } from '../components/QPayHeroBanner';
 import { BankCardCarousel } from '../components/BankCardCarousel';
 import { TransactionRow } from '../components/TransactionRow';
 import { useApp } from '../state/AppContext';
@@ -79,6 +80,9 @@ export const HomeScreen: React.FC = () => {
           </button>
         }
       />
+
+      {/* Promotional Hero Banner */}
+      <QPayHeroBanner />
 
       {/* 2. Total Available Balance Hero Card (MobiKwik Blue Banner, 8px Radius) */}
       <div

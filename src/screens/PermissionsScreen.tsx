@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { MessageSquare, Phone, Users, Camera, MapPin, Mic, ShieldCheck } from 'lucide-react';
+import { MessageSquare, Phone, Users, Camera, MapPin, Mic, ShieldCheck, ArrowRight, Lock, CheckCircle2 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
 import { useApp } from '../state/AppContext';
-import { designSystem } from '../design-system';
 
 export const PermissionsScreen: React.FC = () => {
   const { navigateTo, goBack } = useApp();
@@ -23,12 +22,48 @@ export const PermissionsScreen: React.FC = () => {
   };
 
   const permissions = [
-    { key: 'sms', icon: <MessageSquare size={20} />, name: 'SMS Permission', desc: 'Required for automatic OTP detection & UPI device binding' },
-    { key: 'phone', icon: <Phone size={20} />, name: 'Phone Permission', desc: 'Required to verify SIM slot and device identity' },
-    { key: 'contacts', icon: <Users size={20} />, name: 'Contacts Permission', desc: 'Required to send and receive money from your contacts' },
-    { key: 'camera', icon: <Camera size={20} />, name: 'Camera Permission', desc: 'Required to scan merchant and payee QR codes' },
-    { key: 'location', icon: <MapPin size={20} />, name: 'Location Permission', desc: 'Required for location-based transaction fraud prevention' },
-    { key: 'mic', icon: <Mic size={20} />, name: 'Microphone Permission', desc: 'Required for voice payment commands and helpline support' },
+    {
+      key: 'sms',
+      icon: <MessageSquare size={19} />,
+      name: 'SMS Verification',
+      desc: 'Automatic OTP detection & encrypted bank SIM binding',
+      required: true,
+    },
+    {
+      key: 'phone',
+      icon: <Phone size={19} />,
+      name: 'Phone & SIM Status',
+      desc: 'Validates SIM slot identity to prevent account duplication',
+      required: true,
+    },
+    {
+      key: 'contacts',
+      icon: <Users size={19} />,
+      name: 'Contacts Access',
+      desc: 'Instantly send & request money to your phonebook contacts',
+      required: false,
+    },
+    {
+      key: 'camera',
+      icon: <Camera size={19} />,
+      name: 'Camera & QR Scanner',
+      desc: 'Scan BharatQR, merchant stands & friend payment codes',
+      required: false,
+    },
+    {
+      key: 'location',
+      icon: <MapPin size={19} />,
+      name: 'Location Security',
+      desc: 'Real-time geo-fencing against remote fraud attempts',
+      required: false,
+    },
+    {
+      key: 'mic',
+      icon: <Mic size={19} />,
+      name: 'Voice Assistant',
+      desc: 'Voice search & audio transaction confirmation receipts',
+      required: false,
+    },
   ];
 
   const handleGrantPermissions = () => {
@@ -37,150 +72,182 @@ export const PermissionsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: designSystem.colors.background, minHeight: '100vh' }}>
-      <AppHeader title="App Permissions" showBack={true} onBack={goBack} showSettings={false} />
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingBottom: '32px' }}>
+      <div>
+        <AppHeader title="App Permissions" showBack={true} onBack={goBack} showSettings={false} />
 
-      <div style={{ padding: '20px', minHeight: '85vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-        <div>
+        <div style={{ padding: '20px' }}>
           {/* Header Card */}
           <div
             style={{
-              backgroundColor: designSystem.colors.surface,
-              border: `1px solid ${designSystem.colors.borderHairline}`,
-              borderRadius: designSystem.radii.md,
-              padding: '18px',
-              marginBottom: '20px',
+              backgroundColor: '#0e274d',
+              border: '1px solid #1e3a8a',
+              borderRadius: '18px',
+              padding: '16px 18px',
+              marginBottom: '18px',
               display: 'flex',
               alignItems: 'center',
               gap: '14px',
-              boxShadow: designSystem.shadows.none,
+              color: '#ffffff',
             }}
           >
             <div
               style={{
                 width: '46px',
                 height: '46px',
-                borderRadius: designSystem.radii.md,
-                backgroundColor: designSystem.colors.primaryLight,
-                color: designSystem.colors.primary,
+                borderRadius: '14px',
+                backgroundColor: 'rgba(46, 131, 255, 0.25)',
+                color: '#38bdf8',
+                border: '1px solid rgba(46, 131, 255, 0.4)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexShrink: 0,
-                border: `1px solid ${designSystem.colors.primaryBorder}`,
               }}
             >
               <ShieldCheck size={26} />
             </div>
             <div>
-              <h3 style={{ fontSize: '16px', fontWeight: designSystem.typography.weights.extrabold, color: designSystem.colors.textPrimary, margin: 0 }}>
-                Enable QTPay Permissions
-              </h3>
-              <p style={{ fontSize: '12px', color: designSystem.colors.textSecondary, marginTop: '2px', margin: 0 }}>
-                Toggle individual permissions ON or OFF anytime
-              </p>
+              <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff' }}>
+                NPCI Mandated Security
+              </div>
+              <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '3px', lineHeight: '1.4' }}>
+                Required once to bind your phone securely with RBI-regulated UPI gateways.
+              </div>
             </div>
           </div>
 
-          <div style={{ fontSize: '12px', fontWeight: designSystem.typography.weights.bold, color: designSystem.colors.textSecondary, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
-            Required Device Access
+          <div
+            style={{
+              fontSize: '11.5px',
+              fontWeight: 800,
+              color: '#64748b',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              marginBottom: '10px',
+              paddingLeft: '4px',
+            }}
+          >
+            Device Permissions ({Object.values(toggles).filter(Boolean).length}/6 Granted)
           </div>
 
-          {/* List of 6 Permissions with Interactive ON/OFF Toggles */}
-          {permissions.map((perm) => {
-            const isOn = toggles[perm.key];
-            return (
-              <div
-                key={perm.key}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '12px',
-                  padding: '14px 16px',
-                  backgroundColor: designSystem.colors.surface,
-                  border: `1px solid ${designSystem.colors.borderHairline}`,
-                  borderRadius: designSystem.radii.md,
-                  marginBottom: '10px',
-                  boxShadow: designSystem.shadows.none,
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1 }}>
+          {/* Grouped Permissions Card */}
+          <div
+            style={{
+              backgroundColor: '#ffffff',
+              borderRadius: '18px',
+              border: '1px solid #e2e8f0',
+              overflow: 'hidden',
+            }}
+          >
+            {permissions.map((perm, index) => {
+              const isOn = toggles[perm.key];
+              return (
+                <React.Fragment key={perm.key}>
+                  {index > 0 && <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />}
                   <div
                     style={{
-                      width: '38px',
-                      height: '38px',
-                      borderRadius: designSystem.radii.md,
-                      backgroundColor: isOn ? designSystem.colors.primaryLight : designSystem.colors.subSurface,
-                      color: isOn ? designSystem.colors.primary : designSystem.colors.textMuted,
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
+                      justifyContent: 'space-between',
+                      gap: '12px',
+                      padding: '14px 16px',
                     }}
                   >
-                    {perm.icon}
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: designSystem.typography.weights.bold, fontSize: '14px', color: designSystem.colors.textPrimary }}>
-                      {perm.name}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
+                      <div
+                        style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '12px',
+                          backgroundColor: isOn ? '#eef5ff' : '#f8fafc',
+                          color: isOn ? '#2e83ff' : '#94a3b8',
+                          border: isOn ? '1px solid #d6e6ff' : '1px solid #e2e8f0',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                          transition: 'all 0.2s ease',
+                        }}
+                      >
+                        {perm.icon}
+                      </div>
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <span style={{ fontWeight: 800, fontSize: '13.5px', color: '#0f172a' }}>
+                            {perm.name}
+                          </span>
+                          {perm.required && (
+                            <span style={{ fontSize: '9px', fontWeight: 800, backgroundColor: '#fef2f2', color: '#ef4444', padding: '1px 5px', borderRadius: '4px' }}>
+                              REQUIRED
+                            </span>
+                          )}
+                        </div>
+                        <div style={{ fontSize: '11.5px', color: '#64748b', marginTop: '2px', lineHeight: '1.35' }}>
+                          {perm.desc}
+                        </div>
+                      </div>
                     </div>
-                    <div style={{ fontSize: '11px', color: designSystem.colors.textSecondary, marginTop: '2px' }}>
-                      {perm.desc}
-                    </div>
-                  </div>
-                </div>
 
-                {/* ON / OFF Toggle Switch */}
-                <div
-                  role="switch"
-                  aria-checked={isOn}
-                  aria-label={perm.name}
-                  tabIndex={0}
-                  onClick={() => handleToggle(perm.key)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      handleToggle(perm.key);
-                    }
-                  }}
-                  style={{
-                    width: '46px',
-                    height: '26px',
-                    borderRadius: designSystem.radii.full,
-                    backgroundColor: isOn ? designSystem.colors.primary : designSystem.colors.borderStrong,
-                    display: 'flex',
-                    alignItems: 'center',
-                    padding: '2px',
-                    cursor: 'pointer',
-                    transition: 'background-color 0.2s ease',
-                    flexShrink: 0,
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '22px',
-                      height: '22px',
-                      borderRadius: designSystem.radii.full,
-                      backgroundColor: designSystem.colors.surface,
-                      transform: isOn ? 'translateX(20px)' : 'translateX(0px)',
-                      transition: 'transform 0.2s ease',
-                      boxShadow: designSystem.shadows.none,
-                    }}
-                  />
-                </div>
-              </div>
-            );
-          })}
+                    {/* iOS/Android Style Toggle Switch */}
+                    <div
+                      role="switch"
+                      aria-checked={isOn}
+                      aria-label={perm.name}
+                      tabIndex={0}
+                      onClick={() => handleToggle(perm.key)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          handleToggle(perm.key);
+                        }
+                      }}
+                      style={{
+                        width: '48px',
+                        height: '28px',
+                        borderRadius: '9999px',
+                        backgroundColor: isOn ? '#2e83ff' : '#cbd5e1',
+                        display: 'flex',
+                        alignItems: 'center',
+                        padding: '3px',
+                        cursor: 'pointer',
+                        transition: 'background-color 0.2s ease',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: '22px',
+                          height: '22px',
+                          borderRadius: '50%',
+                          backgroundColor: '#ffffff',
+                          transform: isOn ? 'translateX(20px)' : 'translateX(0px)',
+                          transition: 'transform 0.2s ease',
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.15)',
+                        }}
+                      />
+                    </div>
+                  </div>
+                </React.Fragment>
+              );
+            })}
+          </div>
         </div>
+      </div>
 
-        {/* Action Buttons */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
-          <PrimaryButton onClick={handleGrantPermissions}>
-            Save & Continue
-          </PrimaryButton>
-          <SecondaryButton onClick={handleGrantPermissions}>
-            Skip for Now
-          </SecondaryButton>
+      {/* Action Buttons */}
+      <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <PrimaryButton onClick={handleGrantPermissions}>
+          Allow Permissions & Enter QTPay <ArrowRight size={18} />
+        </PrimaryButton>
+        <SecondaryButton onClick={handleGrantPermissions}>
+          Skip & Customize Later
+        </SecondaryButton>
+
+        <div style={{ textAlign: 'center', marginTop: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+          <Lock size={12} color="#64748b" />
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
+            Encrypted End-to-End &bull; Data never shared with 3rd parties
+          </span>
         </div>
       </div>
     </div>

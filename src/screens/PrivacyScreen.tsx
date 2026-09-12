@@ -20,53 +20,62 @@ export const PrivacyScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100vh', paddingBottom: '32px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f9', minHeight: '100vh', paddingBottom: '36px' }}>
       <AppHeader title="Privacy Policy" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Encryption Hero Card */}
         <div
           style={{
-            backgroundColor: '#0e274d',
-            border: '1.5px solid #1e3a8a',
+            background: 'linear-gradient(135deg, #071529 0%, #0a2540 55%, #1d4ed8 100%)',
+            border: '1.5px solid rgba(56, 189, 248, 0.35)',
             borderRadius: '20px',
-            padding: '20px',
+            padding: '22px 20px',
             marginBottom: '24px',
             color: '#FFFFFF',
+            boxShadow: '0 8px 24px rgba(10, 25, 47, 0.2)',
             position: 'relative',
             overflow: 'hidden',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div
               style={{
-                width: '42px',
-                height: '42px',
-                borderRadius: '12px',
-                backgroundColor: 'rgba(46, 131, 255, 0.2)',
-                border: '1px solid rgba(46, 131, 255, 0.4)',
+                width: '46px',
+                height: '46px',
+                borderRadius: '14px',
+                backgroundColor: 'rgba(255, 255, 255, 0.12)',
+                border: '1px solid rgba(255, 255, 255, 0.22)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#38bdf8',
+                backdropFilter: 'blur(6px)',
+                flexShrink: 0,
               }}
             >
               <Lock size={22} />
             </div>
-            <h3 style={{ fontSize: '17px', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>Banking-Grade Encryption</h3>
+            <div>
+              <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>Banking-Grade Encryption</h3>
+              <p style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.75)', margin: '3px 0 0 0' }}>
+                TLS 1.3 & 256-Bit AES multi-layer privacy protections
+              </p>
+            </div>
           </div>
         </div>
 
-        <div style={{ fontSize: '11.5px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '12px', paddingLeft: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '12px', paddingLeft: '4px' }}>
           Data Controls & Rights
         </div>
 
         <div
           style={{
             backgroundColor: '#ffffff',
-            borderRadius: '16px',
+            borderRadius: '18px',
             border: '1px solid #e2e8f0',
             overflow: 'hidden',
+            boxShadow: '0 2px 8px rgba(15, 23, 42, 0.02)',
           }}
         >
           <ListRow
@@ -94,7 +103,7 @@ export const PrivacyScreen: React.FC = () => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px', backgroundColor: '#f8fafc', borderRadius: '14px', border: '1px solid #e2e8f0' }}>
             <div>
-              <div style={{ fontSize: '14px', fontWeight: '700', color: '#0f172a' }}>Personalized Offers</div>
+              <div style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a' }}>Personalized Offers</div>
               <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>Allow curated cashback & reward recommendations</div>
             </div>
             <input type="checkbox" checked={marketingConsent} onChange={(e) => setMarketingConsent(e.target.checked)} style={{ width: '20px', height: '20px', accentColor: '#2e83ff', cursor: 'pointer' }} />
@@ -102,7 +111,7 @@ export const PrivacyScreen: React.FC = () => {
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px', backgroundColor: '#f8fafc', borderRadius: '14px', border: '1px solid #e2e8f0' }}>
             <div>
-              <div style={{ fontSize: '14px', fontWeight: '700', color: '#0f172a' }}>Merchant Analytics</div>
+              <div style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a' }}>Merchant Analytics</div>
               <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>Share anonymized spending statistics</div>
             </div>
             <input type="checkbox" checked={shareData} onChange={(e) => setShareData(e.target.checked)} style={{ width: '20px', height: '20px', accentColor: '#2e83ff', cursor: 'pointer' }} />
@@ -118,8 +127,8 @@ export const PrivacyScreen: React.FC = () => {
       <Modal isOpen={activeModal === 'export'} onClose={() => setActiveModal(null)} title="Export Account Data">
         {exportSuccess ? (
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <CheckCircle2 size={48} color="#10b981" style={{ margin: '0 auto 12px auto' }} />
-            <h4 style={{ fontSize: '16px', fontWeight: '800', color: '#0f172a' }}>Data Export Initiated!</h4>
+            <CheckCircle2 size={48} color="#2e83ff" style={{ margin: '0 auto 12px auto' }} />
+            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a' }}>Data Export Initiated!</h4>
             <p style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>Your encrypted CSV statement will be sent to your registered email.</p>
           </div>
         ) : (
@@ -145,4 +154,3 @@ export const PrivacyScreen: React.FC = () => {
     </div>
   );
 };
-

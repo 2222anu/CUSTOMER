@@ -35,7 +35,7 @@ export const ListRow: React.FC<ListRowProps> = ({
         justifyContent: 'space-between',
         padding: '14px 16px',
         backgroundColor: '#ffffff',
-        border: `1px solid ${danger ? '#fee2e2' : '#e2e8f0'}`,
+        border: '1px solid #e2e8f0',
         borderRadius: '12px',
         marginBottom: '10px',
         cursor: onClick ? 'pointer' : 'default',
@@ -50,12 +50,12 @@ export const ListRow: React.FC<ListRowProps> = ({
               width: '38px',
               height: '38px',
               borderRadius: '10px',
-              backgroundColor: danger ? '#fef2f2' : '#eef5ff',
-              color: danger ? '#dc2626' : '#2e83ff',
+              backgroundColor: danger ? '#f8fafc' : '#eef5ff',
+              color: danger ? '#64748b' : '#2e83ff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              border: `1px solid ${danger ? '#fecaca' : '#d6e6ff'}`,
+              border: `1px solid ${danger ? '#e2e8f0' : '#d6e6ff'}`,
               flexShrink: 0,
             }}
           >
@@ -67,7 +67,7 @@ export const ListRow: React.FC<ListRowProps> = ({
             style={{
               fontSize: '14.5px',
               fontWeight: 700,
-              color: danger ? '#dc2626' : '#0f172a',
+              color: danger ? '#475569' : '#0f172a',
             }}
           >
             {label}

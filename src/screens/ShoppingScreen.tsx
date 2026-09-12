@@ -262,7 +262,7 @@ export const ShoppingScreen: React.FC = () => {
                   onClick={() => handleCopyCode(selectedDeal.couponCode)}
                   className="interactive-tap"
                   style={{
-                    backgroundColor: copiedCode ? '#10B981' : '#2e83ff',
+                    backgroundColor: copiedCode ? '#0e274d' : '#2e83ff',
                     border: 'none',
                     borderRadius: '8px',
                     color: '#FFFFFF',
@@ -348,13 +348,13 @@ export const ShoppingScreen: React.FC = () => {
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                backgroundColor: '#ecfdf5',
-                color: '#10B981',
+                backgroundColor: '#eef5ff',
+                color: '#2e83ff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 12px auto',
-                border: '1.5px solid #a7f3d0',
+                border: '1.5px solid #d6e6ff',
               }}
             >
               <CheckCircle2 size={32} />
@@ -369,7 +369,7 @@ export const ShoppingScreen: React.FC = () => {
 
             <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
               <div style={{ fontSize: '14px', fontWeight: '800', color: '#0f172a' }}>{purchasedDeal.title}</div>
-              <div style={{ fontSize: '13px', fontWeight: '800', color: '#10B981', marginTop: '6px', fontVariantNumeric: 'tabular-nums' }}>
+              <div style={{ fontSize: '13px', fontWeight: '800', color: '#2e83ff', marginTop: '6px', fontVariantNumeric: 'tabular-nums' }}>
                 Paid ₹{purchasedDeal.paidAmount.toLocaleString()} via UPI
               </div>
             </div>

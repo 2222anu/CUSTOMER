@@ -153,9 +153,9 @@ export const RewardsScreen: React.FC = () => {
             >
               {card.isScratched ? (
                 <>
-                  <CheckCircle size={28} color="#10B981" style={{ margin: '0 auto 8px auto' }} />
+                  <CheckCircle size={28} color="#2e83ff" style={{ margin: '0 auto 8px auto' }} />
                   <div style={{ fontWeight: '800', fontSize: '13px', color: '#0f172a' }}>{card.rewardText}</div>
-                  <div style={{ fontSize: '11px', color: '#10B981', marginTop: '4px', fontWeight: '700' }}>Claimed</div>
+                  <div style={{ fontSize: '11px', color: '#2e83ff', marginTop: '4px', fontWeight: '800' }}>Claimed</div>
                 </>
               ) : (
                 <>

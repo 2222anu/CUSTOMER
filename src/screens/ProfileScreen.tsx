@@ -18,6 +18,7 @@ import {
   Edit3,
   QrCode,
   History,
+  CheckCircle2,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { ListRow } from '../components/ListRow';
@@ -34,15 +35,15 @@ export const ProfileScreen: React.FC = () => {
   } = useApp();
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '36px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f9', minHeight: '100%', paddingBottom: '36px' }}>
       <AppHeader title="Profile" showSettings={false} showBack={true} onBack={() => navigateTo('HOME')} />
 
-      {/* User Header Profile Hero Card */}
+      {/* User Header Profile Hero Card - Luxury Fintech Membership Card */}
       <div
         style={{
           margin: '16px 20px 24px 20px',
-          background: 'linear-gradient(145deg, #0e274d 0%, #0a1c36 100%)',
-          border: '1.5px solid rgba(46, 131, 255, 0.35)',
+          background: 'linear-gradient(135deg, #071529 0%, #0a2540 50%, #1d4ed8 100%)',
+          border: '1.5px solid rgba(56, 189, 248, 0.35)',
           borderRadius: '20px',
           padding: '24px 20px',
           color: '#FFFFFF',
@@ -52,24 +53,60 @@ export const ProfileScreen: React.FC = () => {
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
+          boxShadow: '0 8px 24px rgba(10, 25, 47, 0.25)',
         }}
       >
         {/* Subtle decorative glow ring */}
         <div
           style={{
             position: 'absolute',
-            top: '-50px',
-            right: '-50px',
+            top: '-40px',
+            right: '-30px',
+            width: '150px',
+            height: '150px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%)',
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '-30px',
+            left: '-20px',
             width: '130px',
             height: '130px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(46,131,255,0.2) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(46, 131, 255, 0.25) 0%, transparent 70%)',
             pointerEvents: 'none',
           }}
         />
 
+        {/* Top Right Verified Pill */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            backgroundColor: 'rgba(46, 131, 255, 0.25)',
+            border: '1px solid rgba(56, 189, 248, 0.5)',
+            borderRadius: '20px',
+            padding: '3px 10px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            fontSize: '10px',
+            fontWeight: 800,
+            letterSpacing: '0.05em',
+            color: '#38bdf8',
+            backdropFilter: 'blur(6px)',
+          }}
+        >
+          <CheckCircle2 size={11} color="#38bdf8" /> KYC VERIFIED
+        </div>
+
         {/* Avatar with Edit Badge */}
-        <div style={{ position: 'relative', marginBottom: '14px' }}>
+        <div style={{ position: 'relative', marginBottom: '14px', marginTop: '6px' }}>
           <div
             onClick={() => navigateTo('HOME')}
             role="button"
@@ -77,8 +114,8 @@ export const ProfileScreen: React.FC = () => {
             aria-label="Go to Home"
             className="interactive-tap"
             style={{
-              width: '76px',
-              height: '76px',
+              width: '80px',
+              height: '80px',
               borderRadius: '50%',
               backgroundColor: user.avatarBgColor || '#2e83ff',
               color: '#FFFFFF',
@@ -88,7 +125,8 @@ export const ProfileScreen: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center',
               overflow: 'hidden',
-              border: '3px solid rgba(255, 255, 255, 0.25)',
+              border: '3px solid rgba(255, 255, 255, 0.3)',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
               cursor: 'pointer',
             }}
           >
@@ -110,12 +148,13 @@ export const ProfileScreen: React.FC = () => {
               height: '28px',
               borderRadius: '50%',
               backgroundColor: '#FFFFFF',
-              border: '2px solid #0e274d',
+              border: '2px solid #071529',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#2e83ff',
               cursor: 'pointer',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
             }}
             title="Edit Profile"
           >
@@ -130,7 +169,7 @@ export const ProfileScreen: React.FC = () => {
         <div style={{ fontSize: '12px', color: '#82b5ff', fontWeight: '700', marginTop: '4px', letterSpacing: '0.01em' }}>
           {user.upiId} &bull; {user.mobile}
         </div>
-        <div style={{ fontSize: '11px', color: '#94a3b8', fontWeight: '600', marginTop: '3px' }}>
+        <div style={{ fontSize: '11px', color: '#cbd5e1', fontWeight: '600', marginTop: '3px' }}>
           {user.email}
         </div>
 
@@ -146,7 +185,7 @@ export const ProfileScreen: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '6px',
-              padding: '9px 14px',
+              padding: '10px 14px',
               borderRadius: '12px',
               backgroundColor: '#2e83ff',
               border: 'none',
@@ -154,6 +193,7 @@ export const ProfileScreen: React.FC = () => {
               fontSize: '12px',
               fontWeight: '800',
               cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(46, 131, 255, 0.3)',
             }}
           >
             <Edit3 size={14} />
@@ -169,7 +209,7 @@ export const ProfileScreen: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '6px',
-              padding: '9px 14px',
+              padding: '10px 14px',
               borderRadius: '12px',
               backgroundColor: 'rgba(255, 255, 255, 0.12)',
               border: '1px solid rgba(255, 255, 255, 0.25)',
@@ -177,6 +217,7 @@ export const ProfileScreen: React.FC = () => {
               fontSize: '12px',
               fontWeight: '800',
               cursor: 'pointer',
+              backdropFilter: 'blur(4px)',
             }}
           >
             <QrCode size={14} />
@@ -195,7 +236,7 @@ export const ProfileScreen: React.FC = () => {
           <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
             <ListRow icon={<Landmark size={18} color="#2e83ff" />} label="Bank Accounts" onClick={() => navigateTo('BANK_ACCOUNTS')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Zap size={18} color="#2e83ff" />} label="UPI Settings & AutoPay" onClick={() => navigateTo('UPI_SETTINGS')} />
+            <ListRow icon={<Zap size={18} color="#2e83ff" />} label="UPI Settings & PIN" onClick={() => navigateTo('UPI_SETTINGS')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
             <ListRow icon={<CreditCard size={18} color="#2e83ff" />} label="Payment Methods & Cards" onClick={() => navigateTo('PAYMENT_METHODS')} />
           </div>
@@ -221,9 +262,9 @@ export const ProfileScreen: React.FC = () => {
             Lifestyle & Rewards
           </div>
           <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-            <ListRow icon={<Gift size={18} color="#2e83ff" />} label="Rewards & Cashback" onClick={() => navigateTo('REWARDS')} />
+            <ListRow icon={<Gift size={18} color="#2e83ff" />} label="Rewards & Scratch Cards" onClick={() => navigateTo('REWARDS')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<ShoppingBag size={18} color="#2e83ff" />} label="Shopping Deals" onClick={() => navigateTo('SHOPPING')} />
+            <ListRow icon={<ShoppingBag size={18} color="#2e83ff" />} label="Shopping Deals & Offers" onClick={() => navigateTo('SHOPPING')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
             <ListRow icon={<MessageSquare size={18} color="#2e83ff" />} label="Messages & Alerts" onClick={() => navigateTo('MESSAGES')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
@@ -239,7 +280,7 @@ export const ProfileScreen: React.FC = () => {
             Settings & Security
           </div>
           <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-            <ListRow icon={<ShieldCheck size={18} color="#2e83ff" />} label="Security & Biometrics" onClick={() => navigateTo('SECURITY')} />
+            <ListRow icon={<ShieldCheck size={18} color="#2e83ff" />} label="Security & Active Devices" onClick={() => navigateTo('SECURITY')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
             <ListRow icon={<Bell size={18} color="#2e83ff" />} label="Notifications & Alerts" onClick={() => navigateTo('NOTIFICATIONS')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
@@ -250,16 +291,20 @@ export const ProfileScreen: React.FC = () => {
               onClick={() => setIsLanguageModalOpen(true)}
             />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<HelpCircle size={18} color="#2e83ff" />} label="Help & Support" onClick={() => navigateTo('HELP_SUPPORT')} />
+            <ListRow icon={<HelpCircle size={18} color="#2e83ff" />} label="Help & Support Center" onClick={() => navigateTo('HELP_SUPPORT')} />
             <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
             <ListRow icon={<Lock size={18} color="#2e83ff" />} label="Privacy Policy & Terms" onClick={() => navigateTo('PRIVACY')} />
           </div>
         </div>
 
-        {/* Log Out */}
+        {/* Log Out - Refined Slate & Navy Row (Zero Red) */}
         <div>
-          <div style={{ backgroundColor: '#ffffff', border: '1px solid #fee2e2', borderRadius: '16px', overflow: 'hidden' }}>
-            <ListRow icon={<LogOut size={18} color="#DC2626" />} label="Log Out of QTPay" onClick={() => setIsLogoutModalOpen(true)} danger />
+          <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
+            <ListRow
+              icon={<LogOut size={18} color="#64748b" />}
+              label="Log Out of QTPay"
+              onClick={() => setIsLogoutModalOpen(true)}
+            />
           </div>
         </div>
       </div>

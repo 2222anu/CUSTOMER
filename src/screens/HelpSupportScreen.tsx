@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HelpCircle, MessageSquare, PhoneCall, ChevronDown, ChevronUp, Send, CheckCircle2 } from 'lucide-react';
+import { HelpCircle, MessageSquare, PhoneCall, ChevronDown, ChevronUp, Send, CheckCircle2, ShieldAlert } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { ListRow } from '../components/ListRow';
 import { Modal } from '../components/Modal';
@@ -18,7 +18,7 @@ export const HelpSupportScreen: React.FC = () => {
   const faqs = [
     { q: 'How long does a UPI refund take?', a: 'Instant UPI refunds are usually credited within 1-2 hours. In rare bank network delays, it can take up to 24-48 hours.' },
     { q: 'What is the daily UPI transfer limit?', a: 'As per NPCI guidelines, the standard daily UPI transaction limit is ₹1,00,000 across all UPI apps.' },
-    { q: 'How do I add a new bank account?', a: 'Go to Profile > Bank Accounts > tap Add Bank Account, select your bank, and verify your mobile number via SMS.' },
+    { q: 'How do I add a new bank account?', a: 'Go to Profile > Bank Accounts > tap Add Bank, select your bank, and verify your mobile number via SMS.' },
   ];
 
   const handleSendChat = (e: React.FormEvent) => {
@@ -52,51 +52,53 @@ export const HelpSupportScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#f4f6f9', minHeight: '100%', paddingBottom: '36px' }}>
       <AppHeader title="Help & Support" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
-        {/* Priority Banner */}
+        {/* Priority Hero Banner */}
         <div
           style={{
-            background: 'linear-gradient(145deg, #0e274d 0%, #0a1c36 100%)',
-            border: '1.5px solid rgba(46, 131, 255, 0.35)',
+            background: 'linear-gradient(135deg, #071529 0%, #0a2540 55%, #1d4ed8 100%)',
+            border: '1.5px solid rgba(56, 189, 248, 0.35)',
             borderRadius: '20px',
             padding: '24px 20px',
-            marginBottom: '20px',
+            marginBottom: '22px',
             textAlign: 'center',
             color: '#FFFFFF',
+            boxShadow: '0 8px 24px rgba(10, 25, 47, 0.2)',
           }}
         >
           <div
             style={{
-              width: '52px',
-              height: '52px',
+              width: '54px',
+              height: '54px',
               borderRadius: '16px',
-              backgroundColor: 'rgba(46, 131, 255, 0.2)',
-              color: '#2e83ff',
+              backgroundColor: 'rgba(255, 255, 255, 0.12)',
+              color: '#38bdf8',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 12px auto',
-              border: '1.5px solid rgba(46, 131, 255, 0.35)',
+              border: '1px solid rgba(255, 255, 255, 0.22)',
+              backdropFilter: 'blur(6px)',
             }}
           >
-            <HelpCircle size={26} />
+            <HelpCircle size={28} />
           </div>
-          <h3 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '6px', color: '#FFFFFF', margin: 0 }}>
-            24/7 Priority Support
+          <h3 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '6px', color: '#FFFFFF', margin: 0 }}>
+            24/7 Priority Concierge
           </h3>
-          <p style={{ fontSize: '13px', color: '#94a3b8', marginTop: '6px', marginBottom: 0 }}>
-            We're here to help resolve any payment or account issues instantly.
+          <p style={{ fontSize: '12.5px', color: 'rgba(255, 255, 255, 0.75)', marginTop: '6px', marginBottom: 0 }}>
+            Instant dispute resolution and customer assistance
           </p>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-          Contact Assistance
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+          Assistance Channels
         </div>
 
-        <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden', marginBottom: '24px' }}>
+        <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '18px', overflow: 'hidden', marginBottom: '24px', boxShadow: '0 2px 8px rgba(15, 23, 42, 0.02)' }}>
           <ListRow
             icon={<MessageSquare size={18} color="#2e83ff" />}
             label="Live Chat with Support"
@@ -112,16 +114,15 @@ export const HelpSupportScreen: React.FC = () => {
           />
           <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
           <ListRow
-            icon={<HelpCircle size={18} color="#DC2626" />}
+            icon={<ShieldAlert size={18} color="#2e83ff" />}
             label="Report Dispute or Fraud"
             subLabel="File a formal transaction complaint"
             onClick={() => setActiveModal('dispute')}
-            danger
           />
         </div>
 
         {/* FAQs */}
-        <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
           Frequently Asked Questions
         </div>
 
@@ -135,18 +136,19 @@ export const HelpSupportScreen: React.FC = () => {
                 style={{
                   backgroundColor: '#FFFFFF',
                   border: '1px solid #e2e8f0',
-                  borderRadius: '14px',
-                  padding: '14px 16px',
+                  borderRadius: '16px',
+                  padding: '16px 18px',
                   cursor: 'pointer',
+                  boxShadow: '0 2px 6px rgba(15, 23, 42, 0.02)',
                 }}
                 onClick={() => setExpandedFaq(isExpanded ? null : index)}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>{faq.q}</span>
+                  <span style={{ fontSize: '13.5px', fontWeight: 700, color: '#0f172a' }}>{faq.q}</span>
                   {isExpanded ? <ChevronUp size={16} color="#2e83ff" /> : <ChevronDown size={16} color="#64748b" />}
                 </div>
                 {isExpanded && (
-                  <p style={{ fontSize: '13px', color: '#475569', marginTop: '10px', marginBottom: 0, lineHeight: '1.5', borderTop: '1px solid #f1f5f9', paddingTop: '10px' }}>
+                  <p style={{ fontSize: '12.5px', color: '#475569', marginTop: '10px', marginBottom: 0, lineHeight: '1.5', borderTop: '1px solid #f1f5f9', paddingTop: '10px' }}>
                     {faq.a}
                   </p>
                 )}
@@ -158,7 +160,7 @@ export const HelpSupportScreen: React.FC = () => {
 
       {/* Live Chat Modal */}
       <Modal isOpen={activeModal === 'chat'} onClose={() => setActiveModal(null)} title="Live Customer Support">
-        <div style={{ height: '260px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '12px', paddingRight: '4px' }}>
+        <div style={{ height: '260px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '14px', paddingRight: '4px' }}>
           {chatMessages.map((msg, i) => (
             <div
               key={i}
@@ -183,14 +185,14 @@ export const HelpSupportScreen: React.FC = () => {
             value={inputMsg}
             onChange={(e) => setInputMsg(e.target.value)}
             placeholder="Type your question..."
-            style={{ flex: 1, padding: '12px', borderRadius: '12px', border: '1.5px solid #cbd5e1', fontSize: '14px', outline: 'none' }}
+            style={{ flex: 1, padding: '12px 14px', borderRadius: '12px', border: '1.5px solid #cbd5e1', fontSize: '13px', outline: 'none' }}
           />
           <button
             type="submit"
             className="interactive-tap"
-            style={{ backgroundColor: '#2e83ff', border: 'none', color: '#FFFFFF', padding: '0 16px', borderRadius: '12px', fontWeight: '700', cursor: 'pointer' }}
+            style={{ backgroundColor: '#2e83ff', border: 'none', color: '#FFFFFF', padding: '0 16px', borderRadius: '12px', fontWeight: 800, cursor: 'pointer' }}
           >
-            <Send size={18} />
+            <Send size={16} />
           </button>
         </form>
       </Modal>
@@ -214,12 +216,12 @@ export const HelpSupportScreen: React.FC = () => {
           >
             <PhoneCall size={28} />
           </div>
-          <h4 style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a', margin: '0 0 6px 0' }}>1800-123-QTPAY</h4>
-          <p style={{ fontSize: '13px', color: '#64748b', margin: '0 0 20px 0' }}>Available 24x7 in English, Telugu, Hindi and Tamil</p>
+          <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', margin: '0 0 6px 0' }}>1800-123-QTPAY</h4>
+          <p style={{ fontSize: '12.5px', color: '#64748b', margin: '0 0 20px 0' }}>Available 24x7 in English, Telugu, Hindi and Tamil</p>
           <a
             href="tel:180012378729"
             className="interactive-tap"
-            style={{ display: 'inline-block', padding: '12px 28px', backgroundColor: '#2e83ff', color: '#FFFFFF', borderRadius: '12px', fontWeight: '800', fontSize: '14px', textDecoration: 'none' }}
+            style={{ display: 'inline-block', padding: '12px 28px', backgroundColor: '#2e83ff', color: '#FFFFFF', borderRadius: '12px', fontWeight: 800, fontSize: '13px', textDecoration: 'none' }}
           >
             Call Now
           </a>
@@ -230,14 +232,14 @@ export const HelpSupportScreen: React.FC = () => {
       <Modal isOpen={activeModal === 'dispute'} onClose={() => setActiveModal(null)} title="Report Transaction Dispute">
         {disputeSuccess ? (
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <CheckCircle2 size={44} color="#10b981" style={{ margin: '0 auto 12px auto' }} />
-            <h4 style={{ fontSize: '16px', fontWeight: '800', color: '#0f172a' }}>Dispute Ticket Filed Successfully!</h4>
+            <CheckCircle2 size={44} color="#2e83ff" style={{ margin: '0 auto 12px auto' }} />
+            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a' }}>Dispute Ticket Filed Successfully!</h4>
             <p style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>Ticket ID: #QT-DISP-{Math.floor(100000 + Math.random() * 900000)}</p>
           </div>
         ) : (
           <form onSubmit={handleDisputeSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             <div>
-              <label style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
+              <label style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
                 Transaction UTR / ID
               </label>
               <input
@@ -246,12 +248,12 @@ export const HelpSupportScreen: React.FC = () => {
                 onChange={(e) => setDisputeTxnId(e.target.value)}
                 placeholder="e.g. UTR984729104821"
                 required
-                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1.5px solid #cbd5e1', fontSize: '14px', outline: 'none' }}
+                style={{ width: '100%', padding: '12px 14px', borderRadius: '12px', border: '1.5px solid #cbd5e1', fontSize: '13px', outline: 'none' }}
               />
             </div>
 
             <div>
-              <label style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
+              <label style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
                 Reason for Dispute
               </label>
               <textarea
@@ -260,7 +262,7 @@ export const HelpSupportScreen: React.FC = () => {
                 placeholder="Describe what went wrong with the transaction..."
                 rows={3}
                 required
-                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1.5px solid #cbd5e1', fontSize: '14px', outline: 'none', resize: 'none', fontFamily: 'inherit' }}
+                style={{ width: '100%', padding: '12px 14px', borderRadius: '12px', border: '1.5px solid #cbd5e1', fontSize: '13px', outline: 'none', resize: 'none', fontFamily: 'inherit' }}
               />
             </div>
 
@@ -268,14 +270,14 @@ export const HelpSupportScreen: React.FC = () => {
               type="submit"
               className="interactive-tap"
               style={{
-                marginTop: '10px',
+                marginTop: '8px',
                 padding: '14px',
                 borderRadius: '12px',
-                backgroundColor: '#dc2626',
+                backgroundColor: '#0e274d',
                 color: '#FFFFFF',
                 border: 'none',
-                fontWeight: '800',
-                fontSize: '14px',
+                fontWeight: 800,
+                fontSize: '13.5px',
                 cursor: 'pointer',
               }}
             >

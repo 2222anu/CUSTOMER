@@ -9,12 +9,12 @@ interface EditProfileModalProps {
 }
 
 const COLOR_PRESETS = [
-  { name: 'Dodger Blue', color: '#2e83ff' },
-  { name: 'Deep Blue', color: '#0e274d' },
-  { name: 'Royal Blue', color: '#174280' },
-  { name: 'Sky Blue', color: '#438fff' },
-  { name: 'Emerald', color: '#10B981' },
-  { name: 'Purple', color: '#8B5CF6' },
+  { name: 'Electric Blue', color: '#2e83ff' },
+  { name: 'Midnight Navy', color: '#071529' },
+  { name: 'Deep Sapphire', color: '#0e274d' },
+  { name: 'Cyber Cyan', color: '#38bdf8' },
+  { name: 'Royal Blue', color: '#1d4ed8' },
+  { name: 'Slate Navy', color: '#334155' },
 ];
 
 export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: propIsOpen, onClose: propOnClose }) => {

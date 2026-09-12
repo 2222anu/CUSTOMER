@@ -396,13 +396,13 @@ export const FoodScreen: React.FC = () => {
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                backgroundColor: '#ecfdf5',
-                color: '#10B981',
+                backgroundColor: '#eef5ff',
+                color: '#2e83ff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 12px auto',
-                border: '1.5px solid #a7f3d0',
+                border: '1.5px solid #d6e6ff',
               }}
             >
               <CheckCircle2 size={32} />

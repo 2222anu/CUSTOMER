@@ -119,13 +119,13 @@ export const UPISettingsScreen: React.FC = () => {
       <Modal isOpen={isPinModalOpen} onClose={() => setIsPinModalOpen(false)} title="Change UPI PIN">
         {pinSuccess ? (
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <CheckCircle2 size={44} color="#10b981" style={{ margin: '0 auto 12px auto' }} />
+            <CheckCircle2 size={44} color="#2e83ff" style={{ margin: '0 auto 12px auto' }} />
             <h4 style={{ fontSize: '16px', fontWeight: '800', color: '#0f172a' }}>UPI PIN Changed Successfully!</h4>
           </div>
         ) : (
           <form onSubmit={handlePinSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             {pinError && (
-              <div style={{ padding: '8px 12px', borderRadius: '10px', backgroundColor: '#fef2f2', color: '#dc2626', fontSize: '12px', fontWeight: '600' }}>
+              <div style={{ padding: '8px 12px', borderRadius: '10px', backgroundColor: '#f1f5f9', border: '1px solid #cbd5e1', color: '#0f172a', fontSize: '12px', fontWeight: '700' }}>
                 {pinError}
               </div>
             )}

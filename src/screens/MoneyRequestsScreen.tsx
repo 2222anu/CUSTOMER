@@ -134,10 +134,10 @@ export const MoneyRequestsScreen: React.FC = () => {
                   className="interactive-tap"
                   style={{
                     flex: 1,
-                    backgroundColor: '#fef2f2',
-                    border: '1px solid #fee2e2',
-                    color: '#ef4444',
-                    borderRadius: '10px',
+                    backgroundColor: '#ffffff',
+                    border: '1px solid #cbd5e1',
+                    color: '#64748b',
+                    borderRadius: '12px',
                     padding: '12px',
                     fontWeight: 800,
                     fontSize: '13px',

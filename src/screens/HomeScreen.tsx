@@ -1,43 +1,40 @@
 import React, { useState } from 'react';
 import {
   Bell,
-  Eye,
-  EyeOff,
   Camera,
   Send,
-  Download,
   FileText,
   Zap,
   Smartphone,
   Tv,
   Car,
   ChevronRight,
+  Landmark,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { QPayHeroBanner } from '../components/QPayHeroBanner';
+import { PWAInstallPrompt } from '../components/PWAInstallPrompt';
 import { BankCardCarousel } from '../components/BankCardCarousel';
+import { BalanceSummaryModal } from '../components/BalanceSummaryModal';
 import { TransactionRow } from '../components/TransactionRow';
 import { useApp } from '../state/AppContext';
-import { formatCurrency } from '../utils/formatters';
 
 export const HomeScreen: React.FC = () => {
   const { bankAccounts, transactions, navigateTo, setIsScanModalOpen, openPinModal } = useApp();
-  const [showTotalBalance, setShowTotalBalance] = useState(false);
+  const [isBalanceModalOpen, setIsBalanceModalOpen] = useState(false);
 
   const totalBalance = bankAccounts.reduce((acc, bank) => acc + bank.balance, 0);
   const recentTransactions = transactions.slice(0, 3);
 
-  const handleTotalBalanceEyeClick = () => {
-    if (showTotalBalance) {
-      setShowTotalBalance(false);
-    } else {
-      openPinModal({
-        title: 'Check Total Available Balance',
-        subTitle: 'Verify 4-digit UPI PIN to view balance',
-        amount: totalBalance,
-        onSuccess: () => setShowTotalBalance(true),
-      });
-    }
+  const handleCheckBalanceClick = () => {
+    openPinModal({
+      title: 'Check Bank Balance',
+      subTitle: 'Enter 4-digit UPI PIN to view account balance',
+      amount: totalBalance,
+      onSuccess: () => {
+        setIsBalanceModalOpen(true);
+      },
+    });
   };
 
   return (
@@ -84,72 +81,15 @@ export const HomeScreen: React.FC = () => {
       {/* Promotional Hero Banner */}
       <QPayHeroBanner />
 
-      {/* 2. Total Available Balance Hero Card (MobiKwik Blue Banner, 8px Radius) */}
-      <div
-        style={{
-          margin: '16px 20px 16px 20px',
-          backgroundColor: '#2e83ff',
-          borderRadius: '8px',
-          padding: '18px',
-          color: '#ffffff',
-          boxShadow: 'none',
-          border: 'none',
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '13px', fontWeight: '600', color: 'rgba(255, 255, 255, 0.9)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-            QTPay Wallet & Balance
-          </span>
-          <button
-            onClick={handleTotalBalanceEyeClick}
-            title="Click to enter UPI PIN and view balance"
-            style={{
-              width: '34px',
-              height: '34px',
-              borderRadius: '10px',
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
-              border: 'none',
-              color: '#ffffff',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              boxShadow: 'none',
-            }}
-          >
-            {showTotalBalance ? <EyeOff size={18} /> : <Eye size={18} />}
-          </button>
-        </div>
+      {/* PWA Install Prompt */}
+      <PWAInstallPrompt />
 
-        <div style={{ fontSize: '28px', fontWeight: '900', margin: '12px 0 18px 0', letterSpacing: '0.02em', color: '#ffffff' }}>
-          {showTotalBalance ? formatCurrency(totalBalance) : '₹ •••••••••'}
+      {/* My Bank Accounts Carousel */}
+      {bankAccounts.length > 0 && (
+        <div style={{ marginTop: '16px' }}>
+          <BankCardCarousel banks={bankAccounts} />
         </div>
-
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '13px', fontWeight: '600', color: 'rgba(255, 255, 255, 0.9)' }}>
-            Linked Accounts: {bankAccounts.length}
-          </span>
-          <button
-            onClick={() => navigateTo('BANK_ACCOUNTS')}
-            style={{
-              backgroundColor: '#ffffff',
-              border: 'none',
-              borderRadius: '20px',
-              color: '#2e83ff',
-              padding: '8px 18px',
-              fontSize: '13px',
-              fontWeight: '800',
-              cursor: 'pointer',
-              boxShadow: 'none',
-            }}
-          >
-            View Accounts
-          </button>
-        </div>
-      </div>
-
-      {/* 3. My Bank Accounts Carousel */}
-      {bankAccounts.length > 0 && <BankCardCarousel banks={bankAccounts} />}
+      )}
 
       {/* 4. Quick Actions Container Card (0 Shadows, MobiKwik Style) */}
       <div
@@ -232,9 +172,9 @@ export const HomeScreen: React.FC = () => {
             </span>
           </div>
 
-          {/* Request */}
+          {/* Check Balance */}
           <div
-            onClick={() => navigateTo('REQUEST_MONEY')}
+            onClick={handleCheckBalanceClick}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -256,12 +196,13 @@ export const HomeScreen: React.FC = () => {
                 justifyContent: 'center',
                 boxShadow: 'none',
                 border: '1px solid #d6e6ff',
+                position: 'relative',
               }}
             >
-              <Download size={22} />
+              <Landmark size={22} />
             </div>
             <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center' }}>
-              Request
+              Check Balance
             </span>
           </div>
 
@@ -493,6 +434,15 @@ export const HomeScreen: React.FC = () => {
           <TransactionRow key={txn.id} transaction={txn} onClick={() => navigateTo('HISTORY')} />
         ))}
       </div>
+
+      {/* Verified UPI Balance Modal Sheet */}
+      <BalanceSummaryModal
+        isOpen={isBalanceModalOpen}
+        onClose={() => setIsBalanceModalOpen(false)}
+        bankAccounts={bankAccounts}
+        totalBalance={totalBalance}
+        onManageAccounts={() => navigateTo('BANK_ACCOUNTS')}
+      />
     </div>
   );
 };

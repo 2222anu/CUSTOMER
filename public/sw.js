@@ -1,10 +1,13 @@
 // QTPay Progressive Web App (PWA) Service Worker
-const CACHE_NAME = 'qtpay-pwa-v3';
+const CACHE_NAME = 'qtpay-pwa-v4';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/favicon.svg'
+  '/favicon.svg',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/apple-touch-icon.png'
 ];
 
 // Install Event
@@ -32,8 +35,6 @@ self.addEventListener('activate', (event) => {
 // Fetch Event — Network first, Cache fallback
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
-
-  // Skip non-http requests
   if (!event.request.url.startsWith('http')) return;
 
   event.respondWith(

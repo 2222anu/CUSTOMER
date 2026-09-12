@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import type { BankAccount } from '../types';
 import { formatCurrency } from '../utils/formatters';
 import { useApp } from '../state/AppContext';
-import { Landmark, Eye, EyeOff, Plus, Wifi, ChevronRight } from 'lucide-react';
+import { Landmark, Eye, EyeOff, Plus, ChevronRight, ShieldCheck } from 'lucide-react';
 
 interface BankCardCarouselProps {
   banks: BankAccount[];
@@ -12,31 +12,43 @@ const getBankStyle = (bankName: string) => {
   const nameUpper = bankName.toUpperCase();
   if (nameUpper.includes('HDFC')) {
     return {
-      gradient: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%)',
+      gradient: 'linear-gradient(135deg, #001f3f 0%, #003366 50%, #0284c7 100%)',
       tagText: 'HDFC BANK',
+      shortName: 'HDFC',
     };
   }
   if (nameUpper.includes('STATE') || nameUpper.includes('SBI')) {
     return {
-      gradient: 'linear-gradient(135deg, #0369a1 0%, #0284c7 100%)',
-      tagText: 'SBI BANK',
+      gradient: 'linear-gradient(135deg, #072a40 0%, #0369a1 50%, #0284c7 100%)',
+      tagText: 'STATE BANK OF INDIA',
+      shortName: 'SBI',
     };
   }
   if (nameUpper.includes('ICICI')) {
     return {
-      gradient: 'linear-gradient(135deg, #991b1b 0%, #c2410c 100%)',
+      gradient: 'linear-gradient(135deg, #0a2540 0%, #153e75 50%, #1a56db 100%)',
       tagText: 'ICICI BANK',
+      shortName: 'ICICI',
     };
   }
   if (nameUpper.includes('AXIS')) {
     return {
-      gradient: 'linear-gradient(135deg, #831843 0%, #9d174d 100%)',
+      gradient: 'linear-gradient(135deg, #2b0914 0%, #4a0e20 50%, #831843 100%)',
       tagText: 'AXIS BANK',
+      shortName: 'AXIS',
+    };
+  }
+  if (nameUpper.includes('YES')) {
+    return {
+      gradient: 'linear-gradient(135deg, #0b192c 0%, #172554 50%, #1d4ed8 100%)',
+      tagText: 'YES BANK',
+      shortName: 'YES',
     };
   }
   return {
-    gradient: 'linear-gradient(135deg, #1e1b4b 0%, #3730a3 100%)',
+    gradient: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #2563eb 100%)',
     tagText: bankName.toUpperCase(),
+    shortName: bankName.toUpperCase(),
   };
 };
 
@@ -46,6 +58,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeftState, setScrollLeftState] = useState(0);
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!carouselRef.current) return;
@@ -64,6 +77,14 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
     const x = e.pageX - carouselRef.current.offsetLeft;
     const walk = (x - startX) * 1.5;
     carouselRef.current.scrollLeft = scrollLeftState - walk;
+  };
+
+  const handleScroll = () => {
+    if (!carouselRef.current) return;
+    const cardWidth = 310;
+    const scrollPos = carouselRef.current.scrollLeft;
+    const index = Math.round(scrollPos / cardWidth);
+    setActiveCardIndex(Math.min(Math.max(index, 0), banks.length - 1));
   };
 
   const handleCardBalanceClick = (bank: BankAccount, e: React.MouseEvent) => {
@@ -101,7 +122,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               fontSize: '11px',
               fontWeight: 700,
               backgroundColor: '#eef5ff',
-              color: '#2563eb',
+              color: '#2e83ff',
               padding: '2px 8px',
               borderRadius: '12px',
               border: '1px solid #d6e6ff',
@@ -118,7 +139,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
             border: 'none',
             fontSize: '12px',
             fontWeight: 700,
-            color: '#2563eb',
+            color: '#2e83ff',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -136,12 +157,13 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
         onMouseLeave={handleMouseLeaveOrUp}
         onMouseUp={handleMouseLeaveOrUp}
         onMouseMove={handleMouseMove}
+        onScroll={handleScroll}
         style={{
           display: 'flex',
           gap: '14px',
           overflowX: 'auto',
           scrollSnapType: isMouseDown ? 'none' : 'x mandatory',
-          padding: '4px 20px 10px 20px',
+          padding: '4px 20px 8px 20px',
           scrollbarWidth: 'none',
           WebkitOverflowScrolling: 'touch',
           cursor: isMouseDown ? 'grabbing' : 'grab',
@@ -150,6 +172,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
       >
         {banks.map((bank) => {
           const style = getBankStyle(bank.bankName);
+          const rawNumbers = bank.accountNumberMasked.replace(/[^0-9]/g, '') || '3616';
 
           return (
             <div
@@ -157,11 +180,11 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               onClick={() => navigateTo('BANK_ACCOUNTS')}
               style={{
                 scrollSnapAlign: 'start',
-                flex: '0 0 280px',
-                height: '160px',
+                flex: '0 0 300px',
+                height: '175px',
                 background: style.gradient,
-                borderRadius: '16px',
-                padding: '18px',
+                borderRadius: '14px',
+                padding: '16px 18px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -170,126 +193,151 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                 color: '#ffffff',
                 position: 'relative',
                 overflow: 'hidden',
-                boxShadow: bank.isPrimary ? '0 8px 20px rgba(37, 99, 235, 0.25)' : 'none',
-                border: bank.isPrimary ? '2px solid rgba(255, 255, 255, 0.4)' : '1px solid rgba(255, 255, 255, 0.15)',
+                border: bank.isPrimary ? '1.5px solid rgba(255, 255, 255, 0.35)' : '1px solid rgba(255, 255, 255, 0.15)',
               }}
             >
-              {/* Background Glow */}
+              {/* Subtle Atmospheric Light Gradients */}
               <div
                 style={{
                   position: 'absolute',
-                  top: '-30%',
-                  right: '-20%',
-                  width: '180px',
-                  height: '180px',
+                  top: '-40%',
+                  right: '-25%',
+                  width: '200px',
+                  height: '200px',
                   borderRadius: '50%',
-                  background: 'rgba(255, 255, 255, 0.08)',
+                  background: 'radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%)',
+                  pointerEvents: 'none',
+                }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '-30%',
+                  left: '-10%',
+                  width: '160px',
+                  height: '160px',
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(46, 131, 255, 0.25) 0%, transparent 75%)',
                   pointerEvents: 'none',
                 }}
               />
 
-              {/* Card Header */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 2 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {/* 1. Card Top Header */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', zIndex: 2 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '9px' }}>
                   <div
                     style={{
-                      width: '32px',
-                      height: '32px',
+                      width: '34px',
+                      height: '34px',
                       borderRadius: '8px',
                       backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                      backdropFilter: 'blur(4px)',
+                      border: '1px solid rgba(255, 255, 255, 0.25)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
+                      backdropFilter: 'blur(4px)',
                     }}
                   >
-                    <Landmark size={18} color="#ffffff" />
+                    <Landmark size={17} color="#ffffff" />
                   </div>
                   <div>
-                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#ffffff', letterSpacing: '0.02em' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 800, color: '#ffffff', letterSpacing: '0.02em', lineHeight: '16px' }}>
                       {style.tagText}
-                    </span>
-                    <div style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.75)' }}>
-                      {bank.accountType}
+                    </div>
+                    <div style={{ fontSize: '10.5px', color: 'rgba(255, 255, 255, 0.75)', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <span>{bank.accountType}</span>
+                      <span>•</span>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+                        <ShieldCheck size={11} color="#60a5fa" /> UPI Linked
+                      </span>
                     </div>
                   </div>
                 </div>
 
-                {/* EMV Chip & Primary Badge */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  {bank.isPrimary && (
-                    <span
-                      style={{
-                        fontSize: '9px',
-                        fontWeight: 800,
-                        backgroundColor: '#ffffff',
-                        color: '#2563eb',
-                        padding: '2px 8px',
-                        borderRadius: '10px',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.04em',
-                      }}
-                    >
-                      Primary
-                    </span>
-                  )}
-                  <Wifi size={16} color="rgba(255, 255, 255, 0.7)" />
+                {/* Primary Pill Badge */}
+                {bank.isPrimary && (
+                  <span
+                    style={{
+                      fontSize: '9px',
+                      fontWeight: 800,
+                      backgroundColor: 'rgba(255, 255, 255, 0.22)',
+                      color: '#ffffff',
+                      border: '1px solid rgba(255, 255, 255, 0.35)',
+                      padding: '2px 8px',
+                      borderRadius: '10px',
+                      letterSpacing: '0.05em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    PRIMARY
+                  </span>
+                )}
+              </div>
+
+              {/* 2. Middle Row: Chip Graphic + Masked Number */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 2, margin: '6px 0' }}>
+                {/* Gold EMV Chip SVG */}
+                <div style={{ width: '32px', height: '23px', borderRadius: '4px', background: 'linear-gradient(135deg, #ffd700 0%, #e6a817 50%, #b8860b 100%)', padding: '2px', boxSizing: 'border-box', border: '1px solid rgba(0,0,0,0.15)' }}>
+                  <div style={{ width: '100%', height: '100%', border: '0.5px solid rgba(0,0,0,0.2)', borderRadius: '2px', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', padding: '2px 0' }}>
+                    <div style={{ height: '0.5px', backgroundColor: 'rgba(0,0,0,0.25)', width: '100%' }} />
+                    <div style={{ height: '0.5px', backgroundColor: 'rgba(0,0,0,0.25)', width: '100%' }} />
+                  </div>
+                </div>
+
+                {/* Masked Card Number */}
+                <div style={{ fontSize: '14px', fontWeight: 700, letterSpacing: '0.18em', color: '#ffffff', fontFamily: 'monospace' }}>
+                  ••••  ••••  ••••  {rawNumbers}
                 </div>
               </div>
 
-              {/* Account Number Masked */}
-              <div style={{ zIndex: 2, margin: '8px 0' }}>
-                <div style={{ fontSize: '13px', fontWeight: 600, letterSpacing: '0.15em', color: 'rgba(255, 255, 255, 0.85)', fontFamily: 'monospace' }}>
-                  •••• •••• {bank.accountNumberMasked.replace(/[^0-9]/g, '') || '4892'}
-                </div>
-              </div>
-
-              {/* Card Footer: Balance & PIN Button */}
+              {/* 3. Card Footer: Available Balance & Clean Check Action */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', zIndex: 2 }}>
                 <div>
-                  <span style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.75)', textTransform: 'uppercase', fontWeight: 600 }}>
-                    Balance
-                  </span>
-                  <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff' }}>
-                    {bank.showBalance !== false ? formatCurrency(bank.balance) : '₹ ••••••••'}
+                  <div style={{ fontSize: '9.5px', color: 'rgba(255, 255, 255, 0.75)', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.06em' }}>
+                    Available Balance
+                  </div>
+                  <div style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff', marginTop: '2px', letterSpacing: '0.01em' }}>
+                    {bank.showBalance ? formatCurrency(bank.balance) : '₹ ••••••••'}
                   </div>
                 </div>
 
                 <button
                   onClick={(e) => handleCardBalanceClick(bank, e)}
+                  title="Check Bank Balance with UPI PIN"
                   style={{
-                    backgroundColor: bank.showBalance ? 'rgba(255, 255, 255, 0.2)' : '#ffffff',
-                    color: bank.showBalance ? '#ffffff' : '#2563eb',
-                    border: 'none',
-                    borderRadius: '8px',
-                    padding: '6px 12px',
-                    fontSize: '11px',
-                    fontWeight: 700,
+                    backgroundColor: bank.showBalance ? 'rgba(255, 255, 255, 0.18)' : '#ffffff',
+                    color: bank.showBalance ? '#ffffff' : '#0f172a',
+                    border: bank.showBalance ? '1px solid rgba(255, 255, 255, 0.3)' : 'none',
+                    borderRadius: '20px',
+                    padding: '6px 14px',
+                    fontSize: '11.5px',
+                    fontWeight: 800,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '4px',
-                    backdropFilter: 'blur(4px)',
+                    gap: '5px',
+                    boxShadow: 'none',
+                    transition: 'background-color 0.2s ease',
                   }}
                 >
-                  {bank.showBalance ? <EyeOff size={14} /> : <Eye size={14} />}
-                  {bank.showBalance ? 'Hide' : 'PIN Check'}
+                  {bank.showBalance ? <EyeOff size={13} /> : <Eye size={13} color="#0f172a" />}
+                  {bank.showBalance ? 'Hide' : 'Check Balance'}
                 </button>
               </div>
             </div>
           );
         })}
 
-        {/* Add New Bank Card CTA Tile */}
+        {/* Add Bank CTA Card */}
         <div
           onClick={() => setIsAddBankModalOpen(true)}
           style={{
             scrollSnapAlign: 'start',
-            flex: '0 0 140px',
-            height: '160px',
+            flex: '0 0 135px',
+            height: '175px',
             backgroundColor: '#ffffff',
             border: '2px dashed #cbd5e1',
-            borderRadius: '16px',
+            borderRadius: '14px',
             padding: '16px',
             display: 'flex',
             flexDirection: 'column',
@@ -303,21 +351,38 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
         >
           <div
             style={{
-              width: '36px',
-              height: '36px',
+              width: '38px',
+              height: '38px',
               borderRadius: '50%',
               backgroundColor: '#eef5ff',
-              color: '#2563eb',
+              color: '#2e83ff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              border: '1px solid #d6e6ff',
             }}
           >
             <Plus size={20} />
           </div>
-          <span style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a' }}>Add Bank</span>
-          <span style={{ fontSize: '10px', color: '#64748b' }}>Link new account</span>
+          <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>Add Bank</span>
+          <span style={{ fontSize: '10.5px', color: '#64748b' }}>Link new account</span>
         </div>
+      </div>
+
+      {/* Card Pagination Indicator Dots */}
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
+        {banks.map((_, i) => (
+          <span
+            key={i}
+            style={{
+              width: i === activeCardIndex ? '16px' : '6px',
+              height: '6px',
+              borderRadius: '3px',
+              backgroundColor: i === activeCardIndex ? '#2e83ff' : '#cbd5e1',
+              transition: 'all 0.25s ease',
+            }}
+          />
+        ))}
       </div>
     </div>
   );

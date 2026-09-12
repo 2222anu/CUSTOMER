@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User as UserIcon, ArrowRight, ShieldCheck, Lock, Check } from 'lucide-react';
+import { User as UserIcon, ArrowRight, ShieldCheck, Lock } from 'lucide-react';
 import { QtPayLogo } from '../components/QtPayLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
@@ -8,13 +8,12 @@ export const MobileNumberScreen: React.FC = () => {
   const { navigateTo, user, updateUser, setIsLanguageModalOpen, language } = useApp();
   const [fullName, setFullName] = useState<string>(user.name || 'Anu');
   const [mobileNumber, setMobileNumber] = useState<string>('9876543210');
-  const [selectedSim, setSelectedSim] = useState<'sim1' | 'sim2'>('sim1');
 
   const handleContinue = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (mobileNumber.length >= 10 && fullName.trim().length > 0) {
       updateUser({ name: fullName, mobile: `+91 ${mobileNumber}` });
-      navigateTo('SMS_OTP', { mobile: mobileNumber, name: fullName, sim: selectedSim });
+      navigateTo('SMS_OTP', { mobile: mobileNumber, name: fullName });
     }
   };
 
@@ -23,7 +22,7 @@ export const MobileNumberScreen: React.FC = () => {
       className="fade-in"
       style={{
         minHeight: '100vh',
-        backgroundColor: '#f4f6f8',
+        backgroundColor: '#f8fafc',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -33,8 +32,9 @@ export const MobileNumberScreen: React.FC = () => {
     >
       {/* Top Header Bar with Language Switcher */}
       <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-          <QtPayLogo variant="horizontal" size={26} showTagline={false} />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          {/* Logo with themeMode="light" for clear visibility on light background */}
+          <QtPayLogo variant="horizontal" size={26} themeMode="light" showTagline={false} />
           <button
             onClick={() => setIsLanguageModalOpen(true)}
             className="interactive-tap"
@@ -42,14 +42,15 @@ export const MobileNumberScreen: React.FC = () => {
               backgroundColor: '#ffffff',
               border: '1px solid #cbd5e1',
               borderRadius: '20px',
-              padding: '5px 12px',
-              fontSize: '11.5px',
+              padding: '6px 14px',
+              fontSize: '12px',
               fontWeight: 800,
               color: '#0f172a',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '5px',
+              gap: '6px',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
             }}
           >
             <span>🌐</span>
@@ -61,19 +62,20 @@ export const MobileNumberScreen: React.FC = () => {
         <div
           style={{
             backgroundColor: '#0e274d',
-            borderRadius: '16px',
-            padding: '16px 18px',
+            borderRadius: '18px',
+            padding: '18px 20px',
             color: '#ffffff',
-            marginBottom: '18px',
+            marginBottom: '20px',
             position: 'relative',
             overflow: 'hidden',
+            boxShadow: '0 8px 20px rgba(14, 39, 77, 0.12)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
             <div
               style={{
-                width: '32px',
-                height: '32px',
+                width: '34px',
+                height: '34px',
                 borderRadius: '10px',
                 backgroundColor: 'rgba(46, 131, 255, 0.25)',
                 color: '#38bdf8',
@@ -84,24 +86,25 @@ export const MobileNumberScreen: React.FC = () => {
             >
               <ShieldCheck size={18} />
             </div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff' }}>UPI Device Registration</div>
+            <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#ffffff' }}>UPI Device Registration</div>
           </div>
-          <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0, lineHeight: '1.45' }}>
+          <p style={{ fontSize: '12.5px', color: '#cbd5e1', margin: 0, lineHeight: '1.45' }}>
             Verify your mobile number linked to your bank account to enable instant payments.
           </p>
         </div>
 
-        {/* Main Input Form Card */}
+        {/* Main Input Form Card - Simple, Clean, Streamlined (No SIM selector clutter) */}
         <form
           onSubmit={handleContinue}
           style={{
             backgroundColor: '#ffffff',
             border: '1px solid #e2e8f0',
             borderRadius: '20px',
-            padding: '20px',
+            padding: '22px 20px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '16px',
+            gap: '18px',
+            boxShadow: '0 4px 14px rgba(0, 0, 0, 0.03)',
           }}
         >
           {/* Full Name Input */}
@@ -235,66 +238,6 @@ export const MobileNumberScreen: React.FC = () => {
             </div>
           </div>
 
-          {/* SIM Card Slot Selector (Fintech Authenticator) */}
-          <div>
-            <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>
-              Select Registered Bank SIM Slot
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-              {/* SIM 1 */}
-              <div
-                onClick={() => setSelectedSim('sim1')}
-                className="interactive-tap"
-                style={{
-                  padding: '10px 12px',
-                  borderRadius: '12px',
-                  backgroundColor: selectedSim === 'sim1' ? '#eef5ff' : '#f8fafc',
-                  border: selectedSim === 'sim1' ? '1.5px solid #2e83ff' : '1px solid #e2e8f0',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <div>
-                  <div style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a' }}>SIM 1 (Jio 5G)</div>
-                  <div style={{ fontSize: '10px', color: '#64748b', marginTop: '1px' }}>Primary Bank Slot</div>
-                </div>
-                {selectedSim === 'sim1' && (
-                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', backgroundColor: '#2e83ff', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Check size={11} strokeWidth={3} />
-                  </div>
-                )}
-              </div>
-
-              {/* SIM 2 */}
-              <div
-                onClick={() => setSelectedSim('sim2')}
-                className="interactive-tap"
-                style={{
-                  padding: '10px 12px',
-                  borderRadius: '12px',
-                  backgroundColor: selectedSim === 'sim2' ? '#eef5ff' : '#f8fafc',
-                  border: selectedSim === 'sim2' ? '1.5px solid #2e83ff' : '1px solid #e2e8f0',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <div>
-                  <div style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a' }}>SIM 2 (Airtel)</div>
-                  <div style={{ fontSize: '10px', color: '#64748b', marginTop: '1px' }}>Secondary Slot</div>
-                </div>
-                {selectedSim === 'sim2' && (
-                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', backgroundColor: '#2e83ff', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Check size={11} strokeWidth={3} />
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
           <div
             style={{
               display: 'flex',
@@ -308,7 +251,7 @@ export const MobileNumberScreen: React.FC = () => {
               border: '1px solid #e2e8f0',
             }}
           >
-            <ShieldCheck size={16} color="#10b981" />
+            <ShieldCheck size={16} color="#2e83ff" />
             <span>An automated encrypted SMS will verify your bank UPI profile</span>
           </div>
 

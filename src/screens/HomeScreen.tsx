@@ -38,7 +38,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '24px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '24px', color: '#FFFFFF' }}>
       {/* App Header with Profile & Notifications */}
       <AppHeader
         showUserInfo
@@ -51,8 +51,8 @@ export const HomeScreen: React.FC = () => {
               width: '36px',
               height: '36px',
               borderRadius: '50%',
-              backgroundColor: '#2A2A3E',
-              border: '1px solid #4D4D6B',
+              backgroundColor: '#151524',
+              border: '1px solid #2C2C44',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -95,8 +95,8 @@ export const HomeScreen: React.FC = () => {
       <div
         style={{
           margin: '0 20px 20px 20px',
-          backgroundColor: '#2A2A3E',
-          border: '1px solid #4D4D6B',
+          backgroundColor: '#151524',
+          border: '1px solid #2C2C44',
           borderRadius: '16px',
           padding: '20px 18px',
           boxShadow: 'none',
@@ -106,7 +106,7 @@ export const HomeScreen: React.FC = () => {
           <h3 style={{ fontSize: '15.5px', fontWeight: '800', color: '#FFFFFF', letterSpacing: '-0.01em', margin: 0 }}>
             Transfer & Pay
           </h3>
-          <span style={{ fontSize: '11px', fontWeight: '700', color: '#7FE87F', backgroundColor: 'rgba(127, 232, 127, 0.15)', padding: '2px 8px', borderRadius: '10px', border: '1px solid rgba(127, 232, 127, 0.3)' }}>
+          <span style={{ fontSize: '11px', fontWeight: '700', color: '#7FE87F', backgroundColor: 'rgba(127, 232, 127, 0.12)', padding: '2px 8px', borderRadius: '10px', border: '1px solid rgba(127, 232, 127, 0.25)' }}>
             Instant UPI
           </span>
         </div>
@@ -130,13 +130,13 @@ export const HomeScreen: React.FC = () => {
                 width: '54px',
                 height: '54px',
                 borderRadius: '16px',
-                backgroundColor: '#3A3A52',
+                backgroundColor: '#1E1E32',
                 color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #4D4D6B',
+                border: '1px solid #2C2C44',
               }}
             >
               <Camera size={22} color="#7FE87F" />
@@ -164,13 +164,13 @@ export const HomeScreen: React.FC = () => {
                 width: '54px',
                 height: '54px',
                 borderRadius: '16px',
-                backgroundColor: '#3A3A52',
+                backgroundColor: '#1E1E32',
                 color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #4D4D6B',
+                border: '1px solid #2C2C44',
               }}
             >
               <Send size={22} color="#7FE87F" />
@@ -198,13 +198,13 @@ export const HomeScreen: React.FC = () => {
                 width: '54px',
                 height: '54px',
                 borderRadius: '16px',
-                backgroundColor: '#3A3A52',
+                backgroundColor: '#1E1E32',
                 color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #4D4D6B',
+                border: '1px solid #2C2C44',
               }}
             >
               <QrCode size={22} color="#7FE87F" />
@@ -232,13 +232,13 @@ export const HomeScreen: React.FC = () => {
                 width: '54px',
                 height: '54px',
                 borderRadius: '16px',
-                backgroundColor: '#3A3A52',
+                backgroundColor: '#1E1E32',
                 color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #4D4D6B',
+                border: '1px solid #2C2C44',
               }}
             >
               <Landmark size={22} color="#7FE87F" />
@@ -254,8 +254,8 @@ export const HomeScreen: React.FC = () => {
       <div
         style={{
           margin: '0 20px 20px 20px',
-          backgroundColor: '#2A2A3E',
-          border: '1px solid #4D4D6B',
+          backgroundColor: '#151524',
+          border: '1px solid #2C2C44',
           borderRadius: '16px',
           padding: '20px 18px',
           boxShadow: 'none',
@@ -269,8 +269,8 @@ export const HomeScreen: React.FC = () => {
             onClick={() => navigateTo('ALL_SERVICES')}
             className="interactive-tap"
             style={{
-              backgroundColor: '#3A3A52',
-              border: '1px solid #4D4D6B',
+              backgroundColor: '#1E1E32',
+              border: '1px solid #2C2C44',
               borderRadius: '8px',
               padding: '5px 12px',
               fontSize: '12px',
@@ -303,13 +303,13 @@ export const HomeScreen: React.FC = () => {
                 width: '50px',
                 height: '50px',
                 borderRadius: '14px',
-                backgroundColor: '#3A3A52',
+                backgroundColor: '#1E1E32',
                 color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #4D4D6B',
+                border: '1px solid #2C2C44',
               }}
             >
               <Zap size={22} color="#7FE87F" />
@@ -337,13 +337,13 @@ export const HomeScreen: React.FC = () => {
                 width: '50px',
                 height: '50px',
                 borderRadius: '14px',
-                backgroundColor: '#3A3A52',
+                backgroundColor: '#1E1E32',
                 color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #4D4D6B',
+                border: '1px solid #2C2C44',
               }}
             >
               <Smartphone size={22} color="#7FE87F" />
@@ -371,13 +371,13 @@ export const HomeScreen: React.FC = () => {
                 width: '50px',
                 height: '50px',
                 borderRadius: '14px',
-                backgroundColor: '#3A3A52',
+                backgroundColor: '#1E1E32',
                 color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #4D4D6B',
+                border: '1px solid #2C2C44',
               }}
             >
               <Tv size={22} color="#7FE87F" />
@@ -405,13 +405,13 @@ export const HomeScreen: React.FC = () => {
                 width: '50px',
                 height: '50px',
                 borderRadius: '14px',
-                backgroundColor: '#3A3A52',
+                backgroundColor: '#1E1E32',
                 color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: 'none',
-                border: '1px solid #4D4D6B',
+                border: '1px solid #2C2C44',
               }}
             >
               <Car size={22} color="#7FE87F" />

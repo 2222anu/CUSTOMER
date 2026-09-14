@@ -5,25 +5,25 @@
   --color-primary: #7FE87F;
   --color-primary-hover: #5FBF5F;
   --color-primary-active: #3F963F;
-  --color-primary-light: #EFFDEF;
-  --color-primary-border: #9FEE9F;
+  --color-primary-light: rgba(127, 232, 127, 0.12);
+  --color-primary-border: #7FE87F;
   --color-primary-dark: #1F6D1F;
   --color-text-on-primary: #000000;
 
-  --color-background: #1A1A2E;
-  --color-surface: #2A2A3E;
-  --color-surface-elevated: #3A3A52;
-  --color-sub-surface: #33334D;
-  --color-overlay: rgba(15, 15, 26, 0.75);
+  --color-background: #0B0B14;
+  --color-surface: #151524;
+  --color-surface-elevated: #1E1E32;
+  --color-sub-surface: #1E1E32;
+  --color-overlay: rgba(5, 5, 10, 0.85);
 
   --color-text-primary: #FFFFFF;
-  --color-text-secondary: #B3B3C2;
-  --color-text-muted: #808099;
-  --color-text-disabled: #808099;
+  --color-text-secondary: #A2A2BA;
+  --color-text-muted: #6E6E85;
+  --color-text-disabled: #6E6E85;
 
-  --color-border: #4D4D6B;
-  --color-border-hairline: #4D4D6B;
-  --color-border-strong: #808099;
+  --color-border: #2C2C44;
+  --color-border-hairline: #2C2C44;
+  --color-border-strong: #4A4A68;
   --color-border-focus: #7FE87F;
 
   --color-success: #7FE87F;
@@ -36,20 +36,20 @@
   --accent: #7FE87F;
   --blue-base: #7FE87F;
   --blue-hover: #5FBF5F;
-  --blue-light: #1E3A2E;
+  --blue-light: rgba(127, 232, 127, 0.12);
   --blue-tint: #9FEE9F;
 
-  --bg-page: #1A1A2E;
-  --bg-card: #2A2A3E;
-  --bg-secondary: #33334D;
-  --card-bg: #2A2A3E;
-  --card-border: #4D4D6B;
-  --border-color: #4D4D6B;
-  --border-strong: #808099;
+  --bg-page: #0B0B14;
+  --bg-card: #151524;
+  --bg-secondary: #1E1E32;
+  --card-bg: #151524;
+  --card-border: #2C2C44;
+  --border-color: #2C2C44;
+  --border-strong: #4A4A68;
 
   --text-primary: #FFFFFF;
-  --text-secondary: #B3B3C2;
-  --text-muted: #808099;
+  --text-secondary: #A2A2BA;
+  --text-muted: #6E6E85;
   --text-white: #FFFFFF;
   --text-dark: #FFFFFF;
 
@@ -64,7 +64,7 @@
   --space-xl: 24px;
   --space-2xl: 32px;
 
-  --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-subtle: none;
 }
 
 * {
@@ -74,6 +74,7 @@
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   font-family: var(--font-family);
+  box-shadow: none !important;
 }
 
 /* WCAG 2.1 AA Keyboard Focus Rings */

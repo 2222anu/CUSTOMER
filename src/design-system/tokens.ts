@@ -13,27 +13,27 @@ export const colors = {
   primary: '#7FE87F',
   primaryHover: '#5FBF5F',
   primaryActive: '#3F963F',
-  primaryLight: '#EFFDEF',
-  primaryLightHover: '#DFFADF',
-  primaryBorder: '#9FEE9F',
+  primaryLight: 'rgba(127, 232, 127, 0.12)',
+  primaryLightHover: 'rgba(127, 232, 127, 0.2)',
+  primaryBorder: '#7FE87F',
   primaryDark: '#1F6D1F',
   textOnPrimary: '#000000', // Black text on Lime Green for maximum readability
 
   // 2. Secondary Color — Pure Black & Grays
   secondary: '#000000',
-  secondaryHover: '#404040',
-  gray25: '#404040',
-  gray50: '#808080',
-  gray75: '#BFBFBF',
-  gray90: '#E6E6E6',
+  secondaryHover: '#2A2A2A',
+  gray25: '#333333',
+  gray50: '#666666',
+  gray75: '#999999',
+  gray90: '#CCCCCC',
 
-  // 3. Accent Dark — Deep Navy Charcoal UI Surfaces
-  darkBg: '#1A1A2E',
-  darkSurface: '#2A2A3E',
-  darkSurfaceElevated: '#3A3A52',
-  darkBorder: '#4D4D6B',
-  darkDisabled: '#4D4D6B',
-  darkPlaceholder: '#B3B3C2',
+  // 3. Accent Dark — Ultra Deep Pitch Navy Charcoal UI Surfaces
+  darkBg: '#0B0B14',
+  darkSurface: '#151524',
+  darkSurfaceElevated: '#1E1E32',
+  darkBorder: '#2C2C44',
+  darkDisabled: '#2C2C44',
+  darkPlaceholder: '#9E9EB2',
 
   // 4. Neutral — Pure White & Light Surfaces
   lightBg: '#FFFFFF',
@@ -41,41 +41,41 @@ export const colors = {
   lightSurfaceElevated: '#FFFFFF',
   lightBorder: '#E6E6E6',
 
-  // Active App Surfaces (alph pay Signature Dark Experience)
-  surface: '#2A2A3E',
-  surfaceElevated: '#3A3A52',
-  background: '#1A1A2E',
-  subSurface: '#33334D',
-  surfaceHover: '#33334D',
-  inputFill: '#1A1A2E',
-  overlay: 'rgba(15, 15, 26, 0.75)',
+  // Active App Surfaces (alph pay Signature Pitch Dark Experience)
+  surface: '#151524',
+  surfaceElevated: '#1E1E32',
+  background: '#0B0B14',
+  subSurface: '#1E1E32',
+  surfaceHover: '#222238',
+  inputFill: '#0F0F1D',
+  overlay: 'rgba(5, 5, 10, 0.85)',
 
   // Typography Tiers
   textPrimary: '#FFFFFF',
-  textSecondary: '#B3B3C2',
-  textMuted: '#808099',
-  textDisabled: '#808099',
+  textSecondary: '#A2A2BA',
+  textMuted: '#6E6E85',
+  textDisabled: '#6E6E85',
 
   // Borders & Dividers
-  borderHairline: '#4D4D6B',
-  borderStrong: '#808099',
+  borderHairline: '#2C2C44',
+  borderStrong: '#4A4A68',
   borderFocus: '#7FE87F',
 
   // Semantic & Feedback Colors
   success: '#7FE87F',
-  successLight: '#EFFDEF',
-  successText: '#0C440C',
+  successLight: 'rgba(127, 232, 127, 0.12)',
+  successText: '#7FE87F',
 
   warning: '#F59E0B',
-  warningLight: '#FEF3C7',
-  warningText: '#92400E',
+  warningLight: 'rgba(245, 158, 11, 0.12)',
+  warningText: '#F59E0B',
 
   danger: '#FF4757',
-  dangerLight: '#FFE8EA',
+  dangerLight: 'rgba(255, 71, 87, 0.12)',
   dangerText: '#FF6B7A',
 
   info: '#7FE87F',
-  infoLight: '#EFFDEF',
+  infoLight: 'rgba(127, 232, 127, 0.12)',
   infoText: '#000000',
 } as const;
 
@@ -111,13 +111,14 @@ export const radii = {
   full: '999px',
 } as const;
 
+// STRICT 0 DROP SHADOWS GLOBALLY
 export const shadows = {
   none: 'none',
   flat: 'none',
-  sm: '0 1px 2px rgba(0, 0, 0, 0.3)',
-  md: '0 4px 12px rgba(0, 0, 0, 0.4)',
-  lg: '0 8px 24px rgba(0, 0, 0, 0.5)',
-  xl: '0 16px 48px rgba(0, 0, 0, 0.6)',
+  sm: 'none',
+  md: 'none',
+  lg: 'none',
+  xl: 'none',
 } as const;
 
 export const spacing = {
@@ -140,12 +141,12 @@ export const componentPresets = {
     backgroundColor: colors.darkSurface,
     border: `1px solid ${colors.darkBorder}`,
     borderRadius: radii.md,
-    boxShadow: shadows.md,
+    boxShadow: 'none',
   },
   header: {
     backgroundColor: colors.darkBg,
     borderBottom: `1px solid ${colors.darkBorder}`,
-    boxShadow: shadows.none,
+    boxShadow: 'none',
   },
   buttonPrimary: {
     backgroundColor: colors.primary,
@@ -153,7 +154,7 @@ export const componentPresets = {
     borderRadius: radii.sm,
     fontWeight: typography.weights.bold,
     border: 'none',
-    boxShadow: shadows.none,
+    boxShadow: 'none',
   },
   buttonSecondary: {
     backgroundColor: 'transparent',
@@ -161,14 +162,14 @@ export const componentPresets = {
     borderRadius: radii.sm,
     fontWeight: typography.weights.semibold,
     border: `1.5px solid ${colors.primary}`,
-    boxShadow: shadows.none,
+    boxShadow: 'none',
   },
   input: {
     backgroundColor: colors.darkBg,
     border: `1px solid ${colors.darkBorder}`,
     borderRadius: radii.sm,
     color: colors.textPrimary,
-    boxShadow: shadows.none,
+    boxShadow: 'none',
   },
 } as const;
 

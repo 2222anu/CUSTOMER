@@ -54,13 +54,13 @@ export const AppLinksModal: React.FC = () => {
           maxWidth: '440px',
           maxHeight: '90vh',
           overflowY: 'auto',
-          backgroundColor: '#2A2A3E',
+          backgroundColor: '#151524',
           borderTopLeftRadius: '24px',
           borderTopRightRadius: '24px',
           padding: '24px',
-          boxShadow: '0 -10px 40px rgba(0,0,0,0.5)',
-          border: '1px solid #4D4D6B',
-          color: '#ffffff',
+          boxShadow: 'none',
+          border: '1px solid #2C2C44',
+          color: '#FFFFFF',
         }}
         onClick={(e) => e.stopPropagation()}
       >

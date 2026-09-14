@@ -146,11 +146,11 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
           maxWidth: '440px',
           maxHeight: '90vh',
           overflowY: 'auto',
-          backgroundColor: '#2A2A3E',
-          border: '1px solid #4D4D6B',
-          borderRadius: designSystem.radii.lg,
+          backgroundColor: '#151524',
+          border: '1px solid #2C2C44',
+          borderRadius: '16px',
           padding: '24px',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+          boxShadow: 'none',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>

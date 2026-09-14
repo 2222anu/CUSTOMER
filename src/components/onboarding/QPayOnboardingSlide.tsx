@@ -61,17 +61,16 @@ export const QPayOnboardingSlide: React.FC<QPayOnboardingSlideProps> = ({
           marginBottom: '8px',
         }}
       >
-        {/* Dominant Feature Word (Oversized Brand Statement) */}
+        {/* Dominant Feature Word */}
         <div
           style={{
-            fontSize: '40px',
+            fontSize: '32px',
             fontWeight: 900,
-            letterSpacing: '0.14em',
+            letterSpacing: '0.1em',
             color: '#7FE87F',
             lineHeight: 1,
-            marginBottom: '10px',
+            marginBottom: '8px',
             textTransform: 'uppercase',
-            textShadow: '0 0 20px rgba(127, 232, 127, 0.4)',
           }}
         >
           {slide.title}
@@ -80,11 +79,11 @@ export const QPayOnboardingSlide: React.FC<QPayOnboardingSlideProps> = ({
         {/* 2-Line Bold Headline */}
         <div
           style={{
-            fontSize: '22px',
+            fontSize: '20px',
             fontWeight: 800,
-            color: '#ffffff',
-            lineHeight: '1.28',
-            letterSpacing: '-0.02em',
+            color: '#FFFFFF',
+            lineHeight: '1.3',
+            letterSpacing: '-0.01em',
           }}
         >
           {slide.headline.map((line, idx) => (

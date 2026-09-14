@@ -34,12 +34,12 @@ export const PaymentMethodsScreen: React.FC = () => {
               onClick={() => navigateTo('BANK_ACCOUNTS')}
               className="interactive-tap"
               style={{
-                backgroundColor: '#2A2A3E',
+                backgroundColor: '#151524',
                 borderRadius: '16px',
                 padding: '16px 18px',
                 color: '#FFFFFF',
-                border: '1.5px solid rgba(127, 232, 127, 0.4)',
-                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
+                border: '1.5px solid #2C2C44',
+                boxShadow: 'none',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',

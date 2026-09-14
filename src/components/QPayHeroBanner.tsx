@@ -19,8 +19,8 @@ export const QPayHeroBanner: React.FC = () => {
       className="interactive-tap"
       style={{
         margin: '14px 20px 0 20px',
-        backgroundColor: '#2A2A3E',
-        border: '1px solid #4D4D6B',
+        backgroundColor: '#151524',
+        border: '1px solid #2C2C44',
         borderRadius: '16px',
         padding: '20px',
         cursor: 'pointer',
@@ -30,6 +30,7 @@ export const QPayHeroBanner: React.FC = () => {
         position: 'relative',
         overflow: 'hidden',
         boxSizing: 'border-box',
+        boxShadow: 'none',
       }}
     >
       <div style={{ flex: 1, zIndex: 2, paddingRight: '12px' }}>
@@ -38,8 +39,8 @@ export const QPayHeroBanner: React.FC = () => {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '6px',
-            backgroundColor: 'rgba(127, 232, 127, 0.15)',
-            border: '1px solid rgba(127, 232, 127, 0.3)',
+            backgroundColor: 'rgba(127, 232, 127, 0.12)',
+            border: '1px solid rgba(127, 232, 127, 0.25)',
             color: '#7FE87F',
             fontSize: '11px',
             fontWeight: 800,
@@ -50,7 +51,7 @@ export const QPayHeroBanner: React.FC = () => {
           }}
         >
           <ShieldCheck size={13} color="#7FE87F" />
-          <span>Zero Transfer Fees</span>
+          <span>Zero Fees</span>
         </div>
 
         <h3
@@ -69,12 +70,12 @@ export const QPayHeroBanner: React.FC = () => {
         <p
           style={{
             fontSize: '12px',
-            color: '#B3B3C2',
+            color: '#A2A2BA',
             margin: '0 0 14px 0',
             lineHeight: 1.4,
           }}
         >
-          Send money directly to any bank account or UPI ID.
+          Direct bank-to-bank settlements.
         </p>
 
         <button
@@ -95,7 +96,7 @@ export const QPayHeroBanner: React.FC = () => {
             alignItems: 'center',
             gap: '6px',
             cursor: 'pointer',
-            boxShadow: '0 2px 8px rgba(127, 232, 127, 0.25)',
+            boxShadow: 'none',
           }}
         >
           <span>Send Money</span>
@@ -105,20 +106,21 @@ export const QPayHeroBanner: React.FC = () => {
 
       <div
         style={{
-          width: '72px',
-          height: '72px',
-          borderRadius: '20px',
-          backgroundColor: '#3A3A52',
-          border: '1px solid #4D4D6B',
+          width: '64px',
+          height: '64px',
+          borderRadius: '16px',
+          backgroundColor: '#1E1E32',
+          border: '1px solid #2C2C44',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: '#7FE87F',
           flexShrink: 0,
           zIndex: 2,
+          boxShadow: 'none',
         }}
       >
-        <span style={{ fontSize: '32px', fontWeight: 900, color: '#7FE87F' }}>₹</span>
+        <span style={{ fontSize: '28px', fontWeight: 900, color: '#7FE87F' }}>₹</span>
       </div>
     </div>
   );

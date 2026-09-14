@@ -1,6 +1,5 @@
 import React from 'react';
-import { CheckCircle2, QrCode, Wifi, ArrowUpRight } from 'lucide-react';
-import { AlphPayLogo } from '../AlphPayLogo';
+import { CheckCircle2, QrCode, ArrowUpRight } from 'lucide-react';
 
 export const PayScene: React.FC = () => {
   return (
@@ -8,199 +7,86 @@ export const PayScene: React.FC = () => {
       style={{
         position: 'relative',
         width: '100%',
-        height: '320px',
+        maxWidth: '280px',
+        margin: '0 auto',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        perspective: '1200px',
-        overflow: 'visible',
+        flexDirection: 'column',
+        gap: '12px',
       }}
     >
-      {/* Floating QR Tile */}
+      {/* Main Payment Card Preview */}
       <div
         style={{
-          position: 'absolute',
-          top: '22px',
-          left: '16px',
-          width: '52px',
-          height: '52px',
-          borderRadius: '14px',
-          backgroundColor: '#2A2A3E',
-          border: '1px solid #4D4D6B',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#7FE87F',
-          zIndex: 4,
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
-          animation: 'floatLeft 4s ease-in-out infinite alternate',
-        }}
-      >
-        <QrCode size={26} />
-      </div>
-
-      {/* Floating Currency Badge 1 */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '24px',
-          right: '28px',
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          backgroundColor: '#3A3A52',
-          border: '1px solid #7FE87F',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontWeight: 900,
-          fontSize: '17px',
-          color: '#7FE87F',
-          zIndex: 4,
-          boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3)',
-          animation: 'floatCoin 4.5s ease-in-out infinite alternate',
-        }}
-      >
-        ₹
-      </div>
-
-      {/* Main Smartphone Device Body */}
-      <div
-        style={{
-          position: 'relative',
-          width: '184px',
-          height: '256px',
-          borderRadius: '28px',
-          backgroundColor: '#1A1A2E',
-          border: '2px solid #4D4D6B',
-          padding: '8px',
-          boxSizing: 'border-box',
+          backgroundColor: '#151524',
+          border: '1px solid #2C2C44',
+          borderRadius: '16px',
+          padding: '20px',
           display: 'flex',
           flexDirection: 'column',
-          zIndex: 2,
-          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
+          alignItems: 'center',
+          textAlign: 'center',
+          boxShadow: 'none',
         }}
       >
-        {/* Device Top Speaker Notch */}
-        <div style={{ width: '40px', height: '4px', backgroundColor: '#3A3A52', borderRadius: '4px', margin: '2px auto 8px auto' }} />
-
-        {/* Screen Canvas */}
+        {/* Merchant Icon */}
         <div
           style={{
-            flex: 1,
-            borderRadius: '20px',
-            backgroundColor: '#2A2A3E',
-            border: '1px solid #3A3A52',
-            padding: '14px 12px',
+            width: '48px',
+            height: '48px',
+            borderRadius: '12px',
+            backgroundColor: 'rgba(127, 232, 127, 0.12)',
+            color: '#7FE87F',
             display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
             alignItems: 'center',
-            textAlign: 'center',
-            position: 'relative',
+            justifyContent: 'center',
+            marginBottom: '12px',
           }}
         >
-          {/* Logo */}
-          <div style={{ opacity: 0.9 }}>
-            <AlphPayLogo variant="horizontal" size={20} />
-          </div>
+          <ArrowUpRight size={24} />
+        </div>
 
-          {/* Payment Success Card */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-            <div
-              style={{
-                width: '44px',
-                height: '44px',
-                borderRadius: '50%',
-                backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                border: '1.5px solid #7FE87F',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#7FE87F',
-              }}
-            >
-              <CheckCircle2 size={24} />
-            </div>
+        <div style={{ fontSize: '12px', color: '#A2A2BA', fontWeight: 600 }}>Payment to</div>
+        <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', marginTop: '2px' }}>Blue Tokai Coffee</div>
+        <div style={{ fontSize: '26px', fontWeight: 900, color: '#7FE87F', margin: '8px 0' }}>₹340.00</div>
 
-            <div style={{ fontSize: '10px', fontWeight: 800, color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Payment Sent
-            </div>
-
-            <div style={{ fontSize: '20px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '0.02em' }}>
-              ₹2,500.00
-            </div>
-          </div>
-
-          {/* Payee Info */}
-          <div style={{ fontSize: '9.5px', color: '#B3B3C2', fontWeight: 600 }}>
-            Priya Menon &bull; Instant UPI
-          </div>
+        {/* Status Pill */}
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            backgroundColor: 'rgba(127, 232, 127, 0.12)',
+            color: '#7FE87F',
+            padding: '4px 10px',
+            borderRadius: '20px',
+            fontSize: '11px',
+            fontWeight: 700,
+          }}
+        >
+          <CheckCircle2 size={13} />
+          <span>Instant UPI Settlement</span>
         </div>
       </div>
 
-      {/* Floating Card (Foreground) */}
+      {/* Mini QR Scan Strip */}
       <div
         style={{
-          position: 'absolute',
-          bottom: '24px',
-          right: '20px',
-          width: '160px',
-          height: '96px',
-          borderRadius: '14px',
-          backgroundColor: '#3A3A52',
-          border: '1px solid #4D4D6B',
+          backgroundColor: '#1E1E32',
+          border: '1px solid #2C2C44',
+          borderRadius: '12px',
           padding: '12px 14px',
-          boxSizing: 'border-box',
-          color: '#FFFFFF',
-          zIndex: 5,
-          boxShadow: '0 16px 36px rgba(0, 0, 0, 0.5)',
-          transform: 'rotate(-4deg)',
-          animation: 'floatCard 4s ease-in-out infinite alternate',
           display: 'flex',
-          flexDirection: 'column',
+          alignItems: 'center',
           justifyContent: 'space-between',
+          boxShadow: 'none',
         }}
       >
-        {/* Card Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div
-            style={{
-              width: '22px',
-              height: '16px',
-              borderRadius: '3px',
-              backgroundColor: '#7FE87F',
-            }}
-          />
-          <Wifi size={14} color="#7FE87F" />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <QrCode size={18} color="#7FE87F" />
+          <span style={{ fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}>Scan Any UPI QR</span>
         </div>
-
-        {/* Card Number */}
-        <div style={{ fontFamily: 'monospace', fontSize: '11px', fontWeight: 700, letterSpacing: '2px', color: '#FFFFFF' }}>
-          •••• &nbsp;•••• &nbsp;3616
-        </div>
-
-        {/* Card Brand */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.08em', color: '#7FE87F' }}>ALPH PAY</span>
-          <ArrowUpRight size={12} color="#FFFFFF" />
-        </div>
+        <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>Zero Fee</span>
       </div>
-
-      <style>{`
-        @keyframes floatCard {
-          0% { transform: rotate(-4deg) translateY(0px); }
-          100% { transform: rotate(-2deg) translateY(-6px); }
-        }
-        @keyframes floatLeft {
-          0% { transform: translateY(0px); }
-          100% { transform: translateY(-6px); }
-        }
-        @keyframes floatCoin {
-          0% { transform: translateY(0px); }
-          100% { transform: translateY(-8px); }
-        }
-      `}</style>
     </div>
   );
 };

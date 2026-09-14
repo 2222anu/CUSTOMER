@@ -144,15 +144,15 @@ export const BankAccountsScreen: React.FC = () => {
                 <div
                   key={bank.id}
                   style={{
-                    backgroundColor: '#2A2A3E',
+                    backgroundColor: '#151524',
                     borderRadius: '20px',
                     padding: '20px',
                     position: 'relative',
                     overflow: 'hidden',
                     border: '1.5px solid #7FE87F',
-                    boxShadow: '0 10px 28px rgba(0, 0, 0, 0.4)',
+                    boxShadow: 'none',
                     color: '#FFFFFF',
-                    transition: 'all 0.25s ease',
+                    transition: 'all 0.15s ease',
                   }}
                 >
                   {/* Card Header Row */}

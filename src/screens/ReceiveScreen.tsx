@@ -99,7 +99,7 @@ export const ReceiveScreen: React.FC = () => {
             zIndex: 100,
             width: '90%',
             maxWidth: '500px',
-            backgroundColor: '#2A2A3E',
+            backgroundColor: '#151524',
             border: '1.5px solid #7FE87F',
             color: '#FFFFFF',
             borderRadius: '12px',
@@ -107,7 +107,7 @@ export const ReceiveScreen: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+            boxShadow: 'none',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>

@@ -47,13 +47,13 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '12px 18px',
-        backgroundColor: 'rgba(26, 26, 46, 0.95)',
+        backgroundColor: 'rgba(11, 11, 20, 0.96)',
         backdropFilter: 'blur(10px)',
         position: 'sticky',
         top: 0,
         zIndex: 30,
         borderBottom: `1px solid ${designSystem.colors.borderHairline}`,
-        boxShadow: designSystem.shadows.none,
+        boxShadow: 'none',
       }}
     >
       {/* Left Slot: Back Button or User Avatar */}
@@ -63,7 +63,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             onClick={handleBack}
             aria-label="Go back"
             style={{
-              backgroundColor: '#2A2A3E',
+              backgroundColor: '#151524',
               border: `1px solid ${designSystem.colors.borderHairline}`,
               color: '#FFFFFF',
               width: '38px',
@@ -98,9 +98,9 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                boxShadow: '0 2px 8px rgba(127, 232, 127, 0.3)',
+                boxShadow: 'none',
                 overflow: 'hidden',
-                border: '2px solid #1A1A2E',
+                border: '2px solid #0B0B14',
                 outline: '1.5px solid #7FE87F',
                 transition: 'transform 0.15s ease',
               }}
@@ -145,7 +145,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             onClick={onSearchClick}
             aria-label="Search"
             style={{
-              backgroundColor: '#2A2A3E',
+              backgroundColor: '#151524',
               border: `1px solid ${designSystem.colors.borderHairline}`,
               color: '#FFFFFF',
               width: '38px',
@@ -170,7 +170,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             onClick={() => navigateTo('UPI_SETTINGS')}
             aria-label="UPI Settings"
             style={{
-              backgroundColor: '#2A2A3E',
+              backgroundColor: '#151524',
               border: `1px solid ${designSystem.colors.borderHairline}`,
               color: '#FFFFFF',
               width: '38px',

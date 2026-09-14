@@ -227,7 +227,7 @@ export const PermissionsScreen: React.FC = () => {
                           backgroundColor: isOn ? '#000000' : '#B3B3C2',
                           transform: isOn ? 'translateX(20px)' : 'translateX(0px)',
                           transition: 'transform 0.2s ease',
-                          boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                          boxShadow: 'none',
                         }}
                       />
                     </div>
@@ -262,7 +262,7 @@ export const PermissionsScreen: React.FC = () => {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(10, 10, 20, 0.82)',
+            backgroundColor: 'rgba(5, 5, 10, 0.85)',
             backdropFilter: 'blur(8px)',
             zIndex: 100,
             display: 'flex',
@@ -274,15 +274,15 @@ export const PermissionsScreen: React.FC = () => {
           <div
             className="fade-in"
             style={{
-              backgroundColor: '#2A2A3E',
+              backgroundColor: '#151524',
               borderRadius: '20px',
-              border: '1px solid #4D4D6B',
+              border: '1px solid #2C2C44',
               padding: '28px 24px',
               width: '100%',
               maxWidth: '380px',
               textAlign: 'center',
-              boxShadow: '0 24px 60px rgba(0,0,0,0.5)',
-              color: '#ffffff',
+              boxShadow: 'none',
+              color: '#FFFFFF',
             }}
           >
             <div

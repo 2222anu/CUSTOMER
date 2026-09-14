@@ -42,14 +42,14 @@ export const SmsOtpScreen: React.FC = () => {
           {/* Main Verification Card */}
           <div
             style={{
-              backgroundColor: '#2A2A3E',
-              border: '1px solid #4D4D6B',
+              backgroundColor: '#151524',
+              border: '1px solid #2C2C44',
               borderRadius: '16px',
               padding: '24px 20px',
               display: 'flex',
               flexDirection: 'column',
               gap: '20px',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
+              boxShadow: 'none',
             }}
           >
             {/* Top Emblem & Header */}

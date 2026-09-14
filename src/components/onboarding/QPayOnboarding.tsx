@@ -118,8 +118,8 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
         position: 'relative',
         minHeight: '100vh',
         width: '100%',
-        backgroundColor: '#1A1A2E',
-        color: '#ffffff',
+        backgroundColor: '#0B0B14',
+        color: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -243,8 +243,8 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
             justifyContent: 'center',
             gap: '8px',
             cursor: 'pointer',
-            boxShadow: '0 4px 16px rgba(127, 232, 127, 0.3)',
-            transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+            boxShadow: 'none',
+            transition: 'all 0.15s ease',
           }}
         >
           <span>{isFinalSlide ? 'Get Started' : 'Continue'}</span>

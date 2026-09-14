@@ -7,20 +7,20 @@ export const SecurityScreen: React.FC = () => {
   const { deviceSessions, terminateSession } = useApp();
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '36px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '36px', color: '#FFFFFF' }}>
       <AppHeader title="Security & Devices" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Biometrics / Security Status HUD Card */}
         <div
           style={{
-            backgroundColor: '#2A2A3E',
+            backgroundColor: '#151524',
             border: '1.5px solid rgba(127, 232, 127, 0.35)',
-            borderRadius: '20px',
+            borderRadius: '16px',
             padding: '20px',
             marginBottom: '24px',
             color: '#FFFFFF',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)',
+            boxShadow: 'none',
             position: 'relative',
             overflow: 'hidden',
           }}
@@ -44,12 +44,12 @@ export const SecurityScreen: React.FC = () => {
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ fontWeight: 800, fontSize: '16px', color: '#FFFFFF' }}>
+                <span style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF' }}>
                   256-Bit Protection Active
                 </span>
               </div>
-              <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px' }}>
-                Hardware biometric & device binding verified
+              <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px' }}>
+                Hardware biometrics verified
               </div>
             </div>
           </div>
@@ -59,34 +59,35 @@ export const SecurityScreen: React.FC = () => {
           style={{
             fontSize: '11px',
             fontWeight: 800,
-            color: '#B3B3C2',
+            color: '#6E6E85',
             textTransform: 'uppercase',
             letterSpacing: '0.06em',
             marginBottom: '12px',
             paddingLeft: '4px',
           }}
         >
-          Active Sessions & Authorized Devices ({deviceSessions.length})
+          Active Devices ({deviceSessions.length})
         </div>
 
         <div
           style={{
-            backgroundColor: '#2A2A3E',
-            borderRadius: '18px',
-            border: '1px solid #4D4D6B',
+            backgroundColor: '#151524',
+            borderRadius: '16px',
+            border: '1px solid #2C2C44',
             overflow: 'hidden',
+            boxShadow: 'none',
           }}
         >
           {deviceSessions.map((session, index) => (
             <React.Fragment key={session.id}>
-              {index > 0 && <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />}
+              {index > 0 && <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />}
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '16px 18px',
-                  backgroundColor: session.isCurrent ? '#33334D' : '#2A2A3E',
+                  backgroundColor: session.isCurrent ? '#1E1E32' : '#151524',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
@@ -95,9 +96,9 @@ export const SecurityScreen: React.FC = () => {
                       width: '42px',
                       height: '42px',
                       borderRadius: '12px',
-                      backgroundColor: '#1A1A2E',
-                      color: session.isCurrent ? '#7FE87F' : '#B3B3C2',
-                      border: '1px solid #4D4D6B',
+                      backgroundColor: '#151524',
+                      color: session.isCurrent ? '#7FE87F' : '#A2A2BA',
+                      border: '1px solid #2C2C44',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -107,11 +108,11 @@ export const SecurityScreen: React.FC = () => {
                     {session.deviceType === 'mobile' ? <Smartphone size={20} /> : <Monitor size={20} />}
                   </div>
                   <div>
-                    <div style={{ fontWeight: 800, fontSize: '14.5px', color: '#FFFFFF' }}>
+                    <div style={{ fontWeight: 800, fontSize: '14px', color: '#FFFFFF' }}>
                       {session.deviceName}
                     </div>
-                    <div style={{ fontSize: '11.5px', color: '#B3B3C2', marginTop: '2px' }}>
-                      {session.location} &bull; {session.lastActive}
+                    <div style={{ fontSize: '11.5px', color: '#A2A2BA', marginTop: '2px' }}>
+                      {session.location} • {session.lastActive}
                     </div>
                   </div>
                 </div>
@@ -121,7 +122,7 @@ export const SecurityScreen: React.FC = () => {
                     style={{
                       fontSize: '10.5px',
                       fontWeight: 800,
-                      color: '#000000',
+                      color: '#0B0B14',
                       backgroundColor: '#7FE87F',
                       padding: '4px 10px',
                       borderRadius: '12px',
@@ -136,9 +137,9 @@ export const SecurityScreen: React.FC = () => {
                     onClick={() => terminateSession(session.id)}
                     className="interactive-tap"
                     style={{
-                      backgroundColor: '#3A3A52',
-                      border: '1px solid #4D4D6B',
-                      color: '#B3B3C2',
+                      backgroundColor: '#1E1E32',
+                      border: '1px solid #2C2C44',
+                      color: '#A2A2BA',
                       padding: '6px 12px',
                       borderRadius: '10px',
                       fontSize: '11.5px',
@@ -147,6 +148,7 @@ export const SecurityScreen: React.FC = () => {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '4px',
+                      boxShadow: 'none',
                     }}
                   >
                     <LogOut size={12} /> End
@@ -159,9 +161,9 @@ export const SecurityScreen: React.FC = () => {
 
         {/* Security Footnote */}
         <div style={{ marginTop: '24px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-          <Lock size={13} color="#808099" />
-          <span style={{ fontSize: '11px', color: '#808099', fontWeight: 600 }}>
-            Automated session timeout enforced across unverified networks
+          <Lock size={13} color="#6E6E85" />
+          <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 600 }}>
+            Automated session security enabled
           </span>
         </div>
       </div>

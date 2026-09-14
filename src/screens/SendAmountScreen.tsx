@@ -48,15 +48,15 @@ export const SendAmountScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '32px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '32px' }}>
       <AppHeader title="Send Money" showBack />
 
       <div style={{ padding: '20px', textAlign: 'center' }}>
         {/* Recipient Profile Card */}
         <div
           style={{
-            backgroundColor: '#2A2A3E',
-            border: '1px solid #4D4D6B',
+            backgroundColor: '#151524',
+            border: '1px solid #2C2C44',
             borderRadius: '16px',
             padding: '24px 20px',
             marginBottom: '20px',
@@ -68,7 +68,7 @@ export const SendAmountScreen: React.FC = () => {
               width: '64px',
               height: '64px',
               borderRadius: '50%',
-              backgroundColor: '#3A3A52',
+              backgroundColor: '#1E1E32',
               color: '#7FE87F',
               fontWeight: 800,
               fontSize: '22px',
@@ -81,13 +81,13 @@ export const SendAmountScreen: React.FC = () => {
           >
             {contact.avatarInitials}
           </div>
-          <h2 style={{ fontSize: '19px', fontWeight: 800, marginBottom: '4px', color: '#FFFFFF', letterSpacing: '-0.01em' }}>
+          <h2 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '4px', color: '#FFFFFF', letterSpacing: '-0.01em' }}>
             {contact.name}
           </h2>
-          <div style={{ fontSize: '13px', color: '#B3B3C2', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+          <div style={{ fontSize: '12.5px', color: '#A2A2BA', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
             <span>{contact.upiId}</span>
-            <span>&bull;</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '2px', color: '#7FE87F', fontWeight: 700 }}>
+            <span style={{ color: '#6E6E85' }}>•</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: '#7FE87F', fontWeight: 700 }}>
               <ShieldCheck size={14} /> Verified
             </span>
           </div>
@@ -96,17 +96,18 @@ export const SendAmountScreen: React.FC = () => {
         {/* Amount Input Card */}
         <div
           style={{
-            backgroundColor: '#2A2A3E',
-            border: '1px solid #4D4D6B',
+            backgroundColor: '#151524',
+            border: '1px solid #2C2C44',
             borderRadius: '16px',
             padding: '24px 20px',
             marginBottom: '20px',
+            boxShadow: 'none',
           }}
         >
           <div
             style={{
               fontSize: '11px',
-              color: '#B3B3C2',
+              color: '#A2A2BA',
               fontWeight: 800,
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
@@ -134,7 +135,7 @@ export const SendAmountScreen: React.FC = () => {
               autoFocus
               className="tabular-nums"
               style={{
-                fontSize: '48px',
+                fontSize: '44px',
                 fontWeight: 900,
                 color: '#FFFFFF',
                 background: 'none',
@@ -158,8 +159,8 @@ export const SendAmountScreen: React.FC = () => {
                   onClick={() => setAmountStr(val)}
                   className="interactive-tap"
                   style={{
-                    backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.15)' : '#3A3A52',
-                    border: isSelected ? '1.5px solid #7FE87F' : '1px solid #4D4D6B',
+                    backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.15)' : '#1E1E32',
+                    border: isSelected ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
                     color: isSelected ? '#7FE87F' : '#FFFFFF',
                     borderRadius: '20px',
                     padding: '8px 16px',
@@ -181,16 +182,16 @@ export const SendAmountScreen: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
-              backgroundColor: '#1A1A2E',
-              border: '1px solid #4D4D6B',
+              backgroundColor: '#1E1E32',
+              border: '1px solid #2C2C44',
               borderRadius: '10px',
               padding: '10px 14px',
             }}
           >
-            <MessageSquare size={16} color="#808099" />
+            <MessageSquare size={16} color="#6E6E85" />
             <input
               type="text"
-              placeholder="Add a note (e.g. Dinner, Rent, Groceries)"
+              placeholder="Add note (optional)"
               value={note}
               onChange={(e) => setNote(e.target.value)}
               style={{

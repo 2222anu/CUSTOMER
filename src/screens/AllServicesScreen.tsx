@@ -76,52 +76,52 @@ export const AllServicesScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '24px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '24px', color: '#FFFFFF' }}>
       <AppHeader title="All Services" showBack showSettings />
 
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* Bill Payments Grid */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-            Recharge & Bill Payments
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+            Recharge & Bills
           </div>
-          <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px' }}>
+          <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
               <ServiceCard label="Electricity" icon={<Zap size={20} />} onClick={() => navigateTo('ELECTRICITY')} />
               <ServiceCard
                 label="Water"
                 icon={<Droplets size={20} />}
-                onClick={() => handleOpenService('Water Bill', 'State Water Supply Board', 480, 'Enter Consumer ID', <Droplets size={20} />)}
+                onClick={() => handleOpenService('Water Bill', 'Water Board', 480, 'Consumer ID', <Droplets size={20} />)}
               />
               <ServiceCard
                 label="Piped Gas"
                 icon={<Flame size={20} />}
-                onClick={() => handleOpenService('Piped Natural Gas (PNG)', 'Indraprastha / Mahanagar Gas', 750, 'Enter Customer Reference No', <Flame size={20} />)}
+                onClick={() => handleOpenService('Piped Gas', 'Mahanagar Gas', 750, 'Customer ID', <Flame size={20} />)}
               />
               <ServiceCard
                 label="LPG Cylinder"
                 icon={<Flame size={20} />}
-                onClick={() => handleOpenService('LPG Cylinder Booking', 'HP / Indane / Bharat Gas', 850, 'Enter Consumer ID or Registered Mobile', <Flame size={20} />)}
+                onClick={() => handleOpenService('LPG Booking', 'HP Gas', 850, 'Consumer ID / Mobile', <Flame size={20} />)}
               />
               <ServiceCard
-                label="Mobile Prepaid"
+                label="Prepaid"
                 icon={<Smartphone size={20} />}
-                onClick={() => handleOpenService('Prepaid Mobile Recharge', 'Jio / Airtel Unlimited 5G Plan', 666, 'Enter 10-digit Mobile Number', <Smartphone size={20} />)}
+                onClick={() => handleOpenService('Mobile Prepaid', 'Jio Unlimited 5G', 666, '10-digit mobile number', <Smartphone size={20} />)}
               />
               <ServiceCard
-                label="Mobile Postpaid"
+                label="Postpaid"
                 icon={<PhoneCall size={20} />}
-                onClick={() => handleOpenService('Postpaid Mobile Bill', 'Airtel / Jio / Vi Postpaid', 1199, 'Enter 10-digit Mobile Number', <PhoneCall size={20} />)}
+                onClick={() => handleOpenService('Mobile Postpaid', 'Airtel Postpaid', 1199, '10-digit mobile number', <PhoneCall size={20} />)}
               />
               <ServiceCard
                 label="Broadband"
                 icon={<Globe size={20} />}
-                onClick={() => handleOpenService('Broadband & Fiber', 'Airtel Xstream / JioFiber Gigabit', 999, 'Enter Account / Fixedline Number', <Globe size={20} />)}
+                onClick={() => handleOpenService('Broadband', 'Airtel Xstream', 999, 'Account Number', <Globe size={20} />)}
               />
               <ServiceCard
                 label="DTH / TV"
                 icon={<Tv size={20} />}
-                onClick={() => handleOpenService('DTH TV Recharge', 'Tata Play / Airtel Digital TV', 450, 'Enter Subscriber ID or Mobile Number', <Tv size={20} />)}
+                onClick={() => handleOpenService('DTH Recharge', 'Tata Play', 450, 'Subscriber ID', <Tv size={20} />)}
               />
             </div>
           </div>
@@ -129,26 +129,26 @@ export const AllServicesScreen: React.FC = () => {
 
         {/* Financial Services */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
             Banking & Credit
           </div>
-          <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px' }}>
+          <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
               <ServiceCard label="Credit Card" icon={<CreditCard size={20} />} onClick={() => navigateTo('PAYMENT_METHODS')} />
               <ServiceCard
                 label="Insurance"
                 icon={<ShieldCheck size={20} />}
-                onClick={() => handleOpenService('Insurance Premium', 'LIC / HDFC Life Insurance', 3450, 'Enter Policy Number', <ShieldCheck size={20} />)}
+                onClick={() => handleOpenService('Insurance', 'HDFC Life', 3450, 'Policy Number', <ShieldCheck size={20} />)}
               />
               <ServiceCard
-                label="Loan Repay"
+                label="Loan EMI"
                 icon={<Building size={20} />}
-                onClick={() => handleOpenService('Loan EMI Repayment', 'Bajaj Finserv / HDFC Bank', 4200, 'Enter Loan Account Number', <Building size={20} />)}
+                onClick={() => handleOpenService('Loan Repayment', 'HDFC Bank EMI', 4200, 'Loan Account No', <Building size={20} />)}
               />
               <ServiceCard
                 label="FASTag"
                 icon={<Car size={20} />}
-                onClick={() => handleOpenService('NETC FASTag Recharge', 'ICICI / SBI NETC FASTag', 500, 'Enter Vehicle Registration Number (VRN)', <Car size={20} />)}
+                onClick={() => handleOpenService('FASTag', 'ICICI NETC FASTag', 500, 'Vehicle Number', <Car size={20} />)}
               />
             </div>
           </div>
@@ -156,25 +156,25 @@ export const AllServicesScreen: React.FC = () => {
 
         {/* Travel & Bookings */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
             Travel & Lifestyle
           </div>
-          <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px' }}>
+          <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
               <ServiceCard
                 label="Flights"
                 icon={<Plane size={20} />}
-                onClick={() => handleOpenService('Flight Booking', 'IndiGo Hyderabad to Mumbai', 4850, 'Enter Passenger PNR / Booking ID', <Plane size={20} />)}
+                onClick={() => handleOpenService('Flight Booking', 'IndiGo Hyd-Bom', 4850, 'Passenger PNR', <Plane size={20} />)}
               />
               <ServiceCard
                 label="Gift Cards"
                 icon={<Gift size={20} />}
-                onClick={() => handleOpenService('Brand Gift Voucher', 'Amazon / Flipkart Digital Voucher', 1000, 'Enter Recipient Mobile / Email', <Gift size={20} />)}
+                onClick={() => handleOpenService('Gift Voucher', 'Amazon Voucher', 1000, 'Mobile / Email', <Gift size={20} />)}
               />
               <ServiceCard
-                label="Tax Pay"
+                label="Property Tax"
                 icon={<FileText size={20} />}
-                onClick={() => handleOpenService('Property & Municipal Tax', 'Municipal Corporation Tax Assessment', 2400, 'Enter Assessment / Property Tax No', <FileText size={20} />)}
+                onClick={() => handleOpenService('Municipal Tax', 'Property Tax Assessment', 2400, 'Property Tax No', <FileText size={20} />)}
               />
             </div>
           </div>
@@ -207,12 +207,12 @@ export const AllServicesScreen: React.FC = () => {
               </div>
               <div>
                 <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>{selectedService.title}</h3>
-                <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '2px 0 0 0' }}>{selectedService.subTitle}</p>
+                <p style={{ fontSize: '12px', color: '#A2A2BA', margin: '2px 0 0 0' }}>{selectedService.subTitle}</p>
               </div>
             </div>
 
             <div style={{ marginBottom: '16px' }}>
-              <label htmlFor="modal-acc-input" style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
+              <label htmlFor="modal-acc-input" style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
                 Account / Consumer Number
               </label>
               <input
@@ -225,8 +225,8 @@ export const AllServicesScreen: React.FC = () => {
                   width: '100%',
                   padding: '12px 14px',
                   borderRadius: '12px',
-                  backgroundColor: '#1A1A2E',
-                  border: '1.5px solid #4D4D6B',
+                  backgroundColor: '#1E1E32',
+                  border: '1px solid #2C2C44',
                   fontSize: '14px',
                   fontWeight: 700,
                   color: '#FFFFFF',
@@ -236,8 +236,8 @@ export const AllServicesScreen: React.FC = () => {
             </div>
 
             <div style={{ marginBottom: '24px' }}>
-              <label htmlFor="modal-amt-input" style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
-                Payment Amount (₹)
+              <label htmlFor="modal-amt-input" style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
+                Amount (₹)
               </label>
               <input
                 id="modal-amt-input"
@@ -249,7 +249,7 @@ export const AllServicesScreen: React.FC = () => {
                   width: '100%',
                   padding: '12px 14px',
                   borderRadius: '12px',
-                  backgroundColor: '#1A1A2E',
+                  backgroundColor: '#1E1E32',
                   border: '1.5px solid #7FE87F',
                   fontSize: '20px',
                   fontWeight: 900,
@@ -261,7 +261,7 @@ export const AllServicesScreen: React.FC = () => {
             </div>
 
             <PrimaryButton onClick={handleProceedPayment}>
-              Proceed to Pay <Check size={18} />
+              Pay Now <Check size={18} />
             </PrimaryButton>
           </div>
         </Modal>

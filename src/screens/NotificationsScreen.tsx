@@ -7,7 +7,7 @@ export const NotificationsScreen: React.FC = () => {
   const { notifications } = useApp();
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '36px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '36px' }}>
       <AppHeader title="Notifications" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
@@ -15,11 +15,11 @@ export const NotificationsScreen: React.FC = () => {
           <div
             style={{
               textAlign: 'center',
-              backgroundColor: '#2A2A3E',
-              border: '1px solid #4D4D6B',
-              borderRadius: '18px',
+              backgroundColor: '#151524',
+              border: '1px solid #2C2C44',
+              borderRadius: '16px',
               padding: '48px 20px',
-              color: '#B3B3C2',
+              color: '#A2A2BA',
               boxShadow: 'none',
             }}
           >
@@ -28,9 +28,9 @@ export const NotificationsScreen: React.FC = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '14px',
-                backgroundColor: '#3A3A52',
+                backgroundColor: '#1E1E32',
                 color: '#7FE87F',
-                border: '1px solid #4D4D6B',
+                border: '1px solid #2C2C44',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -39,9 +39,9 @@ export const NotificationsScreen: React.FC = () => {
             >
               <BellRing size={22} />
             </div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>No New Notifications</div>
-            <p style={{ fontSize: '12.5px', color: '#B3B3C2', marginTop: '4px' }}>
-              Your account activity, payment alerts and updates will appear here.
+            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>No notifications</div>
+            <p style={{ fontSize: '12.5px', color: '#6E6E85', marginTop: '4px' }}>
+              You're all caught up.
             </p>
           </div>
         ) : (
@@ -55,8 +55,8 @@ export const NotificationsScreen: React.FC = () => {
                   alignItems: 'flex-start',
                   gap: '14px',
                   padding: '16px 18px',
-                  backgroundColor: '#2A2A3E',
-                  border: '1px solid #4D4D6B',
+                  backgroundColor: '#151524',
+                  border: '1px solid #2C2C44',
                   borderRadius: '16px',
                   boxShadow: 'none',
                 }}
@@ -66,13 +66,13 @@ export const NotificationsScreen: React.FC = () => {
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    backgroundColor: '#3A3A52',
+                    backgroundColor: '#1E1E32',
                     color: '#7FE87F',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    border: '1px solid #4D4D6B',
+                    border: '1px solid #2C2C44',
                   }}
                 >
                   {notif.type === 'success' ? (
@@ -86,17 +86,17 @@ export const NotificationsScreen: React.FC = () => {
 
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontWeight: 800, fontSize: '14.5px', color: '#FFFFFF' }}>
+                    <span style={{ fontWeight: 800, fontSize: '14px', color: '#FFFFFF' }}>
                       {notif.title}
                     </span>
-                    <span style={{ fontSize: '11px', color: '#808099', fontWeight: 600 }}>
+                    <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 600 }}>
                       {notif.timestamp}
                     </span>
                   </div>
                   <div
                     style={{
                       fontSize: '12px',
-                      color: '#B3B3C2',
+                      color: '#A2A2BA',
                       marginTop: '4px',
                       lineHeight: '1.45',
                     }}

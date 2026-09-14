@@ -49,26 +49,27 @@ export const UPISettingsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
       <AppHeader title="UPI Settings" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Active UPI ID Banner */}
         <div
           style={{
-            backgroundColor: '#2A2A3E',
+            backgroundColor: '#151524',
             border: '1.5px solid rgba(127, 232, 127, 0.35)',
-            borderRadius: '20px',
+            borderRadius: '16px',
             padding: '20px',
             marginBottom: '20px',
             color: '#FFFFFF',
+            boxShadow: 'none',
           }}
         >
           <div style={{ fontSize: '11px', color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>
             Primary UPI ID
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px' }}>
-            <span style={{ fontSize: '17px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em' }}>
+            <span style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em' }}>
               {user.upiId}
             </span>
             <button
@@ -77,7 +78,7 @@ export const UPISettingsScreen: React.FC = () => {
               style={{
                 backgroundColor: '#7FE87F',
                 border: 'none',
-                color: '#000000',
+                color: '#0B0B14',
                 padding: '6px 14px',
                 borderRadius: '10px',
                 fontSize: '12px',
@@ -86,31 +87,32 @@ export const UPISettingsScreen: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '5px',
+                boxShadow: 'none',
               }}
             >
-              {copied ? <Check size={13} /> : <Copy size={13} />} {copied ? 'Copied!' : 'Copy'}
+              {copied ? <Check size={13} /> : <Copy size={13} />} {copied ? 'Copied' : 'Copy'}
             </button>
           </div>
         </div>
 
         {/* Config Menu Items */}
-        <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', overflow: 'hidden' }}>
+        <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', boxShadow: 'none' }}>
           <ListRow
             icon={<QrCode size={18} color="#7FE87F" />}
             label="My QR Code"
             onClick={() => navigateTo('RECEIVE')}
           />
-          <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<Key size={18} color="#7FE87F" />}
             label="Change UPI PIN"
             onClick={() => setIsPinModalOpen(true)}
           />
-          <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<ShieldCheck size={18} color="#7FE87F" />}
-            label="UPI Payment Limit"
-            rightElement={<span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 800, backgroundColor: '#3A3A52', border: '1px solid #4D4D6B', padding: '3px 8px', borderRadius: '6px' }}>₹1,00,000 / day</span>}
+            label="Daily Limit"
+            rightElement={<span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 800, backgroundColor: '#1E1E32', border: '1px solid #2C2C44', padding: '3px 8px', borderRadius: '6px' }}>₹1,00,000 / day</span>}
           />
         </div>
       </div>
@@ -134,18 +136,18 @@ export const UPISettingsScreen: React.FC = () => {
             >
               <Check size={28} />
             </div>
-            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>UPI PIN Changed Successfully!</h4>
+            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>UPI PIN Updated</h4>
           </div>
         ) : (
           <form onSubmit={handlePinSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             {pinError && (
-              <div style={{ padding: '8px 12px', borderRadius: '10px', backgroundColor: '#3A3A52', border: '1px solid #FF4757', color: '#FF4757', fontSize: '12px', fontWeight: 700 }}>
+              <div style={{ padding: '8px 12px', borderRadius: '10px', backgroundColor: '#1E1E32', border: '1px solid #FF4757', color: '#FF4757', fontSize: '12px', fontWeight: 700 }}>
                 {pinError}
               </div>
             )}
             <div>
-              <label style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
-                Current 4-Digit UPI PIN
+              <label style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
+                Current 4-Digit PIN
               </label>
               <input
                 type="password"
@@ -154,13 +156,13 @@ export const UPISettingsScreen: React.FC = () => {
                 onChange={(e) => setOldPin(e.target.value.replace(/\D/g, ''))}
                 placeholder="••••"
                 required
-                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1.5px solid #4D4D6B', backgroundColor: '#1A1A2E', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none' }}
+                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none' }}
               />
             </div>
 
             <div>
-              <label style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
-                New 4-Digit UPI PIN
+              <label style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
+                New 4-Digit PIN
               </label>
               <input
                 type="password"
@@ -169,13 +171,13 @@ export const UPISettingsScreen: React.FC = () => {
                 onChange={(e) => setNewPin(e.target.value.replace(/\D/g, ''))}
                 placeholder="••••"
                 required
-                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1.5px solid #4D4D6B', backgroundColor: '#1A1A2E', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none' }}
+                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none' }}
               />
             </div>
 
             <div>
-              <label style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
-                Confirm New UPI PIN
+              <label style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
+                Confirm New PIN
               </label>
               <input
                 type="password"
@@ -184,7 +186,7 @@ export const UPISettingsScreen: React.FC = () => {
                 onChange={(e) => setConfirmPin(e.target.value.replace(/\D/g, ''))}
                 placeholder="••••"
                 required
-                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1.5px solid #4D4D6B', backgroundColor: '#1A1A2E', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none' }}
+                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none' }}
               />
             </div>
 
@@ -196,14 +198,15 @@ export const UPISettingsScreen: React.FC = () => {
                 padding: '14px',
                 borderRadius: '12px',
                 backgroundColor: '#7FE87F',
-                color: '#000000',
+                color: '#0B0B14',
                 border: 'none',
                 fontWeight: 800,
                 fontSize: '14px',
                 cursor: 'pointer',
+                boxShadow: 'none',
               }}
             >
-              Update UPI PIN
+              Update PIN
             </button>
           </form>
         )}

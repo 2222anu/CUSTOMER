@@ -16,13 +16,13 @@ export const MessagesScreen: React.FC = () => {
   const [threads, setThreads] = useState<ChatThread[]>([
     {
       id: 'chat-1',
-      name: 'QTPay Support Bot',
-      avatarInitials: 'QT',
+      name: 'alph pay Support',
+      avatarInitials: 'AP',
       isSupport: true,
       time: '10:42 AM',
       unread: true,
       messages: [
-        { sender: 'them', text: 'Hello Anu! Welcome to QTPay 24/7 Support.', time: '10:40 AM' },
+        { sender: 'them', text: 'Hello! Welcome to alph pay 24/7 Support.', time: '10:40 AM' },
         { sender: 'them', text: 'Your electricity bill payment of ₹2,620.14 was successful. UTR: 948201849204', time: '10:42 AM' },
       ],
     },
@@ -34,7 +34,7 @@ export const MessagesScreen: React.FC = () => {
       time: '10:41 AM',
       unread: false,
       messages: [
-        { sender: 'them', text: 'Alert: A/c ****3616 debited by ₹2,620.14 on 10-Sep-26. Info: QTPay Electricity.', time: '10:41 AM' },
+        { sender: 'them', text: 'Alert: A/c ****3616 debited by ₹2,620.14 on 10-Sep-26. Info: alph pay Electricity.', time: '10:41 AM' },
       ],
     },
     {
@@ -45,7 +45,7 @@ export const MessagesScreen: React.FC = () => {
       unread: false,
       messages: [
         { sender: 'me', text: 'Sent you ₹500 for dinner split!', time: 'Yesterday 8:30 PM' },
-        { sender: 'them', text: 'Thanks for the quick transfer Anu! Got it.', time: 'Yesterday 8:32 PM' },
+        { sender: 'them', text: 'Thanks for the quick transfer! Got it.', time: 'Yesterday 8:32 PM' },
       ],
     },
   ]);
@@ -85,7 +85,7 @@ export const MessagesScreen: React.FC = () => {
       setTimeout(() => {
         const replyMsg = {
           sender: 'them' as const,
-          text: 'Thank you for your message! Our automated support system has logged your query.',
+          text: 'Thank you for your message! Our team has logged your request.',
           time: 'Just now',
         };
         setActiveChat((curr) => (curr && curr.id === activeChat.id ? { ...curr, messages: [...curr.messages, replyMsg] } : curr));
@@ -94,11 +94,11 @@ export const MessagesScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
       <AppHeader title="Messages & Alerts" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
-        <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
           Conversations & System Alerts
         </div>
 
@@ -113,8 +113,8 @@ export const MessagesScreen: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '16px',
-                backgroundColor: '#FFFFFF',
-                border: thread.unread ? '1.5px solid #2e83ff' : '1px solid #e2e8f0',
+                backgroundColor: '#2A2A3E',
+                border: thread.unread ? '1.5px solid #7FE87F' : '1px solid #4D4D6B',
                 borderRadius: '16px',
                 cursor: 'pointer',
               }}
@@ -125,12 +125,13 @@ export const MessagesScreen: React.FC = () => {
                     width: '44px',
                     height: '44px',
                     borderRadius: '12px',
-                    backgroundColor: thread.isSupport ? '#0e274d' : '#2e83ff',
-                    color: '#FFFFFF',
+                    backgroundColor: thread.isSupport ? '#1A1A2E' : '#3A3A52',
+                    color: '#7FE87F',
+                    border: '1px solid #4D4D6B',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontWeight: '800',
+                    fontWeight: 800,
                     fontSize: '14px',
                     flexShrink: 0,
                   }}
@@ -139,15 +140,15 @@ export const MessagesScreen: React.FC = () => {
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span style={{ fontWeight: '800', fontSize: '15px', color: '#0f172a' }}>{thread.name}</span>
-                    {thread.isSupport && <Shield size={14} color="#2e83ff" />}
+                    <span style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF' }}>{thread.name}</span>
+                    {thread.isSupport && <Shield size={14} color="#7FE87F" />}
                   </div>
-                  <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {thread.messages[thread.messages.length - 1]?.text}
                   </div>
                 </div>
               </div>
-              <div style={{ fontSize: '11px', fontWeight: '700', color: thread.unread ? '#2e83ff' : '#64748b', marginLeft: '10px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: thread.unread ? '#7FE87F' : '#808099', marginLeft: '10px' }}>
                 {thread.time}
               </div>
             </div>
@@ -161,8 +162,8 @@ export const MessagesScreen: React.FC = () => {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 23, 42, 0.65)',
-            backdropFilter: 'blur(6px)',
+            backgroundColor: 'rgba(15, 15, 26, 0.75)',
+            backdropFilter: 'blur(8px)',
             zIndex: 1000,
             display: 'flex',
             alignItems: 'flex-end',
@@ -175,7 +176,8 @@ export const MessagesScreen: React.FC = () => {
               width: '100%',
               maxWidth: '440px',
               height: '85vh',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: '#1A1A2E',
+              borderTop: '1px solid #4D4D6B',
               borderTopLeftRadius: '20px',
               borderTopRightRadius: '20px',
               display: 'flex',
@@ -192,8 +194,8 @@ export const MessagesScreen: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '16px 20px',
-                borderBottom: '1px solid #e2e8f0',
-                backgroundColor: '#0e274d',
+                borderBottom: '1px solid #4D4D6B',
+                backgroundColor: '#2A2A3E',
                 color: '#FFFFFF',
               }}
             >
@@ -203,9 +205,10 @@ export const MessagesScreen: React.FC = () => {
                     width: '36px',
                     height: '36px',
                     borderRadius: '10px',
-                    backgroundColor: '#2e83ff',
-                    color: '#FFFFFF',
-                    fontWeight: '800',
+                    backgroundColor: '#1A1A2E',
+                    color: '#7FE87F',
+                    border: '1px solid #4D4D6B',
+                    fontWeight: 800,
                     fontSize: '13px',
                     display: 'flex',
                     alignItems: 'center',
@@ -215,8 +218,8 @@ export const MessagesScreen: React.FC = () => {
                   {activeChat.avatarInitials}
                 </div>
                 <div>
-                  <div style={{ fontSize: '15px', fontWeight: '800', color: '#FFFFFF' }}>{activeChat.name}</div>
-                  <div style={{ fontSize: '11px', color: '#82b5ff' }}>Online • QPay Messaging</div>
+                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>{activeChat.name}</div>
+                  <div style={{ fontSize: '11px', color: '#7FE87F' }}>Online • alph pay Messaging</div>
                 </div>
               </div>
               <button
@@ -226,13 +229,13 @@ export const MessagesScreen: React.FC = () => {
                   width: '32px',
                   height: '32px',
                   borderRadius: '50%',
-                  backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                  backgroundColor: '#3A3A52',
                   border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  color: '#FFFFFF',
+                  color: '#B3B3C2',
                 }}
               >
                 <X size={18} />
@@ -240,25 +243,25 @@ export const MessagesScreen: React.FC = () => {
             </div>
 
             {/* Chat Messages Body */}
-            <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', backgroundColor: '#f8fafc' }}>
+            <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', backgroundColor: '#1A1A2E' }}>
               {activeChat.messages.map((msg, idx) => (
                 <div
                   key={idx}
                   style={{
                     alignSelf: msg.sender === 'me' ? 'flex-end' : 'flex-start',
                     maxWidth: '80%',
-                    backgroundColor: msg.sender === 'me' ? '#2e83ff' : '#FFFFFF',
-                    color: msg.sender === 'me' ? '#FFFFFF' : '#0f172a',
+                    backgroundColor: msg.sender === 'me' ? '#7FE87F' : '#2A2A3E',
+                    color: msg.sender === 'me' ? '#000000' : '#FFFFFF',
                     padding: '12px 16px',
                     borderRadius: msg.sender === 'me' ? '16px 16px 2px 16px' : '16px 16px 16px 2px',
-                    border: msg.sender === 'me' ? 'none' : '1px solid #e2e8f0',
+                    border: msg.sender === 'me' ? 'none' : '1px solid #4D4D6B',
                   }}
                 >
-                  <div style={{ fontSize: '13px', fontWeight: '600', lineHeight: '1.45' }}>{msg.text}</div>
+                  <div style={{ fontSize: '13px', fontWeight: 600, lineHeight: '1.45' }}>{msg.text}</div>
                   <div
                     style={{
                       fontSize: '10px',
-                      color: msg.sender === 'me' ? 'rgba(255,255,255,0.8)' : '#64748b',
+                      color: msg.sender === 'me' ? 'rgba(0, 0, 0, 0.7)' : '#808099',
                       textAlign: 'right',
                       marginTop: '4px',
                       display: 'flex',
@@ -275,7 +278,7 @@ export const MessagesScreen: React.FC = () => {
             </div>
 
             {/* Chat Send Input Box */}
-            <form onSubmit={handleSendMessage} style={{ padding: '12px 16px', borderTop: '1px solid #e2e8f0', backgroundColor: '#FFFFFF', display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <form onSubmit={handleSendMessage} style={{ padding: '12px 16px', borderTop: '1px solid #4D4D6B', backgroundColor: '#2A2A3E', display: 'flex', gap: '10px', alignItems: 'center' }}>
               <input
                 type="text"
                 value={inputText}
@@ -285,11 +288,11 @@ export const MessagesScreen: React.FC = () => {
                   flex: 1,
                   padding: '12px 16px',
                   borderRadius: '20px',
-                  border: '1.5px solid #cbd5e1',
-                  backgroundColor: '#f8fafc',
+                  border: '1.5px solid #4D4D6B',
+                  backgroundColor: '#1A1A2E',
                   fontSize: '13px',
-                  fontWeight: '600',
-                  color: '#0f172a',
+                  fontWeight: 600,
+                  color: '#FFFFFF',
                   outline: 'none',
                 }}
               />
@@ -300,9 +303,9 @@ export const MessagesScreen: React.FC = () => {
                   width: '42px',
                   height: '42px',
                   borderRadius: '50%',
-                  backgroundColor: '#2e83ff',
+                  backgroundColor: '#7FE87F',
                   border: 'none',
-                  color: '#FFFFFF',
+                  color: '#000000',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',

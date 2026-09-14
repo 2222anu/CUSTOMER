@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plane, Car, Hotel, Compass, X, CheckCircle2 } from 'lucide-react';
+import { Plane, Car, Hotel, Compass, X, Check } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { ListRow } from '../components/ListRow';
 import { useApp } from '../state/AppContext';
@@ -41,7 +41,7 @@ export const TravelScreen: React.FC = () => {
       from: 'City Center',
       to: 'Rajiv Gandhi Int. Airport',
       amount: 850,
-      provider: 'QTPay Cabs',
+      provider: 'alph pay Cabs',
     },
     {
       type: 'hotel',
@@ -55,7 +55,7 @@ export const TravelScreen: React.FC = () => {
       title: 'Goa Weekend Getaway Package',
       subtitle: '3 Days / 2 Nights • Resort + Scooty Included',
       amount: 8990,
-      provider: 'QTPay Holidays',
+      provider: 'alph pay Holidays',
     },
   ];
 
@@ -91,15 +91,15 @@ export const TravelScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
       <AppHeader title="Travel & Bookings" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Travel Desk Hero Banner */}
         <div
           style={{
-            background: 'linear-gradient(145deg, #0e274d 0%, #0a1c36 100%)',
-            border: '1.5px solid rgba(46, 131, 255, 0.35)',
+            backgroundColor: '#2A2A3E',
+            border: '1.5px solid rgba(127, 232, 127, 0.35)',
             borderRadius: '20px',
             padding: '24px 20px',
             marginBottom: '20px',
@@ -112,59 +112,59 @@ export const TravelScreen: React.FC = () => {
               width: '54px',
               height: '54px',
               borderRadius: '16px',
-              backgroundColor: '#eef5ff',
-              color: '#2e83ff',
+              backgroundColor: 'rgba(127, 232, 127, 0.15)',
+              color: '#7FE87F',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 12px auto',
-              border: '1.5px solid #d6e6ff',
+              border: '1.5px solid rgba(127, 232, 127, 0.3)',
             }}
           >
             <Plane size={26} />
           </div>
-          <h3 style={{ fontSize: '18px', fontWeight: '800', margin: '0 0 4px 0', color: '#FFFFFF' }}>
-            QPay Travel Desk
+          <h3 style={{ fontSize: '18px', fontWeight: 800, margin: '0 0 4px 0', color: '#FFFFFF' }}>
+            alph pay Travel Desk
           </h3>
-          <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0 }}>
-            Book flights, cabs, and hotels with zero convenience fee & instant UPI cashbacks
+          <p style={{ fontSize: '12px', color: '#B3B3C2', margin: 0 }}>
+            Book flights, cabs, and hotels with zero convenience fee & instant cashbacks
           </p>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
           Available Travel Bookings
         </div>
 
-        <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
+        <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', overflow: 'hidden' }}>
           <ListRow
-            icon={<Plane size={18} color="#2e83ff" />}
+            icon={<Plane size={18} color="#7FE87F" />}
             label="Flight Bookings"
             subLabel="HYD ➔ BOM • ₹3,490 • Indigo"
-            rightElement={<span style={{ fontSize: '12px', fontWeight: '800', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '4px 10px', borderRadius: '8px' }}>Book ₹3,490</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>Book ₹3,490</span>}
             onClick={() => handleStartBooking(bookings[0])}
           />
-          <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />
           <ListRow
-            icon={<Car size={18} color="#2e83ff" />}
+            icon={<Car size={18} color="#7FE87F" />}
             label="Cab & Airport Bus"
             subLabel="Airport Pickup • ₹850 • Sedan"
-            rightElement={<span style={{ fontSize: '12px', fontWeight: '800', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '4px 10px', borderRadius: '8px' }}>Book ₹850</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>Book ₹850</span>}
             onClick={() => handleStartBooking(bookings[1])}
           />
-          <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />
           <ListRow
-            icon={<Hotel size={18} color="#2e83ff" />}
+            icon={<Hotel size={18} color="#7FE87F" />}
             label="Hotel Reservations"
             subLabel="Taj Krishna Deluxe • ₹6,200/night"
-            rightElement={<span style={{ fontSize: '12px', fontWeight: '800', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '4px 10px', borderRadius: '8px' }}>Reserve</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>Reserve</span>}
             onClick={() => handleStartBooking(bookings[2])}
           />
-          <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />
           <ListRow
-            icon={<Compass size={18} color="#2e83ff" />}
+            icon={<Compass size={18} color="#7FE87F" />}
             label="Holiday Packages"
             subLabel="Goa 3D/2N Tour • ₹8,990"
-            rightElement={<span style={{ fontSize: '12px', fontWeight: '800', color: '#2e83ff', backgroundColor: '#eef5ff', padding: '4px 10px', borderRadius: '8px' }}>Explore</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>Explore</span>}
             onClick={() => handleStartBooking(bookings[3])}
           />
         </div>
@@ -176,8 +176,8 @@ export const TravelScreen: React.FC = () => {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 23, 42, 0.65)',
-            backdropFilter: 'blur(6px)',
+            backgroundColor: 'rgba(15, 15, 26, 0.75)',
+            backdropFilter: 'blur(8px)',
             zIndex: 1000,
             display: 'flex',
             alignItems: 'flex-end',
@@ -189,7 +189,8 @@ export const TravelScreen: React.FC = () => {
             style={{
               width: '100%',
               maxWidth: '440px',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: '#2A2A3E',
+              borderTop: '1px solid #4D4D6B',
               borderTopLeftRadius: '20px',
               borderTopRightRadius: '20px',
               padding: '24px 20px',
@@ -199,10 +200,10 @@ export const TravelScreen: React.FC = () => {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div>
-                <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: 0 }}>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
                   Confirm Booking
                 </h3>
-                <p style={{ fontSize: '12px', color: '#64748b', margin: '2px 0 0 0' }}>{selectedBooking.provider}</p>
+                <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '2px 0 0 0' }}>{selectedBooking.provider}</p>
               </div>
               <button
                 onClick={() => setSelectedBooking(null)}
@@ -211,25 +212,25 @@ export const TravelScreen: React.FC = () => {
                   width: '32px',
                   height: '32px',
                   borderRadius: '50%',
-                  backgroundColor: '#f1f5f9',
+                  backgroundColor: '#3A3A52',
                   border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  color: '#64748b',
+                  color: '#B3B3C2',
                 }}
               >
                 <X size={18} />
               </button>
             </div>
 
-            <div style={{ padding: '16px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', marginBottom: '20px' }}>
-              <div style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a' }}>{selectedBooking.title}</div>
-              <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>{selectedBooking.subtitle}</div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px', paddingTop: '10px', borderTop: '1px dashed #cbd5e1' }}>
-                <span style={{ fontSize: '13px', fontWeight: '700', color: '#64748b' }}>Total Payable Amount</span>
-                <span style={{ fontSize: '20px', fontWeight: '800', color: '#2e83ff', fontVariantNumeric: 'tabular-nums' }}>₹{selectedBooking.amount.toLocaleString()}</span>
+            <div style={{ padding: '16px', backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', marginBottom: '20px' }}>
+              <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>{selectedBooking.title}</div>
+              <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '4px' }}>{selectedBooking.subtitle}</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px', paddingTop: '10px', borderTop: '1px dashed #4D4D6B' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#B3B3C2' }}>Total Payable Amount</span>
+                <span style={{ fontSize: '20px', fontWeight: 900, color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>₹{selectedBooking.amount.toLocaleString()}</span>
               </div>
             </div>
 
@@ -240,11 +241,11 @@ export const TravelScreen: React.FC = () => {
                 width: '100%',
                 padding: '14px',
                 borderRadius: '12px',
-                backgroundColor: '#2e83ff',
+                backgroundColor: '#7FE87F',
                 border: 'none',
-                color: '#FFFFFF',
+                color: '#000000',
                 fontSize: '14px',
-                fontWeight: '800',
+                fontWeight: 800,
                 cursor: 'pointer',
               }}
             >
@@ -260,8 +261,8 @@ export const TravelScreen: React.FC = () => {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 23, 42, 0.65)',
-            backdropFilter: 'blur(6px)',
+            backgroundColor: 'rgba(15, 15, 26, 0.75)',
+            backdropFilter: 'blur(8px)',
             zIndex: 1000,
             display: 'flex',
             alignItems: 'center',
@@ -274,7 +275,8 @@ export const TravelScreen: React.FC = () => {
             style={{
               width: '100%',
               maxWidth: '380px',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #4D4D6B',
               borderRadius: '20px',
               padding: '24px',
               textAlign: 'center',
@@ -288,35 +290,35 @@ export const TravelScreen: React.FC = () => {
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                backgroundColor: '#eef5ff',
-                color: '#2e83ff',
+                backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 12px auto',
-                border: '1.5px solid #d6e6ff',
+                border: '1.5px solid rgba(127, 232, 127, 0.3)',
               }}
             >
-              <CheckCircle2 size={32} />
+              <Check size={32} />
             </div>
 
-            <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 4px 0' }}>
               Booking Confirmed!
             </h3>
-            <p style={{ fontSize: '13px', color: '#64748b', margin: '0 0 20px 0' }}>{confirmedTicket.title}</p>
+            <p style={{ fontSize: '13px', color: '#B3B3C2', margin: '0 0 20px 0' }}>{confirmedTicket.title}</p>
 
-            <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
+            <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <span style={{ fontSize: '12px', color: '#64748b' }}>Booking Reference (PNR)</span>
-                <span style={{ fontSize: '12px', fontWeight: '800', color: '#0f172a', fontFamily: 'monospace' }}>{confirmedTicket.pnr}</span>
+                <span style={{ fontSize: '12px', color: '#B3B3C2' }}>Booking Reference (PNR)</span>
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#7FE87F', fontFamily: 'monospace' }}>{confirmedTicket.pnr}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <span style={{ fontSize: '12px', color: '#64748b' }}>Transaction UTR</span>
-                <span style={{ fontSize: '12px', fontWeight: '800', color: '#0f172a', fontFamily: 'monospace' }}>{confirmedTicket.utr}</span>
+                <span style={{ fontSize: '12px', color: '#B3B3C2' }}>Transaction UTR</span>
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#FFFFFF', fontFamily: 'monospace' }}>{confirmedTicket.utr}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '8px', borderTop: '1px dashed #cbd5e1' }}>
-                <span style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>Amount Paid</span>
-                <span style={{ fontSize: '15px', fontWeight: '800', color: '#2e83ff', fontVariantNumeric: 'tabular-nums' }}>₹{confirmedTicket.amount.toLocaleString()}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '8px', borderTop: '1px dashed #4D4D6B' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}>Amount Paid</span>
+                <span style={{ fontSize: '15px', fontWeight: 900, color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>₹{confirmedTicket.amount.toLocaleString()}</span>
               </div>
             </div>
 
@@ -327,11 +329,11 @@ export const TravelScreen: React.FC = () => {
                 width: '100%',
                 padding: '12px',
                 borderRadius: '12px',
-                backgroundColor: '#2e83ff',
+                backgroundColor: '#7FE87F',
                 border: 'none',
-                color: '#FFFFFF',
+                color: '#000000',
                 fontSize: '14px',
-                fontWeight: '800',
+                fontWeight: 800,
                 cursor: 'pointer',
               }}
             >

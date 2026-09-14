@@ -37,7 +37,7 @@ export const Modal: React.FC<ModalProps> = ({
       style={{
         position: 'fixed',
         inset: 0,
-        backgroundColor: 'rgba(15, 23, 42, 0.65)',
+        backgroundColor: 'rgba(15, 15, 26, 0.75)',
         backdropFilter: 'blur(8px)',
         zIndex: 50,
         display: 'flex',
@@ -53,8 +53,8 @@ export const Modal: React.FC<ModalProps> = ({
         style={{
           width: '100%',
           maxWidth: '420px',
-          backgroundColor: '#ffffff',
-          border: '1px solid #e2e8f0',
+          backgroundColor: '#2A2A3E',
+          border: '1px solid #4D4D6B',
           borderRadius: '16px',
           padding: '24px',
           boxShadow: 'none',
@@ -62,7 +62,7 @@ export const Modal: React.FC<ModalProps> = ({
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
           {title ? (
-            <h3 id="modal-title" style={{ fontSize: '17px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.01em' }}>
+            <h3 id="modal-title" style={{ fontSize: '17px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
               {title}
             </h3>
           ) : (
@@ -73,9 +73,9 @@ export const Modal: React.FC<ModalProps> = ({
             aria-label="Close modal"
             className="interactive-tap"
             style={{
-              backgroundColor: '#f8fafc',
-              border: '1px solid #e2e8f0',
-              color: '#64748b',
+              backgroundColor: '#3A3A52',
+              border: '1px solid #4D4D6B',
+              color: '#B3B3C2',
               width: '32px',
               height: '32px',
               borderRadius: '50%',

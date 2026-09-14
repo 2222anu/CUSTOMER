@@ -35,15 +35,15 @@ export const ProfileScreen: React.FC = () => {
   } = useApp();
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f9', minHeight: '100%', paddingBottom: '36px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '36px' }}>
       <AppHeader title="Profile" showSettings={false} showBack={true} onBack={() => navigateTo('HOME')} />
 
-      {/* User Header Profile Hero Card - Luxury Fintech Membership Card */}
+      {/* User Header Profile Hero Card */}
       <div
         style={{
           margin: '16px 20px 24px 20px',
-          background: 'linear-gradient(135deg, #071529 0%, #0a2540 50%, #1d4ed8 100%)',
-          border: '1.5px solid rgba(56, 189, 248, 0.35)',
+          backgroundColor: '#2A2A3E',
+          border: '1px solid #4D4D6B',
           borderRadius: '20px',
           padding: '24px 20px',
           color: '#FFFFFF',
@@ -53,43 +53,17 @@ export const ProfileScreen: React.FC = () => {
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
-          boxShadow: '0 8px 24px rgba(10, 25, 47, 0.25)',
+          boxShadow: 'none',
         }}
       >
-        {/* Subtle decorative glow ring */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '-40px',
-            right: '-30px',
-            width: '150px',
-            height: '150px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '-30px',
-            left: '-20px',
-            width: '130px',
-            height: '130px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(46, 131, 255, 0.25) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-
         {/* Top Right Verified Pill */}
         <div
           style={{
             position: 'absolute',
             top: '16px',
             right: '16px',
-            backgroundColor: 'rgba(46, 131, 255, 0.25)',
-            border: '1px solid rgba(56, 189, 248, 0.5)',
+            backgroundColor: 'rgba(127, 232, 127, 0.15)',
+            border: '1px solid #7FE87F',
             borderRadius: '20px',
             padding: '3px 10px',
             display: 'flex',
@@ -98,11 +72,10 @@ export const ProfileScreen: React.FC = () => {
             fontSize: '10px',
             fontWeight: 800,
             letterSpacing: '0.05em',
-            color: '#38bdf8',
-            backdropFilter: 'blur(6px)',
+            color: '#7FE87F',
           }}
         >
-          <CheckCircle2 size={11} color="#38bdf8" /> KYC VERIFIED
+          <CheckCircle2 size={11} color="#7FE87F" /> KYC VERIFIED
         </div>
 
         {/* Avatar with Edit Badge */}
@@ -117,16 +90,15 @@ export const ProfileScreen: React.FC = () => {
               width: '80px',
               height: '80px',
               borderRadius: '50%',
-              backgroundColor: user.avatarBgColor || '#2e83ff',
-              color: '#FFFFFF',
+              backgroundColor: '#3A3A52',
+              color: '#7FE87F',
               fontWeight: '800',
               fontSize: '28px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               overflow: 'hidden',
-              border: '3px solid rgba(255, 255, 255, 0.3)',
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
+              border: '2px solid #7FE87F',
               cursor: 'pointer',
             }}
           >
@@ -147,14 +119,13 @@ export const ProfileScreen: React.FC = () => {
               width: '28px',
               height: '28px',
               borderRadius: '50%',
-              backgroundColor: '#FFFFFF',
-              border: '2px solid #071529',
+              backgroundColor: '#3A3A52',
+              border: '1px solid #4D4D6B',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#2e83ff',
+              color: '#7FE87F',
               cursor: 'pointer',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
             }}
             title="Edit Profile"
           >
@@ -166,10 +137,10 @@ export const ProfileScreen: React.FC = () => {
         <h2 style={{ fontSize: '20px', fontWeight: '800', color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
           {user.name}
         </h2>
-        <div style={{ fontSize: '12px', color: '#82b5ff', fontWeight: '700', marginTop: '4px', letterSpacing: '0.01em' }}>
+        <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: '700', marginTop: '4px', letterSpacing: '0.01em' }}>
           {user.upiId} &bull; {user.mobile}
         </div>
-        <div style={{ fontSize: '11px', color: '#cbd5e1', fontWeight: '600', marginTop: '3px' }}>
+        <div style={{ fontSize: '11px', color: '#B3B3C2', fontWeight: '600', marginTop: '3px' }}>
           {user.email}
         </div>
 
@@ -187,16 +158,15 @@ export const ProfileScreen: React.FC = () => {
               gap: '6px',
               padding: '10px 14px',
               borderRadius: '12px',
-              backgroundColor: '#2e83ff',
+              backgroundColor: '#7FE87F',
               border: 'none',
-              color: '#FFFFFF',
+              color: '#000000',
               fontSize: '12px',
               fontWeight: '800',
               cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(46, 131, 255, 0.3)',
             }}
           >
-            <Edit3 size={14} />
+            <Edit3 size={14} color="#000000" />
             Edit Profile
           </button>
           <button
@@ -211,16 +181,15 @@ export const ProfileScreen: React.FC = () => {
               gap: '6px',
               padding: '10px 14px',
               borderRadius: '12px',
-              backgroundColor: 'rgba(255, 255, 255, 0.12)',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              backgroundColor: '#3A3A52',
+              border: '1px solid #4D4D6B',
               color: '#FFFFFF',
               fontSize: '12px',
               fontWeight: '800',
               cursor: 'pointer',
-              backdropFilter: 'blur(4px)',
             }}
           >
-            <QrCode size={14} />
+            <QrCode size={14} color="#7FE87F" />
             My QR Code
           </button>
         </div>
@@ -230,79 +199,68 @@ export const ProfileScreen: React.FC = () => {
       <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* Payment & Banking */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: '800', color: '#808099', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
             Payment & Accounts
           </div>
-          <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-            <ListRow icon={<Landmark size={18} color="#2e83ff" />} label="Bank Accounts" onClick={() => navigateTo('BANK_ACCOUNTS')} />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Zap size={18} color="#2e83ff" />} label="UPI Settings & PIN" onClick={() => navigateTo('UPI_SETTINGS')} />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<CreditCard size={18} color="#2e83ff" />} label="Payment Methods & Cards" onClick={() => navigateTo('PAYMENT_METHODS')} />
+          <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', overflow: 'hidden', padding: '6px 6px 0 6px' }}>
+            <ListRow icon={<Landmark size={18} color="#7FE87F" />} label="Bank Accounts" onClick={() => navigateTo('BANK_ACCOUNTS')} />
+            <ListRow icon={<Zap size={18} color="#7FE87F" />} label="UPI Settings & PIN" onClick={() => navigateTo('UPI_SETTINGS')} />
+            <ListRow icon={<CreditCard size={18} color="#7FE87F" />} label="Payment Methods & Cards" onClick={() => navigateTo('PAYMENT_METHODS')} />
           </div>
         </div>
 
         {/* Transactions & Money */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: '800', color: '#808099', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
             Transfers & Requests
           </div>
-          <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-            <ListRow icon={<Download size={18} color="#2e83ff" />} label="Money Requests" onClick={() => navigateTo('MONEY_REQUESTS')} />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<History size={18} color="#2e83ff" />} label="Transaction History" onClick={() => navigateTo('HISTORY')} />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<QrCode size={18} color="#2e83ff" />} label="Receive Money / QR Code" onClick={() => navigateTo('RECEIVE')} />
+          <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', overflow: 'hidden', padding: '6px 6px 0 6px' }}>
+            <ListRow icon={<Download size={18} color="#7FE87F" />} label="Money Requests" onClick={() => navigateTo('MONEY_REQUESTS')} />
+            <ListRow icon={<History size={18} color="#7FE87F" />} label="Transaction History" onClick={() => navigateTo('HISTORY')} />
+            <ListRow icon={<QrCode size={18} color="#7FE87F" />} label="Receive Money / QR Code" onClick={() => navigateTo('RECEIVE')} />
           </div>
         </div>
 
         {/* Lifestyle & Offers */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: '800', color: '#808099', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
             Lifestyle & Rewards
           </div>
-          <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-            <ListRow icon={<Gift size={18} color="#2e83ff" />} label="Rewards & Scratch Cards" onClick={() => navigateTo('REWARDS')} />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<ShoppingBag size={18} color="#2e83ff" />} label="Shopping Deals & Offers" onClick={() => navigateTo('SHOPPING')} />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<MessageSquare size={18} color="#2e83ff" />} label="Messages & Alerts" onClick={() => navigateTo('MESSAGES')} />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Plane size={18} color="#2e83ff" />} label="Travel Bookings" onClick={() => navigateTo('TRAVEL')} />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Utensils size={18} color="#2e83ff" />} label="Food & Dining" onClick={() => navigateTo('FOOD')} />
+          <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', overflow: 'hidden', padding: '6px 6px 0 6px' }}>
+            <ListRow icon={<Gift size={18} color="#7FE87F" />} label="Rewards & Scratch Cards" onClick={() => navigateTo('REWARDS')} />
+            <ListRow icon={<ShoppingBag size={18} color="#7FE87F" />} label="Shopping Deals & Offers" onClick={() => navigateTo('SHOPPING')} />
+            <ListRow icon={<MessageSquare size={18} color="#7FE87F" />} label="Messages & Alerts" onClick={() => navigateTo('MESSAGES')} />
+            <ListRow icon={<Plane size={18} color="#7FE87F" />} label="Travel Bookings" onClick={() => navigateTo('TRAVEL')} />
+            <ListRow icon={<Utensils size={18} color="#7FE87F" />} label="Food & Dining" onClick={() => navigateTo('FOOD')} />
           </div>
         </div>
 
         {/* Security & System Settings */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: '800', color: '#808099', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
             Settings & Security
           </div>
-          <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-            <ListRow icon={<ShieldCheck size={18} color="#2e83ff" />} label="Security & Active Devices" onClick={() => navigateTo('SECURITY')} />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Bell size={18} color="#2e83ff" />} label="Notifications & Alerts" onClick={() => navigateTo('NOTIFICATIONS')} />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
+          <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', overflow: 'hidden', padding: '6px 6px 0 6px' }}>
+            <ListRow icon={<ShieldCheck size={18} color="#7FE87F" />} label="Security & Active Devices" onClick={() => navigateTo('SECURITY')} />
+            <ListRow icon={<Bell size={18} color="#7FE87F" />} label="Notifications & Alerts" onClick={() => navigateTo('NOTIFICATIONS')} />
             <ListRow
-              icon={<Globe size={18} color="#2e83ff" />}
+              icon={<Globe size={18} color="#7FE87F" />}
               label="App Language"
-              rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#2e83ff' }}>{language}</span>}
+              rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#7FE87F' }}>{language}</span>}
               onClick={() => setIsLanguageModalOpen(true)}
             />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<HelpCircle size={18} color="#2e83ff" />} label="Help & Support Center" onClick={() => navigateTo('HELP_SUPPORT')} />
-            <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />
-            <ListRow icon={<Lock size={18} color="#2e83ff" />} label="Privacy Policy & Terms" onClick={() => navigateTo('PRIVACY')} />
+            <ListRow icon={<HelpCircle size={18} color="#7FE87F" />} label="Help & Support Center" onClick={() => navigateTo('HELP_SUPPORT')} />
+            <ListRow icon={<Lock size={18} color="#7FE87F" />} label="Privacy Policy & Terms" onClick={() => navigateTo('PRIVACY')} />
           </div>
         </div>
 
-        {/* Log Out - Refined Slate & Navy Row (Zero Red) */}
+        {/* Log Out */}
         <div>
-          <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
+          <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', overflow: 'hidden', padding: '6px 6px 0 6px' }}>
             <ListRow
-              icon={<LogOut size={18} color="#64748b" />}
-              label="Log Out of QTPay"
+              icon={<LogOut size={18} color="#FF4757" />}
+              label="Log Out of alph pay"
+              danger={true}
               onClick={() => setIsLogoutModalOpen(true)}
             />
           </div>

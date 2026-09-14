@@ -4,7 +4,6 @@ import { PinPad } from '../components/PinPad';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
 import { authService } from '../services/authService';
-import { designSystem } from '../design-system';
 
 export const PayBillPinModal: React.FC = () => {
   const { isPinModalOpen, closePinModal, pendingPaymentData, bankAccounts } = useApp();
@@ -44,31 +43,31 @@ export const PayBillPinModal: React.FC = () => {
       title={isCheckBalance ? 'Verify UPI PIN to Check Balance' : pendingPaymentData.title}
     >
       <div style={{ paddingBottom: '10px' }}>
-        {/* Payment / Check Balance Summary Box (0 Drop Shadows) */}
+        {/* Payment / Check Balance Summary Box */}
         <div
           style={{
-            backgroundColor: designSystem.colors.surface,
-            border: `1px solid ${designSystem.colors.borderHairline}`,
-            borderRadius: designSystem.radii.md,
+            backgroundColor: '#3A3A52',
+            border: '1px solid #4D4D6B',
+            borderRadius: '16px',
             padding: '16px',
             marginBottom: '20px',
-            boxShadow: designSystem.shadows.none,
+            boxShadow: 'none',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <div style={{ fontWeight: designSystem.typography.weights.extrabold, fontSize: '15px', color: designSystem.colors.textPrimary }}>{pendingPaymentData.title}</div>
-              <div style={{ fontSize: '12px', color: designSystem.colors.textSecondary, marginTop: '2px' }}>
+              <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>{pendingPaymentData.title}</div>
+              <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px' }}>
                 {pendingPaymentData.subTitle}
               </div>
             </div>
             {pendingPaymentData.amount > 0 && !isCheckBalance && (
-              <div style={{ fontSize: '20px', fontWeight: designSystem.typography.weights.black, color: designSystem.colors.primary }}>
+              <div style={{ fontSize: '20px', fontWeight: '900', color: '#7FE87F' }}>
                 {formatCurrency(pendingPaymentData.amount)}
               </div>
             )}
             {isCheckBalance && (
-              <div style={{ fontSize: '18px', fontWeight: designSystem.typography.weights.extrabold, color: designSystem.colors.textPrimary, letterSpacing: '4px' }}>
+              <div style={{ fontSize: '18px', fontWeight: '800', color: '#FFFFFF', letterSpacing: '4px' }}>
                 ••••••••
               </div>
             )}
@@ -76,7 +75,7 @@ export const PayBillPinModal: React.FC = () => {
 
           <div
             style={{
-              borderTop: `1px solid ${designSystem.colors.borderHairline}`,
+              borderTop: '1px solid #4D4D6B',
               marginTop: '12px',
               paddingTop: '10px',
               display: 'flex',
@@ -85,15 +84,15 @@ export const PayBillPinModal: React.FC = () => {
               fontSize: '12px',
             }}
           >
-            <span style={{ color: designSystem.colors.textSecondary }}>Account:</span>
-            <span style={{ fontWeight: designSystem.typography.weights.bold, color: designSystem.colors.textPrimary }}>
+            <span style={{ color: '#B3B3C2' }}>Account:</span>
+            <span style={{ fontWeight: '700', color: '#FFFFFF' }}>
               {primaryBank ? `${primaryBank.bankName} (${primaryBank.accountNumberMasked})` : 'Linked Bank Account'}
             </span>
           </div>
         </div>
 
         <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-          <span style={{ fontSize: '12px', fontWeight: designSystem.typography.weights.extrabold, color: designSystem.colors.textPrimary, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <span style={{ fontSize: '12px', fontWeight: '800', color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             {isVerifying ? 'Verifying PIN...' : 'ENTER 4-DIGIT UPI PIN'}
           </span>
         </div>

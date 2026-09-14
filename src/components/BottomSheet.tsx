@@ -6,7 +6,6 @@ interface BottomSheetProps {
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
-  themeMode?: 'dark' | 'light';
 }
 
 export const BottomSheet: React.FC<BottomSheetProps> = ({
@@ -14,7 +13,6 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
   onClose,
   title,
   children,
-  themeMode = 'light',
 }) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -26,8 +24,6 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
 
   if (!isOpen) return null;
 
-  const isDark = themeMode === 'dark';
-
   return (
     <div
       role="dialog"
@@ -36,7 +32,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
       style={{
         position: 'fixed',
         inset: 0,
-        backgroundColor: 'rgba(15, 23, 42, 0.65)',
+        backgroundColor: 'rgba(15, 15, 26, 0.75)',
         backdropFilter: 'blur(8px)',
         zIndex: 50,
         display: 'flex',
@@ -49,11 +45,11 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
         className="slide-up"
         onClick={(e) => e.stopPropagation()}
         style={{
-          backgroundColor: isDark ? '#0f172a' : '#ffffff',
-          color: isDark ? '#ffffff' : '#0f172a',
+          backgroundColor: '#2A2A3E',
+          color: '#FFFFFF',
           borderTopLeftRadius: '20px',
           borderTopRightRadius: '20px',
-          borderTop: isDark ? '1px solid #1e293b' : '1px solid #e2e8f0',
+          borderTop: '1px solid #4D4D6B',
           padding: '24px 20px',
           maxHeight: '88vh',
           overflowY: 'auto',
@@ -67,7 +63,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
           style={{
             width: '40px',
             height: '4px',
-            backgroundColor: isDark ? 'rgba(255, 255, 255, 0.2)' : '#e2e8f0',
+            backgroundColor: '#4D4D6B',
             borderRadius: '2px',
             margin: '0 auto 16px auto',
           }}
@@ -75,7 +71,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           {title ? (
-            <h3 id="bottom-sheet-title" style={{ fontSize: '18px', fontWeight: 800, color: isDark ? '#ffffff' : '#0f172a', margin: 0, letterSpacing: '-0.01em' }}>
+            <h3 id="bottom-sheet-title" style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
               {title}
             </h3>
           ) : (
@@ -86,9 +82,9 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
             aria-label="Close sheet"
             className="interactive-tap"
             style={{
-              backgroundColor: isDark ? 'rgba(255, 255, 255, 0.1)' : '#f8fafc',
-              border: `1px solid ${isDark ? '#334155' : '#e2e8f0'}`,
-              color: isDark ? '#ffffff' : '#64748b',
+              backgroundColor: '#3A3A52',
+              border: '1px solid #4D4D6B',
+              color: '#B3B3C2',
               width: '32px',
               height: '32px',
               borderRadius: '50%',

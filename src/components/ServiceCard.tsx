@@ -16,10 +16,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   icon,
   onClick,
   badge,
-  bgColor = '#ffffff',
-  iconBg = '#eef5ff',
-  iconColor = '#2e83ff',
-  borderColor = '#e2e8f0',
+  bgColor = '#2A2A3E',
+  iconBg = '#3A3A52',
+  iconColor = '#7FE87F',
+  borderColor = '#4D4D6B',
 }) => {
   return (
     <div
@@ -58,8 +58,8 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             right: '6px',
             fontSize: '9px',
             fontWeight: 800,
-            backgroundColor: '#2e83ff',
-            color: '#ffffff',
+            backgroundColor: '#7FE87F',
+            color: '#000000',
             padding: '2px 7px',
             borderRadius: '6px',
             textTransform: 'uppercase',
@@ -80,7 +80,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           justifyContent: 'center',
           color: iconColor,
           marginBottom: '10px',
-          border: '1px solid #d6e6ff',
+          border: '1px solid #4D4D6B',
         }}
       >
         {icon}
@@ -89,7 +89,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         style={{
           fontSize: '11.5px',
           fontWeight: 700,
-          color: '#0f172a',
+          color: '#FFFFFF',
           lineHeight: '14px',
           letterSpacing: '-0.01em',
         }}

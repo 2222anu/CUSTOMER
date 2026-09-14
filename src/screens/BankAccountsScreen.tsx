@@ -16,20 +16,6 @@ import { Modal } from '../components/Modal';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
 
-// Realistic EMV Chip Graphic strictly using QPay Brand Palette
-const EmvChip: React.FC<{ variant?: 'sapphire' | 'silver' }> = ({ variant = 'sapphire' }) => {
-  const isSapphire = variant === 'sapphire';
-  return (
-    <svg width="34" height="25" viewBox="0 0 34 25" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: '5px', overflow: 'hidden', flexShrink: 0 }}>
-      <rect width="34" height="25" rx="5" fill={isSapphire ? '#0f274d' : '#f1f5f9'} />
-      <rect x="0.5" y="0.5" width="33" height="24" rx="4.5" stroke={isSapphire ? '#38bdf8' : '#cbd5e1'} strokeOpacity={isSapphire ? '0.7' : '0.9'} />
-      {/* Circuit Traces */}
-      <path d="M0 12.5H11M23 12.5H34M11 6V19M23 6V19M11 9.5H17M11 15.5H17M23 9.5H17M23 15.5H17M17 6V19" stroke={isSapphire ? '#38bdf8' : '#94a3b8'} strokeWidth="1" />
-      <circle cx="17" cy="12.5" r="2.5" fill={isSapphire ? '#2e83ff' : '#cbd5e1'} />
-    </svg>
-  );
-};
-
 // Contactless NFC Waves Icon
 const ContactlessIcon: React.FC<{ color?: string; size?: number }> = ({ color = '#ffffff', size = 18 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: 'rotate(90deg)', flexShrink: 0 }}>
@@ -65,22 +51,22 @@ export const BankAccountsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f9', minHeight: '100%', paddingBottom: '36px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '36px' }}>
       <AppHeader title="Bank Accounts" showBack showSettings />
 
       <div style={{ padding: '16px 20px' }}>
         {/* Top Summary Banner */}
         <div
           style={{
-            backgroundColor: '#ffffff',
+            backgroundColor: '#2A2A3E',
             borderRadius: '16px',
-            border: '1px solid #e2e8f0',
+            border: '1px solid #4D4D6B',
             padding: '16px 18px',
             marginBottom: '20px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            boxShadow: '0 2px 8px rgba(15, 23, 42, 0.03)',
+            boxShadow: 'none',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -89,9 +75,9 @@ export const BankAccountsScreen: React.FC = () => {
                 width: '42px',
                 height: '42px',
                 borderRadius: '12px',
-                backgroundColor: '#eef5ff',
-                color: '#2e83ff',
-                border: '1px solid #d6e6ff',
+                backgroundColor: '#3A3A52',
+                color: '#7FE87F',
+                border: '1px solid #4D4D6B',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -102,16 +88,16 @@ export const BankAccountsScreen: React.FC = () => {
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a' }}>
+                <span style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>
                   Linked UPI Accounts
                 </span>
                 <span
                   style={{
                     fontSize: '11px',
                     fontWeight: 800,
-                    color: '#2e83ff',
-                    backgroundColor: '#eef5ff',
-                    border: '1px solid #d6e6ff',
+                    color: '#7FE87F',
+                    backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                    border: '1px solid #7FE87F',
                     padding: '2px 7px',
                     borderRadius: '10px',
                   }}
@@ -119,8 +105,8 @@ export const BankAccountsScreen: React.FC = () => {
                   {bankAccounts.length} Active
                 </span>
               </div>
-              <div style={{ fontSize: '11.5px', color: '#64748b', fontWeight: 600, marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <ShieldCheck size={13} color="#2e83ff" />
+              <div style={{ fontSize: '11.5px', color: '#B3B3C2', fontWeight: 600, marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <ShieldCheck size={13} color="#7FE87F" />
                 <span>NPCI / BHIM UPI Secured</span>
               </div>
             </div>
@@ -130,8 +116,8 @@ export const BankAccountsScreen: React.FC = () => {
             onClick={() => setIsAddBankModalOpen(true)}
             className="interactive-tap"
             style={{
-              backgroundColor: '#2e83ff',
-              color: '#ffffff',
+              backgroundColor: '#7FE87F',
+              color: '#000000',
               border: 'none',
               borderRadius: '12px',
               padding: '9px 14px',
@@ -141,10 +127,9 @@ export const BankAccountsScreen: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '5px',
-              boxShadow: '0 2px 8px rgba(46, 131, 255, 0.25)',
             }}
           >
-            <Plus size={15} /> Add Bank
+            <Plus size={15} color="#000000" /> Add Bank
           </button>
         </div>
 
@@ -153,50 +138,24 @@ export const BankAccountsScreen: React.FC = () => {
           {bankAccounts.map((bank) => {
             const rawNumbers = bank.accountNumberMasked.replace(/[^0-9]/g, '') || '3616';
 
-            // PRIMARY BANK CARD MODEL: Luxury Midnight Sapphire Fintech Card
+            // PRIMARY BANK CARD MODEL
             if (bank.isPrimary) {
               return (
                 <div
                   key={bank.id}
                   style={{
-                    background: 'linear-gradient(135deg, #071529 0%, #0a2540 50%, #1d4ed8 100%)',
+                    backgroundColor: '#2A2A3E',
                     borderRadius: '20px',
                     padding: '20px',
                     position: 'relative',
                     overflow: 'hidden',
-                    border: '1.5px solid rgba(56, 189, 248, 0.35)',
-                    boxShadow: '0 10px 28px rgba(10, 25, 47, 0.25)',
-                    color: '#ffffff',
+                    border: '1.5px solid #7FE87F',
+                    boxShadow: '0 10px 28px rgba(0, 0, 0, 0.4)',
+                    color: '#FFFFFF',
                     transition: 'all 0.25s ease',
                   }}
                 >
-                  {/* Subtle Ambient Radial Light Highlights */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '-40px',
-                      right: '-30px',
-                      width: '180px',
-                      height: '180px',
-                      borderRadius: '50%',
-                      background: 'radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%)',
-                      pointerEvents: 'none',
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: '-30px',
-                      left: '-20px',
-                      width: '150px',
-                      height: '150px',
-                      borderRadius: '50%',
-                      background: 'radial-gradient(circle, rgba(46, 131, 255, 0.25) 0%, transparent 70%)',
-                      pointerEvents: 'none',
-                    }}
-                  />
-
-                  {/* 1. Card Header Row */}
+                  {/* Card Header Row */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', position: 'relative', zIndex: 2 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                       <div
@@ -204,21 +163,20 @@ export const BankAccountsScreen: React.FC = () => {
                           width: '42px',
                           height: '42px',
                           borderRadius: '12px',
-                          backgroundColor: 'rgba(255, 255, 255, 0.12)',
-                          border: '1px solid rgba(255, 255, 255, 0.22)',
+                          backgroundColor: '#3A3A52',
+                          border: '1px solid #4D4D6B',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          backdropFilter: 'blur(8px)',
                         }}
                       >
-                        <Landmark size={20} color="#ffffff" />
+                        <Landmark size={20} color="#7FE87F" />
                       </div>
                       <div>
-                        <div style={{ fontSize: '16px', fontWeight: 800, letterSpacing: '0.01em', color: '#ffffff' }}>
+                        <div style={{ fontSize: '16px', fontWeight: 800, letterSpacing: '0.01em', color: '#FFFFFF' }}>
                           {bank.bankName}
                         </div>
-                        <div style={{ fontSize: '11px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.75)', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '1px' }}>
+                        <div style={{ fontSize: '11px', fontWeight: 600, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '1px' }}>
                           {bank.accountType}
                         </div>
                       </div>
@@ -226,9 +184,9 @@ export const BankAccountsScreen: React.FC = () => {
 
                     <div
                       style={{
-                        backgroundColor: 'rgba(46, 131, 255, 0.3)',
-                        border: '1px solid rgba(56, 189, 248, 0.6)',
-                        color: '#ffffff',
+                        backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                        border: '1px solid #7FE87F',
+                        color: '#7FE87F',
                         fontSize: '10.5px',
                         fontWeight: 800,
                         letterSpacing: '0.06em',
@@ -237,18 +195,24 @@ export const BankAccountsScreen: React.FC = () => {
                         display: 'flex',
                         alignItems: 'center',
                         gap: '5px',
-                        backdropFilter: 'blur(6px)',
                       }}
                     >
-                      <Star size={11} fill="#ffffff" color="#ffffff" /> PRIMARY
+                      <Star size={11} fill="#7FE87F" color="#7FE87F" /> PRIMARY
                     </div>
                   </div>
 
-                  {/* 2. EMV Chip & Account Number Row */}
+                  {/* EMV Chip & Account Number Row */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '18px 0 20px 0', position: 'relative', zIndex: 2 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                      <EmvChip variant="sapphire" />
-                      <ContactlessIcon color="rgba(255, 255, 255, 0.65)" size={18} />
+                      <div
+                        style={{
+                          width: '32px',
+                          height: '24px',
+                          borderRadius: '4px',
+                          backgroundColor: '#7FE87F',
+                        }}
+                      />
+                      <ContactlessIcon color="#7FE87F" size={18} />
                     </div>
 
                     <div
@@ -257,21 +221,18 @@ export const BankAccountsScreen: React.FC = () => {
                         fontSize: '16px',
                         letterSpacing: '0.12em',
                         fontWeight: 700,
-                        color: '#ffffff',
-                        textShadow: '0 1px 3px rgba(0,0,0,0.3)',
+                        color: '#FFFFFF',
                       }}
                     >
                       •••• &nbsp; •••• &nbsp; •••• &nbsp; {rawNumbers}
                     </div>
                   </div>
 
-                  {/* 3. Integrated Frosted Balance Container */}
+                  {/* Integrated Balance Container */}
                   <div
                     style={{
-                      backgroundColor: 'rgba(255, 255, 255, 0.09)',
-                      border: '1px solid rgba(255, 255, 255, 0.16)',
-                      backdropFilter: 'blur(10px)',
-                      WebkitBackdropFilter: 'blur(10px)',
+                      backgroundColor: '#1A1A2E',
+                      border: '1px solid #4D4D6B',
                       borderRadius: '14px',
                       padding: '12px 16px',
                       display: 'flex',
@@ -283,10 +244,10 @@ export const BankAccountsScreen: React.FC = () => {
                     }}
                   >
                     <div>
-                      <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255, 255, 255, 0.7)' }}>
+                      <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#B3B3C2' }}>
                         Available Balance
                       </div>
-                      <div className="tabular-nums" style={{ fontSize: '19px', fontWeight: 900, color: '#ffffff', marginTop: '2px', letterSpacing: '0.02em' }}>
+                      <div className="tabular-nums" style={{ fontSize: '19px', fontWeight: 900, color: '#7FE87F', marginTop: '2px', letterSpacing: '0.02em' }}>
                         {bank.showBalance ? formatCurrency(bank.balance) : '₹ ••••••••'}
                       </div>
                     </div>
@@ -295,9 +256,9 @@ export const BankAccountsScreen: React.FC = () => {
                       onClick={() => handleBalanceCheck(bank)}
                       className="interactive-tap"
                       style={{
-                        backgroundColor: 'rgba(255, 255, 255, 0.18)',
-                        border: '1px solid rgba(255, 255, 255, 0.35)',
-                        color: '#ffffff',
+                        backgroundColor: '#7FE87F',
+                        border: 'none',
+                        color: '#000000',
                         padding: '6px 14px',
                         borderRadius: '20px',
                         fontSize: '11.5px',
@@ -306,18 +267,17 @@ export const BankAccountsScreen: React.FC = () => {
                         alignItems: 'center',
                         gap: '6px',
                         cursor: 'pointer',
-                        backdropFilter: 'blur(4px)',
                       }}
                     >
-                      {bank.showBalance ? <EyeOff size={13} color="#ffffff" /> : <Eye size={13} color="#38bdf8" />}
+                      {bank.showBalance ? <EyeOff size={13} color="#000000" /> : <Eye size={13} color="#000000" />}
                       <span>{bank.showBalance ? 'Hide' : 'Check'}</span>
                     </button>
                   </div>
 
-                  {/* 4. Action Strip (QPay Brand Palette Only - No Green / No Red) */}
+                  {/* Action Strip */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 2 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 700, color: '#38bdf8' }}>
-                      <CheckCircle2 size={15} color="#38bdf8" />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 700, color: '#7FE87F' }}>
+                      <CheckCircle2 size={15} color="#7FE87F" />
                       <span>Default for receiving money</span>
                     </div>
 
@@ -325,9 +285,9 @@ export const BankAccountsScreen: React.FC = () => {
                       onClick={() => setBankToRemove(bank.id)}
                       className="interactive-tap"
                       style={{
-                        backgroundColor: 'rgba(255, 255, 255, 0.12)',
-                        border: '1px solid rgba(255, 255, 255, 0.22)',
-                        color: 'rgba(255, 255, 255, 0.85)',
+                        backgroundColor: '#3A3A52',
+                        border: '1px solid #4D4D6B',
+                        color: '#B3B3C2',
                         padding: '7px 12px',
                         borderRadius: '10px',
                         fontSize: '11.5px',
@@ -338,7 +298,7 @@ export const BankAccountsScreen: React.FC = () => {
                         cursor: 'pointer',
                       }}
                     >
-                      <Trash2 size={13} color="rgba(255, 255, 255, 0.85)" />
+                      <Trash2 size={13} color="#B3B3C2" />
                       <span>Remove</span>
                     </button>
                   </div>
@@ -346,22 +306,22 @@ export const BankAccountsScreen: React.FC = () => {
               );
             }
 
-            // SECONDARY BANK CARD MODEL: Modern Sculpted White & Sapphire Fintech Card
+            // SECONDARY BANK CARD MODEL
             return (
               <div
                 key={bank.id}
                 style={{
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #e2e8f0',
+                  backgroundColor: '#2A2A3E',
+                  border: '1px solid #4D4D6B',
                   borderRadius: '20px',
                   padding: '20px',
                   position: 'relative',
                   overflow: 'hidden',
-                  boxShadow: '0 3px 12px rgba(15, 23, 42, 0.04)',
+                  boxShadow: 'none',
                   transition: 'all 0.2s ease',
                 }}
               >
-                {/* 1. Card Header Row */}
+                {/* Header Row */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <div
@@ -369,9 +329,9 @@ export const BankAccountsScreen: React.FC = () => {
                         width: '42px',
                         height: '42px',
                         borderRadius: '12px',
-                        backgroundColor: '#eef5ff',
-                        border: '1px solid #d6e6ff',
-                        color: '#2e83ff',
+                        backgroundColor: '#3A3A52',
+                        border: '1px solid #4D4D6B',
+                        color: '#7FE87F',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -381,21 +341,28 @@ export const BankAccountsScreen: React.FC = () => {
                       <Landmark size={20} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#0f172a', letterSpacing: '0.01em' }}>
+                      <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em' }}>
                         {bank.bankName}
                       </div>
-                      <div style={{ fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '1px' }}>
+                      <div style={{ fontSize: '11px', fontWeight: 600, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '1px' }}>
                         {bank.accountType}
                       </div>
                     </div>
                   </div>
 
-                  <ContactlessIcon color="#94a3b8" size={18} />
+                  <ContactlessIcon color="#808099" size={18} />
                 </div>
 
-                {/* 2. EMV Chip & Account Number Row */}
+                {/* EMV Chip & Account Number Row */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '16px 0 18px 0' }}>
-                  <EmvChip variant="silver" />
+                  <div
+                    style={{
+                      width: '32px',
+                      height: '24px',
+                      borderRadius: '4px',
+                      backgroundColor: '#4D4D6B',
+                    }}
+                  />
 
                   <div
                     style={{
@@ -403,18 +370,18 @@ export const BankAccountsScreen: React.FC = () => {
                       fontSize: '15px',
                       letterSpacing: '0.1em',
                       fontWeight: 700,
-                      color: '#0f172a',
+                      color: '#FFFFFF',
                     }}
                   >
                     •••• &nbsp; •••• &nbsp; •••• &nbsp; {rawNumbers}
                   </div>
                 </div>
 
-                {/* 3. Integrated Balance Container */}
+                {/* Integrated Balance Container */}
                 <div
                   style={{
-                    backgroundColor: '#f8fafc',
-                    border: '1px solid #e2e8f0',
+                    backgroundColor: '#3A3A52',
+                    border: '1px solid #4D4D6B',
                     borderRadius: '14px',
                     padding: '12px 16px',
                     display: 'flex',
@@ -424,10 +391,10 @@ export const BankAccountsScreen: React.FC = () => {
                   }}
                 >
                   <div>
-                    <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748b' }}>
+                    <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#B3B3C2' }}>
                       Available Balance
                     </div>
-                    <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: '#0f172a', marginTop: '2px', letterSpacing: '0.01em' }}>
+                    <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px', letterSpacing: '0.01em' }}>
                       {bank.showBalance ? formatCurrency(bank.balance) : '₹ ••••••••'}
                     </div>
                   </div>
@@ -436,9 +403,9 @@ export const BankAccountsScreen: React.FC = () => {
                     onClick={() => handleBalanceCheck(bank)}
                     className="interactive-tap"
                     style={{
-                      backgroundColor: '#ffffff',
-                      border: '1px solid #cbd5e1',
-                      color: '#0f172a',
+                      backgroundColor: '#2A2A3E',
+                      border: '1px solid #4D4D6B',
+                      color: '#7FE87F',
                       padding: '6px 14px',
                       borderRadius: '20px',
                       fontSize: '11.5px',
@@ -449,21 +416,21 @@ export const BankAccountsScreen: React.FC = () => {
                       cursor: 'pointer',
                     }}
                   >
-                    {bank.showBalance ? <EyeOff size={13} color="#64748b" /> : <Eye size={13} color="#2e83ff" />}
+                    {bank.showBalance ? <EyeOff size={13} color="#B3B3C2" /> : <Eye size={13} color="#7FE87F" />}
                     <span>{bank.showBalance ? 'Hide' : 'Check'}</span>
                   </button>
                 </div>
 
-                {/* 4. Action Strip (QPay Brand Palette Only - No Green / No Red) */}
+                {/* Action Strip */}
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <button
                     onClick={() => setPrimaryBank(bank.id)}
                     className="interactive-tap"
                     style={{
                       flex: 1,
-                      backgroundColor: '#ffffff',
-                      border: '1.5px solid #2e83ff',
-                      color: '#2e83ff',
+                      backgroundColor: '#3A3A52',
+                      border: '1px solid #7FE87F',
+                      color: '#7FE87F',
                       padding: '9px 12px',
                       borderRadius: '10px',
                       fontSize: '12px',
@@ -473,19 +440,18 @@ export const BankAccountsScreen: React.FC = () => {
                       alignItems: 'center',
                       justifyContent: 'center',
                       gap: '5px',
-                      transition: 'background-color 0.2s ease',
                     }}
                   >
-                    <Star size={13} /> Set as Primary
+                    <Star size={13} color="#7FE87F" /> Set as Primary
                   </button>
 
                   <button
                     onClick={() => setBankToRemove(bank.id)}
                     className="interactive-tap"
                     style={{
-                      backgroundColor: '#ffffff',
-                      border: '1px solid #cbd5e1',
-                      color: '#64748b',
+                      backgroundColor: '#3A3A52',
+                      border: '1px solid #4D4D6B',
+                      color: '#B3B3C2',
                       padding: '9px 14px',
                       borderRadius: '10px',
                       fontSize: '12px',
@@ -497,7 +463,7 @@ export const BankAccountsScreen: React.FC = () => {
                       cursor: 'pointer',
                     }}
                   >
-                    <Trash2 size={13} color="#64748b" />
+                    <Trash2 size={13} color="#B3B3C2" />
                     <span>Remove</span>
                   </button>
                 </div>
@@ -513,14 +479,14 @@ export const BankAccountsScreen: React.FC = () => {
 
         {/* Security & NPCI Trust Footer */}
         <div style={{ marginTop: '22px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-          <Lock size={13} color="#64748b" />
-          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
+          <Lock size={13} color="#808099" />
+          <span style={{ fontSize: '11px', color: '#808099', fontWeight: 600 }}>
             256-Bit Hardware Encrypted &bull; NPCI Regulated
           </span>
         </div>
       </div>
 
-      {/* Delete Confirmation Modal (Strictly QPay Brand Palette) */}
+      {/* Delete Confirmation Modal */}
       {bankToRemove && (
         <Modal
           isOpen={Boolean(bankToRemove)}
@@ -528,8 +494,8 @@ export const BankAccountsScreen: React.FC = () => {
           title="Remove Bank Account"
         >
           <div style={{ textAlign: 'center', padding: '10px 0' }}>
-            <p style={{ color: '#475569', fontSize: '14px', marginBottom: '20px', lineHeight: '20px' }}>
-              Are you sure you want to unlink this bank account from QPay?
+            <p style={{ color: '#B3B3C2', fontSize: '14px', marginBottom: '20px', lineHeight: '20px' }}>
+              Are you sure you want to unlink this bank account from alph pay?
             </p>
             <div style={{ display: 'flex', gap: '10px' }}>
               <button
@@ -537,11 +503,11 @@ export const BankAccountsScreen: React.FC = () => {
                 className="interactive-tap"
                 style={{
                   flex: 1,
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #cbd5e1',
+                  backgroundColor: '#3A3A52',
+                  border: '1px solid #4D4D6B',
                   borderRadius: '10px',
                   padding: '12px',
-                  color: '#475569',
+                  color: '#FFFFFF',
                   fontWeight: '700',
                   fontSize: '13px',
                   cursor: 'pointer',
@@ -554,11 +520,11 @@ export const BankAccountsScreen: React.FC = () => {
                 className="interactive-tap"
                 style={{
                   flex: 1,
-                  backgroundColor: '#0e274d',
+                  backgroundColor: '#FF4757',
                   border: 'none',
                   borderRadius: '10px',
                   padding: '12px',
-                  color: '#ffffff',
+                  color: '#FFFFFF',
                   fontWeight: '800',
                   fontSize: '13px',
                   cursor: 'pointer',

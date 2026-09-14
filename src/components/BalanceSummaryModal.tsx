@@ -25,7 +25,7 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
       style={{
         position: 'fixed',
         inset: 0,
-        backgroundColor: 'rgba(15, 23, 42, 0.65)',
+        backgroundColor: 'rgba(15, 15, 26, 0.75)',
         backdropFilter: 'blur(4px)',
         zIndex: 100,
         display: 'flex',
@@ -38,9 +38,10 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
         style={{
           width: '100%',
           maxWidth: '440px',
-          backgroundColor: '#ffffff',
+          backgroundColor: '#2A2A3E',
           borderTopLeftRadius: '20px',
           borderTopRightRadius: '20px',
+          borderTop: '1px solid #4D4D6B',
           padding: '24px 20px',
           boxSizing: 'border-box',
           animation: 'slideUpSheet 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -56,13 +57,13 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
 
         {/* Sheet Handle & Header */}
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '14px' }}>
-          <div style={{ width: '40px', height: '4px', borderRadius: '2px', backgroundColor: '#e2e8f0' }} />
+          <div style={{ width: '40px', height: '4px', borderRadius: '2px', backgroundColor: '#4D4D6B' }} />
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <CheckCircle2 size={20} color="#10b981" />
-            <span style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a' }}>
+            <CheckCircle2 size={20} color="#7FE87F" />
+            <span style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>
               UPI Balance Verified
             </span>
           </div>
@@ -70,8 +71,8 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
             onClick={onClose}
             aria-label="Close"
             style={{
-              background: '#f1f5f9',
-              border: 'none',
+              background: '#3A3A52',
+              border: '1px solid #4D4D6B',
               borderRadius: '50%',
               width: '32px',
               height: '32px',
@@ -79,7 +80,7 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              color: '#64748b',
+              color: '#B3B3C2',
             }}
           >
             <X size={18} />
@@ -89,27 +90,28 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
         {/* Total Balance Card */}
         <div
           style={{
-            background: 'linear-gradient(135deg, #2e83ff 0%, #1e40af 100%)',
+            backgroundColor: '#1A1A2E',
+            border: '1px solid #4D4D6B',
             borderRadius: '12px',
             padding: '16px',
-            color: '#ffffff',
+            color: '#FFFFFF',
             marginBottom: '16px',
           }}
         >
-          <div style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255, 255, 255, 0.8)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Total Available Balance
           </div>
-          <div style={{ fontSize: '26px', fontWeight: 900, marginTop: '4px', letterSpacing: '0.01em' }}>
+          <div style={{ fontSize: '26px', fontWeight: 900, marginTop: '4px', letterSpacing: '0.01em', color: '#7FE87F' }}>
             {formatCurrency(totalBalance)}
           </div>
-          <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.85)', marginTop: '4px' }}>
+          <div style={{ fontSize: '11px', color: '#808099', marginTop: '4px' }}>
             Across {bankAccounts.length} Linked Bank Accounts
           </div>
         </div>
 
         {/* Breakdown by Bank */}
         <div style={{ marginBottom: '16px' }}>
-          <div style={{ fontSize: '12px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px' }}>
+          <div style={{ fontSize: '12px', fontWeight: 800, color: '#808099', textTransform: 'uppercase', marginBottom: '8px' }}>
             Bank Accounts Breakdown
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -122,8 +124,8 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
                   alignItems: 'center',
                   padding: '12px',
                   borderRadius: '10px',
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid #e2e8f0',
+                  backgroundColor: '#3A3A52',
+                  border: '1px solid #4D4D6B',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -132,30 +134,31 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
                       width: '32px',
                       height: '32px',
                       borderRadius: '8px',
-                      backgroundColor: '#eef5ff',
+                      backgroundColor: 'rgba(127, 232, 127, 0.12)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#2e83ff',
+                      color: '#7FE87F',
+                      border: '1px solid rgba(127, 232, 127, 0.3)',
                     }}
                   >
                     <Landmark size={16} />
                   </div>
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
                       {bank.bankName}
                     </div>
-                    <div style={{ fontSize: '11px', color: '#64748b' }}>
+                    <div style={{ fontSize: '11px', color: '#B3B3C2' }}>
                       {bank.accountType} • {bank.accountNumberMasked}
                     </div>
                   </div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: '14px', fontWeight: 800, color: '#0f172a' }}>
+                  <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
                     {formatCurrency(bank.balance)}
                   </div>
                   {bank.isPrimary && (
-                    <span style={{ fontSize: '9px', fontWeight: 800, color: '#2e83ff' }}>
+                    <span style={{ fontSize: '9px', fontWeight: 800, color: '#7FE87F' }}>
                       PRIMARY
                     </span>
                   )}
@@ -174,13 +177,13 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
             }}
             style={{
               flex: 1,
-              backgroundColor: '#f1f5f9',
-              border: '1px solid #cbd5e1',
+              backgroundColor: '#3A3A52',
+              border: '1px solid #4D4D6B',
               borderRadius: '10px',
               padding: '12px',
               fontSize: '13px',
               fontWeight: 800,
-              color: '#0f172a',
+              color: '#FFFFFF',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -188,19 +191,19 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
               gap: '6px',
             }}
           >
-            Manage Accounts <ArrowRight size={14} />
+            Manage Accounts <ArrowRight size={14} color="#7FE87F" />
           </button>
           <button
             onClick={onClose}
             style={{
               flex: 1,
-              backgroundColor: '#2e83ff',
+              backgroundColor: '#7FE87F',
               border: 'none',
               borderRadius: '10px',
               padding: '12px',
               fontSize: '13px',
               fontWeight: 800,
-              color: '#ffffff',
+              color: '#000000',
               cursor: 'pointer',
             }}
           >

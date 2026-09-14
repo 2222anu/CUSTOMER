@@ -26,7 +26,7 @@ export const PayAnyoneScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '24px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '24px' }}>
       <AppHeader title="Pay Anyone" showBack showSettings />
 
       {/* Search Input Field */}
@@ -36,15 +36,15 @@ export const PayAnyoneScreen: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
-            backgroundColor: '#ffffff',
-            border: '1.5px solid #cbd5e1',
+            backgroundColor: '#2A2A3E',
+            border: '1px solid #4D4D6B',
             borderRadius: '12px',
             padding: '12px 16px',
             boxShadow: 'none',
             transition: 'border-color 0.2s ease',
           }}
         >
-          <Search size={18} color="#2e83ff" />
+          <Search size={18} color="#7FE87F" />
           <input
             id="search-contact-input"
             type="text"
@@ -56,7 +56,7 @@ export const PayAnyoneScreen: React.FC = () => {
               background: 'none',
               border: 'none',
               outline: 'none',
-              color: '#0f172a',
+              color: '#FFFFFF',
               fontSize: '14.5px',
               fontWeight: 600,
               width: '100%',
@@ -71,7 +71,7 @@ export const PayAnyoneScreen: React.FC = () => {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#94a3b8',
+                color: '#808099',
                 padding: '2px',
                 display: 'flex',
                 alignItems: 'center',
@@ -99,27 +99,27 @@ export const PayAnyoneScreen: React.FC = () => {
             style={{
               fontSize: '12px',
               fontWeight: 800,
-              color: '#475569',
+              color: '#B3B3C2',
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
             }}
           >
             Frequent Contacts
           </span>
-          <span style={{ fontSize: '11px', color: '#2e83ff', fontWeight: 700 }}>
+          <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
             {filteredContacts.length} available
           </span>
         </div>
 
         {filteredContacts.length === 0 ? (
-          <div style={{ color: '#64748b', fontSize: '13px', padding: '16px', textAlign: 'center', backgroundColor: '#ffffff', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+          <div style={{ color: '#808099', fontSize: '13px', padding: '16px', textAlign: 'center', backgroundColor: '#2A2A3E', borderRadius: '12px', border: '1px solid #4D4D6B' }}>
             No contacts found matching "{searchQuery}"
           </div>
         ) : (
           <div
             style={{
-              backgroundColor: '#ffffff',
-              border: '1px solid #e2e8f0',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #4D4D6B',
               borderRadius: '14px',
               overflow: 'hidden',
               boxShadow: 'none',
@@ -143,9 +143,9 @@ export const PayAnyoneScreen: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '14px 16px',
-                  borderBottom: index < filteredContacts.length - 1 ? '1px solid #f1f5f9' : 'none',
+                  borderBottom: index < filteredContacts.length - 1 ? '1px solid #3A3A52' : 'none',
                   cursor: 'pointer',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: '#2A2A3E',
                   transition: 'background-color 0.15s ease',
                 }}
               >
@@ -155,25 +155,25 @@ export const PayAnyoneScreen: React.FC = () => {
                       width: '44px',
                       height: '44px',
                       borderRadius: '12px',
-                      backgroundColor: '#eef5ff',
-                      color: '#2e83ff',
+                      backgroundColor: '#3A3A52',
+                      color: '#7FE87F',
                       fontWeight: 800,
                       fontSize: '15px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      border: '1px solid #d6e6ff',
+                      border: '1px solid #4D4D6B',
                       flexShrink: 0,
                     }}
                   >
                     {contact.avatarInitials}
                   </div>
                   <div>
-                    <div style={{ fontWeight: 800, fontSize: '15px', color: '#0f172a', lineHeight: '18px' }}>
+                    <div style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF', lineHeight: '18px' }}>
                       {contact.name}
                     </div>
-                    <div style={{ fontSize: '12px', color: '#2e83ff', fontWeight: 600, marginTop: '2px' }}>
-                      {contact.upiId} &bull; <span style={{ color: '#64748b' }}>{contact.mobile}</span>
+                    <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 600, marginTop: '2px' }}>
+                      {contact.upiId} &bull; <span style={{ color: '#B3B3C2' }}>{contact.mobile}</span>
                     </div>
                   </div>
                 </div>
@@ -182,8 +182,8 @@ export const PayAnyoneScreen: React.FC = () => {
                     style={{
                       fontSize: '11px',
                       fontWeight: 800,
-                      color: '#2e83ff',
-                      backgroundColor: '#eef5ff',
+                      backgroundColor: '#7FE87F',
+                      color: '#000000',
                       padding: '4px 10px',
                       borderRadius: '8px',
                       display: 'flex',
@@ -200,14 +200,13 @@ export const PayAnyoneScreen: React.FC = () => {
         )}
       </div>
 
-      {/* Verified Merchants */}
       {filteredMerchants.length > 0 && (
         <div style={{ padding: '0 20px', marginBottom: '24px' }}>
           <div
             style={{
               fontSize: '12px',
               fontWeight: 800,
-              color: '#475569',
+              color: '#B3B3C2',
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
               marginBottom: '12px',
@@ -218,8 +217,8 @@ export const PayAnyoneScreen: React.FC = () => {
 
           <div
             style={{
-              backgroundColor: '#ffffff',
-              border: '1px solid #e2e8f0',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #4D4D6B',
               borderRadius: '14px',
               overflow: 'hidden',
               boxShadow: 'none',
@@ -243,9 +242,9 @@ export const PayAnyoneScreen: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '14px 16px',
-                  borderBottom: index < filteredMerchants.length - 1 ? '1px solid #f1f5f9' : 'none',
+                  borderBottom: index < filteredMerchants.length - 1 ? '1px solid #3A3A52' : 'none',
                   cursor: 'pointer',
-                  backgroundColor: '#ffffff',
+                  backgroundColor: '#2A2A3E',
                   transition: 'background-color 0.15s ease',
                 }}
               >
@@ -255,29 +254,29 @@ export const PayAnyoneScreen: React.FC = () => {
                       width: '44px',
                       height: '44px',
                       borderRadius: '12px',
-                      backgroundColor: '#eef5ff',
-                      color: '#2e83ff',
+                      backgroundColor: '#3A3A52',
+                      color: '#7FE87F',
                       fontWeight: 800,
                       fontSize: '15px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      border: '1px solid #d6e6ff',
+                      border: '1px solid #4D4D6B',
                       flexShrink: 0,
                     }}
                   >
                     <Store size={20} />
                   </div>
                   <div>
-                    <div style={{ fontWeight: 800, fontSize: '15px', color: '#0f172a', lineHeight: '18px' }}>
+                    <div style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF', lineHeight: '18px' }}>
                       {merchant.name}
                     </div>
-                    <div style={{ fontSize: '12px', color: '#2e83ff', fontWeight: 600, marginTop: '2px' }}>
+                    <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 600, marginTop: '2px' }}>
                       {merchant.upiId}
                     </div>
                   </div>
                 </div>
-                <ChevronRight size={18} color="#94a3b8" />
+                <ChevronRight size={18} color="#808099" />
               </div>
             ))}
           </div>

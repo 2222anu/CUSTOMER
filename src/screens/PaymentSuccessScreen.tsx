@@ -29,7 +29,7 @@ export const PaymentSuccessScreen: React.FC = () => {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'QTPay Receipt',
+        title: 'alph pay Receipt',
         text: `Payment Successful! ${formatCurrency(txn.amount)} paid to ${txn.title}. UTR: ${txn.utr}`,
       }).catch(() => {});
     } else {
@@ -44,7 +44,7 @@ export const PaymentSuccessScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '30px' }}>
       <AppHeader title="Receipt" showSettings={false} />
 
       <div style={{ padding: '24px 20px', textAlign: 'center' }}>
@@ -56,11 +56,11 @@ export const PaymentSuccessScreen: React.FC = () => {
           </div>
         </div>
 
-        <h2 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '4px', color: '#0f172a', letterSpacing: '-0.01em' }}>
+        <h2 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '4px', color: '#FFFFFF', letterSpacing: '-0.01em' }}>
           Payment Successful
         </h2>
-        <div style={{ fontSize: '13px', color: '#64748b', marginBottom: '14px' }}>
-          Paid to <strong style={{ color: '#0f172a' }}>{txn.title}</strong>
+        <div style={{ fontSize: '13px', color: '#B3B3C2', marginBottom: '14px' }}>
+          Paid to <strong style={{ color: '#FFFFFF' }}>{txn.title}</strong>
         </div>
 
         {/* Large Amount Display */}
@@ -68,7 +68,7 @@ export const PaymentSuccessScreen: React.FC = () => {
           style={{
             fontSize: '32px',
             fontWeight: '900',
-            color: '#0f172a',
+            color: '#7FE87F',
             marginBottom: '20px',
             fontVariantNumeric: 'tabular-nums',
             letterSpacing: '-0.02em',
@@ -80,8 +80,8 @@ export const PaymentSuccessScreen: React.FC = () => {
         {/* Transaction Details Breakdown Card */}
         <div
           style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid #e2e8f0',
+            backgroundColor: '#2A2A3E',
+            border: '1px solid #4D4D6B',
             borderRadius: '20px',
             padding: '20px',
             marginBottom: '20px',
@@ -89,34 +89,34 @@ export const PaymentSuccessScreen: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <span style={{ color: '#64748b', fontSize: '13px' }}>Provider / Payee</span>
-            <span style={{ fontWeight: '700', fontSize: '13px', color: '#0f172a' }}>{txn.title}</span>
+            <span style={{ color: '#B3B3C2', fontSize: '13px' }}>Provider / Payee</span>
+            <span style={{ fontWeight: '700', fontSize: '13px', color: '#FFFFFF' }}>{txn.title}</span>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <span style={{ color: '#64748b', fontSize: '13px' }}>Transaction ID</span>
-            <span style={{ fontWeight: '600', fontSize: '12px', color: '#0f172a', fontFamily: 'monospace' }}>{txn.id}</span>
+            <span style={{ color: '#B3B3C2', fontSize: '13px' }}>Transaction ID</span>
+            <span style={{ fontWeight: '600', fontSize: '12px', color: '#FFFFFF', fontFamily: 'monospace' }}>{txn.id}</span>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <span style={{ color: '#64748b', fontSize: '13px' }}>UTR / Reference No</span>
-            <span style={{ fontWeight: '600', fontSize: '12px', color: '#0f172a', fontFamily: 'monospace' }}>{txn.utr}</span>
+            <span style={{ color: '#B3B3C2', fontSize: '13px' }}>UTR / Reference No</span>
+            <span style={{ fontWeight: '600', fontSize: '12px', color: '#FFFFFF', fontFamily: 'monospace' }}>{txn.utr}</span>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <span style={{ color: '#64748b', fontSize: '13px' }}>Date & Time</span>
-            <span style={{ fontWeight: '600', fontSize: '13px', color: '#0f172a' }}>{formatDate(txn.timestamp)}</span>
+            <span style={{ color: '#B3B3C2', fontSize: '13px' }}>Date & Time</span>
+            <span style={{ fontWeight: '600', fontSize: '13px', color: '#FFFFFF' }}>{formatDate(txn.timestamp)}</span>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #f1f5f9', paddingTop: '12px' }}>
-            <span style={{ color: '#64748b', fontSize: '13px' }}>Payment Method</span>
-            <span style={{ fontWeight: '700', fontSize: '13px', color: '#2e83ff' }}>ICICI Bank Savings **** 3616</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #3A3A52', paddingTop: '12px' }}>
+            <span style={{ color: '#B3B3C2', fontSize: '13px' }}>Payment Method</span>
+            <span style={{ fontWeight: '700', fontSize: '13px', color: '#7FE87F' }}>ICICI Bank Savings **** 3616</span>
           </div>
         </div>
 
         {downloadMsg && (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '12px', color: '#2e83ff', fontWeight: '700', marginBottom: '16px' }}>
-            <CheckCircle2 size={16} color="#2e83ff" /> Receipt details saved successfully!
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '12px', color: '#7FE87F', fontWeight: '700', marginBottom: '16px' }}>
+            <CheckCircle2 size={16} color="#7FE87F" /> Receipt details saved successfully!
           </div>
         )}
 

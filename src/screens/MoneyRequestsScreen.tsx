@@ -26,7 +26,7 @@ export const MoneyRequestsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100vh', paddingBottom: '32px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '32px', color: '#FFFFFF' }}>
       <AppHeader title="Money Requests" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
@@ -34,9 +34,9 @@ export const MoneyRequestsScreen: React.FC = () => {
           <div
             style={{
               textAlign: 'center',
-              backgroundColor: '#ffffff',
+              backgroundColor: '#2A2A3E',
               borderRadius: '16px',
-              border: '1px solid #e2e8f0',
+              border: '1px solid #4D4D6B',
               padding: '48px 24px',
             }}
           >
@@ -45,8 +45,9 @@ export const MoneyRequestsScreen: React.FC = () => {
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                backgroundColor: '#eef5ff',
-                color: '#2e83ff',
+                backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                color: '#7FE87F',
+                border: '1px solid rgba(127, 232, 127, 0.3)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -55,8 +56,8 @@ export const MoneyRequestsScreen: React.FC = () => {
             >
               <ArrowDownLeft size={28} />
             </div>
-            <div style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a' }}>No Pending Requests</div>
-            <p style={{ fontSize: '13px', color: '#64748b', marginTop: '6px', margin: '6px 0 0 0' }}>
+            <div style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>No Pending Requests</div>
+            <p style={{ fontSize: '13px', color: '#B3B3C2', marginTop: '6px', margin: '6px 0 0 0' }}>
               When someone requests money from you via UPI, it will appear here.
             </p>
           </div>
@@ -65,8 +66,8 @@ export const MoneyRequestsScreen: React.FC = () => {
             <div
               key={req.id}
               style={{
-                backgroundColor: '#ffffff',
-                border: '1px solid #e2e8f0',
+                backgroundColor: '#2A2A3E',
+                border: '1px solid #4D4D6B',
                 borderRadius: '16px',
                 padding: '20px',
                 marginBottom: '16px',
@@ -86,28 +87,28 @@ export const MoneyRequestsScreen: React.FC = () => {
                       width: '46px',
                       height: '46px',
                       borderRadius: '14px',
-                      backgroundColor: '#eef5ff',
-                      color: '#2e83ff',
+                      backgroundColor: '#3A3A52',
+                      color: '#7FE87F',
                       fontWeight: 800,
                       fontSize: '15px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      border: '1px solid #d6e6ff',
+                      border: '1px solid #4D4D6B',
                       flexShrink: 0,
                     }}
                   >
                     {req.requesterName.substring(0, 2).toUpperCase()}
                   </div>
                   <div>
-                    <div style={{ fontWeight: 800, fontSize: '15px', color: '#0f172a' }}>
+                    <div style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF' }}>
                       {req.requesterName}
                     </div>
-                    <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>{req.upiId}</div>
+                    <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px' }}>{req.upiId}</div>
                   </div>
                 </div>
 
-                <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: '#0f172a' }}>
+                <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: '#7FE87F' }}>
                   {formatCurrency(req.amount)}
                 </div>
               </div>
@@ -115,12 +116,12 @@ export const MoneyRequestsScreen: React.FC = () => {
               {req.note && (
                 <div
                   style={{
-                    backgroundColor: '#f8fafc',
-                    border: '1px solid #e2e8f0',
+                    backgroundColor: '#1A1A2E',
+                    border: '1px solid #4D4D6B',
                     borderRadius: '10px',
                     padding: '10px 14px',
                     fontSize: '12.5px',
-                    color: '#475569',
+                    color: '#B3B3C2',
                     marginBottom: '16px',
                     fontStyle: 'italic',
                   }}
@@ -134,9 +135,9 @@ export const MoneyRequestsScreen: React.FC = () => {
                   className="interactive-tap"
                   style={{
                     flex: 1,
-                    backgroundColor: '#ffffff',
-                    border: '1px solid #cbd5e1',
-                    color: '#64748b',
+                    backgroundColor: '#3A3A52',
+                    border: '1px solid #4D4D6B',
+                    color: '#B3B3C2',
                     borderRadius: '12px',
                     padding: '12px',
                     fontWeight: 800,

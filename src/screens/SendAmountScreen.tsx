@@ -48,15 +48,15 @@ export const SendAmountScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '32px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '32px' }}>
       <AppHeader title="Send Money" showBack />
 
       <div style={{ padding: '20px', textAlign: 'center' }}>
         {/* Recipient Profile Card */}
         <div
           style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid #e2e8f0',
+            backgroundColor: '#2A2A3E',
+            border: '1px solid #4D4D6B',
             borderRadius: '16px',
             padding: '24px 20px',
             marginBottom: '20px',
@@ -68,27 +68,26 @@ export const SendAmountScreen: React.FC = () => {
               width: '64px',
               height: '64px',
               borderRadius: '50%',
-              backgroundColor: '#2e83ff',
-              color: '#ffffff',
+              backgroundColor: '#3A3A52',
+              color: '#7FE87F',
               fontWeight: 800,
               fontSize: '22px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 12px auto',
-              border: '3px solid #ffffff',
-              outline: '2px solid #d6e6ff',
+              border: '2px solid #7FE87F',
             }}
           >
             {contact.avatarInitials}
           </div>
-          <h2 style={{ fontSize: '19px', fontWeight: 800, marginBottom: '4px', color: '#0f172a', letterSpacing: '-0.01em' }}>
+          <h2 style={{ fontSize: '19px', fontWeight: 800, marginBottom: '4px', color: '#FFFFFF', letterSpacing: '-0.01em' }}>
             {contact.name}
           </h2>
-          <div style={{ fontSize: '13px', color: '#64748b', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+          <div style={{ fontSize: '13px', color: '#B3B3C2', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
             <span>{contact.upiId}</span>
             <span>&bull;</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '2px', color: '#2e83ff', fontWeight: 700 }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '2px', color: '#7FE87F', fontWeight: 700 }}>
               <ShieldCheck size={14} /> Verified
             </span>
           </div>
@@ -97,8 +96,8 @@ export const SendAmountScreen: React.FC = () => {
         {/* Amount Input Card */}
         <div
           style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid #e2e8f0',
+            backgroundColor: '#2A2A3E',
+            border: '1px solid #4D4D6B',
             borderRadius: '16px',
             padding: '24px 20px',
             marginBottom: '20px',
@@ -107,7 +106,7 @@ export const SendAmountScreen: React.FC = () => {
           <div
             style={{
               fontSize: '11px',
-              color: '#64748b',
+              color: '#B3B3C2',
               fontWeight: 800,
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
@@ -126,7 +125,7 @@ export const SendAmountScreen: React.FC = () => {
               marginBottom: '20px',
             }}
           >
-            <span style={{ fontSize: '36px', fontWeight: 800, color: '#2e83ff' }}>₹</span>
+            <span style={{ fontSize: '36px', fontWeight: 800, color: '#7FE87F' }}>₹</span>
             <input
               type="number"
               value={amountStr}
@@ -137,7 +136,7 @@ export const SendAmountScreen: React.FC = () => {
               style={{
                 fontSize: '48px',
                 fontWeight: 900,
-                color: '#0f172a',
+                color: '#FFFFFF',
                 background: 'none',
                 border: 'none',
                 outline: 'none',
@@ -159,9 +158,9 @@ export const SendAmountScreen: React.FC = () => {
                   onClick={() => setAmountStr(val)}
                   className="interactive-tap"
                   style={{
-                    backgroundColor: isSelected ? '#eef5ff' : '#f8fafc',
-                    border: isSelected ? '1.5px solid #2e83ff' : '1px solid #e2e8f0',
-                    color: isSelected ? '#2e83ff' : '#0f172a',
+                    backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.15)' : '#3A3A52',
+                    border: isSelected ? '1.5px solid #7FE87F' : '1px solid #4D4D6B',
+                    color: isSelected ? '#7FE87F' : '#FFFFFF',
                     borderRadius: '20px',
                     padding: '8px 16px',
                     fontSize: '13px',
@@ -182,13 +181,13 @@ export const SendAmountScreen: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
-              backgroundColor: '#f8fafc',
-              border: '1px solid #e2e8f0',
+              backgroundColor: '#1A1A2E',
+              border: '1px solid #4D4D6B',
               borderRadius: '10px',
               padding: '10px 14px',
             }}
           >
-            <MessageSquare size={16} color="#64748b" />
+            <MessageSquare size={16} color="#808099" />
             <input
               type="text"
               placeholder="Add a note (e.g. Dinner, Rent, Groceries)"
@@ -201,7 +200,7 @@ export const SendAmountScreen: React.FC = () => {
                 padding: 0,
                 fontSize: '13.5px',
                 fontWeight: 600,
-                color: '#0f172a',
+                color: '#FFFFFF',
                 outline: 'none',
               }}
             />

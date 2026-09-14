@@ -124,7 +124,7 @@ body.rtl {
   max-width: 600px;
   height: 100vh;
   height: 100dvh;
-  background-color: #ffffff;
+  background-color: var(--bg-page);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -205,9 +205,9 @@ select {
   font-family: var(--font-family);
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-primary);
-  background-color: #ffffff;
-  border: 1.5px solid #cbd5e1;
+  color: #ffffff;
+  background-color: #2A2A3E;
+  border: 1px solid #4D4D6B;
   border-radius: 10px;
   padding: 12px 14px;
   outline: none;
@@ -217,15 +217,15 @@ select {
 
 input::placeholder,
 textarea::placeholder {
-  color: #94a3b8;
+  color: #808099;
   font-weight: 500;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #2e83ff !important;
-  background-color: #ffffff !important;
+  border-color: #7FE87F !important;
+  background-color: #2A2A3E !important;
 }
 
 /* Universal Interactive Button & Icon Touch Feedback */
@@ -288,7 +288,7 @@ button:disabled {
   position: absolute;
   width: 64px;
   height: 64px;
-  background: #2e83ff;
+  background: #7FE87F;
   transform: rotate(45deg);
   border-radius: 8px;
 }
@@ -296,7 +296,7 @@ button:disabled {
 .diamond-icon {
   position: relative;
   z-index: 2;
-  color: #ffffff;
+  color: #000000;
 }
 
 /* Custom Scrollbar */

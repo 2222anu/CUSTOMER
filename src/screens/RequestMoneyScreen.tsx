@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Check } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
@@ -32,45 +33,44 @@ export const RequestMoneyScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
       <AppHeader title="Request Money" showBack />
 
       <div style={{ padding: '20px' }}>
         {isSuccess ? (
-          <div className="fade-in" style={{ textAlign: 'center', backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '40px 20px' }}>
+          <div className="fade-in" style={{ textAlign: 'center', backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '20px', padding: '40px 20px' }}>
             <div
               style={{
                 width: '60px',
                 height: '60px',
                 borderRadius: '16px',
-                backgroundColor: '#eef5ff',
-                color: '#2e83ff',
+                backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 16px auto',
-                fontSize: '28px',
-                border: '1.5px solid #d6e6ff',
+                border: '1.5px solid rgba(127, 232, 127, 0.4)',
               }}
             >
-              ✓
+              <Check size={32} />
             </div>
-            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '6px', color: '#0f172a' }}>
+            <h3 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '6px', color: '#FFFFFF' }}>
               Request Sent Successfully!
             </h3>
-            <p style={{ color: '#64748b', fontSize: '13px', margin: 0 }}>
-              Requested ₹{amountStr} from <strong style={{ color: '#0f172a' }}>{selectedContact.name}</strong>
+            <p style={{ color: '#B3B3C2', fontSize: '13px', margin: 0 }}>
+              Requested ₹{amountStr} from <strong style={{ color: '#FFFFFF' }}>{selectedContact.name}</strong>
             </p>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Selected Contact Card */}
-            <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '16px' }}>
+            <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px' }}>
               <label
                 style={{
                   fontSize: '11px',
-                  color: '#64748b',
-                  fontWeight: '800',
+                  color: '#B3B3C2',
+                  fontWeight: 800,
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
                   marginBottom: '10px',
@@ -86,8 +86,9 @@ export const RequestMoneyScreen: React.FC = () => {
                     width: '44px',
                     height: '44px',
                     borderRadius: '12px',
-                    backgroundColor: '#2e83ff',
-                    color: '#ffffff',
+                    backgroundColor: '#3A3A52',
+                    border: '1px solid #4D4D6B',
+                    color: '#7FE87F',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -98,8 +99,8 @@ export const RequestMoneyScreen: React.FC = () => {
                   {selectedContact.avatarInitials}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a' }}>{selectedContact.name}</div>
-                  <div style={{ fontSize: '12px', color: '#64748b' }}>{selectedContact.upiId}</div>
+                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>{selectedContact.name}</div>
+                  <div style={{ fontSize: '12px', color: '#B3B3C2' }}>{selectedContact.upiId}</div>
                 </div>
               </div>
 
@@ -111,18 +112,18 @@ export const RequestMoneyScreen: React.FC = () => {
                 }}
                 style={{
                   width: '100%',
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid #cbd5e1',
+                  backgroundColor: '#1A1A2E',
+                  border: '1px solid #4D4D6B',
                   borderRadius: '10px',
                   padding: '10px 12px',
-                  color: '#0f172a',
+                  color: '#FFFFFF',
                   fontSize: '13px',
-                  fontWeight: '600',
+                  fontWeight: 600,
                   outline: 'none',
                 }}
               >
                 {contacts.map((c) => (
-                  <option key={c.id} value={c.id}>
+                  <option key={c.id} value={c.id} style={{ backgroundColor: '#1A1A2E', color: '#FFFFFF' }}>
                     {c.name} ({c.upiId})
                   </option>
                 ))}
@@ -130,12 +131,12 @@ export const RequestMoneyScreen: React.FC = () => {
             </div>
 
             {/* Enter Amount Card */}
-            <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '20px' }}>
+            <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '20px' }}>
               <label
                 style={{
                   fontSize: '11px',
-                  color: '#64748b',
-                  fontWeight: '800',
+                  color: '#B3B3C2',
+                  fontWeight: 800,
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
                   marginBottom: '12px',
@@ -149,14 +150,14 @@ export const RequestMoneyScreen: React.FC = () => {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  backgroundColor: '#f8fafc',
-                  border: '1.5px solid #2e83ff',
+                  backgroundColor: '#1A1A2E',
+                  border: '1.5px solid #7FE87F',
                   borderRadius: '14px',
                   padding: '12px 18px',
                   marginBottom: '14px',
                 }}
               >
-                <span style={{ fontSize: '26px', fontWeight: 800, color: '#2e83ff', marginRight: '8px' }}>₹</span>
+                <span style={{ fontSize: '26px', fontWeight: 800, color: '#7FE87F', marginRight: '8px' }}>₹</span>
                 <input
                   type="number"
                   value={amountStr}
@@ -166,7 +167,7 @@ export const RequestMoneyScreen: React.FC = () => {
                     width: '100%',
                     background: 'none',
                     border: 'none',
-                    color: '#0f172a',
+                    color: '#FFFFFF',
                     fontSize: '28px',
                     fontWeight: 900,
                     outline: 'none',
@@ -190,9 +191,9 @@ export const RequestMoneyScreen: React.FC = () => {
                       flex: 1,
                       padding: '7px 0',
                       borderRadius: '10px',
-                      backgroundColor: '#eef5ff',
-                      border: '1px solid #d6e6ff',
-                      color: '#2e83ff',
+                      backgroundColor: '#3A3A52',
+                      border: '1px solid #4D4D6B',
+                      color: '#7FE87F',
                       fontSize: '12px',
                       fontWeight: 700,
                       cursor: 'pointer',
@@ -206,12 +207,12 @@ export const RequestMoneyScreen: React.FC = () => {
             </div>
 
             {/* Note Card */}
-            <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '16px' }}>
+            <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px' }}>
               <label
                 style={{
                   fontSize: '11px',
-                  color: '#64748b',
-                  fontWeight: '800',
+                  color: '#B3B3C2',
+                  fontWeight: 800,
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
                   marginBottom: '8px',
@@ -227,11 +228,11 @@ export const RequestMoneyScreen: React.FC = () => {
                 placeholder="What is this request for? (e.g. Dinner, Rent)"
                 style={{
                   width: '100%',
-                  backgroundColor: '#f8fafc',
-                  border: '1.5px solid #cbd5e1',
+                  backgroundColor: '#1A1A2E',
+                  border: '1.5px solid #4D4D6B',
                   borderRadius: '12px',
                   padding: '12px 14px',
-                  color: '#0f172a',
+                  color: '#FFFFFF',
                   fontSize: '14px',
                   fontWeight: 600,
                   outline: 'none',

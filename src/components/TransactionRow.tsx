@@ -29,8 +29,8 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '14px 16px',
-        backgroundColor: '#ffffff',
-        border: '1px solid #e2e8f0',
+        backgroundColor: '#2A2A3E',
+        border: '1px solid #4D4D6B',
         borderRadius: '12px',
         marginBottom: '10px',
         cursor: onClick ? 'pointer' : 'default',
@@ -44,9 +44,9 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
             width: '42px',
             height: '42px',
             borderRadius: '12px',
-            backgroundColor: isReceived ? '#ecfdf5' : '#eef5ff',
-            border: `1px solid ${isReceived ? '#a7f3d0' : '#d6e6ff'}`,
-            color: isReceived ? '#059669' : '#2e83ff',
+            backgroundColor: isReceived ? 'rgba(127, 232, 127, 0.12)' : '#3A3A52',
+            border: `1px solid ${isReceived ? '#7FE87F' : '#4D4D6B'}`,
+            color: isReceived ? '#7FE87F' : '#FFFFFF',
             fontWeight: 800,
             fontSize: '13px',
             display: 'flex',
@@ -58,10 +58,10 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
           {transaction.avatarInitials || transaction.title.substring(0, 2).toUpperCase()}
         </div>
         <div>
-          <div style={{ fontWeight: 800, fontSize: '14px', color: '#0f172a', lineHeight: '18px' }}>
+          <div style={{ fontWeight: 800, fontSize: '14px', color: '#FFFFFF', lineHeight: '18px' }}>
             {transaction.title}
           </div>
-          <div style={{ fontSize: '11.5px', color: '#64748b', marginTop: '2px' }}>
+          <div style={{ fontSize: '11.5px', color: '#B3B3C2', marginTop: '2px' }}>
             {transaction.subTitle || (isReceived ? 'Received via UPI' : 'Paid via UPI')} &bull; {transaction.utr.substring(0, 10)}
           </div>
         </div>
@@ -73,12 +73,12 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
           style={{
             fontWeight: 900,
             fontSize: '15px',
-            color: isReceived ? '#059669' : '#0f172a',
+            color: isReceived ? '#7FE87F' : '#FFFFFF',
           }}
         >
           {isReceived ? '+' : '-'}{formatCurrency(transaction.amount)}
         </div>
-        <div style={{ fontSize: '10.5px', color: '#94a3b8', marginTop: '2px', fontWeight: 600 }}>
+        <div style={{ fontSize: '10.5px', color: '#808099', marginTop: '2px', fontWeight: 600 }}>
           {transaction.date}
         </div>
       </div>

@@ -38,7 +38,7 @@ export const HistoryScreen: React.FC = () => {
   });
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '30px' }}>
       <AppHeader
         title="Transactions"
         showSearch
@@ -53,13 +53,13 @@ export const HistoryScreen: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
-              backgroundColor: '#ffffff',
-              border: '1.5px solid #2e83ff',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #7FE87F',
               borderRadius: '12px',
               padding: '10px 14px',
             }}
           >
-            <Search size={16} color="#2e83ff" />
+            <Search size={16} color="#7FE87F" />
             <input
               type="text"
               placeholder="Search by payee name or UTR number..."
@@ -70,7 +70,7 @@ export const HistoryScreen: React.FC = () => {
                 background: 'none',
                 border: 'none',
                 outline: 'none',
-                color: '#0f172a',
+                color: '#FFFFFF',
                 fontSize: '13px',
                 fontWeight: 600,
                 width: '100%',
@@ -83,7 +83,7 @@ export const HistoryScreen: React.FC = () => {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: '#64748b',
+                  color: '#808099',
                   cursor: 'pointer',
                   padding: 0,
                   display: 'flex',
@@ -114,9 +114,9 @@ export const HistoryScreen: React.FC = () => {
               onClick={() => setFilter(f)}
               className="interactive-tap"
               style={{
-                backgroundColor: isActive ? '#2e83ff' : '#ffffff',
-                border: isActive ? '1.5px solid #2e83ff' : '1px solid #e2e8f0',
-                color: isActive ? '#ffffff' : '#475569',
+                backgroundColor: isActive ? '#7FE87F' : '#2A2A3E',
+                border: isActive ? '1px solid #7FE87F' : '1px solid #4D4D6B',
+                color: isActive ? '#000000' : '#B3B3C2',
                 borderRadius: '20px',
                 padding: '7px 16px',
                 fontSize: '12px',
@@ -139,11 +139,11 @@ export const HistoryScreen: React.FC = () => {
           <div
             style={{
               textAlign: 'center',
-              backgroundColor: '#ffffff',
-              border: '1px solid #e2e8f0',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #4D4D6B',
               borderRadius: '16px',
               padding: '40px 20px',
-              color: '#64748b',
+              color: '#B3B3C2',
             }}
           >
             <div
@@ -151,8 +151,9 @@ export const HistoryScreen: React.FC = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '14px',
-                backgroundColor: '#eef5ff',
-                color: '#2e83ff',
+                backgroundColor: '#3A3A52',
+                color: '#7FE87F',
+                border: '1px solid #4D4D6B',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -161,8 +162,8 @@ export const HistoryScreen: React.FC = () => {
             >
               <Receipt size={24} />
             </div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a' }}>No transactions found</div>
-            <div style={{ fontSize: '13px', marginTop: '4px' }}>Try changing search or filter parameters</div>
+            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>No transactions found</div>
+            <div style={{ fontSize: '13px', marginTop: '4px', color: '#808099' }}>Try changing search or filter parameters</div>
           </div>
         ) : (
           Object.entries(groupedByDate).map(([dateLabel, items]) => (
@@ -171,7 +172,7 @@ export const HistoryScreen: React.FC = () => {
                 style={{
                   fontSize: '11px',
                   fontWeight: 800,
-                  color: '#64748b',
+                  color: '#808099',
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
                   marginBottom: '8px',
@@ -182,17 +183,15 @@ export const HistoryScreen: React.FC = () => {
               </div>
               <div
                 style={{
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #e2e8f0',
+                  backgroundColor: '#2A2A3E',
+                  border: '1px solid #4D4D6B',
                   borderRadius: '16px',
                   overflow: 'hidden',
+                  padding: '8px 8px 0 8px',
                 }}
               >
-                {items.map((txn, index) => (
-                  <React.Fragment key={txn.id}>
-                    {index > 0 && <div style={{ height: '1px', backgroundColor: '#f1f5f9', margin: '0 16px' }} />}
-                    <TransactionRow transaction={txn} />
-                  </React.Fragment>
+                {items.map((txn) => (
+                  <TransactionRow key={txn.id} transaction={txn} />
                 ))}
               </div>
             </div>

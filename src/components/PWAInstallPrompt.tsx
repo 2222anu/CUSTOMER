@@ -56,8 +56,8 @@ export const PWAInstallPrompt: React.FC = () => {
     <div
       style={{
         margin: '10px 20px 0 20px',
-        backgroundColor: '#ffffff',
-        border: '1px solid #d6e6ff',
+        backgroundColor: '#2A2A3E',
+        border: '1px solid #4D4D6B',
         borderRadius: '10px',
         padding: '10px 14px',
         display: 'flex',
@@ -72,18 +72,19 @@ export const PWAInstallPrompt: React.FC = () => {
             width: '34px',
             height: '34px',
             borderRadius: '8px',
-            backgroundColor: '#eef5ff',
+            backgroundColor: '#3A3A52',
+            border: '1px solid #4D4D6B',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#2e83ff',
+            color: '#7FE87F',
           }}
         >
           <Download size={18} />
         </div>
         <div>
-          <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>Install QPay App</div>
-          <div style={{ fontSize: '11px', color: '#64748b' }}>Fast launch & offline access</div>
+          <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>Install alph pay</div>
+          <div style={{ fontSize: '11px', color: '#B3B3C2' }}>Fast launch & instant access</div>
         </div>
       </div>
 
@@ -91,8 +92,8 @@ export const PWAInstallPrompt: React.FC = () => {
         <button
           onClick={handleInstallClick}
           style={{
-            backgroundColor: '#2e83ff',
-            color: '#ffffff',
+            backgroundColor: '#7FE87F',
+            color: '#000000',
             border: 'none',
             borderRadius: '6px',
             padding: '6px 12px',
@@ -109,7 +110,7 @@ export const PWAInstallPrompt: React.FC = () => {
           style={{
             background: 'none',
             border: 'none',
-            color: '#94a3b8',
+            color: '#808099',
             cursor: 'pointer',
             padding: '4px',
             display: 'flex',

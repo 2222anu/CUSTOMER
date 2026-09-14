@@ -34,8 +34,8 @@ export const ListRow: React.FC<ListRowProps> = ({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '14px 16px',
-        backgroundColor: '#ffffff',
-        border: '1px solid #e2e8f0',
+        backgroundColor: '#2A2A3E',
+        border: '1px solid #4D4D6B',
         borderRadius: '12px',
         marginBottom: '10px',
         cursor: onClick ? 'pointer' : 'default',
@@ -50,12 +50,12 @@ export const ListRow: React.FC<ListRowProps> = ({
               width: '38px',
               height: '38px',
               borderRadius: '10px',
-              backgroundColor: danger ? '#f8fafc' : '#eef5ff',
-              color: danger ? '#64748b' : '#2e83ff',
+              backgroundColor: danger ? 'rgba(255, 71, 87, 0.12)' : '#3A3A52',
+              color: danger ? '#FF4757' : '#7FE87F',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              border: `1px solid ${danger ? '#e2e8f0' : '#d6e6ff'}`,
+              border: `1px solid ${danger ? '#FF4757' : '#4D4D6B'}`,
               flexShrink: 0,
             }}
           >
@@ -67,13 +67,13 @@ export const ListRow: React.FC<ListRowProps> = ({
             style={{
               fontSize: '14.5px',
               fontWeight: 700,
-              color: danger ? '#475569' : '#0f172a',
+              color: danger ? '#FF6B7A' : '#FFFFFF',
             }}
           >
             {label}
           </div>
           {subLabel && (
-            <div style={{ fontSize: '11.5px', color: '#64748b', marginTop: '2px' }}>
+            <div style={{ fontSize: '11.5px', color: '#B3B3C2', marginTop: '2px' }}>
               {subLabel}
             </div>
           )}
@@ -82,7 +82,7 @@ export const ListRow: React.FC<ListRowProps> = ({
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         {rightElement}
-        {onClick && !rightElement && <ChevronRight size={18} color="#94a3b8" />}
+        {onClick && !rightElement && <ChevronRight size={18} color="#808099" />}
       </div>
     </div>
   );

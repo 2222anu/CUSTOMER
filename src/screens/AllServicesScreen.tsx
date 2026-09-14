@@ -14,7 +14,7 @@ import {
   Car,
   Gift,
   FileText,
-  CheckCircle,
+  Check,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { ServiceCard } from '../components/ServiceCard';
@@ -76,22 +76,22 @@ export const AllServicesScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '24px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '24px', color: '#FFFFFF' }}>
       <AppHeader title="All Services" showBack showSettings />
 
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* Bill Payments Grid */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
             Recharge & Bill Payments
           </div>
-          <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '16px' }}>
+          <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
               <ServiceCard label="Electricity" icon={<Zap size={20} />} onClick={() => navigateTo('ELECTRICITY')} />
               <ServiceCard
                 label="Water"
                 icon={<Droplets size={20} />}
-                onClick={() => handleOpenService('Water Bill', 'Municipal Water Supply', 480, 'Enter Consumer ID', <Droplets size={24} />)}
+                onClick={() => handleOpenService('Water Bill', 'Municipal Water Supply', 480, 'Enter Consumer ID', <Droplets size={20} />)}
               />
               <ServiceCard
                 label="Piped Gas"
@@ -129,10 +129,10 @@ export const AllServicesScreen: React.FC = () => {
 
         {/* Financial Services */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
             Financial & Insurance
           </div>
-          <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '16px' }}>
+          <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
               <ServiceCard label="Credit Card" icon={<CreditCard size={20} />} onClick={() => navigateTo('PAYMENT_METHODS')} />
               <ServiceCard
@@ -156,10 +156,10 @@ export const AllServicesScreen: React.FC = () => {
 
         {/* Travel & Bookings */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
             Travel & Entertainment
           </div>
-          <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '16px' }}>
+          <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
               <ServiceCard
                 label="Flights"
@@ -195,24 +195,24 @@ export const AllServicesScreen: React.FC = () => {
                   width: '44px',
                   height: '44px',
                   borderRadius: '12px',
-                  backgroundColor: '#eef5ff',
-                  color: '#2e83ff',
+                  backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                  color: '#7FE87F',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '1.5px solid #d6e6ff',
+                  border: '1.5px solid rgba(127, 232, 127, 0.3)',
                 }}
               >
                 {selectedService.icon}
               </div>
               <div>
-                <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0f172a', margin: 0 }}>{selectedService.title}</h3>
-                <p style={{ fontSize: '12px', color: '#64748b', margin: '2px 0 0 0' }}>{selectedService.subTitle}</p>
+                <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>{selectedService.title}</h3>
+                <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '2px 0 0 0' }}>{selectedService.subTitle}</p>
               </div>
             </div>
 
             <div style={{ marginBottom: '16px' }}>
-              <label htmlFor="modal-acc-input" style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
+              <label htmlFor="modal-acc-input" style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
                 Account / Consumer Number
               </label>
               <input
@@ -225,18 +225,18 @@ export const AllServicesScreen: React.FC = () => {
                   width: '100%',
                   padding: '12px 14px',
                   borderRadius: '12px',
-                  backgroundColor: '#ffffff',
-                  border: '1.5px solid #cbd5e1',
+                  backgroundColor: '#1A1A2E',
+                  border: '1.5px solid #4D4D6B',
                   fontSize: '14px',
-                  fontWeight: '700',
-                  color: '#0f172a',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
                   outline: 'none',
                 }}
               />
             </div>
 
             <div style={{ marginBottom: '24px' }}>
-              <label htmlFor="modal-amt-input" style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
+              <label htmlFor="modal-amt-input" style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
                 Payment Amount (₹)
               </label>
               <input
@@ -249,11 +249,11 @@ export const AllServicesScreen: React.FC = () => {
                   width: '100%',
                   padding: '12px 14px',
                   borderRadius: '12px',
-                  backgroundColor: '#ffffff',
-                  border: '1.5px solid #2e83ff',
+                  backgroundColor: '#1A1A2E',
+                  border: '1.5px solid #7FE87F',
                   fontSize: '20px',
-                  fontWeight: '900',
-                  color: '#2e83ff',
+                  fontWeight: 900,
+                  color: '#7FE87F',
                   outline: 'none',
                   fontVariantNumeric: 'tabular-nums',
                 }}
@@ -261,7 +261,7 @@ export const AllServicesScreen: React.FC = () => {
             </div>
 
             <PrimaryButton onClick={handleProceedPayment}>
-              Proceed to Pay <CheckCircle size={18} />
+              Proceed to Pay <Check size={18} />
             </PrimaryButton>
           </div>
         </Modal>

@@ -57,8 +57,8 @@ export const ReceiveScreen: React.FC = () => {
     if (navigator.share) {
       navigator
         .share({
-          title: 'QTPay UPI ID',
-          text: `Pay ${user.name} via QTPay: ${user.upiId}${numAmount > 0 ? ` (Amount: ${formatCurrency(numAmount)})` : ''}`,
+          title: 'alph pay UPI ID',
+          text: `Pay ${user.name} via alph pay: ${user.upiId}${numAmount > 0 ? ` (Amount: ${formatCurrency(numAmount)})` : ''}`,
         })
         .catch(() => {});
     } else {
@@ -75,7 +75,7 @@ export const ReceiveScreen: React.FC = () => {
       senderName: randomSender,
       senderUpi: `${randomSender.toLowerCase().replace(/\s+/g, '')}@upi`,
       amount: amt,
-      note: 'Payment via QTPay QR',
+      note: 'Payment via alph pay QR',
     });
 
     playSuccessChime();
@@ -84,7 +84,7 @@ export const ReceiveScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '30px' }}>
       <AppHeader title="Receive Money" showBack />
 
       {/* Floating Success Toast when Money is Received */}
@@ -99,14 +99,15 @@ export const ReceiveScreen: React.FC = () => {
             zIndex: 100,
             width: '90%',
             maxWidth: '500px',
-            backgroundColor: '#065f46',
-            color: '#ffffff',
+            backgroundColor: '#2A2A3E',
+            border: '1.5px solid #7FE87F',
+            color: '#FFFFFF',
             borderRadius: '12px',
             padding: '14px 18px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            boxShadow: '0 4px 16px rgba(6, 95, 70, 0.35)',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -115,19 +116,21 @@ export const ReceiveScreen: React.FC = () => {
                 width: '36px',
                 height: '36px',
                 borderRadius: '50%',
-                backgroundColor: '#10b981',
+                backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                color: '#7FE87F',
+                border: '1px solid #7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <ArrowDownLeft size={20} color="#ffffff" />
+              <ArrowDownLeft size={20} color="#7FE87F" />
             </div>
             <div>
-              <div style={{ fontSize: '14px', fontWeight: 800 }}>
+              <div style={{ fontSize: '14px', fontWeight: 800, color: '#7FE87F' }}>
                 +{formatCurrency(receivedToast.amount)} Received!
               </div>
-              <div style={{ fontSize: '12px', opacity: 0.9 }}>
+              <div style={{ fontSize: '12px', color: '#B3B3C2' }}>
                 Credited to {primaryBank ? primaryBank.bankName : 'Bank'} from {receivedToast.sender}
               </div>
             </div>
@@ -135,9 +138,9 @@ export const ReceiveScreen: React.FC = () => {
           <button
             onClick={() => navigateTo('HISTORY')}
             style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
-              border: 'none',
-              color: '#ffffff',
+              backgroundColor: '#3A3A52',
+              border: '1px solid #4D4D6B',
+              color: '#FFFFFF',
               borderRadius: '6px',
               padding: '6px 12px',
               fontSize: '12px',
@@ -151,11 +154,11 @@ export const ReceiveScreen: React.FC = () => {
       )}
 
       <div style={{ padding: '20px', textAlign: 'center' }}>
-        {/* White QR Showcase Card */}
+        {/* Dark QR Showcase Card */}
         <div
           style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid #e2e8f0',
+            backgroundColor: '#2A2A3E',
+            border: '1px solid #4D4D6B',
             borderRadius: '24px',
             padding: '24px 20px',
             marginBottom: '16px',
@@ -171,15 +174,15 @@ export const ReceiveScreen: React.FC = () => {
               width: '60px',
               height: '60px',
               borderRadius: '50%',
-              backgroundColor: user.avatarBgColor || '#2e83ff',
-              color: '#ffffff',
+              backgroundColor: '#3A3A52',
+              color: '#7FE87F',
               fontWeight: 800,
               fontSize: '20px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: '10px',
-              border: '3px solid #eef5ff',
+              border: '2px solid #7FE87F',
               overflow: 'hidden',
             }}
           >
@@ -190,7 +193,7 @@ export const ReceiveScreen: React.FC = () => {
             )}
           </div>
 
-          <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+          <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
             {user.name}
           </h2>
 
@@ -202,24 +205,24 @@ export const ReceiveScreen: React.FC = () => {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              backgroundColor: '#eef5ff',
-              border: '1px solid #d6e6ff',
+              backgroundColor: '#3A3A52',
+              border: '1px solid #4D4D6B',
               borderRadius: '20px',
               padding: '5px 12px',
               marginTop: '6px',
               marginBottom: '14px',
-              color: '#2e83ff',
+              color: '#7FE87F',
               fontSize: '12.5px',
               fontWeight: 700,
               cursor: 'pointer',
             }}
           >
             <span>{user.upiId}</span>
-            {copied ? <CheckCircle2 size={14} color="#10b981" /> : <Copy size={13} />}
+            {copied ? <CheckCircle2 size={14} color="#7FE87F" /> : <Copy size={13} />}
           </button>
 
           {/* Machine-Readable QR Code */}
-          <div style={{ padding: '8px', backgroundColor: '#ffffff', borderRadius: '16px' }}>
+          <div style={{ padding: '10px', backgroundColor: '#FFFFFF', borderRadius: '16px' }}>
             <QRCodeView value={upiQrString} size={180} />
           </div>
 
@@ -228,9 +231,10 @@ export const ReceiveScreen: React.FC = () => {
               style={{
                 fontSize: '15px',
                 fontWeight: 800,
-                color: '#10b981',
+                color: '#7FE87F',
                 marginTop: '12px',
-                backgroundColor: '#d1fae5',
+                backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                border: '1px solid #7FE87F',
                 padding: '4px 14px',
                 borderRadius: '12px',
               }}
@@ -241,13 +245,13 @@ export const ReceiveScreen: React.FC = () => {
             <div
               style={{
                 fontSize: '11px',
-                color: '#2e83ff',
+                color: '#7FE87F',
                 marginTop: '12px',
                 fontWeight: 800,
-                backgroundColor: '#eef5ff',
+                backgroundColor: '#3A3A52',
                 padding: '4px 12px',
                 borderRadius: '12px',
-                border: '1px solid #d6e6ff',
+                border: '1px solid #4D4D6B',
               }}
             >
               Accepts Any UPI App • Direct to {primaryBank?.bankName || 'Bank'}
@@ -258,15 +262,15 @@ export const ReceiveScreen: React.FC = () => {
         {/* Set Specific Amount Box */}
         <div
           style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid #e2e8f0',
+            backgroundColor: '#2A2A3E',
+            border: '1px solid #4D4D6B',
             borderRadius: '16px',
             padding: '14px 16px',
             marginBottom: '16px',
             textAlign: 'left',
           }}
         >
-          <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>
+          <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF', marginBottom: '8px' }}>
             Set Request Amount (Optional)
           </div>
           <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
@@ -275,13 +279,13 @@ export const ReceiveScreen: React.FC = () => {
                 flex: 1,
                 display: 'flex',
                 alignItems: 'center',
-                backgroundColor: '#f8fafc',
-                border: '1px solid #cbd5e1',
+                backgroundColor: '#1A1A2E',
+                border: '1px solid #4D4D6B',
                 borderRadius: '8px',
                 padding: '0 12px',
               }}
             >
-              <span style={{ fontSize: '16px', fontWeight: 800, color: '#64748b', marginRight: '6px' }}>₹</span>
+              <span style={{ fontSize: '16px', fontWeight: 800, color: '#7FE87F', marginRight: '6px' }}>₹</span>
               <input
                 type="number"
                 placeholder="Enter amount"
@@ -295,13 +299,13 @@ export const ReceiveScreen: React.FC = () => {
                   padding: '10px 0',
                   fontSize: '15px',
                   fontWeight: 700,
-                  color: '#0f172a',
+                  color: '#FFFFFF',
                 }}
               />
               {customAmount && (
                 <button
                   onClick={() => setCustomAmount('')}
-                  style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '12px' }}
+                  style={{ background: 'none', border: 'none', color: '#808099', cursor: 'pointer', fontSize: '12px' }}
                 >
                   Clear
                 </button>
@@ -318,9 +322,9 @@ export const ReceiveScreen: React.FC = () => {
                   flex: 1,
                   padding: '6px 0',
                   borderRadius: '6px',
-                  border: customAmount === String(amt) ? '1px solid #2e83ff' : '1px solid #e2e8f0',
-                  backgroundColor: customAmount === String(amt) ? '#eef5ff' : '#ffffff',
-                  color: customAmount === String(amt) ? '#2e83ff' : '#475569',
+                  border: customAmount === String(amt) ? '1px solid #7FE87F' : '1px solid #4D4D6B',
+                  backgroundColor: customAmount === String(amt) ? 'rgba(127, 232, 127, 0.15)' : '#3A3A52',
+                  color: customAmount === String(amt) ? '#7FE87F' : '#FFFFFF',
                   fontSize: '12px',
                   fontWeight: 700,
                   cursor: 'pointer',
@@ -340,8 +344,8 @@ export const ReceiveScreen: React.FC = () => {
             className="interactive-tap"
             style={{
               width: '100%',
-              backgroundColor: '#10b981',
-              color: '#ffffff',
+              backgroundColor: '#7FE87F',
+              color: '#000000',
               border: 'none',
               borderRadius: '8px',
               padding: '14px',
@@ -354,7 +358,7 @@ export const ReceiveScreen: React.FC = () => {
               cursor: 'pointer',
             }}
           >
-            <Sparkles size={18} /> Simulate Incoming Payment ({formatCurrency(numAmount > 0 ? numAmount : 500)})
+            <Sparkles size={18} color="#000000" /> Simulate Incoming Payment ({formatCurrency(numAmount > 0 ? numAmount : 500)})
           </button>
 
           <PrimaryButton onClick={() => navigateTo('REQUEST_MONEY')}>

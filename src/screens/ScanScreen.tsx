@@ -197,8 +197,8 @@ export const ScanScreen: React.FC = () => {
           <h2 style={{ color: '#FFFFFF', fontSize: '17px', fontWeight: '700', margin: 0 }}>
             Scan Any UPI QR
           </h2>
-          <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: '500' }}>
-            QtPay Instant Scanner
+          <span style={{ fontSize: '11px', color: '#B3B3C2', fontWeight: '500' }}>
+            alph pay Instant Scanner
           </span>
         </div>
 
@@ -206,9 +206,9 @@ export const ScanScreen: React.FC = () => {
           onClick={toggleFlash}
           aria-label="Toggle Flashlight"
           style={{
-            backgroundColor: isFlashOn ? designSystem.colors.primary : 'rgba(255, 255, 255, 0.15)',
+            backgroundColor: isFlashOn ? '#7FE87F' : 'rgba(255, 255, 255, 0.15)',
             border: 'none',
-            color: '#FFFFFF',
+            color: isFlashOn ? '#000000' : '#FFFFFF',
             width: '40px',
             height: '40px',
             borderRadius: designSystem.radii.full,
@@ -262,18 +262,18 @@ export const ScanScreen: React.FC = () => {
             borderRadius: '20px',
             position: 'relative',
             zIndex: 10,
-            boxShadow: '0 0 0 4000px rgba(10, 15, 29, 0.72)',
+            boxShadow: '0 0 0 4000px rgba(15, 15, 26, 0.85)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             overflow: 'hidden',
             border: scanSuccessContact
-              ? `3px solid ${designSystem.colors.success}`
-              : `1.5px solid rgba(46, 131, 255, 0.35)`,
+              ? '3px solid #7FE87F'
+              : '1.5px solid rgba(127, 232, 127, 0.35)',
             transition: 'border 0.3s ease',
           }}
         >
-          {/* Corner Guides (QtPay Electric Blue) */}
+          {/* Corner Guides (alph pay Lime Green) */}
           <div
             style={{
               position: 'absolute',
@@ -281,8 +281,8 @@ export const ScanScreen: React.FC = () => {
               left: 10,
               width: 32,
               height: 32,
-              borderTop: `4px solid ${designSystem.colors.primary}`,
-              borderLeft: `4px solid ${designSystem.colors.primary}`,
+              borderTop: '4px solid #7FE87F',
+              borderLeft: '4px solid #7FE87F',
               borderTopLeftRadius: '10px',
             }}
           />
@@ -293,8 +293,8 @@ export const ScanScreen: React.FC = () => {
               right: 10,
               width: 32,
               height: 32,
-              borderTop: `4px solid ${designSystem.colors.primary}`,
-              borderRight: `4px solid ${designSystem.colors.primary}`,
+              borderTop: '4px solid #7FE87F',
+              borderRight: '4px solid #7FE87F',
               borderTopRightRadius: '10px',
             }}
           />
@@ -305,8 +305,8 @@ export const ScanScreen: React.FC = () => {
               left: 10,
               width: 32,
               height: 32,
-              borderBottom: `4px solid ${designSystem.colors.primary}`,
-              borderLeft: `4px solid ${designSystem.colors.primary}`,
+              borderBottom: '4px solid #7FE87F',
+              borderLeft: '4px solid #7FE87F',
               borderBottomLeftRadius: '10px',
             }}
           />
@@ -317,8 +317,8 @@ export const ScanScreen: React.FC = () => {
               right: 10,
               width: 32,
               height: 32,
-              borderBottom: `4px solid ${designSystem.colors.primary}`,
-              borderRight: `4px solid ${designSystem.colors.primary}`,
+              borderBottom: '4px solid #7FE87F',
+              borderRight: '4px solid #7FE87F',
               borderBottomRightRadius: '10px',
             }}
           />
@@ -330,9 +330,9 @@ export const ScanScreen: React.FC = () => {
               style={{
                 width: '100%',
                 height: '2px',
-                backgroundColor: designSystem.colors.primary,
+                backgroundColor: '#7FE87F',
                 position: 'absolute',
-                boxShadow: `0 0 12px ${designSystem.colors.primary}, 0 0 4px #ffffff`,
+                boxShadow: '0 0 12px #7FE87F, 0 0 4px #ffffff',
                 animation: 'scanLaser 2.2s infinite ease-in-out alternate',
               }}
             />
@@ -344,7 +344,7 @@ export const ScanScreen: React.FC = () => {
               style={{
                 position: 'absolute',
                 inset: 0,
-                backgroundColor: 'rgba(16, 185, 129, 0.25)',
+                backgroundColor: 'rgba(127, 232, 127, 0.25)',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -353,8 +353,8 @@ export const ScanScreen: React.FC = () => {
                 backdropFilter: 'blur(4px)',
               }}
             >
-              <CheckCircle size={48} color={designSystem.colors.success} />
-              <span style={{ color: '#ffffff', fontWeight: '700', fontSize: '15px' }}>
+              <CheckCircle size={48} color="#7FE87F" />
+              <span style={{ color: '#FFFFFF', fontWeight: '700', fontSize: '15px' }}>
                 QR Verified!
               </span>
             </div>
@@ -364,13 +364,14 @@ export const ScanScreen: React.FC = () => {
         {/* Status Guide Text */}
         <p
           style={{
-            color: '#e2e8f0',
+            color: '#FFFFFF',
             fontSize: '13px',
             marginTop: '20px',
             fontWeight: '600',
             zIndex: 10,
             textAlign: 'center',
-            backgroundColor: 'rgba(15, 23, 42, 0.75)',
+            backgroundColor: 'rgba(42, 42, 62, 0.85)',
+            border: '1px solid #4D4D6B',
             padding: '6px 16px',
             borderRadius: '20px',
             backdropFilter: 'blur(6px)',
@@ -401,11 +402,11 @@ export const ScanScreen: React.FC = () => {
               )
             }
             style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.12)',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #4D4D6B',
               borderRadius: designSystem.radii.sm,
               padding: '6px 12px',
-              color: '#ffffff',
+              color: '#FFFFFF',
               fontSize: '11px',
               fontWeight: '600',
               display: 'flex',
@@ -415,7 +416,7 @@ export const ScanScreen: React.FC = () => {
               whiteSpace: 'nowrap',
             }}
           >
-            <Store size={13} color={designSystem.colors.primary} /> Star Supermarket
+            <Store size={13} color="#7FE87F" /> Star Supermarket
           </button>
 
           <button
@@ -426,11 +427,11 @@ export const ScanScreen: React.FC = () => {
               )
             }
             style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.12)',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #4D4D6B',
               borderRadius: designSystem.radii.sm,
               padding: '6px 12px',
-              color: '#ffffff',
+              color: '#FFFFFF',
               fontSize: '11px',
               fontWeight: '600',
               display: 'flex',
@@ -440,7 +441,7 @@ export const ScanScreen: React.FC = () => {
               whiteSpace: 'nowrap',
             }}
           >
-            <Coffee size={13} color="#f59e0b" /> Coffee House
+            <Coffee size={13} color="#7FE87F" /> Coffee House
           </button>
 
           <button
@@ -451,11 +452,11 @@ export const ScanScreen: React.FC = () => {
               )
             }
             style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.12)',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #4D4D6B',
               borderRadius: designSystem.radii.sm,
               padding: '6px 12px',
-              color: '#ffffff',
+              color: '#FFFFFF',
               fontSize: '11px',
               fontWeight: '600',
               display: 'flex',
@@ -465,7 +466,7 @@ export const ScanScreen: React.FC = () => {
               whiteSpace: 'nowrap',
             }}
           >
-            <Train size={13} color="#10b981" /> Metro Card
+            <Train size={13} color="#7FE87F" /> Metro Card
           </button>
         </div>
       </div>
@@ -477,7 +478,7 @@ export const ScanScreen: React.FC = () => {
           flexDirection: 'column',
           gap: '10px',
           padding: '20px',
-          background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)',
+          background: 'linear-gradient(to top, rgba(15,15,26,0.95), transparent)',
           zIndex: 20,
         }}
       >
@@ -485,8 +486,8 @@ export const ScanScreen: React.FC = () => {
           <button
             onClick={() => fileInputRef.current?.click()}
             style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.12)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #4D4D6B',
               borderRadius: designSystem.radii.md,
               padding: '12px',
               color: '#FFFFFF',
@@ -500,17 +501,17 @@ export const ScanScreen: React.FC = () => {
               transition: 'background-color 0.2s',
             }}
           >
-            <ImageIcon size={16} /> Upload Image
+            <ImageIcon size={16} color="#7FE87F" /> Upload Image
           </button>
 
           <button
             onClick={() => handleScanSuccess(contacts[0] || { name: 'Priya Menon', upiId: 'priya@paytm' })}
             style={{
-              backgroundColor: designSystem.colors.primary,
+              backgroundColor: '#7FE87F',
               border: 'none',
               borderRadius: designSystem.radii.md,
               padding: '12px',
-              color: '#FFFFFF',
+              color: '#000000',
               fontSize: '13px',
               fontWeight: '700',
               display: 'flex',
@@ -521,7 +522,7 @@ export const ScanScreen: React.FC = () => {
               boxShadow: designSystem.shadows.none,
             }}
           >
-            <Zap size={16} /> Demo Pay
+            <Zap size={16} color="#000000" /> Demo Pay
           </button>
         </div>
       </div>

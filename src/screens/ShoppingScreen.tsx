@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Tag, ChevronRight, X, CheckCircle2, Copy } from 'lucide-react';
+import { ShoppingBag, Tag, ChevronRight, X, Check, Copy } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
 
@@ -31,7 +31,7 @@ export const ShoppingScreen: React.FC = () => {
       title: 'Weekly Grocery Smart Saver',
       offer: 'Flat ₹300 Cashback on UPI',
       category: 'Groceries & Essentials',
-      couponCode: 'STARSAVER300',
+      couponCode: 'ALPHSAVER300',
       originalPrice: 2500,
       discountedPrice: 2200,
     },
@@ -89,15 +89,15 @@ export const ShoppingScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
       <AppHeader title="Shopping & Deals" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Shopping Hero Banner */}
         <div
           style={{
-            background: 'linear-gradient(145deg, #0e274d 0%, #0a1c36 100%)',
-            border: '1.5px solid rgba(46, 131, 255, 0.35)',
+            backgroundColor: '#2A2A3E',
+            border: '1.5px solid rgba(127, 232, 127, 0.35)',
             borderRadius: '20px',
             padding: '20px',
             marginBottom: '20px',
@@ -112,26 +112,26 @@ export const ShoppingScreen: React.FC = () => {
               width: '50px',
               height: '50px',
               borderRadius: '16px',
-              backgroundColor: '#eef5ff',
-              color: '#2e83ff',
+              backgroundColor: 'rgba(127, 232, 127, 0.15)',
+              color: '#7FE87F',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
-              border: '1.5px solid #d6e6ff',
+              border: '1.5px solid rgba(127, 232, 127, 0.3)',
             }}
           >
             <ShoppingBag size={24} />
           </div>
           <div>
-            <h3 style={{ fontSize: '16px', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>QPay Partner Deals</h3>
-            <p style={{ fontSize: '12px', color: '#94a3b8', margin: '3px 0 0 0' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>alph pay Partner Deals</h3>
+            <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '3px 0 0 0' }}>
               Exclusive promo codes & instant discounts on top shopping brands
             </p>
           </div>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
           Featured Partner Offers
         </div>
 
@@ -146,8 +146,8 @@ export const ShoppingScreen: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '16px',
-                backgroundColor: '#FFFFFF',
-                border: '1px solid #e2e8f0',
+                backgroundColor: '#2A2A3E',
+                border: '1px solid #4D4D6B',
                 borderRadius: '16px',
                 cursor: 'pointer',
               }}
@@ -158,23 +158,23 @@ export const ShoppingScreen: React.FC = () => {
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    backgroundColor: '#eef5ff',
-                    color: '#2e83ff',
+                    backgroundColor: '#3A3A52',
+                    color: '#7FE87F',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    border: '1px solid #d6e6ff',
+                    border: '1px solid #4D4D6B',
                   }}
                 >
                   <Tag size={20} />
                 </div>
                 <div>
-                  <div style={{ fontWeight: '800', fontSize: '15px', color: '#0f172a' }}>{deal.merchant}</div>
-                  <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>{deal.title}</div>
-                  <div style={{ fontSize: '12px', color: '#2e83ff', marginTop: '3px', fontWeight: '800' }}>{deal.offer}</div>
+                  <div style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF' }}>{deal.merchant}</div>
+                  <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px' }}>{deal.title}</div>
+                  <div style={{ fontSize: '12px', color: '#7FE87F', marginTop: '3px', fontWeight: 800 }}>{deal.offer}</div>
                 </div>
               </div>
-              <ChevronRight size={18} color="#64748b" />
+              <ChevronRight size={18} color="#B3B3C2" />
             </div>
           ))}
         </div>
@@ -186,8 +186,8 @@ export const ShoppingScreen: React.FC = () => {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 23, 42, 0.65)',
-            backdropFilter: 'blur(6px)',
+            backgroundColor: 'rgba(15, 15, 26, 0.75)',
+            backdropFilter: 'blur(8px)',
             zIndex: 1000,
             display: 'flex',
             alignItems: 'flex-end',
@@ -199,7 +199,8 @@ export const ShoppingScreen: React.FC = () => {
             style={{
               width: '100%',
               maxWidth: '440px',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: '#2A2A3E',
+              borderTop: '1px solid #4D4D6B',
               borderTopLeftRadius: '20px',
               borderTopRightRadius: '20px',
               padding: '24px 20px',
@@ -209,8 +210,8 @@ export const ShoppingScreen: React.FC = () => {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div>
-                <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: 0 }}>{selectedDeal.merchant}</h3>
-                <p style={{ fontSize: '12px', color: '#64748b', margin: '2px 0 0 0' }}>{selectedDeal.category}</p>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>{selectedDeal.merchant}</h3>
+                <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '2px 0 0 0' }}>{selectedDeal.category}</p>
               </div>
               <button
                 onClick={() => setSelectedDeal(null)}
@@ -219,22 +220,22 @@ export const ShoppingScreen: React.FC = () => {
                   width: '32px',
                   height: '32px',
                   borderRadius: '50%',
-                  backgroundColor: '#f1f5f9',
+                  backgroundColor: '#3A3A52',
                   border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  color: '#64748b',
+                  color: '#B3B3C2',
                 }}
               >
                 <X size={18} />
               </button>
             </div>
 
-            <div style={{ padding: '16px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', marginBottom: '20px' }}>
-              <div style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a' }}>{selectedDeal.title}</div>
-              <div style={{ fontSize: '13px', fontWeight: '800', color: '#2e83ff', marginTop: '4px' }}>
+            <div style={{ padding: '16px', backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', marginBottom: '20px' }}>
+              <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>{selectedDeal.title}</div>
+              <div style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F', marginTop: '4px' }}>
                 {selectedDeal.offer}
               </div>
 
@@ -246,14 +247,14 @@ export const ShoppingScreen: React.FC = () => {
                   justifyContent: 'space-between',
                   marginTop: '14px',
                   padding: '10px 14px',
-                  backgroundColor: '#FFFFFF',
-                  border: '1.5px dashed #2e83ff',
+                  backgroundColor: '#2A2A3E',
+                  border: '1.5px dashed #7FE87F',
                   borderRadius: '12px',
                 }}
               >
                 <div>
-                  <span style={{ fontSize: '11px', color: '#64748b', display: 'block' }}>Coupon Code</span>
-                  <span style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', letterSpacing: '0.05em' }}>
+                  <span style={{ fontSize: '11px', color: '#B3B3C2', display: 'block' }}>Coupon Code</span>
+                  <span style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.05em' }}>
                     {selectedDeal.couponCode}
                   </span>
                 </div>
@@ -262,31 +263,31 @@ export const ShoppingScreen: React.FC = () => {
                   onClick={() => handleCopyCode(selectedDeal.couponCode)}
                   className="interactive-tap"
                   style={{
-                    backgroundColor: copiedCode ? '#0e274d' : '#2e83ff',
+                    backgroundColor: '#7FE87F',
                     border: 'none',
                     borderRadius: '8px',
-                    color: '#FFFFFF',
+                    color: '#000000',
                     padding: '6px 12px',
                     fontSize: '12px',
-                    fontWeight: '800',
+                    fontWeight: 800,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px',
                   }}
                 >
-                  {copiedCode ? <CheckCircle2 size={14} /> : <Copy size={14} />}
+                  {copiedCode ? <Check size={14} /> : <Copy size={14} />}
                   {copiedCode ? 'Copied!' : 'Copy'}
                 </button>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px', paddingTop: '10px', borderTop: '1px dashed #cbd5e1' }}>
-                <span style={{ fontSize: '13px', fontWeight: '700', color: '#64748b' }}>Special Discount Price</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px', paddingTop: '10px', borderTop: '1px dashed #4D4D6B' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#B3B3C2' }}>Special Discount Price</span>
                 <div>
-                  <span style={{ fontSize: '13px', color: '#9CA3AF', textDecoration: 'line-through', marginRight: '8px', fontVariantNumeric: 'tabular-nums' }}>
+                  <span style={{ fontSize: '13px', color: '#808099', textDecoration: 'line-through', marginRight: '8px', fontVariantNumeric: 'tabular-nums' }}>
                     ₹{selectedDeal.originalPrice.toLocaleString()}
                   </span>
-                  <span style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a', fontVariantNumeric: 'tabular-nums' }}>
+                  <span style={{ fontSize: '20px', fontWeight: 900, color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>
                     ₹{selectedDeal.discountedPrice.toLocaleString()}
                   </span>
                 </div>
@@ -300,15 +301,15 @@ export const ShoppingScreen: React.FC = () => {
                 width: '100%',
                 padding: '14px',
                 borderRadius: '12px',
-                backgroundColor: '#2e83ff',
+                backgroundColor: '#7FE87F',
                 border: 'none',
-                color: '#FFFFFF',
+                color: '#000000',
                 fontSize: '14px',
-                fontWeight: '800',
+                fontWeight: 800,
                 cursor: 'pointer',
               }}
             >
-              Order Now via QPay UPI PIN (₹{selectedDeal.discountedPrice.toLocaleString()})
+              Order Now (₹{selectedDeal.discountedPrice.toLocaleString()})
             </button>
           </div>
         </div>
@@ -320,8 +321,8 @@ export const ShoppingScreen: React.FC = () => {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 23, 42, 0.65)',
-            backdropFilter: 'blur(6px)',
+            backgroundColor: 'rgba(15, 15, 26, 0.75)',
+            backdropFilter: 'blur(8px)',
             zIndex: 1000,
             display: 'flex',
             alignItems: 'center',
@@ -334,7 +335,8 @@ export const ShoppingScreen: React.FC = () => {
             style={{
               width: '100%',
               maxWidth: '360px',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #4D4D6B',
               borderRadius: '20px',
               padding: '24px',
               textAlign: 'center',
@@ -348,29 +350,29 @@ export const ShoppingScreen: React.FC = () => {
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                backgroundColor: '#eef5ff',
-                color: '#2e83ff',
+                backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 12px auto',
-                border: '1.5px solid #d6e6ff',
+                border: '1.5px solid rgba(127, 232, 127, 0.3)',
               }}
             >
-              <CheckCircle2 size={32} />
+              <Check size={32} />
             </div>
 
-            <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 4px 0' }}>
               Order Placed!
             </h3>
-            <p style={{ fontSize: '12px', color: '#64748b', margin: '0 0 20px 0' }}>
+            <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '0 0 20px 0' }}>
               Discount voucher redeemed at {purchasedDeal.merchant}
             </p>
 
-            <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
-              <div style={{ fontSize: '14px', fontWeight: '800', color: '#0f172a' }}>{purchasedDeal.title}</div>
-              <div style={{ fontSize: '13px', fontWeight: '800', color: '#2e83ff', marginTop: '6px', fontVariantNumeric: 'tabular-nums' }}>
-                Paid ₹{purchasedDeal.paidAmount.toLocaleString()} via UPI
+            <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
+              <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{purchasedDeal.title}</div>
+              <div style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F', marginTop: '6px', fontVariantNumeric: 'tabular-nums' }}>
+                Paid ₹{purchasedDeal.paidAmount.toLocaleString()} via alph pay
               </div>
             </div>
 
@@ -381,11 +383,11 @@ export const ShoppingScreen: React.FC = () => {
                 width: '100%',
                 padding: '12px',
                 borderRadius: '12px',
-                backgroundColor: '#2e83ff',
+                backgroundColor: '#7FE87F',
                 border: 'none',
-                color: '#FFFFFF',
+                color: '#000000',
                 fontSize: '14px',
-                fontWeight: '800',
+                fontWeight: 800,
                 cursor: 'pointer',
               }}
             >

@@ -87,23 +87,24 @@ export const PermissionsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingBottom: '32px', color: '#ffffff' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingBottom: '32px', color: '#FFFFFF' }}>
       <div>
         <AppHeader title="App Permissions" showBack={true} onBack={goBack} showSettings={false} />
 
         <div style={{ padding: '20px' }}>
-          {/* Header Card - Clean & Minimal */}
+          {/* Header Card */}
           <div
             style={{
-              backgroundColor: '#2A2A3E',
-              border: '1px solid #4D4D6B',
-              borderRadius: '18px',
+              backgroundColor: '#151524',
+              border: '1px solid #2C2C44',
+              borderRadius: '16px',
               padding: '16px 18px',
               marginBottom: '18px',
               display: 'flex',
               alignItems: 'center',
               gap: '14px',
-              color: '#ffffff',
+              color: '#FFFFFF',
+              boxShadow: 'none',
             }}
           >
             <div
@@ -122,7 +123,7 @@ export const PermissionsScreen: React.FC = () => {
             >
               <ShieldCheck size={24} />
             </div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff' }}>
+            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>
               NPCI Mandated Security
             </div>
           </div>
@@ -131,7 +132,7 @@ export const PermissionsScreen: React.FC = () => {
             style={{
               fontSize: '11.5px',
               fontWeight: 800,
-              color: '#B3B3C2',
+              color: '#6E6E85',
               textTransform: 'uppercase',
               letterSpacing: '0.06em',
               marginBottom: '10px',
@@ -144,17 +145,18 @@ export const PermissionsScreen: React.FC = () => {
           {/* Grouped Permissions Card */}
           <div
             style={{
-              backgroundColor: '#2A2A3E',
-              borderRadius: '18px',
-              border: '1px solid #4D4D6B',
+              backgroundColor: '#151524',
+              borderRadius: '16px',
+              border: '1px solid #2C2C44',
               overflow: 'hidden',
+              boxShadow: 'none',
             }}
           >
             {permissions.map((perm, index) => {
               const isOn = toggles[perm.key];
               return (
                 <React.Fragment key={perm.key}>
-                  {index > 0 && <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />}
+                  {index > 0 && <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />}
                   <div
                     style={{
                       display: 'flex',
@@ -170,9 +172,9 @@ export const PermissionsScreen: React.FC = () => {
                           width: '38px',
                           height: '38px',
                           borderRadius: '10px',
-                          backgroundColor: isOn ? 'rgba(127, 232, 127, 0.15)' : '#3A3A52',
-                          color: isOn ? '#7FE87F' : '#B3B3C2',
-                          border: isOn ? '1px solid rgba(127, 232, 127, 0.35)' : '1px solid #4D4D6B',
+                          backgroundColor: isOn ? 'rgba(127, 232, 127, 0.15)' : '#1E1E32',
+                          color: isOn ? '#7FE87F' : '#A2A2BA',
+                          border: isOn ? '1px solid rgba(127, 232, 127, 0.35)' : '1px solid #2C2C44',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -183,7 +185,7 @@ export const PermissionsScreen: React.FC = () => {
                         {perm.icon}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <span style={{ fontWeight: 800, fontSize: '14px', color: '#ffffff' }}>
+                        <span style={{ fontWeight: 800, fontSize: '14px', color: '#FFFFFF' }}>
                           {perm.name}
                         </span>
                         {perm.required && (
@@ -210,7 +212,8 @@ export const PermissionsScreen: React.FC = () => {
                         width: '46px',
                         height: '26px',
                         borderRadius: '9999px',
-                        backgroundColor: isOn ? '#7FE87F' : '#3A3A52',
+                        backgroundColor: isOn ? '#7FE87F' : '#1E1E32',
+                        border: isOn ? 'none' : '1px solid #2C2C44',
                         display: 'flex',
                         alignItems: 'center',
                         padding: '2px',
@@ -224,7 +227,7 @@ export const PermissionsScreen: React.FC = () => {
                           width: '22px',
                           height: '22px',
                           borderRadius: '50%',
-                          backgroundColor: isOn ? '#000000' : '#B3B3C2',
+                          backgroundColor: isOn ? '#0B0B14' : '#A2A2BA',
                           transform: isOn ? 'translateX(20px)' : 'translateX(0px)',
                           transition: 'transform 0.2s ease',
                           boxShadow: 'none',
@@ -242,15 +245,15 @@ export const PermissionsScreen: React.FC = () => {
       {/* Action Buttons */}
       <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <PrimaryButton onClick={handleGrantPermissions}>
-          Allow Permissions & Continue <ArrowRight size={18} />
+          Allow & Continue <ArrowRight size={18} />
         </PrimaryButton>
         <SecondaryButton onClick={handleGrantPermissions}>
-          Skip & Customize Later
+          Skip for Now
         </SecondaryButton>
 
         <div style={{ textAlign: 'center', marginTop: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-          <Lock size={12} color="#B3B3C2" />
-          <span style={{ fontSize: '11px', color: '#B3B3C2', fontWeight: 600 }}>
+          <Lock size={12} color="#6E6E85" />
+          <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 600 }}>
             256-Bit Hardware Encrypted
           </span>
         </div>
@@ -262,7 +265,7 @@ export const PermissionsScreen: React.FC = () => {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(5, 5, 10, 0.85)',
+            backgroundColor: 'rgba(11, 11, 20, 0.9)',
             backdropFilter: 'blur(8px)',
             zIndex: 100,
             display: 'flex',
@@ -304,16 +307,16 @@ export const PermissionsScreen: React.FC = () => {
               {discoveryStep === 3 && <CheckCircle2 size={36} color="#7FE87F" />}
             </div>
 
-            <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', margin: '0 0 8px 0' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 8px 0' }}>
               {discoveryStep === 1 && 'Discovering Bank Accounts...'}
-              {discoveryStep === 2 && 'Accounts Found & Linked!'}
-              {discoveryStep === 3 && 'KYC Verified • Ready!'}
+              {discoveryStep === 2 && 'Accounts Linked'}
+              {discoveryStep === 3 && 'KYC Verified'}
             </h3>
 
-            <p style={{ fontSize: '13px', color: '#B3B3C2', margin: '0 0 20px 0', lineHeight: '1.4' }}>
-              {discoveryStep === 1 && 'Binding SIM card and verifying NPCI UPI registration on +91 98765 43210'}
-              {discoveryStep === 2 && 'Discovered ICICI Bank (Savings •••• 3616) and YES Bank accounts'}
-              {discoveryStep === 3 && 'Instant Aadhaar e-KYC authentication successful. Redirecting to home...'}
+            <p style={{ fontSize: '13px', color: '#A2A2BA', margin: '0 0 20px 0', lineHeight: '1.4' }}>
+              {discoveryStep === 1 && 'Verifying NPCI UPI registration on +91 98765 43210'}
+              {discoveryStep === 2 && 'Discovered ICICI Bank and YES Bank accounts'}
+              {discoveryStep === 3 && 'Instant KYC verified. Redirecting to home...'}
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', textAlign: 'left' }}>
@@ -324,12 +327,12 @@ export const PermissionsScreen: React.FC = () => {
                   gap: '10px',
                   padding: '10px 12px',
                   borderRadius: '10px',
-                  backgroundColor: discoveryStep >= 1 ? 'rgba(127, 232, 127, 0.12)' : '#3A3A52',
-                  border: `1px solid ${discoveryStep >= 1 ? 'rgba(127, 232, 127, 0.35)' : '#4D4D6B'}`,
+                  backgroundColor: discoveryStep >= 1 ? 'rgba(127, 232, 127, 0.12)' : '#1E1E32',
+                  border: `1px solid ${discoveryStep >= 1 ? 'rgba(127, 232, 127, 0.35)' : '#2C2C44'}`,
                 }}
               >
-                {discoveryStep >= 1 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Loader2 size={16} color="#B3B3C2" />}
-                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 1 ? '#ffffff' : '#B3B3C2' }}>
+                {discoveryStep >= 1 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Loader2 size={16} color="#A2A2BA" />}
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 1 ? '#FFFFFF' : '#A2A2BA' }}>
                   Device Binding & SIM Verification
                 </span>
               </div>
@@ -341,12 +344,12 @@ export const PermissionsScreen: React.FC = () => {
                   gap: '10px',
                   padding: '10px 12px',
                   borderRadius: '10px',
-                  backgroundColor: discoveryStep >= 2 ? 'rgba(127, 232, 127, 0.12)' : '#3A3A52',
-                  border: `1px solid ${discoveryStep >= 2 ? 'rgba(127, 232, 127, 0.35)' : '#4D4D6B'}`,
+                  backgroundColor: discoveryStep >= 2 ? 'rgba(127, 232, 127, 0.12)' : '#1E1E32',
+                  border: `1px solid ${discoveryStep >= 2 ? 'rgba(127, 232, 127, 0.35)' : '#2C2C44'}`,
                 }}
               >
-                {discoveryStep >= 2 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Loader2 size={16} color="#B3B3C2" />}
-                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 2 ? '#ffffff' : '#B3B3C2' }}>
+                {discoveryStep >= 2 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Loader2 size={16} color="#A2A2BA" />}
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 2 ? '#FFFFFF' : '#A2A2BA' }}>
                   Bank Accounts Discovered (ICICI, YES Bank)
                 </span>
               </div>
@@ -358,12 +361,12 @@ export const PermissionsScreen: React.FC = () => {
                   gap: '10px',
                   padding: '10px 12px',
                   borderRadius: '10px',
-                  backgroundColor: discoveryStep >= 3 ? 'rgba(127, 232, 127, 0.2)' : '#3A3A52',
-                  border: `1px solid ${discoveryStep >= 3 ? '#7FE87F' : '#4D4D6B'}`,
+                  backgroundColor: discoveryStep >= 3 ? 'rgba(127, 232, 127, 0.2)' : '#1E1E32',
+                  border: `1px solid ${discoveryStep >= 3 ? '#7FE87F' : '#2C2C44'}`,
                 }}
               >
-                {discoveryStep >= 3 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Sparkles size={16} color="#B3B3C2" />}
-                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 3 ? '#7FE87F' : '#B3B3C2' }}>
+                {discoveryStep >= 3 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Sparkles size={16} color="#A2A2BA" />}
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 3 ? '#7FE87F' : '#A2A2BA' }}>
                   NPCI Instant e-KYC Authenticated
                 </span>
               </div>

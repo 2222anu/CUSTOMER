@@ -125,9 +125,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const urlParams = new URLSearchParams(window.location.search);
       const paramScreen = urlParams.get('screen') as ScreenId | null;
       if (paramScreen) return paramScreen;
-      const completed = localStorage.getItem('hasCompletedOnboarding');
-      if (completed === 'true') return 'HOME';
-      return 'SPLASH';
     }
     return 'SPLASH';
   });
@@ -136,9 +133,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const urlParams = new URLSearchParams(window.location.search);
       const paramScreen = urlParams.get('screen') as ScreenId | null;
       if (paramScreen) return [{ screen: paramScreen }];
-      const completed = localStorage.getItem('hasCompletedOnboarding');
-      if (completed === 'true') return [{ screen: 'HOME' }];
-      return [{ screen: 'SPLASH' }];
     }
     return [{ screen: 'SPLASH' }];
   });

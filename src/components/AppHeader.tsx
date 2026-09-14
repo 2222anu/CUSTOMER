@@ -1,7 +1,8 @@
 import React from 'react';
 import { ArrowLeft, Search, Settings } from 'lucide-react';
 import { useApp } from '../state/AppContext';
-import { QtPayLogo } from './QtPayLogo';
+import { AlphPayLogo } from './AlphPayLogo';
+import { designSystem } from '../design-system';
 
 interface AppHeaderProps {
   title?: string;
@@ -46,13 +47,13 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '12px 18px',
-        backgroundColor: 'rgba(255, 255, 255, 0.96)',
+        backgroundColor: 'rgba(26, 26, 46, 0.95)',
         backdropFilter: 'blur(10px)',
         position: 'sticky',
         top: 0,
         zIndex: 30,
-        borderBottom: '1px solid #e2e8f0',
-        boxShadow: 'none',
+        borderBottom: `1px solid ${designSystem.colors.borderHairline}`,
+        boxShadow: designSystem.shadows.none,
       }}
     >
       {/* Left Slot: Back Button or User Avatar */}
@@ -62,12 +63,12 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             onClick={handleBack}
             aria-label="Go back"
             style={{
-              backgroundColor: '#f8fafc',
-              border: '1px solid #e2e8f0',
-              color: '#0f172a',
+              backgroundColor: '#2A2A3E',
+              border: `1px solid ${designSystem.colors.borderHairline}`,
+              color: '#FFFFFF',
               width: '38px',
               height: '38px',
-              borderRadius: '10px',
+              borderRadius: '8px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -89,18 +90,18 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                 width: '38px',
                 height: '38px',
                 borderRadius: '50%',
-                backgroundColor: '#2e83ff',
-                color: '#ffffff',
+                backgroundColor: '#7FE87F',
+                color: '#000000',
                 fontWeight: '800',
                 fontSize: '13.5px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                boxShadow: 'none',
+                boxShadow: '0 2px 8px rgba(127, 232, 127, 0.3)',
                 overflow: 'hidden',
-                border: '2px solid #ffffff',
-                outline: '1.5px solid #2e83ff',
+                border: '2px solid #1A1A2E',
+                outline: '1.5px solid #7FE87F',
                 transition: 'transform 0.15s ease',
               }}
             >
@@ -112,11 +113,11 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             </div>
             {showUserInfo && (
               <div style={{ marginLeft: '10px' }}>
-                <span style={{ fontSize: '13.5px', fontWeight: '800', color: '#0f172a', display: 'block', lineHeight: '16px' }}>
+                <span style={{ fontSize: '13.5px', fontWeight: '800', color: '#FFFFFF', display: 'block', lineHeight: '16px' }}>
                   {user.name}
                 </span>
-                <span style={{ fontSize: '10.5px', fontWeight: '600', color: '#64748b' }}>
-                  Standard Plan
+                <span style={{ fontSize: '10.5px', fontWeight: '600', color: '#7FE87F' }}>
+                  alph pay Verified
                 </span>
               </div>
             )}
@@ -124,15 +125,15 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         )}
       </div>
 
-      {/* Center Slot: Official Vector Logo or Page Title */}
+      {/* Center Slot: Official AlphPay Logo or Page Title */}
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0 8px' }}>
         {title ? (
-          <h2 style={{ fontSize: '17px', fontWeight: '800', color: '#0f172a', margin: 0, textAlign: 'center', letterSpacing: '-0.01em' }}>
+          <h2 style={{ fontSize: '17px', fontWeight: '800', color: '#FFFFFF', margin: 0, textAlign: 'center', letterSpacing: '-0.01em' }}>
             {title}
           </h2>
         ) : (
           <div onClick={() => navigateTo('HOME')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-            <QtPayLogo variant="header" size={26} themeMode="light" />
+            <AlphPayLogo variant="header" size={24} themeMode="dark" />
           </div>
         )}
       </div>
@@ -144,12 +145,12 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             onClick={onSearchClick}
             aria-label="Search"
             style={{
-              backgroundColor: '#f8fafc',
-              border: '1px solid #e2e8f0',
-              color: '#0f172a',
+              backgroundColor: '#2A2A3E',
+              border: `1px solid ${designSystem.colors.borderHairline}`,
+              color: '#FFFFFF',
               width: '38px',
               height: '38px',
-              borderRadius: '10px',
+              borderRadius: '8px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -169,12 +170,12 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             onClick={() => navigateTo('UPI_SETTINGS')}
             aria-label="UPI Settings"
             style={{
-              backgroundColor: '#f8fafc',
-              border: '1px solid #e2e8f0',
-              color: '#0f172a',
+              backgroundColor: '#2A2A3E',
+              border: `1px solid ${designSystem.colors.borderHairline}`,
+              color: '#FFFFFF',
               width: '38px',
               height: '38px',
-              borderRadius: '10px',
+              borderRadius: '8px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -190,3 +191,4 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
     </header>
   );
 };
+

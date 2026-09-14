@@ -26,9 +26,9 @@ export const BottomNavigation: React.FC = () => {
         maxWidth: '600px',
         margin: '0 auto',
         height: '68px',
-        backgroundColor: 'rgba(255, 255, 255, 0.96)',
+        backgroundColor: 'rgba(26, 26, 46, 0.95)',
         backdropFilter: 'blur(12px)',
-        borderTop: '1px solid #e2e8f0',
+        borderTop: '1px solid #4D4D6B',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
@@ -70,13 +70,14 @@ export const BottomNavigation: React.FC = () => {
                   width: '56px',
                   height: '56px',
                   borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
-                  color: '#ffffff',
+                  background: '#7FE87F',
+                  color: '#000000',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '3.5px solid #ffffff',
-                  outline: '1.5px solid #d6e6ff',
+                  border: '3.5px solid #1A1A2E',
+                  outline: '1.5px solid #7FE87F',
+                  boxShadow: '0 4px 16px rgba(127, 232, 127, 0.4)',
                   transition: 'transform 0.15s ease',
                 }}
               >
@@ -86,7 +87,7 @@ export const BottomNavigation: React.FC = () => {
                 style={{
                   fontSize: '10px',
                   fontWeight: 800,
-                  color: '#2e83ff',
+                  color: '#7FE87F',
                   marginTop: '2px',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
@@ -118,7 +119,7 @@ export const BottomNavigation: React.FC = () => {
               flex: 1,
               height: '100%',
               cursor: 'pointer',
-              color: isActive ? '#2e83ff' : '#64748b',
+              color: isActive ? '#7FE87F' : '#808099',
               transition: 'color 0.15s ease',
               position: 'relative',
             }}
@@ -130,7 +131,7 @@ export const BottomNavigation: React.FC = () => {
               style={{
                 fontSize: '11px',
                 fontWeight: isActive ? 800 : 600,
-                color: isActive ? '#2e83ff' : '#64748b',
+                color: isActive ? '#FFFFFF' : '#808099',
                 marginTop: '3px',
                 letterSpacing: '-0.01em',
               }}
@@ -147,7 +148,7 @@ export const BottomNavigation: React.FC = () => {
                   width: '14px',
                   height: '2.5px',
                   borderRadius: '2px',
-                  backgroundColor: '#2e83ff',
+                  backgroundColor: '#7FE87F',
                 }}
               />
             )}

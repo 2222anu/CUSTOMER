@@ -61,10 +61,10 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
                 width: '18px',
                 height: '18px',
                 borderRadius: '50%',
-                backgroundColor: isFilled ? '#2e83ff' : '#f8fafc',
-                border: isFilled ? '2px solid #2e83ff' : '2px solid #cbd5e1',
+                backgroundColor: isFilled ? '#7FE87F' : '#1A1A2E',
+                border: isFilled ? '2px solid #7FE87F' : '2px solid #4D4D6B',
                 transform: isFilled ? 'scale(1.15)' : 'scale(1)',
-                boxShadow: 'none',
+                boxShadow: isFilled ? '0 0 10px rgba(127, 232, 127, 0.4)' : 'none',
                 transition: 'all 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
               }}
             />
@@ -73,7 +73,7 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
       </div>
 
       {error && (
-        <div role="alert" style={{ color: '#ef4444', fontSize: '13px', marginBottom: '20px', fontWeight: 700 }}>
+        <div role="alert" style={{ color: '#FF4757', fontSize: '13px', marginBottom: '20px', fontWeight: 700 }}>
           {error}
         </div>
       )}
@@ -98,20 +98,20 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
               <button
                 key={i}
                 onClick={handleDelete}
-                aria-label="Delete last digit"
+                aria-label="Backspace"
                 className="interactive-tap"
                 style={{
-                  height: '56px',
-                  borderRadius: '14px',
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid #e2e8f0',
-                  color: '#475569',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  height: '56px',
+                  backgroundColor: '#2A2A3E',
+                  border: '1px solid #4D4D6B',
+                  borderRadius: '12px',
+                  color: '#B3B3C2',
                   cursor: 'pointer',
                   boxShadow: 'none',
-                  transition: 'background-color 0.15s ease',
+                  transition: 'background-color 0.12s ease',
                 }}
               >
                 <Delete size={22} />
@@ -126,19 +126,19 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
               aria-label={`Digit ${key}`}
               className="interactive-tap"
               style={{
-                height: '56px',
-                borderRadius: '14px',
-                backgroundColor: '#ffffff',
-                border: '1px solid #e2e8f0',
-                color: '#0f172a',
-                fontSize: '22px',
-                fontWeight: 800,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                height: '56px',
+                backgroundColor: '#2A2A3E',
+                border: '1px solid #4D4D6B',
+                borderRadius: '12px',
+                fontSize: '22px',
+                fontWeight: 800,
+                color: '#FFFFFF',
                 cursor: 'pointer',
-                transition: 'background-color 0.15s ease, border-color 0.15s ease',
                 boxShadow: 'none',
+                transition: 'background-color 0.12s ease, transform 0.08s ease',
               }}
             >
               {key}

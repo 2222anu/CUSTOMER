@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ShieldCheck, Lock, Sparkles } from 'lucide-react';
-import { QtPayLogo } from '../components/QtPayLogo';
+import { ShieldCheck, Lock } from 'lucide-react';
+import { AlphPayLogo } from '../components/AlphPayLogo';
 import { useApp } from '../state/AppContext';
 
 export const SplashScreen: React.FC = () => {
@@ -20,7 +20,7 @@ export const SplashScreen: React.FC = () => {
         if (next > 70) {
           setStatusText('Verifying cryptographic tokens...');
         } else if (next > 40) {
-          setStatusText('Connecting to NPCI UPI network...');
+          setStatusText('Connecting to Global Payment Rails...');
         }
         return next;
       });
@@ -41,7 +41,7 @@ export const SplashScreen: React.FC = () => {
       className="fade-in"
       style={{
         minHeight: '100vh',
-        background: 'radial-gradient(circle at 50% 36%, #1d4ed8 0%, #0e274d 45%, #071529 100%)',
+        background: 'radial-gradient(circle at 50% 36%, #2A2A3E 0%, #1A1A2E 60%, #0E0E1A 100%)',
         color: '#ffffff',
         display: 'flex',
         flexDirection: 'column',
@@ -64,13 +64,13 @@ export const SplashScreen: React.FC = () => {
           width: '460px',
           height: '460px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(46, 131, 255, 0.28) 0%, rgba(56, 189, 248, 0.08) 50%, transparent 75%)',
+          background: 'radial-gradient(circle, rgba(127, 232, 127, 0.25) 0%, rgba(159, 238, 159, 0.08) 50%, transparent 75%)',
           filter: 'blur(50px)',
           pointerEvents: 'none',
         }}
       />
 
-      {/* Kinetic Ultrasonic Energy Rings (Pulsing outward from center) */}
+      {/* Kinetic Ultrasonic Energy Rings */}
       <div
         style={{
           position: 'absolute',
@@ -80,49 +80,36 @@ export const SplashScreen: React.FC = () => {
           width: '340px',
           height: '340px',
           borderRadius: '50%',
-          border: '1.5px solid rgba(56, 189, 248, 0.2)',
+          border: '1px solid rgba(127, 232, 127, 0.15)',
+          animation: 'ringPulse 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite',
           pointerEvents: 'none',
-          animation: 'sonicRipple 3.5s ease-out infinite',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          top: '36%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '260px',
-          height: '260px',
-          borderRadius: '50%',
-          border: '1px dashed rgba(46, 131, 255, 0.35)',
-          pointerEvents: 'none',
-          animation: 'rotateOrbit 12s linear infinite',
         }}
       />
 
-      {/* Top Floating Security Pill */}
+      {/* Top Security Tier Badge */}
       <div
         style={{
-          zIndex: 3,
-          display: 'flex',
+          display: 'inline-flex',
           alignItems: 'center',
-          gap: '6px',
-          backgroundColor: 'rgba(255, 255, 255, 0.12)',
+          gap: '8px',
+          backgroundColor: 'rgba(255, 255, 255, 0.06)',
           backdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.25)',
-          padding: '6px 16px',
-          borderRadius: '24px',
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
-          animation: 'fadeSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+          border: '1px solid rgba(127, 232, 127, 0.25)',
+          borderRadius: '9999px',
+          padding: '6px 14px',
+          fontSize: '11.5px',
+          fontWeight: 700,
+          letterSpacing: '0.04em',
+          color: '#7FE87F',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+          zIndex: 3,
         }}
       >
-        <Sparkles size={13} color="#38bdf8" />
-        <span style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#ffffff' }}>
-          NEXT-GEN UPI PAYMENTS
-        </span>
+        <ShieldCheck size={14} color="#7FE87F" />
+        <span>256-Bit Financial Encryption</span>
       </div>
 
-      {/* Hero Centerpiece: 3D Holographic Glass Emblem & Specular Shine */}
+      {/* Center Cinematic Hero Logo & Pulse */}
       <div
         style={{
           display: 'flex',
@@ -130,50 +117,35 @@ export const SplashScreen: React.FC = () => {
           alignItems: 'center',
           textAlign: 'center',
           zIndex: 3,
-          marginTop: '-16px',
+          position: 'relative',
         }}
       >
-        {/* Holographic 3D Floating Glass Tile */}
         <div
           style={{
             position: 'relative',
-            width: '130px',
-            height: '130px',
-            borderRadius: '34px',
-            background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 100%)',
-            backdropFilter: 'blur(20px)',
-            border: '2px solid rgba(255, 255, 255, 0.45)',
-            marginBottom: '20px',
-            boxShadow: '0 24px 60px rgba(7, 21, 41, 0.6), 0 0 35px rgba(46, 131, 255, 0.45)',
+            width: '116px',
+            height: '116px',
+            borderRadius: '30px',
+            background: 'linear-gradient(145deg, #2A2A3E 0%, #1A1A2E 100%)',
+            border: '2px solid rgba(127, 232, 127, 0.4)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            marginBottom: '20px',
+            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.6), 0 0 24px rgba(127, 232, 127, 0.2)',
             overflow: 'hidden',
-            animation: 'heroTileEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
           }}
         >
-          {/* Specular Diagonal Light Sweep */}
+          {/* Logo */}
           <div
             style={{
-              position: 'absolute',
-              inset: '-100%',
-              background: 'linear-gradient(135deg, transparent 35%, rgba(255, 255, 255, 0.65) 50%, transparent 65%)',
-              animation: 'shineSweep 2.8s ease-in-out infinite',
-              pointerEvents: 'none',
-            }}
-          />
-
-          {/* Glowing QPay Emblem */}
-          <div
-            style={{
-              filter: 'drop-shadow(0 0 16px rgba(56, 189, 248, 0.8))',
-              transform: 'scale(1.25)',
+              filter: 'drop-shadow(0 0 16px rgba(127, 232, 127, 0.8))',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <QtPayLogo variant="icon" size={68} themeMode="dark" />
+            <AlphPayLogo variant="icon" size={68} themeMode="dark" />
           </div>
         </div>
 
@@ -181,16 +153,18 @@ export const SplashScreen: React.FC = () => {
         <div
           style={{
             fontSize: '36px',
-            fontWeight: 900,
-            letterSpacing: '0.14em',
+            fontWeight: 800,
+            letterSpacing: '-0.02em',
             color: '#ffffff',
             lineHeight: 1,
             margin: '0 0 8px 0',
-            textShadow: '0 4px 20px rgba(46, 131, 255, 0.5)',
-            animation: 'titleEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            display: 'flex',
+            alignItems: 'baseline',
+            gap: '6px',
           }}
         >
-          QPAY
+          <span>alph</span>
+          <span style={{ color: '#7FE87F' }}>pay</span>
         </div>
 
         {/* Minimalist Sub-Tag */}
@@ -199,7 +173,7 @@ export const SplashScreen: React.FC = () => {
             fontSize: '12px',
             fontWeight: 700,
             letterSpacing: '0.12em',
-            color: '#93c5fd',
+            color: '#B3B3C2',
             textTransform: 'uppercase',
             display: 'flex',
             alignItems: 'center',
@@ -207,9 +181,9 @@ export const SplashScreen: React.FC = () => {
           }}
         >
           <span>Fast</span>
-          <span style={{ color: '#38bdf8' }}>•</span>
+          <span style={{ color: '#7FE87F' }}>•</span>
           <span>Unified</span>
-          <span style={{ color: '#38bdf8' }}>•</span>
+          <span style={{ color: '#7FE87F' }}>•</span>
           <span>Secure</span>
         </div>
       </div>

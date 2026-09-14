@@ -19,16 +19,16 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       className={`interactive-tap ${className}`}
       style={{
         width: fullWidth ? '100%' : 'auto',
-        backgroundColor: disabled ? '#cbd5e1' : '#2e83ff',
-        color: disabled ? '#64748b' : '#ffffff',
+        backgroundColor: disabled ? '#4D4D6B' : '#7FE87F',
+        color: disabled ? '#808099' : '#000000',
         border: 'none',
-        borderRadius: '10px',
+        borderRadius: '8px',
         padding: '14px 20px',
-        fontSize: '15px',
+        fontSize: '15.5px',
         fontWeight: 800,
-        letterSpacing: '0.01em',
+        letterSpacing: '-0.01em',
         cursor: disabled ? 'not-allowed' : 'pointer',
-        boxShadow: 'none',
+        boxShadow: disabled ? 'none' : '0 4px 12px rgba(127, 232, 127, 0.25)',
         transition: 'all 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
         display: 'flex',
         alignItems: 'center',
@@ -37,7 +37,6 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
         userSelect: 'none',
         ...style,
       }}
-      disabled={disabled}
       {...props}
     >
       {children}

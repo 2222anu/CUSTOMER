@@ -1,14 +1,14 @@
 {
   "id": "/",
-  "name": "QTPay — Quick UPI Payments",
-  "short_name": "QTPay",
-  "description": "Fast, secure, and instant UPI payments, bank transfers, bill payments, and balance check.",
+  "name": "alph pay — Instant Global Payments",
+  "short_name": "alph pay",
+  "description": "Fast, secure, and instant payments, global transfers, and digital wallet.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f4f6f8",
-  "theme_color": "#2e83ff",
+  "background_color": "#1A1A2E",
+  "theme_color": "#7FE87F",
   "categories": ["finance", "shopping", "utilities"],
   "icons": [
     {

@@ -1,34 +1,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  /* MobiKwik Signature Blue & Clean White/Black Palette */
-  --blue-base: #2e83ff;
-  --blue-hover: #1e70e6;
-  --blue-light: #eef5ff;
-  --blue-tint: #d6e6ff;
-  
-  --bg-page: #f4f6f8;
-  --bg-card: #ffffff;
-  --bg-secondary: #f8fafc;
+  /* alph pay — Brand Theme Tokens */
+  --color-primary: #7FE87F;
+  --color-primary-hover: #5FBF5F;
+  --color-primary-active: #3F963F;
+  --color-primary-light: #EFFDEF;
+  --color-primary-border: #9FEE9F;
+  --color-primary-dark: #1F6D1F;
+  --color-text-on-primary: #000000;
 
-  --border-color: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --card-border: #e2e8f0;
-  --card-bg: #ffffff;
+  --color-background: #1A1A2E;
+  --color-surface: #2A2A3E;
+  --color-surface-elevated: #3A3A52;
+  --color-sub-surface: #33334D;
+  --color-overlay: rgba(15, 15, 26, 0.75);
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  --text-white: #ffffff;
-  --text-dark: #0f172a;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B3B3C2;
+  --color-text-muted: #808099;
+  --color-text-disabled: #808099;
 
-  --primary: #2e83ff;
-  --accent: #2e83ff;
-  --neon-primary: #2e83ff;
-  --neon-glow: rgba(46, 131, 255, 0.35);
+  --color-border: #4D4D6B;
+  --color-border-hairline: #4D4D6B;
+  --color-border-strong: #808099;
+  --color-border-focus: #7FE87F;
 
-  /* Global Google Sans Flex Typography System */
-  --font-family: 'Google Sans Flex', 'Google Sans', 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --color-success: #7FE87F;
+  --color-warning: #F59E0B;
+  --color-danger: #FF4757;
+
+  /* Aliases for backwards compatibility */
+  --primary: #7FE87F;
+  --primary-hover: #5FBF5F;
+  --accent: #7FE87F;
+  --blue-base: #7FE87F;
+  --blue-hover: #5FBF5F;
+  --blue-light: #1E3A2E;
+  --blue-tint: #9FEE9F;
+
+  --bg-page: #1A1A2E;
+  --bg-card: #2A2A3E;
+  --bg-secondary: #33334D;
+  --card-bg: #2A2A3E;
+  --card-border: #4D4D6B;
+  --border-color: #4D4D6B;
+  --border-strong: #808099;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #B3B3C2;
+  --text-muted: #808099;
+  --text-white: #FFFFFF;
+  --text-dark: #FFFFFF;
+
+  --font-family: 'Inter', 'SF Pro Display', 'Google Sans Flex', system-ui, -apple-system, sans-serif;
 
   /* Global Spacing Scale */
   --space-2xs: 4px;
@@ -39,8 +64,7 @@
   --space-xl: 24px;
   --space-2xl: 32px;
 
-  /* NO DROP SHADOWS (Strictly 0 Shadows) */
-  --shadow-subtle: none;
+  --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -50,13 +74,11 @@
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   font-family: var(--font-family);
-  /* Enforce 0 drop shadows globally */
-  box-shadow: none !important;
 }
 
 /* WCAG 2.1 AA Keyboard Focus Rings */
 :focus-visible {
-  outline: 2.5px solid #2e83ff !important;
+  outline: 2.5px solid #7FE87F !important;
   outline-offset: 2px !important;
   border-radius: 4px;
 }
@@ -66,7 +88,7 @@ a:focus-visible,
 input:focus-visible,
 [role="button"]:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2.5px solid #2e83ff !important;
+  outline: 2.5px solid #7FE87F !important;
   outline-offset: 2px !important;
 }
 

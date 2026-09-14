@@ -19,10 +19,10 @@ export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
       className={`interactive-tap ${className}`}
       style={{
         width: fullWidth ? '100%' : 'auto',
-        backgroundColor: '#ffffff',
-        color: disabled ? '#94a3b8' : '#0f172a',
-        border: '1.5px solid #cbd5e1',
-        borderRadius: '10px',
+        backgroundColor: 'transparent',
+        color: disabled ? '#808099' : '#7FE87F',
+        border: disabled ? '1.5px solid #4D4D6B' : '1.5px solid #7FE87F',
+        borderRadius: '8px',
         padding: '13px 20px',
         fontSize: '15px',
         fontWeight: 700,

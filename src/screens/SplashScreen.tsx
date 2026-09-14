@@ -217,10 +217,10 @@ export const SplashScreen: React.FC = () => {
               style={{
                 height: '100%',
                 width: `${progress}%`,
-                background: 'linear-gradient(90deg, #2e83ff 0%, #38bdf8 70%, #ffffff 100%)',
+                background: 'linear-gradient(90deg, #5FBF5F 0%, #7FE87F 70%, #9FEE9F 100%)',
                 borderRadius: '9999px',
                 transition: 'width 0.08s linear',
-                boxShadow: '0 0 14px #38bdf8',
+                boxShadow: '0 0 14px rgba(127, 232, 127, 0.6)',
               }}
             />
           </div>
@@ -237,7 +237,7 @@ export const SplashScreen: React.FC = () => {
             }}
           >
             <span>{statusText}</span>
-            <span style={{ fontWeight: 800, color: '#38bdf8' }}>{progress}%</span>
+            <span style={{ fontWeight: 800, color: '#7FE87F' }}>{progress}%</span>
           </div>
         </div>
 
@@ -248,8 +248,8 @@ export const SplashScreen: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '8px',
-            backgroundColor: 'rgba(7, 21, 41, 0.72)',
-            border: '1px solid rgba(56, 189, 248, 0.22)',
+            backgroundColor: '#2A2A3E',
+            border: '1px solid rgba(127, 232, 127, 0.25)',
             backdropFilter: 'blur(12px)',
             borderRadius: '14px',
             padding: '8px 14px',
@@ -257,7 +257,7 @@ export const SplashScreen: React.FC = () => {
             boxSizing: 'border-box',
           }}
         >
-          <ShieldCheck size={15} color="#38bdf8" />
+          <ShieldCheck size={15} color="#7FE87F" />
           <span style={{ fontSize: '10.5px', color: '#e2e8f0', fontWeight: 700, letterSpacing: '0.04em' }}>
             NPCI • BHIM UPI • 256-BIT SECURED
           </span>

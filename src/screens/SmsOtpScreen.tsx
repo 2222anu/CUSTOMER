@@ -34,7 +34,7 @@ export const SmsOtpScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#f4f6f8', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingBottom: '32px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingBottom: '32px' }}>
       <div>
         <AppHeader title="OTP Verification" showBack showSettings={false} />
 
@@ -42,13 +42,14 @@ export const SmsOtpScreen: React.FC = () => {
           {/* Main Verification Card */}
           <div
             style={{
-              backgroundColor: '#ffffff',
-              border: '1px solid #e2e8f0',
-              borderRadius: '20px',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #4D4D6B',
+              borderRadius: '16px',
               padding: '24px 20px',
               display: 'flex',
               flexDirection: 'column',
               gap: '20px',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
             }}
           >
             {/* Top Emblem & Header */}
@@ -57,23 +58,23 @@ export const SmsOtpScreen: React.FC = () => {
                 style={{
                   width: '56px',
                   height: '56px',
-                  borderRadius: '16px',
-                  backgroundColor: '#eef5ff',
-                  color: '#2e83ff',
+                  borderRadius: '14px',
+                  backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                  color: '#7FE87F',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   margin: '0 auto 14px auto',
-                  border: '1.5px solid #d6e6ff',
+                  border: '1.5px solid rgba(127, 232, 127, 0.3)',
                 }}
               >
                 <Smartphone size={28} />
               </div>
-              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', margin: '0 0 8px 0' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 8px 0' }}>
                 Verify Mobile Number
               </h2>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: '#eef5ff', border: '1px solid #d6e6ff', padding: '4px 14px', borderRadius: '12px' }}>
-                <span className="tabular-nums" style={{ fontSize: '13.5px', fontWeight: 800, color: '#2e83ff' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: '#33334D', border: '1px solid #4D4D6B', padding: '4px 14px', borderRadius: '12px' }}>
+                <span className="tabular-nums" style={{ fontSize: '13.5px', fontWeight: 800, color: '#7FE87F' }}>
                   +91 {mobile}
                 </span>
               </div>
@@ -97,12 +98,12 @@ export const SmsOtpScreen: React.FC = () => {
                   style={{
                     width: '44px',
                     height: '52px',
-                    borderRadius: '12px',
-                    backgroundColor: digit ? '#eef5ff' : '#f8fafc',
-                    border: digit ? '2px solid #2e83ff' : '1.5px solid #cbd5e1',
+                    borderRadius: '10px',
+                    backgroundColor: digit ? '#33334D' : '#1A1A2E',
+                    border: digit ? '2px solid #7FE87F' : '1.5px solid #4D4D6B',
                     fontSize: '20px',
                     fontWeight: 900,
-                    color: '#0f172a',
+                    color: '#FFFFFF',
                     textAlign: 'center',
                     outline: 'none',
                     transition: 'border-color 0.2s ease, background-color 0.2s ease',
@@ -117,15 +118,15 @@ export const SmsOtpScreen: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                backgroundColor: '#eef5ff',
-                border: '1px solid #d6e6ff',
+                backgroundColor: 'rgba(127, 232, 127, 0.1)',
+                border: '1px solid rgba(127, 232, 127, 0.25)',
                 padding: '10px 14px',
-                borderRadius: '12px',
+                borderRadius: '10px',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <CheckCircle2 size={18} color="#2e83ff" />
-                <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#0e274d' }}>
+                <CheckCircle2 size={18} color="#7FE87F" />
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#FFFFFF' }}>
                   Auto-Detected (589204)
                 </span>
               </div>
@@ -134,11 +135,11 @@ export const SmsOtpScreen: React.FC = () => {
                 onClick={handleAutofillDemo}
                 className="interactive-tap"
                 style={{
-                  backgroundColor: '#2e83ff',
-                  color: '#ffffff',
+                  backgroundColor: '#7FE87F',
+                  color: '#000000',
                   border: 'none',
                   borderRadius: '6px',
-                  padding: '4px 8px',
+                  padding: '4px 10px',
                   fontSize: '11px',
                   fontWeight: 800,
                   cursor: 'pointer',
@@ -149,7 +150,7 @@ export const SmsOtpScreen: React.FC = () => {
             </div>
 
             {/* Resend Link & Timer */}
-            <div style={{ textAlign: 'center', fontSize: '13px', color: '#64748b' }}>
+            <div style={{ textAlign: 'center', fontSize: '13px', color: '#B3B3C2' }}>
               Didn't receive SMS?{' '}
               <button
                 disabled={timer > 0}
@@ -158,7 +159,7 @@ export const SmsOtpScreen: React.FC = () => {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: timer > 0 ? '#94a3b8' : '#2e83ff',
+                  color: timer > 0 ? '#808099' : '#7FE87F',
                   fontWeight: 800,
                   cursor: timer > 0 ? 'not-allowed' : 'pointer',
                   padding: 0,
@@ -169,7 +170,7 @@ export const SmsOtpScreen: React.FC = () => {
             </div>
 
             {isResent && (
-              <div style={{ textAlign: 'center', fontSize: '12px', color: '#2e83ff', fontWeight: 700 }}>
+              <div style={{ textAlign: 'center', fontSize: '12px', color: '#7FE87F', fontWeight: 700 }}>
                 ✓ New 6-digit code dispatched to +91 {mobile}
               </div>
             )}
@@ -186,3 +187,4 @@ export const SmsOtpScreen: React.FC = () => {
     </div>
   );
 };
+

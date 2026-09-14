@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { User as UserIcon, ArrowRight, ShieldCheck, Lock } from 'lucide-react';
-import { QtPayLogo } from '../components/QtPayLogo';
+import { AlphPayLogo } from '../components/AlphPayLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
+import { designSystem } from '../design-system';
 
 export const MobileNumberScreen: React.FC = () => {
   const { navigateTo, user, updateUser, setIsLanguageModalOpen, language } = useApp();
@@ -22,7 +23,7 @@ export const MobileNumberScreen: React.FC = () => {
       className="fade-in"
       style={{
         minHeight: '100vh',
-        backgroundColor: '#f8fafc',
+        backgroundColor: '#1A1A2E',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -33,24 +34,22 @@ export const MobileNumberScreen: React.FC = () => {
       {/* Top Header Bar with Language Switcher */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          {/* Logo with themeMode="light" for clear visibility on light background */}
-          <QtPayLogo variant="horizontal" size={26} themeMode="light" showTagline={false} />
+          <AlphPayLogo variant="header" size={26} themeMode="dark" />
           <button
             onClick={() => setIsLanguageModalOpen(true)}
             className="interactive-tap"
             style={{
-              backgroundColor: '#ffffff',
-              border: '1px solid #cbd5e1',
+              backgroundColor: '#2A2A3E',
+              border: '1px solid #4D4D6B',
               borderRadius: '20px',
               padding: '6px 14px',
               fontSize: '12px',
               fontWeight: 800,
-              color: '#0f172a',
+              color: '#FFFFFF',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
             }}
           >
             <span>🌐</span>
@@ -61,47 +60,51 @@ export const MobileNumberScreen: React.FC = () => {
         {/* Security Tag Header */}
         <div
           style={{
-            backgroundColor: '#0e274d',
-            borderRadius: '18px',
-            padding: '18px 20px',
-            color: '#ffffff',
+            backgroundColor: '#2A2A3E',
+            border: '1px solid #4D4D6B',
+            borderRadius: '16px',
+            padding: '16px 18px',
+            color: '#FFFFFF',
             marginBottom: '20px',
-            position: 'relative',
-            overflow: 'hidden',
-            boxShadow: '0 8px 20px rgba(14, 39, 77, 0.12)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div
-              style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '10px',
-                backgroundColor: 'rgba(46, 131, 255, 0.25)',
-                color: '#38bdf8',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <ShieldCheck size={18} />
-            </div>
-            <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#ffffff' }}>UPI Device Registration</div>
+          <div
+            style={{
+              width: '38px',
+              height: '38px',
+              borderRadius: '10px',
+              backgroundColor: 'rgba(127, 232, 127, 0.15)',
+              color: '#7FE87F',
+              border: '1px solid rgba(127, 232, 127, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <ShieldCheck size={20} />
+          </div>
+          <div>
+            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>Secure Sign In & Registration</div>
+            <div style={{ fontSize: '12px', color: '#B3B3C2' }}>Bank-grade biometric & device binding</div>
           </div>
         </div>
 
-        {/* Main Input Form Card - Simple, Clean, Streamlined (No SIM selector clutter) */}
+        {/* Main Input Form Card */}
         <form
           onSubmit={handleContinue}
           style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid #e2e8f0',
-            borderRadius: '20px',
+            backgroundColor: '#2A2A3E',
+            border: '1px solid #4D4D6B',
+            borderRadius: '16px',
             padding: '22px 20px',
             display: 'flex',
             flexDirection: 'column',
             gap: '18px',
-            boxShadow: '0 4px 14px rgba(0, 0, 0, 0.03)',
+            boxShadow: designSystem.shadows.md,
           }}
         >
           {/* Full Name Input */}
@@ -110,7 +113,7 @@ export const MobileNumberScreen: React.FC = () => {
               htmlFor="name-input"
               style={{
                 fontSize: '11px',
-                color: '#64748b',
+                color: '#B3B3C2',
                 fontWeight: 800,
                 textTransform: 'uppercase',
                 letterSpacing: '0.05em',
@@ -120,17 +123,16 @@ export const MobileNumberScreen: React.FC = () => {
               }}
             >
               <span>Full Name</span>
-              <span style={{ color: '#2e83ff', textTransform: 'none', fontWeight: 700 }}>As per bank records</span>
+              <span style={{ color: '#7FE87F', textTransform: 'none', fontWeight: 700 }}>As per bank records</span>
             </label>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                backgroundColor: '#f8fafc',
-                border: '1.5px solid #cbd5e1',
-                borderRadius: '12px',
+                backgroundColor: '#1A1A2E',
+                border: '1.5px solid #4D4D6B',
+                borderRadius: '10px',
                 padding: '12px 14px',
-                transition: 'border-color 0.2s ease',
               }}
             >
               <div
@@ -138,8 +140,8 @@ export const MobileNumberScreen: React.FC = () => {
                   width: '30px',
                   height: '30px',
                   borderRadius: '8px',
-                  backgroundColor: '#eef5ff',
-                  color: '#2e83ff',
+                  backgroundColor: '#33334D',
+                  color: '#7FE87F',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -162,20 +164,20 @@ export const MobileNumberScreen: React.FC = () => {
                   outline: 'none',
                   fontSize: '15px',
                   fontWeight: 700,
-                  color: '#0f172a',
+                  color: '#FFFFFF',
                   width: '100%',
                 }}
               />
             </div>
           </div>
 
-          {/* Mobile Number Input with +91 Country Badge */}
+          {/* Mobile Number Input */}
           <div>
             <label
               htmlFor="mobile-input"
               style={{
                 fontSize: '11px',
-                color: '#64748b',
+                color: '#B3B3C2',
                 fontWeight: 800,
                 textTransform: 'uppercase',
                 letterSpacing: '0.05em',
@@ -189,65 +191,64 @@ export const MobileNumberScreen: React.FC = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                backgroundColor: '#f8fafc',
-                border: '1.5px solid #2e83ff',
-                borderRadius: '12px',
+                backgroundColor: '#1A1A2E',
+                border: '1.5px solid #7FE87F',
+                borderRadius: '10px',
                 padding: '10px 14px',
               }}
             >
-              {/* Country Flag Pill */}
+              {/* Country Code Pill */}
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '4px',
-                  backgroundColor: '#eef5ff',
-                  border: '1px solid #d6e6ff',
-                  padding: '5px 10px',
-                  borderRadius: '8px',
-                  marginRight: '10px',
-                  flexShrink: 0,
+                  gap: '6px',
+                  paddingRight: '12px',
+                  marginRight: '12px',
+                  borderRight: '1px solid #4D4D6B',
+                  fontWeight: 800,
+                  fontSize: '14px',
+                  color: '#FFFFFF',
                 }}
               >
-                <span style={{ fontSize: '15px' }}>🇮🇳</span>
-                <span style={{ fontWeight: 800, fontSize: '14px', color: '#2e83ff' }}>+91</span>
+                <span>🇮🇳</span>
+                <span>+91</span>
               </div>
+
               <input
                 id="mobile-input"
                 type="tel"
                 value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value.replace(/[^0-9]/g, ''))}
+                onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                placeholder="98765 43210"
                 maxLength={10}
-                placeholder="9876543210"
                 required
-                className="tabular-nums"
                 style={{
                   background: 'none',
                   border: 'none',
                   outline: 'none',
-                  fontSize: '17px',
+                  fontSize: '16px',
                   fontWeight: 800,
-                  color: '#0f172a',
+                  color: '#FFFFFF',
                   width: '100%',
+                  fontVariantNumeric: 'tabular-nums',
                   letterSpacing: '0.05em',
                 }}
               />
             </div>
           </div>
 
-
-
           <PrimaryButton type="submit" disabled={mobileNumber.length < 10 || fullName.trim().length === 0}>
-            Get OTP Verification Code <ArrowRight size={18} />
+            Get OTP & Bind Device <ArrowRight size={18} />
           </PrimaryButton>
         </form>
       </div>
 
       {/* Security Trust Badges Footer */}
       <div style={{ marginTop: '20px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', color: '#64748b', fontWeight: 700 }}>
-          <Lock size={12} color="#2e83ff" />
-          <span>NPCI & BHIM UPI Certified &bull; 256-Bit Hardware Encryption</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', color: '#808099', fontWeight: 700 }}>
+          <Lock size={12} color="#7FE87F" />
+          <span>256-Bit Hardware Encryption &bull; alph pay Certified</span>
         </div>
       </div>
     </div>

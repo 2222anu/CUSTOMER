@@ -10,7 +10,7 @@ export const QPayOnboardingBackground: React.FC = () => {
         pointerEvents: 'none',
         overflow: 'hidden',
         zIndex: 0,
-        background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 40%, #ffffff 100%)',
+        background: 'radial-gradient(circle at 50% 36%, #2A2A3E 0%, #1A1A2E 60%, #0E0E1A 100%)',
       }}
     >
       {/* Primary Top Studio Spotlight */}
@@ -23,8 +23,8 @@ export const QPayOnboardingBackground: React.FC = () => {
           width: '420px',
           height: '420px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(46, 131, 255, 0.12) 0%, rgba(56, 189, 248, 0.04) 45%, rgba(255, 255, 255, 0) 70%)',
-          filter: 'blur(40px)',
+          background: 'radial-gradient(circle, rgba(127, 232, 127, 0.18) 0%, rgba(159, 238, 159, 0.05) 45%, transparent 70%)',
+          filter: 'blur(50px)',
         }}
       />
 
@@ -37,8 +37,8 @@ export const QPayOnboardingBackground: React.FC = () => {
           width: '280px',
           height: '280px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(14, 39, 77, 0.04) 0%, rgba(255, 255, 255, 0) 70%)',
-          filter: 'blur(35px)',
+          background: 'radial-gradient(circle, rgba(127, 232, 127, 0.08) 0%, transparent 70%)',
+          filter: 'blur(40px)',
         }}
       />
 
@@ -52,7 +52,7 @@ export const QPayOnboardingBackground: React.FC = () => {
           width: '320px',
           height: '320px',
           borderRadius: '50%',
-          border: '1px solid rgba(46, 131, 255, 0.08)',
+          border: '1px solid rgba(127, 232, 127, 0.12)',
           pointerEvents: 'none',
         }}
       />

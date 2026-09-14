@@ -120,19 +120,37 @@ const INITIAL_SESSIONS: DeviceSession[] = [
 ];
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currentScreen, setCurrentScreen] = useState<ScreenId>('HOME');
-  const [screenStack, setScreenStack] = useState<{ screen: ScreenId; params?: Record<string, any> }[]>([
-    { screen: 'HOME' },
-  ]);
+  const [currentScreen, setCurrentScreen] = useState<ScreenId>(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramScreen = urlParams.get('screen') as ScreenId | null;
+      if (paramScreen) return paramScreen;
+      const completed = localStorage.getItem('hasCompletedOnboarding');
+      if (completed === 'true') return 'HOME';
+      return 'SPLASH';
+    }
+    return 'SPLASH';
+  });
+  const [screenStack, setScreenStack] = useState<{ screen: ScreenId; params?: Record<string, any> }[]>(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramScreen = urlParams.get('screen') as ScreenId | null;
+      if (paramScreen) return [{ screen: paramScreen }];
+      const completed = localStorage.getItem('hasCompletedOnboarding');
+      if (completed === 'true') return [{ screen: 'HOME' }];
+      return [{ screen: 'SPLASH' }];
+    }
+    return [{ screen: 'SPLASH' }];
+  });
   const [screenParams, setScreenParams] = useState<Record<string, any>>({});
   const [activeTab, setActiveTabState] = useState<BottomTab>('home');
 
   const [user, setUser] = useState<User>({
     name: 'Anu',
     avatarInitials: 'AN',
-    upiId: 'anu@qtpay',
+    upiId: 'anu@alphpay',
     mobile: '+91 98765 43210',
-    email: 'anu@qtpay.com',
+    email: 'anu@alphpay.com',
   });
 
   const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([]);
@@ -449,13 +467,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const performLogout = () => {
     localStorage.removeItem('hasSeenOnboarding');
+    localStorage.removeItem('hasCompletedOnboarding');
+    localStorage.removeItem('hasGrantedPermissions');
     setIsLogoutModalOpen(false);
     setCurrentScreen('SPLASH');
     setScreenStack([{ screen: 'SPLASH' }]);
-    setTimeout(() => {
-      setCurrentScreen('ONBOARDING');
-      setScreenStack([{ screen: 'ONBOARDING' }]);
-    }, 1800);
   };
 
   const terminateSession = (sessionId: string) => {

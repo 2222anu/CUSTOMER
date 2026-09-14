@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, ChevronRight } from 'lucide-react';
-import { QtPayLogo } from '../QtPayLogo';
+import { AlphPayLogo } from '../AlphPayLogo';
 import { QPayOnboardingBackground } from './QPayOnboardingBackground';
 import { QPayOnboardingProgress } from './QPayOnboardingProgress';
 import { QPayOnboardingSlide, type OnboardingSlideData } from './QPayOnboardingSlide';
@@ -118,7 +118,8 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
         position: 'relative',
         minHeight: '100vh',
         width: '100%',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#1A1A2E',
+        color: '#ffffff',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -143,7 +144,7 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
           paddingTop: '6px',
         }}
       >
-        <QtPayLogo variant="horizontal" size={24} showTagline={false} />
+        <AlphPayLogo variant="horizontal" size={24} themeMode="dark" />
 
         <button
           type="button"
@@ -155,7 +156,7 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
           style={{
             background: 'transparent',
             border: 'none',
-            color: '#64748b',
+            color: '#B3B3C2',
             fontSize: '13px',
             fontWeight: 700,
             padding: '6px 12px',
@@ -172,7 +173,7 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
         </button>
       </header>
 
-      {/* Slide Visual Area (Smooth Cross-fade & Continuous Transform) */}
+      {/* Slide Visual Area */}
       <main
         style={{
           position: 'relative',
@@ -202,7 +203,7 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
         ))}
       </main>
 
-      {/* Bottom Controls: Milkinside Pagination + Primary Button */}
+      {/* Bottom Controls: Pagination + Primary Button */}
       <footer
         style={{
           position: 'relative',
@@ -215,7 +216,7 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
           paddingTop: '8px',
         }}
       >
-        {/* Pagination Dots [ ● ○ ○ ] */}
+        {/* Pagination Dots */}
         <QPayOnboardingProgress
           total={slides.length}
           activeIndex={currentSlide}
@@ -230,11 +231,9 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
           style={{
             width: '100%',
             height: '52px',
-            borderRadius: '16px',
-            background: isFinalSlide
-              ? 'linear-gradient(135deg, #0e274d 0%, #1d4ed8 50%, #2e83ff 100%)'
-              : 'linear-gradient(135deg, #2e83ff 0%, #1d4ed8 100%)',
-            color: '#ffffff',
+            borderRadius: '8px',
+            backgroundColor: '#7FE87F',
+            color: '#000000',
             border: 'none',
             fontSize: '15px',
             fontWeight: 800,
@@ -244,10 +243,8 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
             justifyContent: 'center',
             gap: '8px',
             cursor: 'pointer',
-            boxShadow: isFinalSlide
-              ? '0 12px 28px rgba(14, 39, 77, 0.35)'
-              : '0 10px 25px rgba(46, 131, 255, 0.35)',
-            transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+            boxShadow: '0 4px 16px rgba(127, 232, 127, 0.3)',
+            transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
           <span>{isFinalSlide ? 'Get Started' : 'Continue'}</span>

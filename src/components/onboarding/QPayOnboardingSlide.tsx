@@ -67,24 +67,22 @@ export const QPayOnboardingSlide: React.FC<QPayOnboardingSlideProps> = ({
             fontSize: '40px',
             fontWeight: 900,
             letterSpacing: '0.14em',
-            color: '#0e274d',
+            color: '#7FE87F',
             lineHeight: 1,
             marginBottom: '10px',
             textTransform: 'uppercase',
-            background: 'linear-gradient(180deg, #0a192f 0%, #1d4ed8 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
+            textShadow: '0 0 20px rgba(127, 232, 127, 0.4)',
           }}
         >
           {slide.title}
         </div>
 
-        {/* 2-Line Bold Headline (No unnecessary supporting paragraphs or tags) */}
+        {/* 2-Line Bold Headline */}
         <div
           style={{
             fontSize: '22px',
             fontWeight: 800,
-            color: '#0f172a',
+            color: '#ffffff',
             lineHeight: '1.28',
             letterSpacing: '-0.02em',
           }}

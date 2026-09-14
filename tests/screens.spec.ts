@@ -66,7 +66,7 @@ test.describe('QtPay All Screens and Modals Verification Suite', () => {
   });
 
   test('Bottom Navigation is sticky and fixed at the bottom', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/?screen=HOME');
     await page.waitForSelector('nav[role="navigation"]');
 
     const nav = page.locator('nav[role="navigation"]');

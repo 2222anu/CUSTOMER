@@ -88,38 +88,24 @@ export const SplashScreen: React.FC = () => {
         <div
           style={{
             position: 'relative',
-            width: '110px',
-            height: '110px',
-            borderRadius: '28px',
+            width: '100px',
+            height: '100px',
+            borderRadius: '26px',
             backgroundColor: '#151524',
             border: '1.5px solid #2C2C44',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginBottom: '20px',
+            marginBottom: '18px',
             boxShadow: 'none',
             overflow: 'hidden',
           }}
         >
-          <AlphPayLogo variant="icon" size={64} themeMode="dark" />
+          <AlphPayLogo variant="icon" size={60} themeMode="dark" />
         </div>
 
-        {/* Oversized Brand Typography */}
-        <div
-          style={{
-            fontSize: '36px',
-            fontWeight: 800,
-            letterSpacing: '-0.02em',
-            color: '#FFFFFF',
-            lineHeight: 1,
-            margin: '0 0 8px 0',
-            display: 'flex',
-            alignItems: 'baseline',
-            gap: '6px',
-          }}
-        >
-          <span>alph</span>
-          <span style={{ color: '#7FE87F' }}>pay</span>
+        <div style={{ marginBottom: '10px' }}>
+          <AlphPayLogo variant="horizontal" size={36} themeMode="dark" />
         </div>
 
         {/* Minimalist Sub-Tag */}

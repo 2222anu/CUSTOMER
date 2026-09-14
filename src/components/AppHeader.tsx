@@ -116,8 +116,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                 <span style={{ fontSize: '13.5px', fontWeight: '800', color: '#FFFFFF', display: 'block', lineHeight: '16px' }}>
                   {user.name}
                 </span>
-                <span style={{ fontSize: '10.5px', fontWeight: '600', color: '#7FE87F' }}>
-                  alph pay Verified
+                <span style={{ fontSize: '10.5px', fontWeight: '700', color: '#7FE87F' }}>
+                  Verified
                 </span>
               </div>
             )}

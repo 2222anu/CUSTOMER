@@ -23,7 +23,7 @@ export const MobileNumberScreen: React.FC = () => {
       className="fade-in"
       style={{
         minHeight: '100vh',
-        backgroundColor: '#1A1A2E',
+        backgroundColor: '#0B0B14',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',

@@ -22,8 +22,8 @@ export const MessagesScreen: React.FC = () => {
       time: '10:42 AM',
       unread: true,
       messages: [
-        { sender: 'them', text: 'Hello! Welcome to alph pay 24/7 Support.', time: '10:40 AM' },
-        { sender: 'them', text: 'Your electricity bill payment of ₹2,620.14 was successful. UTR: 948201849204', time: '10:42 AM' },
+        { sender: 'them', text: 'Hello! Welcome to alph pay 24/7 Priority Support.', time: '10:40 AM' },
+        { sender: 'them', text: 'Your electricity bill payment of ₹2,620.14 was credited successfully to State Power Corporation. Ref UTR: 948201849204', time: '10:42 AM' },
       ],
     },
     {
@@ -34,7 +34,7 @@ export const MessagesScreen: React.FC = () => {
       time: '10:41 AM',
       unread: false,
       messages: [
-        { sender: 'them', text: 'Alert: A/c ****3616 debited by ₹2,620.14 on 10-Sep-26. Info: alph pay Electricity.', time: '10:41 AM' },
+        { sender: 'them', text: 'ICICI Bank Alert: A/c ****3616 debited by ₹2,620.14 on 10-Sep-26 via UPI. Info: Electricity Payment.', time: '10:41 AM' },
       ],
     },
     {
@@ -44,8 +44,8 @@ export const MessagesScreen: React.FC = () => {
       time: 'Yesterday',
       unread: false,
       messages: [
-        { sender: 'me', text: 'Sent you ₹500 for dinner split!', time: 'Yesterday 8:30 PM' },
-        { sender: 'them', text: 'Thanks for the quick transfer! Got it.', time: 'Yesterday 8:32 PM' },
+        { sender: 'me', text: 'Sent ₹500 for our dinner split!', time: 'Yesterday 8:30 PM' },
+        { sender: 'them', text: 'Thanks for the instant transfer! Received.', time: 'Yesterday 8:32 PM' },
       ],
     },
   ]);
@@ -85,7 +85,7 @@ export const MessagesScreen: React.FC = () => {
       setTimeout(() => {
         const replyMsg = {
           sender: 'them' as const,
-          text: 'Thank you for your message! Our team has logged your request.',
+          text: 'Thank you for reaching out. A customer support specialist is reviewing your inquiry.',
           time: 'Just now',
         };
         setActiveChat((curr) => (curr && curr.id === activeChat.id ? { ...curr, messages: [...curr.messages, replyMsg] } : curr));

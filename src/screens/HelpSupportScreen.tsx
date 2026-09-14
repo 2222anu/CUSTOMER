@@ -35,7 +35,7 @@ export const HelpSupportScreen: React.FC = () => {
     setTimeout(() => {
       setChatMessages((prev) => [
         ...prev,
-        { sender: 'agent', text: `Thanks for contacting us regarding "${userText}". A support supervisor has received your message and will update your ticket within 5 minutes.`, time: 'Just now' },
+        { sender: 'agent', text: `Thank you for reaching out regarding "${userText}". Our customer support team is reviewing your inquiry and will respond shortly.`, time: 'Just now' },
       ]);
     }, 1000);
   };
@@ -216,7 +216,7 @@ export const HelpSupportScreen: React.FC = () => {
             <PhoneCall size={28} />
           </div>
           <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>1800-123-ALPHPAY</h4>
-          <p style={{ fontSize: '12.5px', color: '#B3B3C2', margin: '0 0 20px 0' }}>Available 24x7 in English, Telugu, Hindi and Tamil</p>
+          <p style={{ fontSize: '12.5px', color: '#B3B3C2', margin: '0 0 20px 0' }}>Available 24x7 in English, Hindi, Telugu, and Tamil</p>
           <a
             href="tel:180012378729"
             className="interactive-tap"
@@ -247,7 +247,7 @@ export const HelpSupportScreen: React.FC = () => {
               <Check size={28} />
             </div>
             <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>Dispute Ticket Filed Successfully!</h4>
-            <p style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '4px' }}>Ticket ID: #ALPH-DISP-{Math.floor(100000 + Math.random() * 900000)}</p>
+            <p style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '4px' }}>Ticket ID: #AP-DISP-{Math.floor(100000 + Math.random() * 900000)}</p>
           </div>
         ) : (
           <form onSubmit={handleDisputeSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>

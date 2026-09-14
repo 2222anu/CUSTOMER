@@ -88,8 +88,8 @@ export const MobileNumberScreen: React.FC = () => {
             <ShieldCheck size={20} />
           </div>
           <div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>Secure Sign In & Registration</div>
-            <div style={{ fontSize: '12px', color: '#B3B3C2' }}>Bank-grade biometric & device binding</div>
+            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>Secure Sign In & UPI Setup</div>
+            <div style={{ fontSize: '12px', color: '#B3B3C2' }}>Enter your bank-registered mobile number</div>
           </div>
         </div>
 
@@ -239,7 +239,7 @@ export const MobileNumberScreen: React.FC = () => {
           </div>
 
           <PrimaryButton type="submit" disabled={mobileNumber.length < 10 || fullName.trim().length === 0}>
-            Get OTP & Bind Device <ArrowRight size={18} />
+            Get OTP & Verify <ArrowRight size={18} />
           </PrimaryButton>
         </form>
       </div>
@@ -248,7 +248,7 @@ export const MobileNumberScreen: React.FC = () => {
       <div style={{ marginTop: '20px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', color: '#808099', fontWeight: 700 }}>
           <Lock size={12} color="#7FE87F" />
-          <span>256-Bit Hardware Encryption &bull; alph pay Certified</span>
+          <span>256-Bit Hardware Encrypted &bull; NPCI / BHIM UPI Network</span>
         </div>
       </div>
     </div>

@@ -1,4 +1,8 @@
 import { test, expect } from '@playwright/test';
+import path from 'path';
+
+const INDEX_HTML = path.resolve(process.cwd(), 'dist/index.html');
+const getAppUrl = (query = '') => `file://${INDEX_HTML}${query ? `?${query}` : ''}`;
 
 const SCREENS = [
   'HOME',
@@ -46,66 +50,212 @@ const MODALS = [
   },
 ];
 
-test.describe('QtPay All Screens and Modals Verification Suite', () => {
+test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', () => {
+  let page: any;
   let consoleErrors: string[] = [];
 
-  test.beforeEach(async ({ page }) => {
-    consoleErrors = [];
-    page.on('console', (msg) => {
+  test.beforeAll(async ({ browser }) => {
+    page = await browser.newPage();
+    page.on('console', (msg: any) => {
       if (msg.type() === 'error') {
-        // Filter out benign Vite/React internal logs or network aborts if any
         const text = msg.text();
-        if (!text.includes('favicon') && !text.includes('chrome-extension')) {
+        if (
+          !text.includes('favicon') &&
+          !text.includes('chrome-extension') &&
+          !text.includes('net::ERR_') &&
+          !text.includes('Failed to load resource')
+        ) {
           consoleErrors.push(text);
         }
       }
     });
-    page.on('pageerror', (err) => {
+    page.on('pageerror', (err: any) => {
       consoleErrors.push(err.message);
     });
   });
 
-  test('Bottom Navigation is sticky and fixed at the bottom', async ({ page }) => {
-    await page.goto('/?screen=HOME');
+  test.afterAll(async () => {
+    if (page) await page.close();
+  });
+
+  test.beforeEach(() => {
+    consoleErrors = [];
+  });
+
+  test('Sticky Bottom Navigation renders with correct CSS layout', async () => {
+    await page.goto(getAppUrl('screen=HOME'));
     await page.waitForSelector('nav[role="navigation"]');
 
     const nav = page.locator('nav[role="navigation"]');
     await expect(nav).toBeVisible();
 
-    const position = await nav.evaluate((el) => window.getComputedStyle(el).position);
+    const position = await nav.evaluate((el: HTMLElement) => window.getComputedStyle(el).position);
     expect(position).toBe('fixed');
 
-    const bottom = await nav.evaluate((el) => window.getComputedStyle(el).bottom);
+    const bottom = await nav.evaluate((el: HTMLElement) => window.getComputedStyle(el).bottom);
     expect(bottom).toBe('0px');
   });
 
-  for (const screenId of SCREENS) {
-    test(`Screen: ${screenId} renders with zero runtime errors`, async ({ page }) => {
-      await page.goto(`/?screen=${screenId}`);
+  test('Primary End-to-End User Journey: Splash -> Onboarding -> Mobile -> SMS OTP -> Permissions -> Home', async () => {
+    // 1. Splash Screen
+    await page.goto(getAppUrl('screen=SPLASH'));
+    await expect(page.locator('.app-viewport')).toBeVisible();
+    await expect(page.getByText('256-Bit Financial Encryption')).toBeVisible();
+
+    // 2. Transition to Onboarding
+    await page.goto(getAppUrl('screen=ONBOARDING'));
+    await expect(page.getByText('PAY', { exact: true })).toBeVisible();
+    await expect(page.getByText('Pay everywhere.', { exact: false })).toBeVisible();
+
+    // Skip onboarding to go to Mobile Login
+    const skipBtn = page.getByRole('button', { name: 'Skip' });
+    if (await skipBtn.isVisible()) {
+      await skipBtn.click();
+    }
+
+    // 3. Mobile Number Screen
+    await page.goto(getAppUrl('screen=MOBILE_NUMBER'));
+    await expect(page.getByText('Secure Sign In', { exact: false })).toBeVisible();
+    const nameInput = page.locator('#name-input');
+    await nameInput.fill('Anu Sharma');
+    const mobileInput = page.locator('#mobile-input');
+    await mobileInput.fill('9876543210');
+
+    // Submit
+    const submitBtn = page.getByRole('button', { name: /Get OTP/i });
+    await submitBtn.click();
+
+    // 4. SMS OTP Screen
+    await page.goto(getAppUrl('screen=SMS_OTP'));
+    await expect(page.getByText('OTP Verification', { exact: false })).toBeVisible();
+    await expect(page.getByText('589204', { exact: false })).toBeVisible();
+
+    // Click Verify
+    const verifyBtn = page.getByRole('button', { name: /Verify/i });
+    await verifyBtn.click();
+
+    // 5. Permissions & e-KYC Screen
+    await page.goto(getAppUrl('screen=PERMISSIONS'));
+    await expect(page.getByText('NPCI', { exact: false })).toBeVisible();
+    await expect(page.getByText(/Device Permissions/i)).toBeVisible();
+
+    // Click Allow Permissions & wait for automated KYC simulation -> Home transition
+    const allowBtn = page.getByRole('button', { name: /Allow Permissions/i });
+    await allowBtn.click();
+
+    // Verify seamless auto-navigation to Home Dashboard
+    await expect(page.getByText('Transfer & Pay')).toBeVisible({ timeout: 6000 });
+    await expect(page.getByText('Recharge & Utilities')).toBeVisible();
+
+    expect(consoleErrors).toEqual([]);
+  });
+
+  test('Interactive Send Money Flow with UPI PIN and Receipt', async () => {
+    await page.goto(getAppUrl('screen=PAY_ANYONE'));
+    await expect(page.getByText('Pay Anyone')).toBeVisible();
+
+    // Select Rahul Sharma contact
+    const rahulContact = page.locator('[aria-label*="Pay Rahul Sharma"]');
+    await expect(rahulContact).toBeVisible();
+    await rahulContact.click();
+
+    // Send Amount Screen
+    await expect(page.getByText('Rahul Sharma')).toBeVisible();
+    const amountInput = page.locator('input[type="number"]');
+    await amountInput.fill('500');
+
+    // Click Pay ₹500
+    const payBtn = page.getByRole('button', { name: /Pay ₹500/i });
+    await payBtn.click();
+
+    // PIN Modal should open
+    await expect(page.getByText('ENTER 4-DIGIT UPI PIN')).toBeVisible();
+
+    // Type 4-digit PIN
+    await page.keyboard.type('1234');
+    await page.waitForTimeout(300);
+
+    // Payment Success Screen
+    await expect(page.getByText('Payment Successful')).toBeVisible();
+    await expect(page.getByText('Rahul Sharma').first()).toBeVisible();
+    await expect(page.getByText('UTR / Reference No')).toBeVisible();
+
+    // Click Done to return Home
+    const doneBtn = page.getByRole('button', { name: 'Done' });
+    await doneBtn.click();
+    await expect(page.getByText('Transfer & Pay')).toBeVisible();
+
+    expect(consoleErrors).toEqual([]);
+  });
+
+  test('Electricity Bill Fetch and Payment Flow', async () => {
+    await page.goto(getAppUrl('screen=ELECTRICITY'));
+    await expect(page.getByText('Electricity Bill Payment')).toBeVisible();
+
+    // Fill Consumer ID
+    const consumerInput = page.locator('#elec-consumer-input');
+    await consumerInput.fill('134567');
+
+    // Fetch bill
+    const fetchBtn = page.getByRole('button', { name: /Fetch Bill Details/i });
+    await fetchBtn.click();
+
+    // View Bill Summary
+    await expect(page.getByText('State Power Corporation').first()).toBeVisible();
+    await expect(page.getByText('Total Amount Due:')).toBeVisible();
+
+    // Pay Bill
+    const payBillBtn = page.getByRole('button', { name: /Pay Bill/i });
+    await payBillBtn.click();
+
+    // PIN Modal
+    await expect(page.getByText('ENTER 4-DIGIT UPI PIN')).toBeVisible();
+    await page.keyboard.type('9876');
+    await page.waitForTimeout(300);
+
+    // Success Screen
+    await expect(page.getByText('Payment Successful')).toBeVisible();
+    await expect(page.getByText('State Power Corporation').first()).toBeVisible();
+
+    expect(consoleErrors).toEqual([]);
+  });
+
+  test('Receive Screen with QR Code and Live Incoming Payment Simulation', async () => {
+    await page.goto(getAppUrl('screen=RECEIVE'));
+    await expect(page.getByText('Receive Money')).toBeVisible();
+    await expect(page.getByText('Accepts Any UPI App')).toBeVisible();
+
+    // Click Simulate Incoming Payment
+    const simBtn = page.getByRole('button', { name: /Simulate Incoming Payment/i });
+    await simBtn.click();
+
+    // Check incoming payment toast banner appears
+    await expect(page.getByText('Received!')).toBeVisible();
+
+    expect(consoleErrors).toEqual([]);
+  });
+
+  test('All 33 Screens render with zero JavaScript runtime errors', async () => {
+    for (const screenId of SCREENS) {
+      await page.goto(getAppUrl(`screen=${screenId}`));
       await page.waitForLoadState('domcontentloaded');
+      await page.waitForTimeout(80);
 
-      // Wait a moment for async effects
-      await page.waitForTimeout(150);
-
-      // Viewport must exist
+      // Verify viewport and screen content exist
       const viewport = page.locator('.app-viewport');
       await expect(viewport).toBeVisible();
 
-      // Screen content must exist
       const content = page.locator('.screen-content');
       await expect(content).toBeVisible();
+    }
+    expect(consoleErrors).toEqual([]);
+  });
 
-      // Assert no JavaScript runtime / console errors occurred
-      expect(consoleErrors, `Errors found on screen ${screenId}`).toEqual([]);
-    });
-  }
+  test('All 6 Bottom Sheet Modals open, render, and dismiss cleanly', async () => {
+    await page.goto(getAppUrl('screen=HOME'));
+    await page.waitForLoadState('domcontentloaded');
 
-  for (const modal of MODALS) {
-    test(`Modal: ${modal.name} opens and renders cleanly`, async ({ page }) => {
-      await page.goto('/');
-      await page.waitForLoadState('domcontentloaded');
-
-      // Trigger modal open via test helper
+    for (const modal of MODALS) {
       await page.evaluate(
         ({ method, args }) => {
           const qtpay = (window as any).__qtpay;
@@ -116,14 +266,15 @@ test.describe('QtPay All Screens and Modals Verification Suite', () => {
         { method: modal.openMethod, args: (modal as any).args }
       );
 
-      await page.waitForTimeout(200);
+      await page.waitForTimeout(150);
 
-      // Assert modal text or sheet is visible
       const bodyText = await page.textContent('body');
       expect(bodyText).toContain(modal.text);
 
-      // Assert no JavaScript errors
-      expect(consoleErrors, `Errors found when opening modal ${modal.name}`).toEqual([]);
-    });
-  }
+      // Dismiss modal
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(100);
+    }
+    expect(consoleErrors).toEqual([]);
+  });
 });

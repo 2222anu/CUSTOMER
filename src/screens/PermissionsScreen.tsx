@@ -57,7 +57,7 @@ export const PermissionsScreen: React.FC = () => {
     {
       key: 'mic',
       icon: <Mic size={19} />,
-      name: 'Voice Assistant',
+      name: 'Audio Alerts & Voice Pay',
       required: false,
     },
   ];
@@ -242,7 +242,7 @@ export const PermissionsScreen: React.FC = () => {
       {/* Action Buttons */}
       <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <PrimaryButton onClick={handleGrantPermissions}>
-          Allow Permissions & Enter alph pay <ArrowRight size={18} />
+          Allow Permissions & Continue <ArrowRight size={18} />
         </PrimaryButton>
         <SecondaryButton onClick={handleGrantPermissions}>
           Skip & Customize Later

@@ -8,20 +8,27 @@ export default defineConfig({
   retries: 0,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:5173',
     trace: 'off',
     screenshot: 'only-on-failure',
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        channel: 'chromium',
+        launchOptions: {
+          args: [
+            '--single-process',
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+            '--allow-file-access-from-files',
+            '--disable-web-security',
+          ],
+        },
+      },
     },
   ],
-  webServer: {
-    command: 'node node_modules/vite/bin/vite.js --port 5173',
-    url: 'http://localhost:5173',
-    reuseExistingServer: true,
-    timeout: 10000,
-  },
 });

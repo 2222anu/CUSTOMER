@@ -154,12 +154,12 @@ export const ManageScene: React.FC = () => {
             <Wallet size={16} />
           </div>
           <span style={{ fontSize: '11px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-            Unified Portfolio
+            Linked Accounts
           </span>
         </div>
 
         <div style={{ fontSize: '9.5px', color: '#B3B3C2', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          Total Financial Balance
+          Total Net Balance
         </div>
         <div className="tabular-nums" style={{ fontSize: '24px', fontWeight: 900, color: '#7FE87F', margin: '2px 0 6px 0', letterSpacing: '0.01em' }}>
           ₹ 63,730.00
@@ -168,10 +168,10 @@ export const ManageScene: React.FC = () => {
         {/* Floating Streams Indicators */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '6px' }}>
           <span style={{ fontSize: '9px', fontWeight: 800, backgroundColor: '#3A3A52', color: '#7FE87F', padding: '3px 8px', borderRadius: '6px', border: '1px solid #4D4D6B' }}>
-            3 Accounts Linked
+            3 Banks Linked
           </span>
           <span style={{ fontSize: '9px', fontWeight: 800, backgroundColor: 'rgba(127, 232, 127, 0.15)', color: '#7FE87F', padding: '3px 8px', borderRadius: '6px', border: '1px solid rgba(127, 232, 127, 0.3)' }}>
-            Auto-Sync
+            Real-Time Sync
           </span>
         </div>
       </div>

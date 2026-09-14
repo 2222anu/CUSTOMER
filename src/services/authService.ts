@@ -5,9 +5,9 @@ export const authService = {
     return {
       name: 'Anu',
       avatarInitials: 'AN',
-      upiId: 'anu@qtpay',
+      upiId: 'anu@alphpay',
       mobile: '+91 98765 43210',
-      email: 'anu@qtpay.com',
+      email: 'anu@alphpay.com',
     };
   },
   async verifyPin(pin: string): Promise<boolean> {

@@ -6,7 +6,7 @@ import { useApp } from '../state/AppContext';
 export const SplashScreen: React.FC = () => {
   const { navigateTo } = useApp();
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState('Initializing secure channel...');
+  const [statusText, setStatusText] = useState('Connecting to secure banking network...');
 
   useEffect(() => {
     // Fast, crisp cinematic loader progression
@@ -18,9 +18,9 @@ export const SplashScreen: React.FC = () => {
           return 100;
         }
         if (next > 70) {
-          setStatusText('Verifying cryptographic tokens...');
+          setStatusText('Securing account credentials...');
         } else if (next > 40) {
-          setStatusText('Connecting to Global Payment Rails...');
+          setStatusText('Verifying NPCI UPI payment gateway...');
         }
         return next;
       });

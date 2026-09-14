@@ -93,14 +93,14 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
     },
     {
       id: 'manage',
-      category: 'FINANCIAL COMMAND',
+      category: 'SMART MONEY MANAGEMENT',
       title: 'MANAGE',
       headline: ['All your money.', 'One simple place.'],
       visual: <ManageScene />,
     },
     {
       id: 'protect',
-      category: 'MIL-SPEC DEFENSE',
+      category: 'BANK-GRADE SECURITY',
       title: 'PROTECT',
       headline: ['Your money.', 'Your control.'],
       visual: <ProtectScene />,

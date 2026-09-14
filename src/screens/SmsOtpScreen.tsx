@@ -127,7 +127,7 @@ export const SmsOtpScreen: React.FC = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <CheckCircle2 size={18} color="#7FE87F" />
                 <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#FFFFFF' }}>
-                  Auto-Detected (589204)
+                  Auto-Read OTP: 589204
                 </span>
               </div>
               <button
@@ -145,7 +145,7 @@ export const SmsOtpScreen: React.FC = () => {
                   cursor: 'pointer',
                 }}
               >
-                Refill
+                Autofill
               </button>
             </div>
 
@@ -181,7 +181,7 @@ export const SmsOtpScreen: React.FC = () => {
       {/* Bottom Button */}
       <div style={{ padding: '0 20px' }}>
         <PrimaryButton onClick={handleVerify} disabled={otp.some((d) => !d)}>
-          Verify & Bind Device <ArrowRight size={18} />
+          Verify & Continue <ArrowRight size={18} />
         </PrimaryButton>
       </div>
     </div>

@@ -118,7 +118,7 @@ export const ProtectScene: React.FC = () => {
             <span>Biometric Protected</span>
           </div>
           <div style={{ fontSize: '9.5px', color: '#B3B3C2' }}>
-            Multi-Tier Fraud Defense
+            24/7 Real-Time Fraud Defense
           </div>
         </div>
       </div>
@@ -141,7 +141,7 @@ export const ProtectScene: React.FC = () => {
       >
         <ShieldCheck size={14} color="#7FE87F" />
         <span style={{ fontSize: '11px', fontWeight: 800, color: '#FFFFFF' }}>
-          Bank Grade Security Standard
+          NPCI & RBI Certified Security
         </span>
       </div>
 

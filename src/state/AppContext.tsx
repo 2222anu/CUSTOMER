@@ -101,8 +101,8 @@ const FREQUENT_CONTACTS: Contact[] = [
   { id: 'c-2', name: 'Ajay Singh', upiId: 'ajay@okicici', mobile: '+91 98234 56789', avatarInitials: 'AS' },
   { id: 'c-3', name: 'Priya Menon', upiId: 'priya@paytm', mobile: '+91 98345 67890', avatarInitials: 'PM' },
   { id: 'c-4', name: 'Amit Verma', upiId: 'amit@ybl', mobile: '+91 98456 78901', avatarInitials: 'AV' },
-  { id: 'c-5', name: 'Sara Al Mansoori', upiId: 'sara@qtpay', mobile: '+971 50 123 4567', avatarInitials: 'SM' },
-  { id: 'c-6', name: 'Omar Khalid', upiId: 'omar@qtpay', mobile: '+971 52 987 6543', avatarInitials: 'OK' },
+  { id: 'c-5', name: 'Sara Al Mansoori', upiId: 'sara@alphpay', mobile: '+971 50 123 4567', avatarInitials: 'SM' },
+  { id: 'c-6', name: 'Omar Khalid', upiId: 'omar@alphpay', mobile: '+971 52 987 6543', avatarInitials: 'OK' },
 ];
 
 const MERCHANTS: Contact[] = [
@@ -111,12 +111,12 @@ const MERCHANTS: Contact[] = [
 ];
 
 const INITIAL_SESSIONS: DeviceSession[] = [
-  { id: 's-1', deviceName: 'QTPay app (mobile)', deviceType: 'mobile', location: 'Primary Phone - Android 14', lastActive: 'Active Now', isCurrent: true },
-  { id: 's-2', deviceName: 'QTPay app (mobile)', deviceType: 'mobile', location: 'iPhone 15 Pro', lastActive: '2 days ago', isCurrent: false },
-  { id: 's-3', deviceName: 'QTPay app (mobile)', deviceType: 'mobile', location: 'Samsung Galaxy S23', lastActive: '1 week ago', isCurrent: false },
-  { id: 's-4', deviceName: 'Windows browser', deviceType: 'browser', location: 'Chrome 128 / Windows 11', lastActive: 'Active Now', isCurrent: false },
-  { id: 's-5', deviceName: 'Windows browser', deviceType: 'browser', location: 'Edge 126 / Windows 11', lastActive: '3 days ago', isCurrent: false },
-  { id: 's-6', deviceName: 'Windows browser', deviceType: 'browser', location: 'Firefox 120 / Windows 10', lastActive: '2 weeks ago', isCurrent: false },
+  { id: 's-1', deviceName: 'alph pay Android App', deviceType: 'mobile', location: 'Primary Phone - Android 14', lastActive: 'Active Now', isCurrent: true },
+  { id: 's-2', deviceName: 'alph pay iOS App', deviceType: 'mobile', location: 'iPhone 15 Pro', lastActive: '2 days ago', isCurrent: false },
+  { id: 's-3', deviceName: 'alph pay Android App', deviceType: 'mobile', location: 'Samsung Galaxy S23', lastActive: '1 week ago', isCurrent: false },
+  { id: 's-4', deviceName: 'Chrome on Windows', deviceType: 'browser', location: 'Chrome 128 / Windows 11', lastActive: 'Active Now', isCurrent: false },
+  { id: 's-5', deviceName: 'Edge on Windows', deviceType: 'browser', location: 'Edge 126 / Windows 11', lastActive: '3 days ago', isCurrent: false },
+  { id: 's-6', deviceName: 'Firefox on Windows', deviceType: 'browser', location: 'Firefox 120 / Windows 10', lastActive: '2 weeks ago', isCurrent: false },
 ];
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

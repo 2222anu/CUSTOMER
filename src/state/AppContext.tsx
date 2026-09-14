@@ -54,6 +54,14 @@ interface AppContextType {
     amount: number;
     avatarInitials?: string;
     category?: string;
+    bankId?: string;
+  }) => Promise<Transaction>;
+  receiveMoney: (params: {
+    senderName: string;
+    senderUpi?: string;
+    amount: number;
+    note?: string;
+    avatarInitials?: string;
   }) => Promise<Transaction>;
 
   // Modals & Bottom Sheets
@@ -315,6 +323,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     amount: number;
     avatarInitials?: string;
     category?: string;
+    bankId?: string;
   }) => {
     const newTxn: Transaction = {
       id: 'QT' + Math.floor(10000000000 + Math.random() * 90000000000).toString(),
@@ -329,6 +338,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       category: params.category || 'Payment',
     };
 
+    // Deduct from primary bank account (or specified bank account)
+    setBankAccounts((prev) =>
+      prev.map((acc) => {
+        if (params.bankId ? acc.id === params.bankId : acc.isPrimary) {
+          const newBal = Math.max(0, acc.balance - params.amount);
+          return { ...acc, balance: newBal };
+        }
+        return acc;
+      })
+    );
+
     setTransactions((prev) => [newTxn, ...prev]);
     setLastTransaction(newTxn);
 
@@ -337,6 +357,53 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       id: `notif-${Date.now()}`,
       title: 'Payment successful',
       description: `${formattedAmt} paid to ${params.title}`,
+      timestamp: 'Just now',
+      read: false,
+      type: 'success',
+    };
+    setNotifications((prev) => [newNotif, ...prev]);
+
+    return newTxn;
+  };
+
+  const receiveMoney = async (params: {
+    senderName: string;
+    senderUpi?: string;
+    amount: number;
+    note?: string;
+    avatarInitials?: string;
+  }) => {
+    const newTxn: Transaction = {
+      id: 'QT' + Math.floor(10000000000 + Math.random() * 90000000000).toString(),
+      title: params.senderName,
+      subTitle: params.senderUpi ? `From ${params.senderUpi}` : 'UPI Transfer Received',
+      amount: params.amount,
+      type: 'received',
+      date: 'TODAY',
+      timestamp: new Date(),
+      utr: 'UTR' + Math.floor(100000000000 + Math.random() * 900000000000).toString(),
+      avatarInitials: params.avatarInitials || params.senderName.substring(0, 2).toUpperCase(),
+      category: 'Received',
+    };
+
+    // Credit to primary bank account
+    setBankAccounts((prev) =>
+      prev.map((acc) => {
+        if (acc.isPrimary) {
+          return { ...acc, balance: acc.balance + params.amount };
+        }
+        return acc;
+      })
+    );
+
+    setTransactions((prev) => [newTxn, ...prev]);
+    setLastTransaction(newTxn);
+
+    const formattedAmt = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(params.amount);
+    const newNotif: AppNotification = {
+      id: `notif-${Date.now()}`,
+      title: 'Payment Received',
+      description: `${formattedAmt} received from ${params.senderName}`,
       timestamp: 'Just now',
       read: false,
       type: 'success',
@@ -437,6 +504,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setPrimaryBank,
         fetchElectricityBill,
         completePayment,
+        receiveMoney,
         isPinModalOpen,
         openPinModal,
         closePinModal,

@@ -6,7 +6,7 @@ import type { Contact } from '../types';
 import { ShieldCheck, MessageSquare } from 'lucide-react';
 
 export const SendAmountScreen: React.FC = () => {
-  const { screenParams, openPinModal, contacts, navigateTo } = useApp();
+  const { screenParams, openPinModal, contacts, navigateTo, completePayment } = useApp();
   const contact: Contact = screenParams.contact || contacts[0] || {
     id: 'default',
     name: 'Priya Menon',
@@ -28,8 +28,16 @@ export const SendAmountScreen: React.FC = () => {
       title: `Pay ${contact.name}`,
       amount: numAmount,
       subTitle: `To ${contact.upiId}`,
-      onSuccess: () => {
+      onSuccess: async () => {
+        const txn = await completePayment({
+          title: contact.name,
+          subTitle: `To ${contact.upiId}`,
+          amount: numAmount,
+          avatarInitials: contact.avatarInitials,
+          category: 'Transfer',
+        });
         navigateTo('PAYMENT_SUCCESS', {
+          transaction: txn,
           recipientName: contact.name,
           amount: numAmount,
           upiId: contact.upiId,

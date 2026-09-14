@@ -3,7 +3,7 @@ import {
   Bell,
   Camera,
   Send,
-  FileText,
+  QrCode,
   Zap,
   Smartphone,
   Tv,
@@ -180,6 +180,40 @@ export const HomeScreen: React.FC = () => {
             </span>
           </div>
 
+          {/* Receive Money */}
+          <div
+            onClick={() => navigateTo('RECEIVE')}
+            className="interactive-tap"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '8px',
+              cursor: 'pointer',
+              flex: 1,
+            }}
+          >
+            <div
+              style={{
+                width: '54px',
+                height: '54px',
+                borderRadius: '16px',
+                backgroundColor: '#eef5ff',
+                color: '#2e83ff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: 'none',
+                border: '1px solid #d6e6ff',
+              }}
+            >
+              <QrCode size={22} />
+            </div>
+            <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center', letterSpacing: '-0.01em' }}>
+              Receive
+            </span>
+          </div>
+
           {/* Check Balance */}
           <div
             onClick={handleCheckBalanceClick}
@@ -211,40 +245,6 @@ export const HomeScreen: React.FC = () => {
             </div>
             <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center', letterSpacing: '-0.01em' }}>
               Check Balance
-            </span>
-          </div>
-
-          {/* Pay Bills */}
-          <div
-            onClick={() => navigateTo('ALL_SERVICES')}
-            className="interactive-tap"
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '8px',
-              cursor: 'pointer',
-              flex: 1,
-            }}
-          >
-            <div
-              style={{
-                width: '54px',
-                height: '54px',
-                borderRadius: '16px',
-                backgroundColor: '#eef5ff',
-                color: '#2e83ff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: 'none',
-                border: '1px solid #d6e6ff',
-              }}
-            >
-              <FileText size={22} />
-            </div>
-            <span style={{ fontSize: '12px', fontWeight: '700', color: '#0f172a', textAlign: 'center', letterSpacing: '-0.01em' }}>
-              Pay Bills
             </span>
           </div>
         </div>

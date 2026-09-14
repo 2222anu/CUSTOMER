@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageSquare, Phone, Users, Camera, MapPin, Mic, ShieldCheck, ArrowRight, Lock } from 'lucide-react';
+import { MessageSquare, Phone, Users, Camera, MapPin, Mic, ShieldCheck, ArrowRight, Lock, Landmark, CheckCircle2, Loader2, Sparkles } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
@@ -16,6 +16,8 @@ export const PermissionsScreen: React.FC = () => {
     location: true,
     mic: false,
   });
+  const [isDiscovering, setIsDiscovering] = useState<boolean>(false);
+  const [discoveryStep, setDiscoveryStep] = useState<number>(0);
 
   const handleToggle = (key: string) => {
     setToggles((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -66,7 +68,21 @@ export const PermissionsScreen: React.FC = () => {
     } catch {
       // Ignore
     }
-    navigateTo('HOME');
+
+    setIsDiscovering(true);
+    setDiscoveryStep(1);
+
+    setTimeout(() => {
+      setDiscoveryStep(2);
+    }, 900);
+
+    setTimeout(() => {
+      setDiscoveryStep(3);
+    }, 1800);
+
+    setTimeout(() => {
+      navigateTo('HOME');
+    }, 2700);
   };
 
   return (
@@ -238,6 +254,119 @@ export const PermissionsScreen: React.FC = () => {
           </span>
         </div>
       </div>
+
+      {/* Interactive Bank Discovery & Instant KYC Modal */}
+      {isDiscovering && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.75)',
+            backdropFilter: 'blur(6px)',
+            zIndex: 100,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px',
+          }}
+        >
+          <div
+            className="fade-in"
+            style={{
+              backgroundColor: '#ffffff',
+              borderRadius: '20px',
+              padding: '28px 24px',
+              width: '100%',
+              maxWidth: '380px',
+              textAlign: 'center',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+            }}
+          >
+            <div
+              style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                backgroundColor: '#eef5ff',
+                color: '#2e83ff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 16px auto',
+              }}
+            >
+              {discoveryStep === 1 && <Loader2 size={32} className="animate-spin" />}
+              {discoveryStep === 2 && <Landmark size={32} />}
+              {discoveryStep === 3 && <CheckCircle2 size={36} color="#10b981" />}
+            </div>
+
+            <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: '0 0 8px 0' }}>
+              {discoveryStep === 1 && 'Discovering Bank Accounts...'}
+              {discoveryStep === 2 && 'Accounts Found & Linked!'}
+              {discoveryStep === 3 && 'KYC Verified • Ready!'}
+            </h3>
+
+            <p style={{ fontSize: '13px', color: '#64748b', margin: '0 0 20px 0', lineHeight: '1.4' }}>
+              {discoveryStep === 1 && 'Binding SIM card and verifying NPCI UPI registration on +91 98765 43210'}
+              {discoveryStep === 2 && 'Discovered ICICI Bank (Savings •••• 3616) and YES Bank accounts'}
+              {discoveryStep === 3 && 'Instant Aadhaar e-KYC authentication successful. Redirecting to home...'}
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', textAlign: 'left' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '10px 12px',
+                  borderRadius: '10px',
+                  backgroundColor: discoveryStep >= 1 ? '#eef5ff' : '#f8fafc',
+                  border: `1px solid ${discoveryStep >= 1 ? '#d6e6ff' : '#e2e8f0'}`,
+                }}
+              >
+                {discoveryStep >= 1 ? <CheckCircle2 size={16} color="#2e83ff" /> : <Loader2 size={16} color="#94a3b8" />}
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 1 ? '#0f172a' : '#64748b' }}>
+                  Device Binding & SIM Verification
+                </span>
+              </div>
+
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '10px 12px',
+                  borderRadius: '10px',
+                  backgroundColor: discoveryStep >= 2 ? '#eef5ff' : '#f8fafc',
+                  border: `1px solid ${discoveryStep >= 2 ? '#d6e6ff' : '#e2e8f0'}`,
+                }}
+              >
+                {discoveryStep >= 2 ? <CheckCircle2 size={16} color="#2e83ff" /> : <Loader2 size={16} color="#94a3b8" />}
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 2 ? '#0f172a' : '#64748b' }}>
+                  Bank Accounts Discovered (ICICI, YES Bank)
+                </span>
+              </div>
+
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '10px 12px',
+                  borderRadius: '10px',
+                  backgroundColor: discoveryStep >= 3 ? '#d1fae5' : '#f8fafc',
+                  border: `1px solid ${discoveryStep >= 3 ? '#a7f3d0' : '#e2e8f0'}`,
+                }}
+              >
+                {discoveryStep >= 3 ? <CheckCircle2 size={16} color="#10b981" /> : <Sparkles size={16} color="#94a3b8" />}
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 3 ? '#065f46' : '#64748b' }}>
+                  NPCI Instant e-KYC Authenticated
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

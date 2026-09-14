@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ShieldCheck, Lock } from 'lucide-react';
 import { AlphPayLogo } from '../components/AlphPayLogo';
 import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
+import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 export const SplashScreen: React.FC = () => {
@@ -200,9 +201,9 @@ export const SplashScreen: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-            <ShieldCheck size={14} color="#7FE87F" />
+            <SamaLogo height={13} themeMode="green" />
             <span style={{ fontSize: '10px', color: '#A2A2BA', fontWeight: 700, letterSpacing: '0.04em' }}>
-              SAMA &bull; SARIE &bull; 256-BIT HARDWARE SECURED
+              SARIE &bull; 256-BIT SECURED
             </span>
             <Lock size={12} color="#7FE87F" />
           </div>

@@ -3,6 +3,7 @@ import { MessageSquare, Phone, Users, Camera, MapPin, Mic, ShieldCheck, ArrowRig
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
+import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 export const PermissionsScreen: React.FC = () => {
@@ -92,7 +93,7 @@ export const PermissionsScreen: React.FC = () => {
         <AppHeader title="App Permissions" showBack={true} onBack={goBack} showSettings={false} />
 
         <div style={{ padding: '20px' }}>
-          {/* Header Card */}
+          {/* Header Card with SAMA Central Bank Logo */}
           <div
             style={{
               backgroundColor: '#151524',
@@ -102,29 +103,40 @@ export const PermissionsScreen: React.FC = () => {
               marginBottom: '18px',
               display: 'flex',
               alignItems: 'center',
-              gap: '14px',
+              justifyContent: 'space-between',
               color: '#FFFFFF',
               boxShadow: 'none',
             }}
           >
-            <div
-              style={{
-                width: '44px',
-                height: '44px',
-                borderRadius: '12px',
-                backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                color: '#7FE87F',
-                border: '1px solid rgba(127, 232, 127, 0.3)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              <ShieldCheck size={24} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+              <div
+                style={{
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '12px',
+                  backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                  color: '#7FE87F',
+                  border: '1px solid rgba(127, 232, 127, 0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <ShieldCheck size={24} />
+              </div>
+              <div>
+                <div style={{ fontSize: '14.5px', fontWeight: 800, color: '#FFFFFF' }}>
+                  SAMA Mandated Security & e-KYC
+                </div>
+                <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px' }}>
+                  Saudi Central Bank Regulatory Standard
+                </div>
+              </div>
             </div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>
-              SAMA Mandated Security
+
+            <div style={{ paddingLeft: '8px', borderLeft: '1px solid #2C2C44' }}>
+              <SamaLogo height={20} themeMode="dark" />
             </div>
           </div>
 
@@ -358,17 +370,20 @@ export const PermissionsScreen: React.FC = () => {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '10px',
+                  justifyContent: 'space-between',
                   padding: '10px 12px',
                   borderRadius: '10px',
                   backgroundColor: discoveryStep >= 3 ? 'rgba(127, 232, 127, 0.2)' : '#1E1E32',
                   border: `1px solid ${discoveryStep >= 3 ? '#7FE87F' : '#2C2C44'}`,
                 }}
               >
-                {discoveryStep >= 3 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Sparkles size={16} color="#A2A2BA" />}
-                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 3 ? '#7FE87F' : '#A2A2BA' }}>
-                  SAMA Instant e-KYC Authenticated
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  {discoveryStep >= 3 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Sparkles size={16} color="#A2A2BA" />}
+                  <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 3 ? '#7FE87F' : '#A2A2BA' }}>
+                    SAMA Instant e-KYC (Nafath)
+                  </span>
+                </div>
+                {discoveryStep >= 3 && <SamaLogo height={14} themeMode="green" />}
               </div>
             </div>
           </div>

@@ -2,20 +2,22 @@ import React, { useState } from 'react';
 import { Landmark, Check } from 'lucide-react';
 import { BottomSheet } from '../components/BottomSheet';
 import { PrimaryButton } from '../components/PrimaryButton';
+import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 export const AddBankModal: React.FC = () => {
   const { isAddBankModalOpen, setIsAddBankModalOpen, addBankAccount } = useApp();
-  const [selectedBank, setSelectedBank] = useState<string>('HDFC Bank');
+  const [selectedBank, setSelectedBank] = useState<string>('Al Rajhi Bank');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const availableBanks = [
-    { name: 'State Bank of India', code: 'SBI' },
-    { name: 'HDFC Bank', code: 'HDFC' },
-    { name: 'ICICI Bank', code: 'ICICI' },
-    { name: 'Axis Bank', code: 'AXIS' },
-    { name: 'Kotak Mahindra Bank', code: 'KOTAK' },
-    { name: 'Yes Bank', code: 'YES' },
+    { name: 'Al Rajhi Bank', code: 'SA03' },
+    { name: 'Saudi National Bank (SNB)', code: 'SA58' },
+    { name: 'Riyad Bank', code: 'SA44' },
+    { name: 'Banque Saudi Fransi', code: 'SA12' },
+    { name: 'Alinma Bank', code: 'SA05' },
+    { name: 'Arab National Bank (anb)', code: 'SA10' },
+    { name: 'Saudi Awwal Bank (SAB)', code: 'SA22' },
   ];
 
   const handleAdd = async () => {
@@ -29,9 +31,9 @@ export const AddBankModal: React.FC = () => {
     <BottomSheet
       isOpen={isAddBankModalOpen}
       onClose={() => setIsAddBankModalOpen(false)}
-      title="Link Bank Account"
+      title="Link Sarie Bank Account"
     >
-      <div style={{ marginBottom: '24px' }}>
+      <div style={{ marginBottom: '20px' }}>
         <div role="radiogroup" aria-label="Available Banks" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {availableBanks.map((bank) => {
             const isSelected = selectedBank === bank.name;
@@ -53,8 +55,8 @@ export const AddBankModal: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '13px 16px',
-                  backgroundColor: isSelected ? '#33334D' : '#1A1A2E',
-                  border: isSelected ? '1.5px solid #7FE87F' : '1px solid #4D4D6B',
+                  backgroundColor: isSelected ? '#1E1E32' : '#151524',
+                  border: isSelected ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
                   borderRadius: '12px',
                   cursor: 'pointer',
                   boxShadow: 'none',
@@ -67,9 +69,9 @@ export const AddBankModal: React.FC = () => {
                       width: '36px',
                       height: '36px',
                       borderRadius: '10px',
-                      backgroundColor: isSelected ? '#2A2A3E' : '#2A2A3E',
-                      color: isSelected ? '#7FE87F' : '#B3B3C2',
-                      border: `1px solid ${isSelected ? 'rgba(127, 232, 127, 0.4)' : '#4D4D6B'}`,
+                      backgroundColor: '#1E1E32',
+                      color: isSelected ? '#7FE87F' : '#A2A2BA',
+                      border: `1px solid ${isSelected ? 'rgba(127, 232, 127, 0.4)' : '#2C2C44'}`,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -79,9 +81,14 @@ export const AddBankModal: React.FC = () => {
                   >
                     <Landmark size={18} />
                   </div>
-                  <span style={{ fontWeight: 700, fontSize: '14px', color: '#FFFFFF' }}>
-                    {bank.name}
-                  </span>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: '14px', color: '#FFFFFF' }}>
+                      {bank.name}
+                    </div>
+                    <div style={{ fontSize: '11px', color: '#6E6E85', marginTop: '1px', fontFamily: 'monospace' }}>
+                      Sarie Rail • IBAN {bank.code}
+                    </div>
+                  </div>
                 </div>
 
                 <div
@@ -89,7 +96,7 @@ export const AddBankModal: React.FC = () => {
                     width: '20px',
                     height: '20px',
                     borderRadius: '50%',
-                    border: isSelected ? 'none' : '1.5px solid #4D4D6B',
+                    border: isSelected ? 'none' : '1.5px solid #2C2C44',
                     backgroundColor: isSelected ? '#7FE87F' : 'transparent',
                     display: 'flex',
                     alignItems: 'center',
@@ -107,6 +114,14 @@ export const AddBankModal: React.FC = () => {
       <PrimaryButton onClick={handleAdd} disabled={isLoading}>
         {isLoading ? 'Verifying & Linking...' : `Link ${selectedBank}`}
       </PrimaryButton>
+
+      {/* SAMA Verification Footer */}
+      <div style={{ marginTop: '14px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+        <SamaLogo height={12} themeMode="green" />
+        <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 600 }}>
+          Direct Bank Binding &bull; SAMA & Sarie Authenticated
+        </span>
+      </div>
     </BottomSheet>
   );
 };

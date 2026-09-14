@@ -7,12 +7,11 @@ import {
   EyeOff,
   Star,
   CheckCircle2,
-  ShieldCheck,
-  Lock,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
+import { SamaLogo } from '../components/SamaLogo';
 import { Modal } from '../components/Modal';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
@@ -106,9 +105,9 @@ export const BankAccountsScreen: React.FC = () => {
                   {bankAccounts.length} Active
                 </span>
               </div>
-              <div style={{ fontSize: '11.5px', color: '#B3B3C2', fontWeight: 600, marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <ShieldCheck size={13} color="#7FE87F" />
-                <span>SAMA / Sarie Network Secured</span>
+              <div style={{ fontSize: '11.5px', color: '#B3B3C2', fontWeight: 600, marginTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <SamaLogo height={12} themeMode="green" />
+                <span>&bull; Sarie Instant Rails Secured</span>
               </div>
             </div>
           </div>
@@ -493,10 +492,10 @@ export const BankAccountsScreen: React.FC = () => {
             borderRadius: '12px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-            <Lock size={13} color="#7FE87F" />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+            <SamaLogo height={12} themeMode="green" />
             <span style={{ fontSize: '11px', color: '#B3B3C2', fontWeight: 600 }}>
-              256-Bit Hardware Encrypted &bull; SAMA & Sarie Regulated
+              &bull; 256-Bit Hardware Encrypted &bull; Sarie Regulated
             </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>

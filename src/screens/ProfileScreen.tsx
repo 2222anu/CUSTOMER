@@ -1,26 +1,26 @@
 import React from 'react';
 import {
-  Download,
+  Edit3,
+  QrCode,
   Landmark,
   Zap,
   CreditCard,
+  Download,
+  History,
+  Gift,
+  ShoppingBag,
   ShieldCheck,
   Bell,
   Globe,
   HelpCircle,
-  Lock,
   LogOut,
-  ShoppingBag,
+  Lock,
   MessageSquare,
   Plane,
-  Gift,
   Utensils,
-  Edit3,
-  QrCode,
-  History,
-  CheckCircle2,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
+import { SamaLogo } from '../components/SamaLogo';
 import { ListRow } from '../components/ListRow';
 import { useApp } from '../state/AppContext';
 
@@ -68,14 +68,15 @@ export const ProfileScreen: React.FC = () => {
             padding: '3px 10px',
             display: 'flex',
             alignItems: 'center',
-            gap: '4px',
+            gap: '6px',
             fontSize: '10px',
             fontWeight: 800,
             letterSpacing: '0.05em',
             color: '#7FE87F',
           }}
         >
-          <CheckCircle2 size={11} color="#7FE87F" /> KYC VERIFIED
+          <SamaLogo height={10} themeMode="green" />
+          <span>KYC VERIFIED</span>
         </div>
 
         {/* Avatar with Edit Badge */}

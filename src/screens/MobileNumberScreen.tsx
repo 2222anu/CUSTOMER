@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { User as UserIcon, ArrowRight, ShieldCheck, Lock } from 'lucide-react';
 import { AlphPayLogo } from '../components/AlphPayLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
+import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 export const MobileNumberScreen: React.FC = () => {
@@ -86,11 +87,14 @@ export const MobileNumberScreen: React.FC = () => {
           >
             <ShieldCheck size={20} />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>SAMA Regulated &bull; Sarie Enabled</div>
             <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px' }}>
               Instant Saudi payments via national banking rail
             </div>
+          </div>
+          <div style={{ paddingLeft: '8px', borderLeft: '1px solid #2C2C44' }}>
+            <SamaLogo height={16} themeMode="dark" />
           </div>
         </div>
 

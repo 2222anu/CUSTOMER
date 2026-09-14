@@ -8,47 +8,21 @@ interface BankCardCarouselProps {
   banks: BankAccount[];
 }
 
-const getBankStyle = (bankName: string) => {
+const getBankStyle = (bankName: string, isPrimary: boolean) => {
   const nameUpper = bankName.toUpperCase();
-  if (nameUpper.includes('HDFC')) {
-    return {
-      gradient: 'linear-gradient(135deg, #001f3f 0%, #003366 50%, #0284c7 100%)',
-      tagText: 'HDFC BANK',
-      shortName: 'HDFC',
-    };
-  }
-  if (nameUpper.includes('STATE') || nameUpper.includes('SBI')) {
-    return {
-      gradient: 'linear-gradient(135deg, #072a40 0%, #0369a1 50%, #0284c7 100%)',
-      tagText: 'STATE BANK OF INDIA',
-      shortName: 'SBI',
-    };
-  }
-  if (nameUpper.includes('ICICI')) {
-    return {
-      gradient: 'linear-gradient(135deg, #0a2540 0%, #153e75 50%, #1a56db 100%)',
-      tagText: 'ICICI BANK',
-      shortName: 'ICICI',
-    };
-  }
-  if (nameUpper.includes('AXIS')) {
-    return {
-      gradient: 'linear-gradient(135deg, #2b0914 0%, #4a0e20 50%, #831843 100%)',
-      tagText: 'AXIS BANK',
-      shortName: 'AXIS',
-    };
-  }
-  if (nameUpper.includes('YES')) {
-    return {
-      gradient: 'linear-gradient(135deg, #0b192c 0%, #172554 50%, #1d4ed8 100%)',
-      tagText: 'YES BANK',
-      shortName: 'YES',
-    };
-  }
+  let tagText = bankName.toUpperCase();
+  if (nameUpper.includes('HDFC')) tagText = 'HDFC BANK';
+  else if (nameUpper.includes('STATE') || nameUpper.includes('SBI')) tagText = 'SBI';
+  else if (nameUpper.includes('ICICI')) tagText = 'ICICI BANK';
+  else if (nameUpper.includes('AXIS')) tagText = 'AXIS BANK';
+  else if (nameUpper.includes('YES')) tagText = 'YES BANK';
+
   return {
-    gradient: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #2563eb 100%)',
-    tagText: bankName.toUpperCase(),
-    shortName: bankName.toUpperCase(),
+    background: isPrimary
+      ? 'linear-gradient(135deg, #18182E 0%, #151524 60%, #12121E 100%)'
+      : 'linear-gradient(135deg, #151524 0%, #12121E 100%)',
+    borderColor: isPrimary ? '#7FE87F' : '#2C2C44',
+    tagText,
   };
 };
 
@@ -114,18 +88,18 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+          <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
             My Bank Accounts
           </h3>
           <span
             style={{
               fontSize: '11px',
               fontWeight: 700,
-              backgroundColor: '#eef5ff',
-              color: '#2e83ff',
+              backgroundColor: 'rgba(127, 232, 127, 0.12)',
+              color: '#7FE87F',
               padding: '2px 8px',
               borderRadius: '12px',
-              border: '1px solid #d6e6ff',
+              border: '1px solid rgba(127, 232, 127, 0.25)',
             }}
           >
             {banks.length} Linked
@@ -139,11 +113,12 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
             border: 'none',
             fontSize: '12px',
             fontWeight: 700,
-            color: '#2e83ff',
+            color: '#7FE87F',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '2px',
+            boxShadow: 'none',
           }}
         >
           Manage <ChevronRight size={14} />
@@ -171,84 +146,60 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
         }}
       >
         {banks.map((bank) => {
-          const style = getBankStyle(bank.bankName);
+          const style = getBankStyle(bank.bankName, bank.isPrimary);
           const rawNumbers = bank.accountNumberMasked.replace(/[^0-9]/g, '') || '3616';
 
           return (
             <div
               key={bank.id}
               onClick={() => navigateTo('BANK_ACCOUNTS')}
+              className="interactive-tap"
               style={{
                 scrollSnapAlign: 'start',
                 flex: '0 0 300px',
                 height: '175px',
-                background: style.gradient,
-                borderRadius: '14px',
+                background: style.background,
+                borderRadius: '16px',
                 padding: '16px 18px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 boxSizing: 'border-box',
                 cursor: 'pointer',
-                color: '#ffffff',
+                color: '#FFFFFF',
                 position: 'relative',
                 overflow: 'hidden',
-                border: bank.isPrimary ? '1.5px solid rgba(255, 255, 255, 0.35)' : '1px solid rgba(255, 255, 255, 0.15)',
+                border: `1.5px solid ${style.borderColor}`,
+                boxShadow: 'none',
               }}
             >
-              {/* Subtle Atmospheric Light Gradients */}
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '-40%',
-                  right: '-25%',
-                  width: '200px',
-                  height: '200px',
-                  borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%)',
-                  pointerEvents: 'none',
-                }}
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: '-30%',
-                  left: '-10%',
-                  width: '160px',
-                  height: '160px',
-                  borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(46, 131, 255, 0.25) 0%, transparent 75%)',
-                  pointerEvents: 'none',
-                }}
-              />
-
               {/* 1. Card Top Header */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', zIndex: 2 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '9px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flex: 1, paddingRight: '8px' }}>
                   <div
                     style={{
-                      width: '34px',
-                      height: '34px',
-                      borderRadius: '8px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                      border: '1px solid rgba(255, 255, 255, 0.25)',
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '10px',
+                      backgroundColor: 'rgba(127, 232, 127, 0.12)',
+                      border: '1px solid rgba(127, 232, 127, 0.25)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      backdropFilter: 'blur(4px)',
+                      flexShrink: 0,
                     }}
                   >
-                    <Landmark size={17} color="#ffffff" />
+                    <Landmark size={18} color="#7FE87F" />
                   </div>
-                  <div>
-                    <div style={{ fontSize: '13px', fontWeight: 800, color: '#ffffff', letterSpacing: '0.02em', lineHeight: '16px' }}>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em', lineHeight: '17px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {style.tagText}
                     </div>
-                    <div style={{ fontSize: '10.5px', color: 'rgba(255, 255, 255, 0.75)', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '5px', whiteSpace: 'nowrap' }}>
                       <span>{bank.accountType}</span>
                       <span>•</span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
-                        <ShieldCheck size={11} color="#60a5fa" /> UPI Linked
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: '#7FE87F', fontWeight: 600 }}>
+                        <ShieldCheck size={11} color="#7FE87F" /> UPI Linked
                       </span>
                     </div>
                   </div>
@@ -260,13 +211,14 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                     style={{
                       fontSize: '9px',
                       fontWeight: 800,
-                      backgroundColor: 'rgba(255, 255, 255, 0.22)',
-                      color: '#ffffff',
-                      border: '1px solid rgba(255, 255, 255, 0.35)',
-                      padding: '2px 8px',
-                      borderRadius: '10px',
+                      backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                      color: '#7FE87F',
+                      border: '1px solid #7FE87F',
+                      padding: '3px 8px',
+                      borderRadius: '8px',
                       letterSpacing: '0.05em',
                       textTransform: 'uppercase',
+                      flexShrink: 0,
                     }}
                   >
                     PRIMARY
@@ -276,16 +228,16 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
 
               {/* 2. Middle Row: Chip Graphic + Masked Number */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 2, margin: '6px 0' }}>
-                {/* Gold EMV Chip SVG */}
-                <div style={{ width: '32px', height: '23px', borderRadius: '4px', background: 'linear-gradient(135deg, #ffd700 0%, #e6a817 50%, #b8860b 100%)', padding: '2px', boxSizing: 'border-box', border: '1px solid rgba(0,0,0,0.15)' }}>
+                {/* Gold EMV Chip Graphic */}
+                <div style={{ width: '32px', height: '23px', borderRadius: '4px', background: 'linear-gradient(135deg, #ffd700 0%, #e6a817 50%, #b8860b 100%)', padding: '2px', boxSizing: 'border-box', border: '1px solid rgba(0,0,0,0.2)' }}>
                   <div style={{ width: '100%', height: '100%', border: '0.5px solid rgba(0,0,0,0.2)', borderRadius: '2px', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', padding: '2px 0' }}>
-                    <div style={{ height: '0.5px', backgroundColor: 'rgba(0,0,0,0.25)', width: '100%' }} />
-                    <div style={{ height: '0.5px', backgroundColor: 'rgba(0,0,0,0.25)', width: '100%' }} />
+                    <div style={{ height: '0.5px', backgroundColor: 'rgba(0,0,0,0.3)', width: '100%' }} />
+                    <div style={{ height: '0.5px', backgroundColor: 'rgba(0,0,0,0.3)', width: '100%' }} />
                   </div>
                 </div>
 
                 {/* Masked Card Number */}
-                <div style={{ fontSize: '14px', fontWeight: 700, letterSpacing: '0.18em', color: '#ffffff', fontFamily: 'monospace' }}>
+                <div style={{ fontSize: '13.5px', fontWeight: 700, letterSpacing: '0.14em', color: '#FFFFFF', fontFamily: 'monospace' }}>
                   ••••  ••••  ••••  {rawNumbers}
                 </div>
               </div>
@@ -293,10 +245,10 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               {/* 3. Card Footer: Available Balance & Clean Check Action */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', zIndex: 2 }}>
                 <div>
-                  <div style={{ fontSize: '9.5px', color: 'rgba(255, 255, 255, 0.75)', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.06em' }}>
+                  <div style={{ fontSize: '9.5px', color: '#A2A2BA', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.06em' }}>
                     Available Balance
                   </div>
-                  <div style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff', marginTop: '2px', letterSpacing: '0.01em' }}>
+                  <div style={{ fontSize: '18px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px', letterSpacing: '0.01em' }}>
                     {bank.showBalance ? formatCurrency(bank.balance) : '₹ ••••••••'}
                   </div>
                 </div>
@@ -304,12 +256,13 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                 <button
                   onClick={(e) => handleCardBalanceClick(bank, e)}
                   title="Check Bank Balance with UPI PIN"
+                  className="interactive-tap"
                   style={{
-                    backgroundColor: bank.showBalance ? 'rgba(255, 255, 255, 0.18)' : '#ffffff',
-                    color: bank.showBalance ? '#ffffff' : '#0f172a',
-                    border: bank.showBalance ? '1px solid rgba(255, 255, 255, 0.3)' : 'none',
-                    borderRadius: '20px',
-                    padding: '6px 14px',
+                    backgroundColor: bank.showBalance ? '#1E1E32' : '#7FE87F',
+                    color: bank.showBalance ? '#FFFFFF' : '#000000',
+                    border: bank.showBalance ? '1px solid #2C2C44' : 'none',
+                    borderRadius: '8px',
+                    padding: '6px 12px',
                     fontSize: '11.5px',
                     fontWeight: 800,
                     cursor: 'pointer',
@@ -317,10 +270,10 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                     alignItems: 'center',
                     gap: '5px',
                     boxShadow: 'none',
-                    transition: 'background-color 0.2s ease',
+                    transition: 'all 0.15s ease',
                   }}
                 >
-                  {bank.showBalance ? <EyeOff size={13} /> : <Eye size={13} color="#0f172a" />}
+                  {bank.showBalance ? <EyeOff size={13} color="#FFFFFF" /> : <Eye size={13} color="#000000" />}
                   {bank.showBalance ? 'Hide' : 'Check Balance'}
                 </button>
               </div>
@@ -331,13 +284,14 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
         {/* Add Bank CTA Card */}
         <div
           onClick={() => setIsAddBankModalOpen(true)}
+          className="interactive-tap"
           style={{
             scrollSnapAlign: 'start',
             flex: '0 0 135px',
             height: '175px',
-            backgroundColor: '#ffffff',
-            border: '2px dashed #cbd5e1',
-            borderRadius: '14px',
+            backgroundColor: '#151524',
+            border: '1.5px dashed #2C2C44',
+            borderRadius: '16px',
             padding: '16px',
             display: 'flex',
             flexDirection: 'column',
@@ -347,6 +301,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
             cursor: 'pointer',
             boxSizing: 'border-box',
             textAlign: 'center',
+            boxShadow: 'none',
           }}
         >
           <div
@@ -354,23 +309,23 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               width: '38px',
               height: '38px',
               borderRadius: '50%',
-              backgroundColor: '#eef5ff',
-              color: '#2e83ff',
+              backgroundColor: 'rgba(127, 232, 127, 0.12)',
+              color: '#7FE87F',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              border: '1px solid #d6e6ff',
+              border: '1px solid rgba(127, 232, 127, 0.25)',
             }}
           >
             <Plus size={20} />
           </div>
-          <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>Add Bank</span>
-          <span style={{ fontSize: '10.5px', color: '#64748b' }}>Link new account</span>
+          <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>Add Bank</span>
+          <span style={{ fontSize: '10.5px', color: '#A2A2BA' }}>Link Account</span>
         </div>
       </div>
 
       {/* Card Pagination Indicator Dots */}
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', marginTop: '8px' }}>
         {banks.map((_, i) => (
           <span
             key={i}
@@ -378,8 +333,8 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               width: i === activeCardIndex ? '16px' : '6px',
               height: '6px',
               borderRadius: '3px',
-              backgroundColor: i === activeCardIndex ? '#2e83ff' : '#cbd5e1',
-              transition: 'all 0.25s ease',
+              backgroundColor: i === activeCardIndex ? '#7FE87F' : '#2C2C44',
+              transition: 'all 0.2s ease',
             }}
           />
         ))}

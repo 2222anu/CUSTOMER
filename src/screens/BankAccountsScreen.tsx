@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
+import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
 import { Modal } from '../components/Modal';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
@@ -478,11 +479,32 @@ export const BankAccountsScreen: React.FC = () => {
         </PrimaryButton>
 
         {/* Security & SAMA Trust Footer */}
-        <div style={{ marginTop: '22px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-          <Lock size={13} color="#808099" />
-          <span style={{ fontSize: '11px', color: '#808099', fontWeight: 600 }}>
-            256-Bit Hardware Encrypted &bull; SAMA & Sarie Regulated
-          </span>
+        <div
+          style={{
+            marginTop: '24px',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '12px',
+            backgroundColor: '#2A2A3E',
+            border: '1px solid #4D4D6B',
+            borderRadius: '12px',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+            <Lock size={13} color="#7FE87F" />
+            <span style={{ fontSize: '11px', color: '#B3B3C2', fontWeight: 600 }}>
+              256-Bit Hardware Encrypted &bull; SAMA & Sarie Regulated
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ fontSize: '10px', color: '#808099', fontWeight: 700, textTransform: 'uppercase' }}>
+              Official Payment Partner:
+            </span>
+            <PaymentPartnerLogo height={16} themeMode="dark" />
+          </div>
         </div>
       </div>
 

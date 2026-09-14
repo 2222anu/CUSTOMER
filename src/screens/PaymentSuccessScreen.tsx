@@ -3,6 +3,7 @@ import { Check, Share2, FileText, CheckCircle2 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
+import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
 import { useApp } from '../state/AppContext';
 import { formatCurrency, formatDate } from '../utils/formatters';
 import type { Transaction } from '../types';
@@ -13,13 +14,13 @@ export const PaymentSuccessScreen: React.FC = () => {
 
   const txn: Transaction = screenParams.transaction || lastTransaction || {
     id: 'QT98472910482',
-    title: 'State Power Corporation',
-    subTitle: 'Electricity Bill Payment',
+    title: 'Saudi Electricity Company (SEC)',
+    subTitle: 'SADAD Bill Payment',
     amount: 2620.14,
     type: 'sent',
     date: 'TODAY',
     timestamp: new Date(),
-    utr: 'UTR984729104821',
+    utr: 'SARIE984729104821',
   };
 
   const handleDone = () => {
@@ -30,7 +31,7 @@ export const PaymentSuccessScreen: React.FC = () => {
     if (navigator.share) {
       navigator.share({
         title: 'alph pay Receipt',
-        text: `Payment Successful! ${formatCurrency(txn.amount)} paid to ${txn.title}. UTR: ${txn.utr}`,
+        text: `Payment Successful! ${formatCurrency(txn.amount)} paid to ${txn.title}. Ref: ${txn.utr}`,
       }).catch(() => {});
     } else {
       setDownloadMsg(true);
@@ -100,7 +101,7 @@ export const PaymentSuccessScreen: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <span style={{ color: '#A2A2BA', fontSize: '13px' }}>UTR Number</span>
+            <span style={{ color: '#A2A2BA', fontSize: '13px' }}>Reference / UTR</span>
             <span style={{ fontWeight: '600', fontSize: '12px', color: '#FFFFFF', fontFamily: 'monospace' }}>{txn.utr}</span>
           </div>
 
@@ -111,7 +112,7 @@ export const PaymentSuccessScreen: React.FC = () => {
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #2C2C44', paddingTop: '12px' }}>
             <span style={{ color: '#A2A2BA', fontSize: '13px' }}>Payment Method</span>
-            <span style={{ fontWeight: '700', fontSize: '13px', color: '#7FE87F' }}>ICICI Bank •••• 3616</span>
+            <span style={{ fontWeight: '700', fontSize: '13px', color: '#7FE87F' }}>Al Rajhi Bank •••• 4821</span>
           </div>
         </div>
 
@@ -132,6 +133,12 @@ export const PaymentSuccessScreen: React.FC = () => {
         </div>
 
         <PrimaryButton onClick={handleDone}>Done</PrimaryButton>
+
+        {/* Verified Payment Partner Footer */}
+        <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 600 }}>Verified by</span>
+          <PaymentPartnerLogo size={18} width={54} height={30} themeMode="dark" />
+        </div>
       </div>
     </div>
   );

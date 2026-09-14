@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ShieldCheck, Lock } from 'lucide-react';
 import { AlphPayLogo } from '../components/AlphPayLogo';
+import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
 import { useApp } from '../state/AppContext';
 
 export const SplashScreen: React.FC = () => {
@@ -182,27 +183,35 @@ export const SplashScreen: React.FC = () => {
           </div>
         </div>
 
-        {/* SAMA Trust Pill */}
+        {/* SAMA & Payment Partner Trust Pill */}
         <div
           style={{
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
             gap: '8px',
             backgroundColor: '#151524',
             border: '1px solid #2C2C44',
-            borderRadius: '12px',
-            padding: '8px 14px',
+            borderRadius: '14px',
+            padding: '10px 14px',
             width: '100%',
             boxSizing: 'border-box',
             boxShadow: 'none',
           }}
         >
-          <ShieldCheck size={15} color="#7FE87F" />
-          <span style={{ fontSize: '10.5px', color: '#FFFFFF', fontWeight: 700, letterSpacing: '0.04em' }}>
-            SAMA • SARIE • 256-BIT SECURED
-          </span>
-          <Lock size={12} color="#7FE87F" />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+            <ShieldCheck size={14} color="#7FE87F" />
+            <span style={{ fontSize: '10px', color: '#A2A2BA', fontWeight: 700, letterSpacing: '0.04em' }}>
+              SAMA &bull; SARIE &bull; 256-BIT HARDWARE SECURED
+            </span>
+            <Lock size={12} color="#7FE87F" />
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', opacity: 0.9 }}>
+            <span style={{ fontSize: '9.5px', color: '#6E6E85', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Partner:
+            </span>
+            <PaymentPartnerLogo height={16} themeMode="dark" />
+          </div>
         </div>
       </div>
     </div>

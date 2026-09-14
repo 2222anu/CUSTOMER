@@ -2,6 +2,7 @@ import React from 'react';
 import { CreditCard, Landmark, Plus, Star, Wifi, ShieldCheck } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
+import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
 import { useApp } from '../state/AppContext';
 
 export const PaymentMethodsScreen: React.FC = () => {
@@ -221,12 +222,33 @@ export const PaymentMethodsScreen: React.FC = () => {
           </PrimaryButton>
         </div>
 
-        {/* Security Footer */}
-        <div style={{ marginTop: '8px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-          <ShieldCheck size={13} color="#7FE87F" />
-          <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 600 }}>
-            Tokenized Card Payments &bull; SAMA & Sarie Secured
-          </span>
+        {/* Security & Partner Footer */}
+        <div
+          style={{
+            marginTop: '8px',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '12px',
+            backgroundColor: '#151524',
+            border: '1px solid #2C2C44',
+            borderRadius: '12px',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+            <ShieldCheck size={13} color="#7FE87F" />
+            <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 600 }}>
+              Tokenized Card Payments &bull; SAMA & Sarie Secured
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ fontSize: '10px', color: '#6E6E85', fontWeight: 700, textTransform: 'uppercase' }}>
+              Partner:
+            </span>
+            <PaymentPartnerLogo height={16} themeMode="dark" />
+          </div>
         </div>
       </div>
     </div>

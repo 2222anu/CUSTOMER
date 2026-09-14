@@ -17,6 +17,7 @@ import { PWAInstallPrompt } from '../components/PWAInstallPrompt';
 import { BankCardCarousel } from '../components/BankCardCarousel';
 import { BalanceSummaryModal } from '../components/BalanceSummaryModal';
 import { TransactionRow } from '../components/TransactionRow';
+import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
 import { useApp } from '../state/AppContext';
 
 export const HomeScreen: React.FC = () => {
@@ -449,6 +450,34 @@ export const HomeScreen: React.FC = () => {
         {recentTransactions.map((txn) => (
           <TransactionRow key={txn.id} transaction={txn} onClick={() => navigateTo('HISTORY')} />
         ))}
+      </div>
+
+      {/* Official Payment Partner Trust Banner */}
+      <div style={{ padding: '0 20px', marginBottom: '24px' }}>
+        <div
+          style={{
+            backgroundColor: '#151524',
+            border: '1px solid #2C2C44',
+            borderRadius: '16px',
+            padding: '16px 18px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            boxShadow: 'none',
+          }}
+        >
+          <div>
+            <div style={{ fontSize: '10px', color: '#7FE87F', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '2px' }}>
+              Official Payment Partner
+            </div>
+            <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
+              Secured by National Banking Rail
+            </div>
+          </div>
+          <div style={{ backgroundColor: '#1E1E32', border: '1px solid #2C2C44', borderRadius: '10px', padding: '6px 10px', display: 'flex', alignItems: 'center' }}>
+            <PaymentPartnerLogo size={24} width={72} height={40} themeMode="dark" />
+          </div>
+        </div>
       </div>
 
       {/* Verified UPI Balance Modal Sheet */}

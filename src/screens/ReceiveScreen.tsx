@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Download, Share2, Copy, CheckCircle2, ArrowDownLeft, Sparkles } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { QRCodeView } from '../components/QRCodeView';
+import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
 import { useApp } from '../state/AppContext';
@@ -254,9 +255,30 @@ export const ReceiveScreen: React.FC = () => {
                 border: '1px solid #2C2C44',
               }}
             >
-              Any UPI App • Direct to {primaryBank?.bankName || 'Bank'}
+              Any Sarie App • Direct to {primaryBank?.bankName || 'Bank'}
             </div>
           )}
+
+          {/* Payment Partner Trust Badge */}
+          <div
+            style={{
+              marginTop: '16px',
+              paddingTop: '14px',
+              borderTop: '1px solid #2C2C44',
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+          >
+            <div style={{ fontSize: '10.5px', color: '#A2A2BA', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+              Official Payment Partner
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <PaymentPartnerLogo height={22} themeMode="dark" />
+            </div>
+          </div>
         </div>
 
         {/* Set Specific Amount Box */}

@@ -124,7 +124,7 @@ export const PermissionsScreen: React.FC = () => {
               <ShieldCheck size={24} />
             </div>
             <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>
-              NPCI Mandated Security
+              SAMA Mandated Security
             </div>
           </div>
 
@@ -314,9 +314,9 @@ export const PermissionsScreen: React.FC = () => {
             </h3>
 
             <p style={{ fontSize: '13px', color: '#A2A2BA', margin: '0 0 20px 0', lineHeight: '1.4' }}>
-              {discoveryStep === 1 && 'Verifying NPCI UPI registration on +91 98765 43210'}
-              {discoveryStep === 2 && 'Discovered ICICI Bank and YES Bank accounts'}
-              {discoveryStep === 3 && 'Instant KYC verified. Redirecting to home...'}
+              {discoveryStep === 1 && 'Verifying SAMA Sarie registration on +966 50 123 4567'}
+              {discoveryStep === 2 && 'Discovered Al Rajhi Bank and SNB accounts'}
+              {discoveryStep === 3 && 'SAMA e-KYC verified. Redirecting to home...'}
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', textAlign: 'left' }}>
@@ -350,7 +350,7 @@ export const PermissionsScreen: React.FC = () => {
               >
                 {discoveryStep >= 2 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Loader2 size={16} color="#A2A2BA" />}
                 <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 2 ? '#FFFFFF' : '#A2A2BA' }}>
-                  Bank Accounts Discovered (ICICI, YES Bank)
+                  Bank Accounts Discovered (Al Rajhi Bank, SNB)
                 </span>
               </div>
 
@@ -367,7 +367,7 @@ export const PermissionsScreen: React.FC = () => {
               >
                 {discoveryStep >= 3 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Sparkles size={16} color="#A2A2BA" />}
                 <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 3 ? '#7FE87F' : '#A2A2BA' }}>
-                  NPCI Instant e-KYC Authenticated
+                  SAMA Instant e-KYC Authenticated
                 </span>
               </div>
             </div>

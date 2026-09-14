@@ -27,33 +27,33 @@ export const ShoppingScreen: React.FC = () => {
   const deals: DealItem[] = [
     {
       id: 'deal-1',
-      merchant: 'Star Supermarket',
+      merchant: 'Panda Supermarket',
       title: 'Weekly Grocery Smart Saver',
-      offer: 'Flat ₹300 Cashback on UPI',
-      category: 'Groceries & Essentials',
-      couponCode: 'ALPHSAVER300',
-      originalPrice: 2500,
-      discountedPrice: 2200,
+      offer: 'Flat SAR 50 Cashback on Sarie',
+      category: 'Groceries & Fresh Food',
+      couponCode: 'PANDASAVER50',
+      originalPrice: 350,
+      discountedPrice: 300,
     },
     {
       id: 'deal-2',
-      merchant: 'Fashion Hub Outlet',
-      title: 'Trending Apparel Collection',
-      offer: 'Flat ₹500 Instant OFF',
-      category: 'Clothing & Accessories',
-      couponCode: 'FASHION500',
-      originalPrice: 2499,
-      discountedPrice: 1999,
+      merchant: 'Jarir Bookstore',
+      title: 'Trending Books & Digital Stationery',
+      offer: 'Flat SAR 75 Instant OFF',
+      category: 'Books & Electronics',
+      couponCode: 'JARIR75',
+      originalPrice: 450,
+      discountedPrice: 375,
     },
     {
       id: 'deal-3',
-      merchant: 'Tech Zone Electronics',
-      title: 'Wireless Noise Cancelling Earbuds',
-      offer: 'Up to ₹1,500 Instant Discount',
-      category: 'Gadgets & Electronics',
-      couponCode: 'TECHZONE1500',
-      originalPrice: 4999,
-      discountedPrice: 3499,
+      merchant: 'eXtra Stores',
+      title: 'Wireless Active Noise Cancelling Earbuds',
+      offer: 'Up to SAR 200 Instant Discount',
+      category: 'Audio & Tech Gadgets',
+      couponCode: 'EXTRA200',
+      originalPrice: 799,
+      discountedPrice: 599,
     },
   ];
 
@@ -68,7 +68,7 @@ export const ShoppingScreen: React.FC = () => {
 
     openPinModal({
       title: `Buy ${selectedDeal.title}`,
-      subTitle: `${selectedDeal.merchant} • ₹${selectedDeal.discountedPrice}`,
+      subTitle: `${selectedDeal.merchant} • SAR ${selectedDeal.discountedPrice}`,
       amount: selectedDeal.discountedPrice,
       onSuccess: async () => {
         await completePayment({
@@ -285,10 +285,10 @@ export const ShoppingScreen: React.FC = () => {
                 <span style={{ fontSize: '13px', fontWeight: 700, color: '#B3B3C2' }}>Special Discount Price</span>
                 <div>
                   <span style={{ fontSize: '13px', color: '#808099', textDecoration: 'line-through', marginRight: '8px', fontVariantNumeric: 'tabular-nums' }}>
-                    ₹{selectedDeal.originalPrice.toLocaleString()}
+                    SAR {selectedDeal.originalPrice.toLocaleString()}
                   </span>
                   <span style={{ fontSize: '20px', fontWeight: 900, color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>
-                    ₹{selectedDeal.discountedPrice.toLocaleString()}
+                    SAR {selectedDeal.discountedPrice.toLocaleString()}
                   </span>
                 </div>
               </div>
@@ -309,7 +309,7 @@ export const ShoppingScreen: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              Order Now (₹{selectedDeal.discountedPrice.toLocaleString()})
+              Order Now (SAR {selectedDeal.discountedPrice.toLocaleString()})
             </button>
           </div>
         </div>
@@ -372,7 +372,7 @@ export const ShoppingScreen: React.FC = () => {
             <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
               <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{purchasedDeal.title}</div>
               <div style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F', marginTop: '6px', fontVariantNumeric: 'tabular-nums' }}>
-                Paid ₹{purchasedDeal.paidAmount.toLocaleString()} via alph pay
+                Paid SAR {purchasedDeal.paidAmount.toLocaleString()} via alph pay
               </div>
             </div>
 

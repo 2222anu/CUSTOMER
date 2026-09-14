@@ -64,7 +64,7 @@ export const QPayHeroBanner: React.FC = () => {
             letterSpacing: '-0.01em',
           }}
         >
-          Instant UPI Transfers
+          Instant Sarie Transfers
         </h3>
 
         <p
@@ -75,7 +75,7 @@ export const QPayHeroBanner: React.FC = () => {
             lineHeight: 1.4,
           }}
         >
-          Direct bank-to-bank settlements.
+          Direct Saudi bank-to-bank settlements.
         </p>
 
         <button
@@ -120,7 +120,7 @@ export const QPayHeroBanner: React.FC = () => {
           boxShadow: 'none',
         }}
       >
-        <span style={{ fontSize: '28px', fontWeight: 900, color: '#7FE87F' }}>₹</span>
+        <span style={{ fontSize: '18px', fontWeight: 900, color: '#7FE87F' }}>SAR</span>
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ export const SplashScreen: React.FC = () => {
         if (next > 70) {
           setStatusText('Securing account credentials...');
         } else if (next > 40) {
-          setStatusText('Verifying NPCI UPI payment gateway...');
+          setStatusText('Verifying SAMA Sarie payment gateway...');
         }
         return next;
       });
@@ -182,7 +182,7 @@ export const SplashScreen: React.FC = () => {
           </div>
         </div>
 
-        {/* NPCI Trust Pill */}
+        {/* SAMA Trust Pill */}
         <div
           style={{
             display: 'flex',
@@ -200,7 +200,7 @@ export const SplashScreen: React.FC = () => {
         >
           <ShieldCheck size={15} color="#7FE87F" />
           <span style={{ fontSize: '10.5px', color: '#FFFFFF', fontWeight: 700, letterSpacing: '0.04em' }}>
-            NPCI • BHIM UPI • 256-BIT SECURED
+            SAMA • SARIE • 256-BIT SECURED
           </span>
           <Lock size={12} color="#7FE87F" />
         </div>

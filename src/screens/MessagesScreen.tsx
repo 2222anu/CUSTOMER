@@ -23,29 +23,29 @@ export const MessagesScreen: React.FC = () => {
       unread: true,
       messages: [
         { sender: 'them', text: 'Hello! Welcome to alph pay 24/7 Priority Support.', time: '10:40 AM' },
-        { sender: 'them', text: 'Your electricity bill payment of ₹2,620.14 was credited successfully to State Power Corporation. Ref UTR: 948201849204', time: '10:42 AM' },
+        { sender: 'them', text: 'Your electricity bill payment of SAR 2,620.14 was credited successfully to Saudi Electricity Company (SEC). Ref: SARIE94820184', time: '10:42 AM' },
       ],
     },
     {
       id: 'chat-2',
-      name: 'ICICI Bank Official',
-      avatarInitials: 'IC',
+      name: 'Al Rajhi Bank Official',
+      avatarInitials: 'AR',
       isSupport: true,
       time: '10:41 AM',
       unread: false,
       messages: [
-        { sender: 'them', text: 'ICICI Bank Alert: A/c ****3616 debited by ₹2,620.14 on 10-Sep-26 via UPI. Info: Electricity Payment.', time: '10:41 AM' },
+        { sender: 'them', text: 'Al Rajhi Bank Alert: A/c SA03 •••• 4821 debited by SAR 2,620.14 on 10-Sep-26 via Sarie. Info: SEC SADAD Payment.', time: '10:41 AM' },
       ],
     },
     {
       id: 'chat-3',
-      name: 'Rahul Sharma',
-      avatarInitials: 'RS',
+      name: 'Tariq Al-Otaibi',
+      avatarInitials: 'TO',
       time: 'Yesterday',
       unread: false,
       messages: [
-        { sender: 'me', text: 'Sent ₹500 for our dinner split!', time: 'Yesterday 8:30 PM' },
-        { sender: 'them', text: 'Thanks for the instant transfer! Received.', time: 'Yesterday 8:32 PM' },
+        { sender: 'me', text: 'Sent SAR 500 for our dinner split!', time: 'Yesterday 8:30 PM' },
+        { sender: 'them', text: 'Thanks for the instant Sarie transfer! Received.', time: 'Yesterday 8:32 PM' },
       ],
     },
   ]);

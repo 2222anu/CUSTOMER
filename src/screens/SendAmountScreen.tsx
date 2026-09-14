@@ -9,10 +9,10 @@ export const SendAmountScreen: React.FC = () => {
   const { screenParams, openPinModal, contacts, navigateTo, completePayment } = useApp();
   const contact: Contact = screenParams.contact || contacts[0] || {
     id: 'default',
-    name: 'Priya Menon',
-    upiId: 'priya@paytm',
-    avatarInitials: 'PM',
-    mobile: '+91 98765 00001',
+    name: 'Tariq Al-Otaibi',
+    upiId: 'tariq@sarie',
+    avatarInitials: 'TO',
+    mobile: '+966 50 234 5678',
   };
 
   const initialAmount = screenParams.defaultAmount ? String(screenParams.defaultAmount) : '';
@@ -122,11 +122,11 @@ export const SendAmountScreen: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '6px',
+              gap: '8px',
               marginBottom: '20px',
             }}
           >
-            <span style={{ fontSize: '36px', fontWeight: 800, color: '#7FE87F' }}>₹</span>
+            <span style={{ fontSize: '24px', fontWeight: 800, color: '#7FE87F' }}>SAR</span>
             <input
               type="number"
               value={amountStr}
@@ -150,7 +150,7 @@ export const SendAmountScreen: React.FC = () => {
 
           {/* Quick Amount Chips */}
           <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '18px' }}>
-            {['100', '500', '1000', '2000', '5000'].map((val) => {
+            {['50', '100', '500', '1000', '2000'].map((val) => {
               const isSelected = amountStr === val;
               return (
                 <button
@@ -170,7 +170,7 @@ export const SendAmountScreen: React.FC = () => {
                     transition: 'all 0.15s ease',
                   }}
                 >
-                  +₹{val}
+                  +SAR {val}
                 </button>
               );
             })}
@@ -209,7 +209,7 @@ export const SendAmountScreen: React.FC = () => {
         </div>
 
         <PrimaryButton onClick={handlePayClick} disabled={numAmount <= 0}>
-          Pay ₹{numAmount ? numAmount.toLocaleString('en-IN') : '0'}
+          Pay SAR {numAmount ? numAmount.toLocaleString() : '0'}
         </PrimaryButton>
       </div>
     </div>

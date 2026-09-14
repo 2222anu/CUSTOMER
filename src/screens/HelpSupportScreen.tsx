@@ -16,9 +16,9 @@ export const HelpSupportScreen: React.FC = () => {
   const [disputeReason, setDisputeReason] = useState('');
 
   const faqs = [
-    { q: 'How long does a UPI refund take?', a: 'Instant UPI refunds are usually credited within 1-2 hours. In rare bank network delays, it can take up to 24-48 hours.' },
-    { q: 'What is the daily UPI transfer limit?', a: 'As per NPCI guidelines, the standard daily UPI transaction limit is ₹1,00,000 across all UPI apps.' },
-    { q: 'How do I add a new bank account?', a: 'Go to Profile > Bank Accounts > tap Add Bank, select your bank, and verify your mobile number via SMS.' },
+    { q: 'How long does a Sarie refund take?', a: 'Instant Sarie refunds are usually credited within seconds to 1-2 hours. In rare bank network delays, it can take up to 24 hours.' },
+    { q: 'What is the daily Sarie transfer limit?', a: 'As per SAMA guidelines, the standard daily Sarie instant transaction limit is SAR 50,000 across digital banking apps.' },
+    { q: 'How do I add a new Saudi bank account?', a: 'Go to Profile > Bank Accounts > tap Add Bank, select your Saudi bank, and verify your mobile number via SMS.' },
   ];
 
   const handleSendChat = (e: React.FormEvent) => {
@@ -216,10 +216,10 @@ export const HelpSupportScreen: React.FC = () => {
           >
             <PhoneCall size={28} />
           </div>
-          <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>1800-123-ALPHPAY</h4>
-          <p style={{ fontSize: '12.5px', color: '#A2A2BA', margin: '0 0 20px 0' }}>Available 24x7 in English, Hindi, Telugu, and Tamil</p>
+          <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>800-123-ALPHPAY</h4>
+          <p style={{ fontSize: '12.5px', color: '#A2A2BA', margin: '0 0 20px 0' }}>Available 24x7 in Arabic and English (Toll-Free in KSA)</p>
           <a
-            href="tel:180012378729"
+            href="tel:80012378729"
             className="interactive-tap"
             style={{ display: 'inline-block', padding: '12px 28px', backgroundColor: '#7FE87F', color: '#0B0B14', borderRadius: '12px', fontWeight: 800, fontSize: '13px', textDecoration: 'none', boxShadow: 'none' }}
           >

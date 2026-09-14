@@ -63,7 +63,7 @@ export const ProtectScene: React.FC = () => {
           }}
         >
           <CheckCircle2 size={13} />
-          <span>NPCI & RBI Certified</span>
+          <span>SAMA & Sarie Certified</span>
         </div>
       </div>
 
@@ -98,7 +98,7 @@ export const ProtectScene: React.FC = () => {
           }}
         >
           <Lock size={18} color="#7FE87F" />
-          <div style={{ fontSize: '11px', fontWeight: 700, color: '#FFFFFF' }}>UPI PIN Safe</div>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#FFFFFF' }}>Sarie PIN Safe</div>
         </div>
       </div>
     </div>

@@ -57,7 +57,7 @@ export const ReceiveScreen: React.FC = () => {
     if (navigator.share) {
       navigator
         .share({
-          title: 'alph pay UPI ID',
+          title: 'alph pay Sarie ID',
           text: `Pay ${user.name} via alph pay: ${user.upiId}${numAmount > 0 ? ` (Amount: ${formatCurrency(numAmount)})` : ''}`,
         })
         .catch(() => {});
@@ -68,14 +68,14 @@ export const ReceiveScreen: React.FC = () => {
 
   const handleSimulateReceive = async (presetAmt?: number) => {
     const amt = presetAmt || (numAmount > 0 ? numAmount : 500);
-    const senders = ['Priya Menon', 'Rahul Sharma', 'Ajay Singh', 'Sara Al Mansoori'];
+    const senders = ['Tariq Al-Otaibi', 'Sara Al-Mansoor', 'Mohammed Al-Ghamdi', 'Abdullah Al-Shehri'];
     const randomSender = senders[Math.floor(Math.random() * senders.length)];
 
     await receiveMoney({
       senderName: randomSender,
-      senderUpi: `${randomSender.toLowerCase().replace(/\s+/g, '')}@upi`,
+      senderUpi: `${randomSender.toLowerCase().replace(/[^a-z]/g, '')}@sarie`,
       amount: amt,
-      note: 'Payment via alph pay QR',
+      note: 'Payment via alph pay Sarie QR',
     });
 
     playSuccessChime();
@@ -286,7 +286,7 @@ export const ReceiveScreen: React.FC = () => {
                 padding: '0 12px',
               }}
             >
-              <span style={{ fontSize: '16px', fontWeight: 800, color: '#7FE87F', marginRight: '6px' }}>₹</span>
+              <span style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F', marginRight: '6px' }}>SAR</span>
               <input
                 type="number"
                 placeholder="Enter amount"
@@ -315,7 +315,7 @@ export const ReceiveScreen: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', gap: '6px' }}>
-            {[100, 500, 1000, 2000].map((amt) => (
+            {[50, 100, 500, 1000].map((amt) => (
               <button
                 key={amt}
                 onClick={() => setCustomAmount(String(amt))}
@@ -331,7 +331,7 @@ export const ReceiveScreen: React.FC = () => {
                   cursor: 'pointer',
                 }}
               >
-                ₹{amt}
+                SAR {amt}
               </button>
             ))}
           </div>

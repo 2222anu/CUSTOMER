@@ -1,18 +1,16 @@
 export const formatCurrency = (amount: number): string => {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 2,
+  return 'SAR ' + new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   }).format(amount);
 };
 
 export const generateUTR = (): string => {
-  return 'UTR' + Math.floor(100000000000 + Math.random() * 900000000000).toString();
+  return 'SARIE' + Math.floor(100000000000 + Math.random() * 900000000000).toString();
 };
 
 export const generateTxnId = (): string => {
-  return 'QT' + Math.floor(10000000000 + Math.random() * 90000000000).toString();
+  return 'SAR' + Math.floor(10000000000 + Math.random() * 90000000000).toString();
 };
 
 export const formatDate = (date: Date): string => {

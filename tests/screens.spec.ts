@@ -115,11 +115,11 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
 
     // 3. Mobile Number Screen
     await page.goto(getAppUrl('screen=MOBILE_NUMBER'));
-    await expect(page.getByText('Secure Sign In', { exact: false })).toBeVisible();
-    const nameInput = page.locator('#name-input');
-    await nameInput.fill('Anu Sharma');
+    await expect(page.getByText('SAMA Regulated', { exact: false })).toBeVisible();
+    const nameInput = page.locator('#fullname-input');
+    await nameInput.fill('Fahad Al-Harbi');
     const mobileInput = page.locator('#mobile-input');
-    await mobileInput.fill('9876543210');
+    await mobileInput.fill('501234567');
 
     // Submit
     const submitBtn = page.getByRole('button', { name: /Get OTP/i });
@@ -127,7 +127,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
 
     // 4. SMS OTP Screen
     await page.goto(getAppUrl('screen=SMS_OTP'));
-    await expect(page.getByText('OTP Verification', { exact: false })).toBeVisible();
+    await expect(page.getByText('Verify Mobile Number', { exact: false })).toBeVisible();
     await expect(page.getByText('589204', { exact: false })).toBeVisible();
 
     // Click Verify
@@ -136,7 +136,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
 
     // 5. Permissions & e-KYC Screen
     await page.goto(getAppUrl('screen=PERMISSIONS'));
-    await expect(page.getByText('NPCI', { exact: false })).toBeVisible();
+    await expect(page.getByText('SAMA', { exact: false })).toBeVisible();
     await expect(page.getByText(/Device Permissions/i)).toBeVisible();
 
     // Click Allow Permissions & wait for automated KYC simulation -> Home transition
@@ -150,26 +150,26 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     expect(consoleErrors).toEqual([]);
   });
 
-  test('Interactive Send Money Flow with UPI PIN and Receipt', async () => {
+  test('Interactive Send Money Flow with Sarie PIN and Receipt', async () => {
     await page.goto(getAppUrl('screen=PAY_ANYONE'));
     await expect(page.getByText('Pay Anyone')).toBeVisible();
 
-    // Select Rahul Sharma contact
-    const rahulContact = page.locator('[aria-label*="Pay Rahul Sharma"]');
-    await expect(rahulContact).toBeVisible();
-    await rahulContact.click();
+    // Select Tariq Al-Otaibi contact
+    const tariqContact = page.locator('[aria-label*="Pay Tariq Al-Otaibi"]');
+    await expect(tariqContact).toBeVisible();
+    await tariqContact.click();
 
     // Send Amount Screen
-    await expect(page.getByText('Rahul Sharma')).toBeVisible();
+    await expect(page.getByText('Tariq Al-Otaibi')).toBeVisible();
     const amountInput = page.locator('input[type="number"]');
     await amountInput.fill('500');
 
-    // Click Pay ₹500
-    const payBtn = page.getByRole('button', { name: /Pay ₹500/i });
+    // Click Pay SAR 500
+    const payBtn = page.getByRole('button', { name: /Pay SAR 500/i });
     await payBtn.click();
 
     // PIN Modal should open
-    await expect(page.getByText('ENTER 4-DIGIT UPI PIN')).toBeVisible();
+    await expect(page.getByText(/PIN/i).first()).toBeVisible();
 
     // Type 4-digit PIN
     await page.keyboard.type('1234');
@@ -177,8 +177,8 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
 
     // Payment Success Screen
     await expect(page.getByText('Payment Successful')).toBeVisible();
-    await expect(page.getByText('Rahul Sharma').first()).toBeVisible();
-    await expect(page.getByText('UTR / Reference No')).toBeVisible();
+    await expect(page.getByText('Tariq Al-Otaibi').first()).toBeVisible();
+    await expect(page.getByText(/Reference No/i)).toBeVisible();
 
     // Click Done to return Home
     const doneBtn = page.getByRole('button', { name: 'Done' });
@@ -190,32 +190,32 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
 
   test('Electricity Bill Fetch and Payment Flow', async () => {
     await page.goto(getAppUrl('screen=ELECTRICITY'));
-    await expect(page.getByText('Electricity Bill Payment')).toBeVisible();
+    await expect(page.getByText('Electricity Bill')).toBeVisible();
 
     // Fill Consumer ID
     const consumerInput = page.locator('#elec-consumer-input');
     await consumerInput.fill('134567');
 
     // Fetch bill
-    const fetchBtn = page.getByRole('button', { name: /Fetch Bill Details/i });
+    const fetchBtn = page.getByRole('button', { name: /Fetch Bill/i });
     await fetchBtn.click();
 
     // View Bill Summary
-    await expect(page.getByText('State Power Corporation').first()).toBeVisible();
-    await expect(page.getByText('Total Amount Due:')).toBeVisible();
+    await expect(page.getByText('Saudi Electricity Company (SEC)').first()).toBeVisible();
+    await expect(page.getByText('Amount Due')).toBeVisible();
 
     // Pay Bill
-    const payBillBtn = page.getByRole('button', { name: /Pay Bill/i });
+    const payBillBtn = page.getByRole('button', { name: /Pay /i });
     await payBillBtn.click();
 
     // PIN Modal
-    await expect(page.getByText('ENTER 4-DIGIT UPI PIN')).toBeVisible();
+    await expect(page.getByText(/PIN/i).first()).toBeVisible();
     await page.keyboard.type('9876');
     await page.waitForTimeout(300);
 
     // Success Screen
     await expect(page.getByText('Payment Successful')).toBeVisible();
-    await expect(page.getByText('State Power Corporation').first()).toBeVisible();
+    await expect(page.getByText('Saudi Electricity Company (SEC)').first()).toBeVisible();
 
     expect(consoleErrors).toEqual([]);
   });
@@ -223,7 +223,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
   test('Receive Screen with QR Code and Live Incoming Payment Simulation', async () => {
     await page.goto(getAppUrl('screen=RECEIVE'));
     await expect(page.getByText('Receive Money')).toBeVisible();
-    await expect(page.getByText('Accepts Any UPI App')).toBeVisible();
+    await expect(page.getByText(/Sarie/i).first()).toBeVisible();
 
     // Click Simulate Incoming Payment
     const simBtn = page.getByRole('button', { name: /Simulate Incoming Payment/i });

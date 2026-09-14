@@ -83,7 +83,7 @@ export const AllServicesScreen: React.FC = () => {
         {/* Bill Payments Grid */}
         <div>
           <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-            Recharge & Bills
+            Recharge & Utilities (SADAD)
           </div>
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
@@ -91,37 +91,37 @@ export const AllServicesScreen: React.FC = () => {
               <ServiceCard
                 label="Water"
                 icon={<Droplets size={20} />}
-                onClick={() => handleOpenService('Water Bill', 'Water Board', 480, 'Consumer ID', <Droplets size={20} />)}
+                onClick={() => handleOpenService('Water Bill', 'National Water Company (NWC)', 220, 'NWC Account No', <Droplets size={20} />)}
               />
               <ServiceCard
-                label="Piped Gas"
+                label="Gas"
                 icon={<Flame size={20} />}
-                onClick={() => handleOpenService('Piped Gas', 'Mahanagar Gas', 750, 'Customer ID', <Flame size={20} />)}
+                onClick={() => handleOpenService('Gas Cylinder', 'National Gas (GASCO)', 45, 'Customer ID', <Flame size={20} />)}
               />
               <ServiceCard
-                label="LPG Cylinder"
-                icon={<Flame size={20} />}
-                onClick={() => handleOpenService('LPG Booking', 'HP Gas', 850, 'Consumer ID / Mobile', <Flame size={20} />)}
-              />
-              <ServiceCard
-                label="Prepaid"
+                label="STC"
                 icon={<Smartphone size={20} />}
-                onClick={() => handleOpenService('Mobile Prepaid', 'Jio Unlimited 5G', 666, '10-digit mobile number', <Smartphone size={20} />)}
+                onClick={() => handleOpenService('STC Sawa Recharge', 'STC Prepaid 5G', 115, '05X XXX XXXX', <Smartphone size={20} />)}
               />
               <ServiceCard
-                label="Postpaid"
+                label="Mobily"
                 icon={<PhoneCall size={20} />}
-                onClick={() => handleOpenService('Mobile Postpaid', 'Airtel Postpaid', 1199, '10-digit mobile number', <PhoneCall size={20} />)}
+                onClick={() => handleOpenService('Mobily Postpaid', 'Mobily Mawaheb', 172, '05X XXX XXXX', <PhoneCall size={20} />)}
               />
               <ServiceCard
-                label="Broadband"
+                label="Zain 5G"
                 icon={<Globe size={20} />}
-                onClick={() => handleOpenService('Broadband', 'Airtel Xstream', 999, 'Account Number', <Globe size={20} />)}
+                onClick={() => handleOpenService('Zain Fiber & 5G', 'Zain KSA', 287, 'Account Number', <Globe size={20} />)}
               />
               <ServiceCard
-                label="DTH / TV"
+                label="Shahid VIP"
                 icon={<Tv size={20} />}
-                onClick={() => handleOpenService('DTH Recharge', 'Tata Play', 450, 'Subscriber ID', <Tv size={20} />)}
+                onClick={() => handleOpenService('Shahid / OSN', 'Shahid VIP Subscription', 49, 'Mobile or Email', <Tv size={20} />)}
+              />
+              <ServiceCard
+                label="Balady"
+                icon={<FileText size={20} />}
+                onClick={() => handleOpenService('Balady Services', 'Municipal License & Fines', 450, 'Balady Invoice No', <FileText size={20} />)}
               />
             </div>
           </div>
@@ -130,25 +130,25 @@ export const AllServicesScreen: React.FC = () => {
         {/* Financial Services */}
         <div>
           <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-            Banking & Credit
+            Banking & Finance (SAMA)
           </div>
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
-              <ServiceCard label="Credit Card" icon={<CreditCard size={20} />} onClick={() => navigateTo('PAYMENT_METHODS')} />
+              <ServiceCard label="mada Cards" icon={<CreditCard size={20} />} onClick={() => navigateTo('PAYMENT_METHODS')} />
               <ServiceCard
                 label="Insurance"
                 icon={<ShieldCheck size={20} />}
-                onClick={() => handleOpenService('Insurance', 'HDFC Life', 3450, 'Policy Number', <ShieldCheck size={20} />)}
+                onClick={() => handleOpenService('Tawuniya Insurance', 'Motor & Health', 1250, 'Policy / National ID', <ShieldCheck size={20} />)}
               />
               <ServiceCard
-                label="Loan EMI"
+                label="Finance EMI"
                 icon={<Building size={20} />}
-                onClick={() => handleOpenService('Loan Repayment', 'HDFC Bank EMI', 4200, 'Loan Account No', <Building size={20} />)}
+                onClick={() => handleOpenService('Finance Installment', 'Al Rajhi / SNB Finance', 2150, 'Contract / IBAN No', <Building size={20} />)}
               />
               <ServiceCard
-                label="FASTag"
+                label="Mawgif"
                 icon={<Car size={20} />}
-                onClick={() => handleOpenService('FASTag', 'ICICI NETC FASTag', 500, 'Vehicle Number', <Car size={20} />)}
+                onClick={() => handleOpenService('Mawgif Parking', 'Riyadh & Jeddah Parking', 50, 'Plate / Mobile No', <Car size={20} />)}
               />
             </div>
           </div>
@@ -162,19 +162,19 @@ export const AllServicesScreen: React.FC = () => {
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
               <ServiceCard
-                label="Flights"
+                label="Saudia"
                 icon={<Plane size={20} />}
-                onClick={() => handleOpenService('Flight Booking', 'IndiGo Hyd-Bom', 4850, 'Passenger PNR', <Plane size={20} />)}
+                onClick={() => handleOpenService('Flight Booking', 'Saudia RUH ➔ JED', 650, 'Passenger PNR', <Plane size={20} />)}
               />
               <ServiceCard
-                label="Gift Cards"
+                label="Jarir"
                 icon={<Gift size={20} />}
-                onClick={() => handleOpenService('Gift Voucher', 'Amazon Voucher', 1000, 'Mobile / Email', <Gift size={20} />)}
+                onClick={() => handleOpenService('Jarir Gift Card', 'Jarir Bookstore Digital Voucher', 200, 'Mobile / Email', <Gift size={20} />)}
               />
               <ServiceCard
-                label="Property Tax"
+                label="Absher"
                 icon={<FileText size={20} />}
-                onClick={() => handleOpenService('Municipal Tax', 'Property Tax Assessment', 2400, 'Property Tax No', <FileText size={20} />)}
+                onClick={() => handleOpenService('Traffic Fines (Absher)', 'Traffic Violations Settlement', 300, 'National ID / Iqama', <FileText size={20} />)}
               />
             </div>
           </div>
@@ -237,7 +237,7 @@ export const AllServicesScreen: React.FC = () => {
 
             <div style={{ marginBottom: '24px' }}>
               <label htmlFor="modal-amt-input" style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
-                Amount (₹)
+                Amount (SAR)
               </label>
               <input
                 id="modal-amt-input"

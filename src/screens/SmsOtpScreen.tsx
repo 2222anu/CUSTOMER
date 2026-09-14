@@ -73,9 +73,9 @@ export const SmsOtpScreen: React.FC = () => {
               <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 8px 0' }}>
                 Verify Mobile Number
               </h2>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: '#33334D', border: '1px solid #4D4D6B', padding: '4px 14px', borderRadius: '12px' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: '#1E1E32', border: '1px solid #2C2C44', padding: '4px 14px', borderRadius: '12px' }}>
                 <span className="tabular-nums" style={{ fontSize: '13.5px', fontWeight: 800, color: '#7FE87F' }}>
-                  +91 {mobile}
+                  +966 {mobile}
                 </span>
               </div>
             </div>
@@ -171,7 +171,7 @@ export const SmsOtpScreen: React.FC = () => {
 
             {isResent && (
               <div style={{ textAlign: 'center', fontSize: '12px', color: '#7FE87F', fontWeight: 700 }}>
-                ✓ New 6-digit code dispatched to +91 {mobile}
+                ✓ New 6-digit code dispatched to +966 {mobile}
               </div>
             )}
           </div>

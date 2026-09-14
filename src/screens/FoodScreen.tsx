@@ -33,40 +33,40 @@ export const FoodScreen: React.FC = () => {
   const restaurants: Restaurant[] = [
     {
       id: 'res-1',
-      name: 'Cafe Aroma & Bakery',
-      rating: '4.8',
-      cuisine: 'Coffee, Fresh Pastries & Italian Breakfast',
+      name: 'Half Million Coffee',
+      rating: '4.9',
+      cuisine: 'Specialty Coffee, Spanish Latte & Pastries',
       offer: 'Flat 20% OFF with ALPH20',
-      deliveryTime: '20-25 mins',
+      deliveryTime: '15-20 mins',
       items: [
-        { id: 'i-1', name: 'Hazelnut Iced Latte', price: 210, qty: 1 },
-        { id: 'i-2', name: 'Avocado Toast & Poached Egg', price: 280, qty: 1 },
-        { id: 'i-3', name: 'Belgian Chocolate Croissant', price: 160, qty: 0 },
+        { id: 'i-1', name: 'Signature Spanish Latte', price: 24, qty: 1 },
+        { id: 'i-2', name: 'Pistachio Cruffin', price: 18, qty: 1 },
+        { id: 'i-3', name: 'Cardamom Iced Cold Brew', price: 22, qty: 0 },
       ],
     },
     {
       id: 'res-2',
-      name: 'Royal Biryani House',
+      name: 'Al Romansiah Mandi',
       rating: '4.9',
-      cuisine: 'Hyderabadi Dum Biryani & Kebabs',
-      offer: 'Free Starter on orders > ₹500',
-      deliveryTime: '30-35 mins',
+      cuisine: 'Authentic Saudi Kabsa, Mandi & Grills',
+      offer: 'Free Dessert on orders > SAR 100',
+      deliveryTime: '25-30 mins',
       items: [
-        { id: 'i-4', name: 'Special Mutton Dum Biryani', price: 420, qty: 1 },
-        { id: 'i-5', name: 'Chicken 65 Starter', price: 290, qty: 1 },
-        { id: 'i-6', name: 'Double Ka Meetha Dessert', price: 120, qty: 0 },
+        { id: 'i-4', name: 'Special Hashi Meat Mandi', price: 78, qty: 1 },
+        { id: 'i-5', name: 'Charcoal Madhbi Chicken', price: 36, qty: 1 },
+        { id: 'i-6', name: 'Fresh Cream Kunafa', price: 20, qty: 0 },
       ],
     },
     {
       id: 'res-3',
-      name: 'Green Bowl Eatery',
-      rating: '4.7',
-      cuisine: 'Healthy Bowls, Smoothies & Salads',
+      name: 'Boga Super Foods',
+      rating: '4.8',
+      cuisine: 'Healthy Bowls, Sandwiches & Fresh Juices',
       offer: '15% Cashback on alph pay',
-      deliveryTime: '25-30 mins',
+      deliveryTime: '20-25 mins',
       items: [
-        { id: 'i-7', name: 'Protein Loaded Quinoa Bowl', price: 340, qty: 1 },
-        { id: 'i-8', name: 'Berry Blast Smoothie', price: 190, qty: 1 },
+        { id: 'i-7', name: 'Smoked Salmon Quinoa Bowl', price: 48, qty: 1 },
+        { id: 'i-8', name: 'Fresh Taif Pomegranate Juice', price: 22, qty: 1 },
       ],
     },
   ];
@@ -285,7 +285,7 @@ export const FoodScreen: React.FC = () => {
                   <div>
                     <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{item.name}</div>
                     <div style={{ fontSize: '13px', fontWeight: 700, color: '#7FE87F', marginTop: '2px', fontVariantNumeric: 'tabular-nums' }}>
-                      ₹{item.price}
+                      SAR {item.price}
                     </div>
                   </div>
 
@@ -337,7 +337,7 @@ export const FoodScreen: React.FC = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', paddingTop: '12px', borderTop: '1px dashed #4D4D6B' }}>
               <span style={{ fontSize: '13px', fontWeight: 700, color: '#B3B3C2' }}>Total Bill Amount</span>
               <span style={{ fontSize: '20px', fontWeight: 900, color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>
-                ₹{calculateSubtotal().toLocaleString()}
+                SAR {calculateSubtotal().toLocaleString()}
               </span>
             </div>
 
@@ -357,7 +357,7 @@ export const FoodScreen: React.FC = () => {
                 cursor: calculateSubtotal() > 0 ? 'pointer' : 'not-allowed',
               }}
             >
-              Order & Pay ₹{calculateSubtotal().toLocaleString()} via UPI PIN
+              Order & Pay SAR {calculateSubtotal().toLocaleString()} via Sarie PIN
             </button>
           </div>
         </div>
@@ -425,7 +425,7 @@ export const FoodScreen: React.FC = () => {
                 </span>
               </div>
               <div style={{ fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}>
-                Paid ₹{orderConfirmed.totalAmount} via alph pay
+                Paid SAR {orderConfirmed.totalAmount} via alph pay
               </div>
             </div>
 

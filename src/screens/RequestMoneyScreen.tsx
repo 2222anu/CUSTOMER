@@ -9,10 +9,10 @@ export const RequestMoneyScreen: React.FC = () => {
   const { contacts, addMoneyRequest } = useApp();
   const [selectedContact, setSelectedContact] = useState<Contact>(contacts[0] || {
     id: 'c1',
-    name: 'Priya Menon',
-    upiId: 'priya@paytm',
-    avatarInitials: 'PM',
-    mobile: '+91 98765 00001',
+    name: 'Sara Al-Mansoor',
+    upiId: 'sara@sarie',
+    avatarInitials: 'SM',
+    mobile: '+966 55 876 5432',
   });
   const [amountStr, setAmountStr] = useState<string>('');
   const [note, setNote] = useState<string>('');
@@ -33,12 +33,12 @@ export const RequestMoneyScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
       <AppHeader title="Request Money" showBack />
 
       <div style={{ padding: '20px' }}>
         {isSuccess ? (
-          <div className="fade-in" style={{ textAlign: 'center', backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '20px', padding: '40px 20px' }}>
+          <div className="fade-in" style={{ textAlign: 'center', backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '20px', padding: '40px 20px' }}>
             <div
               style={{
                 width: '60px',
@@ -58,18 +58,18 @@ export const RequestMoneyScreen: React.FC = () => {
             <h3 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '6px', color: '#FFFFFF' }}>
               Request Sent Successfully!
             </h3>
-            <p style={{ color: '#B3B3C2', fontSize: '13px', margin: 0 }}>
-              Requested ₹{amountStr} from <strong style={{ color: '#FFFFFF' }}>{selectedContact.name}</strong>
+            <p style={{ color: '#A2A2BA', fontSize: '13px', margin: 0 }}>
+              Requested SAR {amountStr} from <strong style={{ color: '#FFFFFF' }}>{selectedContact.name}</strong>
             </p>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Selected Contact Card */}
-            <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px' }}>
+            <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px' }}>
               <label
                 style={{
                   fontSize: '11px',
-                  color: '#B3B3C2',
+                  color: '#A2A2BA',
                   fontWeight: 800,
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
@@ -86,8 +86,8 @@ export const RequestMoneyScreen: React.FC = () => {
                     width: '44px',
                     height: '44px',
                     borderRadius: '12px',
-                    backgroundColor: '#3A3A52',
-                    border: '1px solid #4D4D6B',
+                    backgroundColor: '#1E1E32',
+                    border: '1px solid #2C2C44',
                     color: '#7FE87F',
                     display: 'flex',
                     alignItems: 'center',
@@ -100,7 +100,7 @@ export const RequestMoneyScreen: React.FC = () => {
                 </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>{selectedContact.name}</div>
-                  <div style={{ fontSize: '12px', color: '#B3B3C2' }}>{selectedContact.upiId}</div>
+                  <div style={{ fontSize: '12px', color: '#A2A2BA' }}>{selectedContact.upiId}</div>
                 </div>
               </div>
 
@@ -112,8 +112,8 @@ export const RequestMoneyScreen: React.FC = () => {
                 }}
                 style={{
                   width: '100%',
-                  backgroundColor: '#1A1A2E',
-                  border: '1px solid #4D4D6B',
+                  backgroundColor: '#1E1E32',
+                  border: '1px solid #2C2C44',
                   borderRadius: '10px',
                   padding: '10px 12px',
                   color: '#FFFFFF',
@@ -123,7 +123,7 @@ export const RequestMoneyScreen: React.FC = () => {
                 }}
               >
                 {contacts.map((c) => (
-                  <option key={c.id} value={c.id} style={{ backgroundColor: '#1A1A2E', color: '#FFFFFF' }}>
+                  <option key={c.id} value={c.id} style={{ backgroundColor: '#1E1E32', color: '#FFFFFF' }}>
                     {c.name} ({c.upiId})
                   </option>
                 ))}
@@ -131,11 +131,11 @@ export const RequestMoneyScreen: React.FC = () => {
             </div>
 
             {/* Enter Amount Card */}
-            <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '20px' }}>
+            <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '20px' }}>
               <label
                 style={{
                   fontSize: '11px',
-                  color: '#B3B3C2',
+                  color: '#A2A2BA',
                   fontWeight: 800,
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
@@ -150,14 +150,14 @@ export const RequestMoneyScreen: React.FC = () => {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  backgroundColor: '#1A1A2E',
+                  backgroundColor: '#1E1E32',
                   border: '1.5px solid #7FE87F',
                   borderRadius: '14px',
                   padding: '12px 18px',
                   marginBottom: '14px',
                 }}
               >
-                <span style={{ fontSize: '26px', fontWeight: 800, color: '#7FE87F', marginRight: '8px' }}>₹</span>
+                <span style={{ fontSize: '20px', fontWeight: 800, color: '#7FE87F', marginRight: '8px' }}>SAR</span>
                 <input
                   type="number"
                   value={amountStr}
@@ -178,7 +178,7 @@ export const RequestMoneyScreen: React.FC = () => {
 
               {/* Quick Amount Chips */}
               <div style={{ display: 'flex', gap: '8px', overflowX: 'auto' }}>
-                {[100, 500, 1000, 2000].map((quickAmt) => (
+                {[50, 100, 500, 1000].map((quickAmt) => (
                   <button
                     key={quickAmt}
                     type="button"
@@ -191,8 +191,8 @@ export const RequestMoneyScreen: React.FC = () => {
                       flex: 1,
                       padding: '7px 0',
                       borderRadius: '10px',
-                      backgroundColor: '#3A3A52',
-                      border: '1px solid #4D4D6B',
+                      backgroundColor: '#1E1E32',
+                      border: '1px solid #2C2C44',
                       color: '#7FE87F',
                       fontSize: '12px',
                       fontWeight: 700,
@@ -200,18 +200,18 @@ export const RequestMoneyScreen: React.FC = () => {
                       whiteSpace: 'nowrap',
                     }}
                   >
-                    +₹{quickAmt}
+                    +SAR {quickAmt}
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Note Card */}
-            <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px' }}>
+            <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px' }}>
               <label
                 style={{
                   fontSize: '11px',
-                  color: '#B3B3C2',
+                  color: '#A2A2BA',
                   fontWeight: 800,
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
@@ -228,8 +228,8 @@ export const RequestMoneyScreen: React.FC = () => {
                 placeholder="What is this request for? (e.g. Dinner, Rent)"
                 style={{
                   width: '100%',
-                  backgroundColor: '#1A1A2E',
-                  border: '1.5px solid #4D4D6B',
+                  backgroundColor: '#1E1E32',
+                  border: '1px solid #2C2C44',
                   borderRadius: '12px',
                   padding: '12px 14px',
                   color: '#FFFFFF',

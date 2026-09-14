@@ -41,8 +41,8 @@ export const ManageScene: React.FC = () => {
               <Landmark size={18} />
             </div>
             <div>
-              <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>HDFC Bank</div>
-              <div style={{ fontSize: '11px', color: '#A2A2BA' }}>•••• 4821</div>
+              <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>Al Rajhi Bank</div>
+              <div style={{ fontSize: '11px', color: '#A2A2BA' }}>SA03 •••• 4821</div>
             </div>
           </div>
           <span
@@ -61,7 +61,7 @@ export const ManageScene: React.FC = () => {
 
         <div style={{ marginTop: '16px' }}>
           <div style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 600 }}>Available Balance</div>
-          <div style={{ fontSize: '24px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px' }}>₹48,250.00</div>
+          <div style={{ fontSize: '24px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px' }}>SAR 48,250.00</div>
         </div>
       </div>
 
@@ -79,7 +79,7 @@ export const ManageScene: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#7FE87F', fontSize: '11px', fontWeight: 700 }}>
             <ArrowDownLeft size={14} /> Received
           </div>
-          <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', marginTop: '4px' }}>₹18,400</div>
+          <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', marginTop: '4px' }}>SAR 18,400</div>
         </div>
 
         <div
@@ -94,7 +94,7 @@ export const ManageScene: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#A2A2BA', fontSize: '11px', fontWeight: 700 }}>
             <ArrowUpRight size={14} /> Spent
           </div>
-          <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', marginTop: '4px' }}>₹6,150</div>
+          <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', marginTop: '4px' }}>SAR 6,150</div>
         </div>
       </div>
     </div>

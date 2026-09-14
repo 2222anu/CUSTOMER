@@ -158,9 +158,9 @@ export const PrivacyScreen: React.FC = () => {
       {/* Privacy Statement Modal */}
       <Modal isOpen={activeModal === 'terms'} onClose={() => setActiveModal(null)} title="Privacy Statement">
         <div style={{ maxHeight: '300px', overflowY: 'auto', fontSize: '13px', color: '#B3B3C2', lineHeight: '1.6', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <p style={{ margin: 0 }}><strong style={{ color: '#FFFFFF' }}>1. Information Collection:</strong> alph pay collects device information, SIM serial data, and mobile numbers for mandatory UPI multi-factor authentication mandated by NPCI.</p>
+          <p style={{ margin: 0 }}><strong style={{ color: '#FFFFFF' }}>1. Information Collection:</strong> alph pay collects device information, SIM serial data, and mobile numbers for mandatory multi-factor authentication mandated by SAMA and the Sarie payment system.</p>
           <p style={{ margin: 0 }}><strong style={{ color: '#FFFFFF' }}>2. Data Encryption:</strong> All transaction payload communication is secured via TLS 1.3 and 256-bit AES end-to-end hardware encryption.</p>
-          <p style={{ margin: 0 }}><strong style={{ color: '#FFFFFF' }}>3. Third Party Policy:</strong> We never sell your personal data. Financial data is shared only with your authorized bank network for payment processing.</p>
+          <p style={{ margin: 0 }}><strong style={{ color: '#FFFFFF' }}>3. Third Party Policy:</strong> We never sell your personal data. Financial data is shared only with your authorized Saudi bank network for payment processing under SAMA regulations.</p>
         </div>
       </Modal>
     </div>

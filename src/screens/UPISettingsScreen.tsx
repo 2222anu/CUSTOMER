@@ -26,11 +26,11 @@ export const UPISettingsScreen: React.FC = () => {
     setPinError('');
 
     if (oldPin.length !== 4) {
-      setPinError('Old UPI PIN must be 4 digits');
+      setPinError('Old PIN must be 4 digits');
       return;
     }
     if (newPin.length !== 4) {
-      setPinError('New UPI PIN must be 4 digits');
+      setPinError('New PIN must be 4 digits');
       return;
     }
     if (newPin !== confirmPin) {
@@ -50,10 +50,10 @@ export const UPISettingsScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
-      <AppHeader title="UPI Settings" showBack showSettings={false} />
+      <AppHeader title="Sarie Settings" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
-        {/* Active UPI ID Banner */}
+        {/* Active Sarie ID Banner */}
         <div
           style={{
             backgroundColor: '#151524',
@@ -66,7 +66,7 @@ export const UPISettingsScreen: React.FC = () => {
           }}
         >
           <div style={{ fontSize: '11px', color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>
-            Primary UPI ID
+            Primary Sarie ID
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px' }}>
             <span style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em' }}>
@@ -99,26 +99,26 @@ export const UPISettingsScreen: React.FC = () => {
         <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', boxShadow: 'none' }}>
           <ListRow
             icon={<QrCode size={18} color="#7FE87F" />}
-            label="My QR Code"
+            label="My Sarie QR Code"
             onClick={() => navigateTo('RECEIVE')}
           />
           <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<Key size={18} color="#7FE87F" />}
-            label="Change UPI PIN"
+            label="Change Payment PIN"
             onClick={() => setIsPinModalOpen(true)}
           />
           <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<ShieldCheck size={18} color="#7FE87F" />}
-            label="Daily Limit"
-            rightElement={<span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 800, backgroundColor: '#1E1E32', border: '1px solid #2C2C44', padding: '3px 8px', borderRadius: '6px' }}>₹1,00,000 / day</span>}
+            label="Daily Transfer Limit"
+            rightElement={<span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 800, backgroundColor: '#1E1E32', border: '1px solid #2C2C44', padding: '3px 8px', borderRadius: '6px' }}>SAR 50,000 / day</span>}
           />
         </div>
       </div>
 
       {/* Change PIN Modal */}
-      <Modal isOpen={isPinModalOpen} onClose={() => setIsPinModalOpen(false)} title="Change UPI PIN">
+      <Modal isOpen={isPinModalOpen} onClose={() => setIsPinModalOpen(false)} title="Change Payment PIN">
         {pinSuccess ? (
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
             <div
@@ -136,7 +136,7 @@ export const UPISettingsScreen: React.FC = () => {
             >
               <Check size={28} />
             </div>
-            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>UPI PIN Updated</h4>
+            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>Payment PIN Updated</h4>
           </div>
         ) : (
           <form onSubmit={handlePinSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>

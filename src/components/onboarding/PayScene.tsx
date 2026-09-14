@@ -46,8 +46,8 @@ export const PayScene: React.FC = () => {
         </div>
 
         <div style={{ fontSize: '12px', color: '#A2A2BA', fontWeight: 600 }}>Payment to</div>
-        <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', marginTop: '2px' }}>Blue Tokai Coffee</div>
-        <div style={{ fontSize: '26px', fontWeight: 900, color: '#7FE87F', margin: '8px 0' }}>₹340.00</div>
+        <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', marginTop: '2px' }}>Half Million Coffee</div>
+        <div style={{ fontSize: '26px', fontWeight: 900, color: '#7FE87F', margin: '8px 0' }}>SAR 34.00</div>
 
         {/* Status Pill */}
         <div
@@ -64,7 +64,7 @@ export const PayScene: React.FC = () => {
           }}
         >
           <CheckCircle2 size={13} />
-          <span>Instant UPI Settlement</span>
+          <span>Instant Sarie Settlement</span>
         </div>
       </div>
 
@@ -83,7 +83,7 @@ export const PayScene: React.FC = () => {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <QrCode size={18} color="#7FE87F" />
-          <span style={{ fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}>Scan Any UPI QR</span>
+          <span style={{ fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}>Scan Any Sarie QR</span>
         </div>
         <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>Zero Fee</span>
       </div>

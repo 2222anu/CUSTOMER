@@ -249,13 +249,13 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                     Available Balance
                   </div>
                   <div style={{ fontSize: '18px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px', letterSpacing: '0.01em' }}>
-                    {bank.showBalance ? formatCurrency(bank.balance) : '₹ ••••••••'}
+                    {bank.showBalance ? formatCurrency(bank.balance) : 'SAR ••••••••'}
                   </div>
                 </div>
 
                 <button
                   onClick={(e) => handleCardBalanceClick(bank, e)}
-                  title="Check Bank Balance with UPI PIN"
+                  title="Check Bank Balance with Sarie PIN"
                   className="interactive-tap"
                   style={{
                     backgroundColor: bank.showBalance ? '#1E1E32' : '#7FE87F',

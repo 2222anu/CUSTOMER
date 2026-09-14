@@ -8,28 +8,28 @@ export const PaymentMethodsScreen: React.FC = () => {
   const { navigateTo } = useApp();
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '36px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '36px', color: '#FFFFFF' }}>
       <AppHeader title="Payment Methods" showBack showSettings={false} />
 
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '22px' }}>
-        {/* UPI Accounts Section */}
+        {/* Sarie Accounts Section */}
         <div>
           <div
             style={{
               fontSize: '11px',
               fontWeight: 800,
-              color: '#B3B3C2',
+              color: '#A2A2BA',
               textTransform: 'uppercase',
               letterSpacing: '0.06em',
               marginBottom: '10px',
               marginLeft: '4px',
             }}
           >
-            Linked UPI Accounts
+            Linked Sarie Bank Accounts
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {/* Primary ICICI Bank Card */}
+            {/* Primary Al Rajhi Bank Card */}
             <div
               onClick={() => navigateTo('BANK_ACCOUNTS')}
               className="interactive-tap"
@@ -52,8 +52,8 @@ export const PaymentMethodsScreen: React.FC = () => {
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    backgroundColor: '#1A1A2E',
-                    border: '1px solid #4D4D6B',
+                    backgroundColor: '#1E1E32',
+                    border: '1px solid #2C2C44',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -63,9 +63,9 @@ export const PaymentMethodsScreen: React.FC = () => {
                   <Landmark size={20} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>ICICI Bank Savings</div>
-                  <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
-                    •••• 3616
+                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>Al Rajhi Bank Current</div>
+                  <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
+                    SA03 •••• 4821
                   </div>
                 </div>
               </div>
@@ -88,13 +88,13 @@ export const PaymentMethodsScreen: React.FC = () => {
               </div>
             </div>
 
-            {/* Yes Bank Card */}
+            {/* SNB Card */}
             <div
               onClick={() => navigateTo('BANK_ACCOUNTS')}
               className="interactive-tap"
               style={{
-                backgroundColor: '#2A2A3E',
-                border: '1px solid #4D4D6B',
+                backgroundColor: '#151524',
+                border: '1px solid #2C2C44',
                 borderRadius: '16px',
                 padding: '16px 18px',
                 cursor: 'pointer',
@@ -109,8 +109,8 @@ export const PaymentMethodsScreen: React.FC = () => {
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    backgroundColor: '#1A1A2E',
-                    border: '1px solid #4D4D6B',
+                    backgroundColor: '#1E1E32',
+                    border: '1px solid #2C2C44',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -120,17 +120,17 @@ export const PaymentMethodsScreen: React.FC = () => {
                   <Landmark size={20} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>Yes Bank Savings</div>
-                  <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
-                    •••• 8821
+                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>Saudi National Bank (SNB)</div>
+                  <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
+                    SA58 •••• 1092
                   </div>
                 </div>
               </div>
 
               <div
                 style={{
-                  backgroundColor: '#3A3A52',
-                  border: '1px solid #4D4D6B',
+                  backgroundColor: '#1E1E32',
+                  border: '1px solid #2C2C44',
                   color: '#7FE87F',
                   fontSize: '10.5px',
                   fontWeight: 800,
@@ -144,26 +144,26 @@ export const PaymentMethodsScreen: React.FC = () => {
           </div>
         </div>
 
-        {/* Credit & RuPay Cards Section */}
+        {/* Saved mada Debit & Credit Cards */}
         <div>
           <div
             style={{
               fontSize: '11px',
               fontWeight: 800,
-              color: '#B3B3C2',
+              color: '#A2A2BA',
               textTransform: 'uppercase',
               letterSpacing: '0.06em',
               marginBottom: '10px',
               marginLeft: '4px',
             }}
           >
-            Saved Credit & RuPay Cards
+            Saved mada & Credit Cards
           </div>
 
           <div
             style={{
-              backgroundColor: '#2A2A3E',
-              border: '1px solid #4D4D6B',
+              backgroundColor: '#151524',
+              border: '1px solid #2C2C44',
               borderRadius: '16px',
               padding: '16px 18px',
               display: 'flex',
@@ -177,8 +177,8 @@ export const PaymentMethodsScreen: React.FC = () => {
                   width: '42px',
                   height: '42px',
                   borderRadius: '12px',
-                  backgroundColor: '#1A1A2E',
-                  border: '1px solid #4D4D6B',
+                  backgroundColor: '#1E1E32',
+                  border: '1px solid #2C2C44',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -188,22 +188,22 @@ export const PaymentMethodsScreen: React.FC = () => {
                 <CreditCard size={20} />
               </div>
               <div>
-                <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>ICICI RuPay Credit Card</div>
-                <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
-                  •••• 9901 &bull; UPI Enabled
+                <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>mada Debit Card (Riyad Bank)</div>
+                <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
+                  •••• 9901 &bull; Sarie & mada Pay
                 </div>
               </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Wifi size={16} color="#808099" />
+              <Wifi size={16} color="#6E6E85" />
               <span
                 style={{
                   fontSize: '10.5px',
                   fontWeight: 800,
                   color: '#7FE87F',
-                  backgroundColor: '#3A3A52',
-                  border: '1px solid #4D4D6B',
+                  backgroundColor: '#1E1E32',
+                  border: '1px solid #2C2C44',
                   padding: '3px 8px',
                   borderRadius: '10px',
                 }}
@@ -224,8 +224,8 @@ export const PaymentMethodsScreen: React.FC = () => {
         {/* Security Footer */}
         <div style={{ marginTop: '8px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
           <ShieldCheck size={13} color="#7FE87F" />
-          <span style={{ fontSize: '11px', color: '#808099', fontWeight: 600 }}>
-            Tokenized Card Payments &bull; RBI & NPCI Secured
+          <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 600 }}>
+            Tokenized Card Payments &bull; SAMA & Sarie Secured
           </span>
         </div>
       </div>

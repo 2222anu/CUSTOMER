@@ -28,15 +28,15 @@ export const ElectricityScreen: React.FC = () => {
     if (!bill) return;
 
     openPinModal({
-      title: 'State Power Corporation',
+      title: 'Saudi Electricity Company (SEC)',
       amount: bill.amount,
-      subTitle: `Electricity Bill • ID: ${bill.consumerNumber}`,
+      subTitle: `SEC Bill • SADAD Account: ${bill.consumerNumber}`,
       onSuccess: async () => {
         const txn = await completePayment({
           title: bill.providerName,
-          subTitle: 'Electricity Bill Payment',
+          subTitle: 'SADAD Electricity Bill Payment',
           amount: bill.amount,
-          avatarInitials: 'SP',
+          avatarInitials: 'SE',
           category: 'Bills',
         });
         navigateTo('PAYMENT_SUCCESS', { transaction: txn });
@@ -84,7 +84,7 @@ export const ElectricityScreen: React.FC = () => {
             Electricity Bill
           </h2>
           <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 800, marginTop: '4px' }}>
-            TSSPDCL • Verified
+            Saudi Electricity Company (SEC) • SADAD Verified
           </div>
         </div>
 
@@ -103,7 +103,7 @@ export const ElectricityScreen: React.FC = () => {
               marginLeft: '4px',
             }}
           >
-            Consumer Number
+            SADAD Account / Consumer Number
           </label>
           <div
             style={{

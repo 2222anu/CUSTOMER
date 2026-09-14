@@ -89,7 +89,7 @@ export const BankAccountsScreen: React.FC = () => {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>
-                  Linked UPI Accounts
+                  Linked Sarie Bank Accounts
                 </span>
                 <span
                   style={{
@@ -107,7 +107,7 @@ export const BankAccountsScreen: React.FC = () => {
               </div>
               <div style={{ fontSize: '11.5px', color: '#B3B3C2', fontWeight: 600, marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
                 <ShieldCheck size={13} color="#7FE87F" />
-                <span>NPCI / BHIM UPI Secured</span>
+                <span>SAMA / Sarie Network Secured</span>
               </div>
             </div>
           </div>
@@ -248,7 +248,7 @@ export const BankAccountsScreen: React.FC = () => {
                         Available Balance
                       </div>
                       <div className="tabular-nums" style={{ fontSize: '19px', fontWeight: 900, color: '#7FE87F', marginTop: '2px', letterSpacing: '0.02em' }}>
-                        {bank.showBalance ? formatCurrency(bank.balance) : '₹ ••••••••'}
+                        {bank.showBalance ? formatCurrency(bank.balance) : 'SAR ••••••••'}
                       </div>
                     </div>
 
@@ -395,7 +395,7 @@ export const BankAccountsScreen: React.FC = () => {
                       Available Balance
                     </div>
                     <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px', letterSpacing: '0.01em' }}>
-                      {bank.showBalance ? formatCurrency(bank.balance) : '₹ ••••••••'}
+                      {bank.showBalance ? formatCurrency(bank.balance) : 'SAR ••••••••'}
                     </div>
                   </div>
 
@@ -477,11 +477,11 @@ export const BankAccountsScreen: React.FC = () => {
           <Plus size={18} /> Add New Bank Account
         </PrimaryButton>
 
-        {/* Security & NPCI Trust Footer */}
+        {/* Security & SAMA Trust Footer */}
         <div style={{ marginTop: '22px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
           <Lock size={13} color="#808099" />
           <span style={{ fontSize: '11px', color: '#808099', fontWeight: 600 }}>
-            256-Bit Hardware Encrypted &bull; NPCI Regulated
+            256-Bit Hardware Encrypted &bull; SAMA & Sarie Regulated
           </span>
         </div>
       </div>

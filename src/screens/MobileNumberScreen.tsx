@@ -3,17 +3,16 @@ import { User as UserIcon, ArrowRight, ShieldCheck, Lock } from 'lucide-react';
 import { AlphPayLogo } from '../components/AlphPayLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
-import { designSystem } from '../design-system';
 
 export const MobileNumberScreen: React.FC = () => {
   const { navigateTo, user, updateUser, setIsLanguageModalOpen, language } = useApp();
-  const [fullName, setFullName] = useState<string>(user.name || 'Anu');
-  const [mobileNumber, setMobileNumber] = useState<string>('9876543210');
+  const [fullName, setFullName] = useState<string>(user.name || 'Fahad Al-Harbi');
+  const [mobileNumber, setMobileNumber] = useState<string>('501234567');
 
   const handleContinue = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (mobileNumber.length >= 10 && fullName.trim().length > 0) {
-      updateUser({ name: fullName, mobile: `+91 ${mobileNumber}` });
+    if (mobileNumber.length >= 9 && fullName.trim().length > 0) {
+      updateUser({ name: fullName, mobile: `+966 ${mobileNumber}` });
       navigateTo('SMS_OTP', { mobile: mobileNumber, name: fullName });
     }
   };
@@ -39,8 +38,8 @@ export const MobileNumberScreen: React.FC = () => {
             onClick={() => setIsLanguageModalOpen(true)}
             className="interactive-tap"
             style={{
-              backgroundColor: '#2A2A3E',
-              border: '1px solid #4D4D6B',
+              backgroundColor: '#151524',
+              border: '1px solid #2C2C44',
               borderRadius: '20px',
               padding: '6px 14px',
               fontSize: '12px',
@@ -60,8 +59,8 @@ export const MobileNumberScreen: React.FC = () => {
         {/* Security Tag Header */}
         <div
           style={{
-            backgroundColor: '#2A2A3E',
-            border: '1px solid #4D4D6B',
+            backgroundColor: '#151524',
+            border: '1px solid #2C2C44',
             borderRadius: '16px',
             padding: '16px 18px',
             color: '#FFFFFF',
@@ -77,8 +76,8 @@ export const MobileNumberScreen: React.FC = () => {
               height: '38px',
               borderRadius: '10px',
               backgroundColor: 'rgba(127, 232, 127, 0.15)',
+              border: '1px solid rgba(127, 232, 127, 0.4)',
               color: '#7FE87F',
-              border: '1px solid rgba(127, 232, 127, 0.3)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -88,75 +87,48 @@ export const MobileNumberScreen: React.FC = () => {
             <ShieldCheck size={20} />
           </div>
           <div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>Secure Sign In & UPI Setup</div>
-            <div style={{ fontSize: '12px', color: '#B3B3C2' }}>Enter your bank-registered mobile number</div>
+            <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>SAMA Regulated &bull; Sarie Enabled</div>
+            <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px' }}>
+              Instant Saudi payments via national banking rail
+            </div>
           </div>
         </div>
 
-        {/* Main Input Form Card */}
-        <form
-          onSubmit={handleContinue}
-          style={{
-            backgroundColor: '#2A2A3E',
-            border: '1px solid #4D4D6B',
-            borderRadius: '16px',
-            padding: '22px 20px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '18px',
-            boxShadow: designSystem.shadows.md,
-          }}
-        >
+        {/* Main Content Form */}
+        <form onSubmit={handleContinue} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {/* Full Name Input */}
           <div>
             <label
-              htmlFor="name-input"
+              htmlFor="fullname-input"
               style={{
                 fontSize: '11px',
-                color: '#B3B3C2',
                 fontWeight: 800,
+                color: '#A2A2BA',
                 textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-                marginBottom: '6px',
-                display: 'flex',
-                justifyContent: 'space-between',
+                letterSpacing: '0.06em',
+                marginBottom: '8px',
+                display: 'block',
               }}
             >
-              <span>Full Name</span>
-              <span style={{ color: '#7FE87F', textTransform: 'none', fontWeight: 700 }}>As per bank records</span>
+              Full Name (as per National ID / Iqama)
             </label>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                backgroundColor: '#1A1A2E',
-                border: '1.5px solid #4D4D6B',
-                borderRadius: '10px',
+                backgroundColor: '#151524',
+                border: '1px solid #2C2C44',
+                borderRadius: '14px',
                 padding: '12px 14px',
               }}
             >
-              <div
-                style={{
-                  width: '30px',
-                  height: '30px',
-                  borderRadius: '8px',
-                  backgroundColor: '#33334D',
-                  color: '#7FE87F',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginRight: '10px',
-                  flexShrink: 0,
-                }}
-              >
-                <UserIcon size={16} />
-              </div>
+              <UserIcon size={18} color="#7FE87F" style={{ marginRight: '10px', flexShrink: 0 }} />
               <input
-                id="name-input"
+                id="fullname-input"
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                placeholder="Enter your full name"
+                placeholder="Fahad Al-Harbi"
                 required
                 style={{
                   background: 'none',
@@ -177,24 +149,24 @@ export const MobileNumberScreen: React.FC = () => {
               htmlFor="mobile-input"
               style={{
                 fontSize: '11px',
-                color: '#B3B3C2',
                 fontWeight: 800,
+                color: '#A2A2BA',
                 textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-                marginBottom: '6px',
+                letterSpacing: '0.06em',
+                marginBottom: '8px',
                 display: 'block',
               }}
             >
-              Mobile Number
+              Saudi Mobile Number
             </label>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                backgroundColor: '#1A1A2E',
-                border: '1.5px solid #7FE87F',
-                borderRadius: '10px',
-                padding: '10px 14px',
+                backgroundColor: '#151524',
+                border: '1px solid #2C2C44',
+                borderRadius: '14px',
+                padding: '12px 14px',
               }}
             >
               {/* Country Code Pill */}
@@ -205,23 +177,23 @@ export const MobileNumberScreen: React.FC = () => {
                   gap: '6px',
                   paddingRight: '12px',
                   marginRight: '12px',
-                  borderRight: '1px solid #4D4D6B',
+                  borderRight: '1px solid #2C2C44',
                   fontWeight: 800,
                   fontSize: '14px',
                   color: '#FFFFFF',
                 }}
               >
-                <span>🇮🇳</span>
-                <span>+91</span>
+                <span>🇸🇦</span>
+                <span>+966</span>
               </div>
 
               <input
                 id="mobile-input"
                 type="tel"
                 value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, '').slice(0, 10))}
-                placeholder="98765 43210"
-                maxLength={10}
+                onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, '').slice(0, 9))}
+                placeholder="50 123 4567"
+                maxLength={9}
                 required
                 style={{
                   background: 'none',
@@ -238,7 +210,7 @@ export const MobileNumberScreen: React.FC = () => {
             </div>
           </div>
 
-          <PrimaryButton type="submit" disabled={mobileNumber.length < 10 || fullName.trim().length === 0}>
+          <PrimaryButton type="submit" disabled={mobileNumber.length < 9 || fullName.trim().length === 0}>
             Get OTP & Verify <ArrowRight size={18} />
           </PrimaryButton>
         </form>
@@ -246,9 +218,9 @@ export const MobileNumberScreen: React.FC = () => {
 
       {/* Security Trust Badges Footer */}
       <div style={{ marginTop: '20px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', color: '#808099', fontWeight: 700 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', color: '#6E6E85', fontWeight: 700 }}>
           <Lock size={12} color="#7FE87F" />
-          <span>256-Bit Hardware Encrypted &bull; NPCI / BHIM UPI Network</span>
+          <span>256-Bit Hardware Encrypted &bull; SAMA & Sarie Network</span>
         </div>
       </div>
     </div>

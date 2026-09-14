@@ -18,26 +18,26 @@ export const RewardsScreen: React.FC = () => {
   const [cards, setCards] = useState<ScratchCardItem[]>([
     {
       id: 'sc-1',
-      title: 'UPI Transfer Reward',
-      subtitle: 'Earned on ₹2,620 Electricity Payment',
-      rewardText: '₹150 Instant Cashback',
+      title: 'Sarie Transfer Reward',
+      subtitle: 'Earned on SAR 2,620 SEC Bill Payment',
+      rewardText: 'SAR 15 Instant Cashback',
       rewardType: 'cashback',
-      amount: 150,
+      amount: 15,
       isScratched: false,
     },
     {
       id: 'sc-2',
       title: 'Merchant Super Saver',
-      subtitle: 'Earned at Star Supermarket',
+      subtitle: 'Earned at Panda Supermarket',
       rewardText: 'Flat 25% Off Food & Groceries',
       rewardType: 'voucher',
-      code: 'ALPHFOOD25',
+      code: 'PANDAFOOD25',
       isScratched: false,
     },
     {
       id: 'sc-3',
       title: 'Weekend Bonus Scratch',
-      subtitle: 'Special reward for 5+ UPI transactions',
+      subtitle: 'Special reward for 5+ Sarie transactions',
       rewardText: '+500 Extra AlphPoints',
       rewardType: 'points',
       amount: 500,
@@ -46,10 +46,10 @@ export const RewardsScreen: React.FC = () => {
     {
       id: 'sc-4',
       title: 'Travel Special Voucher',
-      subtitle: 'Flight booking discount card',
-      rewardText: 'Flat ₹750 Flight Discount',
+      subtitle: 'Saudia flight discount card',
+      rewardText: 'Flat SAR 150 Flight Discount',
       rewardType: 'voucher',
-      code: 'FLYALPH750',
+      code: 'FLYSAR150',
       isScratched: true,
     },
   ]);
@@ -84,14 +84,14 @@ export const RewardsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
       <AppHeader title="Rewards & Scratch Cards" showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* AlphPoints Balance Hero Banner */}
         <div
           style={{
-            backgroundColor: '#2A2A3E',
+            backgroundColor: '#151524',
             border: '1.5px solid rgba(127, 232, 127, 0.35)',
             borderRadius: '20px',
             padding: '24px 20px',
@@ -122,8 +122,8 @@ export const RewardsScreen: React.FC = () => {
           <h2 style={{ fontSize: '26px', fontWeight: 900, color: '#FFFFFF', margin: '4px 0 6px 0', fontVariantNumeric: 'tabular-nums' }}>
             {points.toLocaleString()} AlphPoints
           </h2>
-          <p style={{ fontSize: '12px', color: '#B3B3C2', margin: 0 }}>
-            Earn 10 AlphPoints on every ₹100 spent via alph pay
+          <p style={{ fontSize: '12px', color: '#A2A2BA', margin: 0 }}>
+            Earn 10 AlphPoints on every SAR 100 spent via alph pay
           </p>
         </div>
 

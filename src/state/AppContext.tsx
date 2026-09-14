@@ -97,26 +97,24 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const FREQUENT_CONTACTS: Contact[] = [
-  { id: 'c-1', name: 'Rahul Sharma', upiId: 'rahul@upi', mobile: '+91 98123 45678', avatarInitials: 'RS' },
-  { id: 'c-2', name: 'Ajay Singh', upiId: 'ajay@okicici', mobile: '+91 98234 56789', avatarInitials: 'AS' },
-  { id: 'c-3', name: 'Priya Menon', upiId: 'priya@paytm', mobile: '+91 98345 67890', avatarInitials: 'PM' },
-  { id: 'c-4', name: 'Amit Verma', upiId: 'amit@ybl', mobile: '+91 98456 78901', avatarInitials: 'AV' },
-  { id: 'c-5', name: 'Sara Al Mansoori', upiId: 'sara@alphpay', mobile: '+971 50 123 4567', avatarInitials: 'SM' },
-  { id: 'c-6', name: 'Omar Khalid', upiId: 'omar@alphpay', mobile: '+971 52 987 6543', avatarInitials: 'OK' },
+  { id: 'c-1', name: 'Tariq Al-Otaibi', upiId: 'tariq@sarie', mobile: '+966 50 234 5678', avatarInitials: 'TO' },
+  { id: 'c-2', name: 'Sara Al-Mansoor', upiId: 'sara@sarie', mobile: '+966 55 876 5432', avatarInitials: 'SM' },
+  { id: 'c-3', name: 'Mohammed Al-Ghamdi', upiId: 'mohammed@sarie', mobile: '+966 54 345 6789', avatarInitials: 'MG' },
+  { id: 'c-4', name: 'Abdullah Al-Shehri', upiId: 'abdullah@sarie', mobile: '+966 56 789 0123', avatarInitials: 'AS' },
+  { id: 'c-5', name: 'Reem Al-Dosari', upiId: 'reem@sarie', mobile: '+966 59 112 2334', avatarInitials: 'RD' },
+  { id: 'c-6', name: 'Omar Khalid', upiId: 'omar@sarie', mobile: '+966 53 445 5667', avatarInitials: 'OK' },
 ];
 
 const MERCHANTS: Contact[] = [
-  { id: 'm-1', name: 'Star Supermarket', upiId: 'starsuper@icici', mobile: 'Merchant #8491', avatarInitials: 'SS', isMerchant: true },
-  { id: 'm-2', name: 'Cafe Aroma', upiId: 'cafearoma@paytm', mobile: 'Merchant #2041', avatarInitials: 'CA', isMerchant: true },
+  { id: 'm-1', name: 'Panda Supermarket', upiId: 'panda@sarie', mobile: 'Merchant #8491', avatarInitials: 'PS', isMerchant: true },
+  { id: 'm-2', name: 'Half Million Coffee', upiId: 'halfmillion@sarie', mobile: 'Merchant #2041', avatarInitials: 'HM', isMerchant: true },
 ];
 
 const INITIAL_SESSIONS: DeviceSession[] = [
-  { id: 's-1', deviceName: 'alph pay Android App', deviceType: 'mobile', location: 'Primary Phone - Android 14', lastActive: 'Active Now', isCurrent: true },
-  { id: 's-2', deviceName: 'alph pay iOS App', deviceType: 'mobile', location: 'iPhone 15 Pro', lastActive: '2 days ago', isCurrent: false },
-  { id: 's-3', deviceName: 'alph pay Android App', deviceType: 'mobile', location: 'Samsung Galaxy S23', lastActive: '1 week ago', isCurrent: false },
-  { id: 's-4', deviceName: 'Chrome on Windows', deviceType: 'browser', location: 'Chrome 128 / Windows 11', lastActive: 'Active Now', isCurrent: false },
-  { id: 's-5', deviceName: 'Edge on Windows', deviceType: 'browser', location: 'Edge 126 / Windows 11', lastActive: '3 days ago', isCurrent: false },
-  { id: 's-6', deviceName: 'Firefox on Windows', deviceType: 'browser', location: 'Firefox 120 / Windows 10', lastActive: '2 weeks ago', isCurrent: false },
+  { id: 's-1', deviceName: 'alph pay Android App', deviceType: 'mobile', location: 'Riyadh - Android 14', lastActive: 'Active Now', isCurrent: true },
+  { id: 's-2', deviceName: 'alph pay iOS App', deviceType: 'mobile', location: 'Jeddah - iPhone 15 Pro', lastActive: '2 days ago', isCurrent: false },
+  { id: 's-3', deviceName: 'Chrome on Mac', deviceType: 'browser', location: 'Riyadh - macOS Sequoia', lastActive: 'Active Now', isCurrent: false },
+  { id: 's-4', deviceName: 'Safari on iPhone', deviceType: 'browser', location: 'Dammam - iOS 18', lastActive: '3 days ago', isCurrent: false },
 ];
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -140,11 +138,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [activeTab, setActiveTabState] = useState<BottomTab>('home');
 
   const [user, setUser] = useState<User>({
-    name: 'Anu',
-    avatarInitials: 'AN',
-    upiId: 'anu@alphpay',
-    mobile: '+91 98765 43210',
-    email: 'anu@alphpay.com',
+    name: 'Fahad Al-Harbi',
+    avatarInitials: 'FA',
+    upiId: 'fahad@sarie',
+    mobile: '+966 50 123 4567',
+    email: 'fahad.alharbi@email.sa',
   });
 
   const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([]);
@@ -155,10 +153,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [moneyRequests, setMoneyRequests] = useState<MoneyRequest[]>([
     {
       id: 'req-1',
-      requesterName: 'Priya Menon',
-      upiId: 'priya@paytm',
+      requesterName: 'Sara Al-Mansoor',
+      upiId: 'sara@sarie',
       amount: 450.0,
-      note: 'Dinner split',
+      note: 'Dinner split at Al Nakheel',
       date: '1 day ago',
       status: 'pending',
     },

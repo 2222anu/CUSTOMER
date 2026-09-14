@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { User as UserIcon, ArrowRight, ShieldCheck, Lock } from 'lucide-react';
+import { User as UserIcon, ArrowRight } from 'lucide-react';
 import { AlphPayLogo } from '../components/AlphPayLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 export const MobileNumberScreen: React.FC = () => {
-  const { navigateTo, user, updateUser, setIsLanguageModalOpen, language } = useApp();
+  const { navigateTo, user, updateUser } = useApp();
   const [fullName, setFullName] = useState<string>(user.name || 'Fahad Al-Harbi');
   const [mobileNumber, setMobileNumber] = useState<string>('501234567');
 
@@ -23,83 +23,49 @@ export const MobileNumberScreen: React.FC = () => {
       className="fade-in"
       style={{
         minHeight: '100vh',
-        backgroundColor: '#0B0B14',
+        backgroundColor: '#000000',
+        color: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: '20px 20px 32px 20px',
+        padding: '50px 24px 36px 24px',
         boxSizing: 'border-box',
+        userSelect: 'none',
       }}
     >
-      {/* Top Header Bar with Language Switcher */}
-      <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <AlphPayLogo variant="header" size={26} themeMode="dark" />
-          <button
-            onClick={() => setIsLanguageModalOpen(true)}
-            className="interactive-tap"
-            style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
-              borderRadius: '20px',
-              padding: '6px 14px',
-              fontSize: '12px',
-              fontWeight: 800,
-              color: '#FFFFFF',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-            }}
-          >
-            <span>🌐</span>
-            <span>{language}</span>
-          </button>
-        </div>
-
-        {/* Security Tag Header */}
+      {/* Top Center: App Brand Logo */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
+          width: '100%',
+        }}
+      >
         <div
           style={{
+            width: '68px',
+            height: '68px',
+            borderRadius: '20px',
             backgroundColor: '#151524',
             border: '1px solid #2C2C44',
-            borderRadius: '16px',
-            padding: '16px 18px',
-            color: '#FFFFFF',
-            marginBottom: '20px',
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
+            justifyContent: 'center',
+            marginBottom: '14px',
+            boxShadow: 'none',
           }}
         >
-          <div
-            style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '10px',
-              backgroundColor: 'rgba(127, 232, 127, 0.15)',
-              border: '1px solid rgba(127, 232, 127, 0.4)',
-              color: '#7FE87F',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}
-          >
-            <ShieldCheck size={20} />
-          </div>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>SAMA Regulated &bull; Sarie Enabled</div>
-            <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px' }}>
-              Instant Saudi payments via national banking rail
-            </div>
-          </div>
-          <div style={{ paddingLeft: '8px', borderLeft: '1px solid #2C2C44' }}>
-            <SamaLogo height={16} themeMode="dark" />
-          </div>
+          <AlphPayLogo variant="icon" size={40} themeMode="dark" />
         </div>
 
-        {/* Main Content Form */}
-        <form onSubmit={handleContinue} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <AlphPayLogo variant="horizontal" size={28} themeMode="dark" />
+      </div>
+
+      {/* Main Form: Input Fields & Action Button */}
+      <div style={{ width: '100%', maxWidth: '360px', margin: '0 auto' }}>
+        <form onSubmit={handleContinue} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
           {/* Full Name Input */}
           <div>
             <label
@@ -123,10 +89,11 @@ export const MobileNumberScreen: React.FC = () => {
                 backgroundColor: '#151524',
                 border: '1px solid #2C2C44',
                 borderRadius: '14px',
-                padding: '12px 14px',
+                padding: '14px 16px',
+                transition: 'border-color 0.2s ease',
               }}
             >
-              <UserIcon size={18} color="#7FE87F" style={{ marginRight: '10px', flexShrink: 0 }} />
+              <UserIcon size={18} color="#7FE87F" style={{ marginRight: '12px', flexShrink: 0 }} />
               <input
                 id="fullname-input"
                 type="text"
@@ -147,7 +114,7 @@ export const MobileNumberScreen: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile Number Input */}
+          {/* Saudi Mobile Number Input */}
           <div>
             <label
               htmlFor="mobile-input"
@@ -170,7 +137,8 @@ export const MobileNumberScreen: React.FC = () => {
                 backgroundColor: '#151524',
                 border: '1px solid #2C2C44',
                 borderRadius: '14px',
-                padding: '12px 14px',
+                padding: '14px 16px',
+                transition: 'border-color 0.2s ease',
               }}
             >
               {/* Country Code Pill */}
@@ -214,18 +182,39 @@ export const MobileNumberScreen: React.FC = () => {
             </div>
           </div>
 
-          <PrimaryButton type="submit" disabled={mobileNumber.length < 9 || fullName.trim().length === 0}>
-            Get OTP & Verify <ArrowRight size={18} />
-          </PrimaryButton>
+          {/* Primary Submit Button */}
+          <div style={{ marginTop: '6px' }}>
+            <PrimaryButton type="submit" disabled={mobileNumber.length < 9 || fullName.trim().length === 0}>
+              Get OTP & Verify <ArrowRight size={18} />
+            </PrimaryButton>
+          </div>
         </form>
       </div>
 
-      {/* Security Trust Badges Footer */}
-      <div style={{ marginTop: '20px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', color: '#6E6E85', fontWeight: 700 }}>
-          <Lock size={12} color="#7FE87F" />
-          <span>256-Bit Hardware Encrypted &bull; SAMA & Sarie Network</span>
-        </div>
+      {/* Down in Center: Associated with SAMA */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '8px',
+          width: '100%',
+          textAlign: 'center',
+        }}
+      >
+        <span
+          style={{
+            fontSize: '11px',
+            color: '#6E6E85',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+          }}
+        >
+          Associated with
+        </span>
+        <SamaLogo height={20} themeMode="green" />
       </div>
     </div>
   );

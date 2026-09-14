@@ -35,7 +35,7 @@ const SCREENS = [
 const MODALS = [
   { name: 'LanguageModal', openMethod: 'setIsLanguageModalOpen', text: 'Select Language' },
   { name: 'LogoutModal', openMethod: 'setIsLogoutModalOpen', text: 'Log Out' },
-  { name: 'AddBankModal', openMethod: 'setIsAddBankModalOpen', text: 'Add Bank Account' },
+  { name: 'AddBankModal', openMethod: 'setIsAddBankModalOpen', text: 'Link Bank Account' },
   { name: 'AppLinksModal', openMethod: 'setIsAppLinksModalOpen', text: 'Application Links' },
   { name: 'EditProfileModal', openMethod: 'setIsEditProfileModalOpen', text: 'Profile' },
   {

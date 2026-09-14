@@ -10,12 +10,13 @@ interface BankCardCarouselProps {
 
 const getBankStyle = (bankName: string, isPrimary: boolean) => {
   const nameUpper = bankName.toUpperCase();
-  let tagText = bankName.toUpperCase();
-  if (nameUpper.includes('HDFC')) tagText = 'HDFC BANK';
-  else if (nameUpper.includes('STATE') || nameUpper.includes('SBI')) tagText = 'SBI';
-  else if (nameUpper.includes('ICICI')) tagText = 'ICICI BANK';
-  else if (nameUpper.includes('AXIS')) tagText = 'AXIS BANK';
-  else if (nameUpper.includes('YES')) tagText = 'YES BANK';
+  let tagText = bankName;
+  if (nameUpper.includes('RAJHI')) tagText = 'AL RAJHI BANK';
+  else if (nameUpper.includes('SNB') || nameUpper.includes('NATIONAL') || nameUpper.includes('AHLI')) tagText = 'SNB (AL AHLI)';
+  else if (nameUpper.includes('RIYAD')) tagText = 'RIYAD BANK';
+  else if (nameUpper.includes('ALINMA')) tagText = 'ALINMA BANK';
+  else if (nameUpper.includes('FRANSI') || nameUpper.includes('BSF')) tagText = 'BANQUE SAUDI FRANSI';
+  else if (nameUpper.includes('SAB') || nameUpper.includes('AWWAL')) tagText = 'SAB BANK';
 
   return {
     background: isPrimary
@@ -199,7 +200,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                       <span>{bank.accountType}</span>
                       <span>•</span>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: '#7FE87F', fontWeight: 600 }}>
-                        <ShieldCheck size={11} color="#7FE87F" /> UPI Linked
+                        <ShieldCheck size={11} color="#7FE87F" /> Sarie Linked
                       </span>
                     </div>
                   </div>

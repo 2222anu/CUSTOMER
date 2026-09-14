@@ -38,10 +38,10 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
         style={{
           width: '100%',
           maxWidth: '440px',
-          backgroundColor: '#2A2A3E',
+          backgroundColor: '#151524',
           borderTopLeftRadius: '20px',
           borderTopRightRadius: '20px',
-          borderTop: '1px solid #4D4D6B',
+          borderTop: '1px solid #2C2C44',
           padding: '24px 20px',
           boxSizing: 'border-box',
           animation: 'slideUpSheet 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -57,22 +57,22 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
 
         {/* Sheet Handle & Header */}
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '14px' }}>
-          <div style={{ width: '40px', height: '4px', borderRadius: '2px', backgroundColor: '#4D4D6B' }} />
+          <div style={{ width: '40px', height: '4px', borderRadius: '2px', backgroundColor: '#2C2C44' }} />
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <CheckCircle2 size={20} color="#7FE87F" />
             <span style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>
-              UPI Balance Verified
+              Sarie Balance Verified
             </span>
           </div>
           <button
             onClick={onClose}
             aria-label="Close"
             style={{
-              background: '#3A3A52',
-              border: '1px solid #4D4D6B',
+              background: '#1E1E32',
+              border: '1px solid #2C2C44',
               borderRadius: '50%',
               width: '32px',
               height: '32px',
@@ -80,7 +80,7 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              color: '#B3B3C2',
+              color: '#A2A2BA',
             }}
           >
             <X size={18} />
@@ -90,28 +90,28 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
         {/* Total Balance Card */}
         <div
           style={{
-            backgroundColor: '#1A1A2E',
-            border: '1px solid #4D4D6B',
-            borderRadius: '12px',
+            backgroundColor: '#1E1E32',
+            border: '1px solid #2C2C44',
+            borderRadius: '14px',
             padding: '16px',
             color: '#FFFFFF',
             marginBottom: '16px',
           }}
         >
-          <div style={{ fontSize: '11px', fontWeight: 700, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Total Available Balance
           </div>
           <div style={{ fontSize: '26px', fontWeight: 900, marginTop: '4px', letterSpacing: '0.01em', color: '#7FE87F' }}>
             {formatCurrency(totalBalance)}
           </div>
-          <div style={{ fontSize: '11px', color: '#808099', marginTop: '4px' }}>
+          <div style={{ fontSize: '11px', color: '#6E6E85', marginTop: '4px' }}>
             Across {bankAccounts.length} Linked Bank Accounts
           </div>
         </div>
 
         {/* Breakdown by Bank */}
         <div style={{ marginBottom: '16px' }}>
-          <div style={{ fontSize: '12px', fontWeight: 800, color: '#808099', textTransform: 'uppercase', marginBottom: '8px' }}>
+          <div style={{ fontSize: '12px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', marginBottom: '8px' }}>
             Bank Accounts Breakdown
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -124,8 +124,8 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
                   alignItems: 'center',
                   padding: '12px',
                   borderRadius: '10px',
-                  backgroundColor: '#3A3A52',
-                  border: '1px solid #4D4D6B',
+                  backgroundColor: '#1E1E32',
+                  border: '1px solid #2C2C44',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -148,7 +148,7 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
                     <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
                       {bank.bankName}
                     </div>
-                    <div style={{ fontSize: '11px', color: '#B3B3C2' }}>
+                    <div style={{ fontSize: '11px', color: '#A2A2BA' }}>
                       {bank.accountType} • {bank.accountNumberMasked}
                     </div>
                   </div>
@@ -177,8 +177,8 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
             }}
             style={{
               flex: 1,
-              backgroundColor: '#3A3A52',
-              border: '1px solid #4D4D6B',
+              backgroundColor: '#1E1E32',
+              border: '1px solid #2C2C44',
               borderRadius: '10px',
               padding: '12px',
               fontSize: '13px',

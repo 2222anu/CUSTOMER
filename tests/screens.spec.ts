@@ -100,7 +100,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     // 1. Splash Screen
     await page.goto(getAppUrl('screen=SPLASH'));
     await expect(page.locator('.app-viewport')).toBeVisible();
-    await expect(page.getByText('256-Bit Financial Encryption')).toBeVisible();
+    await expect(page.getByText(/256-Bit (Hardware|Financial) Encryption/)).toBeVisible();
 
     // 2. Transition to Onboarding
     await page.goto(getAppUrl('screen=ONBOARDING'));

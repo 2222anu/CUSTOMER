@@ -2,9 +2,9 @@ import React from 'react';
 
 export interface OnboardingSlideData {
   id: string;
-  category: string;
+  category?: string;
   title: string;
-  headline: string[];
+  subtitle: string;
   visual: React.ReactNode;
 }
 
@@ -24,11 +24,11 @@ export const QPayOnboardingSlide: React.FC<QPayOnboardingSlideProps> = ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         flex: 1,
         opacity: isActive ? 1 : 0,
         transform: isActive ? 'scale(1) translateY(0px)' : 'scale(0.96) translateY(8px)',
-        transition: 'opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
+        transition: 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         pointerEvents: isActive ? 'auto' : 'none',
       }}
     >
@@ -40,14 +40,14 @@ export const QPayOnboardingSlide: React.FC<QPayOnboardingSlideProps> = ({
           alignItems: 'center',
           justifyContent: 'center',
           position: 'relative',
-          padding: '10px 0 6px 0',
-          minHeight: '320px',
+          padding: '10px 0',
+          minHeight: '260px',
         }}
       >
         {slide.visual}
       </div>
 
-      {/* Editorial Content Container - Minimal, Oversized, Pure Headline Only */}
+      {/* Clean Minimalist Typography Matching Reference */}
       <div
         style={{
           width: '100%',
@@ -55,41 +55,38 @@ export const QPayOnboardingSlide: React.FC<QPayOnboardingSlideProps> = ({
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
-          padding: '0 20px',
+          padding: '0 24px',
           boxSizing: 'border-box',
-          marginTop: 'auto',
-          marginBottom: '8px',
+          marginTop: '16px',
         }}
       >
-        {/* Dominant Feature Word */}
-        <div
+        {/* Bold Headline */}
+        <h1
           style={{
-            fontSize: '32px',
+            fontSize: '24px',
             fontWeight: 900,
-            letterSpacing: '0.1em',
-            color: '#7FE87F',
-            lineHeight: 1,
-            marginBottom: '8px',
-            textTransform: 'uppercase',
+            color: '#FFFFFF',
+            lineHeight: 1.25,
+            marginBottom: '10px',
+            letterSpacing: '-0.02em',
           }}
         >
           {slide.title}
-        </div>
+        </h1>
 
-        {/* 2-Line Bold Headline */}
-        <div
+        {/* Short, Readable Subtitle */}
+        <p
           style={{
-            fontSize: '20px',
-            fontWeight: 800,
-            color: '#FFFFFF',
-            lineHeight: '1.3',
-            letterSpacing: '-0.01em',
+            fontSize: '13.5px',
+            fontWeight: 500,
+            color: '#A2A2BA',
+            lineHeight: 1.5,
+            maxWidth: '320px',
+            margin: 0,
           }}
         >
-          {slide.headline.map((line, idx) => (
-            <div key={idx}>{line}</div>
-          ))}
-        </div>
+          {slide.subtitle}
+        </p>
       </div>
     </div>
   );

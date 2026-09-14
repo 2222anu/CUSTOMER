@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { AlphPayLogo } from '../AlphPayLogo';
-import { QPayOnboardingBackground } from './QPayOnboardingBackground';
 import { QPayOnboardingProgress } from './QPayOnboardingProgress';
 import { QPayOnboardingSlide, type OnboardingSlideData } from './QPayOnboardingSlide';
-import { PayScene } from './PayScene';
-import { ManageScene } from './ManageScene';
-import { ProtectScene } from './ProtectScene';
+import { CardsIllustration } from './CardsIllustration';
+import { HubIllustration } from './HubIllustration';
+import { SecurityIllustration } from './SecurityIllustration';
 
 interface QPayOnboardingProps {
   onComplete: () => void;
@@ -59,10 +58,8 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
     const threshold = 45;
 
     if (diff > threshold && currentSlide < slides.length - 1) {
-      // Swiped Left -> Next slide
       handleNext();
     } else if (diff < -threshold && currentSlide > 0) {
-      // Swiped Right -> Previous slide
       goToSlide(currentSlide - 1);
     }
 
@@ -85,25 +82,22 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
 
   const slides: OnboardingSlideData[] = [
     {
-      id: 'pay',
-      category: 'INSTANT PAYMENTS',
-      title: 'PAY',
-      headline: ['Pay everywhere.', 'Pay instantly.'],
-      visual: <PayScene />,
+      id: 'cards',
+      title: 'Diverse Card Options',
+      subtitle: 'Explore a variety of payment cards tailored to your daily needs. Pay instantly with bank-grade security.',
+      visual: <CardsIllustration />,
     },
     {
-      id: 'manage',
-      category: 'SMART MONEY MANAGEMENT',
-      title: 'MANAGE',
-      headline: ['All your money.', 'One simple place.'],
-      visual: <ManageScene />,
+      id: 'wealth',
+      title: 'Grow Your Wealth',
+      subtitle: 'Discover a smarter way to manage your finances. Link and control all Saudi bank accounts in one unified dashboard.',
+      visual: <HubIllustration />,
     },
     {
-      id: 'protect',
-      category: 'BANK-GRADE SECURITY',
-      title: 'PROTECT',
-      headline: ['Your money.', 'Your control.'],
-      visual: <ProtectScene />,
+      id: 'security',
+      title: 'Secure & Reliable',
+      subtitle: 'Your security is our top priority. Protected by SAMA 256-bit encryption and Sarie national payment rail.',
+      visual: <SecurityIllustration />,
     },
   ];
 
@@ -123,28 +117,26 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: '16px 20px 24px 20px',
+        padding: '16px 24px 28px 24px',
         boxSizing: 'border-box',
         overflow: 'hidden',
         userSelect: 'none',
       }}
     >
-      {/* 3D Studio Lighting Backdrop */}
-      <QPayOnboardingBackground />
-
-      {/* Top Header: Logo + Minimal Skip */}
+      {/* Top Bar: Brand / Time & Skip Pill */}
       <header
         style={{
-          position: 'relative',
-          zIndex: 10,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           width: '100%',
-          paddingTop: '6px',
+          paddingTop: '4px',
+          zIndex: 10,
         }}
       >
-        <AlphPayLogo variant="horizontal" size={24} themeMode="dark" />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <AlphPayLogo variant="horizontal" size={24} themeMode="dark" />
+        </div>
 
         <button
           type="button"
@@ -154,36 +146,32 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
           }}
           className="interactive-tap"
           style={{
-            background: 'transparent',
-            border: 'none',
-            color: '#B3B3C2',
-            fontSize: '13px',
+            backgroundColor: '#1E1E32',
+            border: '1px solid #2C2C44',
+            color: '#A2A2BA',
+            fontSize: '12px',
             fontWeight: 700,
-            padding: '6px 12px',
+            padding: '5px 14px',
+            borderRadius: '20px',
             cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '2px',
-            letterSpacing: '0.02em',
-            transition: 'color 0.2s ease',
+            boxShadow: 'none',
+            transition: 'all 0.15s ease',
           }}
         >
-          <span>Skip</span>
-          <ChevronRight size={14} />
+          Skip
         </button>
       </header>
 
-      {/* Slide Visual Area */}
+      {/* Main Slide Carousel Area */}
       <main
         style={{
-          position: 'relative',
-          zIndex: 5,
           flex: 1,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           width: '100%',
-          margin: '4px 0',
+          position: 'relative',
+          margin: '10px 0',
         }}
       >
         {slides.map((slide, index) => (
@@ -196,6 +184,7 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
               display: index === currentSlide ? 'flex' : 'none',
               flexDirection: 'column',
               justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
             <QPayOnboardingSlide slide={slide} isActive={index === currentSlide} />
@@ -203,17 +192,15 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
         ))}
       </main>
 
-      {/* Bottom Controls: Pagination + Primary Button */}
+      {/* Bottom Controls: Pagination + Pill Button */}
       <footer
         style={{
-          position: 'relative',
-          zIndex: 10,
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '14px',
-          paddingTop: '8px',
+          gap: '18px',
+          zIndex: 10,
         }}
       >
         {/* Pagination Dots */}
@@ -230,25 +217,26 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
           className="interactive-tap"
           style={{
             width: '100%',
-            height: '52px',
-            borderRadius: '8px',
+            maxWidth: '320px',
+            height: '48px',
+            borderRadius: '12px',
             backgroundColor: '#7FE87F',
-            color: '#000000',
+            color: '#0B0B14',
             border: 'none',
-            fontSize: '15px',
+            fontSize: '14px',
             fontWeight: 800,
-            letterSpacing: '0.02em',
+            letterSpacing: '0.01em',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '8px',
+            gap: '6px',
             cursor: 'pointer',
             boxShadow: 'none',
             transition: 'all 0.15s ease',
           }}
         >
-          <span>{isFinalSlide ? 'Get Started' : 'Continue'}</span>
-          <ArrowRight size={18} />
+          <span>{isFinalSlide ? 'Get started' : 'Next'}</span>
+          <ArrowRight size={16} />
         </button>
       </footer>
     </div>

@@ -122,14 +122,14 @@ export const FoodScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Food & Dining', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Dining Offer Banner */}
         <div
           style={{
-            backgroundColor: '#2A2A3E',
+            backgroundColor: '#151524',
             border: '1.5px solid rgba(127, 232, 127, 0.35)',
             borderRadius: '20px',
             padding: '20px',
@@ -158,13 +158,13 @@ export const FoodScreen: React.FC = () => {
           </div>
           <div>
             <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>{translateText('QTPay Food & Dining', language)}</h3>
-            <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '3px 0 0 0' }}>
+            <p style={{ fontSize: '12px', color: '#A2A2BA', margin: '3px 0 0 0' }}>
               {translateText('Order food online with instant discounts & 0 delivery fee', language)}
             </p>
           </div>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginInlineStart: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginInlineStart: '4px' }}>
           {translateText('Nearby Partner Restaurants', language)}
         </div>
 
@@ -176,8 +176,8 @@ export const FoodScreen: React.FC = () => {
               className="interactive-tap"
               style={{
                 padding: '16px',
-                backgroundColor: '#2A2A3E',
-                border: '1px solid #4D4D6B',
+                backgroundColor: '#151524',
+                border: '1px solid #2C2C44',
                 borderRadius: '16px',
                 cursor: 'pointer',
               }}
@@ -201,12 +201,12 @@ export const FoodScreen: React.FC = () => {
                   <Star size={12} fill="#7FE87F" /> {res.rating}
                 </span>
               </div>
-              <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '4px' }}>{res.cuisine}</div>
+              <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '4px' }}>{res.cuisine}</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px' }}>
                 <span style={{ fontSize: '11px', fontWeight: 700, color: '#000000', backgroundColor: '#7FE87F', padding: '3px 8px', borderRadius: '6px' }}>
                   {res.offer}
                 </span>
-                <span style={{ fontSize: '11px', color: '#B3B3C2', display: 'flex', alignItems: 'center', gap: '4px', marginInlineStart: 'auto' }}>
+                <span style={{ fontSize: '11px', color: '#A2A2BA', display: 'flex', alignItems: 'center', gap: '4px', marginInlineStart: 'auto' }}>
                   <Clock size={12} /> {res.deliveryTime}
                 </span>
               </div>

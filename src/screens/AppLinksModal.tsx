@@ -67,8 +67,8 @@ export const AppLinksModal: React.FC = () => {
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <div>
-            <h3 id="app-links-title" style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', margin: 0 }}>QTPay Application Links</h3>
-            <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '4px 0 0 0' }}>Web, Android APK & iOS Access</p>
+            <h3 id="app-links-title" style={{ fontSize: '18px', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>QTPay Application Links</h3>
+            <p style={{ fontSize: '12px', color: '#A2A2BA', margin: '4px 0 0 0' }}>Web, Android APK & iOS Access</p>
           </div>
           <button
             onClick={() => setIsAppLinksModalOpen(false)}
@@ -77,13 +77,13 @@ export const AppLinksModal: React.FC = () => {
               width: '32px',
               height: '32px',
               borderRadius: '50%',
-              backgroundColor: '#3A3A52',
-              border: 'none',
+              backgroundColor: '#1E1E32',
+              border: '1px solid #2C2C44',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              color: '#B3B3C2',
+              color: '#A2A2BA',
               boxShadow: 'none',
             }}
           >
@@ -92,7 +92,7 @@ export const AppLinksModal: React.FC = () => {
         </div>
 
         {/* Logo Banner */}
-        <div style={{ textAlign: 'center', padding: '16px', backgroundColor: '#1A1A2E', borderRadius: '16px', marginBottom: '20px', border: '1px solid #4D4D6B' }}>
+        <div style={{ textAlign: 'center', padding: '16px', backgroundColor: '#1E1E32', borderRadius: '16px', marginBottom: '20px', border: '1px solid #2C2C44' }}>
           <AlphPayLogo variant="horizontal" themeMode="dark" />
         </div>
 
@@ -103,7 +103,7 @@ export const AppLinksModal: React.FC = () => {
             style={{
               padding: '16px',
               borderRadius: '16px',
-              backgroundColor: '#3A3A52',
+              backgroundColor: '#1E1E32',
               border: '1.5px solid #7FE87F',
               display: 'flex',
               flexDirection: 'column',
@@ -128,7 +128,7 @@ export const AppLinksModal: React.FC = () => {
                   <Globe size={22} />
                 </div>
                 <div>
-                  <div style={{ fontWeight: '800', fontSize: '15px', color: '#ffffff' }}>Web Application</div>
+                  <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>Web Application</div>
                   <div style={{ fontSize: '11px', color: '#7FE87F', fontWeight: '700' }}>
                     Live Web Version (Active)
                   </div>
@@ -147,7 +147,7 @@ export const AppLinksModal: React.FC = () => {
                 Online
               </span>
             </div>
-            <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '4px 0 0 0' }}>
+            <p style={{ fontSize: '12px', color: '#A2A2BA', margin: '4px 0 0 0' }}>
               URL: <code style={{ color: '#7FE87F', fontWeight: '700' }}>{webUrl}</code>
             </p>
           </div>
@@ -157,8 +157,8 @@ export const AppLinksModal: React.FC = () => {
             style={{
               padding: '16px',
               borderRadius: '16px',
-              backgroundColor: '#3A3A52',
-              border: '1px solid #4D4D6B',
+              backgroundColor: '#1E1E32',
+              border: '1px solid #2C2C44',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px',
@@ -173,7 +173,7 @@ export const AppLinksModal: React.FC = () => {
                     height: '40px',
                     borderRadius: '12px',
                     backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                    color: '#B3B3C2',
+                    color: '#A2A2BA',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -182,8 +182,8 @@ export const AppLinksModal: React.FC = () => {
                   <Smartphone size={22} />
                 </div>
                 <div>
-                  <div style={{ fontWeight: '800', fontSize: '15px', color: '#ffffff' }}>Android Application</div>
-                  <div style={{ fontSize: '11px', color: '#B3B3C2' }}>Google Play & APK Direct</div>
+                  <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>Android Application</div>
+                  <div style={{ fontSize: '11px', color: '#A2A2BA' }}>Google Play & APK Direct</div>
                 </div>
               </div>
               <span
@@ -191,7 +191,7 @@ export const AppLinksModal: React.FC = () => {
                   fontSize: '10px',
                   fontWeight: '800',
                   backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  color: '#B3B3C2',
+                  color: '#A2A2BA',
                   padding: '4px 8px',
                   borderRadius: '10px',
                 }}
@@ -201,12 +201,13 @@ export const AppLinksModal: React.FC = () => {
             </div>
             <button
               onClick={handleDownloadApk}
+              className="interactive-tap"
               style={{
                 width: '100%',
                 padding: '12px',
-                borderRadius: '8px',
+                borderRadius: '10px',
                 backgroundColor: '#7FE87F',
-                color: '#000000',
+                color: '#0B0B14',
                 border: 'none',
                 fontWeight: '800',
                 fontSize: '13px',
@@ -223,7 +224,7 @@ export const AppLinksModal: React.FC = () => {
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#B3B3C2', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#A2A2BA', justifyContent: 'center' }}>
           <CheckCircle2 size={14} color="#7FE87F" /> All links are secured and verified for QTPay
         </div>
       </div>

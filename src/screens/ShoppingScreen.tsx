@@ -98,7 +98,7 @@ export const ShoppingScreen: React.FC = () => {
         {/* Shopping Hero Banner */}
         <div
           style={{
-            backgroundColor: '#2A2A3E',
+            backgroundColor: '#151524',
             border: '1.5px solid rgba(127, 232, 127, 0.35)',
             borderRadius: '20px',
             padding: '20px',
@@ -127,13 +127,13 @@ export const ShoppingScreen: React.FC = () => {
           </div>
           <div>
             <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>{translateText('QTPay Partner Deals', language)}</h3>
-            <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '3px 0 0 0' }}>
+            <p style={{ fontSize: '12px', color: '#A2A2BA', margin: '3px 0 0 0' }}>
               {translateText('Exclusive promo codes & instant discounts on top shopping brands', language)}
             </p>
           </div>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginInlineStart: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginInlineStart: '4px' }}>
           {translateText('Featured Partner Offers', language)}
         </div>
 
@@ -148,8 +148,8 @@ export const ShoppingScreen: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '16px',
-                backgroundColor: '#2A2A3E',
-                border: '1px solid #4D4D6B',
+                backgroundColor: '#151524',
+                border: '1px solid #2C2C44',
                 borderRadius: '16px',
                 cursor: 'pointer',
               }}

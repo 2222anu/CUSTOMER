@@ -15,7 +15,7 @@ export const paymentService = {
     const txn: Transaction = {
       id: generateTxnId(),
       title: params.payeeName,
-      subTitle: params.subTitle || 'UPI Payment',
+      subTitle: params.subTitle || 'Sarie Transfer',
       amount: params.amount,
       type: 'sent',
       date: 'TODAY',

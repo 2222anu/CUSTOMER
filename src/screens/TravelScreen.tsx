@@ -93,14 +93,14 @@ export const TravelScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Travel & Bookings', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Travel Desk Hero Banner */}
         <div
           style={{
-            backgroundColor: '#2A2A3E',
+            backgroundColor: '#151524',
             border: '1.5px solid rgba(127, 232, 127, 0.35)',
             borderRadius: '20px',
             padding: '24px 20px',
@@ -128,16 +128,16 @@ export const TravelScreen: React.FC = () => {
           <h3 style={{ fontSize: '18px', fontWeight: 800, margin: '0 0 4px 0', color: '#FFFFFF' }}>
             {translateText('QTPay Travel Desk', language)}
           </h3>
-          <p style={{ fontSize: '12px', color: '#B3B3C2', margin: 0 }}>
+          <p style={{ fontSize: '12px', color: '#A2A2BA', margin: 0 }}>
             {translateText('Book flights, cabs, and hotels with zero convenience fee & instant cashbacks', language)}
           </p>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
           {translateText('Available Travel Bookings', language)}
         </div>
 
-        <div style={{ backgroundColor: '#2A2A3E', border: '1px solid #4D4D6B', borderRadius: '16px', overflow: 'hidden' }}>
+        <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden' }}>
           <ListRow
             icon={<Plane size={18} color="#7FE87F" />}
             label={translateText('Flight Bookings', language)}
@@ -145,7 +145,7 @@ export const TravelScreen: React.FC = () => {
             rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(650, language)}` : 'Book SAR 650'}</span>}
             onClick={() => handleStartBooking(bookings[0])}
           />
-          <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<Car size={18} color="#7FE87F" />}
             label={translateText('Airport Chauffeur', language)}
@@ -153,7 +153,7 @@ export const TravelScreen: React.FC = () => {
             rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(120, language)}` : 'Book SAR 120'}</span>}
             onClick={() => handleStartBooking(bookings[1])}
           />
-          <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<Hotel size={18} color="#7FE87F" />}
             label={translateText('Hotel Reservations', language)}

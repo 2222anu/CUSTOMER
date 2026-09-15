@@ -89,7 +89,7 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   'pay.select_route': { en: 'Select Payment Route', ar: 'اختر طريقة التحويل' },
   'pay.account_to_account': { en: 'Account to Account', ar: 'تحويل بالآيبان / الحساب' },
   'pay.mobile_transfer': { en: 'Mobile Number', ar: 'رقم الجوال' },
-  'pay.sarie_id': { en: 'Sarie Alias / UPI ID', ar: 'معرف سريع الفوري' },
+  'pay.sarie_id': { en: 'Sarie Alias / ID', ar: 'معرف سريع الفوري' },
   'pay.enter_amount': { en: 'Enter Amount', ar: 'أدخل المبلغ' },
   'pay.source_account': { en: 'Source Bank Account', ar: 'الحساب البنكي المصدر' },
   'pay.add_note': { en: 'Add note / Purpose', ar: 'إضافة ملاحظة / الغرض' },

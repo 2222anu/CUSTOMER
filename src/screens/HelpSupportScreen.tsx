@@ -3,11 +3,19 @@ import { HelpCircle, MessageSquare, PhoneCall, ChevronDown, ChevronUp, Send, Che
 import { AppHeader } from '../components/AppHeader';
 import { ListRow } from '../components/ListRow';
 import { Modal } from '../components/Modal';
+import { useApp } from '../state/AppContext';
+import { translateText } from '../utils/i18n';
 
 export const HelpSupportScreen: React.FC = () => {
+  const { language } = useApp();
+  const isAr = language === 'العربية' || language === 'ar';
   const [activeModal, setActiveModal] = useState<'chat' | 'call' | 'dispute' | null>(null);
   const [chatMessages, setChatMessages] = useState<Array<{ sender: 'user' | 'agent'; text: string; time: string }>>([
-    { sender: 'agent', text: 'Hello! How can I assist you with your QTPay account today?', time: 'Just now' },
+    {
+      sender: 'agent',
+      text: isAr ? 'مرحباً بك! كيف يمكننا مساعدتك في حساب كيو تي باي اليوم؟' : 'Hello! How can I assist you with your QTPay account today?',
+      time: isAr ? 'الآن' : 'Just now',
+    },
   ]);
   const [inputMsg, setInputMsg] = useState('');
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
@@ -16,9 +24,18 @@ export const HelpSupportScreen: React.FC = () => {
   const [disputeReason, setDisputeReason] = useState('');
 
   const faqs = [
-    { q: 'How long does a Sarie refund take?', a: 'Instant Sarie refunds are usually credited within seconds to 1-2 hours. In rare bank network delays, it can take up to 24 hours.' },
-    { q: 'What is the daily Sarie transfer limit?', a: 'As per SAMA guidelines, the standard daily Sarie instant transaction limit is SAR 50,000 across digital banking apps.' },
-    { q: 'How do I add a new Saudi bank account?', a: 'Go to Profile > Bank Accounts > tap Add Bank, select your Saudi bank, and verify your mobile number via SMS.' },
+    {
+      q: isAr ? 'كم يستغرق استرداد الأموال عبر سريع؟' : 'How long does a Sarie refund take?',
+      a: isAr ? 'تتم عمليات الاسترداد الفورية خلال ثوانٍ إلى ساعتين كحد أقصى وفق معايير البنك المركزي السعودي.' : 'Instant Sarie refunds are credited within seconds to 1-2 hours under standard banking protocols.',
+    },
+    {
+      q: isAr ? 'ما هو الحد اليومي للتحويل عبر سريع؟' : 'What is the daily Sarie transfer limit?',
+      a: isAr ? 'الحد اليومي القياسي للتحويل الفوري عبر سريع هو ٥٠,٠٠٠ ر.س عبر التطبيقات المصرفية المعتمدة.' : 'As per SAMA guidelines, the standard daily Sarie instant transaction limit is SAR 50,000.',
+    },
+    {
+      q: isAr ? 'كيف أقوم بربط حساب بنكي سعودي جديد؟' : 'How do I add a new Saudi bank account?',
+      a: isAr ? 'توجه إلى الحسابات البنكية > إضافة حساب، ثم اختر بنكك السعودي ووثق عبر الرسائل النصية.' : 'Go to Bank Accounts > Add Bank, select your Saudi bank, and verify via SMS OTP.',
+    },
   ];
 
   const handleSendChat = (e: React.FormEvent) => {
@@ -53,7 +70,7 @@ export const HelpSupportScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '36px', color: '#FFFFFF' }}>
-      <AppHeader title="Help & Support" showBack showSettings={false} />
+      <AppHeader title={translateText('Help & Support', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Priority Hero Banner */}
@@ -86,43 +103,43 @@ export const HelpSupportScreen: React.FC = () => {
             <HelpCircle size={28} />
           </div>
           <h3 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '6px', color: '#FFFFFF', margin: 0 }}>
-            24/7 Support
+            {isAr ? 'الدعم الفني المباشر ٢٤/٧' : '24/7 Priority Support'}
           </h3>
           <p style={{ fontSize: '12.5px', color: '#A2A2BA', marginTop: '6px', marginBottom: 0 }}>
-            Instant dispute resolution and assistance
+            {isAr ? 'حل فوري للشكاوى ومساعدة مصرفية معتمدة' : 'Instant dispute resolution and accredited banking assistance'}
           </p>
         </div>
 
         <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-          Contact Channels
+          {isAr ? 'قنوات الاتصال المباشرة' : 'Contact Channels'}
         </div>
 
         <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', marginBottom: '24px', boxShadow: 'none' }}>
           <ListRow
             icon={<MessageSquare size={18} color="#7FE87F" />}
-            label="Live Chat"
-            subLabel="Avg response: ~1 min"
+            label={isAr ? 'المحادثة الفورية' : 'Live Chat'}
+            subLabel={isAr ? 'متوسط الرد: ~١ دقيقة' : 'Avg response: ~1 min'}
             onClick={() => setActiveModal('chat')}
           />
           <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<PhoneCall size={18} color="#7FE87F" />}
-            label="Toll-Free Hotline"
+            label={isAr ? 'الرقم المجاني الموحد' : 'Toll-Free Hotline'}
             subLabel="800-123-QTPAY"
             onClick={() => setActiveModal('call')}
           />
           <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<ShieldAlert size={18} color="#7FE87F" />}
-            label="Dispute & Fraud"
-            subLabel="File a transaction complaint"
+            label={isAr ? 'النزاعات وعمليات الاحتيال' : 'Dispute & Fraud'}
+            subLabel={isAr ? 'تقديم اعتراض على معاملة مالية' : 'File a transaction complaint'}
             onClick={() => setActiveModal('dispute')}
           />
         </div>
 
         {/* FAQs */}
         <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
-          Frequently Asked Questions
+          {isAr ? 'الأسئلة الشائعة' : 'Frequently Asked Questions'}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -158,7 +175,7 @@ export const HelpSupportScreen: React.FC = () => {
       </div>
 
       {/* Live Chat Modal */}
-      <Modal isOpen={activeModal === 'chat'} onClose={() => setActiveModal(null)} title="Live Support">
+      <Modal isOpen={activeModal === 'chat'} onClose={() => setActiveModal(null)} title={isAr ? 'الدعم المباشر' : 'Live Support'}>
         <div style={{ height: '260px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '14px', paddingRight: '4px' }}>
           {chatMessages.map((msg, i) => (
             <div
@@ -184,7 +201,7 @@ export const HelpSupportScreen: React.FC = () => {
             type="text"
             value={inputMsg}
             onChange={(e) => setInputMsg(e.target.value)}
-            placeholder="Type your message..."
+            placeholder={isAr ? 'اكتب رسالتك هنا...' : 'Type your message...'}
             style={{ flex: 1, padding: '12px 14px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '13px', outline: 'none' }}
           />
           <button
@@ -198,7 +215,7 @@ export const HelpSupportScreen: React.FC = () => {
       </Modal>
 
       {/* Hotline Call Modal */}
-      <Modal isOpen={activeModal === 'call'} onClose={() => setActiveModal(null)} title="Toll-Free Hotline">
+      <Modal isOpen={activeModal === 'call'} onClose={() => setActiveModal(null)} title={isAr ? 'الرقم المجاني' : 'Toll-Free Hotline'}>
         <div style={{ textAlign: 'center', padding: '20px 0' }}>
           <div
             style={{
@@ -216,20 +233,22 @@ export const HelpSupportScreen: React.FC = () => {
           >
             <PhoneCall size={28} />
           </div>
-          <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>800-123-QTPAY</h4>
-          <p style={{ fontSize: '12.5px', color: '#A2A2BA', margin: '0 0 20px 0' }}>Available 24x7 in Arabic and English (Toll-Free in KSA)</p>
+          <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0', direction: 'ltr' }}>800-123-QTPAY</h4>
+          <p style={{ fontSize: '12.5px', color: '#A2A2BA', margin: '0 0 20px 0' }}>
+            {isAr ? 'متاح على مدار الساعة بالعربية والإنجليزية (مجاني داخل المملكة)' : 'Available 24x7 in Arabic and English (Toll-Free in KSA)'}
+          </p>
           <a
             href="tel:80012378729"
             className="interactive-tap"
             style={{ display: 'inline-block', padding: '12px 28px', backgroundColor: '#7FE87F', color: '#0B0B14', borderRadius: '12px', fontWeight: 800, fontSize: '13px', textDecoration: 'none', boxShadow: 'none' }}
           >
-            Call Now
+            {isAr ? 'اتصال الآن' : 'Call Now'}
           </a>
         </div>
       </Modal>
 
       {/* Report Dispute Modal */}
-      <Modal isOpen={activeModal === 'dispute'} onClose={() => setActiveModal(null)} title="Report Dispute">
+      <Modal isOpen={activeModal === 'dispute'} onClose={() => setActiveModal(null)} title={isAr ? 'تقديم اعتراض' : 'Report Dispute'}>
         {disputeSuccess ? (
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
             <div
@@ -247,20 +266,20 @@ export const HelpSupportScreen: React.FC = () => {
             >
               <Check size={28} />
             </div>
-            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>Dispute Filed</h4>
-            <p style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '4px' }}>Ticket #AP-DISP-{Math.floor(100000 + Math.random() * 900000)}</p>
+            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>{isAr ? 'تم تسجيل الاعتراض بنجاح' : 'Dispute Filed Successfully'}</h4>
+            <p style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '4px' }}>Ticket #QT-DISP-{Math.floor(100000 + Math.random() * 900000)}</p>
           </div>
         ) : (
           <form onSubmit={handleDisputeSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             <div>
               <label style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
-                Transaction UTR
+                {isAr ? 'الرقم المرجعي للمعاملة' : 'Transaction Reference'}
               </label>
               <input
                 type="text"
                 value={disputeTxnId}
                 onChange={(e) => setDisputeTxnId(e.target.value)}
-                placeholder="e.g. UTR984729104821"
+                placeholder={isAr ? 'مثال: SAR-984729104821' : 'e.g. SAR-984729104821'}
                 required
                 style={{ width: '100%', padding: '12px 14px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '13px', outline: 'none' }}
               />
@@ -268,12 +287,12 @@ export const HelpSupportScreen: React.FC = () => {
 
             <div>
               <label style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
-                Dispute Reason
+                {isAr ? 'سبب الاعتراض' : 'Dispute Reason'}
               </label>
               <textarea
                 value={disputeReason}
                 onChange={(e) => setDisputeReason(e.target.value)}
-                placeholder="Describe what went wrong..."
+                placeholder={isAr ? 'يرجى توضيح تفاصيل المشكلة...' : 'Describe what went wrong...'}
                 rows={3}
                 required
                 style={{ width: '100%', padding: '12px 14px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '13px', outline: 'none', resize: 'none', fontFamily: 'inherit' }}
@@ -296,7 +315,7 @@ export const HelpSupportScreen: React.FC = () => {
                 boxShadow: 'none',
               }}
             >
-              Submit Dispute
+              {isAr ? 'إرسال الاعتراض' : 'Submit Dispute'}
             </button>
           </form>
         )}

@@ -26,7 +26,7 @@ export const MoneyRequestsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '32px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '32px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Money Requests', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
@@ -34,9 +34,9 @@ export const MoneyRequestsScreen: React.FC = () => {
           <div
             style={{
               textAlign: 'center',
-              backgroundColor: '#2A2A3E',
+              backgroundColor: '#151524',
               borderRadius: '16px',
-              border: '1px solid #4D4D6B',
+              border: '1px solid #2C2C44',
               padding: '48px 24px',
             }}
           >
@@ -57,8 +57,10 @@ export const MoneyRequestsScreen: React.FC = () => {
               <ArrowDownLeft size={28} />
             </div>
             <div style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>{translateText('No Pending Requests', language)}</div>
-            <p style={{ fontSize: '13px', color: '#B3B3C2', marginTop: '6px', margin: '6px 0 0 0' }}>
-              {translateText('When someone requests money from you via UPI, it will appear here.', language)}
+            <p style={{ fontSize: '13px', color: '#A2A2BA', marginTop: '6px', margin: '6px 0 0 0' }}>
+              {language === 'العربية'
+                ? 'عندما يطلب منك شخص ما أموالاً عبر نظام سريع، ستظهر هنا.'
+                : 'When someone requests money from you via Sarie, it will appear here.'}
             </p>
           </div>
         ) : (
@@ -66,8 +68,8 @@ export const MoneyRequestsScreen: React.FC = () => {
             <div
               key={req.id}
               style={{
-                backgroundColor: '#2A2A3E',
-                border: '1px solid #4D4D6B',
+                backgroundColor: '#151524',
+                border: '1px solid #2C2C44',
                 borderRadius: '16px',
                 padding: '20px',
                 marginBottom: '16px',
@@ -87,14 +89,14 @@ export const MoneyRequestsScreen: React.FC = () => {
                       width: '46px',
                       height: '46px',
                       borderRadius: '14px',
-                      backgroundColor: '#3A3A52',
+                      backgroundColor: '#1E1E32',
                       color: '#7FE87F',
                       fontWeight: 800,
                       fontSize: '15px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      border: '1px solid #4D4D6B',
+                      border: '1px solid #2C2C44',
                       flexShrink: 0,
                     }}
                   >
@@ -104,7 +106,7 @@ export const MoneyRequestsScreen: React.FC = () => {
                     <div style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF' }}>
                       {req.requesterName}
                     </div>
-                    <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px' }}>{req.upiId}</div>
+                    <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px' }}>{req.upiId}</div>
                   </div>
                 </div>
 
@@ -116,12 +118,12 @@ export const MoneyRequestsScreen: React.FC = () => {
               {req.note && (
                 <div
                   style={{
-                    backgroundColor: '#1A1A2E',
-                    border: '1px solid #4D4D6B',
+                    backgroundColor: '#1E1E32',
+                    border: '1px solid #2C2C44',
                     borderRadius: '10px',
                     padding: '10px 14px',
                     fontSize: '12.5px',
-                    color: '#B3B3C2',
+                    color: '#A2A2BA',
                     marginBottom: '16px',
                     fontStyle: 'italic',
                   }}
@@ -135,9 +137,9 @@ export const MoneyRequestsScreen: React.FC = () => {
                   className="interactive-tap"
                   style={{
                     flex: 1,
-                    backgroundColor: '#3A3A52',
-                    border: '1px solid #4D4D6B',
-                    color: '#B3B3C2',
+                    backgroundColor: '#1E1E32',
+                    border: '1px solid #2C2C44',
+                    color: '#A2A2BA',
                     borderRadius: '12px',
                     padding: '12px',
                     fontWeight: 800,
@@ -153,7 +155,7 @@ export const MoneyRequestsScreen: React.FC = () => {
                 </button>
                 <div style={{ flex: 1.4 }}>
                   <PrimaryButton onClick={() => handlePayRequest(req)}>
-                    <Check size={16} /> {t('pay')} {formatSaudiCurrency(req.amount, language)}
+                    <Check size={16} /> {t('nav.pay', 'Pay')} {formatSaudiCurrency(req.amount, language)}
                   </PrimaryButton>
                 </div>
               </div>

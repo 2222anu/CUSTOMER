@@ -42,10 +42,10 @@ export const PayAnyoneScreen: React.FC = () => {
           <input
             id="search-contact-input"
             type="text"
-            placeholder={language === 'العربية' ? 'ابحث بالاسم، معرف سريع، أو رقم الجوال' : 'Search name, UPI ID, or number'}
+            placeholder={language === 'العربية' ? 'ابحث بالاسم، معرف سريع، أو رقم الجوال' : 'Search name, Sarie ID, or number'}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            aria-label="Search UPI ID or mobile number"
+            aria-label="Search Sarie ID or mobile number"
             style={{
               background: 'none',
               border: 'none',

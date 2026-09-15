@@ -63,11 +63,19 @@ export const PermissionsScreen: React.FC = () => {
   const handleGrantPermissions = () => {
     try {
       localStorage.setItem('hasGrantedPermissions', 'true');
-      localStorage.setItem('hasCompletedOnboarding', 'true');
     } catch {
       // Ignore
     }
-    navigateTo('HOME');
+    navigateTo('ONBOARDING_KYC');
+  };
+
+  const handleSkipPermissions = () => {
+    try {
+      localStorage.setItem('hasGrantedPermissions', 'true');
+    } catch {
+      // Ignore
+    }
+    navigateTo('ONBOARDING_KYC');
   };
 
   return (
@@ -199,7 +207,7 @@ export const PermissionsScreen: React.FC = () => {
           {t('auth.allow_continue', 'Allow & Continue')}{' '}
           <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
         </PrimaryButton>
-        <SecondaryButton onClick={handleGrantPermissions}>
+        <SecondaryButton onClick={handleSkipPermissions}>
           {language === 'العربية' ? 'تخطي الآن' : 'Skip for Now'}
         </SecondaryButton>
 

@@ -83,6 +83,8 @@ export type ScreenId =
   | 'MOBILE_NUMBER'
   | 'SMS_OTP'
   | 'PERMISSIONS'
+  | 'ONBOARDING_KYC'
+  | 'ONBOARDING_BANK'
   | 'HOME'
   | 'PAY_ANYONE'
   | 'SEND_AMOUNT'

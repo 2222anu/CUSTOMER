@@ -8,6 +8,8 @@ import { OnboardingScreen } from './screens/OnboardingScreen';
 import { MobileNumberScreen } from './screens/MobileNumberScreen';
 import { SmsOtpScreen } from './screens/SmsOtpScreen';
 import { PermissionsScreen } from './screens/PermissionsScreen';
+import { OnboardingKycScreen } from './screens/OnboardingKycScreen';
+import { OnboardingBankScreen } from './screens/OnboardingBankScreen';
 import { HomeScreen } from './screens/HomeScreen';
 import { PayAnyoneScreen } from './screens/PayAnyoneScreen';
 import { SendAmountScreen } from './screens/SendAmountScreen';
@@ -59,6 +61,10 @@ const AppContent: React.FC = () => {
         return <SmsOtpScreen />;
       case 'PERMISSIONS':
         return <PermissionsScreen />;
+      case 'ONBOARDING_KYC':
+        return <OnboardingKycScreen />;
+      case 'ONBOARDING_BANK':
+        return <OnboardingBankScreen />;
       case 'HOME':
         return <HomeScreen />;
       case 'PAY_ANYONE':
@@ -116,6 +122,8 @@ const AppContent: React.FC = () => {
     currentScreen !== 'MOBILE_NUMBER' &&
     currentScreen !== 'SMS_OTP' &&
     currentScreen !== 'PERMISSIONS' &&
+    currentScreen !== 'ONBOARDING_KYC' &&
+    currentScreen !== 'ONBOARDING_BANK' &&
     currentScreen !== 'PAYMENT_SUCCESS';
 
   return (

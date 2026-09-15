@@ -27,17 +27,33 @@ import { formatCurrency } from '../utils/formatters';
 export const HomeScreen: React.FC = () => {
   const { bankAccounts, transactions, navigateTo, setIsScanModalOpen, openPinModal } = useApp();
   const [isBalanceModalOpen, setIsBalanceModalOpen] = useState(false);
-  const [showTotalBalance, setShowTotalBalance] = useState(true);
+  const [showTotalBalance, setShowTotalBalance] = useState(false);
 
   const totalBalance = bankAccounts.reduce((acc, bank) => acc + bank.balance, 0);
   const recentTransactions = transactions.slice(0, 3);
 
+  const handleToggleBalance = () => {
+    if (showTotalBalance) {
+      setShowTotalBalance(false);
+    } else {
+      openPinModal({
+        title: 'Enter PIN to View Balance',
+        subTitle: 'Enter 4-digit security PIN to view your total balance',
+        amount: totalBalance,
+        onSuccess: () => {
+          setShowTotalBalance(true);
+        },
+      });
+    }
+  };
+
   const handleCheckBalanceClick = () => {
     openPinModal({
-      title: 'Check Bank Balance',
-      subTitle: 'Enter 4-digit Sarie PIN to view account balance',
+      title: 'Check Bank Balance Breakdown',
+      subTitle: 'Enter 4-digit Sarie PIN to view individual account balances',
       amount: totalBalance,
       onSuccess: () => {
+        setShowTotalBalance(true);
         setIsBalanceModalOpen(true);
       },
     });
@@ -94,38 +110,60 @@ export const HomeScreen: React.FC = () => {
         }
       />
 
-      {/* 2. Total Balance & Instant Sarie Overview Hero */}
+      {/* 2. Total Balance & Instant Sarie Overview Hero (Gradient Green-Black) */}
       <div style={{ padding: '14px 20px 0 20px' }}>
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
-            borderRadius: '18px',
-            padding: '20px 22px',
+            background: 'linear-gradient(135deg, #052e16 0%, #064e3b 35%, #031c12 70%, #0e0e18 100%)',
+            border: '1px solid rgba(127, 232, 127, 0.32)',
+            borderRadius: '20px',
+            padding: '22px',
             boxShadow: 'none',
+            position: 'relative',
+            overflow: 'hidden',
           }}
         >
+          {/* Subtle Decorative Background Glow */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '-30px',
+              right: '-30px',
+              width: '120px',
+              height: '120px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(127, 232, 127, 0.15) 0%, transparent 70%)',
+              pointerEvents: 'none',
+            }}
+          />
+
           {/* Top meta row */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '11px', fontWeight: 800, color: '#C8E6C9', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 Total Available Balance
               </span>
               <button
                 type="button"
-                onClick={() => setShowTotalBalance(!showTotalBalance)}
-                aria-label={showTotalBalance ? 'Hide total balance' : 'Show total balance'}
+                onClick={handleToggleBalance}
+                aria-label={showTotalBalance ? 'Hide total balance' : 'Enter PIN to view total balance'}
+                className="interactive-tap"
                 style={{
-                  background: 'none',
-                  border: 'none',
-                  color: '#A2A2BA',
+                  background: 'rgba(127, 232, 127, 0.12)',
+                  border: '1px solid rgba(127, 232, 127, 0.25)',
+                  color: '#7FE87F',
                   cursor: 'pointer',
-                  padding: 0,
+                  padding: '4px 6px',
+                  borderRadius: '6px',
                   display: 'flex',
                   alignItems: 'center',
+                  gap: '4px',
+                  fontSize: '11px',
+                  fontWeight: 700,
                 }}
               >
-                {showTotalBalance ? <EyeOff size={14} /> : <Eye size={14} />}
+                {showTotalBalance ? <EyeOff size={13} /> : <Eye size={13} />}
+                <span>{showTotalBalance ? 'Hide' : 'PIN Required'}</span>
               </button>
             </div>
 
@@ -134,45 +172,66 @@ export const HomeScreen: React.FC = () => {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '5px',
-                backgroundColor: 'rgba(127, 232, 127, 0.12)',
-                border: '1px solid rgba(127, 232, 127, 0.25)',
+                backgroundColor: 'rgba(127, 232, 127, 0.16)',
+                border: '1px solid rgba(127, 232, 127, 0.35)',
                 color: '#7FE87F',
                 fontSize: '10.5px',
                 fontWeight: 800,
-                padding: '2px 8px',
+                padding: '3px 9px',
                 borderRadius: '12px',
               }}
             >
               <ShieldCheck size={12} color="#7FE87F" />
-              <span>Sarie Rail</span>
+              <span>Sarie 24/7 Rail</span>
             </div>
           </div>
 
-          {/* Amount Display */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-            <div className="tabular-nums" style={{ fontSize: '28px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em' }}>
-              {showTotalBalance ? formatCurrency(totalBalance) : 'SAR ••••••••'}
+          {/* Amount Display & PIN View Action */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: '4px' }}>
+            <div
+              onClick={handleToggleBalance}
+              style={{ cursor: 'pointer' }}
+              title={showTotalBalance ? 'Click to hide balance' : 'Click to enter PIN & view balance'}
+            >
+              <div
+                className="tabular-nums"
+                style={{
+                  fontSize: '30px',
+                  fontWeight: 900,
+                  color: '#FFFFFF',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.1,
+                }}
+              >
+                {showTotalBalance ? formatCurrency(totalBalance) : 'SAR ••••••••'}
+              </div>
+              {!showTotalBalance && (
+                <div style={{ fontSize: '11px', color: '#A2E6A2', marginTop: '4px', fontWeight: 600 }}>
+                  🔒 Tap to enter PIN and view balance
+                </div>
+              )}
             </div>
 
             <button
               onClick={handleCheckBalanceClick}
               className="interactive-tap"
               style={{
-                backgroundColor: '#1E1E32',
-                border: '1px solid #2C2C44',
-                color: '#7FE87F',
-                borderRadius: '8px',
-                padding: '6px 12px',
+                background: 'linear-gradient(180deg, #1A4D2E 0%, #0F331E 100%)',
+                border: '1px solid rgba(127, 232, 127, 0.35)',
+                color: '#FFFFFF',
+                borderRadius: '10px',
+                padding: '8px 14px',
                 fontSize: '11.5px',
                 fontWeight: 800,
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '4px',
+                gap: '5px',
                 boxShadow: 'none',
               }}
             >
-              Breakdown
+              <Landmark size={13} color="#7FE87F" />
+              <span>Accounts</span>
             </button>
           </div>
         </div>

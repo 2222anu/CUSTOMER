@@ -13,6 +13,117 @@ export const PaymentMethodsScreen: React.FC = () => {
       <AppHeader title="Payment Methods" showBack showSettings={false} />
 
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '22px' }}>
+        {/* QTPay Virtual Platinum Card (Gradient Green-Black) */}
+        <div>
+          <div
+            style={{
+              fontSize: '11px',
+              fontWeight: 800,
+              color: '#C8E6C9',
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              marginBottom: '10px',
+              marginLeft: '4px',
+            }}
+          >
+            Digital Debit Card (mada & Apple Pay)
+          </div>
+
+          <div
+            style={{
+              background: 'linear-gradient(135deg, #052e16 0%, #064e3b 40%, #031c12 75%, #0e0e18 100%)',
+              border: '1px solid rgba(127, 232, 127, 0.35)',
+              borderRadius: '20px',
+              padding: '22px',
+              boxShadow: 'none',
+              position: 'relative',
+              overflow: 'hidden',
+              minHeight: '175px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }}
+          >
+            {/* Top Row: QTPay emblem + Contactless wave */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div
+                  style={{
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '8px',
+                    backgroundColor: 'rgba(127, 232, 127, 0.2)',
+                    border: '1px solid rgba(127, 232, 127, 0.4)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <ShieldCheck size={18} color="#7FE87F" />
+                </div>
+                <div>
+                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '0.04em' }}>QTPay Platinum</div>
+                  <div style={{ fontSize: '10px', color: '#7FE87F', fontWeight: 700 }}>Sarie Instant Debit</div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Wifi size={18} color="#7FE87F" style={{ transform: 'rotate(90deg)' }} />
+              </div>
+            </div>
+
+            {/* Middle Row: Card Number */}
+            <div style={{ margin: '14px 0 8px 0' }}>
+              <div
+                className="tabular-nums"
+                style={{
+                  fontSize: '18px',
+                  fontWeight: 800,
+                  color: '#FFFFFF',
+                  letterSpacing: '0.18em',
+                  fontFamily: 'monospace',
+                }}
+              >
+                •••• &nbsp;•••• &nbsp;•••• &nbsp;5192
+              </div>
+            </div>
+
+            {/* Bottom Row: Holder Name, Expiry & mada Logo */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+              <div>
+                <div style={{ fontSize: '9px', color: '#A2E6A2', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
+                  Cardholder
+                </div>
+                <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF', marginTop: '2px' }}>
+                  Fahad Al-Harbi
+                </div>
+              </div>
+
+              <div>
+                <div style={{ fontSize: '9px', color: '#A2E6A2', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
+                  Expires
+                </div>
+                <div style={{ fontSize: '12px', fontWeight: 800, color: '#FFFFFF', marginTop: '2px', fontFamily: 'monospace' }}>
+                  08/29
+                </div>
+              </div>
+
+              <div
+                style={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                  padding: '4px 8px',
+                  borderRadius: '6px',
+                  border: '1px solid rgba(127, 232, 127, 0.25)',
+                }}
+              >
+                <span style={{ fontSize: '12px', fontWeight: 900, color: '#7FE87F', letterSpacing: '0.05em' }}>
+                  mada
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Sarie Accounts Section */}
         <div>
           <div

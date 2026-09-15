@@ -151,12 +151,12 @@ export const MerchantHomeScreen: React.FC = () => {
         </div>
       </header>
 
-      {/* 2. Today's Total Collections Hero Summary Card */}
+      {/* 2. Today's Total Collections Hero Summary Card (Gradient Green-Black) */}
       <div style={{ padding: '16px 20px 0 20px' }}>
         <div
           style={{
-            background: 'linear-gradient(135deg, #18182E 0%, #151524 60%, #10101C 100%)',
-            border: '1.5px solid #2C2C44',
+            background: 'linear-gradient(135deg, #052e16 0%, #064e3b 35%, #031c12 70%, #0e0e18 100%)',
+            border: '1px solid rgba(127, 232, 127, 0.35)',
             borderRadius: '20px',
             padding: '22px 20px',
             boxShadow: 'none',
@@ -164,21 +164,35 @@ export const MerchantHomeScreen: React.FC = () => {
             overflow: 'hidden',
           }}
         >
+          {/* Decorative ambient radial glow */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '-30px',
+              right: '-30px',
+              width: '130px',
+              height: '130px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(127, 232, 127, 0.18) 0%, transparent 70%)',
+              pointerEvents: 'none',
+            }}
+          />
+
           {/* Top metadata */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              <span style={{ fontSize: '11px', fontWeight: 800, color: '#C8E6C9', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 Today's Collections
               </span>
               <span
                 style={{
                   fontSize: '10px',
                   fontWeight: 800,
-                  backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                  backgroundColor: 'rgba(127, 232, 127, 0.18)',
                   color: '#7FE87F',
-                  padding: '2px 7px',
+                  padding: '2px 8px',
                   borderRadius: '10px',
-                  border: '1px solid rgba(127, 232, 127, 0.25)',
+                  border: '1px solid rgba(127, 232, 127, 0.3)',
                 }}
               >
                 {settledCount} Sales
@@ -190,19 +204,20 @@ export const MerchantHomeScreen: React.FC = () => {
               title="Test SoundBox Voice Announcement"
               className="interactive-tap"
               style={{
-                background: 'none',
-                border: 'none',
+                background: 'rgba(127, 232, 127, 0.12)',
+                border: '1px solid rgba(127, 232, 127, 0.25)',
                 color: '#7FE87F',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '4px',
+                gap: '5px',
                 fontSize: '11.5px',
                 fontWeight: 700,
-                padding: 0,
+                padding: '4px 8px',
+                borderRadius: '8px',
               }}
             >
-              <Volume2 size={15} /> SoundBox
+              <Volume2 size={14} /> SoundBox
             </button>
           </div>
 
@@ -212,8 +227,8 @@ export const MerchantHomeScreen: React.FC = () => {
               <div className="tabular-nums" style={{ fontSize: '32px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em' }}>
                 {formatCurrency(totalToday)}
               </div>
-              <div style={{ fontSize: '11.5px', color: '#A2A2BA', marginTop: '2px' }}>
-                Incl. <span style={{ color: '#7FE87F', fontWeight: 700 }}>SAR {totalVat.toFixed(2)}</span> ZATCA 15% VAT
+              <div style={{ fontSize: '11.5px', color: '#A2E6A2', marginTop: '2px', fontWeight: 600 }}>
+                Incl. <span style={{ color: '#FFFFFF', fontWeight: 800 }}>SAR {totalVat.toFixed(2)}</span> ZATCA 15% VAT
               </div>
             </div>
 
@@ -232,9 +247,10 @@ export const MerchantHomeScreen: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
+                boxShadow: 'none',
               }}
             >
-              <CreditCard size={16} /> Tap to Pay
+              <CreditCard size={15} /> Collect
             </button>
           </div>
 

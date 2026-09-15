@@ -114,23 +114,34 @@ export const SoftPOSTerminalScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* Center: Amount Display & Scheme Selector */}
-      <div style={{ textAlign: 'center', margin: '14px 0' }}>
-        <div style={{ fontSize: '11.5px', color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700, marginBottom: '6px' }}>
-          Enter Charge Amount
+      {/* Center: Amount Display & Scheme Selector (Gradient Green-Black) */}
+      <div
+        style={{
+          textAlign: 'center',
+          margin: '14px 0',
+          background: 'linear-gradient(135deg, #052e16 0%, #064e3b 35%, #031c12 70%, #0e0e18 100%)',
+          border: '1px solid rgba(127, 232, 127, 0.35)',
+          borderRadius: '20px',
+          padding: '20px 16px',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <div style={{ fontSize: '11.5px', color: '#C8E6C9', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 800, marginBottom: '4px' }}>
+          Charge Amount (Sarie SoftPOS)
         </div>
 
-        <div className="tabular-nums" style={{ fontSize: '42px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em', margin: '4px 0 10px 0' }}>
+        <div className="tabular-nums" style={{ fontSize: '40px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em', margin: '4px 0 8px 0' }}>
           {formatCurrency(numericValue)}
         </div>
 
         {/* 15% ZATCA VAT Breakdown Tag */}
-        <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 700 }}>
+        <div style={{ fontSize: '12px', color: '#A2E6A2', fontWeight: 700 }}>
           Includes SAR {(numericValue - numericValue / 1.15).toFixed(2)} (15% ZATCA VAT)
         </div>
 
         {/* Card Scheme Selection */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '14px' }}>
           {CARD_SCHEMES.map((scheme) => {
             const isSelected = softPosCardScheme === scheme.id;
             return (
@@ -140,8 +151,8 @@ export const SoftPOSTerminalScreen: React.FC = () => {
                 onClick={() => setSoftPosCardScheme(scheme.id)}
                 className="interactive-tap"
                 style={{
-                  backgroundColor: isSelected ? '#1E1E32' : '#151524',
-                  border: isSelected ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
+                  backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.22)' : 'rgba(0, 0, 0, 0.4)',
+                  border: isSelected ? '1.5px solid #7FE87F' : '1px solid rgba(127, 232, 127, 0.2)',
                   color: isSelected ? '#FFFFFF' : '#A2A2BA',
                   borderRadius: '12px',
                   padding: '6px 12px',

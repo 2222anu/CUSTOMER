@@ -367,10 +367,28 @@ export const OnboardingKycScreen: React.FC = () => {
                   : `Challenge expires in ${countdown} seconds`}
               </div>
 
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <SecondaryButton onClick={() => setStep('NATIONAL_ID')}>
-                  <ArrowLeft size={16} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
-                </SecondaryButton>
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <button
+                  type="button"
+                  onClick={() => setStep('NATIONAL_ID')}
+                  aria-label="Back"
+                  className="interactive-tap"
+                  style={{
+                    width: '52px',
+                    height: '52px',
+                    borderRadius: '14px',
+                    backgroundColor: '#1E1E32',
+                    border: '1px solid #2C2C44',
+                    color: '#FFFFFF',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    flexShrink: 0,
+                  }}
+                >
+                  <ArrowLeft size={20} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+                </button>
                 <div style={{ flex: 1 }}>
                   <PrimaryButton onClick={handleSimulateApproveInNafath}>
                     {language === 'العربية' ? 'تمت الموافقة في نفاذ' : 'I Approved in Nafath'}{' '}
@@ -497,7 +515,7 @@ export const OnboardingKycScreen: React.FC = () => {
       {/* Footer Skip Link */}
       {step !== 'VERIFIED_SUCCESS' && (
         <div style={{ padding: '0 20px', marginTop: '16px' }}>
-          <SecondaryButton onClick={handleSkip}>
+          <SecondaryButton variant="ghost" onClick={handleSkip}>
             {language === 'العربية' ? 'تخطي التوثيق الآن' : 'Skip Verification for Now'}
           </SecondaryButton>
         </div>

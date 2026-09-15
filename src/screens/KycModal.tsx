@@ -3,7 +3,6 @@ import { X, ShieldCheck, CheckCircle2, UserCheck, ArrowRight, ArrowLeft, Loader2
 import { useApp } from '../state/AppContext';
 import { SamaLogo } from '../components/SamaLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
-import { SecondaryButton } from '../components/SecondaryButton';
 
 type KycStep = 'NATIONAL_ID' | 'NAFATH_CHALLENGE' | 'BIOMETRIC_POLLING' | 'VERIFIED_SUCCESS';
 
@@ -370,10 +369,28 @@ export const KycModal: React.FC = () => {
                 : `Challenge expires in ${countdown} seconds`}
             </div>
 
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <SecondaryButton onClick={() => setStep('NATIONAL_ID')}>
-                <ArrowLeft size={16} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
-              </SecondaryButton>
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <button
+                type="button"
+                onClick={() => setStep('NATIONAL_ID')}
+                aria-label="Back"
+                className="interactive-tap"
+                style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '14px',
+                  backgroundColor: '#1E1E32',
+                  border: '1px solid #2C2C44',
+                  color: '#FFFFFF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  flexShrink: 0,
+                }}
+              >
+                <ArrowLeft size={20} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+              </button>
               <div style={{ flex: 1 }}>
                 <PrimaryButton onClick={handleSimulateApproveInNafath}>
                   {language === 'العربية' ? 'تمت الموافقة في نفاذ' : 'I Approved in Nafath'}{' '}

@@ -207,7 +207,7 @@ export const PermissionsScreen: React.FC = () => {
           {t('auth.allow_continue', 'Allow & Continue')}{' '}
           <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
         </PrimaryButton>
-        <SecondaryButton onClick={handleSkipPermissions}>
+        <SecondaryButton variant="ghost" onClick={handleSkipPermissions}>
           {language === 'العربية' ? 'تخطي الآن' : 'Skip for Now'}
         </SecondaryButton>
 

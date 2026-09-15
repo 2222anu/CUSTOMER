@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Landmark, Check, Phone, ShieldCheck, CreditCard, ArrowRight, ArrowLeft, Loader2, CheckCircle2, Lock } from 'lucide-react';
 import { BottomSheet } from '../components/BottomSheet';
 import { PrimaryButton } from '../components/PrimaryButton';
-import { SecondaryButton } from '../components/SecondaryButton';
 import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
@@ -489,10 +488,28 @@ export const AddBankModal: React.FC = () => {
             </div>
           )}
 
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <SecondaryButton onClick={() => setStep('SELECT_BANK')}>
-              <ArrowLeft size={16} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
-            </SecondaryButton>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <button
+              type="button"
+              onClick={() => setStep('SELECT_BANK')}
+              aria-label="Back"
+              className="interactive-tap"
+              style={{
+                width: '52px',
+                height: '52px',
+                borderRadius: '14px',
+                backgroundColor: '#1E1E32',
+                border: '1px solid #2C2C44',
+                color: '#FFFFFF',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                flexShrink: 0,
+              }}
+            >
+              <ArrowLeft size={20} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+            </button>
             <div style={{ flex: 1 }}>
               <PrimaryButton onClick={handleRequestOtp} disabled={isLoading}>
                 {isLoading ? (
@@ -568,10 +585,28 @@ export const AddBankModal: React.FC = () => {
             </div>
           )}
 
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <SecondaryButton onClick={() => setStep('MATCH_METHOD')}>
-              <ArrowLeft size={16} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
-            </SecondaryButton>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <button
+              type="button"
+              onClick={() => setStep('MATCH_METHOD')}
+              aria-label="Back"
+              className="interactive-tap"
+              style={{
+                width: '52px',
+                height: '52px',
+                borderRadius: '14px',
+                backgroundColor: '#1E1E32',
+                border: '1px solid #2C2C44',
+                color: '#FFFFFF',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                flexShrink: 0,
+              }}
+            >
+              <ArrowLeft size={20} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+            </button>
             <div style={{ flex: 1 }}>
               <PrimaryButton onClick={handleVerifyOtpAndLink} disabled={isLoading}>
                 {isLoading ? (

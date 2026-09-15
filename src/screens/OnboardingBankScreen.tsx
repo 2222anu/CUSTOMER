@@ -503,15 +503,21 @@ export const OnboardingBankScreen: React.FC = () => {
                         key={tName}
                         type="button"
                         onClick={() => setAccountType(tName)}
+                        className="interactive-tap"
                         style={{
-                          padding: '10px 6px',
-                          borderRadius: '10px',
+                          height: '44px',
+                          padding: '0 8px',
+                          borderRadius: '12px',
                           backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.15)' : '#1E1E32',
-                          border: isSelected ? '1px solid #7FE87F' : '1px solid #2C2C44',
+                          border: isSelected ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
                           color: isSelected ? '#7FE87F' : '#A2A2BA',
-                          fontSize: '12px',
+                          fontSize: '12.5px',
                           fontWeight: 700,
                           cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          transition: 'all 0.15s ease',
                         }}
                       >
                         {label}
@@ -527,10 +533,28 @@ export const OnboardingBankScreen: React.FC = () => {
                 </div>
               )}
 
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <SecondaryButton onClick={() => setStep('SELECT_BANK')}>
-                  <ArrowLeft size={16} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
-                </SecondaryButton>
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <button
+                  type="button"
+                  onClick={() => setStep('SELECT_BANK')}
+                  aria-label="Back"
+                  className="interactive-tap"
+                  style={{
+                    width: '52px',
+                    height: '52px',
+                    borderRadius: '14px',
+                    backgroundColor: '#1E1E32',
+                    border: '1px solid #2C2C44',
+                    color: '#FFFFFF',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    flexShrink: 0,
+                  }}
+                >
+                  <ArrowLeft size={20} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+                </button>
                 <div style={{ flex: 1 }}>
                   <PrimaryButton onClick={handleRequestOtp} disabled={isLoading}>
                     {isLoading ? (
@@ -613,10 +637,28 @@ export const OnboardingBankScreen: React.FC = () => {
                 </div>
               )}
 
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <SecondaryButton onClick={() => setStep('MATCH_METHOD')}>
-                  <ArrowLeft size={16} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
-                </SecondaryButton>
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <button
+                  type="button"
+                  onClick={() => setStep('MATCH_METHOD')}
+                  aria-label="Back"
+                  className="interactive-tap"
+                  style={{
+                    width: '52px',
+                    height: '52px',
+                    borderRadius: '14px',
+                    backgroundColor: '#1E1E32',
+                    border: '1px solid #2C2C44',
+                    color: '#FFFFFF',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    flexShrink: 0,
+                  }}
+                >
+                  <ArrowLeft size={20} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+                </button>
                 <div style={{ flex: 1 }}>
                   <PrimaryButton onClick={handleVerifyOtpAndLink} disabled={isLoading}>
                     {isLoading ? (
@@ -712,7 +754,7 @@ export const OnboardingBankScreen: React.FC = () => {
       {/* Footer Skip Link */}
       {step !== 'SUCCESS' && (
         <div style={{ padding: '0 20px', marginTop: '16px' }}>
-          <SecondaryButton onClick={handleFinishOnboarding}>
+          <SecondaryButton variant="ghost" onClick={handleFinishOnboarding}>
             {language === 'العربية' ? 'تخطي والدخول للرئيسية' : 'Skip & Go to Home'}
           </SecondaryButton>
         </div>

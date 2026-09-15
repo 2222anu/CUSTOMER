@@ -374,19 +374,21 @@ export const ReceiveScreen: React.FC = () => {
             className="interactive-tap"
             style={{
               width: '100%',
+              minHeight: '52px',
               backgroundColor: '#7FE87F',
               color: '#0B0B14',
               border: 'none',
-              borderRadius: '8px',
-              padding: '14px',
-              fontSize: '14px',
+              borderRadius: '14px',
+              padding: '0 20px',
+              fontSize: '14.5px',
               fontWeight: 800,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '8px',
               cursor: 'pointer',
-              boxShadow: 'none',
+              boxShadow: '0 4px 14px rgba(127, 232, 127, 0.25)',
+              boxSizing: 'border-box',
             }}
           >
             <Sparkles size={18} color="#0B0B14" />{' '}

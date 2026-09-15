@@ -99,71 +99,12 @@ export const AddBankModal: React.FC = () => {
     setIsAuthorized(true);
   };
 
-  const stepNum = step === 'SELECT_AND_MATCH' ? 1 : 2;
-  const stepLabel =
-    step === 'SELECT_AND_MATCH'
-      ? language === 'العربية' ? 'الخطوة ١: اختيار البنك والمطابقة' : 'Step 1: Select Bank & Match'
-      : isAuthorized
-      ? language === 'العربية' ? 'الخطوة ٢: تم الربط بنجاح' : 'Step 2: Bank Account Linked'
-      : language === 'العربية' ? 'الخطوة ٢: التحقق والربط' : 'Step 2: Authorize & Link';
-
   return (
     <BottomSheet
       isOpen={isAddBankModalOpen}
       onClose={handleClose}
       title={language === 'العربية' ? 'ربط الحساب البنكي' : 'Link Bank Account'}
     >
-      {/* Streamlined 2-Segment Stepped Progress Indicator */}
-      <div style={{ marginBottom: '16px' }}>
-        <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
-          {[1, 2].map((s) => {
-            const isPassed = stepNum >= s;
-            const isCurrent = stepNum === s;
-            return (
-              <div
-                key={s}
-                style={{
-                  flex: 1,
-                  height: '4px',
-                  borderRadius: '4px',
-                  backgroundColor: isPassed ? '#7FE87F' : '#1E1E32',
-                  boxShadow: isCurrent ? '0 0 8px rgba(127, 232, 127, 0.45)' : 'none',
-                  transition: 'all 0.3s ease',
-                }}
-              />
-            );
-          })}
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span
-              style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                backgroundColor: '#7FE87F',
-                display: 'inline-block',
-              }}
-            />
-            <span
-              style={{
-                fontSize: '11.5px',
-                fontWeight: 800,
-                color: '#7FE87F',
-                textTransform: 'uppercase',
-                letterSpacing: '0.04em',
-              }}
-            >
-              {stepLabel}
-            </span>
-          </div>
-          <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 800 }}>
-            {stepNum} / 2
-          </span>
-        </div>
-      </div>
-
       {/* STEP 1: SELECT BANK & MATCH METHOD */}
       {step === 'SELECT_AND_MATCH' && (
         <div className="fade-in">

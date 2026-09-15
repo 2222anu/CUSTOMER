@@ -491,18 +491,19 @@ export const HomeScreen: React.FC = () => {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#7FE87F',
-                fontSize: '12px',
-                fontWeight: 800,
+                color: '#34d399',
+                fontSize: '12.5px',
+                fontWeight: 700,
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '2px',
+                gap: '3px',
                 boxShadow: 'none',
                 padding: 0,
               }}
             >
-              {t('home.view_all', 'View All')} <ChevronRight size={14} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+              <span>{t('home.view_all', 'View All')}</span>
+              <ChevronRight size={15} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
             </button>
           </div>
 
@@ -646,21 +647,23 @@ export const HomeScreen: React.FC = () => {
           </h3>
           <button
             onClick={() => navigateTo('HISTORY')}
+            className="interactive-tap"
             style={{
               background: 'none',
               border: 'none',
-              color: '#7FE87F',
-              fontSize: '12px',
-              fontWeight: 800,
+              color: '#34d399',
+              fontSize: '12.5px',
+              fontWeight: 700,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '2px',
+              gap: '3px',
               boxShadow: 'none',
               padding: 0,
             }}
           >
-            {t('home.view_all', 'View All')} <ChevronRight size={14} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+            <span>{t('home.view_all', 'View All')}</span>
+            <ChevronRight size={15} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
           </button>
         </div>
 

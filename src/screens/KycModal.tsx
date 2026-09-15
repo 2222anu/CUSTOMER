@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, ShieldCheck, CheckCircle2, FileText, UserCheck, ArrowRight, Loader2 } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { SamaLogo } from '../components/SamaLogo';
+import { ZatcaLogo } from '../components/ZatcaLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 
 export const KycModal: React.FC = () => {
@@ -260,9 +261,12 @@ export const KycModal: React.FC = () => {
                 marginTop: '4px',
               }}
             >
-              <span style={{ fontSize: '11.5px', color: '#A2A2BA' }}>
-                Regulated by Saudi Central Bank
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <ZatcaLogo variant="icon" size={18} />
+                <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 600 }}>
+                  SAMA & ZATCA Verified
+                </span>
+              </div>
               <SamaLogo height={16} themeMode="green" />
             </div>
 

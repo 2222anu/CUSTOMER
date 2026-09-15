@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   CheckCircle2,
   Share2,
-  Receipt,
   Plus,
   Volume2,
   Check,
@@ -11,6 +10,7 @@ import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SamaLogo } from '../components/SamaLogo';
+import { ZatcaLogo } from '../components/ZatcaLogo';
 
 export const MerchantPaymentReceivedScreen: React.FC = () => {
   const {
@@ -97,10 +97,10 @@ export const MerchantPaymentReceivedScreen: React.FC = () => {
             boxSizing: 'border-box',
           }}
         >
-          {/* Header */}
+          {/* Header with Zatca Logo */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', borderBottom: '1px solid #2C2C44', paddingBottom: '10px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Receipt size={16} color="#7FE87F" />
+              <ZatcaLogo variant="icon" size={20} />
               <span style={{ fontSize: '12px', fontWeight: 800, color: '#FFFFFF' }}>
                 ZATCA Phase 2 E-Invoice
               </span>
@@ -133,58 +133,62 @@ export const MerchantPaymentReceivedScreen: React.FC = () => {
               <span style={{ fontWeight: 700, color: '#FFFFFF' }}>SAR {collection.netAmount.toFixed(2)}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: '#A2A2BA' }}>Standard VAT (15%)</span>
-              <span style={{ fontWeight: 700, color: '#7FE87F' }}>SAR {collection.vatAmount.toFixed(2)}</span>
+              <span style={{ color: '#7FE87F', fontWeight: 700 }}>15% ZATCA VAT</span>
+              <span style={{ fontWeight: 800, color: '#7FE87F' }}>SAR {collection.vatAmount.toFixed(2)}</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #2C2C44', paddingTop: '8px', marginTop: '2px' }}>
+              <span style={{ fontWeight: 800, color: '#FFFFFF', fontSize: '13px' }}>Gross Total</span>
+              <span style={{ fontWeight: 900, color: '#FFFFFF', fontSize: '14px' }}>SAR {collection.amount.toFixed(2)}</span>
             </div>
           </div>
-        </div>
 
-        {/* Quick Voice Replay & Share Row */}
-        <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-          <button
-            onClick={() => speakSoundBox(collection.amount)}
-            className="interactive-tap"
-            style={{
-              flex: 1,
-              backgroundColor: '#1E1E32',
-              border: '1px solid #2C2C44',
-              borderRadius: '12px',
-              padding: '10px',
-              color: '#FFFFFF',
-              fontSize: '12px',
-              fontWeight: 800,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '6px',
-              cursor: 'pointer',
-            }}
-          >
-            <Volume2 size={15} color="#7FE87F" /> Play SoundBox
-          </button>
+          {/* Play Soundbox Voice Again */}
+          <div style={{ display: 'flex', gap: '8px', marginTop: '14px' }}>
+            <button
+              onClick={() => speakSoundBox(collection.amount)}
+              className="interactive-tap"
+              style={{
+                flex: 1,
+                backgroundColor: '#1E1E32',
+                border: '1px solid #2C2C44',
+                color: '#7FE87F',
+                borderRadius: '10px',
+                padding: '9px 12px',
+                fontSize: '11.5px',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '5px',
+                cursor: 'pointer',
+              }}
+            >
+              <Volume2 size={15} /> Play SoundBox
+            </button>
 
-          <button
-            onClick={handleShareReceipt}
-            className="interactive-tap"
-            style={{
-              flex: 1,
-              backgroundColor: '#1E1E32',
-              border: '1px solid #2C2C44',
-              borderRadius: '12px',
-              padding: '10px',
-              color: '#FFFFFF',
-              fontSize: '12px',
-              fontWeight: 800,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '6px',
-              cursor: 'pointer',
-            }}
-          >
-            {copied ? <Check size={15} color="#7FE87F" /> : <Share2 size={15} color="#7FE87F" />}
-            {copied ? 'Copied Receipt' : 'Share Receipt'}
-          </button>
+            <button
+              onClick={handleShareReceipt}
+              className="interactive-tap"
+              style={{
+                flex: 1,
+                backgroundColor: '#1E1E32',
+                border: '1px solid #2C2C44',
+                color: '#FFFFFF',
+                borderRadius: '10px',
+                padding: '9px 12px',
+                fontSize: '11.5px',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                cursor: 'pointer',
+              }}
+            >
+              {copied ? <Check size={15} color="#7FE87F" /> : <Share2 size={15} color="#7FE87F" />}
+              {copied ? 'Copied Receipt' : 'Share Receipt'}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -213,22 +217,21 @@ export const MerchantPaymentReceivedScreen: React.FC = () => {
         </button>
       </div>
 
-      {/* SAMA Dock */}
+      {/* SAMA & ZATCA Compliance Dock */}
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '8px',
+          gap: '12px',
           width: '100%',
           textAlign: 'center',
           marginTop: '10px',
         }}
       >
-        <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 700 }}>
-          SAMA & ZATCA Approved Digital Receipt
-        </span>
         <SamaLogo height={14} themeMode="green" />
+        <span style={{ fontSize: '10px', color: '#6E6E85' }}>•</span>
+        <ZatcaLogo variant="full" height={13} themeMode="dark" />
       </div>
     </div>
   );

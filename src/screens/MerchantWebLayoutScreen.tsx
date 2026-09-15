@@ -12,6 +12,8 @@ import {
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
 import { AlphPayLogo } from '../components/AlphPayLogo';
+import { ZatcaLogo } from '../components/ZatcaLogo';
+import { SamaLogo } from '../components/SamaLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 
 export const MerchantWebLayoutScreen: React.FC = () => {
@@ -428,13 +430,29 @@ export const MerchantWebLayoutScreen: React.FC = () => {
           {activeTab === 'zatca' && (
             <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <h2 style={{ fontSize: '22px', fontWeight: 800, margin: '0 0 4px 0', color: '#FFFFFF' }}>
-                    ZATCA Phase 2 E-Invoicing Ledger
-                  </h2>
-                  <p style={{ fontSize: '13px', color: '#A2A2BA', margin: 0 }}>
-                    Mandatory cryptographic compliance with ZATCA (Fatoora platform)
-                  </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div
+                    style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      backgroundColor: 'rgba(56, 171, 195, 0.12)',
+                      border: '1px solid rgba(56, 171, 195, 0.3)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <ZatcaLogo variant="icon" size={28} />
+                  </div>
+                  <div>
+                    <h2 style={{ fontSize: '22px', fontWeight: 800, margin: '0 0 4px 0', color: '#FFFFFF' }}>
+                      ZATCA Phase 2 E-Invoicing Ledger
+                    </h2>
+                    <p style={{ fontSize: '13px', color: '#A2A2BA', margin: 0 }}>
+                      Mandatory cryptographic compliance with ZATCA (Fatoora platform)
+                    </p>
+                  </div>
                 </div>
 
                 <button
@@ -481,13 +499,16 @@ export const MerchantWebLayoutScreen: React.FC = () => {
           {/* TAB 4: SARIE PAYOUTS */}
           {activeTab === 'settlement' && (
             <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div>
-                <h2 style={{ fontSize: '22px', fontWeight: 800, margin: '0 0 4px 0', color: '#FFFFFF' }}>
-                  Sarie Bank Settlements
-                </h2>
-                <p style={{ fontSize: '13px', color: '#A2A2BA', margin: 0 }}>
-                  Automated daily payouts directly to registered Saudi Corporate IBAN
-                </p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <h2 style={{ fontSize: '22px', fontWeight: 800, margin: '0 0 4px 0', color: '#FFFFFF' }}>
+                    Sarie Bank Settlements
+                  </h2>
+                  <p style={{ fontSize: '13px', color: '#A2A2BA', margin: 0 }}>
+                    Automated daily payouts directly to registered Saudi Corporate IBAN
+                  </p>
+                </div>
+                <SamaLogo height={22} themeMode="green" />
               </div>
 
               <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '20px', padding: '24px' }}>

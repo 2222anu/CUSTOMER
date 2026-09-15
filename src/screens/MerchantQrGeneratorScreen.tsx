@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Share2, QrCode, Check, Sparkles } from 'lucide-react';
+import { ArrowLeft, Share2, Check, Sparkles } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SamaLogo } from '../components/SamaLogo';
+import { ZatcaLogo } from '../components/ZatcaLogo';
 import { QRCodeView } from '../components/QRCodeView';
 
 export const MerchantQrGeneratorScreen: React.FC = () => {
@@ -85,10 +86,10 @@ export const MerchantQrGeneratorScreen: React.FC = () => {
 
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
-            ZATCA QR Generator
+            ZATCA Phase 2 E-Invoice
           </div>
-          <div style={{ fontSize: '11px', color: '#EBB432', fontWeight: 700 }}>
-            Phase 2 E-Invoice QR
+          <div style={{ fontSize: '11px', color: '#56bbb4', fontWeight: 700 }}>
+            TLV Cryptographic QR
           </div>
         </div>
 
@@ -97,15 +98,14 @@ export const MerchantQrGeneratorScreen: React.FC = () => {
             width: '38px',
             height: '38px',
             borderRadius: '12px',
-            backgroundColor: 'rgba(235, 180, 50, 0.12)',
-            border: '1px solid rgba(235, 180, 50, 0.25)',
+            backgroundColor: 'rgba(56, 171, 195, 0.12)',
+            border: '1px solid rgba(56, 171, 195, 0.25)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#EBB432',
           }}
         >
-          <QrCode size={18} />
+          <ZatcaLogo variant="icon" size={24} />
         </div>
       </div>
 
@@ -122,7 +122,13 @@ export const MerchantQrGeneratorScreen: React.FC = () => {
             boxShadow: 'none',
           }}
         >
-          <QRCodeView value={zatcaPayload} size={180} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+            <ZatcaLogo variant="icon" size={20} />
+            <span style={{ fontSize: '11px', fontWeight: 900, color: '#333333', letterSpacing: '0.04em' }}>
+              ZATCA Fatoora
+            </span>
+          </div>
+          <QRCodeView value={zatcaPayload} size={175} />
           <div style={{ marginTop: '10px', textAlign: 'center' }}>
             <div style={{ fontSize: '13px', fontWeight: 800, color: '#000000' }}>
               {merchantInfo.businessName}

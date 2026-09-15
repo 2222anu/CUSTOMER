@@ -10,6 +10,7 @@ import {
   Monitor,
   User,
   ReceiptText,
+  Radio,
 } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
@@ -337,202 +338,132 @@ export const MerchantHomeScreen: React.FC = () => {
       </div>
 
       {/* 3. Payment Acceptance Tools Grid */}
-      <div style={{ padding: '18px 20px 0 20px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-          <h3 style={{ fontSize: '14.5px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
-            {isAr ? 'منظومة قبول المدفوعات' : 'Payment Acceptance Suite'}
-          </h3>
-          <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
-            {isAr ? 'نقاط بيع مدى وسريع' : 'mada & Sarie POS'}
-          </span>
-        </div>
+      <div style={{ padding: '14px 20px 0 20px' }}>
+        <div
+          style={{
+            backgroundColor: '#151524',
+            border: '1px solid #2C2C44',
+            borderRadius: '18px',
+            padding: '18px 16px',
+            boxShadow: 'none',
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
+              {isAr ? 'منظومة قبول المدفوعات' : 'Payment Acceptance Suite'}
+            </h3>
+            <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
+              {isAr ? 'نقاط بيع مدى وسريع' : 'mada & Sarie POS'}
+            </span>
+          </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-          {/* 1. SoftPOS Contactless Card Terminal */}
-          <div
-            onClick={() => navigateTo('SOFTPOS_TERMINAL')}
-            className="interactive-tap"
-            style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
-              borderRadius: '18px',
-              padding: '16px',
-              cursor: 'pointer',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              height: '120px',
-              boxSizing: 'border-box',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
+            {/* 1. SoftPOS */}
+            <div
+              onClick={() => navigateTo('SOFTPOS_TERMINAL')}
+              className="interactive-tap"
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+            >
               <div
                 style={{
-                  width: '42px',
-                  height: '42px',
-                  borderRadius: '12px',
+                  width: '54px',
+                  height: '54px',
+                  borderRadius: '16px',
                   backgroundColor: '#1E1E32',
                   border: '1px solid #2C2C44',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: '#7FE87F',
+                  boxShadow: 'none',
                 }}
               >
-                <CreditCard size={20} />
+                <CreditCard size={22} />
               </div>
-              <span style={{ fontSize: '10px', fontWeight: 800, color: '#7FE87F', backgroundColor: 'rgba(127, 232, 127, 0.12)', padding: '2px 6px', borderRadius: '6px' }}>
-                mada NFC
+              <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
+                {t('merchant.softpos', 'SoftPOS')}
               </span>
             </div>
-            <div>
-              <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
-                {t('merchant.softpos', 'SoftPOS Terminal')}
-              </div>
-              <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px' }}>
-                {isAr ? 'دفع بالبطاقة والجوال' : 'Contactless tap to pay'}
-              </div>
-            </div>
-          </div>
 
-          {/* 2. ZATCA E-Invoicing QR Code Generator */}
-          <div
-            onClick={() => navigateTo('MERCHANT_QR_GENERATOR')}
-            className="interactive-tap"
-            style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
-              borderRadius: '18px',
-              padding: '16px',
-              cursor: 'pointer',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              height: '120px',
-              boxSizing: 'border-box',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            {/* 2. ZATCA QR */}
+            <div
+              onClick={() => navigateTo('MERCHANT_QR_GENERATOR')}
+              className="interactive-tap"
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+            >
               <div
                 style={{
-                  width: '42px',
-                  height: '42px',
-                  borderRadius: '12px',
+                  width: '54px',
+                  height: '54px',
+                  borderRadius: '16px',
                   backgroundColor: '#1E1E32',
                   border: '1px solid #2C2C44',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: '#EBB432',
+                  boxShadow: 'none',
                 }}
               >
-                <QrCode size={20} />
+                <QrCode size={22} />
               </div>
-              <span style={{ fontSize: '10px', fontWeight: 800, color: '#EBB432', backgroundColor: 'rgba(235, 180, 50, 0.12)', padding: '2px 6px', borderRadius: '6px' }}>
-                {isAr ? 'زاتكا ٢' : 'ZATCA Phase 2'}
+              <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
+                {t('merchant.zatca_qr', 'ZATCA QR')}
               </span>
             </div>
-            <div>
-              <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
-                {t('merchant.zatca_qr', 'ZATCA QR Code')}
-              </div>
-              <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px' }}>
-                {isAr ? 'رمز ضريبي مفوتر ديناميكي' : 'Dynamic tax invoice QR'}
-              </div>
-            </div>
-          </div>
 
-          {/* 3. Remote Payment Link */}
-          <div
-            onClick={() => navigateTo('PAYMENT_LINK_GENERATOR')}
-            className="interactive-tap"
-            style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
-              borderRadius: '18px',
-              padding: '16px',
-              cursor: 'pointer',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              height: '120px',
-              boxSizing: 'border-box',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            {/* 3. Payment Link */}
+            <div
+              onClick={() => navigateTo('PAYMENT_LINK_GENERATOR')}
+              className="interactive-tap"
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+            >
               <div
                 style={{
-                  width: '42px',
-                  height: '42px',
-                  borderRadius: '12px',
+                  width: '54px',
+                  height: '54px',
+                  borderRadius: '16px',
                   backgroundColor: '#1E1E32',
                   border: '1px solid #2C2C44',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: '#B478FF',
+                  boxShadow: 'none',
                 }}
               >
-                <Link2 size={20} />
+                <Link2 size={22} />
               </div>
-              <span style={{ fontSize: '10px', fontWeight: 800, color: '#B478FF', backgroundColor: 'rgba(180, 120, 255, 0.12)', padding: '2px 6px', borderRadius: '6px' }}>
-                {isAr ? 'واتساب' : 'WhatsApp'}
+              <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
+                {t('merchant.payment_link', 'Pay Link')}
               </span>
             </div>
-            <div>
-              <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
-                {t('merchant.payment_link', 'Payment Link')}
-              </div>
-              <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px' }}>
-                {isAr ? 'مشاركة رابط دفع عن بُعد' : 'Share remote order link'}
-              </div>
-            </div>
-          </div>
 
-          {/* 4. SoundBox Notifier */}
-          <div
-            onClick={() => navigateTo('SOUNDBOX_NOTIFIER')}
-            className="interactive-tap"
-            style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
-              borderRadius: '18px',
-              padding: '16px',
-              cursor: 'pointer',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              height: '120px',
-              boxSizing: 'border-box',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            {/* 4. SoundBox Notifier */}
+            <div
+              onClick={() => navigateTo('SOUNDBOX_NOTIFIER')}
+              className="interactive-tap"
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+            >
               <div
                 style={{
-                  width: '42px',
-                  height: '42px',
-                  borderRadius: '12px',
+                  width: '54px',
+                  height: '54px',
+                  borderRadius: '16px',
                   backgroundColor: '#1E1E32',
                   border: '1px solid #2C2C44',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: '#7FE87F',
+                  boxShadow: 'none',
                 }}
               >
-                <Volume2 size={20} />
+                <Radio size={22} />
               </div>
-              <span style={{ fontSize: '10px', fontWeight: 800, color: '#7FE87F', backgroundColor: 'rgba(127, 232, 127, 0.12)', padding: '2px 6px', borderRadius: '6px' }}>
-                {isAr ? 'إشعار صوتي' : 'Voice Alert'}
+              <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
+                {t('merchant.soundbox', 'SoundBox')}
               </span>
-            </div>
-            <div>
-              <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
-                {t('merchant.soundbox', 'SoundBox Unit')}
-              </div>
-              <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px' }}>
-                {isAr ? 'تنبيهات صوتية فورية' : 'Arabic & English audio'}
-              </div>
             </div>
           </div>
         </div>

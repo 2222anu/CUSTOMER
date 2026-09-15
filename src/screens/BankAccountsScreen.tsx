@@ -61,9 +61,9 @@ export const BankAccountsScreen: React.FC = () => {
         {/* Top Summary Banner */}
         <div
           style={{
-            backgroundColor: '#2A2A3E',
+            backgroundColor: '#151524',
             borderRadius: '16px',
-            border: '1px solid #4D4D6B',
+            border: '1px solid #2C2C44',
             padding: '16px 18px',
             marginBottom: '20px',
             display: 'flex',
@@ -78,9 +78,9 @@ export const BankAccountsScreen: React.FC = () => {
                 width: '42px',
                 height: '42px',
                 borderRadius: '12px',
-                backgroundColor: '#3A3A52',
+                backgroundColor: '#1E1E32',
                 color: '#7FE87F',
-                border: '1px solid #4D4D6B',
+                border: '1px solid #2C2C44',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

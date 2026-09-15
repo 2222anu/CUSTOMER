@@ -40,7 +40,8 @@ export const SmsOtpScreen: React.FC = () => {
       className="fade-in"
       style={{
         minHeight: '100vh',
-        backgroundColor: '#000000',
+        backgroundColor: '#070D0A',
+        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(52, 211, 153, 0.12) 0%, rgba(7, 13, 10, 0.98) 60%)',
         color: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
@@ -64,7 +65,19 @@ export const SmsOtpScreen: React.FC = () => {
       </div>
 
       {/* Main OTP Verification Form */}
-      <div style={{ width: '100%', maxWidth: '360px', margin: '0 auto' }}>
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '380px',
+          margin: '0 auto',
+          backgroundColor: 'rgba(21, 21, 36, 0.8)',
+          backdropFilter: 'blur(16px)',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '24px',
+          padding: '24px 20px',
+          boxSizing: 'border-box',
+        }}
+      >
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
           <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>
             {t('auth.enter_otp', 'Enter 6-Digit Code')}

@@ -29,7 +29,8 @@ export const MobileNumberScreen: React.FC = () => {
       className="fade-in"
       style={{
         minHeight: '100vh',
-        backgroundColor: '#000000',
+        backgroundColor: '#070D0A',
+        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(52, 211, 153, 0.12) 0%, rgba(7, 13, 10, 0.98) 60%)',
         color: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
@@ -47,24 +48,37 @@ export const MobileNumberScreen: React.FC = () => {
           alignItems: 'center',
           textAlign: 'center',
           width: '100%',
+          position: 'relative',
         }}
       >
         <AlphPayLogo variant="horizontal" size={32} themeMode="dark" />
       </div>
 
       {/* Main Form: Account Type Selector, Input Fields & Action Button */}
-      <div style={{ width: '100%', maxWidth: '360px', margin: '0 auto' }}>
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '380px',
+          margin: '0 auto',
+          backgroundColor: 'rgba(21, 21, 36, 0.8)',
+          backdropFilter: 'blur(16px)',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '24px',
+          padding: '24px 20px',
+          boxSizing: 'border-box',
+        }}
+      >
         {/* Account Type Selector Toggle */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '8px',
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
+            backgroundColor: '#0E0E1A',
+            border: '1px solid rgba(255, 255, 255, 0.06)',
             borderRadius: '16px',
             padding: '4px',
-            marginBottom: '16px',
+            marginBottom: '18px',
           }}
         >
           <button

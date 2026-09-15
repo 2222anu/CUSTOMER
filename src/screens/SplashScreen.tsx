@@ -18,22 +18,23 @@ export const SplashScreen: React.FC = () => {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: '#000000',
+        backgroundColor: '#070D0A',
+        backgroundImage: 'radial-gradient(circle at 50% 40%, rgba(52, 211, 153, 0.15) 0%, rgba(7, 13, 10, 0.95) 70%)',
         color: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '60px 24px 40px 24px',
+        padding: '60px 24px 44px 24px',
         boxSizing: 'border-box',
         position: 'relative',
         userSelect: 'none',
       }}
     >
-      {/* Invisible spacer to perfectly balance the central logo */}
+      {/* Spacer */}
       <div style={{ height: '30px' }} />
 
-      {/* Central App Brand Logo */}
+      {/* Central App Brand Logo with Ambient Aura */}
       <div
         className="fade-in"
         style={{
@@ -41,9 +42,33 @@ export const SplashScreen: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
+          position: 'relative',
         }}
       >
-        <AlphPayLogo variant="horizontal" size={44} themeMode="dark" />
+        <div
+          style={{
+            position: 'absolute',
+            width: '140px',
+            height: '140px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(52, 211, 153, 0.2)',
+            filter: 'blur(40px)',
+            pointerEvents: 'none',
+          }}
+        />
+        <AlphPayLogo variant="horizontal" size={48} themeMode="dark" />
+        <div
+          style={{
+            marginTop: '12px',
+            fontSize: '11px',
+            fontWeight: 800,
+            letterSpacing: '0.2em',
+            color: '#86efac',
+            textTransform: 'uppercase',
+          }}
+        >
+          Quick • Trusted • Payments
+        </div>
       </div>
 
       {/* Bottom Center: Powered by Quantira Technologies */}
@@ -58,11 +83,11 @@ export const SplashScreen: React.FC = () => {
       >
         <span
           style={{
-            fontSize: '11px',
-            fontWeight: 600,
+            fontSize: '10.5px',
+            fontWeight: 700,
             color: '#6E6E85',
-            letterSpacing: '0.04em',
-            textTransform: 'lowercase',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
           }}
         >
           powered by

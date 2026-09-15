@@ -1,0 +1,235 @@
+import React, { useState } from 'react';
+import { ArrowLeft, Share2, QrCode, Check, Sparkles } from 'lucide-react';
+import { useApp } from '../state/AppContext';
+import { formatCurrency } from '../utils/formatters';
+import { PrimaryButton } from '../components/PrimaryButton';
+import { SamaLogo } from '../components/SamaLogo';
+import { QRCodeView } from '../components/QRCodeView';
+
+export const MerchantQrGeneratorScreen: React.FC = () => {
+  const {
+    merchantInfo,
+    processMerchantCollection,
+    navigateTo,
+    goBack,
+  } = useApp();
+
+  const [invoiceAmount, setInvoiceAmount] = useState<string>('150.00');
+  const [orderNote, setOrderNote] = useState<string>('Invoice #INV-9901');
+  const [copied, setCopied] = useState(false);
+  const [isSimulatingScan, setIsSimulatingScan] = useState(false);
+
+  const numAmount = parseFloat(invoiceAmount) || 0;
+  const vatAmount = numAmount > 0 ? Number((numAmount - numAmount / 1.15).toFixed(2)) : 0;
+
+  // Build ZATCA Phase 2 compliant TLV payload representation
+  const zatcaPayload = `zatca://taxinvoice?seller=${encodeURIComponent(merchantInfo.businessName)}&vat=${merchantInfo.vatNumber}&total=${numAmount.toFixed(2)}&vat_total=${vatAmount.toFixed(2)}&rail=sarie&ts=${encodeURIComponent(new Date().toISOString())}`;
+
+  const handleSimulateCustomerPayment = async () => {
+    if (numAmount <= 0) return;
+    setIsSimulatingScan(true);
+    await processMerchantCollection({
+      amount: numAmount,
+      paymentMethod: 'zatca_qr',
+      orderRef: orderNote || 'QR-INVOICE',
+      customerMasked: '+966 54 ••• 8821',
+    });
+    setTimeout(() => {
+      setIsSimulatingScan(false);
+      navigateTo('MERCHANT_PAYMENT_SUCCESS');
+    }, 800);
+  };
+
+  const handleCopyLink = () => {
+    navigator.clipboard?.writeText(zatcaPayload);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div
+      className="fade-in"
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#000000',
+        color: '#FFFFFF',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: '16px 20px 24px 20px',
+        boxSizing: 'border-box',
+        userSelect: 'none',
+      }}
+    >
+      {/* Top Bar */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <button
+          onClick={goBack}
+          aria-label="Back"
+          className="interactive-tap"
+          style={{
+            backgroundColor: '#151524',
+            border: '1px solid #2C2C44',
+            color: '#FFFFFF',
+            width: '38px',
+            height: '38px',
+            borderRadius: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+          }}
+        >
+          <ArrowLeft size={18} />
+        </button>
+
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
+            ZATCA QR Generator
+          </div>
+          <div style={{ fontSize: '11px', color: '#EBB432', fontWeight: 700 }}>
+            Phase 2 E-Invoice QR
+          </div>
+        </div>
+
+        <div
+          style={{
+            width: '38px',
+            height: '38px',
+            borderRadius: '12px',
+            backgroundColor: 'rgba(235, 180, 50, 0.12)',
+            border: '1px solid rgba(235, 180, 50, 0.25)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#EBB432',
+          }}
+        >
+          <QrCode size={18} />
+        </div>
+      </div>
+
+      {/* QR Code Card Display */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '14px 0' }}>
+        <div
+          style={{
+            backgroundColor: '#FFFFFF',
+            padding: '18px',
+            borderRadius: '22px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            boxShadow: 'none',
+          }}
+        >
+          <QRCodeView value={zatcaPayload} size={180} />
+          <div style={{ marginTop: '10px', textAlign: 'center' }}>
+            <div style={{ fontSize: '13px', fontWeight: 800, color: '#000000' }}>
+              {merchantInfo.businessName}
+            </div>
+            <div style={{ fontSize: '10.5px', color: '#666666', fontWeight: 600 }}>
+              VAT ID: {merchantInfo.vatNumber}
+            </div>
+          </div>
+        </div>
+
+        {/* Amount in QR */}
+        <div className="tabular-nums" style={{ fontSize: '26px', fontWeight: 900, color: '#FFFFFF', marginTop: '12px' }}>
+          {formatCurrency(numAmount)}
+        </div>
+        <div style={{ fontSize: '11.5px', color: '#7FE87F', fontWeight: 700 }}>
+          Includes SAR {vatAmount.toFixed(2)} (15% ZATCA VAT)
+        </div>
+      </div>
+
+      {/* Controls: Edit Amount & Reference */}
+      <div style={{ width: '100%', maxWidth: '360px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <div style={{ flex: 1 }}>
+            <label style={{ fontSize: '10.5px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', marginBottom: '4px', display: 'block' }}>
+              Invoice Total (SAR)
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              value={invoiceAmount}
+              onChange={(e) => setInvoiceAmount(e.target.value)}
+              placeholder="150.00"
+              style={{
+                backgroundColor: '#151524',
+                border: '1px solid #2C2C44',
+                borderRadius: '12px',
+                padding: '10px 14px',
+                color: '#FFFFFF',
+                fontSize: '14px',
+                fontWeight: 800,
+                width: '100%',
+                boxSizing: 'border-box',
+                outline: 'none',
+              }}
+            />
+          </div>
+
+          <div style={{ flex: 1 }}>
+            <label style={{ fontSize: '10.5px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', marginBottom: '4px', display: 'block' }}>
+              Order Reference
+            </label>
+            <input
+              type="text"
+              value={orderNote}
+              onChange={(e) => setOrderNote(e.target.value)}
+              placeholder="Invoice #INV-9901"
+              style={{
+                backgroundColor: '#151524',
+                border: '1px solid #2C2C44',
+                borderRadius: '12px',
+                padding: '10px 14px',
+                color: '#FFFFFF',
+                fontSize: '14px',
+                fontWeight: 700,
+                width: '100%',
+                boxSizing: 'border-box',
+                outline: 'none',
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Customer Scan & Pay Simulation CTA */}
+        <PrimaryButton onClick={handleSimulateCustomerPayment} disabled={isSimulatingScan || numAmount <= 0}>
+          <Sparkles size={16} /> Simulate Customer Scan & Pay
+        </PrimaryButton>
+
+        <button
+          onClick={handleCopyLink}
+          className="interactive-tap"
+          style={{
+            backgroundColor: '#151524',
+            border: '1px solid #2C2C44',
+            borderRadius: '12px',
+            padding: '10px',
+            color: '#A2A2BA',
+            fontSize: '12px',
+            fontWeight: 700,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px',
+          }}
+        >
+          {copied ? <Check size={14} color="#7FE87F" /> : <Share2 size={14} />}
+          {copied ? 'QR Payload Copied' : 'Copy ZATCA Payload String'}
+        </button>
+      </div>
+
+      {/* SAMA Dock */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '10px' }}>
+        <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 700 }}>
+          SAMA Sarie & ZATCA Compatible E-Invoicing
+        </span>
+        <SamaLogo height={14} themeMode="green" />
+      </div>
+    </div>
+  );
+};

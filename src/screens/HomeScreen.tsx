@@ -51,7 +51,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '32px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '96px' }}>
       {/* 1. Header with exact center brand logo and icon-only profile avatar */}
       <AppHeader
         showSettings={false}
@@ -277,10 +277,10 @@ export const HomeScreen: React.FC = () => {
               }}
             >
               <Lock size={13} color="#fbbf24" />
-              <span>
+              <span style={{ whiteSpace: 'nowrap' }}>
                 {showTotalBalance
                   ? (language === 'العربية' ? 'رصيد سريع المباشر' : 'Live Sarie Balance')
-                  : (language === 'العربية' ? 'اضغط لإدخال الرمز السري' : 'Tap to enter PIN')}
+                  : (language === 'العربية' ? 'إدخال الرمز السري' : 'Enter PIN')}
               </span>
             </div>
 

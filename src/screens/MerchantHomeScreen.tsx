@@ -60,7 +60,7 @@ export const MerchantHomeScreen: React.FC = () => {
       style={{
         backgroundColor: '#000000',
         minHeight: '100vh',
-        paddingBottom: '36px',
+        paddingBottom: '96px',
         color: '#FFFFFF',
         userSelect: 'none',
       }}

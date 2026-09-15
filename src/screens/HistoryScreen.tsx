@@ -48,7 +48,7 @@ export const HistoryScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '96px' }}>
       <AppHeader
         title={t('history.title', 'Transactions')}
         showSearch
@@ -116,6 +116,7 @@ export const HistoryScreen: React.FC = () => {
           padding: '0 20px',
           marginBottom: '18px',
           overflowX: 'auto',
+          scrollbarWidth: 'none',
         }}
       >
         {(['all', 'sent', 'received', 'pending'] as FilterType[]).map((f) => {

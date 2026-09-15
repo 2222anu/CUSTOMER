@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Landmark, Check, Phone, ShieldCheck, CreditCard, ArrowRight, ArrowLeft, Loader2, CheckCircle2, Lock } from 'lucide-react';
+import { Landmark, Check, Phone, CreditCard, ArrowRight, ArrowLeft, Loader2, CheckCircle2, Lock } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
-import { SecondaryButton } from '../components/SecondaryButton';
 import { useApp } from '../state/AppContext';
 
 interface SaudiBankOption {
@@ -23,13 +22,12 @@ const SAUDI_BANKS: SaudiBankOption[] = [
 ];
 
 export const OnboardingBankScreen: React.FC = () => {
-  const { navigateTo, goBack, addBankAccount, user, kycData, t, language, isRtl } = useApp();
+  const { navigateTo, goBack, addBankAccount, user, t, language, isRtl } = useApp();
 
   const [step, setStep] = useState<'SELECT_BANK' | 'MATCH_METHOD' | 'OTP' | 'SUCCESS'>('SELECT_BANK');
   const [selectedBank, setSelectedBank] = useState<string>('Al Rajhi Bank');
-  const [matchMethod, setMatchMethod] = useState<'mobile' | 'id' | 'iban'>('mobile');
+  const [matchMethod, setMatchMethod] = useState<'mobile' | 'iban'>('mobile');
   const [customIban, setCustomIban] = useState<string>('');
-  const [accountType, setAccountType] = useState<string>('Current Account');
   const [otpCode, setOtpCode] = useState<string>('4821');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -79,16 +77,11 @@ export const OnboardingBankScreen: React.FC = () => {
         ? customIban.toUpperCase()
         : `${selectedBankObj.code} •••• ${Math.floor(1000 + Math.random() * 9000)}`;
 
-    const matchedValue =
-      matchMethod === 'mobile'
-        ? user.mobile
-        : matchMethod === 'id'
-        ? kycData?.nationalId || '1098472910'
-        : generatedIban;
+    const matchedValue = matchMethod === 'mobile' ? user.mobile : generatedIban;
 
     await addBankAccount(selectedBank, {
       iban: generatedIban,
-      accountType,
+      accountType: 'Primary Account',
       matchedWith: matchedValue,
     });
 
@@ -313,8 +306,8 @@ export const OnboardingBankScreen: React.FC = () => {
                   onClick={() => setMatchMethod('mobile')}
                   className="interactive-tap"
                   style={{
-                    padding: '12px 14px',
-                    borderRadius: '12px',
+                    padding: '14px 16px',
+                    borderRadius: '14px',
                     backgroundColor: matchMethod === 'mobile' ? '#1E1E32' : '#151524',
                     border: matchMethod === 'mobile' ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
                     cursor: 'pointer',
@@ -323,21 +316,21 @@ export const OnboardingBankScreen: React.FC = () => {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <Phone size={18} color={matchMethod === 'mobile' ? '#7FE87F' : '#A2A2BA'} />
                     <div>
                       <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#FFFFFF' }}>
                         {language === 'العربية' ? 'مطابقة برقم الجوال المسجل' : 'Match Registered Mobile Number'}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#7FE87F', fontFamily: 'monospace' }} dir="ltr">
+                      <div style={{ fontSize: '11.5px', color: '#7FE87F', fontFamily: 'monospace', marginTop: '2px' }} dir="ltr">
                         {user.mobile}
                       </div>
                     </div>
                   </div>
                   <div
                     style={{
-                      width: '18px',
-                      height: '18px',
+                      width: '20px',
+                      height: '20px',
                       borderRadius: '50%',
                       border: matchMethod === 'mobile' ? 'none' : '1.5px solid #2C2C44',
                       backgroundColor: matchMethod === 'mobile' ? '#7FE87F' : 'transparent',
@@ -350,51 +343,6 @@ export const OnboardingBankScreen: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Match to ID */}
-                <div
-                  tabIndex={0}
-                  role="radio"
-                  aria-checked={matchMethod === 'id'}
-                  onClick={() => setMatchMethod('id')}
-                  className="interactive-tap"
-                  style={{
-                    padding: '12px 14px',
-                    borderRadius: '12px',
-                    backgroundColor: matchMethod === 'id' ? '#1E1E32' : '#151524',
-                    border: matchMethod === 'id' ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <ShieldCheck size={18} color={matchMethod === 'id' ? '#7FE87F' : '#A2A2BA'} />
-                    <div>
-                      <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#FFFFFF' }}>
-                        {language === 'العربية' ? 'مطابقة برقم الهوية الوطنية / الإقامة' : 'Match National ID / Iqama'}
-                      </div>
-                      <div style={{ fontSize: '11px', color: '#A2A2BA', fontFamily: 'monospace' }}>
-                        {kycData?.nationalId ? `ID: ${kycData.nationalId}` : '1098472910'}
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      width: '18px',
-                      height: '18px',
-                      borderRadius: '50%',
-                      border: matchMethod === 'id' ? 'none' : '1.5px solid #2C2C44',
-                      backgroundColor: matchMethod === 'id' ? '#7FE87F' : 'transparent',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {matchMethod === 'id' && <Check size={12} color="#000000" strokeWidth={3} />}
-                  </div>
-                </div>
-
                 {/* Match to Direct IBAN */}
                 <div
                   tabIndex={0}
@@ -403,8 +351,8 @@ export const OnboardingBankScreen: React.FC = () => {
                   onClick={() => setMatchMethod('iban')}
                   className="interactive-tap"
                   style={{
-                    padding: '12px 14px',
-                    borderRadius: '12px',
+                    padding: '14px 16px',
+                    borderRadius: '14px',
                     backgroundColor: matchMethod === 'iban' ? '#1E1E32' : '#151524',
                     border: matchMethod === 'iban' ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
                     cursor: 'pointer',
@@ -413,21 +361,21 @@ export const OnboardingBankScreen: React.FC = () => {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <CreditCard size={18} color={matchMethod === 'iban' ? '#7FE87F' : '#A2A2BA'} />
                     <div>
                       <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#FFFFFF' }}>
                         {language === 'العربية' ? 'إدخال رقم الآيبان مباشرة (IBAN)' : 'Direct Saudi IBAN Input'}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#A2A2BA' }}>
+                      <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px' }}>
                         {language === 'العربية' ? 'إدخال يدوي لرقم الحساب الدولي' : 'Manual 24-character IBAN format'}
                       </div>
                     </div>
                   </div>
                   <div
                     style={{
-                      width: '18px',
-                      height: '18px',
+                      width: '20px',
+                      height: '20px',
                       borderRadius: '50%',
                       border: matchMethod === 'iban' ? 'none' : '1.5px solid #2C2C44',
                       backgroundColor: matchMethod === 'iban' ? '#7FE87F' : 'transparent',
@@ -479,59 +427,6 @@ export const OnboardingBankScreen: React.FC = () => {
                   />
                 </div>
               )}
-
-              {/* Account Type Selector */}
-              <div style={{ marginBottom: '18px' }}>
-                <label
-                  style={{
-                    fontSize: '11px',
-                    fontWeight: 800,
-                    color: '#A2A2BA',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.06em',
-                    marginBottom: '6px',
-                    display: 'block',
-                  }}
-                >
-                  {language === 'العربية' ? 'نوع الحساب' : 'Account Type'}
-                </label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
-                  {['Current Account', 'Savings Account', 'Salary Account'].map((tName) => {
-                    const isSelected = accountType === tName;
-                    const label =
-                      tName === 'Current Account'
-                        ? language === 'العربية' ? 'حساب جاري' : 'Current'
-                        : tName === 'Savings Account'
-                        ? language === 'العربية' ? 'حساب توفير' : 'Savings'
-                        : language === 'العربية' ? 'حساب راتب' : 'Salary';
-                    return (
-                      <button
-                        key={tName}
-                        type="button"
-                        onClick={() => setAccountType(tName)}
-                        className="interactive-tap"
-                        style={{
-                          height: '44px',
-                          padding: '0 8px',
-                          borderRadius: '12px',
-                          backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.15)' : '#1E1E32',
-                          border: isSelected ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
-                          color: isSelected ? '#7FE87F' : '#A2A2BA',
-                          fontSize: '12.5px',
-                          fontWeight: 700,
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          transition: 'all 0.15s ease',
-                        }}
-                      >
-                        {label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
 
               {errorMessage && (
                 <div style={{ fontSize: '12px', color: '#FF6B6B', fontWeight: 700, marginBottom: '14px' }}>
@@ -730,10 +625,6 @@ export const OnboardingBankScreen: React.FC = () => {
                   <span style={{ fontSize: '12px', color: '#A2A2BA' }}>{language === 'العربية' ? 'البنك' : 'Bank'}</span>
                   <span style={{ fontSize: '12.5px', fontWeight: 800, color: '#FFFFFF' }}>{t(selectedBank, selectedBank)}</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <span style={{ fontSize: '12px', color: '#A2A2BA' }}>{language === 'العربية' ? 'النوع' : 'Type'}</span>
-                  <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#7FE87F' }}>{accountType}</span>
-                </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ fontSize: '12px', color: '#A2A2BA' }}>{language === 'العربية' ? 'حالة الربط' : 'Status'}</span>
                   <span style={{ fontSize: '12.5px', fontWeight: 800, color: '#7FE87F' }}>
@@ -750,15 +641,6 @@ export const OnboardingBankScreen: React.FC = () => {
           )}
         </div>
       </div>
-
-      {/* Footer Skip Link */}
-      {step !== 'SUCCESS' && (
-        <div style={{ padding: '0 20px', marginTop: '16px' }}>
-          <SecondaryButton variant="ghost" onClick={handleFinishOnboarding}>
-            {language === 'العربية' ? 'تخطي والدخول للرئيسية' : 'Skip & Go to Home'}
-          </SecondaryButton>
-        </div>
-      )}
     </div>
   );
 };

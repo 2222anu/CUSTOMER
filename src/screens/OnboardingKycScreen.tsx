@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ShieldCheck, CheckCircle2, UserCheck, ArrowRight, ArrowLeft, Loader2, Calendar, Lock } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
-import { SecondaryButton } from '../components/SecondaryButton';
 import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
@@ -61,10 +60,6 @@ export const OnboardingKycScreen: React.FC = () => {
       });
       setStep('VERIFIED_SUCCESS');
     }, 1800);
-  };
-
-  const handleSkip = () => {
-    navigateTo('ONBOARDING_BANK');
   };
 
   const handleContinueToBank = () => {
@@ -505,15 +500,6 @@ export const OnboardingKycScreen: React.FC = () => {
           )}
         </div>
       </div>
-
-      {/* Footer Skip Link */}
-      {step !== 'VERIFIED_SUCCESS' && (
-        <div style={{ padding: '0 20px', marginTop: '16px' }}>
-          <SecondaryButton variant="ghost" onClick={handleSkip}>
-            {language === 'العربية' ? 'تخطي التوثيق الآن' : 'Skip Verification for Now'}
-          </SecondaryButton>
-        </div>
-      )}
     </div>
   );
 };

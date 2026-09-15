@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Landmark, Check, Phone, ShieldCheck, CreditCard, ArrowRight, ArrowLeft, Loader2, CheckCircle2, Lock } from 'lucide-react';
+import { Landmark, Check, Phone, CreditCard, ArrowRight, ArrowLeft, Loader2, CheckCircle2, Lock } from 'lucide-react';
 import { BottomSheet } from '../components/BottomSheet';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SamaLogo } from '../components/SamaLogo';
@@ -23,13 +23,12 @@ const SAUDI_BANKS: SaudiBankOption[] = [
 ];
 
 export const AddBankModal: React.FC = () => {
-  const { isAddBankModalOpen, setIsAddBankModalOpen, addBankAccount, user, kycData, t, language, isRtl } = useApp();
+  const { isAddBankModalOpen, setIsAddBankModalOpen, addBankAccount, user, t, language, isRtl } = useApp();
 
   const [step, setStep] = useState<'SELECT_BANK' | 'MATCH_METHOD' | 'OTP' | 'SUCCESS'>('SELECT_BANK');
   const [selectedBank, setSelectedBank] = useState<string>('Al Rajhi Bank');
-  const [matchMethod, setMatchMethod] = useState<'mobile' | 'id' | 'iban'>('mobile');
+  const [matchMethod, setMatchMethod] = useState<'mobile' | 'iban'>('mobile');
   const [customIban, setCustomIban] = useState<string>('');
-  const [accountType, setAccountType] = useState<string>('Current Account');
   const [otpCode, setOtpCode] = useState<string>('4821');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -88,16 +87,11 @@ export const AddBankModal: React.FC = () => {
         ? customIban.toUpperCase()
         : `${selectedBankObj.code} •••• ${Math.floor(1000 + Math.random() * 9000)}`;
 
-    const matchedValue =
-      matchMethod === 'mobile'
-        ? user.mobile
-        : matchMethod === 'id'
-        ? kycData?.nationalId || '1098472910'
-        : generatedIban;
+    const matchedValue = matchMethod === 'mobile' ? user.mobile : generatedIban;
 
     await addBankAccount(selectedBank, {
       iban: generatedIban,
-      accountType,
+      accountType: 'Primary Account',
       matchedWith: matchedValue,
     });
 
@@ -305,51 +299,6 @@ export const AddBankModal: React.FC = () => {
               </div>
             </div>
 
-            {/* Match to ID */}
-            <div
-              tabIndex={0}
-              role="radio"
-              aria-checked={matchMethod === 'id'}
-              onClick={() => setMatchMethod('id')}
-              className="interactive-tap"
-              style={{
-                padding: '12px 14px',
-                borderRadius: '12px',
-                backgroundColor: matchMethod === 'id' ? '#1E1E32' : '#151524',
-                border: matchMethod === 'id' ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <ShieldCheck size={18} color={matchMethod === 'id' ? '#7FE87F' : '#A2A2BA'} />
-                <div>
-                  <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#FFFFFF' }}>
-                    {language === 'العربية' ? 'مطابقة برقم الهوية الوطنية / الإقامة' : 'Match National ID / Iqama'}
-                  </div>
-                  <div style={{ fontSize: '11px', color: '#A2A2BA', fontFamily: 'monospace' }}>
-                    {kycData?.nationalId ? `ID: ${kycData.nationalId}` : '1098472910'}
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{
-                  width: '18px',
-                  height: '18px',
-                  borderRadius: '50%',
-                  border: matchMethod === 'id' ? 'none' : '1.5px solid #2C2C44',
-                  backgroundColor: matchMethod === 'id' ? '#7FE87F' : 'transparent',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {matchMethod === 'id' && <Check size={12} color="#000000" strokeWidth={3} />}
-              </div>
-            </div>
-
             {/* Match to Direct IBAN */}
             <div
               tabIndex={0}
@@ -434,53 +383,6 @@ export const AddBankModal: React.FC = () => {
               />
             </div>
           )}
-
-          {/* Account Type Selector */}
-          <div style={{ marginBottom: '18px' }}>
-            <label
-              style={{
-                fontSize: '11px',
-                fontWeight: 800,
-                color: '#A2A2BA',
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                marginBottom: '6px',
-                display: 'block',
-              }}
-            >
-              {language === 'العربية' ? 'نوع الحساب' : 'Account Type'}
-            </label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
-              {['Current Account', 'Savings Account', 'Salary Account'].map((tName) => {
-                const isSelected = accountType === tName;
-                const label =
-                  tName === 'Current Account'
-                    ? language === 'العربية' ? 'حساب جاري' : 'Current'
-                    : tName === 'Savings Account'
-                    ? language === 'العربية' ? 'حساب توفير' : 'Savings'
-                    : language === 'العربية' ? 'حساب راتب' : 'Salary';
-                return (
-                  <button
-                    key={tName}
-                    type="button"
-                    onClick={() => setAccountType(tName)}
-                    style={{
-                      padding: '10px 6px',
-                      borderRadius: '10px',
-                      backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.15)' : '#1E1E32',
-                      border: isSelected ? '1px solid #7FE87F' : '1px solid #2C2C44',
-                      color: isSelected ? '#7FE87F' : '#A2A2BA',
-                      fontSize: '12px',
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
 
           {errorMessage && (
             <div style={{ fontSize: '12px', color: '#FF6B6B', fontWeight: 700, marginBottom: '14px' }}>
@@ -668,10 +570,6 @@ export const AddBankModal: React.FC = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span style={{ fontSize: '12px', color: '#A2A2BA' }}>{language === 'العربية' ? 'البنك' : 'Bank'}</span>
               <span style={{ fontSize: '12.5px', fontWeight: 800, color: '#FFFFFF' }}>{t(selectedBank, selectedBank)}</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <span style={{ fontSize: '12px', color: '#A2A2BA' }}>{language === 'العربية' ? 'النوع' : 'Type'}</span>
-              <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#7FE87F' }}>{accountType}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ fontSize: '12px', color: '#A2A2BA' }}>{language === 'العربية' ? 'حالة الربط' : 'Status'}</span>

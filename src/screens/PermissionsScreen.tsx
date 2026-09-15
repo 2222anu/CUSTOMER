@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { MessageSquare, Phone, Users, Camera, MapPin, Mic, ArrowRight, Lock } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
-import { SecondaryButton } from '../components/SecondaryButton';
 import { useApp } from '../state/AppContext';
 
 export const PermissionsScreen: React.FC = () => {
@@ -61,15 +60,6 @@ export const PermissionsScreen: React.FC = () => {
   ];
 
   const handleGrantPermissions = () => {
-    try {
-      localStorage.setItem('hasGrantedPermissions', 'true');
-    } catch {
-      // Ignore
-    }
-    navigateTo('ONBOARDING_KYC');
-  };
-
-  const handleSkipPermissions = () => {
     try {
       localStorage.setItem('hasGrantedPermissions', 'true');
     } catch {
@@ -207,9 +197,6 @@ export const PermissionsScreen: React.FC = () => {
           {t('auth.allow_continue', 'Allow & Continue')}{' '}
           <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
         </PrimaryButton>
-        <SecondaryButton variant="ghost" onClick={handleSkipPermissions}>
-          {language === 'العربية' ? 'تخطي الآن' : 'Skip for Now'}
-        </SecondaryButton>
 
         <div style={{ textAlign: 'center', marginTop: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
           <Lock size={12} color="#6E6E85" />

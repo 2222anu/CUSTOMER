@@ -139,13 +139,13 @@ export const HomeScreen: React.FC = () => {
           />
 
           {/* Card Header Section */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '22px', position: 'relative', zIndex: 2 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '22px', position: 'relative', zIndex: 2 }}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span
                 style={{
                   fontSize: '11px',
                   fontWeight: 800,
-                  letterSpacing: '1.8px',
+                  letterSpacing: '1.6px',
                   color: '#86efac',
                   textTransform: 'uppercase',
                   lineHeight: 1.35,
@@ -155,48 +155,44 @@ export const HomeScreen: React.FC = () => {
               </span>
             </div>
 
-            {/* Badges Container */}
+            {/* Badges Container: Clean, Minimal Icon Buttons */}
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
               <button
                 type="button"
                 onClick={handleToggleBalance}
                 aria-label={showTotalBalance ? t('home.hide', 'Hide') : t('home.pin_required', 'PIN Required')}
+                title={showTotalBalance ? t('home.hide', 'Hide') : t('home.pin_required', 'PIN Required')}
                 className="interactive-tap"
                 style={{
+                  width: '34px',
+                  height: '34px',
+                  borderRadius: '10px',
                   background: 'rgba(6, 78, 59, 0.6)',
-                  border: '1px solid rgba(52, 211, 153, 0.28)',
-                  borderRadius: '12px',
-                  padding: '6px 10px',
+                  border: '1px solid rgba(52, 211, 153, 0.3)',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  color: '#d1fae5',
+                  justifyContent: 'center',
                   cursor: 'pointer',
                   boxShadow: 'none',
                 }}
               >
-                {showTotalBalance ? <EyeOff size={13} color="#34d399" /> : <Eye size={13} color="#34d399" />}
-                <span>{showTotalBalance ? t('home.hide', 'Hide') : t('home.pin_required', 'PIN Required')}</span>
+                {showTotalBalance ? <EyeOff size={16} color="#34d399" /> : <Eye size={16} color="#34d399" />}
               </button>
 
               <div
+                title={t('home.sarie_rail', 'Sarie 24/7 Rail')}
                 style={{
+                  width: '34px',
+                  height: '34px',
+                  borderRadius: '10px',
                   background: 'rgba(6, 78, 59, 0.6)',
-                  border: '1px solid rgba(52, 211, 153, 0.28)',
-                  borderRadius: '12px',
-                  padding: '6px 10px',
-                  display: 'inline-flex',
+                  border: '1px solid rgba(52, 211, 153, 0.3)',
+                  display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  color: '#d1fae5',
+                  justifyContent: 'center',
                 }}
               >
-                <ShieldCheck size={13} color="#34d399" />
-                <span>{t('home.sarie_rail', 'Sarie 24/7 Rail')}</span>
+                <ShieldCheck size={16} color="#34d399" />
               </div>
             </div>
           </div>
@@ -269,7 +265,7 @@ export const HomeScreen: React.FC = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '7px',
+                gap: '6px',
                 fontSize: '11.5px',
                 fontWeight: 600,
                 color: '#86efac',
@@ -283,8 +279,8 @@ export const HomeScreen: React.FC = () => {
               <Lock size={13} color="#fbbf24" />
               <span>
                 {showTotalBalance
-                  ? (language === 'العربية' ? 'رصيد سريع فوري ومحدث' : 'Real-time Sarie Balance')
-                  : t('home.tap_to_view_pin', 'Tap to enter PIN and view balance')}
+                  ? (language === 'العربية' ? 'رصيد سريع المباشر' : 'Live Sarie Balance')
+                  : (language === 'العربية' ? 'اضغط لإدخال الرمز السري' : 'Tap to enter PIN')}
               </span>
             </div>
 
@@ -294,13 +290,13 @@ export const HomeScreen: React.FC = () => {
               style={{
                 background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.48))',
                 border: '1px solid rgba(110, 231, 183, 0.35)',
-                borderRadius: '14px',
-                padding: '10px 18px',
+                borderRadius: '12px',
+                padding: '8px 15px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
+                gap: '6px',
                 color: '#FFFFFF',
-                fontSize: '13px',
+                fontSize: '12.5px',
                 fontWeight: 800,
                 cursor: 'pointer',
                 backdropFilter: 'blur(8px)',

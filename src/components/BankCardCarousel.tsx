@@ -2,19 +2,51 @@ import React, { useState, useRef } from 'react';
 import type { BankAccount } from '../types';
 import { formatCurrency } from '../utils/formatters';
 import { useApp } from '../state/AppContext';
-import { Landmark, Eye, EyeOff, Plus, ChevronRight, ShieldCheck } from 'lucide-react';
+import {
+  Landmark,
+  Building2,
+  Wallet,
+  Star,
+  PiggyBank,
+  Briefcase,
+  Zap,
+  Eye,
+  EyeOff,
+  Plus,
+  ChevronRight,
+  ShieldCheck,
+} from 'lucide-react';
 
 interface BankCardCarouselProps {
   banks: BankAccount[];
 }
 
-const getBankStyle = (_bankName: string, isPrimary: boolean) => {
-  return {
-    background: isPrimary
-      ? 'linear-gradient(135deg, #18182E 0%, #151524 60%, #12121E 100%)'
-      : 'linear-gradient(135deg, #151524 0%, #12121E 100%)',
-    borderColor: isPrimary ? '#7FE87F' : '#2C2C44',
-  };
+const getBankIcon = (bankName: string) => {
+  const lower = bankName.toLowerCase();
+  if (lower.includes('rajhi')) {
+    return <Landmark size={20} color="#34d399" />;
+  }
+  if (lower.includes('snb') || lower.includes('national')) {
+    return <Building2 size={20} color="#34d399" />;
+  }
+  if (lower.includes('riyad') || lower.includes('alinma')) {
+    return <Wallet size={20} color="#34d399" />;
+  }
+  return <Landmark size={20} color="#34d399" />;
+};
+
+const getTierIcon = (bank: BankAccount) => {
+  if (bank.isPrimary) {
+    return <Star size={17} color="#34d399" fill="#34d399" />;
+  }
+  const lowerType = bank.accountType.toLowerCase();
+  if (lowerType.includes('saving')) {
+    return <PiggyBank size={17} color="#34d399" />;
+  }
+  if (lowerType.includes('business') || lowerType.includes('merchant')) {
+    return <Briefcase size={17} color="#34d399" />;
+  }
+  return <Star size={17} color="#34d399" />;
 };
 
 export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => {
@@ -71,52 +103,70 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
 
   return (
     <div style={{ marginBottom: '20px' }}>
-      {/* Header Bar */}
+      {/* Section Header Row */}
       <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '0 20px',
-          marginBottom: '12px',
+          marginBottom: '14px',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
-            {t('banks.title', 'My Bank Accounts')}
+          <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '0.2px' }}>
+            {t('home.linked_banks', 'Saudi Linked Accounts')}
           </h3>
           <span
             style={{
               fontSize: '11px',
               fontWeight: 700,
-              backgroundColor: 'rgba(127, 232, 127, 0.12)',
-              color: '#7FE87F',
+              backgroundColor: 'rgba(52, 211, 153, 0.12)',
+              color: '#34d399',
               padding: '2px 8px',
               borderRadius: '12px',
-              border: '1px solid rgba(127, 232, 127, 0.25)',
+              border: '1px solid rgba(52, 211, 153, 0.25)',
             }}
           >
-            {language === 'العربية' ? `${banks.length} حسابات مرتبطة` : `${banks.length} Linked`}
+            {language === 'العربية' ? `${banks.length} حسابات` : `${banks.length} Linked`}
           </span>
         </div>
 
-        <button
-          onClick={() => navigateTo('BANK_ACCOUNTS')}
-          style={{
-            background: 'none',
-            border: 'none',
-            fontSize: '12px',
-            fontWeight: 700,
-            color: '#7FE87F',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '2px',
-            boxShadow: 'none',
-          }}
-        >
-          {t('banks.title', 'Manage')} <ChevronRight size={14} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
-        </button>
+        {/* Header Right: Carousel Dots Indicator + Manage Link */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+            {banks.map((_, i) => (
+              <span
+                key={i}
+                style={{
+                  width: i === activeCardIndex ? '16px' : '6px',
+                  height: '6px',
+                  borderRadius: i === activeCardIndex ? '3px' : '50%',
+                  backgroundColor: i === activeCardIndex ? '#34d399' : 'rgba(52, 211, 153, 0.25)',
+                  transition: 'all 0.3s ease',
+                }}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={() => navigateTo('BANK_ACCOUNTS')}
+            style={{
+              background: 'none',
+              border: 'none',
+              fontSize: '12px',
+              fontWeight: 700,
+              color: '#34d399',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '2px',
+              boxShadow: 'none',
+            }}
+          >
+            {t('banks.title', 'Manage')} <ChevronRight size={14} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+          </button>
+        </div>
       </div>
 
       {/* Swipable Cards Container */}
@@ -129,7 +179,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
         onScroll={handleScroll}
         style={{
           display: 'flex',
-          gap: '14px',
+          gap: '16px',
           overflowX: 'auto',
           scrollSnapType: isMouseDown ? 'none' : 'x mandatory',
           padding: '4px 20px 10px 20px',
@@ -143,8 +193,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
         }}
       >
         {banks.map((bank) => {
-          const style = getBankStyle(bank.bankName, bank.isPrimary);
-          const rawNumbers = bank.accountNumberMasked.replace(/[^0-9]/g, '') || '3616';
+          const rawNumbers = bank.accountNumberMasked.replace(/[^0-9]/g, '') || '4821';
           const displayBankName = t(bank.bankName, bank.bankName);
           const displayAccType = t(bank.accountType, bank.accountType);
 
@@ -157,124 +206,188 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                 scrollSnapAlign: 'start',
                 flex: '0 0 min(315px, calc(100% - 40px))',
                 width: 'min(315px, calc(100% - 40px))',
-                height: '175px',
-                background: style.background,
-                borderRadius: '16px',
-                padding: '16px 18px',
+                background: 'linear-gradient(135deg, #072e1f 0%, #021710 100%)',
+                borderRadius: '24px',
+                padding: '20px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
+                gap: '16px',
                 boxSizing: 'border-box',
                 cursor: 'pointer',
                 color: '#FFFFFF',
                 position: 'relative',
                 overflow: 'hidden',
-                border: `1.5px solid ${style.borderColor}`,
-                boxShadow: 'none',
+                border: '1px solid rgba(52, 211, 153, 0.3)',
+                boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12)',
               }}
             >
               {/* 1. Card Top Header */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', zIndex: 2 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flex: 1, paddingInlineEnd: '8px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 2 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
                   <div
                     style={{
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '10px',
-                      backgroundColor: 'rgba(127, 232, 127, 0.12)',
-                      border: '1px solid rgba(127, 232, 127, 0.25)',
+                      width: '42px',
+                      height: '42px',
+                      backgroundColor: 'rgba(8, 45, 30, 0.9)',
+                      border: '1px solid rgba(52, 211, 153, 0.25)',
+                      borderRadius: '13px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0,
                     }}
                   >
-                    <Landmark size={18} color="#7FE87F" />
+                    {getBankIcon(bank.bankName)}
                   </div>
                   <div style={{ minWidth: 0, flex: 1 }}>
-                    <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em', lineHeight: '17px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <h4
+                      style={{
+                        fontSize: '14.5px',
+                        fontWeight: 700,
+                        color: '#FFFFFF',
+                        margin: 0,
+                        letterSpacing: '0.01em',
+                        lineHeight: '18px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
                       {displayBankName}
-                    </div>
-                    <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '5px', whiteSpace: 'nowrap' }}>
+                    </h4>
+                    <div
+                      style={{
+                        fontSize: '11.5px',
+                        color: '#a3d9bc',
+                        fontWeight: 500,
+                        marginTop: '2px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
                       <span>{displayAccType}</span>
                       <span>•</span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: '#7FE87F', fontWeight: 600 }}>
-                        <ShieldCheck size={11} color="#7FE87F" /> {language === 'العربية' ? 'مرتبط بسريع' : 'Sarie Linked'}
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: '#34d399', fontWeight: 600 }}>
+                        <ShieldCheck size={11} color="#34d399" /> {language === 'العربية' ? 'سريع' : 'Sarie'}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Primary Pill Badge */}
-                {bank.isPrimary && (
-                  <span
-                    style={{
-                      fontSize: '9px',
-                      fontWeight: 800,
-                      backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                      color: '#7FE87F',
-                      border: '1px solid #7FE87F',
-                      padding: '3px 8px',
-                      borderRadius: '8px',
-                      letterSpacing: '0.05em',
-                      textTransform: 'uppercase',
-                      flexShrink: 0,
-                    }}
-                  >
-                    {t('banks.primary', 'PRIMARY')}
-                  </span>
-                )}
+                {/* Right Tier Icon Badge (Replaces long text) */}
+                <div
+                  title={bank.isPrimary ? (language === 'العربية' ? 'الحساب الأساسي' : 'Primary Account') : displayAccType}
+                  style={{
+                    width: '36px',
+                    height: '36px',
+                    backgroundColor: 'rgba(8, 45, 30, 0.9)',
+                    border: '1px solid rgba(52, 211, 153, 0.25)',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                  }}
+                >
+                  {getTierIcon(bank)}
+                </div>
               </div>
 
               {/* 2. Middle Row: Chip Graphic + Masked Number */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 2, margin: '6px 0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', zIndex: 2 }}>
                 {/* Gold EMV Chip Graphic */}
-                <div style={{ width: '32px', height: '23px', borderRadius: '4px', background: 'linear-gradient(135deg, #ffd700 0%, #e6a817 50%, #b8860b 100%)', padding: '2px', boxSizing: 'border-box', border: '1px solid rgba(0,0,0,0.2)' }}>
-                  <div style={{ width: '100%', height: '100%', border: '0.5px solid rgba(0,0,0,0.2)', borderRadius: '2px', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', padding: '2px 0' }}>
-                    <div style={{ height: '0.5px', backgroundColor: 'rgba(0,0,0,0.3)', width: '100%' }} />
-                    <div style={{ height: '0.5px', backgroundColor: 'rgba(0,0,0,0.3)', width: '100%' }} />
+                <div
+                  style={{
+                    width: '36px',
+                    height: '26px',
+                    borderRadius: '5px',
+                    background: 'linear-gradient(135deg, #fde047 0%, #ca8a04 100%)',
+                    padding: '2px',
+                    boxSizing: 'border-box',
+                    border: '1px solid rgba(0,0,0,0.3)',
+                    flexShrink: 0,
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      border: '0.5px solid rgba(0,0,0,0.2)',
+                      borderRadius: '3px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-around',
+                      padding: '2px 0',
+                    }}
+                  >
+                    <div style={{ height: '0.5px', backgroundColor: 'rgba(0,0,0,0.35)', width: '100%' }} />
+                    <div style={{ height: '0.5px', backgroundColor: 'rgba(0,0,0,0.35)', width: '100%' }} />
                   </div>
                 </div>
 
                 {/* Masked Card Number */}
-                <div style={{ fontSize: '13.5px', fontWeight: 700, letterSpacing: '0.14em', color: '#FFFFFF', fontFamily: 'monospace', direction: 'ltr' }}>
+                <div
+                  style={{
+                    fontFamily: 'monospace',
+                    fontSize: '14.5px',
+                    letterSpacing: '2px',
+                    color: '#FFFFFF',
+                    fontWeight: 600,
+                    direction: 'ltr',
+                  }}
+                >
                   ••••  ••••  ••••  {rawNumbers}
                 </div>
               </div>
 
-              {/* 3. Card Footer: Available Balance & Clean Check Action */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', zIndex: 2 }}>
-                <div>
-                  <div style={{ fontSize: '9.5px', color: '#A2A2BA', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.06em' }}>
-                    {t('home.total_balance', 'Available Balance')}
-                  </div>
-                  <div style={{ fontSize: '18px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px', letterSpacing: '0.01em' }}>
-                    {bank.showBalance ? formatCurrency(bank.balance, language) : (language === 'العربية' ? '•••••••• ر.س' : 'SAR ••••••••')}
-                  </div>
+              {/* 3. Card Footer: Available Balance & Action */}
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  borderTop: '1px solid rgba(52, 211, 153, 0.15)',
+                  paddingTop: '12px',
+                  zIndex: 2,
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {bank.showBalance ? (
+                    <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em' }}>
+                      {formatCurrency(bank.balance, language)}
+                    </div>
+                  ) : (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#a3d9bc', fontSize: '11.5px', fontWeight: 600 }}>
+                      <Zap size={13} color="#4ade80" />
+                      <span>{language === 'العربية' ? 'شبكة سريع ٢٤/٧' : 'Sarie 24/7 Rail'}</span>
+                    </div>
+                  )}
                 </div>
 
                 <button
                   onClick={(e) => handleCardBalanceClick(bank, e)}
-                  title={t('banks.check_balance', 'Check Balance')}
+                  title={bank.showBalance ? t('home.hide', 'Hide') : t('banks.check_balance', 'Balance')}
                   className="interactive-tap"
                   style={{
-                    backgroundColor: bank.showBalance ? '#1E1E32' : '#7FE87F',
-                    color: bank.showBalance ? '#FFFFFF' : '#000000',
-                    border: bank.showBalance ? '1px solid #2C2C44' : 'none',
-                    borderRadius: '8px',
-                    padding: '6px 12px',
+                    backgroundColor: '#4ade80',
+                    color: '#022c1b',
+                    border: 'none',
+                    borderRadius: '12px',
+                    padding: '7px 14px',
                     fontSize: '11.5px',
-                    fontWeight: 800,
+                    fontWeight: 700,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '5px',
-                    boxShadow: 'none',
+                    boxShadow: '0 4px 12px rgba(74, 222, 128, 0.25)',
                     transition: 'all 0.15s ease',
                   }}
                 >
-                  {bank.showBalance ? <EyeOff size={13} color="#FFFFFF" /> : <Eye size={13} color="#000000" />}
-                  {bank.showBalance ? t('home.hide', 'Hide') : t('banks.check_balance', 'Check Balance')}
+                  {bank.showBalance ? <EyeOff size={13} color="#022c1b" /> : <Eye size={13} color="#022c1b" />}
+                  <span>{bank.showBalance ? t('home.hide', 'Hide') : t('banks.check_balance', 'Balance')}</span>
                 </button>
               </div>
             </div>
@@ -288,10 +401,9 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
           style={{
             scrollSnapAlign: 'start',
             flex: '0 0 135px',
-            height: '175px',
-            backgroundColor: '#151524',
-            border: '1.5px dashed #2C2C44',
-            borderRadius: '16px',
+            background: 'linear-gradient(135deg, #072e1f 0%, #021710 100%)',
+            border: '1.5px dashed rgba(52, 211, 153, 0.35)',
+            borderRadius: '24px',
             padding: '16px',
             display: 'flex',
             flexDirection: 'column',
@@ -309,36 +421,20 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               width: '38px',
               height: '38px',
               borderRadius: '50%',
-              backgroundColor: 'rgba(127, 232, 127, 0.12)',
-              color: '#7FE87F',
+              backgroundColor: 'rgba(52, 211, 153, 0.15)',
+              color: '#34d399',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              border: '1px solid rgba(127, 232, 127, 0.25)',
+              border: '1px solid rgba(52, 211, 153, 0.3)',
             }}
           >
             <Plus size={20} />
           </div>
           <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>{t('banks.add_bank', 'Add Bank')}</span>
-          <span style={{ fontSize: '10.5px', color: '#A2A2BA' }}>{language === 'العربية' ? 'ربط حساب' : 'Link Account'}</span>
+          <span style={{ fontSize: '10.5px', color: '#a3d9bc' }}>{language === 'العربية' ? 'ربط حساب' : 'Link Account'}</span>
         </div>
         <div style={{ flex: '0 0 1px', width: '1px', flexShrink: 0 }} />
-      </div>
-
-      {/* Card Pagination Indicator Dots */}
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', marginTop: '8px' }}>
-        {banks.map((_, i) => (
-          <span
-            key={i}
-            style={{
-              width: i === activeCardIndex ? '16px' : '6px',
-              height: '6px',
-              borderRadius: '3px',
-              backgroundColor: i === activeCardIndex ? '#7FE87F' : '#2C2C44',
-              transition: 'all 0.2s ease',
-            }}
-          />
-        ))}
       </div>
     </div>
   );

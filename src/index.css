@@ -507,3 +507,256 @@ button:disabled {
 .shake {
   animation: shake 0.4s ease-in-out;
 }
+
+/* Select Saudi Bank & Verification (User Provided Spec) */
+.main-card {
+  width: 100%;
+  max-width: 440px;
+  background: #111726;
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f3f4f6;
+  margin-bottom: 16px;
+  letter-spacing: -0.2px;
+}
+
+.bank-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  max-height: 290px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.bank-list::-webkit-scrollbar {
+  width: 4px;
+}
+.bank-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.bank-item {
+  background: #182236;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.bank-item:hover {
+  background: #1e2942;
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+.bank-item.selected {
+  background: rgba(52, 211, 153, 0.06);
+  border-color: #34d399;
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.1);
+}
+
+.bank-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.bank-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #34d399;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.bank-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 3px;
+}
+
+.bank-meta {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Custom Radio Indicator */
+.radio-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.bank-item.selected .radio-dot {
+  border-color: #34d399;
+  background: #34d399;
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
+}
+
+.radio-dot::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #111726;
+  transform: scale(0);
+  transition: transform 0.2s ease;
+}
+
+.bank-item.selected .radio-dot::after {
+  transform: scale(1);
+}
+
+/* Account Match Method Section */
+.match-section {
+  margin-bottom: 24px;
+}
+
+.match-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.match-tab {
+  background: #182236;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.match-tab:hover {
+  color: #ffffff;
+  background: #1e2942;
+}
+
+.match-tab.active {
+  background: rgba(52, 211, 153, 0.08);
+  border-color: #34d399;
+  color: #34d399;
+  font-weight: 600;
+}
+
+/* Main Action Button */
+.action-btn {
+  width: 100%;
+  background: #34d399;
+  color: #0b0f19;
+  border: none;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(52, 211, 153, 0.3);
+}
+
+.action-btn:hover {
+  background: #2ebb84;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(52, 211, 153, 0.4);
+}
+
+.action-btn:active {
+  transform: translateY(1px);
+}
+
+/* Secondary OTP View State */
+.otp-container {
+  text-align: center;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.otp-desc {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  direction: ltr;
+}
+
+.otp-box {
+  width: 50px;
+  height: 56px;
+  background: #182236;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.otp-box:focus {
+  border-color: #34d399;
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.3);
+  background: #1e2942;
+}
+
+.back-link {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #ffffff;
+}

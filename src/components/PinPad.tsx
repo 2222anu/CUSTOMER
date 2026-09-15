@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Delete } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { toArabicNumerals } from '../utils/i18n';
 
@@ -7,11 +6,31 @@ interface PinPadProps {
   length?: number;
   onComplete: (pin: string) => void;
   error?: string;
+  successMessage?: string;
+  customTitle?: string;
 }
 
-export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error }) => {
+export const PinPad: React.FC<PinPadProps> = ({
+  length = 4,
+  onComplete,
+  error,
+  successMessage,
+  customTitle,
+}) => {
   const { language } = useApp();
   const [pin, setPin] = useState<string>('');
+  const [isShaking, setIsShaking] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (error) {
+      setIsShaking(true);
+      const timer = setTimeout(() => {
+        setIsShaking(false);
+        setPin('');
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const handleKeyPress = (num: string) => {
     if (pin.length < length) {
@@ -20,15 +39,14 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
       if (nextPin.length === length) {
         setTimeout(() => {
           onComplete(nextPin);
-          setPin('');
-        }, 150);
+        }, 120);
       }
     }
   };
 
   const handleDelete = () => {
     if (pin.length > 0) {
-      setPin(pin.slice(0, -1));
+      setPin((prev) => prev.slice(0, -1));
     }
   };
 
@@ -45,44 +63,96 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [pin, length]);
 
+  // Determine Title Text and Color
+  let titleText = customTitle;
+  let titleColor = '#9ca3af';
+
+  if (error) {
+    titleText = error;
+    titleColor = '#f87171';
+  } else if (successMessage) {
+    titleText = successMessage;
+    titleColor = '#34d399';
+  } else if (!titleText) {
+    titleText = language === 'العربية' ? 'أدخل الرمز السري المكون من ٤ أرقام' : 'Enter 4-Digit PIN';
+  }
+
   const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', 'delete'];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-      {/* PIN Dots Display */}
-      <div
-        role="group"
-        aria-label={`PIN input, ${pin.length} of ${length} digits entered`}
-        style={{ display: 'flex', gap: '20px', margin: '20px 0 28px 0', alignItems: 'center', direction: 'ltr' }}
-      >
-        {Array.from({ length }).map((_, index) => {
-          const isFilled = index < pin.length;
-          return (
-            <div
-              key={index}
-              style={{
-                width: '18px',
-                height: '18px',
-                borderRadius: '50%',
-                backgroundColor: isFilled ? '#7FE87F' : '#1E1E32',
-                border: isFilled ? '2px solid #7FE87F' : '1.5px solid #2C2C44',
-                transform: isFilled ? 'scale(1.15)' : 'scale(1)',
-                boxShadow: isFilled ? '0 0 10px rgba(127, 232, 127, 0.4)' : 'none',
-                transition: 'all 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
-              }}
-            />
-          );
-        })}
+    <div
+      className={isShaking ? 'shake' : ''}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
+    >
+      {/* PIN Indicators Section */}
+      <div className="pin-section" style={{ textAlign: 'center', marginBottom: '24px', width: '100%' }}>
+        <div
+          className="pin-title"
+          id="pin-label"
+          style={{
+            fontSize: '11px',
+            letterSpacing: '1.5px',
+            color: titleColor,
+            textTransform: 'uppercase',
+            fontWeight: 600,
+            marginBottom: '16px',
+            transition: 'color 0.2s',
+          }}
+        >
+          {titleText}
+        </div>
+
+        <div
+          className="pin-dots"
+          id="pin-dots"
+          role="group"
+          aria-label={`PIN input, ${pin.length} of ${length} digits entered`}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '12px',
+            direction: 'ltr',
+          }}
+        >
+          {Array.from({ length }).map((_, index) => {
+            const isFilled = index < pin.length;
+            const isError = Boolean(error);
+            return (
+              <div
+                key={index}
+                className={`dot ${isFilled ? 'active' : ''} ${isError ? 'error' : ''}`}
+                style={{
+                  width: '12px',
+                  height: '12px',
+                  borderRadius: '50%',
+                  backgroundColor: isError
+                    ? '#f87171'
+                    : isFilled
+                    ? '#34d399'
+                    : 'rgba(255, 255, 255, 0.1)',
+                  transform: isFilled ? 'scale(1.2)' : 'scale(1)',
+                  boxShadow: isError
+                    ? '0 0 12px rgba(248, 113, 113, 0.5)'
+                    : isFilled
+                    ? '0 0 12px rgba(52, 211, 153, 0.5)'
+                    : 'none',
+                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                }}
+              />
+            );
+          })}
+        </div>
       </div>
 
-      {error && (
-        <div role="alert" style={{ color: '#FF4757', fontSize: '13px', marginBottom: '20px', fontWeight: 700 }}>
-          {error}
-        </div>
-      )}
-
-      {/* Numeric Keypad Grid */}
+      {/* Keypad Grid */}
       <div
+        className="keypad"
         role="group"
         aria-label="Numeric PIN keypad"
         style={{
@@ -90,35 +160,40 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: '12px',
           width: '100%',
-          maxWidth: '300px',
+          maxWidth: '380px',
           direction: 'ltr',
         }}
       >
         {keys.map((key, i) => {
-          if (key === '') return <div key={i} />;
+          if (key === '') {
+            return <div key={i} className="key action-key" style={{ background: 'transparent', border: 'none' }} />;
+          }
 
           if (key === 'delete') {
             return (
               <button
                 key={i}
+                type="button"
                 onClick={handleDelete}
                 aria-label="Backspace"
-                className="interactive-tap"
+                className="key action-key"
                 style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: '#9ca3af',
+                  borderRadius: '14px',
+                  height: '56px',
+                  fontSize: '22px',
+                  fontWeight: 500,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  height: '56px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
-                  borderRadius: '14px',
-                  color: '#A2A2BA',
                   cursor: 'pointer',
-                  boxShadow: 'none',
-                  transition: 'background-color 0.12s ease',
+                  transition: 'all 0.12s ease',
+                  userSelect: 'none',
                 }}
               >
-                <Delete size={22} />
+                ⌫
               </button>
             );
           }
@@ -128,23 +203,24 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
           return (
             <button
               key={i}
+              type="button"
               onClick={() => handleKeyPress(key)}
               aria-label={`Digit ${key}`}
-              className="interactive-tap"
+              className="key"
               style={{
+                background: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+                borderRadius: '14px',
+                height: '56px',
+                fontSize: '22px',
+                fontWeight: 500,
+                color: '#ffffff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '56px',
-                backgroundColor: '#1E1E32',
-                border: '1px solid #2C2C44',
-                borderRadius: '14px',
-                fontSize: '22px',
-                fontWeight: 800,
-                color: '#FFFFFF',
                 cursor: 'pointer',
-                boxShadow: 'none',
-                transition: 'background-color 0.12s ease, transform 0.08s ease',
+                transition: 'all 0.12s ease',
+                userSelect: 'none',
               }}
             >
               {displayDigit}

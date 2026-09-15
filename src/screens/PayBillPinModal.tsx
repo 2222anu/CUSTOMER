@@ -16,8 +16,8 @@ export const PayBillPinModal: React.FC = () => {
 
   const isCheckBalance = pendingPaymentData.title.toLowerCase().includes('balance');
   const displayTitle = t(pendingPaymentData.title, pendingPaymentData.title);
-  const displaySubTitle = t(pendingPaymentData.subTitle, pendingPaymentData.subTitle);
-  const displayBankName = primaryBank ? t(primaryBank.bankName, primaryBank.bankName) : '';
+  const displayBankName = primaryBank ? t(primaryBank.bankName, primaryBank.bankName) : 'Al Rajhi Bank';
+  const displayBankIban = primaryBank ? primaryBank.accountNumberMasked : 'SA03 •••• 4821';
 
   const handlePinComplete = async (pin: string) => {
     setIsVerifying(true);
@@ -30,79 +30,71 @@ export const PayBillPinModal: React.FC = () => {
           pendingPaymentData.onSuccess();
         }
       } else {
-        setError(language === 'العربية' ? 'الرمز السري غير صحيح. يرجى المحاولة مرة أخرى.' : 'Incorrect PIN. Please try again.');
+        setError(language === 'العربية' ? 'الرمز غير صحيح، حاول مرة أخرى' : 'Incorrect PIN, Try Again');
       }
     } catch (err) {
-      setError(language === 'العربية' ? 'فشل التحقق من الرمز. حاول مرة أخرى.' : 'Verification failed. Try again.');
+      setError(language === 'العربية' ? 'فشل التحقق من الرمز' : 'Verification failed');
     } finally {
       setIsVerifying(false);
     }
   };
 
+  const headerTitle = isCheckBalance
+    ? (language === 'العربية' ? 'الرمز السري للرصيد' : 'Enter PIN to Check Balance')
+    : displayTitle || (language === 'العربية' ? 'إدخال الرمز السري' : 'Enter PIN');
+
   return (
     <BottomSheet
       isOpen={isPinModalOpen}
       onClose={closePinModal}
-      title={isCheckBalance ? (language === 'العربية' ? 'التحقق من الرمز السري لعرض الرصيد' : 'Verify PIN to Check Balance') : displayTitle}
+      title={headerTitle}
     >
-      <div style={{ paddingBottom: '10px' }}>
-        {/* Payment / Check Balance Summary Box */}
-        <div
-          style={{
-            backgroundColor: '#1E1E32',
-            border: '1px solid #2C2C44',
-            borderRadius: '16px',
-            padding: '16px',
-            marginBottom: '20px',
-            boxShadow: 'none',
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div>
-              <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>{displayTitle}</div>
-              <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px' }}>
-                {displaySubTitle}
-              </div>
-            </div>
-            {pendingPaymentData.amount > 0 && !isCheckBalance && (
-              <div style={{ fontSize: '20px', fontWeight: '900', color: '#7FE87F' }}>
-                {formatCurrency(pendingPaymentData.amount, language)}
-              </div>
-            )}
-            {isCheckBalance && (
-              <div style={{ fontSize: '18px', fontWeight: '800', color: '#FFFFFF', letterSpacing: '4px' }}>
-                ••••••••
-              </div>
-            )}
-          </div>
-
+      <div style={{ paddingBottom: '8px' }}>
+        {/* Payment Amount Bar if Transfer / Bill */}
+        {pendingPaymentData.amount > 0 && !isCheckBalance && (
           <div
             style={{
-              borderTop: '1px solid #2C2C44',
-              marginTop: '12px',
-              paddingTop: '10px',
+              background: 'rgba(255, 255, 255, 0.03)',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              borderRadius: '12px',
+              padding: '12px 16px',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              fontSize: '12px',
+              fontSize: '13px',
+              marginBottom: '10px',
             }}
           >
-            <span style={{ color: '#A2A2BA' }}>{language === 'العربية' ? 'الحساب المصدر:' : 'Account:'}</span>
-            <span style={{ fontWeight: '700', color: '#FFFFFF' }}>
-              {primaryBank ? `${displayBankName} (${primaryBank.accountNumberMasked})` : (language === 'العربية' ? 'الحساب البنكي المرتبط' : 'Linked Bank Account')}
+            <span style={{ color: '#9ca3af', fontSize: '13px' }}>
+              {language === 'العربية' ? 'المبلغ المطلوب' : 'Amount'}
+            </span>
+            <span style={{ color: '#34d399', fontWeight: 700, fontSize: '16px' }}>
+              {formatCurrency(pendingPaymentData.amount, language)}
             </span>
           </div>
-        </div>
+        )}
 
-        <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-          <span style={{ fontSize: '12px', fontWeight: '800', color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            {isVerifying
-              ? (language === 'العربية' ? 'جاري التحقق من الرمز السري...' : 'Verifying PIN...')
-              : (language === 'العربية' ? 'أدخل الرمز السري المكون من ٤ أرقام' : 'ENTER 4-DIGIT PIN')}
+        {/* Single-line Bank Info Pill */}
+        <div className="bank-info-bar">
+          <span className="bank-label">
+            {language === 'العربية' ? 'الحساب' : 'Account'}
+          </span>
+          <span className="bank-value">
+            {displayBankName} ({displayBankIban})
           </span>
         </div>
 
-        <PinPad length={4} onComplete={handlePinComplete} error={error} />
+        {/* Keypad & PIN with dynamic labels and dots */}
+        <PinPad
+          length={4}
+          onComplete={handlePinComplete}
+          error={error}
+          customTitle={
+            isVerifying
+              ? (language === 'العربية' ? 'جاري التحقق من الرمز السري...' : 'Verifying PIN...')
+              : (language === 'العربية' ? 'أدخل الرمز السري المكون من ٤ أرقام' : 'Enter 4-Digit PIN')
+          }
+        />
       </div>
     </BottomSheet>
   );

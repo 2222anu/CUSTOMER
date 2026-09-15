@@ -98,6 +98,33 @@ export const OnboardingBankScreen: React.FC = () => {
     navigateTo('HOME');
   };
 
+  const getBankStepInfo = () => {
+    switch (step) {
+      case 'SELECT_BANK':
+        return {
+          stepNum: 1,
+          label: language === 'العربية' ? 'الخطوة ١: اختيار البنك السعودي' : 'Step 1: Select Saudi Bank',
+        };
+      case 'MATCH_METHOD':
+        return {
+          stepNum: 2,
+          label: language === 'العربية' ? 'الخطوة ٢: طريقة مطابقة الحساب' : 'Step 2: Account Match Method',
+        };
+      case 'OTP':
+        return {
+          stepNum: 3,
+          label: language === 'العربية' ? 'الخطوة ٣: رمز التحقق البنكي' : 'Step 3: Bank SMS Authorization',
+        };
+      case 'SUCCESS':
+        return {
+          stepNum: 4,
+          label: language === 'العربية' ? 'الخطوة ٤: تم ربط الحساب بنجاح' : 'Step 4: Bank Account Linked',
+        };
+    }
+  };
+
+  const { stepNum, label: stepLabel } = getBankStepInfo();
+
   return (
     <div
       className="fade-in"
@@ -119,27 +146,54 @@ export const OnboardingBankScreen: React.FC = () => {
           showSettings={false}
         />
 
-        {/* Redesigned 4-Segment Stepped Progress Indicator */}
+        {/* Dynamic 4-Segment Stepped Progress Indicator */}
         <div style={{ padding: '0 20px', marginTop: '10px', marginBottom: '22px' }}>
           <div style={{ display: 'flex', gap: '6px', marginBottom: '10px' }}>
-            {/* Step 1: Mobile */}
-            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#7FE87F' }} />
-            {/* Step 2: Permissions */}
-            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#7FE87F' }} />
-            {/* Step 3: Nafath KYC */}
-            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#7FE87F' }} />
-            {/* Step 4: Bank Account (Active) */}
-            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#7FE87F', boxShadow: '0 0 8px rgba(127, 232, 127, 0.4)' }} />
+            {[1, 2, 3, 4].map((s) => {
+              const isPassed = stepNum >= s;
+              const isCurrent = stepNum === s;
+              return (
+                <div
+                  key={s}
+                  style={{
+                    flex: 1,
+                    height: '4px',
+                    borderRadius: '4px',
+                    backgroundColor: isPassed ? '#7FE87F' : '#1E1E32',
+                    boxShadow: isCurrent ? '0 0 8px rgba(127, 232, 127, 0.45)' : 'none',
+                    transition: 'all 0.3s ease',
+                  }}
+                />
+              );
+            })}
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#7FE87F', display: 'inline-block' }} />
-              <span style={{ fontSize: '12px', fontWeight: 800, color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                {language === 'العربية' ? 'الخطوة ٤: ربط الحساب البنكي' : 'Step 4: Link Saudi Bank'}
+              <span
+                style={{
+                  width: '7px',
+                  height: '7px',
+                  borderRadius: '50%',
+                  backgroundColor: '#7FE87F',
+                  display: 'inline-block',
+                }}
+              />
+              <span
+                style={{
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  color: '#7FE87F',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.04em',
+                }}
+              >
+                {stepLabel}
               </span>
             </div>
-            <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 800 }}>4 / 4</span>
+            <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 800 }}>
+              {stepNum} / 4
+            </span>
           </div>
         </div>
 

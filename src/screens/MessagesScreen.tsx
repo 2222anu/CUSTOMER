@@ -16,58 +16,59 @@ interface ChatThread {
 
 export const MessagesScreen: React.FC = () => {
   const { language, isRtl } = useApp();
+  const isAr = language === 'العربية' || language === 'ar';
   const [threads, setThreads] = useState<ChatThread[]>([
     {
       id: 'chat-1',
-      name: language === 'ar' ? 'فريق دعم كيو تي باي' : 'alph pay Support',
+      name: isAr ? 'فريق دعم كيو تي باي' : 'QTPay Priority Support',
       avatarInitials: 'QT',
       isSupport: true,
-      time: language === 'ar' ? '١٠:٤٢ ص' : '10:42 AM',
+      time: isAr ? '١٠:٤٢ ص' : '10:42 AM',
       unread: true,
       messages: [
         {
           sender: 'them',
-          text: language === 'ar' ? 'مرحباً بك! أهلاً بك في دعم كيو تي باي على مدار الساعة.' : 'Hello! Welcome to alph pay 24/7 Priority Support.',
-          time: language === 'ar' ? '١٠:٤٠ ص' : '10:40 AM',
+          text: isAr ? 'مرحباً بك! أهلاً بك في دعم كيو تي باي المباشر.' : 'Hello! Welcome to QTPay Priority Support.',
+          time: isAr ? '١٠:٤٠ ص' : '10:40 AM',
         },
         {
           sender: 'them',
-          text: language === 'ar' ? 'تم دفع فاتورة الكهرباء بمبلغ ٢,٦٢٠.١٤ ر.س بنجاح لدى الشركة السعودية للكهرباء (SEC). رقم المرجع: SARIE94820184' : 'Your electricity bill payment of SAR 2,620.14 was credited successfully to Saudi Electricity Company (SEC). Ref: SARIE94820184',
-          time: language === 'ar' ? '١٠:٤٢ ص' : '10:42 AM',
+          text: isAr ? 'تم دفع فاتورة الكهرباء بمبلغ ٢,٦٢٠.١٤ ر.س بنجاح لدى الشركة السعودية للكهرباء (SEC). رقم المرجع: SARIE94820184' : 'Your electricity bill payment of SAR 2,620.14 was credited successfully to Saudi Electricity Company (SEC). Ref: SARIE94820184',
+          time: isAr ? '١٠:٤٢ ص' : '10:42 AM',
         },
       ],
     },
     {
       id: 'chat-2',
-      name: language === 'ar' ? 'إشعارات مصرف الراجحي الرسمية' : 'Al Rajhi Bank Official',
+      name: isAr ? 'إشعارات مصرف الراجحي الرسمية' : 'Al Rajhi Bank Official',
       avatarInitials: 'AR',
       isSupport: true,
-      time: language === 'ar' ? '١٠:٤١ ص' : '10:41 AM',
+      time: isAr ? '١٠:٤١ ص' : '10:41 AM',
       unread: false,
       messages: [
         {
           sender: 'them',
-          text: language === 'ar' ? 'تنبيه مصرف الراجحي: تم خصم مبلغ ٢,٦٢٠.١٤ ر.س من حسابكم SA03 •••• 4821 عبر سريع. البيان: دفع فاتورة SEC.' : 'Al Rajhi Bank Alert: A/c SA03 •••• 4821 debited by SAR 2,620.14 on 10-Sep-26 via Sarie. Info: SEC Utility Payment.',
-          time: language === 'ar' ? '١٠:٤١ ص' : '10:41 AM',
+          text: isAr ? 'تنبيه مصرف الراجحي: تم خصم مبلغ ٢,٦٢٠.١٤ ر.س من حسابكم SA03 •••• 4821 عبر سريع. البيان: دفع فاتورة SEC.' : 'Al Rajhi Bank Alert: A/c SA03 •••• 4821 debited by SAR 2,620.14 on 10-Sep-26 via Sarie. Info: SEC Utility Payment.',
+          time: isAr ? '١٠:٤١ ص' : '10:41 AM',
         },
       ],
     },
     {
       id: 'chat-3',
-      name: language === 'ar' ? 'طارق العتيبي' : 'Tariq Al-Otaibi',
+      name: isAr ? 'طارق العتيبي' : 'Tariq Al-Otaibi',
       avatarInitials: 'TO',
-      time: language === 'ar' ? 'أمس' : 'Yesterday',
+      time: isAr ? 'أمس' : 'Yesterday',
       unread: false,
       messages: [
         {
           sender: 'me',
-          text: language === 'ar' ? 'تم تحويل ٥٠٠ ر.س لقسمة العشاء!' : 'Sent SAR 500 for our dinner split!',
-          time: language === 'ar' ? 'أمس ٨:٣٠ م' : 'Yesterday 8:30 PM',
+          text: isAr ? 'تم تحويل ٥٠٠ ر.س لقسمة العشاء!' : 'Sent SAR 500 for our dinner split!',
+          time: isAr ? 'أمس ٨:٣٠ م' : 'Yesterday 8:30 PM',
         },
         {
           sender: 'them',
-          text: language === 'ar' ? 'شكراً لك على التحويل الفوري عبر ساريع! وصل المبلغ.' : 'Thanks for the instant Sarie transfer! Received.',
-          time: language === 'ar' ? 'أمس ٨:٣٢ م' : 'Yesterday 8:32 PM',
+          text: isAr ? 'شكراً لك على التحويل الفوري عبر سريع! وصل المبلغ.' : 'Thanks for the instant Sarie transfer! Received.',
+          time: isAr ? 'أمس ٨:٣٢ م' : 'Yesterday 8:32 PM',
         },
       ],
     },
@@ -91,14 +92,14 @@ export const MessagesScreen: React.FC = () => {
     const newMsg = {
       sender: 'me' as const,
       text: inputText.trim(),
-      time: language === 'ar' ? 'الآن' : 'Just now',
+      time: isAr ? 'الآن' : 'Just now',
     };
 
     const updatedMessages = [...activeChat.messages, newMsg];
     setActiveChat({ ...activeChat, messages: updatedMessages });
 
     setThreads((prev) =>
-      prev.map((t) => (t.id === activeChat.id ? { ...t, messages: updatedMessages, time: language === 'ar' ? 'الآن' : 'Just now' } : t))
+      prev.map((t) => (t.id === activeChat.id ? { ...t, messages: updatedMessages, time: isAr ? 'الآن' : 'Just now' } : t))
     );
 
     setInputText('');
@@ -108,8 +109,8 @@ export const MessagesScreen: React.FC = () => {
       setTimeout(() => {
         const replyMsg = {
           sender: 'them' as const,
-          text: language === 'ar' ? 'شكراً لتواصلك معنا. يقوم أحد أخصائيي الدعم بمراجعة طلبك حالياً.' : 'Thank you for reaching out. A customer support specialist is reviewing your inquiry.',
-          time: language === 'ar' ? 'الآن' : 'Just now',
+          text: isAr ? 'شكراً لتواصلك معنا. يقوم أحد أخصائيي الدعم بمراجعة طلبك حالياً.' : 'Thank you for reaching out. A customer support specialist is reviewing your inquiry.',
+          time: isAr ? 'الآن' : 'Just now',
         };
         setActiveChat((curr) => (curr && curr.id === activeChat.id ? { ...curr, messages: [...curr.messages, replyMsg] } : curr));
       }, 1000);
@@ -117,7 +118,7 @@ export const MessagesScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '96px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Messages & Alerts', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>

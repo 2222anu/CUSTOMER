@@ -17,40 +17,41 @@ interface ScratchCardItem {
 
 export const RewardsScreen: React.FC = () => {
   const { language, isRtl } = useApp();
+  const isAr = language === 'العربية' || language === 'ar';
   const [points, setPoints] = useState(1450);
   const [cards, setCards] = useState<ScratchCardItem[]>([
     {
       id: 'sc-1',
-      title: language === 'ar' ? 'مكافأة تحويل ساريع' : 'Sarie Transfer Reward',
-      subtitle: language === 'ar' ? 'مكتسبة عند سداد فاتورة كهرباء بمبلغ ٢,٦٢٠ ر.س' : 'Earned on SAR 2,620 SEC Bill Payment',
-      rewardText: language === 'ar' ? 'كاش باك فوري ١٥ ر.س' : 'SAR 15 Instant Cashback',
+      title: isAr ? 'مكافأة تحويل سريع' : 'Sarie Transfer Reward',
+      subtitle: isAr ? 'مكتسبة عند سداد فاتورة كهرباء بمبلغ ٢,٦٢٠ ر.س' : 'Earned on SAR 2,620 SEC Bill Payment',
+      rewardText: isAr ? 'كاش باك فوري ١٥ ر.س' : 'SAR 15 Instant Cashback',
       rewardType: 'cashback',
       amount: 15,
       isScratched: false,
     },
     {
       id: 'sc-2',
-      title: language === 'ar' ? 'توفير المتاجر الكبرى' : 'Merchant Super Saver',
-      subtitle: language === 'ar' ? 'مكتسبة لدى أسواق بنده' : 'Earned at Panda Supermarket',
-      rewardText: language === 'ar' ? 'خصم ٢٥٪ على الأغذية والمقاضي' : 'Flat 25% Off Food & Groceries',
+      title: isAr ? 'توفير المتاجر الكبرى' : 'Merchant Super Saver',
+      subtitle: isAr ? 'مكتسبة لدى أسواق بنده' : 'Earned at Panda Supermarket',
+      rewardText: isAr ? 'خصم ٢٥٪ على الأغذية والمقاضي' : 'Flat 25% Off Food & Groceries',
       rewardType: 'voucher',
       code: 'PANDAFOOD25',
       isScratched: false,
     },
     {
       id: 'sc-3',
-      title: language === 'ar' ? 'مكافأة عطلة نهاية الأسبوع' : 'Weekend Bonus Scratch',
-      subtitle: language === 'ar' ? 'مكافأة خاصة لإجراء أكثر من ٥ عمليات ساريع' : 'Special reward for 5+ Sarie transactions',
-      rewardText: language === 'ar' ? '+٥٠٠ نقطة ألف إضافية' : '+500 Extra AlphPoints',
+      title: isAr ? 'مكافأة عطلة نهاية الأسبوع' : 'Weekend Bonus Scratch',
+      subtitle: isAr ? 'مكافأة خاصة لإجراء أكثر من ٥ عمليات سريع' : 'Special reward for 5+ Sarie transactions',
+      rewardText: isAr ? '+٥٠٠ نقطة كيو تي إضافية' : '+500 Extra QTPoints',
       rewardType: 'points',
       amount: 500,
       isScratched: false,
     },
     {
       id: 'sc-4',
-      title: language === 'ar' ? 'قسيمة سفر خاصة' : 'Travel Special Voucher',
-      subtitle: language === 'ar' ? 'بطاقة خصم رحلات الخطوط السعودية' : 'Saudia flight discount card',
-      rewardText: language === 'ar' ? 'خصم فوري ١٥٠ ر.س على الطيران' : 'Flat SAR 150 Flight Discount',
+      title: isAr ? 'قسيمة سفر خاصة' : 'Travel Special Voucher',
+      subtitle: isAr ? 'بطاقة خصم رحلات الخطوط السعودية' : 'Saudia flight discount card',
+      rewardText: isAr ? 'خصم فوري ١٥٠ ر.س على الطيران' : 'Flat SAR 150 Flight Discount',
       rewardType: 'voucher',
       code: 'FLYSAR150',
       isScratched: true,
@@ -87,11 +88,11 @@ export const RewardsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '96px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Rewards & Scratch Cards', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
-        {/* AlphPoints Balance Hero Banner */}
+        {/* QTPoints Balance Hero Banner */}
         <div
           style={{
             backgroundColor: '#151524',
@@ -123,10 +124,10 @@ export const RewardsScreen: React.FC = () => {
             {translateText('Total Reward Balance', language)}
           </div>
           <h2 style={{ fontSize: '26px', fontWeight: 900, color: '#FFFFFF', margin: '4px 0 6px 0', fontVariantNumeric: 'tabular-nums' }}>
-            {formatLocalizedNumber(points, language)} {translateText('AlphPoints', language)}
+            {formatLocalizedNumber(points, language)} {isAr ? 'نقاط كيو تي' : 'QTPoints'}
           </h2>
           <p style={{ fontSize: '12px', color: '#A2A2BA', margin: 0 }}>
-            {language === 'ar' ? 'اكسب ١٠ نقاط مكافأة على كل ١٠٠ ر.س تنفقها عبر كيو تي باي' : 'Earn 10 AlphPoints on every SAR 100 spent via alph pay'}
+            {isAr ? 'اكسب ١٠ نقاط مكافأة على كل ١٠٠ ر.س تنفقها عبر كيو تي باي' : 'Earn 10 QTPoints on every SAR 100 spent via QTPay'}
           </p>
         </div>
 

@@ -23,8 +23,8 @@ export const AppLinksModal: React.FC = () => {
 
   const handleDownloadApk = () => {
     const link = document.createElement('a');
-    link.href = 'data:text/plain;charset=utf-8,alph%20pay%20Android%20APK%20Installation%20Package';
-    link.download = 'alphpay-v2.4-release.apk';
+    link.href = 'data:text/plain;charset=utf-8,QTPay%20Android%20APK%20Installation%20Package';
+    link.download = 'qtpay-v2.4-release.apk';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -67,7 +67,7 @@ export const AppLinksModal: React.FC = () => {
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <div>
-            <h3 id="app-links-title" style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', margin: 0 }}>alph pay Application Links</h3>
+            <h3 id="app-links-title" style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', margin: 0 }}>QTPay Application Links</h3>
             <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '4px 0 0 0' }}>Web, Android APK & iOS Access</p>
           </div>
           <button
@@ -224,7 +224,7 @@ export const AppLinksModal: React.FC = () => {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#B3B3C2', justifyContent: 'center' }}>
-          <CheckCircle2 size={14} color="#7FE87F" /> All links are secured and verified for alph pay
+          <CheckCircle2 size={14} color="#7FE87F" /> All links are secured and verified for QTPay
         </div>
       </div>
     </div>

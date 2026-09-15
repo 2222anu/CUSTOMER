@@ -17,6 +17,7 @@ interface DealItem {
 
 export const ShoppingScreen: React.FC = () => {
   const { openPinModal, completePayment, language, t, isRtl } = useApp();
+  const isAr = language === 'العربية' || language === 'ar';
   const [selectedDeal, setSelectedDeal] = useState<DealItem | null>(null);
   const [copiedCode, setCopiedCode] = useState(false);
   const [purchasedDeal, setPurchasedDeal] = useState<{
@@ -28,30 +29,30 @@ export const ShoppingScreen: React.FC = () => {
   const deals: DealItem[] = [
     {
       id: 'deal-1',
-      merchant: language === 'ar' ? 'أسواق بنده' : 'Panda Supermarket',
-      title: language === 'ar' ? 'توفير البقالة والمقاضي الأسبوعية' : 'Weekly Grocery Smart Saver',
-      offer: language === 'ar' ? 'كاش باك ٥٠ ر.س عبر ساريع' : 'Flat SAR 50 Cashback on Sarie',
-      category: language === 'ar' ? 'بقالة ومواد غذائية طازجة' : 'Groceries & Fresh Food',
+      merchant: isAr ? 'أسواق بنده' : 'Panda Supermarket',
+      title: isAr ? 'توفير البقالة والمقاضي الأسبوعية' : 'Weekly Grocery Smart Saver',
+      offer: isAr ? 'كاش باك ٥٠ ر.س عبر سريع' : 'Flat SAR 50 Cashback on Sarie',
+      category: isAr ? 'بقالة ومواد غذائية طازجة' : 'Groceries & Fresh Food',
       couponCode: 'PANDASAVER50',
       originalPrice: 350,
       discountedPrice: 300,
     },
     {
       id: 'deal-2',
-      merchant: language === 'ar' ? 'مكتبة جرير' : 'Jarir Bookstore',
-      title: language === 'ar' ? 'أفضل الكتب والأدوات الرقمية' : 'Trending Books & Digital Stationery',
-      offer: language === 'ar' ? 'خصم فوري ٧٥ ر.س' : 'Flat SAR 75 Instant OFF',
-      category: language === 'ar' ? 'كتب وإلكترونيات' : 'Books & Electronics',
+      merchant: isAr ? 'مكتبة جرير' : 'Jarir Bookstore',
+      title: isAr ? 'أفضل الكتب والأدوات الرقمية' : 'Trending Books & Digital Stationery',
+      offer: isAr ? 'خصم فوري ٧٥ ر.س' : 'Flat SAR 75 Instant OFF',
+      category: isAr ? 'كتب وإلكترونيات' : 'Books & Electronics',
       couponCode: 'JARIR75',
       originalPrice: 450,
       discountedPrice: 375,
     },
     {
       id: 'deal-3',
-      merchant: language === 'ar' ? 'معارض إكسترا' : 'eXtra Stores',
-      title: language === 'ar' ? 'سماعات لاسلكية عازلة للضوضاء' : 'Wireless Active Noise Cancelling Earbuds',
-      offer: language === 'ar' ? 'خصم فوري يصل إلى ٢٠٠ ر.س' : 'Up to SAR 200 Instant Discount',
-      category: language === 'ar' ? 'صوتيات وتقنية' : 'Audio & Tech Gadgets',
+      merchant: isAr ? 'معارض إكسترا' : 'eXtra Stores',
+      title: isAr ? 'سماعات لاسلكية عازلة للضوضاء' : 'Wireless Active Noise Cancelling Earbuds',
+      offer: isAr ? 'خصم فوري يصل إلى ٢٠٠ ر.س' : 'Up to SAR 200 Instant Discount',
+      category: isAr ? 'صوتيات وتقنية' : 'Audio & Tech Gadgets',
       couponCode: 'EXTRA200',
       originalPrice: 799,
       discountedPrice: 599,
@@ -90,7 +91,7 @@ export const ShoppingScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '96px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Shopping & Deals', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
@@ -125,7 +126,7 @@ export const ShoppingScreen: React.FC = () => {
             <ShoppingBag size={24} />
           </div>
           <div>
-            <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>{translateText('alph pay Partner Deals', language)}</h3>
+            <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>{translateText('QTPay Partner Deals', language)}</h3>
             <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '3px 0 0 0' }}>
               {translateText('Exclusive promo codes & instant discounts on top shopping brands', language)}
             </p>
@@ -367,13 +368,13 @@ export const ShoppingScreen: React.FC = () => {
               {translateText('Order Placed!', language)}
             </h3>
             <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '0 0 20px 0' }}>
-              {language === 'ar' ? `تم تفعيل قسيمة الخصم لدى ${purchasedDeal.merchant}` : `Discount voucher redeemed at ${purchasedDeal.merchant}`}
+              {isAr ? `تم تفعيل قسيمة الخصم لدى ${purchasedDeal.merchant}` : `Discount voucher redeemed at ${purchasedDeal.merchant}`}
             </p>
 
             <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: isRtl ? 'right' : 'left', marginBottom: '20px' }}>
               <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{purchasedDeal.title}</div>
               <div style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F', marginTop: '6px', fontVariantNumeric: 'tabular-nums' }}>
-                {language === 'ar' ? `تم دفع ${formatSaudiCurrency(purchasedDeal.paidAmount, language)} عبر كيو تي باي` : `Paid SAR ${purchasedDeal.paidAmount.toLocaleString()} via alph pay`}
+                {isAr ? `تم دفع ${formatSaudiCurrency(purchasedDeal.paidAmount, language)} عبر كيو تي باي` : `Paid ${formatSaudiCurrency(purchasedDeal.paidAmount, language)} via QTPay`}
               </div>
             </div>
 

@@ -278,6 +278,15 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   'merchant.filter_settled': { en: 'Settled', ar: 'مكتملة' },
   'merchant.filter_refunded': { en: 'Refunded', ar: 'مستردة' },
   'merchant.refund_success': { en: 'Refund Authorized Successfully', ar: 'تم تأكيد الاسترداد بنجاح' },
+  
+  // Deals & Travel
+  'QTPay Travel Desk': { en: 'QTPay Travel Desk', ar: 'مكتب سفريات كيو تي باي' },
+  'QTPay Partner Deals': { en: 'QTPay Partner Deals', ar: 'عروض شركاء كيو تي باي' },
+  'Exclusive promo codes & instant discounts on top shopping brands': { en: 'Exclusive promo codes & instant discounts on top shopping brands', ar: 'أكواد خصم حصرية وتخفيضات فورية على أشهر الماركات' },
+  'Book flights, cabs, and hotels with zero convenience fee & instant cashbacks': { en: 'Book flights, cabs, and hotels with zero convenience fee & instant cashbacks', ar: 'حجز طيران وسيارات وفنادق بدون رسوم إضافية واسترداد نقدي فوري' },
+  'Featured Partner Offers': { en: 'Featured Partner Offers', ar: 'عروض الشركاء المميزة' },
+  'Available Travel Bookings': { en: 'Available Travel Bookings', ar: 'خيارات السفر المتاحة' },
+  'Order Placed!': { en: 'Order Placed!', ar: 'تم تأكيد الطلب!' },
 };
 
 export const translateText = (keyOrText: string, language: SupportedLanguage = 'English', defaultText?: string): string => {

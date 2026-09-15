@@ -7,7 +7,7 @@ import { Modal } from '../components/Modal';
 export const HelpSupportScreen: React.FC = () => {
   const [activeModal, setActiveModal] = useState<'chat' | 'call' | 'dispute' | null>(null);
   const [chatMessages, setChatMessages] = useState<Array<{ sender: 'user' | 'agent'; text: string; time: string }>>([
-    { sender: 'agent', text: 'Hello! How can I assist you with your alph pay account today?', time: 'Just now' },
+    { sender: 'agent', text: 'Hello! How can I assist you with your QTPay account today?', time: 'Just now' },
   ]);
   const [inputMsg, setInputMsg] = useState('');
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
@@ -108,7 +108,7 @@ export const HelpSupportScreen: React.FC = () => {
           <ListRow
             icon={<PhoneCall size={18} color="#7FE87F" />}
             label="Toll-Free Hotline"
-            subLabel="1800-123-ALPHPAY"
+            subLabel="800-123-QTPAY"
             onClick={() => setActiveModal('call')}
           />
           <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
@@ -216,7 +216,7 @@ export const HelpSupportScreen: React.FC = () => {
           >
             <PhoneCall size={28} />
           </div>
-          <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>800-123-ALPHPAY</h4>
+          <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>800-123-QTPAY</h4>
           <p style={{ fontSize: '12.5px', color: '#A2A2BA', margin: '0 0 20px 0' }}>Available 24x7 in Arabic and English (Toll-Free in KSA)</p>
           <a
             href="tel:80012378729"

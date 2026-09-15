@@ -151,8 +151,8 @@ const MERCHANTS: Contact[] = [
 ];
 
 const INITIAL_SESSIONS: DeviceSession[] = [
-  { id: 's-1', deviceName: 'alph pay Android App', deviceType: 'mobile', location: 'Riyadh - Android 14', lastActive: 'Active Now', isCurrent: true },
-  { id: 's-2', deviceName: 'alph pay iOS App', deviceType: 'mobile', location: 'Jeddah - iPhone 15 Pro', lastActive: '2 days ago', isCurrent: false },
+  { id: 's-1', deviceName: 'QTPay Android App', deviceType: 'mobile', location: 'Riyadh - Android 14', lastActive: 'Active Now', isCurrent: true },
+  { id: 's-2', deviceName: 'QTPay iOS App', deviceType: 'mobile', location: 'Jeddah - iPhone 15 Pro', lastActive: '2 days ago', isCurrent: false },
   { id: 's-3', deviceName: 'Chrome on Mac', deviceType: 'browser', location: 'Riyadh - macOS Sequoia', lastActive: 'Active Now', isCurrent: false },
   { id: 's-4', deviceName: 'Safari on iPhone', deviceType: 'browser', location: 'Dammam - iOS 18', lastActive: '3 days ago', isCurrent: false },
 ];
@@ -579,8 +579,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         window.speechSynthesis.cancel();
         const isArabic = soundBoxLanguage === 'ar';
         const text = isArabic
-          ? `تم استلام ${amount} ريال سعودي عبر ألف باي`
-          : `Received ${amount} Saudi Riyals on Alph Pay`;
+          ? `تم استلام ${amount} ريال سعودي عبر كيو تي باي`
+          : `Received ${amount} Saudi Riyals on QTPay`;
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = isArabic ? 'ar-SA' : 'en-US';
         utterance.rate = 1.0;

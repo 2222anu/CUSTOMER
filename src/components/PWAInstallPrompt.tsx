@@ -83,7 +83,7 @@ export const PWAInstallPrompt: React.FC = () => {
           <Download size={18} />
         </div>
         <div>
-          <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>Install alph pay</div>
+          <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>Install QTPay</div>
           <div style={{ fontSize: '11px', color: '#B3B3C2' }}>Fast launch & instant access</div>
         </div>
       </div>

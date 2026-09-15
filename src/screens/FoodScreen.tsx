@@ -23,6 +23,7 @@ interface Restaurant {
 
 export const FoodScreen: React.FC = () => {
   const { openPinModal, completePayment, language, t, isRtl } = useApp();
+  const isAr = language === 'العربية' || language === 'ar';
   const [selectedRes, setSelectedRes] = useState<Restaurant | null>(null);
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [orderConfirmed, setOrderConfirmed] = useState<{
@@ -34,40 +35,40 @@ export const FoodScreen: React.FC = () => {
   const restaurants: Restaurant[] = [
     {
       id: 'res-1',
-      name: language === 'ar' ? 'كافيه هاف مليون' : 'Half Million Coffee',
+      name: isAr ? 'كافيه هاف مليون' : 'Half Million Coffee',
       rating: formatLocalizedNumber('4.9', language),
-      cuisine: language === 'ar' ? 'قهوة مختصة، سبانش لاتيه ومخبوزات طازجة' : 'Specialty Coffee, Spanish Latte & Pastries',
-      offer: language === 'ar' ? 'خصم ٢٠٪ مع كود ALPH20' : 'Flat 20% OFF with ALPH20',
-      deliveryTime: language === 'ar' ? '١٥-٢٠ دقيقة' : '15-20 mins',
+      cuisine: isAr ? 'قهوة مختصة، سبانش لاتيه ومخبوزات طازجة' : 'Specialty Coffee, Spanish Latte & Pastries',
+      offer: isAr ? 'خصم ٢٠٪ مع كود QTPAY20' : 'Flat 20% OFF with QTPAY20',
+      deliveryTime: isAr ? '١٥-٢٠ دقيقة' : '15-20 mins',
       items: [
-        { id: 'i-1', name: language === 'ar' ? 'سبانش لاتيه مميز' : 'Signature Spanish Latte', price: 24, qty: 1 },
-        { id: 'i-2', name: language === 'ar' ? 'كروفين فستق' : 'Pistachio Cruffin', price: 18, qty: 1 },
-        { id: 'i-3', name: language === 'ar' ? 'كولد برو بالهيل' : 'Cardamom Iced Cold Brew', price: 22, qty: 0 },
+        { id: 'i-1', name: isAr ? 'سبانش لاتيه مميز' : 'Signature Spanish Latte', price: 24, qty: 1 },
+        { id: 'i-2', name: isAr ? 'كروفين فستق' : 'Pistachio Cruffin', price: 18, qty: 1 },
+        { id: 'i-3', name: isAr ? 'كولد برو بالهيل' : 'Cardamom Iced Cold Brew', price: 22, qty: 0 },
       ],
     },
     {
       id: 'res-2',
-      name: language === 'ar' ? 'مطاعم الرومانسية للمندي' : 'Al Romansiah Mandi',
+      name: isAr ? 'مطاعم الرومانسية للمندي' : 'Al Romansiah Mandi',
       rating: formatLocalizedNumber('4.9', language),
-      cuisine: language === 'ar' ? 'كبسة ومندي سعودي أصيل ومشويات' : 'Authentic Saudi Kabsa, Mandi & Grills',
-      offer: language === 'ar' ? 'حلى مجاني للطلبات فوق ١٠٠ ر.س' : 'Free Dessert on orders > SAR 100',
-      deliveryTime: language === 'ar' ? '٢٥-٣٠ دقيقة' : '25-30 mins',
+      cuisine: isAr ? 'كبسة ومندي سعودي أصيل ومشويات' : 'Authentic Saudi Kabsa, Mandi & Grills',
+      offer: isAr ? 'حلى مجاني للطلبات فوق ١٠٠ ر.س' : 'Free Dessert on orders > SAR 100',
+      deliveryTime: isAr ? '٢٥-٣٠ دقيقة' : '25-30 mins',
       items: [
-        { id: 'i-4', name: language === 'ar' ? 'مندي لحم حاشي خاص' : 'Special Hashi Meat Mandi', price: 78, qty: 1 },
-        { id: 'i-5', name: language === 'ar' ? 'مضبي دجاج على الفحم' : 'Charcoal Madhbi Chicken', price: 36, qty: 1 },
-        { id: 'i-6', name: language === 'ar' ? 'كنافة بالقشطة الطازجة' : 'Fresh Cream Kunafa', price: 20, qty: 0 },
+        { id: 'i-4', name: isAr ? 'مندي لحم حاشي خاص' : 'Special Hashi Meat Mandi', price: 78, qty: 1 },
+        { id: 'i-5', name: isAr ? 'مضبي دجاج على الفحم' : 'Charcoal Madhbi Chicken', price: 36, qty: 1 },
+        { id: 'i-6', name: isAr ? 'كنافة بالقشطة الطازجة' : 'Fresh Cream Kunafa', price: 20, qty: 0 },
       ],
     },
     {
       id: 'res-3',
-      name: language === 'ar' ? 'بوقا سوبر فودز' : 'Boga Super Foods',
+      name: isAr ? 'بوقا سوبر فودز' : 'Boga Super Foods',
       rating: formatLocalizedNumber('4.8', language),
-      cuisine: language === 'ar' ? 'أطباق صحية، ساندويتشات وعصائر طازجة' : 'Healthy Bowls, Sandwiches & Fresh Juices',
-      offer: language === 'ar' ? '١٥٪ كاش باك عبر كيو تي باي' : '15% Cashback on alph pay',
-      deliveryTime: language === 'ar' ? '٢٠-٢٥ دقيقة' : '20-25 mins',
+      cuisine: isAr ? 'أطباق صحية، ساندويتشات وعصائر طازجة' : 'Healthy Bowls, Sandwiches & Fresh Juices',
+      offer: isAr ? '١٥٪ كاش باك عبر كيو تي باي' : '15% Cashback on QTPay',
+      deliveryTime: isAr ? '٢٠-٢٥ دقيقة' : '20-25 mins',
       items: [
-        { id: 'i-7', name: language === 'ar' ? 'وعاء كينوا مع سلمون مدخن' : 'Smoked Salmon Quinoa Bowl', price: 48, qty: 1 },
-        { id: 'i-8', name: language === 'ar' ? 'عصير رمان طائفي طازج' : 'Fresh Taif Pomegranate Juice', price: 22, qty: 1 },
+        { id: 'i-7', name: isAr ? 'وعاء كينوا مع سلمون مدخن' : 'Smoked Salmon Quinoa Bowl', price: 48, qty: 1 },
+        { id: 'i-8', name: isAr ? 'عصير رمان طائفي طازج' : 'Fresh Taif Pomegranate Juice', price: 22, qty: 1 },
       ],
     },
   ];
@@ -156,7 +157,7 @@ export const FoodScreen: React.FC = () => {
             <Utensils size={24} />
           </div>
           <div>
-            <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>{translateText('alph pay Food & Dining', language)}</h3>
+            <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>{translateText('QTPay Food & Dining', language)}</h3>
             <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '3px 0 0 0' }}>
               {translateText('Order food online with instant discounts & 0 delivery fee', language)}
             </p>
@@ -358,7 +359,7 @@ export const FoodScreen: React.FC = () => {
                 cursor: calculateSubtotal() > 0 ? 'pointer' : 'not-allowed',
               }}
             >
-              {language === 'ar'
+              {isAr
                 ? `طلب ودفع ${formatSaudiCurrency(calculateSubtotal(), language)} عبر رمز ساريع`
                 : `Order & Pay SAR ${calculateSubtotal().toLocaleString()} via Sarie PIN`}
             </button>
@@ -417,18 +418,18 @@ export const FoodScreen: React.FC = () => {
               {translateText('Order Confirmed!', language)}
             </h3>
             <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '0 0 20px 0' }}>
-              {language === 'ar' ? `${orderConfirmed.restaurantName} يجهز وجبتك الآن` : `${orderConfirmed.restaurantName} is preparing your meal`}
+              {isAr ? `${orderConfirmed.restaurantName} يجهز وجبتك الآن` : `${orderConfirmed.restaurantName} is preparing your meal`}
             </p>
 
             <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: isRtl ? 'right' : 'left', marginBottom: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <Clock size={16} color="#7FE87F" />
                 <span style={{ fontSize: '12px', fontWeight: 800, color: '#7FE87F' }}>
-                  {language === 'ar' ? `التوصيل خلال ${orderConfirmed.estimatedTime}` : `Delivering in ${orderConfirmed.estimatedTime}`}
+                  {isAr ? `التوصيل خلال ${orderConfirmed.estimatedTime}` : `Delivering in ${orderConfirmed.estimatedTime}`}
                 </span>
               </div>
               <div style={{ fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}>
-                {language === 'ar' ? `تم دفع ${formatSaudiCurrency(orderConfirmed.totalAmount, language)} عبر كيو تي باي` : `Paid SAR ${orderConfirmed.totalAmount} via alph pay`}
+                {isAr ? `تم دفع ${formatSaudiCurrency(orderConfirmed.totalAmount, language)} عبر كيو تي باي` : `Paid SAR ${orderConfirmed.totalAmount} via QTPay`}
               </div>
             </div>
 

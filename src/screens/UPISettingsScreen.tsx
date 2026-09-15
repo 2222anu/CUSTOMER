@@ -8,6 +8,7 @@ import { translateText } from '../utils/i18n';
 
 export const UPISettingsScreen: React.FC = () => {
   const { user, navigateTo, language, t } = useApp();
+  const isAr = language === 'العربية' || language === 'ar';
   const [copied, setCopied] = useState(false);
   const [isPinModalOpen, setIsPinModalOpen] = useState(false);
   const [oldPin, setOldPin] = useState('');
@@ -50,7 +51,7 @@ export const UPISettingsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '96px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Sarie Settings', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
@@ -113,7 +114,7 @@ export const UPISettingsScreen: React.FC = () => {
           <ListRow
             icon={<ShieldCheck size={18} color="#7FE87F" />}
             label={translateText('Daily Transfer Limit', language)}
-            rightElement={<span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 800, backgroundColor: '#1E1E32', border: '1px solid #2C2C44', padding: '3px 8px', borderRadius: '6px' }}>{language === 'ar' ? '٥٠,٠٠٠ ر.س / يومياً' : 'SAR 50,000 / day'}</span>}
+            rightElement={<span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 800, backgroundColor: '#1E1E32', border: '1px solid #2C2C44', padding: '3px 8px', borderRadius: '6px' }}>{isAr ? '٥٠,٠٠٠ ر.س / يومياً' : 'SAR 50,000 / day'}</span>}
           />
         </div>
       </div>

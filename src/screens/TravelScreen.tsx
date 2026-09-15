@@ -17,6 +17,7 @@ interface TravelBooking {
 
 export const TravelScreen: React.FC = () => {
   const { openPinModal, completePayment, language, t, isRtl } = useApp();
+  const isAr = language === 'العربية' || language === 'ar';
   const [selectedBooking, setSelectedBooking] = useState<TravelBooking | null>(null);
   const [confirmedTicket, setConfirmedTicket] = useState<{
     title: string;
@@ -28,35 +29,35 @@ export const TravelScreen: React.FC = () => {
   const bookings: TravelBooking[] = [
     {
       type: 'flight',
-      title: language === 'ar' ? 'الرياض (RUH) ➔ جدة (JED)' : 'Riyadh (RUH) ➔ Jeddah (JED)',
-      subtitle: language === 'ar' ? 'رحلة الخطوط السعودية SV1024 • مباشر • ساعة و٣٥ دقيقة' : 'Saudia Flight SV1024 • Direct • 1h 35m',
+      title: isAr ? 'الرياض (RUH) ➔ جدة (JED)' : 'Riyadh (RUH) ➔ Jeddah (JED)',
+      subtitle: isAr ? 'رحلة الخطوط السعودية SV1024 • مباشر • ساعة و٣٥ دقيقة' : 'Saudia Flight SV1024 • Direct • 1h 35m',
       from: 'Riyadh',
       to: 'Jeddah',
       amount: 650,
-      provider: language === 'ar' ? 'الخطوط السعودية' : 'Saudia Airlines',
+      provider: isAr ? 'الخطوط السعودية' : 'Saudia Airlines',
     },
     {
       type: 'cab',
-      title: language === 'ar' ? 'توصيل مطار الملك خالد' : 'King Khalid Airport Transfer',
-      subtitle: language === 'ar' ? 'سيدان فاخرة • استلام من باب المنزل' : 'Executive Sedan • Doorstep Pickup',
+      title: isAr ? 'توصيل مطار الملك خالد' : 'King Khalid Airport Transfer',
+      subtitle: isAr ? 'سيدان فاخرة • استلام من باب المنزل' : 'Executive Sedan • Doorstep Pickup',
       from: 'Al Olaya, Riyadh',
       to: 'RUH Terminal 5',
       amount: 120,
-      provider: language === 'ar' ? 'كيو تي باي شوفيير' : 'alph pay Chauffeur',
+      provider: isAr ? 'كيو تي باي شوفيير' : 'QTPay Chauffeur',
     },
     {
       type: 'hotel',
-      title: language === 'ar' ? 'فندق ريتز كارلتون الرياض' : 'The Ritz-Carlton Riyadh',
-      subtitle: language === 'ar' ? 'جناح ديلوكس • ليلة واحدة • شامل الإفطار' : 'Deluxe Suite • 1 Night • Breakfast Included',
+      title: isAr ? 'فندق ريتز كارلتون الرياض' : 'The Ritz-Carlton Riyadh',
+      subtitle: isAr ? 'جناح ديلوكس • ليلة واحدة • شامل الإفطار' : 'Deluxe Suite • 1 Night • Breakfast Included',
       amount: 1450,
       provider: 'Marriott Bonvoy',
     },
     {
       type: 'holiday',
-      title: language === 'ar' ? 'باقة عطلة واحة العلا' : 'AlUla Oasis Getaway Package',
-      subtitle: language === 'ar' ? '٣ أيام / ليلتان • منتجع بيئي فاخر + جولة الحِجر' : '3 Days / 2 Nights • Luxury Eco-Resort + Hegra Tour',
+      title: isAr ? 'باقة عطلة واحة العلا' : 'AlUla Oasis Getaway Package',
+      subtitle: isAr ? '٣ أيام / ليلتان • منتجع بيئي فاخر + جولة الحِجر' : '3 Days / 2 Nights • Luxury Eco-Resort + Hegra Tour',
       amount: 2800,
-      provider: language === 'ar' ? 'استكشف العلا' : 'Experience AlUla',
+      provider: isAr ? 'استكشف العلا' : 'Experience AlUla',
     },
   ];
 
@@ -125,7 +126,7 @@ export const TravelScreen: React.FC = () => {
             <Plane size={26} />
           </div>
           <h3 style={{ fontSize: '18px', fontWeight: 800, margin: '0 0 4px 0', color: '#FFFFFF' }}>
-            {translateText('alph pay Travel Desk', language)}
+            {translateText('QTPay Travel Desk', language)}
           </h3>
           <p style={{ fontSize: '12px', color: '#B3B3C2', margin: 0 }}>
             {translateText('Book flights, cabs, and hotels with zero convenience fee & instant cashbacks', language)}
@@ -141,7 +142,7 @@ export const TravelScreen: React.FC = () => {
             icon={<Plane size={18} color="#7FE87F" />}
             label={translateText('Flight Bookings', language)}
             subLabel={bookings[0].subtitle}
-            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>{language === 'ar' ? `حجز ${formatSaudiCurrency(650, language)}` : 'Book SAR 650'}</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(650, language)}` : 'Book SAR 650'}</span>}
             onClick={() => handleStartBooking(bookings[0])}
           />
           <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />
@@ -149,7 +150,7 @@ export const TravelScreen: React.FC = () => {
             icon={<Car size={18} color="#7FE87F" />}
             label={translateText('Airport Chauffeur', language)}
             subLabel={bookings[1].subtitle}
-            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>{language === 'ar' ? `حجز ${formatSaudiCurrency(120, language)}` : 'Book SAR 120'}</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(120, language)}` : 'Book SAR 120'}</span>}
             onClick={() => handleStartBooking(bookings[1])}
           />
           <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />
@@ -250,7 +251,7 @@ export const TravelScreen: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              {language === 'ar'
+              {isAr
                 ? `دفع ${formatSaudiCurrency(selectedBooking.amount, language)} عبر رمز ساريع`
                 : `Pay SAR ${selectedBooking.amount.toLocaleString()} via Sarie PIN`}
             </button>

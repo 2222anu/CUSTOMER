@@ -8,6 +8,7 @@ import type { Contact } from '../types';
 
 export const RequestMoneyScreen: React.FC = () => {
   const { contacts, addMoneyRequest, language, t } = useApp();
+  const isAr = language === 'العربية' || language === 'ar';
   const [selectedContact, setSelectedContact] = useState<Contact>(contacts[0] || {
     id: 'c1',
     name: 'Sara Al-Mansoor',
@@ -34,7 +35,7 @@ export const RequestMoneyScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '96px', color: '#FFFFFF' }}>
       <AppHeader title={t('request_money')} showBack />
 
       <div style={{ padding: '20px' }}>
@@ -60,7 +61,7 @@ export const RequestMoneyScreen: React.FC = () => {
               {translateText('Request Sent Successfully!', language)}
             </h3>
             <p style={{ color: '#A2A2BA', fontSize: '13px', margin: 0 }}>
-              {language === 'ar' ? (
+              {isAr ? (
                 <>تم إرسال طلب بمبلغ {formatSaudiCurrency(parseFloat(amountStr) || 0, language)} إلى <strong style={{ color: '#FFFFFF' }}>{selectedContact.name}</strong></>
               ) : (
                 <>Requested SAR {amountStr} from <strong style={{ color: '#FFFFFF' }}>{selectedContact.name}</strong></>

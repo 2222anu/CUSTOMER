@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldCheck, CheckCircle2, UserCheck, ArrowRight, ArrowLeft, Loader2, Calendar } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, UserCheck, ArrowRight, ArrowLeft, Loader2, Calendar, Lock } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
@@ -92,16 +92,27 @@ export const OnboardingKycScreen: React.FC = () => {
           showSettings={false}
         />
 
-        {/* Progress Step Indicator */}
-        <div style={{ padding: '0 20px', marginTop: '12px', marginBottom: '16px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-            <span style={{ fontSize: '11px', fontWeight: 800, color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              {language === 'العربية' ? 'الخطوة ٣ من ٤: توثيق نفاذ' : 'Step 3 of 4: Nafath e-KYC'}
-            </span>
-            <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 700 }}>75%</span>
+        {/* Redesigned 4-Segment Stepped Progress Indicator */}
+        <div style={{ padding: '0 20px', marginTop: '10px', marginBottom: '22px' }}>
+          <div style={{ display: 'flex', gap: '6px', marginBottom: '10px' }}>
+            {/* Step 1: Mobile */}
+            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#7FE87F' }} />
+            {/* Step 2: Permissions */}
+            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#7FE87F' }} />
+            {/* Step 3: Nafath KYC (Active) */}
+            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#7FE87F', boxShadow: '0 0 8px rgba(127, 232, 127, 0.4)' }} />
+            {/* Step 4: Bank Account */}
+            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#1E1E32' }} />
           </div>
-          <div style={{ width: '100%', height: '4px', backgroundColor: '#1E1E32', borderRadius: '2px', overflow: 'hidden' }}>
-            <div style={{ width: '75%', height: '100%', backgroundColor: '#7FE87F', borderRadius: '2px' }} />
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#7FE87F', display: 'inline-block' }} />
+              <span style={{ fontSize: '12px', fontWeight: 800, color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                {language === 'العربية' ? 'الخطوة ٣: توثيق نفاذ الوطني' : 'Step 3: Nafath e-KYC'}
+              </span>
+            </div>
+            <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 700 }}>3 / 4</span>
           </div>
         </div>
 
@@ -117,41 +128,37 @@ export const OnboardingKycScreen: React.FC = () => {
               }}
               className="fade-in"
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '22px' }}>
                 <div
                   style={{
-                    width: '38px',
-                    height: '38px',
-                    borderRadius: '10px',
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '12px',
                     backgroundColor: 'rgba(127, 232, 127, 0.12)',
                     border: '1px solid rgba(127, 232, 127, 0.3)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    flexShrink: 0,
                   }}
                 >
-                  <ShieldCheck size={20} color="#7FE87F" />
+                  <ShieldCheck size={22} color="#7FE87F" />
                 </div>
                 <div>
                   <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>
-                    {language === 'العربية' ? 'التحقق من الهوية الوطنية / الإقامة' : 'Nafath National e-KYC'}
+                    {language === 'العربية' ? 'الهوية الوطنية / الإقامة' : 'National ID & Iqama'}
                   </h3>
-                  <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
-                    {language === 'العربية' ? 'معتمد من البنك المركزي السعودي (ساما)' : 'SAMA Tier-1 Digital Identity'}
+                  <span style={{ fontSize: '11.5px', color: '#7FE87F', fontWeight: 700 }}>
+                    SAMA Tier-1 Digital Identity
                   </span>
                 </div>
               </div>
-
-              <p style={{ fontSize: '13px', color: '#A2A2BA', margin: '0 0 18px 0', lineHeight: '1.4' }}>
-                {language === 'العربية'
-                  ? 'أدخل رقم الهوية الوطنية وتاريخ الميلاد لتوثيق حسابك ورفع الحد اليومي للتحويلات إلى ٥٠,٠٠٠ ر.س.'
-                  : 'Enter your Saudi National ID / Iqama and Date of Birth to unlock SAMA Tier-1 certified status and SAR 50,000 daily limits.'}
-              </p>
 
               <form onSubmit={handleRequestNafath} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {/* National ID Input */}
                 <div>
                   <label
+                    htmlFor="national-id-input"
                     style={{
                       fontSize: '11px',
                       fontWeight: 800,
@@ -162,7 +169,7 @@ export const OnboardingKycScreen: React.FC = () => {
                       display: 'block',
                     }}
                   >
-                    {t('sec.national_id', 'National ID / Iqama Number (10 Digits)')}
+                    {t('sec.national_id', 'National ID / Iqama (10 Digits)')}
                   </label>
                   <div
                     style={{
@@ -202,6 +209,7 @@ export const OnboardingKycScreen: React.FC = () => {
                 {/* Date of Birth */}
                 <div>
                   <label
+                    htmlFor="dob-input"
                     style={{
                       fontSize: '11px',
                       fontWeight: 800,
@@ -246,30 +254,33 @@ export const OnboardingKycScreen: React.FC = () => {
                 </div>
 
                 {errorMsg && (
-                  <div style={{ fontSize: '12px', color: '#FF6B6B', fontWeight: 700 }}>
+                  <div style={{ fontSize: '12px', color: '#FF4757', fontWeight: 700 }}>
                     {errorMsg}
                   </div>
                 )}
 
-                {/* Trust Badge */}
+                {/* Minimal Trust Badge */}
                 <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    backgroundColor: 'rgba(127, 232, 127, 0.06)',
-                    border: '1px solid rgba(127, 232, 127, 0.2)',
+                    backgroundColor: '#1E1E32',
+                    border: '1px solid #2C2C44',
                     borderRadius: '12px',
                     padding: '10px 14px',
                   }}
                 >
-                  <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 600 }}>
-                    {language === 'العربية' ? 'ربط آمن ومشفر عبر بوابة النفاذ الوطني' : 'Encrypted Link via National Information Center'}
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Lock size={12} color="#7FE87F" />
+                    <span style={{ fontSize: '11.5px', color: '#A2A2BA', fontWeight: 600 }}>
+                      NIC & SAMA Gateway
+                    </span>
+                  </div>
                   <SamaLogo height={16} themeMode="green" />
                 </div>
 
-                <div style={{ marginTop: '8px' }}>
+                <div style={{ marginTop: '6px' }}>
                   <PrimaryButton type="submit" disabled={nationalId.length < 10}>
                     {language === 'العربية' ? 'طلب مصادقة نفاذ' : 'Request Nafath Authentication'}{' '}
                     <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
@@ -293,78 +304,73 @@ export const OnboardingKycScreen: React.FC = () => {
             >
               <div
                 style={{
-                  width: '90px',
-                  height: '90px',
+                  width: '84px',
+                  height: '84px',
                   borderRadius: '50%',
                   backgroundColor: 'rgba(127, 232, 127, 0.12)',
-                  border: '2.5px solid #7FE87F',
+                  border: '2px solid #7FE87F',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  margin: '0 auto 12px auto',
-                  boxShadow: '0 0 20px rgba(127, 232, 127, 0.25)',
+                  margin: '0 auto 16px auto',
+                  boxShadow: '0 0 24px rgba(127, 232, 127, 0.2)',
                 }}
               >
-                <span style={{ fontSize: '42px', fontWeight: 900, color: '#7FE87F', letterSpacing: '2px', fontFamily: 'monospace' }}>
+                <span style={{ fontSize: '40px', fontWeight: 900, color: '#7FE87F', letterSpacing: '1px', fontFamily: 'monospace' }}>
                   {challengeCode}
                 </span>
               </div>
-              <h4 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>
-                {language === 'العربية' ? 'اختر هذا الرقم في تطبيق نفاذ' : 'Select This Code in Nafath App'}
-              </h4>
-              <p style={{ fontSize: '12.5px', color: '#A2A2BA', margin: '0 0 16px 0', lineHeight: '1.4' }}>
-                {language === 'العربية'
-                  ? 'افتح تطبيق نفاذ على هاتفك، واضغط على نفس الرقم الظاهر أعلاه لإتمام بصمة الوجه.'
-                  : 'Open your official Nafath app on your mobile, tap the number above, and complete facial recognition.'}
-              </p>
 
-              {/* Step Guide */}
+              <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 16px 0' }}>
+                {language === 'العربية' ? 'اختر الرقم في تطبيق نفاذ' : 'Select Code in Nafath App'}
+              </h4>
+
+              {/* Minimal 3-Step Action Guide */}
               <div
                 style={{
                   backgroundColor: '#1E1E32',
                   borderRadius: '14px',
                   border: '1px solid #2C2C44',
-                  padding: '14px',
-                  marginBottom: '18px',
+                  padding: '12px 14px',
+                  marginBottom: '16px',
                   textAlign: isRtl ? 'right' : 'left',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '10px',
+                  gap: '8px',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: '#7FE87F', color: '#0B0B14', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 800 }}>
+                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: '#7FE87F', color: '#0B0B14', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 900 }}>
                     1
                   </div>
-                  <span style={{ fontSize: '12px', color: '#FFFFFF', fontWeight: 600 }}>
-                    {language === 'العربية' ? 'افتح تطبيق نفاذ (Nafath App)' : 'Open the official Nafath App'}
+                  <span style={{ fontSize: '12.5px', color: '#FFFFFF', fontWeight: 600 }}>
+                    {language === 'العربية' ? 'افتح تطبيق نفاذ' : 'Open Nafath App'}
                   </span>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: '#7FE87F', color: '#0B0B14', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 800 }}>
+                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: '#7FE87F', color: '#0B0B14', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 900 }}>
                     2
                   </div>
-                  <span style={{ fontSize: '12px', color: '#FFFFFF', fontWeight: 600 }}>
-                    {language === 'العربية' ? `اختر الرقم (${challengeCode}) من بين الخيارات` : `Select challenge number (${challengeCode})`}
+                  <span style={{ fontSize: '12.5px', color: '#FFFFFF', fontWeight: 600 }}>
+                    {language === 'العربية' ? `اختر الرقم (${challengeCode})` : `Select challenge (${challengeCode})`}
                   </span>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: '#7FE87F', color: '#0B0B14', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 800 }}>
+                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: '#7FE87F', color: '#0B0B14', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 900 }}>
                     3
                   </div>
-                  <span style={{ fontSize: '12px', color: '#FFFFFF', fontWeight: 600 }}>
-                    {language === 'العربية' ? 'أكمل التحقق من ملامح الوجه' : 'Complete biometric facial capture'}
+                  <span style={{ fontSize: '12.5px', color: '#FFFFFF', fontWeight: 600 }}>
+                    {language === 'العربية' ? 'أكمل التحقق البيومتري' : 'Confirm biometric face capture'}
                   </span>
                 </div>
               </div>
 
-              {/* Countdown */}
-              <div style={{ fontSize: '12px', color: '#6E6E85', fontWeight: 700, marginBottom: '16px' }}>
-                {language === 'العربية'
-                  ? `صالح لمدة ${countdown} ثانية`
-                  : `Challenge expires in ${countdown} seconds`}
+              {/* Countdown Pill */}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 12px', borderRadius: '20px', backgroundColor: '#1E1E32', border: '1px solid #2C2C44', fontSize: '11.5px', color: '#A2A2BA', fontWeight: 700, marginBottom: '20px' }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: countdown > 10 ? '#7FE87F' : '#FF4757' }} />
+                {language === 'العربية' ? `ينتهي خلال ${countdown} ثانية` : `Expires in ${countdown}s`}
               </div>
 
               <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
@@ -406,7 +412,7 @@ export const OnboardingKycScreen: React.FC = () => {
                 backgroundColor: '#151524',
                 borderRadius: '20px',
                 border: '1px solid #2C2C44',
-                padding: '36px 20px',
+                padding: '40px 20px',
                 textAlign: 'center',
               }}
               className="fade-in"
@@ -416,26 +422,20 @@ export const OnboardingKycScreen: React.FC = () => {
                   width: '64px',
                   height: '64px',
                   borderRadius: '50%',
-                  backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                  backgroundColor: 'rgba(127, 232, 127, 0.12)',
                   border: '1.5px solid #7FE87F',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  margin: '0 auto 16px auto',
+                  margin: '0 auto 18px auto',
                 }}
               >
                 <Loader2 size={32} color="#7FE87F" className="animate-spin" />
               </div>
 
-              <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>
-                {language === 'العربية' ? 'جاري التحقق من مصادقة نفاذ...' : 'Verifying with Nafath Gateway...'}
+              <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
+                {language === 'العربية' ? 'جاري التحقق من مصادقة نفاذ...' : 'Verifying with Nafath...'}
               </h4>
-
-              <p style={{ fontSize: '13px', color: '#A2A2BA', margin: 0 }}>
-                {language === 'العربية'
-                  ? 'جاري تأكيد التوثيق البيومتري من مركز المعلومات الوطني والبنك المركزي (ساما).'
-                  : 'Confirming digital signature with National Information Center & SAMA.'}
-              </p>
             </div>
           )}
 
@@ -467,15 +467,9 @@ export const OnboardingKycScreen: React.FC = () => {
                 <CheckCircle2 size={36} color="#7FE87F" />
               </div>
 
-              <h4 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>
+              <h4 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 16px 0' }}>
                 {language === 'العربية' ? 'تم توثيق الهوية عبر نفاذ بنجاح' : 'Nafath e-KYC Certified'}
               </h4>
-
-              <p style={{ fontSize: '13px', color: '#A2A2BA', margin: '0 0 18px 0', lineHeight: '1.4' }}>
-                {language === 'العربية'
-                  ? 'تم توثيق حسابك بمستوى الاعتماد الأول (SAMA Tier-1). تم رفع الحد اليومي للتحويل إلى ٥٠,٠٠٠ ر.س.'
-                  : 'Your identity is fully verified with SAMA Tier-1 certification. Daily transfer limit elevated to SAR 50,000.'}
-              </p>
 
               <div
                 style={{
@@ -499,7 +493,7 @@ export const OnboardingKycScreen: React.FC = () => {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ fontSize: '12px', color: '#A2A2BA' }}>{language === 'العربية' ? 'الحد اليومي' : 'Daily Limit'}</span>
-                  <span style={{ fontSize: '12.5px', fontWeight: 800, color: '#7FE87F' }}>SAR 50,000 / Day</span>
+                  <span style={{ fontSize: '12.5px', fontWeight: 800, color: '#7FE87F' }}>SAR 50,000</span>
                 </div>
               </div>
 

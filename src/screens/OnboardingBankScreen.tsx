@@ -126,16 +126,27 @@ export const OnboardingBankScreen: React.FC = () => {
           showSettings={false}
         />
 
-        {/* Progress Step Indicator */}
-        <div style={{ padding: '0 20px', marginTop: '12px', marginBottom: '16px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-            <span style={{ fontSize: '11px', fontWeight: 800, color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              {language === 'العربية' ? 'الخطوة ٤ من ٤: ربط الحساب' : 'Step 4 of 4: Link Bank Account'}
-            </span>
-            <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 800 }}>100%</span>
+        {/* Redesigned 4-Segment Stepped Progress Indicator */}
+        <div style={{ padding: '0 20px', marginTop: '10px', marginBottom: '22px' }}>
+          <div style={{ display: 'flex', gap: '6px', marginBottom: '10px' }}>
+            {/* Step 1: Mobile */}
+            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#7FE87F' }} />
+            {/* Step 2: Permissions */}
+            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#7FE87F' }} />
+            {/* Step 3: Nafath KYC */}
+            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#7FE87F' }} />
+            {/* Step 4: Bank Account (Active) */}
+            <div style={{ flex: 1, height: '4px', borderRadius: '4px', backgroundColor: '#7FE87F', boxShadow: '0 0 8px rgba(127, 232, 127, 0.4)' }} />
           </div>
-          <div style={{ width: '100%', height: '4px', backgroundColor: '#1E1E32', borderRadius: '2px', overflow: 'hidden' }}>
-            <div style={{ width: '100%', height: '100%', backgroundColor: '#7FE87F', borderRadius: '2px' }} />
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#7FE87F', display: 'inline-block' }} />
+              <span style={{ fontSize: '12px', fontWeight: 800, color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                {language === 'العربية' ? 'الخطوة ٤: ربط الحساب البنكي' : 'Step 4: Link Saudi Bank'}
+              </span>
+            </div>
+            <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 800 }}>4 / 4</span>
           </div>
         </div>
 
@@ -151,14 +162,9 @@ export const OnboardingBankScreen: React.FC = () => {
               }}
               className="fade-in"
             >
-              <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 16px 0' }}>
                 {language === 'العربية' ? 'اختر البنك السعودي' : 'Select Saudi Bank'}
               </h3>
-              <p style={{ fontSize: '13px', color: '#A2A2BA', margin: '0 0 16px 0', lineHeight: '1.4' }}>
-                {language === 'العربية'
-                  ? 'اختر البنك المراد ربطه بحساب سريع للدفع الفوري:'
-                  : 'Choose the Saudi bank you wish to connect for instant Sarie transfers:'}
-              </p>
 
               <div
                 role="radiogroup"
@@ -706,15 +712,9 @@ export const OnboardingBankScreen: React.FC = () => {
                 <CheckCircle2 size={36} color="#7FE87F" />
               </div>
 
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>
+              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 16px 0' }}>
                 {language === 'العربية' ? 'تم ربط الحساب بنجاح' : 'Bank Account Linked'}
               </h3>
-
-              <p style={{ fontSize: '13px', color: '#A2A2BA', margin: '0 0 20px 0', lineHeight: '1.4' }}>
-                {language === 'العربية'
-                  ? `تم تفعيل حساب ${t(selectedBank, selectedBank)} بنجاح لعمليات الدفع والتحويل عبر سريع.`
-                  : `Your ${selectedBank} account has been connected for Sarie instant transfers.`}
-              </p>
 
               <div
                 style={{

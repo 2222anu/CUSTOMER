@@ -25,7 +25,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   showUserInfo = false,
   rightAction,
 }) => {
-  const { user, goBack, navigateTo, currentScreen } = useApp();
+  const { user, goBack, navigateTo, currentScreen, isRtl } = useApp();
 
   const handleBack = () => {
     if (onBack) onBack();
@@ -77,7 +77,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               transition: 'background-color 0.15s ease, transform 0.1s ease',
             }}
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={18} style={{ transform: isRtl ? 'rotate(180deg)' : 'none' }} />
           </button>
         ) : (
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -112,7 +112,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               )}
             </div>
             {showUserInfo && (
-              <div style={{ marginLeft: '10px' }}>
+              <div style={{ marginInlineStart: '10px' }}>
                 <span style={{ fontSize: '13.5px', fontWeight: '800', color: '#FFFFFF', display: 'block', lineHeight: '16px' }}>
                   {user.name}
                 </span>

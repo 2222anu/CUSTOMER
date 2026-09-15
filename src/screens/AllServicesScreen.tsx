@@ -21,6 +21,7 @@ import { ServiceCard } from '../components/ServiceCard';
 import { Modal } from '../components/Modal';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
+import type { Transaction } from '../types';
 
 export const AllServicesScreen: React.FC = () => {
   const { navigateTo, openPinModal, completePayment } = useApp();
@@ -68,7 +69,7 @@ export const AllServicesScreen: React.FC = () => {
           subTitle: serviceSubTitle,
           amount: payAmt,
           category: 'Bill Payment',
-        }).then((txn) => {
+        }).then((txn: Transaction) => {
           navigateTo('PAYMENT_SUCCESS', { transaction: txn });
         });
       },

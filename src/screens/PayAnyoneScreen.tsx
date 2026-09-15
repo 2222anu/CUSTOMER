@@ -9,14 +9,14 @@ export const PayAnyoneScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredContacts = contacts.filter(
-    (c) =>
+    (c: Contact) =>
       c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.upiId.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.mobile.includes(searchQuery)
   );
 
-  const filteredMerchants = merchants.filter(
-    (m) =>
+  const filteredMerchants = (merchants || []).filter(
+    (m: Contact) =>
       m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       m.upiId.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -224,7 +224,7 @@ export const PayAnyoneScreen: React.FC = () => {
               boxShadow: 'none',
             }}
           >
-            {filteredMerchants.map((merchant, index) => (
+            {filteredMerchants.map((merchant: Contact, index: number) => (
               <div
                 key={merchant.id}
                 role="button"

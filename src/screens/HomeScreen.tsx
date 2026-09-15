@@ -22,10 +22,9 @@ import { TransactionRow } from '../components/TransactionRow';
 import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
 import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
-import { formatCurrency } from '../utils/formatters';
 
 export const HomeScreen: React.FC = () => {
-  const { bankAccounts, transactions, navigateTo, setIsScanModalOpen, openPinModal } = useApp();
+  const { bankAccounts, transactions, navigateTo, setIsScanModalOpen, openPinModal, t, formatMoney, isRtl } = useApp();
   const [isBalanceModalOpen, setIsBalanceModalOpen] = useState(false);
   const [showTotalBalance, setShowTotalBalance] = useState(false);
 
@@ -37,8 +36,8 @@ export const HomeScreen: React.FC = () => {
       setShowTotalBalance(false);
     } else {
       openPinModal({
-        title: 'Enter PIN to View Balance',
-        subTitle: 'Enter 4-digit security PIN to view your total balance',
+        title: t('sec.enter_pin', 'Enter PIN to View Balance'),
+        subTitle: t('sec.enter_pin_sub', 'Enter 4-digit security PIN to view your total balance'),
         amount: totalBalance,
         onSuccess: () => {
           setShowTotalBalance(true);
@@ -49,8 +48,8 @@ export const HomeScreen: React.FC = () => {
 
   const handleCheckBalanceClick = () => {
     openPinModal({
-      title: 'Check Bank Balance Breakdown',
-      subTitle: 'Enter 4-digit Sarie PIN to view individual account balances',
+      title: t('sec.enter_pin', 'Check Bank Balance Breakdown'),
+      subTitle: t('sec.enter_pin_sub', 'Enter 4-digit Sarie PIN to view individual account balances'),
       amount: totalBalance,
       onSuccess: () => {
         setShowTotalBalance(true);
@@ -128,7 +127,8 @@ export const HomeScreen: React.FC = () => {
             style={{
               position: 'absolute',
               top: '-30px',
-              right: '-30px',
+              right: isRtl ? 'auto' : '-30px',
+              left: isRtl ? '-30px' : 'auto',
               width: '120px',
               height: '120px',
               borderRadius: '50%',
@@ -141,7 +141,7 @@ export const HomeScreen: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span style={{ fontSize: '11px', fontWeight: 800, color: '#C8E6C9', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                Total Available Balance
+                {t('home.total_balance', 'Total Available Balance')}
               </span>
               <button
                 type="button"
@@ -163,7 +163,7 @@ export const HomeScreen: React.FC = () => {
                 }}
               >
                 {showTotalBalance ? <EyeOff size={13} /> : <Eye size={13} />}
-                <span>{showTotalBalance ? 'Hide' : 'PIN Required'}</span>
+                <span>{showTotalBalance ? t('home.hide', 'Hide') : t('home.pin_required', 'PIN Required')}</span>
               </button>
             </div>
 
@@ -182,7 +182,7 @@ export const HomeScreen: React.FC = () => {
               }}
             >
               <ShieldCheck size={12} color="#7FE87F" />
-              <span>Sarie 24/7 Rail</span>
+              <span>{t('home.sarie_rail', 'Sarie 24/7 Rail')}</span>
             </div>
           </div>
 
@@ -203,11 +203,11 @@ export const HomeScreen: React.FC = () => {
                   lineHeight: 1.1,
                 }}
               >
-                {showTotalBalance ? formatCurrency(totalBalance) : 'SAR ••••••••'}
+                {showTotalBalance ? formatMoney(totalBalance) : (isRtl ? '•••••••• ر.س' : 'SAR ••••••••')}
               </div>
               {!showTotalBalance && (
                 <div style={{ fontSize: '11px', color: '#A2E6A2', marginTop: '4px', fontWeight: 600 }}>
-                  🔒 Tap to enter PIN and view balance
+                  {t('home.tap_to_view_pin', '🔒 Tap to enter PIN and view balance')}
                 </div>
               )}
             </div>
@@ -231,7 +231,7 @@ export const HomeScreen: React.FC = () => {
               }}
             >
               <Landmark size={13} color="#7FE87F" />
-              <span>Accounts</span>
+              <span>{t('home.accounts', 'Accounts')}</span>
             </button>
           </div>
         </div>
@@ -250,10 +250,10 @@ export const HomeScreen: React.FC = () => {
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
             <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
-              Transfer & Pay
+              {t('home.transfer_pay', 'Transfer & Pay')}
             </h3>
             <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
-              Zero Fees
+              {t('home.zero_fees', 'Zero Fees')}
             </span>
           </div>
 
@@ -286,7 +286,7 @@ export const HomeScreen: React.FC = () => {
                 <Camera size={22} color="#7FE87F" />
               </div>
               <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                Scan QR
+                {t('home.scan_qr', 'Scan QR')}
               </span>
             </div>
 
@@ -318,13 +318,13 @@ export const HomeScreen: React.FC = () => {
                 <Send size={22} color="#7FE87F" />
               </div>
               <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                Send Money
+                {t('home.pay_anyone', 'Pay Anyone')}
               </span>
             </div>
 
-            {/* Receive */}
+            {/* Request Money */}
             <div
-              onClick={() => navigateTo('RECEIVE')}
+              onClick={() => navigateTo('REQUEST_MONEY')}
               className="interactive-tap"
               style={{
                 display: 'flex',
@@ -350,13 +350,13 @@ export const HomeScreen: React.FC = () => {
                 <QrCode size={22} color="#7FE87F" />
               </div>
               <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                Receive
+                {t('home.request_money', 'Request')}
               </span>
             </div>
 
-            {/* Bank Accounts */}
+            {/* Electricity & Bills */}
             <div
-              onClick={() => navigateTo('BANK_ACCOUNTS')}
+              onClick={() => navigateTo('ELECTRICITY')}
               className="interactive-tap"
               style={{
                 display: 'flex',
@@ -379,16 +379,15 @@ export const HomeScreen: React.FC = () => {
                   boxShadow: 'none',
                 }}
               >
-                <Landmark size={22} color="#7FE87F" />
+                <Zap size={22} color="#7FE87F" />
               </div>
               <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                Accounts
+                {t('home.bills_sadad', 'Bills')}
               </span>
             </div>
           </div>
         </div>
       </div>
-
       {/* 4. My Linked Saudi Bank Accounts Carousel */}
       {bankAccounts.length > 0 && (
         <div style={{ marginTop: '18px' }}>
@@ -413,7 +412,7 @@ export const HomeScreen: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
-                SADAD Utilities & Services
+                {t('home.bills_sadad', 'SADAD Utilities & Services')}
               </h3>
               <span
                 style={{
@@ -426,7 +425,7 @@ export const HomeScreen: React.FC = () => {
                   borderRadius: '6px',
                 }}
               >
-                SADAD
+                {t('common.sadad', 'SADAD')}
               </span>
             </div>
 
@@ -445,7 +444,7 @@ export const HomeScreen: React.FC = () => {
                 boxShadow: 'none',
               }}
             >
-              View All
+              {t('common.view_all', 'View All')}
             </button>
           </div>
 
@@ -478,7 +477,7 @@ export const HomeScreen: React.FC = () => {
                 <Zap size={22} color="#7FE87F" />
               </div>
               <span style={{ fontSize: '11px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                Electricity
+                {t('home.sec_electric', 'Electricity')}
               </span>
             </div>
 
@@ -510,7 +509,7 @@ export const HomeScreen: React.FC = () => {
                 <Smartphone size={22} color="#7FE87F" />
               </div>
               <span style={{ fontSize: '11px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                Telecom
+                {t('home.telecom', 'Telecom')}
               </span>
             </div>
 
@@ -542,7 +541,7 @@ export const HomeScreen: React.FC = () => {
                 <Droplets size={22} color="#7FE87F" />
               </div>
               <span style={{ fontSize: '11px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                Water
+                {t('home.water', 'Water')}
               </span>
             </div>
 
@@ -574,7 +573,7 @@ export const HomeScreen: React.FC = () => {
                 <Car size={22} color="#7FE87F" />
               </div>
               <span style={{ fontSize: '11px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                Traffic Fines
+                {t('home.traffic_fines', 'Traffic Fines')}
               </span>
             </div>
           </div>
@@ -585,7 +584,7 @@ export const HomeScreen: React.FC = () => {
       <div style={{ padding: '20px 20px 0 20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
           <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
-            Recent Activity
+            {t('home.recent_activity', 'Recent Activity')}
           </h3>
           <button
             onClick={() => navigateTo('HISTORY')}
@@ -603,7 +602,7 @@ export const HomeScreen: React.FC = () => {
               padding: 0,
             }}
           >
-            View All <ChevronRight size={14} />
+            {t('common.view_all', 'View All')} <ChevronRight size={14} style={{ transform: isRtl ? 'rotate(180deg)' : 'none' }} />
           </button>
         </div>
 
@@ -628,10 +627,10 @@ export const HomeScreen: React.FC = () => {
         >
           <div>
             <div style={{ fontSize: '10px', color: '#7FE87F', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '2px' }}>
-              Official Payment Partner
+              {t('home.payment_partner', 'Official Payment Partner')}
             </div>
             <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#FFFFFF' }}>
-              Secured by SAMA National Banking Rail
+              {t('home.sama_license', 'Secured by SAMA National Banking Rail')}
             </div>
           </div>
 

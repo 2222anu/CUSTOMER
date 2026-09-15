@@ -132,7 +132,7 @@ const AppContent: React.FC = () => {
   return (
     <div className={`app-viewport ${isRtl ? 'rtl' : ''}`}>
       {/* Scrollable Main Screen Container */}
-      <div className="screen-content">{renderScreen()}</div>
+      <div className={`screen-content ${!showBottomNav ? 'no-bottom-nav' : ''}`}>{renderScreen()}</div>
 
       {/* Global Fixed Bottom Navigation */}
       {showBottomNav && <BottomNavigation />}

@@ -126,234 +126,418 @@ export const OnboardingBankScreen: React.FC = () => {
       className="fade-in"
       style={{
         backgroundColor: '#080c14',
-        minHeight: '100vh',
+        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(52, 211, 153, 0.08) 0%, rgba(7, 13, 10, 0.98) 60%)',
+        minHeight: '100%',
+        paddingBottom: '40px',
+        color: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        paddingBottom: '32px',
-        color: '#FFFFFF',
       }}
     >
-      <div>
-        <AppHeader
-          title={language === 'العربية' ? 'ربط الحساب البنكي' : 'Link Bank Account'}
-          showBack={true}
-          onBack={goBack}
-          showSettings={false}
-        />
+      <AppHeader
+        title={language === 'العربية' ? 'ربط الحساب البنكي' : 'Link Bank Account'}
+        showBack={true}
+        onBack={goBack}
+        showSettings={false}
+      />
 
-        <div style={{ padding: '0 20px', marginTop: '12px' }}>
-          <div className="main-card">
-            {/* STEP 1: SELECT BANK & MATCH METHOD */}
-            {step === 'SELECT_AND_MATCH' && (
-              <div id="selectionView" className="fade-in">
-                <div className="section-title">
-                  {language === 'العربية' ? 'اختر البنك السعودي' : 'Select Saudi Bank'}
-                </div>
-
-                <div className="bank-list" role="radiogroup" aria-label="Available Banks">
-                  {SAUDI_BANKS.map((bank) => {
-                    const isSelected = selectedBank === bank.name;
-                    const displayBankName = t(bank.name, bank.name);
-                    return (
-                      <div
-                        key={bank.name}
-                        role="radio"
-                        aria-checked={isSelected}
-                        tabIndex={0}
-                        onClick={() => setSelectedBank(bank.name)}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') setSelectedBank(bank.name);
-                        }}
-                        className={`bank-item ${isSelected ? 'selected' : ''}`}
-                      >
-                        <div className="bank-info">
-                          <div className="bank-icon">🏛️</div>
-                          <div>
-                            <div className="bank-name">{displayBankName}</div>
-                            <div className="bank-meta">Sarie • {bank.code}</div>
-                          </div>
-                        </div>
-                        <div className="radio-dot" />
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Account Match Method */}
-                <div className="match-section">
-                  <div className="section-title" style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '10px' }}>
-                    {language === 'العربية' ? 'طريقة مطابقة الحساب' : 'ACCOUNT MATCH METHOD'}
-                  </div>
-                  <div className="match-tabs">
-                    <div
-                      className={`match-tab ${matchMethod === 'mobile' ? 'active' : ''}`}
-                      onClick={() => setMatchMethod('mobile')}
-                    >
-                      <span>📱</span> {language === 'العربية' ? 'الجوال المسجل' : 'Registered Mobile'}
-                    </div>
-                    <div
-                      className={`match-tab ${matchMethod === 'iban' ? 'active' : ''}`}
-                      onClick={() => setMatchMethod('iban')}
-                    >
-                      <span>💳</span> {language === 'العربية' ? 'الآيبان السعودي' : 'Saudi IBAN'}
-                    </div>
-                  </div>
-
-                  {matchMethod === 'iban' && (
-                    <div style={{ marginTop: '12px' }} className="fade-in">
-                      <input
-                        type="text"
-                        value={customIban}
-                        onChange={(e) => setCustomIban(e.target.value.toUpperCase())}
-                        placeholder="SA03 8000 0000 6080 1012 3456"
-                        maxLength={29}
-                        style={{
-                          width: '100%',
-                          padding: '12px 14px',
-                          borderRadius: '14px',
-                          backgroundColor: '#182236',
-                          border: '1px solid rgba(255, 255, 255, 0.08)',
-                          color: '#FFFFFF',
-                          fontSize: '13.5px',
-                          fontWeight: 700,
-                          fontFamily: 'monospace',
-                          boxSizing: 'border-box',
-                          outline: 'none',
-                        }}
-                        dir="ltr"
-                      />
-                    </div>
-                  )}
-                </div>
-
-                {errorMessage && (
-                  <div style={{ fontSize: '12px', color: '#FF6B6B', fontWeight: 700, marginBottom: '12px' }}>
-                    {errorMessage}
-                  </div>
-                )}
-
-                <button className="action-btn" onClick={handleRequestOtp} disabled={isLoading}>
-                  {isLoading ? (
-                    <Loader2 size={18} className="animate-spin" />
-                  ) : (
-                    <>
-                      {language === 'العربية' ? 'طلب رمز التحقق البنكي' : 'Request Bank OTP'}
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }}>
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </>
-                  )}
-                </button>
+      <div style={{ padding: '16px 20px', display: 'flex', justifyContent: 'center', width: '100%', boxSizing: 'border-box' }}>
+        <div
+          className="main-card fade-in"
+          style={{
+            width: '100%',
+            maxWidth: '440px',
+            backgroundColor: '#111726',
+            borderRadius: '24px',
+            padding: '24px 20px',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
+            boxSizing: 'border-box',
+          }}
+        >
+          {/* STEP 1: SELECT BANK & MATCH METHOD */}
+          {step === 'SELECT_AND_MATCH' && (
+            <div id="selectionView" className="fade-in">
+              <div
+                style={{
+                  fontSize: '15px',
+                  fontWeight: 800,
+                  color: '#FFFFFF',
+                  marginBottom: '14px',
+                  letterSpacing: '-0.01em',
+                }}
+              >
+                {language === 'العربية' ? 'اختر البنك السعودي' : 'Select Saudi Bank'}
               </div>
-            )}
 
-            {/* STEP 2: OTP ENTRY VIEW */}
-            {step === 'AUTHORIZE_AND_CONNECT' && (
-              <div id="otpView" className="otp-container" style={{ display: 'block' }}>
-                {!isAuthorized ? (
-                  <>
-                    <div className="section-title">
-                      {language === 'العربية' ? 'إدخال رمز التحقق البنكي' : 'Enter Bank OTP'}
-                    </div>
-                    <div className="otp-desc" id="otpDescText">
-                      {language === 'العربية'
-                        ? `يرجى إدخال رمز التحقق المرسل إلى رقم جوالك المسجل والمرتبط بـ ${t(selectedBank, selectedBank)}.`
-                        : `Please enter the verification code sent to your registered mobile number linked with ${selectedBank}.`}
-                    </div>
-
-                    <div className="otp-inputs">
-                      {otpDigits.map((digit, idx) => (
-                        <input
-                          key={idx}
-                          ref={otpInputRefs[idx]}
-                          type="text"
-                          inputMode="numeric"
-                          maxLength={1}
-                          value={digit}
-                          onChange={(e) => handleOtpChange(idx, e.target.value)}
-                          onKeyDown={(e) => handleOtpKeyDown(idx, e)}
-                          className="otp-box"
-                          autoFocus={idx === 0}
-                        />
-                      ))}
-                    </div>
-
-                    {errorMessage && (
-                      <div style={{ fontSize: '12px', color: '#FF6B6B', fontWeight: 700, marginBottom: '14px' }}>
-                        {errorMessage}
-                      </div>
-                    )}
-
-                    <button className="action-btn" onClick={handleVerifyOtpAndLink} disabled={isLoading}>
-                      {isLoading ? (
-                        <>
-                          <Loader2 size={18} className="animate-spin" />{' '}
-                          {language === 'العربية' ? 'جاري الربط...' : 'Authorizing...'}
-                        </>
-                      ) : (
-                        <>{language === 'العربية' ? 'تأكيد وربط الحساب' : 'Authorize & Link Account'}</>
-                      )}
-                    </button>
-
-                    <button className="back-link" onClick={() => setStep('SELECT_AND_MATCH')}>
-                      {language === 'العربية' ? '← العودة لاختيار البنك' : '← Back to bank selection'}
-                    </button>
-                  </>
-                ) : (
-                  <div className="fade-in" style={{ padding: '8px 0' }}>
+              <div
+                className="bank-list"
+                role="radiogroup"
+                aria-label="Available Banks"
+                style={{
+                  maxHeight: '260px',
+                  overflowY: 'auto',
+                  paddingInlineEnd: '4px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '10px',
+                  marginBottom: '20px',
+                }}
+              >
+                {SAUDI_BANKS.map((bank) => {
+                  const isSelected = selectedBank === bank.name;
+                  const displayBankName = t(bank.name, bank.name);
+                  return (
                     <div
+                      key={bank.name}
+                      role="radio"
+                      aria-checked={isSelected}
+                      tabIndex={0}
+                      onClick={() => setSelectedBank(bank.name)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') setSelectedBank(bank.name);
+                      }}
+                      className={`bank-item interactive-tap ${isSelected ? 'selected' : ''}`}
                       style={{
-                        width: '60px',
-                        height: '60px',
-                        borderRadius: '50%',
-                        backgroundColor: 'rgba(52, 211, 153, 0.15)',
-                        border: '1.5px solid #34d399',
+                        backgroundColor: isSelected ? 'rgba(52, 211, 153, 0.08)' : '#182236',
+                        border: isSelected ? '1.5px solid #34d399' : '1px solid rgba(255, 255, 255, 0.06)',
+                        borderRadius: '16px',
+                        padding: '12px 14px',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        margin: '0 auto 16px auto',
+                        justifyContent: 'space-between',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
                       }}
                     >
-                      <CheckCircle2 size={34} color="#34d399" />
+                      <div className="bank-info" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <div
+                          className="bank-icon"
+                          style={{
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '12px',
+                            backgroundColor: '#111726',
+                            border: '1px solid rgba(255, 255, 255, 0.08)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '18px',
+                            flexShrink: 0,
+                          }}
+                        >
+                          🏛️
+                        </div>
+                        <div>
+                          <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{displayBankName}</div>
+                          <div style={{ fontSize: '11px', color: '#9ca3af', fontWeight: 600, marginTop: '2px' }}>
+                            Sarie • {bank.code}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="radio-dot" />
                     </div>
+                  );
+                })}
+              </div>
 
-                    <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#FFFFFF', margin: '0 0 16px 0' }}>
-                      {language === 'العربية' ? 'تم ربط الحساب بنجاح' : 'Bank Account Linked'}
-                    </h3>
+              {/* Account Match Method */}
+              <div className="match-section" style={{ marginBottom: '20px' }}>
+                <div
+                  style={{
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    color: '#9ca3af',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.06em',
+                    marginBottom: '10px',
+                  }}
+                >
+                  {language === 'العربية' ? 'طريقة مطابقة الحساب' : 'ACCOUNT MATCH METHOD'}
+                </div>
+                <div className="match-tabs" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                  <div
+                    className={`match-tab interactive-tap ${matchMethod === 'mobile' ? 'active' : ''}`}
+                    onClick={() => setMatchMethod('mobile')}
+                    style={{
+                      backgroundColor: matchMethod === 'mobile' ? 'rgba(52, 211, 153, 0.12)' : '#182236',
+                      border: matchMethod === 'mobile' ? '1px solid #34d399' : '1px solid rgba(255, 255, 255, 0.06)',
+                      color: matchMethod === 'mobile' ? '#34d399' : '#9ca3af',
+                      borderRadius: '14px',
+                      padding: '11px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      fontSize: '12.5px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <span>📱</span> {language === 'العربية' ? 'الجوال المسجل' : 'Registered Mobile'}
+                  </div>
+                  <div
+                    className={`match-tab interactive-tap ${matchMethod === 'iban' ? 'active' : ''}`}
+                    onClick={() => setMatchMethod('iban')}
+                    style={{
+                      backgroundColor: matchMethod === 'iban' ? 'rgba(52, 211, 153, 0.12)' : '#182236',
+                      border: matchMethod === 'iban' ? '1px solid #34d399' : '1px solid rgba(255, 255, 255, 0.06)',
+                      color: matchMethod === 'iban' ? '#34d399' : '#9ca3af',
+                      borderRadius: '14px',
+                      padding: '11px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      fontSize: '12.5px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <span>💳</span> {language === 'العربية' ? 'الآيبان السعودي' : 'Saudi IBAN'}
+                  </div>
+                </div>
 
-                    <div
+                {matchMethod === 'iban' && (
+                  <div style={{ marginTop: '12px' }} className="fade-in">
+                    <input
+                      type="text"
+                      value={customIban}
+                      onChange={(e) => setCustomIban(e.target.value.toUpperCase())}
+                      placeholder="SA03 8000 0000 6080 1012 3456"
+                      maxLength={29}
                       style={{
+                        width: '100%',
+                        padding: '12px 14px',
+                        borderRadius: '14px',
                         backgroundColor: '#182236',
-                        borderRadius: '16px',
-                        border: '1px solid rgba(255, 255, 255, 0.06)',
-                        padding: '14px 16px',
-                        marginBottom: '22px',
-                        textAlign: isRtl ? 'right' : 'left',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        color: '#FFFFFF',
+                        fontSize: '13.5px',
+                        fontWeight: 700,
+                        fontFamily: 'monospace',
+                        boxSizing: 'border-box',
+                        outline: 'none',
                       }}
-                    >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                        <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'البنك' : 'Bank'}</span>
-                        <span style={{ fontSize: '13px', fontWeight: 600, color: '#FFFFFF' }}>{t(selectedBank, selectedBank)}</span>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'حالة الربط' : 'Status'}</span>
-                        <span style={{ fontSize: '13px', fontWeight: 600, color: '#34d399' }}>
-                          {language === 'العربية' ? 'نشط عبر سريع' : 'Active on Sarie'}
-                        </span>
-                      </div>
-                    </div>
-
-                    <button className="action-btn" onClick={handleFinishOnboarding}>
-                      {language === 'العربية' ? 'إتمام الإعداد والدخول للرئيسية' : 'Complete Setup & Go to Home'}{' '}
-                      <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
-                    </button>
+                      dir="ltr"
+                    />
                   </div>
                 )}
               </div>
-            )}
-          </div>
+
+              {errorMessage && (
+                <div style={{ fontSize: '12px', color: '#FF4757', fontWeight: 700, marginBottom: '14px' }}>
+                  {errorMessage}
+                </div>
+              )}
+
+              <button
+                className="action-btn interactive-tap"
+                onClick={handleRequestOtp}
+                disabled={isLoading}
+                style={{
+                  width: '100%',
+                  padding: '15px',
+                  backgroundColor: '#34d399',
+                  color: '#0b0f19',
+                  border: 'none',
+                  borderRadius: '16px',
+                  fontSize: '14.5px',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '8px',
+                  boxShadow: '0 10px 25px -5px rgba(52, 211, 153, 0.3)',
+                }}
+              >
+                {isLoading ? (
+                  <Loader2 size={18} className="animate-spin" />
+                ) : (
+                  <>
+                    <span>{language === 'العربية' ? 'طلب رمز التحقق البنكي' : 'Request Bank OTP'}</span>
+                    <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+                  </>
+                )}
+              </button>
+            </div>
+          )}
+
+          {/* STEP 2: OTP ENTRY VIEW */}
+          {step === 'AUTHORIZE_AND_CONNECT' && (
+            <div id="otpView" className="otp-container" style={{ display: 'block', textAlign: 'center' }}>
+              {!isAuthorized ? (
+                <>
+                  <div
+                    style={{
+                      fontSize: '16.5px',
+                      fontWeight: 800,
+                      color: '#FFFFFF',
+                      marginBottom: '8px',
+                      letterSpacing: '-0.01em',
+                    }}
+                  >
+                    {language === 'العربية' ? 'إدخال رمز التحقق البنكي' : 'Enter Bank OTP'}
+                  </div>
+                  <div style={{ fontSize: '12.5px', color: '#9ca3af', marginBottom: '22px', lineHeight: '1.5' }}>
+                    {language === 'العربية'
+                      ? `يرجى إدخال رمز التحقق المرسل إلى رقم جوالك المسجل والمرتبط بـ ${t(selectedBank, selectedBank)}.`
+                      : `Please enter the verification code sent to your registered mobile number linked with ${selectedBank}.`}
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '22px', direction: 'ltr' }}>
+                    {otpDigits.map((digit, idx) => (
+                      <input
+                        key={idx}
+                        ref={otpInputRefs[idx]}
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={1}
+                        value={digit}
+                        onChange={(e) => handleOtpChange(idx, e.target.value)}
+                        onKeyDown={(e) => handleOtpKeyDown(idx, e)}
+                        className="otp-box"
+                        autoFocus={idx === 0}
+                        style={{
+                          width: '48px',
+                          height: '52px',
+                          backgroundColor: '#182236',
+                          border: digit ? '1.5px solid #34d399' : '1px solid rgba(255, 255, 255, 0.08)',
+                          borderRadius: '14px',
+                          fontSize: '20px',
+                          fontWeight: 800,
+                          color: '#FFFFFF',
+                          textAlign: 'center',
+                          outline: 'none',
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {errorMessage && (
+                    <div style={{ fontSize: '12px', color: '#FF4757', fontWeight: 700, marginBottom: '14px' }}>
+                      {errorMessage}
+                    </div>
+                  )}
+
+                  <button
+                    className="action-btn interactive-tap"
+                    onClick={handleVerifyOtpAndLink}
+                    disabled={isLoading}
+                    style={{
+                      width: '100%',
+                      padding: '15px',
+                      backgroundColor: '#34d399',
+                      color: '#0b0f19',
+                      border: 'none',
+                      borderRadius: '16px',
+                      fontSize: '14.5px',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      gap: '8px',
+                      boxShadow: '0 10px 25px -5px rgba(52, 211, 153, 0.3)',
+                    }}
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 size={18} className="animate-spin" />{' '}
+                        <span>{language === 'العربية' ? 'جاري الربط...' : 'Authorizing...'}</span>
+                      </>
+                    ) : (
+                      <span>{language === 'العربية' ? 'تأكيد وربط الحساب' : 'Authorize & Link Account'}</span>
+                    )}
+                  </button>
+
+                  <button
+                    onClick={() => setStep('SELECT_AND_MATCH')}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#9ca3af',
+                      fontSize: '12.5px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      marginTop: '16px',
+                    }}
+                  >
+                    {language === 'العربية' ? '← العودة لاختيار البنك' : '← Back to bank selection'}
+                  </button>
+                </>
+              ) : (
+                <div className="fade-in" style={{ padding: '8px 0', textAlign: 'center' }}>
+                  <div
+                    style={{
+                      width: '64px',
+                      height: '64px',
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(52, 211, 153, 0.15)',
+                      border: '1.5px solid #34d399',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto 16px auto',
+                    }}
+                  >
+                    <CheckCircle2 size={36} color="#34d399" />
+                  </div>
+
+                  <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 16px 0' }}>
+                    {language === 'العربية' ? 'تم ربط الحساب بنجاح' : 'Bank Account Linked'}
+                  </h3>
+
+                  <div
+                    style={{
+                      backgroundColor: '#182236',
+                      borderRadius: '16px',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      padding: '16px',
+                      marginBottom: '20px',
+                      textAlign: isRtl ? 'right' : 'left',
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                      <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'البنك' : 'Bank'}</span>
+                      <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>{t(selectedBank, selectedBank)}</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'حالة الربط' : 'Status'}</span>
+                      <span style={{ fontSize: '13px', fontWeight: 800, color: '#34d399' }}>
+                        {language === 'العربية' ? 'نشط عبر سريع' : 'Active on Sarie'}
+                      </span>
+                    </div>
+                  </div>
+
+                  <button
+                    className="action-btn interactive-tap"
+                    onClick={handleFinishOnboarding}
+                    style={{
+                      width: '100%',
+                      padding: '15px',
+                      backgroundColor: '#34d399',
+                      color: '#0b0f19',
+                      border: 'none',
+                      borderRadius: '16px',
+                      fontSize: '14.5px',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      gap: '8px',
+                      boxShadow: '0 10px 25px -5px rgba(52, 211, 153, 0.3)',
+                    }}
+                  >
+                    <span>{language === 'العربية' ? 'إتمام الإعداد والدخول للرئيسية' : 'Complete Setup & Go to Home'}</span>
+                    <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

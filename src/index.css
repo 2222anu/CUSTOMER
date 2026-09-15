@@ -158,6 +158,10 @@ body.rtl {
   -webkit-overflow-scrolling: touch;
 }
 
+.screen-content.no-bottom-nav {
+  padding-bottom: 0px !important;
+}
+
 /* Global Typescale Helpers */
 h1 {
   font-size: 24px;

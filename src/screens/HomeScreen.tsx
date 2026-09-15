@@ -25,7 +25,7 @@ import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
 
 export const HomeScreen: React.FC = () => {
-  const { bankAccounts, transactions, navigateTo, setIsScanModalOpen, openPinModal, t, language, isRtl } = useApp();
+  const { bankAccounts, transactions, navigateTo, setIsScanModalOpen, openPinModal, isKycVerified, t, language, isRtl } = useApp();
   const [isBalanceModalOpen, setIsBalanceModalOpen] = useState(false);
   const [showTotalBalance, setShowTotalBalance] = useState(false);
 
@@ -89,6 +89,76 @@ export const HomeScreen: React.FC = () => {
           </button>
         }
       />
+
+      {/* e-KYC Verification Action Card (when unverified) */}
+      {!isKycVerified && (
+        <div style={{ padding: '14px 20px 0 20px' }}>
+          <div
+            className="interactive-tap"
+            onClick={() => navigateTo('ONBOARDING_KYC')}
+            style={{
+              backgroundColor: '#111726',
+              border: '1px solid rgba(52, 211, 153, 0.4)',
+              borderRadius: '20px',
+              padding: '16px 18px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '12px',
+              boxShadow: '0 10px 25px -5px rgba(52, 211, 153, 0.15)',
+              cursor: 'pointer',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
+              <div
+                style={{
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '12px',
+                  backgroundColor: 'rgba(52, 211, 153, 0.12)',
+                  border: '1px solid rgba(52, 211, 153, 0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <ShieldCheck size={22} color="#34d399" />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
+                  {language === 'العربية' ? 'توثيق الهوية الوطنية الرقمية (e-KYC)' : 'Digital ID Verification (e-KYC)'}
+                </div>
+                <div style={{ fontSize: '11px', color: '#9ca3af', fontWeight: 600, marginTop: '2px' }}>
+                  {language === 'العربية' ? 'وثّق هويتك لفتح سقف التحويل اليومي (٥٠,٠٠٠ ر.س)' : 'Verify identity to unlock full SAR 50,000 limits'}
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                navigateTo('ONBOARDING_KYC');
+              }}
+              className="action-btn interactive-tap"
+              style={{
+                width: 'auto',
+                padding: '8px 14px',
+                borderRadius: '12px',
+                fontSize: '12px',
+                fontWeight: 800,
+                backgroundColor: '#34d399',
+                color: '#080c14',
+                border: 'none',
+                cursor: 'pointer',
+                flexShrink: 0,
+              }}
+            >
+              {language === 'العربية' ? 'توثيق' : 'Verify'}
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* 2. Total Balance & Instant Sarie Overview Hero (Modern Premium Banking Card UI) */}
       <div style={{ padding: '14px 20px 0 20px', position: 'relative' }}>

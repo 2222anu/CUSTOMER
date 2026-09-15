@@ -325,9 +325,6 @@ export const HomeScreen: React.FC = () => {
             <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
               {t('home.transfer_pay', 'Transfer & Pay')}
             </h3>
-            <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
-              {t('home.zero_fees', 'Zero Fees')}
-            </span>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
@@ -484,41 +481,28 @@ export const HomeScreen: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
-                {t('home.utilities_services', 'Bills & Public Utilities')}
-              </h3>
-              <span
-                style={{
-                  fontSize: '9.5px',
-                  fontWeight: 800,
-                  backgroundColor: 'rgba(127, 232, 127, 0.12)',
-                  color: '#7FE87F',
-                  border: '1px solid rgba(127, 232, 127, 0.25)',
-                  padding: '2px 6px',
-                  borderRadius: '6px',
-                }}
-              >
-                {language === 'العربية' ? 'فوري ٢٤/٧' : '24/7 INSTANT'}
-              </span>
-            </div>
+            <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
+              {t('home.utilities_services', 'Bills & Public Utilities')}
+            </h3>
 
             <button
               onClick={() => navigateTo('ALL_SERVICES')}
               className="interactive-tap"
               style={{
-                backgroundColor: '#1E1E32',
-                border: '1px solid #2C2C44',
-                borderRadius: '8px',
-                padding: '4px 10px',
-                fontSize: '11.5px',
-                fontWeight: 800,
+                background: 'none',
+                border: 'none',
                 color: '#7FE87F',
+                fontSize: '12px',
+                fontWeight: 800,
                 cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2px',
                 boxShadow: 'none',
+                padding: 0,
               }}
             >
-              {t('home.view_all', 'View All')}
+              {t('home.view_all', 'View All')} <ChevronRight size={14} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
             </button>
           </div>
 

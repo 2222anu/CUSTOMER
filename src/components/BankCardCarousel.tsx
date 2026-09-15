@@ -110,63 +110,32 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '0 20px',
-          marginBottom: '14px',
+          marginBottom: '12px',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '0.2px' }}>
-            {t('home.linked_banks', 'Saudi Linked Accounts')}
-          </h3>
-          <span
-            style={{
-              fontSize: '11px',
-              fontWeight: 700,
-              backgroundColor: 'rgba(52, 211, 153, 0.12)',
-              color: '#34d399',
-              padding: '2px 8px',
-              borderRadius: '12px',
-              border: '1px solid rgba(52, 211, 153, 0.25)',
-            }}
-          >
-            {language === 'العربية' ? `${banks.length} حسابات` : `${banks.length} Linked`}
-          </span>
-        </div>
+        <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '0.2px' }}>
+          {t('home.linked_banks', 'Linked Saudi Banks')}
+        </h3>
 
-        {/* Header Right: Carousel Dots Indicator + Manage Link */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-            {banks.map((_, i) => (
-              <span
-                key={i}
-                style={{
-                  width: i === activeCardIndex ? '16px' : '6px',
-                  height: '6px',
-                  borderRadius: i === activeCardIndex ? '3px' : '50%',
-                  backgroundColor: i === activeCardIndex ? '#34d399' : 'rgba(52, 211, 153, 0.25)',
-                  transition: 'all 0.3s ease',
-                }}
-              />
-            ))}
-          </div>
-
-          <button
-            onClick={() => navigateTo('BANK_ACCOUNTS')}
-            style={{
-              background: 'none',
-              border: 'none',
-              fontSize: '12px',
-              fontWeight: 700,
-              color: '#34d399',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '2px',
-              boxShadow: 'none',
-            }}
-          >
-            {t('banks.title', 'Manage')} <ChevronRight size={14} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
-          </button>
-        </div>
+        <button
+          onClick={() => navigateTo('BANK_ACCOUNTS')}
+          style={{
+            background: 'none',
+            border: 'none',
+            fontSize: '13px',
+            fontWeight: 700,
+            color: '#34d399',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '3px',
+            boxShadow: 'none',
+            padding: 0,
+          }}
+        >
+          <span>{t('banks.title', 'Bank Accounts')}</span>
+          <ChevronRight size={15} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+        </button>
       </div>
 
       {/* Swipable Cards Container */}
@@ -435,6 +404,22 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
           <span style={{ fontSize: '10.5px', color: '#a3d9bc' }}>{language === 'العربية' ? 'ربط حساب' : 'Link Account'}</span>
         </div>
         <div style={{ flex: '0 0 1px', width: '1px', flexShrink: 0 }} />
+      </div>
+
+      {/* Pagination Indicator Dots */}
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
+        {banks.map((_, i) => (
+          <span
+            key={i}
+            style={{
+              width: i === activeCardIndex ? '16px' : '6px',
+              height: '5px',
+              borderRadius: i === activeCardIndex ? '3px' : '50%',
+              backgroundColor: i === activeCardIndex ? '#34d399' : 'rgba(52, 211, 153, 0.25)',
+              transition: 'all 0.3s ease',
+            }}
+          />
+        ))}
       </div>
     </div>
   );

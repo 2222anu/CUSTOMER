@@ -4,7 +4,7 @@ import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
 import { formatSaudiCurrency, translateText } from '../utils/i18n';
 
-interface DealItem {
+export interface DealItem {
   id: string;
   store: string;
   title: string;
@@ -15,7 +15,11 @@ interface DealItem {
   discountedPrice: number;
 }
 
-export const ShoppingScreen: React.FC = () => {
+export interface ShoppingScreenProps {
+  initialDeals?: DealItem[];
+}
+
+export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) => {
   const { openPinModal, completePayment, language, t, isRtl } = useApp();
   const isAr = language === 'العربية' || language === 'ar';
   const [selectedDeal, setSelectedDeal] = useState<DealItem | null>(null);
@@ -26,7 +30,7 @@ export const ShoppingScreen: React.FC = () => {
     paidAmount: number;
   } | null>(null);
 
-  const deals: DealItem[] = [
+  const defaultDeals: DealItem[] = [
     {
       id: 'deal-1',
       store: isAr ? 'أسواق بنده' : 'Panda Supermarket',
@@ -58,6 +62,8 @@ export const ShoppingScreen: React.FC = () => {
       discountedPrice: 599,
     },
   ];
+
+  const deals = initialDeals && initialDeals.length > 0 ? initialDeals : defaultDeals;
 
   const handleCopyCode = (code: string) => {
     navigator.clipboard.writeText(code);

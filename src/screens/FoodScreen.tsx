@@ -4,14 +4,14 @@ import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
 import { formatSaudiCurrency, formatLocalizedNumber, translateText } from '../utils/i18n';
 
-interface MenuItem {
+export interface MenuItem {
   id: string;
   name: string;
   price: number;
   qty: number;
 }
 
-interface Restaurant {
+export interface Restaurant {
   id: string;
   name: string;
   rating: string;
@@ -21,7 +21,11 @@ interface Restaurant {
   items: MenuItem[];
 }
 
-export const FoodScreen: React.FC = () => {
+export interface FoodScreenProps {
+  initialRestaurants?: Restaurant[];
+}
+
+export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) => {
   const { openPinModal, completePayment, language, t, isRtl } = useApp();
   const isAr = language === 'العربية' || language === 'ar';
   const [selectedRes, setSelectedRes] = useState<Restaurant | null>(null);
@@ -32,7 +36,7 @@ export const FoodScreen: React.FC = () => {
     estimatedTime: string;
   } | null>(null);
 
-  const restaurants: Restaurant[] = [
+  const defaultRestaurants: Restaurant[] = [
     {
       id: 'res-1',
       name: isAr ? 'كافيه هاف مليون' : 'Half Million Coffee',
@@ -72,6 +76,8 @@ export const FoodScreen: React.FC = () => {
       ],
     },
   ];
+
+  const restaurants = initialRestaurants && initialRestaurants.length > 0 ? initialRestaurants : defaultRestaurants;
 
   const handleOpenRes = (res: Restaurant) => {
     setSelectedRes(res);

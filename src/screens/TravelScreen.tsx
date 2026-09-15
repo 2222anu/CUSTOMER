@@ -5,7 +5,7 @@ import { ListRow } from '../components/ListRow';
 import { useApp } from '../state/AppContext';
 import { formatSaudiCurrency, translateText } from '../utils/i18n';
 
-interface TravelBooking {
+export interface TravelBooking {
   type: 'flight' | 'cab' | 'hotel' | 'holiday';
   title: string;
   subtitle: string;
@@ -15,7 +15,11 @@ interface TravelBooking {
   provider: string;
 }
 
-export const TravelScreen: React.FC = () => {
+export interface TravelScreenProps {
+  initialBookings?: TravelBooking[];
+}
+
+export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) => {
   const { openPinModal, completePayment, language, t, isRtl } = useApp();
   const isAr = language === 'العربية' || language === 'ar';
   const [selectedBooking, setSelectedBooking] = useState<TravelBooking | null>(null);
@@ -26,7 +30,7 @@ export const TravelScreen: React.FC = () => {
     utr: string;
   } | null>(null);
 
-  const bookings: TravelBooking[] = [
+  const defaultBookings: TravelBooking[] = [
     {
       type: 'flight',
       title: isAr ? 'الرياض (RUH) ➔ جدة (JED)' : 'Riyadh (RUH) ➔ Jeddah (JED)',
@@ -60,6 +64,8 @@ export const TravelScreen: React.FC = () => {
       provider: isAr ? 'استكشف العلا' : 'Experience AlUla',
     },
   ];
+
+  const bookings = initialBookings && initialBookings.length > 0 ? initialBookings : defaultBookings;
 
   const handleStartBooking = (booking: TravelBooking) => {
     setSelectedBooking(booking);

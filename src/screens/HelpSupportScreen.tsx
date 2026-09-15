@@ -6,7 +6,16 @@ import { Modal } from '../components/Modal';
 import { useApp } from '../state/AppContext';
 import { translateText } from '../utils/i18n';
 
-export const HelpSupportScreen: React.FC = () => {
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+export interface HelpSupportScreenProps {
+  initialFaqs?: FaqItem[];
+}
+
+export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaqs }) => {
   const { language } = useApp();
   const isAr = language === 'العربية' || language === 'ar';
   const [activeModal, setActiveModal] = useState<'chat' | 'call' | 'dispute' | null>(null);
@@ -23,7 +32,7 @@ export const HelpSupportScreen: React.FC = () => {
   const [disputeTxnId, setDisputeTxnId] = useState('');
   const [disputeReason, setDisputeReason] = useState('');
 
-  const faqs = [
+  const defaultFaqs: FaqItem[] = [
     {
       q: isAr ? 'كم يستغرق استرداد الأموال عبر سريع؟' : 'How long does a Sarie refund take?',
       a: isAr ? 'تتم عمليات الاسترداد الفورية خلال ثوانٍ إلى ساعتين كحد أقصى وفق معايير البنك المركزي السعودي.' : 'Instant Sarie refunds are credited within seconds to 1-2 hours under standard banking protocols.',
@@ -37,6 +46,8 @@ export const HelpSupportScreen: React.FC = () => {
       a: isAr ? 'توجه إلى الحسابات البنكية > إضافة حساب، ثم اختر بنكك السعودي ووثق عبر الرسائل النصية.' : 'Go to Bank Accounts > Add Bank, select your Saudi bank, and verify via SMS OTP.',
     },
   ];
+
+  const faqs = initialFaqs && initialFaqs.length > 0 ? initialFaqs : defaultFaqs;
 
   const handleSendChat = (e: React.FormEvent) => {
     e.preventDefault();

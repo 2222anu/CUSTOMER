@@ -4,7 +4,7 @@ import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
 import { formatLocalizedNumber, translateText } from '../utils/i18n';
 
-interface ScratchCardItem {
+export interface ScratchCardItem {
   id: string;
   title: string;
   subtitle: string;
@@ -15,11 +15,16 @@ interface ScratchCardItem {
   code?: string;
 }
 
-export const RewardsScreen: React.FC = () => {
+export interface RewardsScreenProps {
+  initialCards?: ScratchCardItem[];
+  initialPoints?: number;
+}
+
+export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, initialPoints = 1450 }) => {
   const { language, isRtl } = useApp();
   const isAr = language === 'العربية' || language === 'ar';
-  const [points, setPoints] = useState(1450);
-  const [cards, setCards] = useState<ScratchCardItem[]>([
+  const [points, setPoints] = useState(initialPoints);
+  const [cards, setCards] = useState<ScratchCardItem[]>(initialCards || [
     {
       id: 'sc-1',
       title: isAr ? 'مكافأة تحويل سريع' : 'Sarie Transfer Reward',

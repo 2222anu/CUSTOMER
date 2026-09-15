@@ -4,7 +4,7 @@ import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
 import { translateText } from '../utils/i18n';
 
-interface ChatThread {
+export interface ChatThread {
   id: string;
   name: string;
   avatarInitials: string;
@@ -14,10 +14,14 @@ interface ChatThread {
   unread: boolean;
 }
 
-export const MessagesScreen: React.FC = () => {
+export interface MessagesScreenProps {
+  initialThreads?: ChatThread[];
+}
+
+export const MessagesScreen: React.FC<MessagesScreenProps> = ({ initialThreads }) => {
   const { language, isRtl } = useApp();
   const isAr = language === 'العربية' || language === 'ar';
-  const [threads, setThreads] = useState<ChatThread[]>([
+  const [threads, setThreads] = useState<ChatThread[]>(initialThreads || [
     {
       id: 'chat-1',
       name: isAr ? 'فريق دعم كيو تي باي' : 'QTPay Priority Support',

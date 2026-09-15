@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ShieldCheck, CheckCircle2, UserCheck, ArrowRight, Loader2, Calendar } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
@@ -13,13 +13,6 @@ export const OnboardingKycScreen: React.FC = () => {
   const [nationalId, setNationalId] = useState(kycData?.nationalId || '1098472910');
   const [dob, setDob] = useState(kycData?.dob || '1992-05-14');
   const [errorMsg, setErrorMsg] = useState('');
-
-  useEffect(() => {
-    // If user already verified, navigate directly
-    if (localStorage.getItem('isKycVerified') === 'true') {
-      navigateTo('ONBOARDING_BANK');
-    }
-  }, [navigateTo]);
 
   const handleVerify = (e?: React.FormEvent) => {
     if (e) e.preventDefault();

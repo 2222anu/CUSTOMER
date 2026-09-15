@@ -140,11 +140,27 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     await page.goto(getAppUrl('screen=PERMISSIONS'));
     await expect(page.getByText(/Permissions/i).first()).toBeVisible();
 
-    // Click Allow Permissions -> goes directly to ONBOARDING_BANK
+    // Click Allow Permissions -> goes to ONBOARDING_KYC
     const allowBtn = page.getByRole('button', { name: /Allow & Continue/i });
     await allowBtn.click();
 
-    // 6. Onboarding Bank Screen (Link Saudi Bank)
+    // 6. Onboarding KYC Screen (Digital Identity Verification)
+    await expect(page.getByText(/Identity Verification|توثيق الهوية/i).first()).toBeVisible();
+    const nationalIdInput = page.locator('#onboarding-national-id');
+    await nationalIdInput.fill('1098765432');
+    const dobInput = page.locator('#onboarding-dob');
+    await dobInput.fill('1992-05-14');
+
+    // Submit Verification -> verifies in backend
+    const verifyIdentityBtn = page.getByRole('button', { name: /Verify & Continue|توثيق الهوية ومتابعة/i });
+    await verifyIdentityBtn.click();
+
+    // Verification Success -> Continue to Link Bank
+    const continueToBankBtn = page.getByRole('button', { name: /Continue to Link Bank|متابعة لربط الحساب البنكي/i });
+    await expect(continueToBankBtn).toBeVisible({ timeout: 5000 });
+    await continueToBankBtn.click();
+
+    // 7. Onboarding Bank Screen (Link Saudi Bank)
     await expect(page.getByText(/Select Saudi Bank|اختر البنك السعودي/i).first()).toBeVisible({ timeout: 5000 });
     
     // Select Al Rajhi Bank
@@ -166,7 +182,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     await expect(completeSetupBtn).toBeVisible({ timeout: 5000 });
     await completeSetupBtn.click();
 
-    // 7. Verify seamless auto-navigation to Home Dashboard
+    // 8. Verify seamless auto-navigation to Home Dashboard
     await expect(page.getByText('Transfer & Pay')).toBeVisible({ timeout: 6000 });
 
     expect(consoleErrors).toEqual([]);

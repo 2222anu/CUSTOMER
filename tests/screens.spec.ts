@@ -278,12 +278,12 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     await expect(page.getByText(/Spend Analysis|تحليل المصاريف/i).first()).toBeVisible();
 
     // Verify Total Spending Amount
-    await expect(page.getByText(/14,850|١٤٬٨٥٠/)).toBeVisible();
+    await expect(page.getByText(/14,850|١٤٬٨٥٠/).first()).toBeVisible();
 
     // Toggle Period to Week
     const weekBtn = page.getByRole('button', { name: /Week|أسبوع/i }).first();
     await weekBtn.click();
-    await expect(page.getByText(/3,420|٣٬٤٢٠/)).toBeVisible();
+    await expect(page.getByText(/3,420|٣٬٤٢٠/).first()).toBeVisible();
 
     // Toggle Period to Month
     const monthBtn = page.getByRole('button', { name: /Month|شهر/i }).first();

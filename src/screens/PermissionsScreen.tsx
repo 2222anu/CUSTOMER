@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageSquare, Phone, Users, Camera, MapPin, Mic, ShieldCheck, ArrowRight, Lock, Landmark, CheckCircle2, Loader2, Sparkles } from 'lucide-react';
+import { MessageSquare, Phone, Users, Camera, MapPin, Mic, ArrowRight, Lock, Landmark, CheckCircle2, Loader2, Sparkles } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
@@ -93,53 +93,6 @@ export const PermissionsScreen: React.FC = () => {
         <AppHeader title={t('auth.permissions_title', 'App Permissions')} showBack={true} onBack={goBack} showSettings={false} />
 
         <div style={{ padding: '20px' }}>
-          {/* Header Card with SAMA Central Bank Logo */}
-          <div
-            style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
-              borderRadius: '16px',
-              padding: '16px 18px',
-              marginBottom: '18px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              color: '#FFFFFF',
-              boxShadow: 'none',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-              <div
-                style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: '12px',
-                  backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                  color: '#7FE87F',
-                  border: '1px solid rgba(127, 232, 127, 0.3)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                }}
-              >
-                <ShieldCheck size={24} />
-              </div>
-              <div>
-                <div style={{ fontSize: '14.5px', fontWeight: 800, color: '#FFFFFF' }}>
-                  {language === 'العربية' ? 'معايير الأمان والتحقق المعتمدة من ساما' : 'SAMA Mandated Security & e-KYC'}
-                </div>
-                <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px' }}>
-                  {language === 'العربية' ? 'المعايير التنظيمية للبنك المركزي السعودي' : 'Saudi Central Bank Regulatory Standard'}
-                </div>
-              </div>
-            </div>
-
-            <div style={{ paddingInlineStart: '8px', borderInlineStart: '1px solid #2C2C44' }}>
-              <SamaLogo height={20} themeMode="dark" />
-            </div>
-          </div>
-
           <div
             style={{
               fontSize: '11.5px',

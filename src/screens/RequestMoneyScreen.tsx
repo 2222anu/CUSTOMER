@@ -6,8 +6,13 @@ import { useApp } from '../state/AppContext';
 import { formatSaudiCurrency, translateText } from '../utils/i18n';
 import type { Contact } from '../types';
 
-export const RequestMoneyScreen: React.FC = () => {
-  const { contacts, addMoneyRequest, language, t } = useApp();
+export interface RequestMoneyScreenProps {
+  initialContacts?: Contact[];
+}
+
+export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialContacts }) => {
+  const { contacts: appContextContacts, addMoneyRequest, language, t } = useApp();
+  const contacts = initialContacts && initialContacts.length > 0 ? initialContacts : appContextContacts;
   const isAr = language === 'العربية' || language === 'ar';
   const [selectedContact, setSelectedContact] = useState<Contact>(contacts[0] || {
     id: 'c1',

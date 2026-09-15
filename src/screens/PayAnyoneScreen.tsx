@@ -4,8 +4,13 @@ import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
 import type { Contact } from '../types';
 
-export const PayAnyoneScreen: React.FC = () => {
-  const { contacts, navigateTo, t, isRtl, language } = useApp();
+export interface PayAnyoneScreenProps {
+  initialContacts?: Contact[];
+}
+
+export const PayAnyoneScreen: React.FC<PayAnyoneScreenProps> = ({ initialContacts }) => {
+  const { contacts: appContextContacts, navigateTo, t, isRtl, language } = useApp();
+  const contacts = initialContacts && initialContacts.length > 0 ? initialContacts : appContextContacts;
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredContacts = contacts.filter(

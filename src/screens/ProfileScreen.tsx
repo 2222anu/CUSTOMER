@@ -20,7 +20,6 @@ import {
   Utensils,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
-import { SamaLogo } from '../components/SamaLogo';
 import { ListRow } from '../components/ListRow';
 import { useApp } from '../state/AppContext';
 
@@ -87,8 +86,8 @@ export const ProfileScreen: React.FC = () => {
               cursor: 'pointer',
             }}
           >
-            <SamaLogo height={10} themeMode="green" />
-            <span>{language === 'العربية' ? 'موثق عبر نفاذ' : 'KYC VERIFIED'}</span>
+            <ShieldCheck size={12} color="#7FE87F" />
+            <span>{language === 'العربية' ? 'هوية موثقة' : 'ID VERIFIED'}</span>
           </div>
         ) : (
           <button
@@ -113,7 +112,7 @@ export const ProfileScreen: React.FC = () => {
             }}
           >
             <ShieldCheck size={12} color="#FFB300" />
-            <span>{language === 'العربية' ? 'توثيق نفاذ الآن' : 'VERIFY NAFATH'}</span>
+            <span>{language === 'العربية' ? 'توثيق الهوية' : 'VERIFY ID'}</span>
           </button>
         )}
 
@@ -287,11 +286,11 @@ export const ProfileScreen: React.FC = () => {
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', padding: '6px 6px 0 6px', boxShadow: 'none' }}>
             <ListRow
               icon={<ShieldCheck size={18} color="#7FE87F" />}
-              label={language === 'العربية' ? 'توثيق الهوية عبر نفاذ' : 'Nafath National e-KYC'}
+              label={language === 'العربية' ? 'توثيق الهوية الوطنية' : 'National ID Verification'}
               rightElement={
                 <span style={{ fontSize: '11px', fontWeight: 800, color: isKycVerified ? '#7FE87F' : '#FFB300' }}>
                   {isKycVerified
-                    ? (language === 'العربية' ? 'موثق (Tier-1)' : 'Verified (Tier-1)')
+                    ? (language === 'العربية' ? 'موثق' : 'Verified')
                     : (language === 'العربية' ? 'غير موثق • توثيق' : 'Unverified • Verify')}
                 </span>
               }

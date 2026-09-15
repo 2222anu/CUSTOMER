@@ -65,7 +65,7 @@ export const PermissionsScreen: React.FC = () => {
     } catch {
       // Ignore
     }
-    navigateTo('ONBOARDING_KYC');
+    navigateTo('ONBOARDING_BANK');
   };
 
   return (

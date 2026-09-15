@@ -327,8 +327,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       }
       const newNotif: AppNotification = {
         id: `notif-${Date.now()}`,
-        title: 'Nafath e-KYC Verified',
-        description: 'Your identity has been verified with SAMA Tier-1 certification.',
+        title: 'Identity Verified',
+        description: 'Your digital national identity has been successfully verified.',
         timestamp: 'Just now',
         read: false,
         type: 'success',

@@ -42,7 +42,7 @@ const MODALS = [
   { name: 'LanguageModal', openMethod: 'setIsLanguageModalOpen', text: 'Select Language' },
   { name: 'LogoutModal', openMethod: 'setIsLogoutModalOpen', text: 'Log Out' },
   { name: 'AddBankModal', openMethod: 'setIsAddBankModalOpen', text: 'Saudi Bank' },
-  { name: 'KycModal', openMethod: 'setIsKycModalOpen', text: 'Nafath' },
+  { name: 'KycModal', openMethod: 'setIsKycModalOpen', text: 'National ID' },
   { name: 'AppLinksModal', openMethod: 'setIsAppLinksModalOpen', text: 'Application Links' },
   { name: 'EditProfileModal', openMethod: 'setIsEditProfileModalOpen', text: 'Profile' },
   {
@@ -99,7 +99,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     expect(bottom).toBe('0px');
   });
 
-  test('Primary End-to-End User Journey: Splash -> Onboarding -> Mobile -> SMS OTP -> Permissions -> Onboarding KYC -> Onboarding Bank -> Home', async () => {
+  test('Primary End-to-End User Journey: Splash -> Onboarding -> Mobile -> SMS OTP -> Permissions -> Onboarding Bank -> Home', async () => {
     // 1. Splash Screen
     await page.goto(getAppUrl('screen=SPLASH'));
     await expect(page.locator('.app-viewport')).toBeVisible();
@@ -139,41 +139,18 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     await page.goto(getAppUrl('screen=PERMISSIONS'));
     await expect(page.getByText(/Permissions/i).first()).toBeVisible();
 
-    // Click Allow Permissions -> goes to ONBOARDING_KYC
+    // Click Allow Permissions -> goes directly to ONBOARDING_BANK
     const allowBtn = page.getByRole('button', { name: /Allow & Continue/i });
     await allowBtn.click();
 
-    // 6. Onboarding KYC Screen (Nafath)
-    await expect(page.getByText(/Nafath|e-KYC|National/i).first()).toBeVisible();
-    const nationalIdInput = page.locator('#national-id-input');
-    await nationalIdInput.fill('1098765432');
-    const dobInput = page.locator('#dob-input');
-    await dobInput.fill('1992-05-14');
-
-    // Request Nafath Authentication
-    const nafathBtn = page.getByRole('button', { name: /Request Nafath Authentication|طلب مصادقة نفاذ/i });
-    await nafathBtn.click();
-
-    // Nafath challenge appears
-    await expect(page.getByText(/Nafath App|تطبيق نفاذ/i).first()).toBeVisible({ timeout: 5000 });
-    
-    // Simulate App Approval
-    const approveBtn = page.getByRole('button', { name: /I Approved in Nafath|تمت الموافقة في نفاذ/i });
-    await approveBtn.click();
-
-    // Nafath Verified Success -> Click Continue to Link Bank Account
-    const continueToBankBtn = page.getByRole('button', { name: /Continue to Link Bank Account|المتابعة لربط الحساب البنكي/i });
-    await expect(continueToBankBtn).toBeVisible({ timeout: 5000 });
-    await continueToBankBtn.click();
-
-    // 7. Onboarding Bank Screen (Link Saudi Bank)
+    // 6. Onboarding Bank Screen (Link Saudi Bank)
     await expect(page.getByText(/Select Saudi Bank|اختر البنك السعودي/i).first()).toBeVisible({ timeout: 5000 });
     
     // Select Al Rajhi Bank
     const alRajhiBank = page.getByText('Al Rajhi Bank').first();
     await alRajhiBank.click();
 
-    // Request Bank OTP (Step 1 includes inline matching)
+    // Request Bank OTP
     const requestOtpBtn = page.getByRole('button', { name: /Request Bank OTP|طلب رمز التحقق البنكي/i });
     await expect(requestOtpBtn).toBeVisible({ timeout: 5000 });
     await requestOtpBtn.click();
@@ -188,7 +165,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     await expect(completeSetupBtn).toBeVisible({ timeout: 5000 });
     await completeSetupBtn.click();
 
-    // 8. Verify seamless auto-navigation to Home Dashboard
+    // 7. Verify seamless auto-navigation to Home Dashboard
     await expect(page.getByText('Transfer & Pay')).toBeVisible({ timeout: 6000 });
 
     expect(consoleErrors).toEqual([]);

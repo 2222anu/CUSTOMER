@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { User as UserIcon, ArrowRight } from 'lucide-react';
 import { AlphPayLogo } from '../components/AlphPayLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
-import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 export const MobileNumberScreen: React.FC = () => {
@@ -192,31 +191,7 @@ export const MobileNumberScreen: React.FC = () => {
         </form>
       </div>
 
-      {/* Down in Center: Associated with SAMA */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '8px',
-          width: '100%',
-          textAlign: 'center',
-        }}
-      >
-        <span
-          style={{
-            fontSize: '11px',
-            color: '#6E6E85',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-          }}
-        >
-          {t('home.associated_sama', 'Associated with')}
-        </span>
-        <SamaLogo height={20} themeMode="green" />
-      </div>
+      <div style={{ height: '20px' }} />
     </div>
   );
 };

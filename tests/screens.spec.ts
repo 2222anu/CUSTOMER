@@ -13,6 +13,7 @@ const SCREENS = [
   'PERMISSIONS',
   'ONBOARDING_KYC',
   'ONBOARDING_BANK',
+  'SPEND_ANALYSIS',
   'PAY_ANYONE',
   'SEND_AMOUNT',
   'ELECTRICITY',
@@ -256,7 +257,35 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     expect(consoleErrors).toEqual([]);
   });
 
-  test('All 33 Screens render with zero JavaScript runtime errors', async () => {
+  test('Spend Analysis Page: Period selector, category breakdowns, and export action', async () => {
+    await page.goto(getAppUrl('screen=SPEND_ANALYSIS'));
+    await expect(page.getByText(/Spend Analysis|تحليل المصاريف/i).first()).toBeVisible();
+
+    // Verify Total Spending Amount
+    await expect(page.getByText(/14,850|١٤٬٨٥٠/)).toBeVisible();
+
+    // Toggle Period to Week
+    const weekBtn = page.getByRole('button', { name: /Week|أسبوع/i }).first();
+    await weekBtn.click();
+    await expect(page.getByText(/3,420|٣٬٤٢٠/)).toBeVisible();
+
+    // Toggle Period to Month
+    const monthBtn = page.getByRole('button', { name: /Month|شهر/i }).first();
+    await monthBtn.click();
+
+    // Click Category breakdown filter (e.g. Shopping & Retail)
+    const shoppingCat = page.getByText(/Shopping & Retail|التسوق والتجزئة/i).first();
+    await shoppingCat.click();
+
+    // Export Statement
+    const exportBtn = page.getByRole('button', { name: /Export|تصدير/i });
+    await exportBtn.click();
+    await expect(page.getByText(/exported successfully|بنجاح/i).first()).toBeVisible({ timeout: 4000 });
+
+    expect(consoleErrors).toEqual([]);
+  });
+
+  test('All 34 Screens render with zero JavaScript runtime errors', async () => {
     for (const screenId of SCREENS) {
       await page.goto(getAppUrl(`screen=${screenId}`));
       await page.waitForLoadState('domcontentloaded');

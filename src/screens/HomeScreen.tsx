@@ -14,6 +14,8 @@ import {
   Eye,
   EyeOff,
   Lock,
+  PieChart,
+  TrendingDown,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { BankCardCarousel } from '../components/BankCardCarousel';
@@ -630,6 +632,74 @@ export const HomeScreen: React.FC = () => {
               </span>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Spend Analytics Widget Card */}
+      <div style={{ padding: '0 20px', marginTop: '16px' }}>
+        <div
+          onClick={() => navigateTo('SPEND_ANALYSIS')}
+          className="interactive-tap"
+          style={{
+            backgroundColor: '#111726',
+            borderRadius: '20px',
+            border: '1px solid #2C2C44',
+            padding: '16px 18px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            cursor: 'pointer',
+            boxShadow: 'none',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, minWidth: 0 }}>
+            <div
+              style={{
+                width: '42px',
+                height: '42px',
+                borderRadius: '12px',
+                backgroundColor: 'rgba(127, 232, 127, 0.12)',
+                border: '1px solid rgba(127, 232, 127, 0.3)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <PieChart size={20} color="#7FE87F" />
+            </div>
+
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
+                  {language === 'العربية' ? 'تحليل المصاريف الشهرية' : 'Monthly Spend Analysis'}
+                </span>
+                <span
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '2px',
+                    fontSize: '10px',
+                    fontWeight: 800,
+                    color: '#7FE87F',
+                    backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                    padding: '2px 6px',
+                    borderRadius: '6px',
+                  }}
+                >
+                  <TrendingDown size={11} />
+                  12.4%
+                </span>
+              </div>
+              <div style={{ fontSize: '11.5px', color: '#A2A2BA', marginTop: '2px' }}>
+                {language === 'العربية'
+                  ? 'تم إنفاق ١٤٬٨٥٠ ر.س في سبتمبر • اضغط لعرض التحليل الكامل'
+                  : 'SAR 14,850.00 spent in September • Tap to view insights'}
+              </div>
+            </div>
+          </div>
+
+          <ChevronRight size={18} color="#A2A2BA" style={{ transform: isRtl ? 'scaleX(-1)' : 'none', marginInlineStart: '8px', flexShrink: 0 }} />
         </div>
       </div>
 

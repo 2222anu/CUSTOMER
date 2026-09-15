@@ -245,6 +245,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     // Sync bottom navigation active tab
     if (screen === 'HOME') setActiveTabState('home');
+    else if (screen === 'SPEND_ANALYSIS') setActiveTabState('spend');
     else if (screen === 'BANK_ACCOUNTS') setActiveTabState('account');
     else if (screen === 'PAY_ANYONE') setActiveTabState('pay');
     else if (screen === 'HISTORY') setActiveTabState('history');
@@ -261,6 +262,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setScreenParams(prev.params || {});
 
       if (prev.screen === 'HOME') setActiveTabState('home');
+      else if (prev.screen === 'SPEND_ANALYSIS') setActiveTabState('spend');
       else if (prev.screen === 'BANK_ACCOUNTS') setActiveTabState('account');
       else if (prev.screen === 'PAY_ANYONE') setActiveTabState('pay');
       else if (prev.screen === 'HISTORY') setActiveTabState('history');
@@ -275,6 +277,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     switch (tab) {
       case 'home':
         navigateTo('HOME');
+        break;
+      case 'spend':
+        navigateTo('SPEND_ANALYSIS');
         break;
       case 'account':
         navigateTo('BANK_ACCOUNTS');

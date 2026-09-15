@@ -86,6 +86,7 @@ export type ScreenId =
   | 'ONBOARDING_KYC'
   | 'ONBOARDING_BANK'
   | 'HOME'
+  | 'SPEND_ANALYSIS'
   | 'PAY_ANYONE'
   | 'SEND_AMOUNT'
   | 'ELECTRICITY'
@@ -110,5 +111,6 @@ export type ScreenId =
   | 'REWARDS'
   | 'FOOD';
 
-export type BottomTab = 'home' | 'account' | 'pay' | 'scan' | 'history' | 'profile';
+export type BottomTab = 'home' | 'spend' | 'account' | 'pay' | 'scan' | 'history' | 'profile';
+
 

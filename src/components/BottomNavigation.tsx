@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Home, FileText, QrCode, Clock, User } from 'lucide-react';
+import { Home, PieChart, QrCode, Clock, User } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import type { BottomTab } from '../types';
 
 export const BottomNavigation: React.FC = () => {
-  const { activeTab, setActiveTab, t } = useApp();
+  const { activeTab, setActiveTab, t, language } = useApp();
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export const BottomNavigation: React.FC = () => {
 
   const tabs: { id: BottomTab; label: string; verified?: boolean; icon: (active: boolean) => React.ReactNode }[] = [
     { id: 'home', label: t('nav.home', 'Home'), icon: (a) => <Home size={20} strokeWidth={a ? 2.5 : 1.8} /> },
-    { id: 'account', label: t('nav.accounts', 'Accounts'), icon: (a) => <FileText size={20} strokeWidth={a ? 2.5 : 1.8} /> },
+    { id: 'spend', label: language === 'العربية' ? 'التحليلات' : 'Analytics', icon: (a) => <PieChart size={20} strokeWidth={a ? 2.5 : 1.8} /> },
     { id: 'scan', label: t('nav.scan', 'Scan'), icon: () => <QrCode size={24} strokeWidth={2.2} /> },
     { id: 'history', label: t('nav.history', 'History'), icon: (a) => <Clock size={20} strokeWidth={a ? 2.5 : 1.8} /> },
     { id: 'profile', label: t('nav.profile', 'Profile'), verified: true, icon: (a) => <User size={20} strokeWidth={a ? 2.5 : 1.8} /> },

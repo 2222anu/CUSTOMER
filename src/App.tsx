@@ -11,6 +11,7 @@ import { PermissionsScreen } from './screens/PermissionsScreen';
 import { OnboardingKycScreen } from './screens/OnboardingKycScreen';
 import { OnboardingBankScreen } from './screens/OnboardingBankScreen';
 import { HomeScreen } from './screens/HomeScreen';
+import { SpendAnalysisScreen } from './screens/SpendAnalysisScreen';
 import { PayAnyoneScreen } from './screens/PayAnyoneScreen';
 import { SendAmountScreen } from './screens/SendAmountScreen';
 import { ElectricityScreen } from './screens/ElectricityScreen';
@@ -67,6 +68,8 @@ const AppContent: React.FC = () => {
         return <OnboardingBankScreen />;
       case 'HOME':
         return <HomeScreen />;
+      case 'SPEND_ANALYSIS':
+        return <SpendAnalysisScreen />;
       case 'PAY_ANYONE':
         return <PayAnyoneScreen />;
       case 'SEND_AMOUNT':

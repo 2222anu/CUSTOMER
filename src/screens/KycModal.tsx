@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { X, ShieldCheck, CheckCircle2, UserCheck, ArrowRight, Loader2, Calendar } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, UserCheck, ArrowRight, Loader2, Calendar } from 'lucide-react';
+import { BottomSheet } from '../components/BottomSheet';
+import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 type KycStep = 'FORM' | 'VERIFYING' | 'CERTIFIED';
@@ -22,8 +24,6 @@ export const KycModal: React.FC = () => {
       }
     }
   }, [isKycModalOpen, isKycVerified]);
-
-  if (!isKycModalOpen) return null;
 
   const handleClose = () => {
     if (step === 'VERIFYING') return;
@@ -50,87 +50,41 @@ export const KycModal: React.FC = () => {
         verifiedAt: new Date().toLocaleDateString('en-GB'),
       });
       setStep('CERTIFIED');
-    }, 900);
+    }, 750);
   };
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
-        backdropFilter: 'blur(8px)',
-        zIndex: 110,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '20px',
-        boxSizing: 'border-box',
-      }}
-      onClick={handleClose}
+    <BottomSheet
+      isOpen={isKycModalOpen}
+      onClose={handleClose}
+      title={language === 'العربية' ? 'توثيق الهوية الوطنية' : 'National ID Verification'}
     >
-      <div
-        className="fade-in"
-        style={{
-          width: '100%',
-          maxWidth: '440px',
-          backgroundColor: '#111726',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          borderRadius: '24px',
-          padding: '24px 20px',
-          boxSizing: 'border-box',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
-          color: '#FFFFFF',
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div
-              style={{
-                width: '42px',
-                height: '42px',
-                borderRadius: '12px',
-                backgroundColor: 'rgba(52, 211, 153, 0.12)',
-                border: '1px solid rgba(52, 211, 153, 0.3)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              <ShieldCheck size={22} color="#34d399" />
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16.5px', fontWeight: 800, margin: 0, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
-                {language === 'العربية' ? 'توثيق الهوية الوطنية الرقمية' : 'Digital Identity Verification'}
-              </h3>
-              <span style={{ fontSize: '11px', color: '#34d399', fontWeight: 700, marginTop: '2px', display: 'block' }}>
-                {language === 'العربية' ? 'توثيق فوري وآمن عبر السجل الوطني' : 'Instant National Verification'}
-              </span>
-            </div>
-          </div>
-
-          <button
-            onClick={handleClose}
-            aria-label="Close"
-            className="interactive-tap"
+      <div style={{ paddingBottom: '8px' }}>
+        {/* Header Identity Badge */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '18px' }}>
+          <div
             style={{
-              backgroundColor: '#182236',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              borderRadius: '50%',
-              width: '32px',
-              height: '32px',
+              width: '40px',
+              height: '40px',
+              borderRadius: '12px',
+              backgroundColor: 'rgba(52, 211, 153, 0.12)',
+              border: '1px solid rgba(52, 211, 153, 0.3)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              cursor: 'pointer',
-              color: '#9ca3af',
+              flexShrink: 0,
             }}
           >
-            <X size={16} />
-          </button>
+            <ShieldCheck size={20} color="#34d399" />
+          </div>
+          <div>
+            <h3 style={{ fontSize: '15.5px', fontWeight: 800, margin: 0, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
+              {language === 'العربية' ? 'توثيق الهوية الوطنية الرقمية' : 'Digital Identity Verification'}
+            </h3>
+            <span style={{ fontSize: '11px', color: '#34d399', fontWeight: 700, marginTop: '2px', display: 'block' }}>
+              {language === 'العربية' ? 'توثيق فوري وآمن عبر السجل الوطني' : 'Instant National Verification'}
+            </span>
+          </div>
         </div>
 
         {/* STEP 1: FORM */}
@@ -253,9 +207,9 @@ export const KycModal: React.FC = () => {
                 marginTop: '6px',
                 width: '100%',
                 padding: '15px',
-                backgroundColor: nationalId.length >= 10 ? '#34d399' : '#1f293d',
-                color: nationalId.length >= 10 ? '#0b0f19' : '#6b7280',
-                border: 'none',
+                backgroundColor: nationalId.length >= 10 ? '#34d399' : '#182236',
+                color: nationalId.length >= 10 ? '#080c14' : '#6b7280',
+                border: nationalId.length >= 10 ? 'none' : '1px solid rgba(255, 255, 255, 0.06)',
                 borderRadius: '16px',
                 fontSize: '14.5px',
                 fontWeight: 800,
@@ -268,7 +222,7 @@ export const KycModal: React.FC = () => {
                 transition: 'all 0.2s ease',
               }}
             >
-              <span>{language === 'العربية' ? 'توثيق الهوية الآن' : 'Verify Identity Now'}</span>
+              <span>{language === 'العربية' ? 'توثيق الهوية ومتابعة' : 'Verify & Continue'}</span>
               <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
             </button>
           </form>
@@ -360,7 +314,7 @@ export const KycModal: React.FC = () => {
                 width: '100%',
                 padding: '15px',
                 backgroundColor: '#34d399',
-                color: '#0b0f19',
+                color: '#080c14',
                 border: 'none',
                 borderRadius: '16px',
                 fontSize: '14.5px',
@@ -377,7 +331,17 @@ export const KycModal: React.FC = () => {
             </button>
           </div>
         )}
+
+        {/* SAMA Verification Footer */}
+        <div style={{ marginTop: '20px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+          <SamaLogo height={12} themeMode="green" />
+          <span style={{ fontSize: '10.5px', color: '#9ca3af', fontWeight: 600 }}>
+            {language === 'العربية'
+              ? 'توثيق رسمي ومعتمد • البنك المركزي السعودي'
+              : 'Official Identity Verification • SAMA Regulated'}
+          </span>
+        </div>
       </div>
-    </div>
+    </BottomSheet>
   );
 };

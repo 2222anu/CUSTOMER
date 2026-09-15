@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ShieldCheck, CheckCircle2, UserCheck, ArrowRight, Loader2, Calendar } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
+import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 type KycStep = 'FORM' | 'VERIFYING' | 'CERTIFIED';
@@ -328,7 +329,7 @@ export const OnboardingKycScreen: React.FC = () => {
                   width: '100%',
                   padding: '15px',
                   backgroundColor: '#34d399',
-                  color: '#0b0f19',
+                  color: '#080c14',
                   border: 'none',
                   borderRadius: '16px',
                   fontSize: '14.5px',
@@ -346,6 +347,16 @@ export const OnboardingKycScreen: React.FC = () => {
               </button>
             </div>
           )}
+
+          {/* SAMA Verification Footer */}
+          <div style={{ marginTop: '20px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+            <SamaLogo height={12} themeMode="green" />
+            <span style={{ fontSize: '10.5px', color: '#9ca3af', fontWeight: 600 }}>
+              {language === 'العربية'
+                ? 'توثيق رسمي ومعتمد • البنك المركزي السعودي'
+                : 'Official Identity Verification • SAMA Regulated'}
+            </span>
+          </div>
         </div>
       </div>
     </div>

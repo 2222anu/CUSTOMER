@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Loader2, CheckCircle2 } from 'lucide-react';
+import { Loader2, CheckCircle2, Landmark, Smartphone, CreditCard } from 'lucide-react';
 import { BottomSheet } from '../components/BottomSheet';
 import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
@@ -130,16 +130,45 @@ export const AddBankModal: React.FC = () => {
       title={language === 'العربية' ? 'ربط الحساب البنكي' : 'Link Bank Account'}
     >
       <div style={{ paddingBottom: '8px' }}>
+        {/* Header Bank Identity Badge */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '18px' }}>
+          <div
+            style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '12px',
+              backgroundColor: 'rgba(52, 211, 153, 0.12)',
+              border: '1px solid rgba(52, 211, 153, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <Landmark size={20} color="#34d399" />
+          </div>
+          <div>
+            <h3 style={{ fontSize: '15.5px', fontWeight: 800, margin: 0, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
+              {language === 'العربية' ? 'ربط الحساب البنكي السعودي' : 'Link Saudi Bank Account'}
+            </h3>
+            <span style={{ fontSize: '11px', color: '#34d399', fontWeight: 700, marginTop: '2px', display: 'block' }}>
+              {language === 'العربية' ? 'ربط فوري ومعتمد عبر نظام سريع' : 'Sarie Instant Clearing & Verification'}
+            </span>
+          </div>
+        </div>
+
         {/* STEP 1: SELECT BANK & MATCH METHOD */}
         {step === 'SELECT_AND_MATCH' && (
           <div id="selectionView" className="fade-in">
             <div
               style={{
-                fontSize: '15px',
+                fontSize: '11px',
                 fontWeight: 800,
-                color: '#FFFFFF',
-                marginBottom: '14px',
-                letterSpacing: '-0.01em',
+                color: '#9ca3af',
+                textTransform: 'uppercase',
+                letterSpacing: '0.06em',
+                marginBottom: '10px',
+                display: 'block',
               }}
             >
               {language === 'العربية' ? 'اختر البنك السعودي' : 'Select Saudi Bank'}
@@ -150,13 +179,13 @@ export const AddBankModal: React.FC = () => {
               role="radiogroup"
               aria-label="Available Banks"
               style={{
-                maxHeight: '260px',
+                maxHeight: '240px',
                 overflowY: 'auto',
                 paddingInlineEnd: '4px',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '10px',
-                marginBottom: '20px',
+                marginBottom: '18px',
               }}
             >
               {SAUDI_BANKS.map((bank) => {
@@ -197,11 +226,10 @@ export const AddBankModal: React.FC = () => {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          fontSize: '18px',
                           flexShrink: 0,
                         }}
                       >
-                        🏛️
+                        <Landmark size={20} color="#34d399" />
                       </div>
                       <div>
                         <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{displayBankName}</div>
@@ -217,7 +245,7 @@ export const AddBankModal: React.FC = () => {
             </div>
 
             {/* Account Match Method */}
-            <div className="match-section" style={{ marginBottom: '20px' }}>
+            <div className="match-section" style={{ marginBottom: '18px' }}>
               <div
                 style={{
                   fontSize: '11px',
@@ -249,7 +277,8 @@ export const AddBankModal: React.FC = () => {
                     cursor: 'pointer',
                   }}
                 >
-                  <span>📱</span> {language === 'العربية' ? 'الجوال المسجل' : 'Registered Mobile'}
+                  <Smartphone size={16} color={matchMethod === 'mobile' ? '#34d399' : '#9ca3af'} />
+                  <span>{language === 'العربية' ? 'الجوال المسجل' : 'Registered Mobile'}</span>
                 </div>
                 <div
                   className={`match-tab interactive-tap ${matchMethod === 'iban' ? 'active' : ''}`}
@@ -269,7 +298,8 @@ export const AddBankModal: React.FC = () => {
                     cursor: 'pointer',
                   }}
                 >
-                  <span>💳</span> {language === 'العربية' ? 'الآيبان السعودي' : 'Saudi IBAN'}
+                  <CreditCard size={16} color={matchMethod === 'iban' ? '#34d399' : '#9ca3af'} />
+                  <span>{language === 'العربية' ? 'الآيبان السعودي' : 'Saudi IBAN'}</span>
                 </div>
               </div>
 
@@ -283,7 +313,7 @@ export const AddBankModal: React.FC = () => {
                     maxLength={29}
                     style={{
                       width: '100%',
-                      padding: '12px 14px',
+                      padding: '13px 16px',
                       borderRadius: '14px',
                       backgroundColor: '#182236',
                       border: '1px solid rgba(255, 255, 255, 0.08)',

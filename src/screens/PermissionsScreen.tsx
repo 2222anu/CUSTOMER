@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { MessageSquare, Phone, Users, Camera, MapPin, Mic, ArrowRight, Lock, Landmark, CheckCircle2, Loader2, Sparkles } from 'lucide-react';
+import { MessageSquare, Phone, Users, Camera, MapPin, Mic, ArrowRight, Lock } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
-import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 export const PermissionsScreen: React.FC = () => {
@@ -17,8 +16,6 @@ export const PermissionsScreen: React.FC = () => {
     location: true,
     mic: false,
   });
-  const [isDiscovering, setIsDiscovering] = useState<boolean>(false);
-  const [discoveryStep, setDiscoveryStep] = useState<number>(0);
 
   const handleToggle = (key: string) => {
     setToggles((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -70,21 +67,7 @@ export const PermissionsScreen: React.FC = () => {
     } catch {
       // Ignore
     }
-
-    setIsDiscovering(true);
-    setDiscoveryStep(1);
-
-    setTimeout(() => {
-      setDiscoveryStep(2);
-    }, 900);
-
-    setTimeout(() => {
-      setDiscoveryStep(3);
-    }, 1800);
-
-    setTimeout(() => {
-      navigateTo('HOME');
-    }, 2700);
+    navigateTo('HOME');
   };
 
   return (
@@ -227,125 +210,6 @@ export const PermissionsScreen: React.FC = () => {
           </span>
         </div>
       </div>
-
-      {/* Interactive Bank Discovery & Instant KYC Modal */}
-      {isDiscovering && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            backgroundColor: 'rgba(11, 11, 20, 0.9)',
-            backdropFilter: 'blur(8px)',
-            zIndex: 100,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '20px',
-          }}
-        >
-          <div
-            className="fade-in"
-            style={{
-              backgroundColor: '#151524',
-              borderRadius: '20px',
-              border: '1px solid #2C2C44',
-              padding: '28px 24px',
-              width: '100%',
-              maxWidth: '380px',
-              textAlign: 'center',
-              boxShadow: 'none',
-              color: '#FFFFFF',
-            }}
-          >
-            <div
-              style={{
-                width: '64px',
-                height: '64px',
-                borderRadius: '50%',
-                backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                color: '#7FE87F',
-                border: '1px solid rgba(127, 232, 127, 0.3)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 16px auto',
-              }}
-            >
-              {discoveryStep === 1 && <Loader2 size={32} className="animate-spin" />}
-              {discoveryStep === 2 && <Landmark size={32} />}
-              {discoveryStep === 3 && <CheckCircle2 size={36} color="#7FE87F" />}
-            </div>
-
-            <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 8px 0' }}>
-              {discoveryStep === 1 && (language === 'العربية' ? 'جاري اكتشاف الحسابات البنكية...' : 'Discovering Bank Accounts...')}
-              {discoveryStep === 2 && (language === 'العربية' ? 'تم ربط الحسابات بنجاح' : 'Accounts Linked')}
-              {discoveryStep === 3 && (language === 'العربية' ? 'تم التحقق الإلكتروني (KYC)' : 'KYC Verified')}
-            </h3>
-
-            <p style={{ fontSize: '13px', color: '#A2A2BA', margin: '0 0 20px 0', lineHeight: '1.4' }}>
-              {discoveryStep === 1 && (language === 'العربية' ? 'التحقق من تسجيل شبكة سريع على الرقم +966 50 123 4567' : 'Verifying SAMA Sarie registration on +966 50 123 4567')}
-              {discoveryStep === 2 && (language === 'العربية' ? 'تم العثور على حسابات مصرف الراجحي والبنك الأهلي السعودي' : 'Discovered Al Rajhi Bank and SNB accounts')}
-              {discoveryStep === 3 && (language === 'العربية' ? 'تم التحقق بنجاح من البنك المركزي السعودي. جاري الانتقال للرئيسية...' : 'SAMA e-KYC verified. Redirecting to home...')}
-            </p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', textAlign: isRtl ? 'right' : 'left' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  padding: '10px 12px',
-                  borderRadius: '10px',
-                  backgroundColor: discoveryStep >= 1 ? 'rgba(127, 232, 127, 0.12)' : '#1E1E32',
-                  border: `1px solid ${discoveryStep >= 1 ? 'rgba(127, 232, 127, 0.35)' : '#2C2C44'}`,
-                }}
-              >
-                {discoveryStep >= 1 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Loader2 size={16} color="#A2A2BA" />}
-                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 1 ? '#FFFFFF' : '#A2A2BA' }}>
-                  {language === 'العربية' ? 'ربط الجهاز والتحقق من الشريحة' : 'Device Binding & SIM Verification'}
-                </span>
-              </div>
-
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  padding: '10px 12px',
-                  borderRadius: '10px',
-                  backgroundColor: discoveryStep >= 2 ? 'rgba(127, 232, 127, 0.12)' : '#1E1E32',
-                  border: `1px solid ${discoveryStep >= 2 ? 'rgba(127, 232, 127, 0.35)' : '#2C2C44'}`,
-                }}
-              >
-                {discoveryStep >= 2 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Loader2 size={16} color="#A2A2BA" />}
-                <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 2 ? '#FFFFFF' : '#A2A2BA' }}>
-                  {language === 'العربية' ? 'تم اكتشاف الحسابات (الراجحي، الأهلي SNB)' : 'Bank Accounts Discovered (Al Rajhi Bank, SNB)'}
-                </span>
-              </div>
-
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '10px 12px',
-                  borderRadius: '10px',
-                  backgroundColor: discoveryStep >= 3 ? 'rgba(127, 232, 127, 0.2)' : '#1E1E32',
-                  border: `1px solid ${discoveryStep >= 3 ? '#7FE87F' : '#2C2C44'}`,
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  {discoveryStep >= 3 ? <CheckCircle2 size={16} color="#7FE87F" /> : <Sparkles size={16} color="#A2A2BA" />}
-                  <span style={{ fontSize: '12.5px', fontWeight: 700, color: discoveryStep >= 3 ? '#7FE87F' : '#A2A2BA' }}>
-                    {language === 'العربية' ? 'التحقق الوطني الفوري عبر نفاذ' : 'SAMA Instant e-KYC (Nafath)'}
-                  </span>
-                </div>
-                {discoveryStep >= 3 && <SamaLogo height={14} themeMode="green" />}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

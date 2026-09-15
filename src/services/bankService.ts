@@ -35,15 +35,21 @@ export const bankService = {
     return [...INITIAL_BANKS];
   },
 
-  async addBankAccount(bankName: string): Promise<BankAccount> {
-    const maskedAcc = 'SA' + Math.floor(10 + Math.random() * 89).toString() + ' •••• ' + Math.floor(1000 + Math.random() * 9000).toString();
+  async addBankAccount(
+    bankName: string,
+    details?: { iban?: string; accountType?: string; matchedWith?: string; balance?: number }
+  ): Promise<BankAccount> {
+    const maskedAcc = details?.iban
+      ? `${details.iban.slice(0, 4)} •••• ${details.iban.slice(-4)}`
+      : 'SA' + Math.floor(10 + Math.random() * 89).toString() + ' •••• ' + Math.floor(1000 + Math.random() * 9000).toString();
+
     return {
       id: `bank-${Date.now()}`,
       bankName,
-      accountType: 'Current Account',
+      accountType: details?.accountType || 'Current Account',
       accountNumberMasked: maskedAcc,
       isPrimary: false,
-      balance: Math.floor(5000 + Math.random() * 45000),
+      balance: details?.balance ?? Math.floor(10000 + Math.random() * 35000),
       showBalance: false,
     };
   },

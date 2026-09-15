@@ -39,7 +39,8 @@ const SCREENS = [
 const MODALS = [
   { name: 'LanguageModal', openMethod: 'setIsLanguageModalOpen', text: 'Select Language' },
   { name: 'LogoutModal', openMethod: 'setIsLogoutModalOpen', text: 'Log Out' },
-  { name: 'AddBankModal', openMethod: 'setIsAddBankModalOpen', text: 'Bank Account' },
+  { name: 'AddBankModal', openMethod: 'setIsAddBankModalOpen', text: 'Saudi Bank' },
+  { name: 'KycModal', openMethod: 'setIsKycModalOpen', text: 'Nafath' },
   { name: 'AppLinksModal', openMethod: 'setIsAppLinksModalOpen', text: 'Application Links' },
   { name: 'EditProfileModal', openMethod: 'setIsEditProfileModalOpen', text: 'Profile' },
   {
@@ -114,7 +115,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
 
     // 3. Mobile Number Screen
     await page.goto(getAppUrl('screen=MOBILE_NUMBER'));
-    await expect(page.getByText('Customer')).toBeVisible();
+    await expect(page.locator('#fullname-input')).toBeVisible();
     const nameInput = page.locator('#fullname-input');
     await nameInput.fill('Fahad Al-Harbi');
     const mobileInput = page.locator('#mobile-input');
@@ -132,11 +133,11 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     const verifyBtn = page.getByRole('button', { name: /Verify/i });
     await verifyBtn.click();
 
-    // 5. Permissions & e-KYC Screen
+    // 5. Permissions Screen
     await page.goto(getAppUrl('screen=PERMISSIONS'));
-    await expect(page.getByText('SAMA', { exact: false })).toBeVisible();
+    await expect(page.getByText(/Permissions/i).first()).toBeVisible();
 
-    // Click Allow Permissions & wait for automated KYC simulation -> Home transition
+    // Click Allow Permissions -> Home transition
     const allowBtn = page.getByRole('button', { name: /Allow & Continue/i });
     await allowBtn.click();
 

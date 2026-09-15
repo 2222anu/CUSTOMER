@@ -32,6 +32,8 @@ export const ProfileScreen: React.FC = () => {
     setIsLanguageModalOpen,
     setIsLogoutModalOpen,
     setIsEditProfileModalOpen,
+    setIsKycModalOpen,
+    isKycVerified,
     t,
     isRtl,
   } = useApp();
@@ -60,28 +62,60 @@ export const ProfileScreen: React.FC = () => {
           boxShadow: 'none',
         }}
       >
-        {/* Top Verified Pill */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '16px',
-            [isRtl ? 'left' : 'right']: '16px',
-            backgroundColor: 'rgba(127, 232, 127, 0.15)',
-            border: '1px solid #7FE87F',
-            borderRadius: '20px',
-            padding: '3px 10px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            fontSize: '10px',
-            fontWeight: 800,
-            letterSpacing: '0.05em',
-            color: '#7FE87F',
-          }}
-        >
-          <SamaLogo height={10} themeMode="green" />
-          <span>{language === 'العربية' ? 'موثق عبر نفاذ' : 'KYC VERIFIED'}</span>
-        </div>
+        {/* Top Verified / Action Pill */}
+        {isKycVerified ? (
+          <div
+            onClick={() => setIsKycModalOpen(true)}
+            role="button"
+            tabIndex={0}
+            className="interactive-tap"
+            style={{
+              position: 'absolute',
+              top: '16px',
+              [isRtl ? 'left' : 'right']: '16px',
+              backgroundColor: 'rgba(127, 232, 127, 0.15)',
+              border: '1px solid #7FE87F',
+              borderRadius: '20px',
+              padding: '4px 10px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '10px',
+              fontWeight: 800,
+              letterSpacing: '0.05em',
+              color: '#7FE87F',
+              cursor: 'pointer',
+            }}
+          >
+            <SamaLogo height={10} themeMode="green" />
+            <span>{language === 'العربية' ? 'موثق عبر نفاذ' : 'KYC VERIFIED'}</span>
+          </div>
+        ) : (
+          <button
+            onClick={() => setIsKycModalOpen(true)}
+            className="interactive-tap"
+            style={{
+              position: 'absolute',
+              top: '16px',
+              [isRtl ? 'left' : 'right']: '16px',
+              backgroundColor: 'rgba(255, 179, 0, 0.15)',
+              border: '1px solid #FFB300',
+              borderRadius: '20px',
+              padding: '4px 10px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '10px',
+              fontWeight: 800,
+              letterSpacing: '0.05em',
+              color: '#FFB300',
+              cursor: 'pointer',
+            }}
+          >
+            <ShieldCheck size={12} color="#FFB300" />
+            <span>{language === 'العربية' ? 'توثيق نفاذ الآن' : 'VERIFY NAFATH'}</span>
+          </button>
+        )}
 
         {/* Avatar with Edit Badge */}
         <div style={{ position: 'relative', marginBottom: '14px', marginTop: '6px' }}>
@@ -251,6 +285,18 @@ export const ProfileScreen: React.FC = () => {
             {language === 'العربية' ? 'الإعدادات والأمان' : 'Settings & Security'}
           </div>
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', padding: '6px 6px 0 6px', boxShadow: 'none' }}>
+            <ListRow
+              icon={<ShieldCheck size={18} color="#7FE87F" />}
+              label={language === 'العربية' ? 'توثيق الهوية عبر نفاذ' : 'Nafath National e-KYC'}
+              rightElement={
+                <span style={{ fontSize: '11px', fontWeight: 800, color: isKycVerified ? '#7FE87F' : '#FFB300' }}>
+                  {isKycVerified
+                    ? (language === 'العربية' ? 'موثق (Tier-1)' : 'Verified (Tier-1)')
+                    : (language === 'العربية' ? 'غير موثق • توثيق' : 'Unverified • Verify')}
+                </span>
+              }
+              onClick={() => setIsKycModalOpen(true)}
+            />
             <ListRow icon={<ShieldCheck size={18} color="#7FE87F" />} label={language === 'العربية' ? 'الأمان والأجهزة' : 'Security & Devices'} onClick={() => navigateTo('SECURITY')} />
             <ListRow icon={<Bell size={18} color="#7FE87F" />} label={language === 'العربية' ? 'الإشعارات' : 'Notifications'} onClick={() => navigateTo('NOTIFICATIONS')} />
             <ListRow

@@ -48,7 +48,7 @@ interface AppContextType {
   // Actions
   updateUser: (updatedData: Partial<User>) => void;
   toggleShowBalance: (bankId: string) => void;
-  addBankAccount: (bankName: string) => Promise<void>;
+  addBankAccount: (bankName: string, details?: { iban?: string; accountType?: string; matchedWith?: string; balance?: number }) => Promise<BankAccount>;
   removeBankAccount: (bankId: string) => void;
   setPrimaryBank: (bankId: string) => void;
   fetchElectricityBill: (consumerNo: string) => Promise<ElectricityBill>;
@@ -67,6 +67,11 @@ interface AppContextType {
     note?: string;
     avatarInitials?: string;
   }) => Promise<Transaction>;
+
+  // KYC Verification
+  isKycVerified: boolean;
+  setIsKycVerified: (verified: boolean, data?: { nationalId: string; dob: string; verifiedAt: string }) => void;
+  kycData: { nationalId: string; dob: string; verifiedAt: string } | null;
 
   // Modals & Bottom Sheets
   isPinModalOpen: boolean;
@@ -215,6 +220,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setIsScanModalOpen,
       setIsAppLinksModalOpen,
       setIsEditProfileModalOpen,
+      setIsKycModalOpen,
+      setIsKycVerified,
+      isKycVerified,
+      addBankAccount,
       currentScreen,
     };
   });
@@ -285,14 +294,64 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   };
 
+  const [isKycVerified, setIsKycVerifiedState] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('isKycVerified') === 'true';
+    }
+    return false;
+  });
+  const [kycData, setKycData] = useState<{ nationalId: string; dob: string; verifiedAt: string } | null>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('kycData');
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+    return null;
+  });
+
+  const setIsKycVerified = (
+    verified: boolean,
+    data?: { nationalId: string; dob: string; verifiedAt: string }
+  ) => {
+    setIsKycVerifiedState(verified);
+    if (verified) {
+      localStorage.setItem('isKycVerified', 'true');
+      if (data) {
+        setKycData(data);
+        localStorage.setItem('kycData', JSON.stringify(data));
+      }
+      const newNotif: AppNotification = {
+        id: `notif-${Date.now()}`,
+        title: 'Nafath e-KYC Verified',
+        description: 'Your identity has been verified with SAMA Tier-1 certification.',
+        timestamp: 'Just now',
+        read: false,
+        type: 'success',
+      };
+      setNotifications((prev) => [newNotif, ...prev]);
+    } else {
+      localStorage.removeItem('isKycVerified');
+      localStorage.removeItem('kycData');
+      setKycData(null);
+    }
+  };
+
   const toggleShowBalance = (bankId: string) => {
     setBankAccounts((prev) =>
       prev.map((acc) => (acc.id === bankId ? { ...acc, showBalance: !acc.showBalance } : acc))
     );
   };
 
-  const addBankAccount = async (bankName: string) => {
-    const newBank = await bankService.addBankAccount(bankName);
+  const addBankAccount = async (
+    bankName: string,
+    details?: { iban?: string; accountType?: string; matchedWith?: string; balance?: number }
+  ) => {
+    const newBank = await bankService.addBankAccount(bankName, details);
     setBankAccounts((prev) => [...prev, newBank]);
 
     const newNotif: AppNotification = {
@@ -304,6 +363,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       type: 'info',
     };
     setNotifications((prev) => [newNotif, ...prev]);
+    return newBank;
   };
 
   const removeBankAccount = (bankId: string) => {
@@ -553,6 +613,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsEditProfileModalOpen,
         isKycModalOpen,
         setIsKycModalOpen,
+        isKycVerified,
+        setIsKycVerified,
+        kycData,
         terminateSession,
         addMoneyRequest,
       }}

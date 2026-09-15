@@ -3,20 +3,20 @@ import { Check, X, ArrowDownLeft } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
-import { formatCurrency } from '../utils/formatters';
+import { formatSaudiCurrency, translateText } from '../utils/i18n';
 
 export const MoneyRequestsScreen: React.FC = () => {
-  const { moneyRequests, openPinModal, completePayment, navigateTo } = useApp();
+  const { moneyRequests, openPinModal, completePayment, navigateTo, language, t } = useApp();
 
   const handlePayRequest = (req: typeof moneyRequests[0]) => {
     openPinModal({
       title: req.requesterName,
       amount: req.amount,
-      subTitle: req.note || 'Requested Payment',
+      subTitle: req.note || translateText('Requested Payment', language),
       onSuccess: async () => {
         const txn = await completePayment({
           title: req.requesterName,
-          subTitle: 'Request Approved Payment',
+          subTitle: translateText('Request Approved Payment', language),
           amount: req.amount,
           avatarInitials: req.requesterName.substring(0, 2).toUpperCase(),
         });
@@ -27,7 +27,7 @@ export const MoneyRequestsScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '32px', color: '#FFFFFF' }}>
-      <AppHeader title="Money Requests" showBack showSettings={false} />
+      <AppHeader title={translateText('Money Requests', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {moneyRequests.length === 0 ? (
@@ -56,9 +56,9 @@ export const MoneyRequestsScreen: React.FC = () => {
             >
               <ArrowDownLeft size={28} />
             </div>
-            <div style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>No Pending Requests</div>
+            <div style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>{translateText('No Pending Requests', language)}</div>
             <p style={{ fontSize: '13px', color: '#B3B3C2', marginTop: '6px', margin: '6px 0 0 0' }}>
-              When someone requests money from you via UPI, it will appear here.
+              {translateText('When someone requests money from you via UPI, it will appear here.', language)}
             </p>
           </div>
         ) : (
@@ -109,7 +109,7 @@ export const MoneyRequestsScreen: React.FC = () => {
                 </div>
 
                 <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: '#7FE87F' }}>
-                  {formatCurrency(req.amount)}
+                  {formatSaudiCurrency(req.amount, language)}
                 </div>
               </div>
 
@@ -149,11 +149,11 @@ export const MoneyRequestsScreen: React.FC = () => {
                     gap: '4px',
                   }}
                 >
-                  <X size={16} /> Decline
+                  <X size={16} /> {translateText('Decline', language)}
                 </button>
                 <div style={{ flex: 1.4 }}>
                   <PrimaryButton onClick={() => handlePayRequest(req)}>
-                    <Check size={16} /> Pay {formatCurrency(req.amount)}
+                    <Check size={16} /> {t('pay')} {formatSaudiCurrency(req.amount, language)}
                   </PrimaryButton>
                 </div>
               </div>
@@ -164,3 +164,4 @@ export const MoneyRequestsScreen: React.FC = () => {
     </div>
   );
 };
+

@@ -11,20 +11,20 @@ import {
   ShieldCheck,
   Building,
   Plane,
-  Car,
   Gift,
   FileText,
   Check,
+  Car,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { ServiceCard } from '../components/ServiceCard';
 import { Modal } from '../components/Modal';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
-import type { Transaction } from '../types';
+import { translateText } from '../utils/i18n';
 
 export const AllServicesScreen: React.FC = () => {
-  const { navigateTo, openPinModal, completePayment } = useApp();
+  const { navigateTo, openPinModal, completePayment, language, t } = useApp();
 
   const [selectedService, setSelectedService] = useState<{
     title: string;
@@ -69,7 +69,7 @@ export const AllServicesScreen: React.FC = () => {
           subTitle: serviceSubTitle,
           amount: payAmt,
           category: 'Bill Payment',
-        }).then((txn: Transaction) => {
+        }).then((txn) => {
           navigateTo('PAYMENT_SUCCESS', { transaction: txn });
         });
       },
@@ -78,51 +78,51 @@ export const AllServicesScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '24px', color: '#FFFFFF' }}>
-      <AppHeader title="All Services" showBack showSettings />
+      <AppHeader title={t('all_services')} showBack showSettings />
 
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* Bill Payments Grid */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-            Recharge & Utilities (SADAD)
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+            {translateText('Recharge & Utilities', language)}
           </div>
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
-              <ServiceCard label="Electricity" icon={<Zap size={20} />} onClick={() => navigateTo('ELECTRICITY')} />
+              <ServiceCard label={translateText('Electricity', language)} icon={<Zap size={20} />} onClick={() => navigateTo('ELECTRICITY')} />
               <ServiceCard
-                label="Water"
+                label={translateText('Water', language)}
                 icon={<Droplets size={20} />}
-                onClick={() => handleOpenService('Water Bill', 'National Water Company (NWC)', 220, 'NWC Account No', <Droplets size={20} />)}
+                onClick={() => handleOpenService(translateText('Water Bill', language), translateText('National Water Company (NWC)', language), 220, translateText('NWC Account No', language), <Droplets size={20} />)}
               />
               <ServiceCard
-                label="Gas"
+                label={translateText('Gas', language)}
                 icon={<Flame size={20} />}
-                onClick={() => handleOpenService('Gas Cylinder', 'National Gas (GASCO)', 45, 'Customer ID', <Flame size={20} />)}
+                onClick={() => handleOpenService(translateText('Gas Cylinder', language), translateText('National Gas (GASCO)', language), 45, translateText('Customer ID', language), <Flame size={20} />)}
               />
               <ServiceCard
-                label="STC"
+                label={translateText('STC', language)}
                 icon={<Smartphone size={20} />}
-                onClick={() => handleOpenService('STC Sawa Recharge', 'STC Prepaid 5G', 115, '05X XXX XXXX', <Smartphone size={20} />)}
+                onClick={() => handleOpenService(translateText('STC Sawa Recharge', language), translateText('STC Prepaid 5G', language), 115, '05X XXX XXXX', <Smartphone size={20} />)}
               />
               <ServiceCard
-                label="Mobily"
+                label={translateText('Mobily', language)}
                 icon={<PhoneCall size={20} />}
-                onClick={() => handleOpenService('Mobily Postpaid', 'Mobily Mawaheb', 172, '05X XXX XXXX', <PhoneCall size={20} />)}
+                onClick={() => handleOpenService(translateText('Mobily Postpaid', language), translateText('Mobily Mawaheb', language), 172, '05X XXX XXXX', <PhoneCall size={20} />)}
               />
               <ServiceCard
-                label="Zain 5G"
+                label={translateText('Zain 5G', language)}
                 icon={<Globe size={20} />}
-                onClick={() => handleOpenService('Zain Fiber & 5G', 'Zain KSA', 287, 'Account Number', <Globe size={20} />)}
+                onClick={() => handleOpenService(translateText('Zain Fiber & 5G', language), translateText('Zain KSA', language), 287, translateText('Account Number', language), <Globe size={20} />)}
               />
               <ServiceCard
-                label="Shahid VIP"
+                label={translateText('Shahid VIP', language)}
                 icon={<Tv size={20} />}
-                onClick={() => handleOpenService('Shahid / OSN', 'Shahid VIP Subscription', 49, 'Mobile or Email', <Tv size={20} />)}
+                onClick={() => handleOpenService(translateText('Shahid / OSN', language), translateText('Shahid VIP Subscription', language), 49, translateText('Mobile or Email', language), <Tv size={20} />)}
               />
               <ServiceCard
-                label="Balady"
+                label={translateText('Balady', language)}
                 icon={<FileText size={20} />}
-                onClick={() => handleOpenService('Balady Services', 'Municipal License & Fines', 450, 'Balady Invoice No', <FileText size={20} />)}
+                onClick={() => handleOpenService(translateText('Balady Services', language), translateText('Municipal License & Fines', language), 450, translateText('Balady Invoice No', language), <FileText size={20} />)}
               />
             </div>
           </div>
@@ -130,26 +130,26 @@ export const AllServicesScreen: React.FC = () => {
 
         {/* Financial Services */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-            Banking & Finance (SAMA)
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+            {translateText('Banking & Finance (SAMA)', language)}
           </div>
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
-              <ServiceCard label="mada Cards" icon={<CreditCard size={20} />} onClick={() => navigateTo('PAYMENT_METHODS')} />
+              <ServiceCard label={translateText('mada Cards', language)} icon={<CreditCard size={20} />} onClick={() => navigateTo('PAYMENT_METHODS')} />
               <ServiceCard
-                label="Insurance"
+                label={translateText('Insurance', language)}
                 icon={<ShieldCheck size={20} />}
-                onClick={() => handleOpenService('Tawuniya Insurance', 'Motor & Health', 1250, 'Policy / National ID', <ShieldCheck size={20} />)}
+                onClick={() => handleOpenService(translateText('Tawuniya Insurance', language), translateText('Motor & Health', language), 1250, translateText('Policy / National ID', language), <ShieldCheck size={20} />)}
               />
               <ServiceCard
-                label="Finance EMI"
+                label={translateText('Finance EMI', language)}
                 icon={<Building size={20} />}
-                onClick={() => handleOpenService('Finance Installment', 'Al Rajhi / SNB Finance', 2150, 'Contract / IBAN No', <Building size={20} />)}
+                onClick={() => handleOpenService(translateText('Finance Installment', language), translateText('Al Rajhi / SNB Finance', language), 2150, translateText('Contract / IBAN No', language), <Building size={20} />)}
               />
               <ServiceCard
-                label="Mawgif"
+                label={translateText('Mawgif', language)}
                 icon={<Car size={20} />}
-                onClick={() => handleOpenService('Mawgif Parking', 'Riyadh & Jeddah Parking', 50, 'Plate / Mobile No', <Car size={20} />)}
+                onClick={() => handleOpenService(translateText('Mawgif Parking', language), translateText('Riyadh & Jeddah Parking', language), 50, translateText('Plate / Mobile No', language), <Car size={20} />)}
               />
             </div>
           </div>
@@ -157,25 +157,25 @@ export const AllServicesScreen: React.FC = () => {
 
         {/* Travel & Bookings */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-            Travel & Lifestyle
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+            {translateText('Travel & Lifestyle', language)}
           </div>
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
               <ServiceCard
-                label="Saudia"
+                label={translateText('Saudia', language)}
                 icon={<Plane size={20} />}
-                onClick={() => handleOpenService('Flight Booking', 'Saudia RUH ➔ JED', 650, 'Passenger PNR', <Plane size={20} />)}
+                onClick={() => handleOpenService(translateText('Flight Booking', language), translateText('Saudia RUH ➔ JED', language), 650, translateText('Passenger PNR', language), <Plane size={20} />)}
               />
               <ServiceCard
-                label="Jarir"
+                label={translateText('Jarir', language)}
                 icon={<Gift size={20} />}
-                onClick={() => handleOpenService('Jarir Gift Card', 'Jarir Bookstore Digital Voucher', 200, 'Mobile / Email', <Gift size={20} />)}
+                onClick={() => handleOpenService(translateText('Jarir Gift Card', language), translateText('Jarir Bookstore Digital Voucher', language), 200, translateText('Mobile / Email', language), <Gift size={20} />)}
               />
               <ServiceCard
-                label="Absher"
+                label={translateText('Absher', language)}
                 icon={<FileText size={20} />}
-                onClick={() => handleOpenService('Traffic Fines (Absher)', 'Traffic Violations Settlement', 300, 'National ID / Iqama', <FileText size={20} />)}
+                onClick={() => handleOpenService(translateText('Traffic Fines (Absher)', language), translateText('Traffic Violations Settlement', language), 300, translateText('National ID / Iqama', language), <FileText size={20} />)}
               />
             </div>
           </div>
@@ -214,7 +214,7 @@ export const AllServicesScreen: React.FC = () => {
 
             <div style={{ marginBottom: '16px' }}>
               <label htmlFor="modal-acc-input" style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
-                Account / Consumer Number
+                {translateText('Account / Consumer Number', language)}
               </label>
               <input
                 id="modal-acc-input"
@@ -238,14 +238,14 @@ export const AllServicesScreen: React.FC = () => {
 
             <div style={{ marginBottom: '24px' }}>
               <label htmlFor="modal-amt-input" style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
-                Amount (SAR)
+                {t('amount')} ({t('sar')})
               </label>
               <input
                 id="modal-amt-input"
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                placeholder="Enter amount"
+                placeholder={t('enter_amount')}
                 style={{
                   width: '100%',
                   padding: '12px 14px',
@@ -262,7 +262,7 @@ export const AllServicesScreen: React.FC = () => {
             </div>
 
             <PrimaryButton onClick={handleProceedPayment}>
-              Pay Now <Check size={18} />
+              {t('pay_now')} <Check size={18} />
             </PrimaryButton>
           </div>
         </Modal>

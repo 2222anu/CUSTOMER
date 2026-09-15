@@ -7,7 +7,7 @@ import type { ElectricityBill } from '../types';
 import { formatCurrency } from '../utils/formatters';
 
 export const ElectricityScreen: React.FC = () => {
-  const { fetchElectricityBill, openPinModal, completePayment, navigateTo } = useApp();
+  const { fetchElectricityBill, openPinModal, completePayment, navigateTo, t, isRtl, language } = useApp();
 
   const [consumerNo, setConsumerNo] = useState<string>('134567');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -28,15 +28,15 @@ export const ElectricityScreen: React.FC = () => {
     if (!bill) return;
 
     openPinModal({
-      title: 'Saudi Electricity Company (SEC)',
+      title: t(bill.providerName, 'Saudi Electricity Company (SEC)'),
       amount: bill.amount,
-      subTitle: `SEC Bill • SADAD Account: ${bill.consumerNumber}`,
+      subTitle: `${language === 'العربية' ? 'فاتورة الكهرباء • حساب المشترك:' : 'SEC Bill • Consumer Account:'} ${bill.consumerNumber}`,
       onSuccess: async () => {
         const txn = await completePayment({
           title: bill.providerName,
-          subTitle: 'SADAD Electricity Bill Payment',
+          subTitle: language === 'العربية' ? 'دفع فاتورة الكهرباء' : 'Electricity Bill Payment',
           amount: bill.amount,
-          avatarInitials: 'SE',
+          avatarInitials: 'SEC',
           category: 'Bills',
         });
         navigateTo('PAYMENT_SUCCESS', { transaction: txn });
@@ -46,7 +46,7 @@ export const ElectricityScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '24px' }}>
-      <AppHeader title="Electricity" showBack showSettings />
+      <AppHeader title={t('home.electricity', 'Electricity')} showBack showSettings />
 
       <div style={{ padding: '20px' }}>
         {/* Electricity Header Card */}
@@ -81,10 +81,10 @@ export const ElectricityScreen: React.FC = () => {
             <Zap size={28} />
           </div>
           <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>
-            Electricity Bill
+            {language === 'العربية' ? 'فاتورة الكهرباء' : 'Electricity Bill'}
           </h2>
           <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 800, marginTop: '4px' }}>
-            Saudi Electricity Company (SEC) • SADAD Verified
+            {language === 'العربية' ? 'الشركة السعودية للكهرباء (SEC) • معتمد' : 'Saudi Electricity Company (SEC) • Verified Provider'}
           </div>
         </div>
 
@@ -100,10 +100,10 @@ export const ElectricityScreen: React.FC = () => {
               textTransform: 'uppercase',
               marginBottom: '8px',
               display: 'block',
-              marginLeft: '4px',
+              marginInlineStart: '4px',
             }}
           >
-            SADAD Account / Consumer Number
+            {t('bills.consumer_num', 'Consumer / Account Number')}
           </label>
           <div
             style={{
@@ -116,13 +116,13 @@ export const ElectricityScreen: React.FC = () => {
               boxShadow: 'none',
             }}
           >
-            <Zap size={18} color="#7FE87F" style={{ marginRight: '10px', flexShrink: 0 }} />
+            <Zap size={18} color="#7FE87F" style={{ marginInlineEnd: '10px', flexShrink: 0 }} />
             <input
               id="elec-consumer-input"
               type="text"
               value={consumerNo}
               onChange={(e) => setConsumerNo(e.target.value)}
-              placeholder="Enter consumer number"
+              placeholder={language === 'العربية' ? 'أدخل رقم الحساب / المشترك' : 'Enter consumer number'}
               style={{
                 width: '100%',
                 background: 'none',
@@ -132,6 +132,8 @@ export const ElectricityScreen: React.FC = () => {
                 fontWeight: '700',
                 outline: 'none',
                 fontVariantNumeric: 'tabular-nums',
+                direction: 'ltr',
+                textAlign: isRtl ? 'right' : 'left',
               }}
             />
           </div>
@@ -142,10 +144,10 @@ export const ElectricityScreen: React.FC = () => {
             {isLoading ? (
               <>
                 <Loader2 size={18} className="spin" style={{ animation: 'spin 1s linear infinite' }} />
-                Fetching Bill...
+                {language === 'العربية' ? 'جاري الاستعلام عن الفاتورة...' : 'Fetching Bill...'}
               </>
             ) : (
-              'Fetch Bill'
+              language === 'العربية' ? 'استعلام عن الفاتورة' : 'Fetch Bill'
             )}
           </PrimaryButton>
         ) : (
@@ -162,28 +164,28 @@ export const ElectricityScreen: React.FC = () => {
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <span style={{ color: '#A2A2BA', fontSize: '13px' }}>Biller</span>
-                <span style={{ fontWeight: '700', fontSize: '13px', color: '#FFFFFF' }}>{bill.providerName}</span>
+                <span style={{ color: '#A2A2BA', fontSize: '13px' }}>{language === 'العربية' ? 'مقدم الخدمة' : 'Biller'}</span>
+                <span style={{ fontWeight: '700', fontSize: '13px', color: '#FFFFFF' }}>{t(bill.providerName, bill.providerName)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <span style={{ color: '#A2A2BA', fontSize: '13px' }}>Consumer No</span>
+                <span style={{ color: '#A2A2BA', fontSize: '13px' }}>{t('bills.consumer_num', 'Consumer No')}</span>
                 <span style={{ fontWeight: '700', fontSize: '13px', color: '#FFFFFF', fontVariantNumeric: 'tabular-nums' }}>{bill.consumerNumber}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <span style={{ color: '#A2A2BA', fontSize: '13px' }}>Due Date</span>
+                <span style={{ color: '#A2A2BA', fontSize: '13px' }}>{t('bills.due_date', 'Due Date')}</span>
                 <span style={{ fontWeight: '700', fontSize: '13px', color: '#FF4757' }}>{bill.dueDate}</span>
               </div>
 
               <div style={{ borderTop: '1px solid #2C2C44', paddingTop: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ color: '#A2A2BA', fontSize: '13px', fontWeight: '700' }}>Amount Due</span>
+                <span style={{ color: '#A2A2BA', fontSize: '13px', fontWeight: '700' }}>{t('bills.bill_amount', 'Amount Due')}</span>
                 <span style={{ fontSize: '22px', fontWeight: '900', color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>
-                  {formatCurrency(bill.amount)}
+                  {formatCurrency(bill.amount, language)}
                 </span>
               </div>
             </div>
 
             <PrimaryButton onClick={handlePayBill}>
-              Pay {formatCurrency(bill.amount)}
+              {language === 'العربية' ? `سداد ${formatCurrency(bill.amount, language)}` : `Pay ${formatCurrency(bill.amount)}`}
             </PrimaryButton>
           </div>
         )}

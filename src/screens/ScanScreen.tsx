@@ -4,7 +4,7 @@ import { useApp } from '../state/AppContext';
 import { designSystem } from '../design-system';
 
 export const ScanScreen: React.FC = () => {
-  const { isScanModalOpen, setIsScanModalOpen, contacts, navigateTo } = useApp();
+  const { isScanModalOpen, setIsScanModalOpen, contacts, navigateTo, t, language } = useApp();
   const [hasCameraPermission, setHasCameraPermission] = useState<boolean | null>(null);
   const [isFlashOn, setIsFlashOn] = useState<boolean>(false);
   const [isScanning, setIsScanning] = useState<boolean>(true);
@@ -129,7 +129,7 @@ export const ScanScreen: React.FC = () => {
     const selectedContact = contacts[0] || {
       id: 'merchant-qr-1',
       name: 'Star Supermarket',
-      upiId: 'starsupermarket@icici',
+      upiId: 'starsupermarket@sarie',
       avatarInitials: 'SS',
     };
     handleScanSuccess(selectedContact, 350);
@@ -175,7 +175,7 @@ export const ScanScreen: React.FC = () => {
       >
         <button
           onClick={() => setIsScanModalOpen(false)}
-          aria-label="Close Scanner"
+          aria-label={t('btn.close', 'Close Scanner')}
           style={{
             backgroundColor: '#1E1E32',
             border: '1px solid #2C2C44',
@@ -194,10 +194,10 @@ export const ScanScreen: React.FC = () => {
 
         <div style={{ textAlign: 'center' }}>
           <h2 style={{ color: '#FFFFFF', fontSize: '16px', fontWeight: '800', margin: 0 }}>
-            Scan UPI QR
+            {t('scan.title', 'Scan QR Code')}
           </h2>
           <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: '600' }}>
-            Instant Payment
+            {language === 'العربية' ? 'دفع فوري عبر شبكة سريع' : 'Instant Payment'}
           </span>
         </div>
 
@@ -271,7 +271,7 @@ export const ScanScreen: React.FC = () => {
             transition: 'border 0.3s ease',
           }}
         >
-          {/* Corner Guides (alph pay Lime Green) */}
+          {/* Corner Guides (QTPay Emerald Green) */}
           <div
             style={{
               position: 'absolute',
@@ -353,7 +353,7 @@ export const ScanScreen: React.FC = () => {
             >
               <CheckCircle size={48} color="#7FE87F" />
               <span style={{ color: '#FFFFFF', fontWeight: '700', fontSize: '15px' }}>
-                QR Verified!
+                {language === 'العربية' ? 'تم التحقق من الرمز بنجاح!' : 'QR Verified!'}
               </span>
             </div>
           )}
@@ -376,8 +376,8 @@ export const ScanScreen: React.FC = () => {
           }}
         >
           {hasCameraPermission === false
-            ? 'Camera unavailable. Tap demo merchant:'
-            : 'Point at any QR code to pay'}
+            ? language === 'العربية' ? 'الكاميرا غير متاحة، اختر متجر تجريبي:' : 'Camera unavailable. Tap demo merchant:'
+            : t('scan.align_qr', 'Point at any QR code to pay')}
         </p>
 
         {/* Quick Sample Merchant Presets for Instant Demo Scanning */}
@@ -395,7 +395,7 @@ export const ScanScreen: React.FC = () => {
           <button
             onClick={() =>
               handleScanSuccess(
-                { id: 'm-1', name: 'Star Supermarket', upiId: 'star@hdfc', avatarInitials: 'SS' },
+                { id: 'm-1', name: 'Star Supermarket', upiId: 'star@sarie', avatarInitials: 'SS' },
                 280
               )
             }
@@ -415,13 +415,13 @@ export const ScanScreen: React.FC = () => {
               boxShadow: 'none',
             }}
           >
-            <Store size={13} color="#7FE87F" /> Star Supermarket
+            <Store size={13} color="#7FE87F" /> {language === 'العربية' ? 'أسواق بنده' : 'Star Supermarket'}
           </button>
 
           <button
             onClick={() =>
               handleScanSuccess(
-                { id: 'm-2', name: 'Third Wave Coffee', upiId: 'thirdwave@icici', avatarInitials: 'TC' },
+                { id: 'm-2', name: 'Half Million Coffee', upiId: 'halfmillion@sarie', avatarInitials: 'HM' },
                 180
               )
             }
@@ -441,13 +441,13 @@ export const ScanScreen: React.FC = () => {
               boxShadow: 'none',
             }}
           >
-            <Coffee size={13} color="#7FE87F" /> Coffee House
+            <Coffee size={13} color="#7FE87F" /> {language === 'العربية' ? 'هاف مليون كافيه' : 'Half Million Coffee'}
           </button>
 
           <button
             onClick={() =>
               handleScanSuccess(
-                { id: 'm-3', name: 'Metro Recharge', upiId: 'metro@sbi', avatarInitials: 'MR' },
+                { id: 'm-3', name: 'SEC Electricity', upiId: 'sec@sarie', avatarInitials: 'SEC' },
                 100
               )
             }
@@ -467,7 +467,7 @@ export const ScanScreen: React.FC = () => {
               boxShadow: 'none',
             }}
           >
-            <Train size={13} color="#7FE87F" /> Metro Card
+            <Train size={13} color="#7FE87F" /> {language === 'العربية' ? 'فاتورة الكهرباء' : 'SEC Electricity'}
           </button>
         </div>
       </div>
@@ -502,11 +502,11 @@ export const ScanScreen: React.FC = () => {
               boxShadow: 'none',
             }}
           >
-            <ImageIcon size={16} color="#7FE87F" /> Upload QR
+            <ImageIcon size={16} color="#7FE87F" /> {t('scan.upload_gallery', 'Upload QR')}
           </button>
 
           <button
-            onClick={() => handleScanSuccess(contacts[0] || { name: 'Priya Menon', upiId: 'priya@paytm' })}
+            onClick={() => handleScanSuccess(contacts[0] || { name: 'Tariq Al-Otaibi', upiId: 'tariq@sarie' })}
             style={{
               backgroundColor: '#7FE87F',
               border: 'none',
@@ -523,7 +523,7 @@ export const ScanScreen: React.FC = () => {
               boxShadow: 'none',
             }}
           >
-            <Zap size={16} color="#0B0B14" /> Demo Pay
+            <Zap size={16} color="#0B0B14" /> {language === 'العربية' ? 'دفع تجريبي' : 'Demo Pay'}
           </button>
         </div>
       </div>

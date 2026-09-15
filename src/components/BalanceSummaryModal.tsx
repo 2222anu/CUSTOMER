@@ -2,6 +2,7 @@ import React from 'react';
 import { CheckCircle2, X, Landmark, ArrowRight } from 'lucide-react';
 import type { BankAccount } from '../types';
 import { formatCurrency } from '../utils/formatters';
+import { useApp } from '../state/AppContext';
 
 interface BalanceSummaryModalProps {
   isOpen: boolean;
@@ -18,6 +19,8 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
   totalBalance,
   onManageAccounts,
 }) => {
+  const { t, language, isRtl } = useApp();
+
   if (!isOpen) return null;
 
   return (
@@ -64,12 +67,12 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <CheckCircle2 size={20} color="#7FE87F" />
             <span style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>
-              Sarie Balance Verified
+              {language === 'العربية' ? 'رصيد سريع المعتمد' : 'Sarie Balance Verified'}
             </span>
           </div>
           <button
             onClick={onClose}
-            aria-label="Close"
+            aria-label={t('btn.close', 'Close')}
             style={{
               background: '#1E1E32',
               border: '1px solid #2C2C44',
@@ -99,72 +102,79 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
           }}
         >
           <div style={{ fontSize: '11px', fontWeight: 700, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-            Total Available Balance
+            {t('home.total_balance', 'Total Available Balance')}
           </div>
           <div style={{ fontSize: '26px', fontWeight: 900, marginTop: '4px', letterSpacing: '0.01em', color: '#7FE87F' }}>
-            {formatCurrency(totalBalance)}
+            {formatCurrency(totalBalance, language)}
           </div>
           <div style={{ fontSize: '11px', color: '#6E6E85', marginTop: '4px' }}>
-            Across {bankAccounts.length} Linked Bank Accounts
+            {language === 'العربية'
+              ? `عبر ${bankAccounts.length} حسابات بنكية سعودية مرتبطة`
+              : `Across ${bankAccounts.length} Linked Bank Accounts`}
           </div>
         </div>
 
         {/* Breakdown by Bank */}
         <div style={{ marginBottom: '16px' }}>
           <div style={{ fontSize: '12px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', marginBottom: '8px' }}>
-            Bank Accounts Breakdown
+            {language === 'العربية' ? 'تفاصيل الحسابات البنكية' : 'Bank Accounts Breakdown'}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {bankAccounts.map((bank) => (
-              <div
-                key={bank.id}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '12px',
-                  borderRadius: '10px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div
-                    style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '8px',
-                      backgroundColor: 'rgba(127, 232, 127, 0.12)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: '#7FE87F',
-                      border: '1px solid rgba(127, 232, 127, 0.3)',
-                    }}
-                  >
-                    <Landmark size={16} />
+            {bankAccounts.map((bank) => {
+              const displayBankName = t(bank.bankName, bank.bankName);
+              const displayAccType = t(bank.accountType, bank.accountType);
+
+              return (
+                <div
+                  key={bank.id}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '12px',
+                    borderRadius: '10px',
+                    backgroundColor: '#1E1E32',
+                    border: '1px solid #2C2C44',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div
+                      style={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '8px',
+                        backgroundColor: 'rgba(127, 232, 127, 0.12)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#7FE87F',
+                        border: '1px solid rgba(127, 232, 127, 0.3)',
+                      }}
+                    >
+                      <Landmark size={16} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
+                        {displayBankName}
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#A2A2BA' }}>
+                        {displayAccType} • {bank.accountNumberMasked}
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
-                      {bank.bankName}
+                  <div style={{ textAlign: language === 'العربية' ? 'left' : 'right' }}>
+                    <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
+                      {formatCurrency(bank.balance, language)}
                     </div>
-                    <div style={{ fontSize: '11px', color: '#A2A2BA' }}>
-                      {bank.accountType} • {bank.accountNumberMasked}
-                    </div>
+                    {bank.isPrimary && (
+                      <span style={{ fontSize: '9px', fontWeight: 800, color: '#7FE87F' }}>
+                        {t('banks.primary', 'PRIMARY')}
+                      </span>
+                    )}
                   </div>
                 </div>
-                <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
-                    {formatCurrency(bank.balance)}
-                  </div>
-                  {bank.isPrimary && (
-                    <span style={{ fontSize: '9px', fontWeight: 800, color: '#7FE87F' }}>
-                      PRIMARY
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -191,7 +201,8 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
               gap: '6px',
             }}
           >
-            Manage Accounts <ArrowRight size={14} color="#7FE87F" />
+            {t('banks.title', 'Manage Accounts')}{' '}
+            <ArrowRight size={14} color="#7FE87F" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
           </button>
           <button
             onClick={onClose}
@@ -207,7 +218,7 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
               cursor: 'pointer',
             }}
           >
-            Done
+            {t('btn.done', 'Done')}
           </button>
         </div>
       </div>

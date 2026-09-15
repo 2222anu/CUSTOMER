@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Lock, Delete, CheckCircle2 } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { SamaLogo } from '../components/SamaLogo';
+import { toArabicNumerals } from '../utils/i18n';
 
 export const MerchantPinSetupScreen: React.FC = () => {
-  const { updateMerchantInfo, setUserRole, navigateTo } = useApp();
+  const { updateMerchantInfo, setUserRole, navigateTo, language, isRtl } = useApp();
+  const isAr = language === 'العربية';
   const [pin, setPin] = useState<string>('');
   const [confirmPin, setConfirmPin] = useState<string>('');
   const [step, setStep] = useState<'create' | 'confirm'>('create');
@@ -36,7 +38,7 @@ export const MerchantPinSetupScreen: React.FC = () => {
               navigateTo('MERCHANT_HOME');
             }, 1200);
           } else {
-            setErrorMsg('PINs do not match. Please re-enter.');
+            setErrorMsg(isAr ? 'الرمز غير متطابق. يرجى إعادة الإدخال.' : 'PINs do not match. Please re-enter.');
             setTimeout(() => {
               setConfirmPin('');
             }, 600);
@@ -61,6 +63,7 @@ export const MerchantPinSetupScreen: React.FC = () => {
   };
 
   const currentPin = step === 'create' ? pin : confirmPin;
+  const digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
   return (
     <div
@@ -95,12 +98,14 @@ export const MerchantPinSetupScreen: React.FC = () => {
           <Lock size={28} color="#7FE87F" />
         </div>
         <h2 style={{ fontSize: '20px', fontWeight: 800, margin: '0 0 6px 0', color: '#FFFFFF' }}>
-          {step === 'create' ? 'Create Merchant PIN' : 'Confirm Merchant PIN'}
+          {step === 'create'
+            ? (isAr ? 'تعيين الرمز السري للتاجر' : 'Create Merchant PIN')
+            : (isAr ? 'تأكيد الرمز السري للتاجر' : 'Confirm Merchant PIN')}
         </h2>
         <p style={{ fontSize: '13px', color: '#A2A2BA', margin: 0 }}>
           {step === 'create'
-            ? 'Set a 4-digit encrypted PIN for SoftPOS terminal and refunds'
-            : 'Re-enter your 4-digit security PIN'}
+            ? (isAr ? 'عيّن رمزاً سرياً مكوناً من ٤ أرقام لعمليات نقاط البيع والاسترداد' : 'Set a 4-digit encrypted PIN for SoftPOS terminal and refunds')
+            : (isAr ? 'أعد إدخال رمز الأمان المكون من ٤ أرقام' : 'Re-enter your 4-digit security PIN')}
         </p>
       </div>
 
@@ -134,19 +139,19 @@ export const MerchantPinSetupScreen: React.FC = () => {
 
         {isSuccess && (
           <div style={{ fontSize: '13px', color: '#7FE87F', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <CheckCircle2 size={16} /> Merchant PIN Created Successfully
+            <CheckCircle2 size={16} /> {isAr ? 'تم تعيين الرمز السري للتاجر بنجاح' : 'Merchant PIN Created Successfully'}
           </div>
         )}
       </div>
 
-      {/* Interactive Numeric Keypad */}
-      <div style={{ width: '100%', maxWidth: '320px', margin: '0 auto' }}>
+      {/* Keypad */}
+      <div style={{ width: '100%', maxWidth: '300px', margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '14px' }}>
-          {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
+          {digits.map((d) => (
             <button
-              key={digit}
+              key={d}
               type="button"
-              onClick={() => handleKeyPress(digit)}
+              onClick={() => handleKeyPress(d)}
               className="interactive-tap"
               style={{
                 height: '56px',
@@ -162,36 +167,11 @@ export const MerchantPinSetupScreen: React.FC = () => {
                 justifyContent: 'center',
               }}
             >
-              {digit}
+              {isAr ? toArabicNumerals(d) : d}
             </button>
           ))}
 
-          {/* Reset / Empty */}
-          <button
-            type="button"
-            onClick={() => {
-              setStep('create');
-              setPin('');
-              setConfirmPin('');
-              setErrorMsg('');
-            }}
-            className="interactive-tap"
-            style={{
-              height: '56px',
-              borderRadius: '16px',
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
-              color: '#A2A2BA',
-              fontSize: '12px',
-              fontWeight: 700,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            Clear
-          </button>
+          <div />
 
           {/* Zero */}
           <button
@@ -212,7 +192,7 @@ export const MerchantPinSetupScreen: React.FC = () => {
               justifyContent: 'center',
             }}
           >
-            0
+            {isAr ? '٠' : '0'}
           </button>
 
           {/* Delete */}
@@ -232,28 +212,17 @@ export const MerchantPinSetupScreen: React.FC = () => {
               justifyContent: 'center',
             }}
           >
-            <Delete size={20} />
+            <Delete size={22} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
           </button>
         </div>
       </div>
 
       {/* SAMA Dock */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '6px',
-          width: '100%',
-          textAlign: 'center',
-          marginTop: '20px',
-        }}
-      >
-        <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-          Encrypted with SAMA 256-Bit Hardware Security
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '20px' }}>
+        <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 700 }}>
+          {isAr ? 'محمي بواسطة تشفير البنك المركزي السعودي' : 'SAMA 256-Bit Hardware Encrypted PIN'}
         </span>
-        <SamaLogo height={18} themeMode="green" />
+        <SamaLogo height={14} themeMode="green" />
       </div>
     </div>
   );

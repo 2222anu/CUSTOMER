@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Send, X, Shield, CheckCheck } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
+import { useApp } from '../state/AppContext';
+import { translateText } from '../utils/i18n';
 
 interface ChatThread {
   id: string;
@@ -13,39 +15,60 @@ interface ChatThread {
 }
 
 export const MessagesScreen: React.FC = () => {
+  const { language, isRtl } = useApp();
   const [threads, setThreads] = useState<ChatThread[]>([
     {
       id: 'chat-1',
-      name: 'alph pay Support',
-      avatarInitials: 'AP',
+      name: language === 'ar' ? 'فريق دعم كيو تي باي' : 'alph pay Support',
+      avatarInitials: 'QT',
       isSupport: true,
-      time: '10:42 AM',
+      time: language === 'ar' ? '١٠:٤٢ ص' : '10:42 AM',
       unread: true,
       messages: [
-        { sender: 'them', text: 'Hello! Welcome to alph pay 24/7 Priority Support.', time: '10:40 AM' },
-        { sender: 'them', text: 'Your electricity bill payment of SAR 2,620.14 was credited successfully to Saudi Electricity Company (SEC). Ref: SARIE94820184', time: '10:42 AM' },
+        {
+          sender: 'them',
+          text: language === 'ar' ? 'مرحباً بك! أهلاً بك في دعم كيو تي باي على مدار الساعة.' : 'Hello! Welcome to alph pay 24/7 Priority Support.',
+          time: language === 'ar' ? '١٠:٤٠ ص' : '10:40 AM',
+        },
+        {
+          sender: 'them',
+          text: language === 'ar' ? 'تم دفع فاتورة الكهرباء بمبلغ ٢,٦٢٠.١٤ ر.س بنجاح لدى الشركة السعودية للكهرباء (SEC). رقم المرجع: SARIE94820184' : 'Your electricity bill payment of SAR 2,620.14 was credited successfully to Saudi Electricity Company (SEC). Ref: SARIE94820184',
+          time: language === 'ar' ? '١٠:٤٢ ص' : '10:42 AM',
+        },
       ],
     },
     {
       id: 'chat-2',
-      name: 'Al Rajhi Bank Official',
+      name: language === 'ar' ? 'إشعارات مصرف الراجحي الرسمية' : 'Al Rajhi Bank Official',
       avatarInitials: 'AR',
       isSupport: true,
-      time: '10:41 AM',
+      time: language === 'ar' ? '١٠:٤١ ص' : '10:41 AM',
       unread: false,
       messages: [
-        { sender: 'them', text: 'Al Rajhi Bank Alert: A/c SA03 •••• 4821 debited by SAR 2,620.14 on 10-Sep-26 via Sarie. Info: SEC SADAD Payment.', time: '10:41 AM' },
+        {
+          sender: 'them',
+          text: language === 'ar' ? 'تنبيه مصرف الراجحي: تم خصم مبلغ ٢,٦٢٠.١٤ ر.س من حسابكم SA03 •••• 4821 عبر سريع. البيان: دفع فاتورة SEC.' : 'Al Rajhi Bank Alert: A/c SA03 •••• 4821 debited by SAR 2,620.14 on 10-Sep-26 via Sarie. Info: SEC Utility Payment.',
+          time: language === 'ar' ? '١٠:٤١ ص' : '10:41 AM',
+        },
       ],
     },
     {
       id: 'chat-3',
-      name: 'Tariq Al-Otaibi',
+      name: language === 'ar' ? 'طارق العتيبي' : 'Tariq Al-Otaibi',
       avatarInitials: 'TO',
-      time: 'Yesterday',
+      time: language === 'ar' ? 'أمس' : 'Yesterday',
       unread: false,
       messages: [
-        { sender: 'me', text: 'Sent SAR 500 for our dinner split!', time: 'Yesterday 8:30 PM' },
-        { sender: 'them', text: 'Thanks for the instant Sarie transfer! Received.', time: 'Yesterday 8:32 PM' },
+        {
+          sender: 'me',
+          text: language === 'ar' ? 'تم تحويل ٥٠٠ ر.س لقسمة العشاء!' : 'Sent SAR 500 for our dinner split!',
+          time: language === 'ar' ? 'أمس ٨:٣٠ م' : 'Yesterday 8:30 PM',
+        },
+        {
+          sender: 'them',
+          text: language === 'ar' ? 'شكراً لك على التحويل الفوري عبر ساريع! وصل المبلغ.' : 'Thanks for the instant Sarie transfer! Received.',
+          time: language === 'ar' ? 'أمس ٨:٣٢ م' : 'Yesterday 8:32 PM',
+        },
       ],
     },
   ]);
@@ -68,14 +91,14 @@ export const MessagesScreen: React.FC = () => {
     const newMsg = {
       sender: 'me' as const,
       text: inputText.trim(),
-      time: 'Just now',
+      time: language === 'ar' ? 'الآن' : 'Just now',
     };
 
     const updatedMessages = [...activeChat.messages, newMsg];
     setActiveChat({ ...activeChat, messages: updatedMessages });
 
     setThreads((prev) =>
-      prev.map((t) => (t.id === activeChat.id ? { ...t, messages: updatedMessages, time: 'Just now' } : t))
+      prev.map((t) => (t.id === activeChat.id ? { ...t, messages: updatedMessages, time: language === 'ar' ? 'الآن' : 'Just now' } : t))
     );
 
     setInputText('');
@@ -85,8 +108,8 @@ export const MessagesScreen: React.FC = () => {
       setTimeout(() => {
         const replyMsg = {
           sender: 'them' as const,
-          text: 'Thank you for reaching out. A customer support specialist is reviewing your inquiry.',
-          time: 'Just now',
+          text: language === 'ar' ? 'شكراً لتواصلك معنا. يقوم أحد أخصائيي الدعم بمراجعة طلبك حالياً.' : 'Thank you for reaching out. A customer support specialist is reviewing your inquiry.',
+          time: language === 'ar' ? 'الآن' : 'Just now',
         };
         setActiveChat((curr) => (curr && curr.id === activeChat.id ? { ...curr, messages: [...curr.messages, replyMsg] } : curr));
       }, 1000);
@@ -95,11 +118,11 @@ export const MessagesScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
-      <AppHeader title="Messages & Alerts" showBack showSettings={false} />
+      <AppHeader title={translateText('Messages & Alerts', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
-        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
-          Conversations & System Alerts
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginInlineStart: '4px' }}>
+          {translateText('Conversations & System Alerts', language)}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -148,7 +171,7 @@ export const MessagesScreen: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div style={{ fontSize: '11px', fontWeight: 700, color: thread.unread ? '#7FE87F' : '#808099', marginLeft: '10px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: thread.unread ? '#7FE87F' : '#808099', marginInlineStart: '10px' }}>
                 {thread.time}
               </div>
             </div>
@@ -219,7 +242,7 @@ export const MessagesScreen: React.FC = () => {
                 </div>
                 <div>
                   <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>{activeChat.name}</div>
-                  <div style={{ fontSize: '11px', color: '#7FE87F' }}>Online • alph pay Messaging</div>
+                  <div style={{ fontSize: '11px', color: '#7FE87F' }}>{translateText('Online • QTPay Messaging', language)}</div>
                 </div>
               </div>
               <button
@@ -253,7 +276,9 @@ export const MessagesScreen: React.FC = () => {
                     backgroundColor: msg.sender === 'me' ? '#7FE87F' : '#2A2A3E',
                     color: msg.sender === 'me' ? '#000000' : '#FFFFFF',
                     padding: '12px 16px',
-                    borderRadius: msg.sender === 'me' ? '16px 16px 2px 16px' : '16px 16px 16px 2px',
+                    borderRadius: msg.sender === 'me'
+                      ? isRtl ? '16px 2px 16px 16px' : '16px 16px 2px 16px'
+                      : isRtl ? '2px 16px 16px 16px' : '16px 16px 16px 2px',
                     border: msg.sender === 'me' ? 'none' : '1px solid #4D4D6B',
                   }}
                 >
@@ -262,11 +287,11 @@ export const MessagesScreen: React.FC = () => {
                     style={{
                       fontSize: '10px',
                       color: msg.sender === 'me' ? 'rgba(0, 0, 0, 0.7)' : '#808099',
-                      textAlign: 'right',
+                      textAlign: isRtl ? 'left' : 'right',
                       marginTop: '4px',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'flex-end',
+                      justifyContent: isRtl ? 'flex-start' : 'flex-end',
                       gap: '4px',
                     }}
                   >
@@ -283,7 +308,7 @@ export const MessagesScreen: React.FC = () => {
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder="Type a message..."
+                placeholder={translateText('Type a message...', language)}
                 style={{
                   flex: 1,
                   padding: '12px 16px',
@@ -311,6 +336,7 @@ export const MessagesScreen: React.FC = () => {
                   justifyContent: 'center',
                   cursor: 'pointer',
                   flexShrink: 0,
+                  transform: isRtl ? 'scaleX(-1)' : 'none',
                 }}
               >
                 <Send size={16} />
@@ -322,3 +348,4 @@ export const MessagesScreen: React.FC = () => {
     </div>
   );
 };
+

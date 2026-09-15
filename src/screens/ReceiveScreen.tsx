@@ -8,9 +8,10 @@ import { SecondaryButton } from '../components/SecondaryButton';
 import { useApp } from '../state/AppContext';
 import { qrService } from '../services/qrService';
 import { formatCurrency } from '../utils/formatters';
+import { toArabicNumerals } from '../utils/i18n';
 
 export const ReceiveScreen: React.FC = () => {
-  const { user, navigateTo, receiveMoney, bankAccounts } = useApp();
+  const { user, navigateTo, receiveMoney, bankAccounts, t, language, isRtl } = useApp();
   const [copied, setCopied] = useState(false);
   const [customAmount, setCustomAmount] = useState<string>('');
   const [receivedToast, setReceivedToast] = useState<{ show: boolean; amount: number; sender: string } | null>(null);
@@ -18,6 +19,8 @@ export const ReceiveScreen: React.FC = () => {
   const primaryBank = bankAccounts.find((b) => b.isPrimary) || bankAccounts[0];
   const numAmount = parseFloat(customAmount) || 0;
   const upiQrString = qrService.getUpiQrString(user.upiId, user.name, numAmount > 0 ? numAmount : undefined);
+  const displayName = t(user.name, user.name);
+  const primaryBankName = primaryBank ? t(primaryBank.bankName, primaryBank.bankName) : '';
 
   const playSuccessChime = () => {
     try {
@@ -58,8 +61,8 @@ export const ReceiveScreen: React.FC = () => {
     if (navigator.share) {
       navigator
         .share({
-          title: 'alph pay Sarie ID',
-          text: `Pay ${user.name} via alph pay: ${user.upiId}${numAmount > 0 ? ` (Amount: ${formatCurrency(numAmount)})` : ''}`,
+          title: 'QTPay Sarie ID',
+          text: `${language === 'العربية' ? 'ادفع إلى' : 'Pay'} ${displayName} via QTPay: ${user.upiId}${numAmount > 0 ? ` (${language === 'العربية' ? 'المبلغ' : 'Amount'}: ${formatCurrency(numAmount, language)})` : ''}`,
         })
         .catch(() => {});
     } else {
@@ -76,7 +79,7 @@ export const ReceiveScreen: React.FC = () => {
       senderName: randomSender,
       senderUpi: `${randomSender.toLowerCase().replace(/[^a-z]/g, '')}@sarie`,
       amount: amt,
-      note: 'Payment via alph pay Sarie QR',
+      note: 'Payment via QTPay Sarie QR',
     });
 
     playSuccessChime();
@@ -86,7 +89,7 @@ export const ReceiveScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '30px' }}>
-      <AppHeader title="Receive Money" showBack />
+      <AppHeader title={t('receive.title', 'Receive Money')} showBack />
 
       {/* Floating Success Toast when Money is Received */}
       {receivedToast && (
@@ -129,10 +132,10 @@ export const ReceiveScreen: React.FC = () => {
             </div>
             <div>
               <div style={{ fontSize: '14px', fontWeight: 800, color: '#7FE87F' }}>
-                +{formatCurrency(receivedToast.amount)} Received
+                +{formatCurrency(receivedToast.amount, language)} {language === 'العربية' ? 'تم الاستلام' : 'Received'}
               </div>
               <div style={{ fontSize: '12px', color: '#A2A2BA' }}>
-                From {receivedToast.sender}
+                {language === 'العربية' ? 'من' : 'From'} {t(receivedToast.sender, receivedToast.sender)}
               </div>
             </div>
           </div>
@@ -149,7 +152,7 @@ export const ReceiveScreen: React.FC = () => {
               cursor: 'pointer',
             }}
           >
-            View
+            {language === 'العربية' ? 'عرض' : 'View'}
           </button>
         </div>
       )}
@@ -188,14 +191,14 @@ export const ReceiveScreen: React.FC = () => {
             }}
           >
             {user.avatarUrl ? (
-              <img src={user.avatarUrl} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={user.avatarUrl} alt={displayName} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             ) : (
               user.avatarInitials
             )}
           </div>
 
           <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
-            {user.name}
+            {displayName}
           </h2>
 
           {/* Copyable UPI ID pill */}
@@ -240,7 +243,7 @@ export const ReceiveScreen: React.FC = () => {
                 borderRadius: '12px',
               }}
             >
-              Amount: {formatCurrency(numAmount)}
+              {language === 'العربية' ? 'المبلغ المحدد:' : 'Amount:'} {formatCurrency(numAmount, language)}
             </div>
           ) : (
             <div
@@ -255,7 +258,9 @@ export const ReceiveScreen: React.FC = () => {
                 border: '1px solid #2C2C44',
               }}
             >
-              Any Sarie App • Direct to {primaryBank?.bankName || 'Bank'}
+              {language === 'العربية'
+                ? `أي تطبيق بنكي سعودي • إيداع مباشر في ${primaryBankName}`
+                : `Any Sarie App • Direct to ${primaryBankName || 'Bank'}`}
             </div>
           )}
 
@@ -273,7 +278,7 @@ export const ReceiveScreen: React.FC = () => {
             }}
           >
             <div style={{ fontSize: '10.5px', color: '#A2A2BA', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-              Official Payment Partner
+              {t('home.payment_partner', 'Official Payment Partner')}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <PaymentPartnerLogo height={22} themeMode="dark" />
@@ -289,12 +294,12 @@ export const ReceiveScreen: React.FC = () => {
             borderRadius: '16px',
             padding: '14px 16px',
             marginBottom: '16px',
-            textAlign: 'left',
+            textAlign: isRtl ? 'right' : 'left',
             boxShadow: 'none',
           }}
         >
           <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF', marginBottom: '8px' }}>
-            Set Amount (Optional)
+            {language === 'العربية' ? 'تحديد المبلغ (اختياري)' : 'Set Amount (Optional)'}
           </div>
           <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
             <div
@@ -308,10 +313,12 @@ export const ReceiveScreen: React.FC = () => {
                 padding: '0 12px',
               }}
             >
-              <span style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F', marginRight: '6px' }}>SAR</span>
+              <span style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F', marginInlineEnd: '6px' }}>
+                {language === 'العربية' ? 'ر.س' : 'SAR'}
+              </span>
               <input
                 type="number"
-                placeholder="Enter amount"
+                placeholder={language === 'العربية' ? 'أدخل المبلغ' : 'Enter amount'}
                 value={customAmount}
                 onChange={(e) => setCustomAmount(e.target.value)}
                 style={{
@@ -323,6 +330,7 @@ export const ReceiveScreen: React.FC = () => {
                   fontSize: '15px',
                   fontWeight: 700,
                   color: '#FFFFFF',
+                  textAlign: isRtl ? 'right' : 'left',
                 }}
               />
               {customAmount && (
@@ -330,7 +338,7 @@ export const ReceiveScreen: React.FC = () => {
                   onClick={() => setCustomAmount('')}
                   style={{ background: 'none', border: 'none', color: '#6E6E85', cursor: 'pointer', fontSize: '12px' }}
                 >
-                  Clear
+                  {language === 'العربية' ? 'مسح' : 'Clear'}
                 </button>
               )}
             </div>
@@ -353,7 +361,7 @@ export const ReceiveScreen: React.FC = () => {
                   cursor: 'pointer',
                 }}
               >
-                SAR {amt}
+                {language === 'العربية' ? `${toArabicNumerals(amt)} ر.س` : `SAR ${amt}`}
               </button>
             ))}
           </div>
@@ -381,19 +389,21 @@ export const ReceiveScreen: React.FC = () => {
               boxShadow: 'none',
             }}
           >
-            <Sparkles size={18} color="#0B0B14" /> Receive Demo Payment ({formatCurrency(numAmount > 0 ? numAmount : 500)})
+            <Sparkles size={18} color="#0B0B14" />{' '}
+            {language === 'العربية'
+              ? `استلام دفعة تجريبية (${formatCurrency(numAmount > 0 ? numAmount : 500, language)})`
+              : `Receive Demo Payment (${formatCurrency(numAmount > 0 ? numAmount : 500)})`}
           </button>
 
           <PrimaryButton onClick={() => navigateTo('REQUEST_MONEY')}>
-            <Download size={18} /> Request Money
+            <Download size={18} /> {t('home.request_money', 'Request Money')}
           </PrimaryButton>
 
           <SecondaryButton onClick={handleShare}>
-            <Share2 size={18} /> Share QR Code
+            <Share2 size={18} /> {t('receive.share_qr', 'Share QR Code')}
           </SecondaryButton>
         </div>
       </div>
     </div>
   );
 };
-

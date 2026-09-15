@@ -6,7 +6,7 @@ import { ZatcaLogo } from '../components/ZatcaLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 
 export const KycModal: React.FC = () => {
-  const { isKycModalOpen, setIsKycModalOpen, merchantInfo, updateMerchantInfo, navigateTo } = useApp();
+  const { isKycModalOpen, setIsKycModalOpen, merchantInfo, updateMerchantInfo, navigateTo, t, isRtl, language } = useApp();
   const [nationalId, setNationalId] = useState(merchantInfo.nationalId || '1098472910');
   const [crNumber, setCrNumber] = useState(merchantInfo.crNumber || 'CR-1010849201');
   const [isVerifying, setIsVerifying] = useState(false);
@@ -18,11 +18,11 @@ export const KycModal: React.FC = () => {
   const handleVerify = (e: React.FormEvent) => {
     e.preventDefault();
     if (nationalId.replace(/\D/g, '').length < 10) {
-      setErrorMsg('Please enter a valid 10-digit National ID or Iqama Number.');
+      setErrorMsg(language === 'العربية' ? 'يرجى إدخال رقم هوية وطنية أو إقامة صحيح من ١٠ أرقام.' : 'Please enter a valid 10-digit National ID or Iqama Number.');
       return;
     }
     if (!crNumber.trim()) {
-      setErrorMsg('Please enter your Commercial Registration (CR) Number.');
+      setErrorMsg(language === 'العربية' ? 'يرجى إدخال رقم السجل التجاري للمنشأة.' : 'Please enter your Commercial Registration (CR) Number.');
       return;
     }
 
@@ -95,17 +95,17 @@ export const KycModal: React.FC = () => {
             </div>
             <div>
               <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>
-                SAMA & ZATCA e-KYC
+                {t('sec.absher_kyc', 'SAMA & ZATCA e-KYC')}
               </h3>
               <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
-                Absher Business Validation
+                {language === 'العربية' ? 'التحقق التجاري عبر أبشر' : 'Absher Business Validation'}
               </span>
             </div>
           </div>
 
           <button
             onClick={() => !isVerifying && setIsKycModalOpen(false)}
-            aria-label="Close"
+            aria-label={t('btn.close', 'Close')}
             style={{
               background: '#1E1E32',
               border: '1px solid #2C2C44',
@@ -141,10 +141,12 @@ export const KycModal: React.FC = () => {
               <CheckCircle2 size={36} color="#7FE87F" />
             </div>
             <h4 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>
-              Identity Verified via Absher
+              {language === 'العربية' ? 'تم التحقق من الهوية عبر منصة أبشر' : 'Identity Verified via Absher'}
             </h4>
             <p style={{ fontSize: '13px', color: '#A2A2BA', margin: 0 }}>
-              SAMA regulatory requirements fulfilled. Directing to Merchant Business Profile...
+              {language === 'العربية'
+                ? 'تم استيفاء متطلبات البنك المركزي وهيئة الزكاة. جاري الانتقال للملف التجاري...'
+                : 'SAMA regulatory requirements fulfilled. Directing to Merchant Business Profile...'}
             </p>
           </div>
         ) : (
@@ -162,7 +164,7 @@ export const KycModal: React.FC = () => {
                   display: 'block',
                 }}
               >
-                National ID / Iqama Number (10 Digits)
+                {t('sec.national_id', 'National ID / Iqama Number (10 Digits)')}
               </label>
               <div
                 style={{
@@ -174,7 +176,7 @@ export const KycModal: React.FC = () => {
                   padding: '13px 16px',
                 }}
               >
-                <UserCheck size={18} color="#7FE87F" style={{ marginRight: '12px', flexShrink: 0 }} />
+                <UserCheck size={18} color="#7FE87F" style={{ marginInlineEnd: '12px', flexShrink: 0 }} />
                 <input
                   type="text"
                   maxLength={10}
@@ -191,6 +193,8 @@ export const KycModal: React.FC = () => {
                     color: '#FFFFFF',
                     width: '100%',
                     fontVariantNumeric: 'tabular-nums',
+                    direction: 'ltr',
+                    textAlign: isRtl ? 'right' : 'left',
                   }}
                 />
               </div>
@@ -209,7 +213,7 @@ export const KycModal: React.FC = () => {
                   display: 'block',
                 }}
               >
-                Commercial Registration (CR) Number
+                {t('zatca.cr_number', 'Commercial Registration (CR) Number')}
               </label>
               <div
                 style={{
@@ -221,7 +225,7 @@ export const KycModal: React.FC = () => {
                   padding: '13px 16px',
                 }}
               >
-                <FileText size={18} color="#7FE87F" style={{ marginRight: '12px', flexShrink: 0 }} />
+                <FileText size={18} color="#7FE87F" style={{ marginInlineEnd: '12px', flexShrink: 0 }} />
                 <input
                   type="text"
                   value={crNumber}
@@ -237,6 +241,8 @@ export const KycModal: React.FC = () => {
                     color: '#FFFFFF',
                     width: '100%',
                     textTransform: 'uppercase',
+                    direction: 'ltr',
+                    textAlign: isRtl ? 'right' : 'left',
                   }}
                 />
               </div>
@@ -264,7 +270,7 @@ export const KycModal: React.FC = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <ZatcaLogo variant="icon" size={18} />
                 <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 600 }}>
-                  SAMA & ZATCA Verified
+                  {language === 'العربية' ? 'معتمد من ساما وهيئة الزكاة والضريبة (ZATCA)' : 'SAMA & ZATCA Verified'}
                 </span>
               </div>
               <SamaLogo height={16} themeMode="green" />
@@ -275,11 +281,13 @@ export const KycModal: React.FC = () => {
               <PrimaryButton type="submit" disabled={isVerifying || nationalId.length < 10 || !crNumber.trim()}>
                 {isVerifying ? (
                   <>
-                    <Loader2 size={18} className="animate-spin" /> Verifying with Absher...
+                    <Loader2 size={18} className="animate-spin" />{' '}
+                    {language === 'العربية' ? 'جاري التحقق عبر أبشر...' : 'Verifying with Absher...'}
                   </>
                 ) : (
                   <>
-                    Verify & Continue <ArrowRight size={18} />
+                    {t('btn.verify', 'Verify & Continue')}{' '}
+                    <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
                   </>
                 )}
               </PrimaryButton>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Wifi, CheckCircle2 } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
+import { translateText, formatLocalizedNumber } from '../utils/i18n';
 import type { PaymentAcceptanceMethod } from '../types';
 
 export const TapCardScreen: React.FC = () => {
@@ -13,8 +14,12 @@ export const TapCardScreen: React.FC = () => {
     navigateTo,
     goBack,
     merchantInfo,
+    language,
+    isRtl,
+    t,
   } = useApp();
 
+  const isAr = language === 'العربية';
   const amount = screenParams.amount || softPosAmount || 67.0;
   const scheme = screenParams.cardScheme || softPosCardScheme || 'mada';
 
@@ -93,7 +98,7 @@ export const TapCardScreen: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <button
           onClick={goBack}
-          aria-label="Back"
+          aria-label={t('btn.back', 'Back')}
           className="interactive-tap"
           style={{
             backgroundColor: '#151524',
@@ -108,15 +113,15 @@ export const TapCardScreen: React.FC = () => {
             cursor: 'pointer',
           }}
         >
-          <ArrowLeft size={18} />
+          <ArrowLeft size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
         </button>
 
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '13px', fontWeight: 800, color: '#A2A2BA' }}>
-            {merchantInfo.businessName}
+            {translateText(merchantInfo.businessName, language)}
           </div>
           <div style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
-            Terminal #{merchantInfo.terminalId}
+            {isAr ? `جهاز رقم #${formatLocalizedNumber(merchantInfo.terminalId, language)}` : `Terminal #${merchantInfo.terminalId}`}
           </div>
         </div>
 
@@ -188,21 +193,21 @@ export const TapCardScreen: React.FC = () => {
 
         {/* Charge Amount Display */}
         <div className="tabular-nums" style={{ fontSize: '38px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em', marginBottom: '8px' }}>
-          {formatCurrency(amount)}
+          {formatCurrency(amount, language)}
         </div>
 
         {/* Dynamic Status Text */}
-        <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', marginBottom: '4px' }}>
-          {step === 'waiting' && 'Hold Card or Phone to Back of Device'}
-          {step === 'reading' && 'Reading Contactless Chip...'}
-          {step === 'authorizing' && 'Authorizing with SAMA Sarie Network...'}
-          {step === 'success' && 'Payment Approved!'}
+        <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', marginBottom: '4px', textAlign: 'center' }}>
+          {step === 'waiting' && (isAr ? 'مرر البطاقة أو الجوال خلف الجهاز' : 'Hold Card or Phone to Back of Device')}
+          {step === 'reading' && (isAr ? 'جاري قراءة الشريحة اللاتلامسية...' : 'Reading Contactless Chip...')}
+          {step === 'authorizing' && (isAr ? 'جاري التفويض مع شبكة البنك المركزي...' : 'Authorizing with SAMA Sarie Network...')}
+          {step === 'success' && (isAr ? 'تمت العملية بنجاح!' : 'Payment Approved!')}
         </div>
 
         <p style={{ fontSize: '12px', color: '#A2A2BA', textAlign: 'center', maxWidth: '280px', margin: 0 }}>
           {step === 'waiting'
-            ? 'Accepts mada contactless debit cards, Apple Pay, Visa, and Mastercard'
-            : 'Please keep the card still until authorization finishes'}
+            ? (isAr ? 'يدعم بطاقات مدى وأبل باي وفيزا وماستركارد اللاتلامسية' : 'Accepts mada contactless debit cards, Apple Pay, Visa, and Mastercard')
+            : (isAr ? 'يرجى إبقاء البطاقة ثابتة حتى انتهاء التفويض' : 'Please keep the card still until authorization finishes')}
         </p>
       </div>
 
@@ -219,7 +224,7 @@ export const TapCardScreen: React.FC = () => {
           padding: '12px 18px',
         }}
       >
-        <span style={{ fontSize: '11px', fontWeight: 800, color: '#7FE87F' }}>🇸🇦 mada</span>
+        <span style={{ fontSize: '11px', fontWeight: 800, color: '#7FE87F' }}>🇸🇦 مدى mada</span>
         <span style={{ color: '#444' }}>•</span>
         <span style={{ fontSize: '11px', fontWeight: 800, color: '#FFFFFF' }}> Apple Pay</span>
         <span style={{ color: '#444' }}>•</span>
@@ -230,3 +235,4 @@ export const TapCardScreen: React.FC = () => {
     </div>
   );
 };
+

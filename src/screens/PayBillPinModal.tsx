@@ -6,7 +6,7 @@ import { formatCurrency } from '../utils/formatters';
 import { authService } from '../services/authService';
 
 export const PayBillPinModal: React.FC = () => {
-  const { isPinModalOpen, closePinModal, pendingPaymentData, bankAccounts } = useApp();
+  const { isPinModalOpen, closePinModal, pendingPaymentData, bankAccounts, t, language } = useApp();
   const [error, setError] = useState<string>('');
   const [isVerifying, setIsVerifying] = useState<boolean>(false);
 
@@ -15,6 +15,9 @@ export const PayBillPinModal: React.FC = () => {
   if (!pendingPaymentData) return null;
 
   const isCheckBalance = pendingPaymentData.title.toLowerCase().includes('balance');
+  const displayTitle = t(pendingPaymentData.title, pendingPaymentData.title);
+  const displaySubTitle = t(pendingPaymentData.subTitle, pendingPaymentData.subTitle);
+  const displayBankName = primaryBank ? t(primaryBank.bankName, primaryBank.bankName) : '';
 
   const handlePinComplete = async (pin: string) => {
     setIsVerifying(true);
@@ -27,10 +30,10 @@ export const PayBillPinModal: React.FC = () => {
           pendingPaymentData.onSuccess();
         }
       } else {
-        setError('Incorrect PIN. Please try again.');
+        setError(language === 'العربية' ? 'الرمز السري غير صحيح. يرجى المحاولة مرة أخرى.' : 'Incorrect PIN. Please try again.');
       }
     } catch (err) {
-      setError('Verification failed. Try again.');
+      setError(language === 'العربية' ? 'فشل التحقق من الرمز. حاول مرة أخرى.' : 'Verification failed. Try again.');
     } finally {
       setIsVerifying(false);
     }
@@ -40,7 +43,7 @@ export const PayBillPinModal: React.FC = () => {
     <BottomSheet
       isOpen={isPinModalOpen}
       onClose={closePinModal}
-      title={isCheckBalance ? 'Verify UPI PIN to Check Balance' : pendingPaymentData.title}
+      title={isCheckBalance ? (language === 'العربية' ? 'التحقق من الرمز السري لعرض الرصيد' : 'Verify PIN to Check Balance') : displayTitle}
     >
       <div style={{ paddingBottom: '10px' }}>
         {/* Payment / Check Balance Summary Box */}
@@ -56,14 +59,14 @@ export const PayBillPinModal: React.FC = () => {
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>{pendingPaymentData.title}</div>
+              <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>{displayTitle}</div>
               <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px' }}>
-                {pendingPaymentData.subTitle}
+                {displaySubTitle}
               </div>
             </div>
             {pendingPaymentData.amount > 0 && !isCheckBalance && (
               <div style={{ fontSize: '20px', fontWeight: '900', color: '#7FE87F' }}>
-                {formatCurrency(pendingPaymentData.amount)}
+                {formatCurrency(pendingPaymentData.amount, language)}
               </div>
             )}
             {isCheckBalance && (
@@ -84,16 +87,18 @@ export const PayBillPinModal: React.FC = () => {
               fontSize: '12px',
             }}
           >
-            <span style={{ color: '#B3B3C2' }}>Account:</span>
+            <span style={{ color: '#B3B3C2' }}>{language === 'العربية' ? 'الحساب المصدر:' : 'Account:'}</span>
             <span style={{ fontWeight: '700', color: '#FFFFFF' }}>
-              {primaryBank ? `${primaryBank.bankName} (${primaryBank.accountNumberMasked})` : 'Linked Bank Account'}
+              {primaryBank ? `${displayBankName} (${primaryBank.accountNumberMasked})` : (language === 'العربية' ? 'الحساب البنكي المرتبط' : 'Linked Bank Account')}
             </span>
           </div>
         </div>
 
         <div style={{ textAlign: 'center', marginBottom: '8px' }}>
           <span style={{ fontSize: '12px', fontWeight: '800', color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            {isVerifying ? 'Verifying PIN...' : 'ENTER 4-DIGIT UPI PIN'}
+            {isVerifying
+              ? (language === 'العربية' ? 'جاري التحقق من الرمز السري...' : 'Verifying PIN...')
+              : (language === 'العربية' ? 'أدخل الرمز السري المكون من ٤ أرقام' : 'ENTER 4-DIGIT PIN')}
           </span>
         </div>
 

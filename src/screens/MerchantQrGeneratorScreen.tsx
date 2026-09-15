@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowLeft, Share2, Check, Sparkles } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
+import { translateText, formatSaudiCurrency, formatLocalizedNumber } from '../utils/i18n';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SamaLogo } from '../components/SamaLogo';
 import { ZatcaLogo } from '../components/ZatcaLogo';
@@ -13,10 +14,14 @@ export const MerchantQrGeneratorScreen: React.FC = () => {
     processMerchantCollection,
     navigateTo,
     goBack,
+    language,
+    isRtl,
+    t,
   } = useApp();
 
+  const isAr = language === 'العربية';
   const [invoiceAmount, setInvoiceAmount] = useState<string>('150.00');
-  const [orderNote, setOrderNote] = useState<string>('Invoice #INV-9901');
+  const [orderNote, setOrderNote] = useState<string>(isAr ? 'فاتورة رقم #INV-9901' : 'Invoice #INV-9901');
   const [copied, setCopied] = useState(false);
   const [isSimulatingScan, setIsSimulatingScan] = useState(false);
 
@@ -66,7 +71,7 @@ export const MerchantQrGeneratorScreen: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <button
           onClick={goBack}
-          aria-label="Back"
+          aria-label={t('btn.back', 'Back')}
           className="interactive-tap"
           style={{
             backgroundColor: '#151524',
@@ -81,15 +86,15 @@ export const MerchantQrGeneratorScreen: React.FC = () => {
             cursor: 'pointer',
           }}
         >
-          <ArrowLeft size={18} />
+          <ArrowLeft size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
         </button>
 
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
-            ZATCA Phase 2 E-Invoice
+            {t('zatca.title', 'ZATCA Phase 2 E-Invoice')}
           </div>
           <div style={{ fontSize: '11px', color: '#56bbb4', fontWeight: 700 }}>
-            TLV Cryptographic QR
+            {t('zatca.tlv_qr', 'TLV Cryptographic QR')}
           </div>
         </div>
 
@@ -125,26 +130,30 @@ export const MerchantQrGeneratorScreen: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
             <ZatcaLogo variant="icon" size={20} />
             <span style={{ fontSize: '11px', fontWeight: 900, color: '#333333', letterSpacing: '0.04em' }}>
-              ZATCA Fatoora
+              {isAr ? 'منصة فاتورة زاتكا' : 'ZATCA Fatoora'}
             </span>
           </div>
           <QRCodeView value={zatcaPayload} size={175} />
           <div style={{ marginTop: '10px', textAlign: 'center' }}>
             <div style={{ fontSize: '13px', fontWeight: 800, color: '#000000' }}>
-              {merchantInfo.businessName}
+              {translateText(merchantInfo.businessName, language)}
             </div>
             <div style={{ fontSize: '10.5px', color: '#666666', fontWeight: 600 }}>
-              VAT ID: {merchantInfo.vatNumber}
+              {isAr ? `الرقم الضريبي: ${formatLocalizedNumber(merchantInfo.vatNumber, language)}` : `VAT ID: ${merchantInfo.vatNumber}`}
             </div>
           </div>
         </div>
 
         {/* Amount in QR */}
         <div className="tabular-nums" style={{ fontSize: '26px', fontWeight: 900, color: '#FFFFFF', marginTop: '12px' }}>
-          {formatCurrency(numAmount)}
+          {formatCurrency(numAmount, language)}
         </div>
         <div style={{ fontSize: '11.5px', color: '#7FE87F', fontWeight: 700 }}>
-          Includes SAR {vatAmount.toFixed(2)} (15% ZATCA VAT)
+          {isAr ? (
+            <>شامل ضريبة زاتكا ١٥٪ ({formatSaudiCurrency(vatAmount, language)})</>
+          ) : (
+            <>Includes SAR {vatAmount.toFixed(2)} (15% ZATCA VAT)</>
+          )}
         </div>
       </div>
 
@@ -153,7 +162,7 @@ export const MerchantQrGeneratorScreen: React.FC = () => {
         <div style={{ display: 'flex', gap: '10px' }}>
           <div style={{ flex: 1 }}>
             <label style={{ fontSize: '10.5px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', marginBottom: '4px', display: 'block' }}>
-              Invoice Total (SAR)
+              {isAr ? 'المبلغ الإجمالي (ر.س)' : 'Invoice Total (SAR)'}
             </label>
             <input
               type="number"
@@ -172,19 +181,20 @@ export const MerchantQrGeneratorScreen: React.FC = () => {
                 width: '100%',
                 boxSizing: 'border-box',
                 outline: 'none',
+                direction: 'ltr',
               }}
             />
           </div>
 
           <div style={{ flex: 1 }}>
             <label style={{ fontSize: '10.5px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', marginBottom: '4px', display: 'block' }}>
-              Order Reference
+              {isAr ? 'رقم / مرجع الفاتورة' : 'Order Reference'}
             </label>
             <input
               type="text"
               value={orderNote}
               onChange={(e) => setOrderNote(e.target.value)}
-              placeholder="Invoice #INV-9901"
+              placeholder={isAr ? 'فاتورة #INV-9901' : 'Invoice #INV-9901'}
               style={{
                 backgroundColor: '#151524',
                 border: '1px solid #2C2C44',
@@ -203,7 +213,7 @@ export const MerchantQrGeneratorScreen: React.FC = () => {
 
         {/* Customer Scan & Pay Simulation CTA */}
         <PrimaryButton onClick={handleSimulateCustomerPayment} disabled={isSimulatingScan || numAmount <= 0}>
-          <Sparkles size={16} /> Simulate Customer Scan & Pay
+          <Sparkles size={16} /> {isAr ? 'محاكاة مسح ودفع العميل' : 'Simulate Customer Scan & Pay'}
         </PrimaryButton>
 
         <button
@@ -225,17 +235,18 @@ export const MerchantQrGeneratorScreen: React.FC = () => {
           }}
         >
           {copied ? <Check size={14} color="#7FE87F" /> : <Share2 size={14} />}
-          {copied ? 'QR Payload Copied' : 'Copy ZATCA Payload String'}
+          {copied ? (isAr ? 'تم نسخ بيانات الرمز' : 'QR Payload Copied') : (isAr ? 'نسخ نص رمز الاستجابة المشفر' : 'Copy ZATCA Payload String')}
         </button>
       </div>
 
       {/* SAMA Dock */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '10px' }}>
         <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 700 }}>
-          SAMA Sarie & ZATCA Compatible E-Invoicing
+          {isAr ? 'فوترة إلكترونية متوافقة مع زاتكا ونظام سريع' : 'SAMA Sarie & ZATCA Compatible E-Invoicing'}
         </span>
         <SamaLogo height={14} themeMode="green" />
       </div>
     </div>
   );
 };
+

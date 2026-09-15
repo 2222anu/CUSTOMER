@@ -1,17 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Home, FileText, QrCode, Clock, User } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import type { BottomTab } from '../types';
 
 export const BottomNavigation: React.FC = () => {
   const { activeTab, setActiveTab, t } = useApp();
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
-  const tabs: { id: BottomTab; label: string; icon: (active: boolean) => React.ReactNode }[] = [
+  useEffect(() => {
+    // Detect when input fields are focused (keyboard open on mobile)
+    const handleFocusIn = (e: FocusEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.getAttribute('contenteditable') === 'true')) {
+        setIsKeyboardOpen(true);
+      }
+    };
+
+    const handleFocusOut = () => {
+      setIsKeyboardOpen(false);
+    };
+
+    window.addEventListener('focusin', handleFocusIn);
+    window.addEventListener('focusout', handleFocusOut);
+
+    // Also listen to visualViewport height shrinkage for mobile browsers
+    const handleViewportResize = () => {
+      if (window.visualViewport) {
+        const heightRatio = window.visualViewport.height / window.innerHeight;
+        setIsKeyboardOpen(heightRatio < 0.78);
+      }
+    };
+
+    window.visualViewport?.addEventListener('resize', handleViewportResize);
+
+    return () => {
+      window.removeEventListener('focusin', handleFocusIn);
+      window.removeEventListener('focusout', handleFocusOut);
+      window.visualViewport?.removeEventListener('resize', handleViewportResize);
+    };
+  }, []);
+
+  const tabs: { id: BottomTab; label: string; verified?: boolean; icon: (active: boolean) => React.ReactNode }[] = [
     { id: 'home', label: t('nav.home', 'Home'), icon: (a) => <Home size={20} strokeWidth={a ? 2.5 : 1.8} /> },
-    { id: 'account', label: t('nav.services', 'Services'), icon: (a) => <FileText size={20} strokeWidth={a ? 2.5 : 1.8} /> },
+    { id: 'account', label: t('nav.accounts', 'Accounts'), icon: (a) => <FileText size={20} strokeWidth={a ? 2.5 : 1.8} /> },
     { id: 'scan', label: t('nav.scan', 'Scan'), icon: () => <QrCode size={24} strokeWidth={2.2} /> },
     { id: 'history', label: t('nav.history', 'History'), icon: (a) => <Clock size={20} strokeWidth={a ? 2.5 : 1.8} /> },
-    { id: 'profile', label: t('nav.profile', 'Profile'), icon: (a) => <User size={20} strokeWidth={a ? 2.5 : 1.8} /> },
+    { id: 'profile', label: t('nav.profile', 'Profile'), verified: true, icon: (a) => <User size={20} strokeWidth={a ? 2.5 : 1.8} /> },
   ];
 
   return (
@@ -27,14 +61,18 @@ export const BottomNavigation: React.FC = () => {
         margin: '0 auto',
         height: '68px',
         backgroundColor: 'rgba(11, 11, 20, 0.96)',
-        backdropFilter: 'blur(12px)',
+        backdropFilter: 'blur(16px)',
         borderTop: '1px solid #2C2C44',
-        display: 'flex',
+        display: isKeyboardOpen ? 'none' : 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
         padding: '0 8px',
-        zIndex: 50,
+        zIndex: 100,
         boxShadow: 'none',
+        transform: isKeyboardOpen ? 'translateY(100%)' : 'translateY(0)',
+        transition: 'transform 0.2s ease, opacity 0.2s ease',
+        opacity: isKeyboardOpen ? 0 : 1,
+        pointerEvents: isKeyboardOpen ? 'none' : 'auto',
       }}
     >
       {tabs.map((tab) => {
@@ -124,8 +162,23 @@ export const BottomNavigation: React.FC = () => {
               position: 'relative',
             }}
           >
-            <div style={{ transform: isActive ? 'scale(1.06)' : 'scale(1)', transition: 'transform 0.15s ease' }}>
+            <div style={{ position: 'relative', transform: isActive ? 'scale(1.06)' : 'scale(1)', transition: 'transform 0.15s ease' }}>
               {tab.icon(isActive)}
+              {tab.verified && (
+                <span
+                  title={t('profile.verified_kyc', 'Verified')}
+                  style={{
+                    position: 'absolute',
+                    top: '-2px',
+                    right: '-4px',
+                    width: '7px',
+                    height: '7px',
+                    borderRadius: '50%',
+                    backgroundColor: '#7FE87F',
+                    border: '1.5px solid #0B0B14',
+                  }}
+                />
+              )}
             </div>
             <span
               style={{

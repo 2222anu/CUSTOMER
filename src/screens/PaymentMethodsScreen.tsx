@@ -6,11 +6,12 @@ import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
 import { useApp } from '../state/AppContext';
 
 export const PaymentMethodsScreen: React.FC = () => {
-  const { navigateTo } = useApp();
+  const { navigateTo, user, t, language } = useApp();
+  const displayName = t(user.name, user.name);
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '36px', color: '#FFFFFF' }}>
-      <AppHeader title="Payment Methods" showBack showSettings={false} />
+      <AppHeader title={t('cards.title', 'Payment Methods')} showBack showSettings={false} />
 
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '22px' }}>
         {/* QTPay Virtual Platinum Card (Gradient Green-Black) */}
@@ -23,10 +24,10 @@ export const PaymentMethodsScreen: React.FC = () => {
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
               marginBottom: '10px',
-              marginLeft: '4px',
+              marginInlineStart: '4px',
             }}
           >
-            Digital Debit Card (mada & Apple Pay)
+            {t('cards.digital_mada', 'Digital Debit Card (mada & Apple Pay)')}
           </div>
 
           <div
@@ -62,8 +63,12 @@ export const PaymentMethodsScreen: React.FC = () => {
                   <ShieldCheck size={18} color="#7FE87F" />
                 </div>
                 <div>
-                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '0.04em' }}>QTPay Platinum</div>
-                  <div style={{ fontSize: '10px', color: '#7FE87F', fontWeight: 700 }}>Sarie Instant Debit</div>
+                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '0.04em' }}>
+                    {t('cards.platinum', 'QTPay Platinum')}
+                  </div>
+                  <div style={{ fontSize: '10px', color: '#7FE87F', fontWeight: 700 }}>
+                    {t('cards.instant_debit', 'Sarie Instant Debit')}
+                  </div>
                 </div>
               </div>
 
@@ -73,7 +78,7 @@ export const PaymentMethodsScreen: React.FC = () => {
             </div>
 
             {/* Middle Row: Card Number */}
-            <div style={{ margin: '14px 0 8px 0' }}>
+            <div style={{ margin: '14px 0 8px 0', direction: 'ltr' }}>
               <div
                 className="tabular-nums"
                 style={{
@@ -92,16 +97,16 @@ export const PaymentMethodsScreen: React.FC = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
               <div>
                 <div style={{ fontSize: '9px', color: '#A2E6A2', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
-                  Cardholder
+                  {t('cards.cardholder', 'Cardholder')}
                 </div>
                 <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF', marginTop: '2px' }}>
-                  Fahad Al-Harbi
+                  {displayName}
                 </div>
               </div>
 
               <div>
                 <div style={{ fontSize: '9px', color: '#A2E6A2', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
-                  Expires
+                  {t('cards.expires', 'Expires')}
                 </div>
                 <div style={{ fontSize: '12px', fontWeight: 800, color: '#FFFFFF', marginTop: '2px', fontFamily: 'monospace' }}>
                   08/29
@@ -134,10 +139,10 @@ export const PaymentMethodsScreen: React.FC = () => {
               textTransform: 'uppercase',
               letterSpacing: '0.06em',
               marginBottom: '10px',
-              marginLeft: '4px',
+              marginInlineStart: '4px',
             }}
           >
-            Linked Sarie Bank Accounts
+            {t('banks.linked', 'Linked Saudi Accounts')}
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -175,8 +180,10 @@ export const PaymentMethodsScreen: React.FC = () => {
                   <Landmark size={20} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>Al Rajhi Bank Current</div>
-                  <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
+                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>
+                    {t('bank.alrajhi', 'Al Rajhi Bank')}
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }} dir="ltr">
                     SA03 •••• 4821
                   </div>
                 </div>
@@ -196,7 +203,7 @@ export const PaymentMethodsScreen: React.FC = () => {
                   gap: '4px',
                 }}
               >
-                <Star size={10} fill="#000000" color="#000000" /> PRIMARY
+                <Star size={10} fill="#000000" color="#000000" /> {t('banks.primary', 'PRIMARY')}
               </div>
             </div>
 
@@ -232,8 +239,10 @@ export const PaymentMethodsScreen: React.FC = () => {
                   <Landmark size={20} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>Saudi National Bank (SNB)</div>
-                  <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
+                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>
+                    {t('bank.snb', 'Saudi National Bank (SNB)')}
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }} dir="ltr">
                     SA58 •••• 1092
                   </div>
                 </div>
@@ -250,7 +259,7 @@ export const PaymentMethodsScreen: React.FC = () => {
                   borderRadius: '12px',
                 }}
               >
-                ACTIVE
+                {t('banks.active', 'ACTIVE')}
               </div>
             </div>
           </div>
@@ -266,10 +275,10 @@ export const PaymentMethodsScreen: React.FC = () => {
               textTransform: 'uppercase',
               letterSpacing: '0.06em',
               marginBottom: '10px',
-              marginLeft: '4px',
+              marginInlineStart: '4px',
             }}
           >
-            Saved mada & Credit Cards
+            {t('cards.saved_cards', 'Saved mada & Credit Cards')}
           </div>
 
           <div
@@ -300,9 +309,11 @@ export const PaymentMethodsScreen: React.FC = () => {
                 <CreditCard size={20} />
               </div>
               <div>
-                <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>mada Debit Card (Riyad Bank)</div>
+                <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>
+                  {language === 'العربية' ? 'بطاقة مدى الرقمية (بنك الرياض)' : 'mada Debit Card (Riyad Bank)'}
+                </div>
                 <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
-                  •••• 9901 &bull; Sarie & mada Pay
+                  •••• 9901 &bull; {language === 'العربية' ? 'مدى باي وسريع' : 'Sarie & mada Pay'}
                 </div>
               </div>
             </div>
@@ -320,7 +331,7 @@ export const PaymentMethodsScreen: React.FC = () => {
                   borderRadius: '10px',
                 }}
               >
-                LINKED
+                {language === 'العربية' ? 'مرتبطة' : 'LINKED'}
               </span>
             </div>
           </div>
@@ -329,7 +340,7 @@ export const PaymentMethodsScreen: React.FC = () => {
         {/* Add New Bank / Card Button */}
         <div style={{ marginTop: '8px' }}>
           <PrimaryButton onClick={() => navigateTo('BANK_ACCOUNTS')}>
-            <Plus size={18} /> Add New Bank or Card
+            <Plus size={18} /> {t('banks.add_bank', 'Add New Bank or Card')}
           </PrimaryButton>
         </div>
 
@@ -351,12 +362,12 @@ export const PaymentMethodsScreen: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
             <ShieldCheck size={13} color="#7FE87F" />
             <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 600 }}>
-              Tokenized Card Payments &bull; SAMA & Sarie Secured
+              {language === 'العربية' ? 'مدفوعات بطاقات مشفرة • معتمدة من ساما وسريع' : 'Tokenized Card Payments • SAMA & Sarie Secured'}
             </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span style={{ fontSize: '10px', color: '#6E6E85', fontWeight: 700, textTransform: 'uppercase' }}>
-              Partner:
+              {t('home.payment_partner', 'Official Partner:')}
             </span>
             <PaymentPartnerLogo height={16} themeMode="dark" />
           </div>

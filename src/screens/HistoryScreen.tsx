@@ -7,7 +7,7 @@ import { useApp } from '../state/AppContext';
 type FilterType = 'all' | 'sent' | 'received' | 'pending';
 
 export const HistoryScreen: React.FC = () => {
-  const { transactions } = useApp();
+  const { transactions, t, isRtl, language } = useApp();
   const [filter, setFilter] = useState<FilterType>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearchInput, setShowSearchInput] = useState(false);
@@ -37,10 +37,20 @@ export const HistoryScreen: React.FC = () => {
     groupedByDate[key].push(t);
   });
 
+  const getFilterLabel = (f: FilterType) => {
+    if (language === 'العربية') {
+      if (f === 'all') return 'الكل';
+      if (f === 'sent') return 'المدفوعات';
+      if (f === 'received') return 'المستلمة';
+      if (f === 'pending') return 'قيد الانتظار';
+    }
+    return f;
+  };
+
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '30px' }}>
       <AppHeader
-        title="Transactions"
+        title={t('history.title', 'Transactions')}
         showSearch
         onSearchClick={() => setShowSearchInput(!showSearchInput)}
         showSettings
@@ -63,7 +73,7 @@ export const HistoryScreen: React.FC = () => {
             <Search size={16} color="#7FE87F" />
             <input
               type="text"
-              placeholder="Search by name or UTR..."
+              placeholder={language === 'العربية' ? 'البحث بالاسم أو المرجع البنكي...' : 'Search by name or UTR...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               autoFocus
@@ -75,6 +85,7 @@ export const HistoryScreen: React.FC = () => {
                 fontSize: '13px',
                 fontWeight: 600,
                 width: '100%',
+                textAlign: isRtl ? 'right' : 'left',
               }}
             />
             {searchQuery && (
@@ -129,7 +140,7 @@ export const HistoryScreen: React.FC = () => {
                 boxShadow: 'none',
               }}
             >
-              {f}
+              {getFilterLabel(f)}
             </button>
           );
         })}
@@ -165,8 +176,12 @@ export const HistoryScreen: React.FC = () => {
             >
               <Receipt size={24} />
             </div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>No transactions</div>
-            <div style={{ fontSize: '13px', marginTop: '4px', color: '#6E6E85' }}>Try adjusting your search or filters</div>
+            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>
+              {language === 'العربية' ? 'لا توجد عمليات' : 'No transactions'}
+            </div>
+            <div style={{ fontSize: '13px', marginTop: '4px', color: '#6E6E85' }}>
+              {language === 'العربية' ? 'جرّب تعديل البحث أو الفلاتر' : 'Try adjusting your search or filters'}
+            </div>
           </div>
         ) : (
           Object.entries(groupedByDate).map(([dateLabel, items]) => (
@@ -179,10 +194,10 @@ export const HistoryScreen: React.FC = () => {
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
                   marginBottom: '8px',
-                  marginLeft: '4px',
+                  marginInlineStart: '4px',
                 }}
               >
-                {dateLabel}
+                {t(dateLabel, dateLabel)}
               </div>
               <div
                 style={{

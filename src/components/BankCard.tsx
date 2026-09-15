@@ -18,15 +18,18 @@ export const BankCard: React.FC<BankCardProps> = ({
   onRequestClick,
   onManageClick,
 }) => {
-  const { toggleShowBalance, openPinModal, navigateTo } = useApp();
+  const { toggleShowBalance, openPinModal, navigateTo, t, language, isRtl } = useApp();
+
+  const displayBankName = t(bank.bankName, bank.bankName);
+  const displayAccountType = t(bank.accountType, bank.accountType);
 
   const handleCheckBalance = () => {
     if (bank.showBalance) {
       toggleShowBalance(bank.id);
     } else {
       openPinModal({
-        title: `Check ${bank.bankName} Balance`,
-        subTitle: `${bank.accountType} • ${bank.accountNumberMasked}`,
+        title: `${t('banks.check_balance', 'Check Balance')} - ${displayBankName}`,
+        subTitle: `${displayAccountType} • ${bank.accountNumberMasked}`,
         amount: bank.balance,
         onSuccess: () => toggleShowBalance(bank.id),
       });
@@ -62,9 +65,11 @@ export const BankCard: React.FC<BankCardProps> = ({
             <CreditCard size={22} />
           </div>
           <div>
-            <div style={{ fontWeight: designSystem.typography.weights.extrabold, fontSize: '15px', color: designSystem.colors.textPrimary }}>{bank.bankName}</div>
+            <div style={{ fontWeight: designSystem.typography.weights.extrabold, fontSize: '15px', color: designSystem.colors.textPrimary }}>
+              {displayBankName}
+            </div>
             <div style={{ fontSize: '12px', color: designSystem.colors.textSecondary }}>
-              {bank.accountType} &bull; {bank.accountNumberMasked}
+              {displayAccountType} &bull; {bank.accountNumberMasked}
             </div>
           </div>
         </div>
@@ -83,7 +88,7 @@ export const BankCard: React.FC<BankCardProps> = ({
               border: `1px solid ${designSystem.colors.primaryBorder}`,
             }}
           >
-            Primary
+            {t('banks.primary', 'PRIMARY')}
           </span>
         )}
       </div>
@@ -102,10 +107,10 @@ export const BankCard: React.FC<BankCardProps> = ({
       >
         <div>
           <div style={{ fontSize: '10px', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: designSystem.typography.weights.bold }}>
-            Available Balance
+            {t('home.total_balance', 'Available Balance')}
           </div>
           <div style={{ fontSize: '18px', fontWeight: designSystem.typography.weights.black, marginTop: '2px', color: designSystem.colors.textPrimary }}>
-            {bank.showBalance ? formatCurrency(bank.balance) : '••••••••'}
+            {bank.showBalance ? formatCurrency(bank.balance, language) : (language === 'العربية' ? '•••••••• ر.س' : '••••••••')}
           </div>
         </div>
 
@@ -127,7 +132,7 @@ export const BankCard: React.FC<BankCardProps> = ({
           }}
         >
           {bank.showBalance ? <EyeOff size={14} /> : <Eye size={14} />}
-          {bank.showBalance ? 'Hide' : 'Check Balance'}
+          {bank.showBalance ? t('home.hide', 'Hide') : t('banks.check_balance', 'Check Balance')}
         </button>
       </div>
 
@@ -151,8 +156,8 @@ export const BankCard: React.FC<BankCardProps> = ({
             boxShadow: designSystem.shadows.none,
           }}
         >
-          <Send size={14} color={designSystem.colors.primary} />
-          Send
+          <Send size={14} color={designSystem.colors.primary} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+          {t('home.send_money', 'Send')}
         </button>
 
         <button
@@ -175,7 +180,7 @@ export const BankCard: React.FC<BankCardProps> = ({
           }}
         >
           <Download size={14} color={designSystem.colors.primary} />
-          Request
+          {t('home.request_money', 'Request')}
         </button>
 
         <button
@@ -198,7 +203,7 @@ export const BankCard: React.FC<BankCardProps> = ({
           }}
         >
           <Settings2 size={14} color={designSystem.colors.textSecondary} />
-          Manage
+          {t('banks.title', 'Manage')}
         </button>
       </div>
     </div>

@@ -27,7 +27,7 @@ const ContactlessIcon: React.FC<{ color?: string; size?: number }> = ({ color = 
 );
 
 export const BankAccountsScreen: React.FC = () => {
-  const { bankAccounts, toggleShowBalance, setPrimaryBank, removeBankAccount, setIsAddBankModalOpen, openPinModal } = useApp();
+  const { bankAccounts, toggleShowBalance, setPrimaryBank, removeBankAccount, setIsAddBankModalOpen, openPinModal, t, language } = useApp();
   const [bankToRemove, setBankToRemove] = useState<string | null>(null);
 
   const confirmRemove = () => {
@@ -38,12 +38,15 @@ export const BankAccountsScreen: React.FC = () => {
   };
 
   const handleBalanceCheck = (bank: typeof bankAccounts[0]) => {
+    const displayBankName = t(bank.bankName, bank.bankName);
+    const displayAccType = t(bank.accountType, bank.accountType);
+
     if (bank.showBalance) {
       toggleShowBalance(bank.id);
     } else {
       openPinModal({
-        title: `Check ${bank.bankName} Balance`,
-        subTitle: `${bank.accountType} • ${bank.accountNumberMasked}`,
+        title: `${t('banks.check_balance', 'Check Balance')} - ${displayBankName}`,
+        subTitle: `${displayAccType} • ${bank.accountNumberMasked}`,
         amount: bank.balance,
         onSuccess: () => toggleShowBalance(bank.id),
       });
@@ -52,7 +55,7 @@ export const BankAccountsScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100%', paddingBottom: '36px' }}>
-      <AppHeader title="Bank Accounts" showBack showSettings />
+      <AppHeader title={t('banks.title', 'Bank Accounts')} showBack showSettings />
 
       <div style={{ padding: '16px 20px' }}>
         {/* Top Summary Banner */}
@@ -89,7 +92,7 @@ export const BankAccountsScreen: React.FC = () => {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>
-                  Linked Sarie Bank Accounts
+                  {t('banks.linked', 'Linked Saudi Accounts')}
                 </span>
                 <span
                   style={{
@@ -102,12 +105,12 @@ export const BankAccountsScreen: React.FC = () => {
                     borderRadius: '10px',
                   }}
                 >
-                  {bankAccounts.length} Active
+                  {language === 'العربية' ? `${bankAccounts.length} نشطة` : `${bankAccounts.length} Active`}
                 </span>
               </div>
               <div style={{ fontSize: '11.5px', color: '#B3B3C2', fontWeight: 600, marginTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <SamaLogo height={12} themeMode="green" />
-                <span>&bull; Sarie Instant Rails Secured</span>
+                <span>&bull; {language === 'العربية' ? 'محمي عبر البنية التحتية لسريع' : 'Sarie Instant Rails Secured'}</span>
               </div>
             </div>
           </div>
@@ -129,7 +132,7 @@ export const BankAccountsScreen: React.FC = () => {
               gap: '5px',
             }}
           >
-            <Plus size={15} color="#000000" /> Add Bank
+            <Plus size={15} color="#000000" /> {t('banks.add_bank', 'Add Bank')}
           </button>
         </div>
 
@@ -137,6 +140,8 @@ export const BankAccountsScreen: React.FC = () => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', marginBottom: '24px' }}>
           {bankAccounts.map((bank) => {
             const rawNumbers = bank.accountNumberMasked.replace(/[^0-9]/g, '') || '3616';
+            const displayBankName = t(bank.bankName, bank.bankName);
+            const displayAccType = t(bank.accountType, bank.accountType);
 
             // PRIMARY BANK CARD MODEL
             if (bank.isPrimary) {
@@ -174,10 +179,10 @@ export const BankAccountsScreen: React.FC = () => {
                       </div>
                       <div>
                         <div style={{ fontSize: '16px', fontWeight: 800, letterSpacing: '0.01em', color: '#FFFFFF' }}>
-                          {bank.bankName}
+                          {displayBankName}
                         </div>
                         <div style={{ fontSize: '11px', fontWeight: 600, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '1px' }}>
-                          {bank.accountType}
+                          {displayAccType}
                         </div>
                       </div>
                     </div>
@@ -197,7 +202,7 @@ export const BankAccountsScreen: React.FC = () => {
                         gap: '5px',
                       }}
                     >
-                      <Star size={11} fill="#7FE87F" color="#7FE87F" /> PRIMARY
+                      <Star size={11} fill="#7FE87F" color="#7FE87F" /> {t('banks.primary', 'PRIMARY')}
                     </div>
                   </div>
 
@@ -222,6 +227,7 @@ export const BankAccountsScreen: React.FC = () => {
                         letterSpacing: '0.12em',
                         fontWeight: 700,
                         color: '#FFFFFF',
+                        direction: 'ltr',
                       }}
                     >
                       •••• &nbsp; •••• &nbsp; •••• &nbsp; {rawNumbers}
@@ -245,10 +251,10 @@ export const BankAccountsScreen: React.FC = () => {
                   >
                     <div>
                       <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#B3B3C2' }}>
-                        Available Balance
+                        {t('home.total_balance', 'Available Balance')}
                       </div>
                       <div className="tabular-nums" style={{ fontSize: '19px', fontWeight: 900, color: '#7FE87F', marginTop: '2px', letterSpacing: '0.02em' }}>
-                        {bank.showBalance ? formatCurrency(bank.balance) : 'SAR ••••••••'}
+                        {bank.showBalance ? formatCurrency(bank.balance, language) : (language === 'العربية' ? '•••••••• ر.س' : 'SAR ••••••••')}
                       </div>
                     </div>
 
@@ -270,7 +276,7 @@ export const BankAccountsScreen: React.FC = () => {
                       }}
                     >
                       {bank.showBalance ? <EyeOff size={13} color="#000000" /> : <Eye size={13} color="#000000" />}
-                      <span>{bank.showBalance ? 'Hide' : 'Check'}</span>
+                      <span>{bank.showBalance ? t('home.hide', 'Hide') : t('banks.check_balance', 'Check')}</span>
                     </button>
                   </div>
 
@@ -278,7 +284,7 @@ export const BankAccountsScreen: React.FC = () => {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 2 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 700, color: '#7FE87F' }}>
                       <CheckCircle2 size={15} color="#7FE87F" />
-                      <span>Default for receiving money</span>
+                      <span>{language === 'العربية' ? 'الحساب الافتراضي لاستلام الأموال' : 'Default for receiving money'}</span>
                     </div>
 
                     <button
@@ -299,7 +305,7 @@ export const BankAccountsScreen: React.FC = () => {
                       }}
                     >
                       <Trash2 size={13} color="#B3B3C2" />
-                      <span>Remove</span>
+                      <span>{language === 'العربية' ? 'حذف' : 'Remove'}</span>
                     </button>
                   </div>
                 </div>
@@ -342,10 +348,10 @@ export const BankAccountsScreen: React.FC = () => {
                     </div>
                     <div>
                       <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em' }}>
-                        {bank.bankName}
+                        {displayBankName}
                       </div>
                       <div style={{ fontSize: '11px', fontWeight: 600, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '1px' }}>
-                        {bank.accountType}
+                        {displayAccType}
                       </div>
                     </div>
                   </div>
@@ -371,6 +377,7 @@ export const BankAccountsScreen: React.FC = () => {
                       letterSpacing: '0.1em',
                       fontWeight: 700,
                       color: '#FFFFFF',
+                      direction: 'ltr',
                     }}
                   >
                     •••• &nbsp; •••• &nbsp; •••• &nbsp; {rawNumbers}
@@ -392,10 +399,10 @@ export const BankAccountsScreen: React.FC = () => {
                 >
                   <div>
                     <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#B3B3C2' }}>
-                      Available Balance
+                      {t('home.total_balance', 'Available Balance')}
                     </div>
                     <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px', letterSpacing: '0.01em' }}>
-                      {bank.showBalance ? formatCurrency(bank.balance) : 'SAR ••••••••'}
+                      {bank.showBalance ? formatCurrency(bank.balance, language) : (language === 'العربية' ? '•••••••• ر.س' : 'SAR ••••••••')}
                     </div>
                   </div>
 
@@ -417,7 +424,7 @@ export const BankAccountsScreen: React.FC = () => {
                     }}
                   >
                     {bank.showBalance ? <EyeOff size={13} color="#B3B3C2" /> : <Eye size={13} color="#7FE87F" />}
-                    <span>{bank.showBalance ? 'Hide' : 'Check'}</span>
+                    <span>{bank.showBalance ? t('home.hide', 'Hide') : t('banks.check_balance', 'Check')}</span>
                   </button>
                 </div>
 
@@ -442,7 +449,7 @@ export const BankAccountsScreen: React.FC = () => {
                       gap: '5px',
                     }}
                   >
-                    <Star size={13} color="#7FE87F" /> Set as Primary
+                    <Star size={13} color="#7FE87F" /> {language === 'العربية' ? 'تعيين كأساسي' : 'Set as Primary'}
                   </button>
 
                   <button
@@ -464,7 +471,7 @@ export const BankAccountsScreen: React.FC = () => {
                     }}
                   >
                     <Trash2 size={13} color="#B3B3C2" />
-                    <span>Remove</span>
+                    <span>{language === 'العربية' ? 'حذف' : 'Remove'}</span>
                   </button>
                 </div>
               </div>
@@ -474,7 +481,7 @@ export const BankAccountsScreen: React.FC = () => {
 
         {/* Add New Bank Account Action */}
         <PrimaryButton onClick={() => setIsAddBankModalOpen(true)}>
-          <Plus size={18} /> Add New Bank Account
+          <Plus size={18} /> {t('banks.add_bank', 'Add New Bank Account')}
         </PrimaryButton>
 
         {/* Security & SAMA Trust Footer */}
@@ -495,12 +502,12 @@ export const BankAccountsScreen: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
             <SamaLogo height={12} themeMode="green" />
             <span style={{ fontSize: '11px', color: '#B3B3C2', fontWeight: 600 }}>
-              &bull; 256-Bit Hardware Encrypted &bull; Sarie Regulated
+              &bull; {language === 'العربية' ? 'تشفير أجهزة ٢٥٦ بت • خاضع لإشراف البنك المركزي السعودي (ساما)' : '256-Bit Hardware Encrypted • Sarie Regulated'}
             </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span style={{ fontSize: '10px', color: '#808099', fontWeight: 700, textTransform: 'uppercase' }}>
-              Official Payment Partner:
+              {t('home.payment_partner', 'Official Payment Partner:')}
             </span>
             <PaymentPartnerLogo height={16} themeMode="dark" />
           </div>
@@ -512,11 +519,13 @@ export const BankAccountsScreen: React.FC = () => {
         <Modal
           isOpen={Boolean(bankToRemove)}
           onClose={() => setBankToRemove(null)}
-          title="Remove Bank Account"
+          title={language === 'العربية' ? 'إلغاء ربط الحساب البنكي' : 'Remove Bank Account'}
         >
           <div style={{ textAlign: 'center', padding: '10px 0' }}>
             <p style={{ color: '#B3B3C2', fontSize: '14px', marginBottom: '20px', lineHeight: '20px' }}>
-              Are you sure you want to unlink this bank account from alph pay?
+              {language === 'العربية'
+                ? 'هل أنت متأكد من رغبتك في إلغاء ربط هذا الحساب البنكي من كيو تي باي؟'
+                : 'Are you sure you want to unlink this bank account from QTPay?'}
             </p>
             <div style={{ display: 'flex', gap: '10px' }}>
               <button
@@ -534,7 +543,7 @@ export const BankAccountsScreen: React.FC = () => {
                   cursor: 'pointer',
                 }}
               >
-                Cancel
+                {t('btn.cancel', 'Cancel')}
               </button>
               <button
                 onClick={confirmRemove}
@@ -551,7 +560,7 @@ export const BankAccountsScreen: React.FC = () => {
                   cursor: 'pointer',
                 }}
               >
-                Unlink Account
+                {language === 'العربية' ? 'تأكيد الحذف' : 'Unlink Account'}
               </button>
             </div>
           </div>

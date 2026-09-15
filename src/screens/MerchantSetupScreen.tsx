@@ -4,23 +4,34 @@ import { useApp } from '../state/AppContext';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SamaLogo } from '../components/SamaLogo';
 import { AlphPayLogo } from '../components/AlphPayLogo';
+import { formatLocalizedNumber } from '../utils/i18n';
 
 const CATEGORIES = [
-  'Groceries & Gourmet',
-  'Food & Drink',
-  'Retail & Fashion',
-  'Electronics & Tech',
-  'Fuel & Auto',
-  'Services',
-  'Pharmacy & Health',
-  'Other Business',
+  { en: 'Groceries & Gourmet', ar: 'بقالة وتموينات' },
+  { en: 'Food & Drink', ar: 'مطاعم ومقاهي' },
+  { en: 'Retail & Fashion', ar: 'تجارة تجزئة وأزياء' },
+  { en: 'Electronics & Tech', ar: 'إلكترونيات وتقنية' },
+  { en: 'Fuel & Auto', ar: 'محطات وقود وسيارات' },
+  { en: 'Services', ar: 'خدمات مهنية' },
+  { en: 'Pharmacy & Health', ar: 'صيدليات ورعاية صحية' },
+  { en: 'Other Business', ar: 'أنشطة أخرى' },
 ];
 
-const CITIES = ['Riyadh', 'Jeddah', 'Dammam', 'Mecca', 'Medina', 'Khobar', 'Tabuk', 'Abha'];
+const CITIES = [
+  { en: 'Riyadh', ar: 'الرياض' },
+  { en: 'Jeddah', ar: 'جدة' },
+  { en: 'Dammam', ar: 'الدمام' },
+  { en: 'Mecca', ar: 'مكة المكرمة' },
+  { en: 'Medina', ar: 'المدينة المنورة' },
+  { en: 'Khobar', ar: 'الخبر' },
+  { en: 'Tabuk', ar: 'تبوك' },
+  { en: 'Abha', ar: 'أبها' },
+];
 
 export const MerchantSetupScreen: React.FC = () => {
-  const { merchantInfo, updateMerchantInfo, navigateTo } = useApp();
-  const [businessName, setBusinessName] = useState(merchantInfo.businessName || 'Starmart Supermarket');
+  const { merchantInfo, updateMerchantInfo, navigateTo, language, isRtl, t } = useApp();
+  const isAr = language === 'العربية';
+  const [businessName, setBusinessName] = useState(merchantInfo.businessName || (isAr ? 'تموينات ستار مارت' : 'Starmart Supermarket'));
   const [category, setCategory] = useState(merchantInfo.category || 'Groceries & Gourmet');
   const [city, setCity] = useState(merchantInfo.city || 'Riyadh');
   const storePhone = merchantInfo.storePhone || '0501234567';
@@ -51,6 +62,7 @@ export const MerchantSetupScreen: React.FC = () => {
         padding: '40px 24px 30px 24px',
         boxSizing: 'border-box',
         userSelect: 'none',
+        direction: isRtl ? 'rtl' : 'ltr',
       }}
     >
       {/* Top Header */}
@@ -71,10 +83,10 @@ export const MerchantSetupScreen: React.FC = () => {
           <AlphPayLogo variant="icon" size={36} themeMode="dark" />
         </div>
         <h2 style={{ fontSize: '20px', fontWeight: 800, margin: '0 0 6px 0', color: '#FFFFFF' }}>
-          Business Profile Setup
+          {t('merchant.setup_title', 'Business Profile Setup')}
         </h2>
         <p style={{ fontSize: '13px', color: '#A2A2BA', margin: 0 }}>
-          Configure your merchant trading identity for ZATCA e-invoicing
+          {isAr ? 'إعداد الملف التجاري للمنشأة للتوافق مع منظومة الفوترة الإلكترونية زاتكا' : 'Configure your merchant trading identity for ZATCA e-invoicing'}
         </p>
       </div>
 
@@ -92,9 +104,10 @@ export const MerchantSetupScreen: React.FC = () => {
                 letterSpacing: '0.06em',
                 marginBottom: '6px',
                 display: 'block',
+                textAlign: isRtl ? 'right' : 'left',
               }}
             >
-              Business / Store Trade Name
+              {t('merchant.business_name', 'Business / Store Trade Name')}
             </label>
             <div
               style={{
@@ -106,12 +119,12 @@ export const MerchantSetupScreen: React.FC = () => {
                 padding: '12px 16px',
               }}
             >
-              <Store size={18} color="#7FE87F" style={{ marginRight: '12px', flexShrink: 0 }} />
+              <Store size={18} color="#7FE87F" style={{ marginRight: isRtl ? 0 : '12px', marginLeft: isRtl ? '12px' : 0, flexShrink: 0 }} />
               <input
                 type="text"
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
-                placeholder="Starmart Supermarket"
+                placeholder={isAr ? 'تموينات ستار مارت' : 'Starmart Supermarket'}
                 required
                 style={{
                   background: 'none',
@@ -121,6 +134,7 @@ export const MerchantSetupScreen: React.FC = () => {
                   fontWeight: 700,
                   color: '#FFFFFF',
                   width: '100%',
+                  textAlign: isRtl ? 'right' : 'left',
                 }}
               />
             </div>
@@ -137,31 +151,35 @@ export const MerchantSetupScreen: React.FC = () => {
                 letterSpacing: '0.06em',
                 marginBottom: '8px',
                 display: 'block',
+                textAlign: isRtl ? 'right' : 'left',
               }}
             >
-              Business Category
+              {t('merchant.category', 'Business Category')}
             </label>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setCategory(cat)}
-                  style={{
-                    backgroundColor: category === cat ? '#7FE87F' : '#151524',
-                    color: category === cat ? '#000000' : '#A2A2BA',
-                    border: category === cat ? '1px solid #7FE87F' : '1px solid #2C2C44',
-                    borderRadius: '20px',
-                    padding: '6px 12px',
-                    fontSize: '11.5px',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease',
-                  }}
-                >
-                  {cat}
-                </button>
-              ))}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: isRtl ? 'flex-end' : 'flex-start' }}>
+              {CATEGORIES.map((cat) => {
+                const isSelected = category === cat.en;
+                return (
+                  <button
+                    key={cat.en}
+                    type="button"
+                    onClick={() => setCategory(cat.en)}
+                    className="interactive-tap"
+                    style={{
+                      backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.2)' : '#151524',
+                      border: isSelected ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
+                      color: isSelected ? '#FFFFFF' : '#A2A2BA',
+                      borderRadius: '12px',
+                      padding: '7px 12px',
+                      fontSize: '11.5px',
+                      fontWeight: isSelected ? 800 : 600,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {isAr ? cat.ar : cat.en}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -176,9 +194,10 @@ export const MerchantSetupScreen: React.FC = () => {
                 letterSpacing: '0.06em',
                 marginBottom: '6px',
                 display: 'block',
+                textAlign: isRtl ? 'right' : 'left',
               }}
             >
-              Operating City / Location
+              {t('merchant.city', 'Operating City')}
             </label>
             <div
               style={{
@@ -190,7 +209,7 @@ export const MerchantSetupScreen: React.FC = () => {
                 padding: '12px 16px',
               }}
             >
-              <MapPin size={18} color="#7FE87F" style={{ marginRight: '12px', flexShrink: 0 }} />
+              <MapPin size={18} color="#7FE87F" style={{ marginRight: isRtl ? 0 : '12px', marginLeft: isRtl ? '12px' : 0, flexShrink: 0 }} />
               <select
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
@@ -198,23 +217,24 @@ export const MerchantSetupScreen: React.FC = () => {
                   background: 'none',
                   border: 'none',
                   outline: 'none',
-                  fontSize: '15px',
+                  fontSize: '14.5px',
                   fontWeight: 700,
                   color: '#FFFFFF',
                   width: '100%',
                   cursor: 'pointer',
+                  textAlign: isRtl ? 'right' : 'left',
                 }}
               >
                 {CITIES.map((c) => (
-                  <option key={c} value={c} style={{ backgroundColor: '#151524', color: '#FFFFFF' }}>
-                    {c}, Saudi Arabia
+                  <option key={c.en} value={c.en} style={{ backgroundColor: '#151524', color: '#FFFFFF' }}>
+                    {isAr ? c.ar : c.en}
                   </option>
                 ))}
               </select>
             </div>
           </div>
 
-          {/* Auto-Generated ZATCA 15-Digit VAT Number */}
+          {/* ZATCA VAT ID (Pre-filled from e-KYC) */}
           <div>
             <label
               style={{
@@ -225,68 +245,58 @@ export const MerchantSetupScreen: React.FC = () => {
                 letterSpacing: '0.06em',
                 marginBottom: '6px',
                 display: 'block',
+                textAlign: isRtl ? 'right' : 'left',
               }}
             >
-              ZATCA Tax Identification / VAT ID (15 Digits)
+              {t('zatca.vat_id', 'ZATCA VAT ID (15-Digit)')}
             </label>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'space-between',
                 backgroundColor: '#151524',
                 border: '1px solid #2C2C44',
                 borderRadius: '14px',
                 padding: '12px 16px',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Hash size={18} color="#7FE87F" />
-                <span style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.05em' }}>
-                  {vatNumber}
-                </span>
-              </div>
-              <span
+              <Hash size={18} color="#7FE87F" style={{ marginRight: isRtl ? 0 : '12px', marginLeft: isRtl ? '12px' : 0, flexShrink: 0 }} />
+              <input
+                type="text"
+                value={isAr ? formatLocalizedNumber(vatNumber, language) : vatNumber}
+                readOnly
+                disabled
                 style={{
-                  fontSize: '10px',
-                  fontWeight: 800,
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                  fontSize: '14px',
+                  fontWeight: 700,
                   color: '#7FE87F',
-                  backgroundColor: 'rgba(127, 232, 127, 0.12)',
-                  padding: '2px 6px',
-                  borderRadius: '6px',
+                  fontFamily: 'monospace',
+                  width: '100%',
+                  direction: 'ltr',
+                  textAlign: isRtl ? 'right' : 'left',
                 }}
-              >
-                ZATCA Phase 2
-              </span>
+              />
             </div>
           </div>
 
-          {/* Submit CTA */}
+          {/* Action Button */}
           <div style={{ marginTop: '10px' }}>
-            <PrimaryButton type="submit" disabled={!businessName.trim()}>
-              Continue to Settlement Bank <ArrowRight size={18} />
+            <PrimaryButton type="submit">
+              {t('btn.continue', 'Continue')} <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
             </PrimaryButton>
           </div>
         </form>
       </div>
 
       {/* SAMA Dock */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '6px',
-          width: '100%',
-          textAlign: 'center',
-          marginTop: '20px',
-        }}
-      >
-        <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-          Regulated & Supervised by
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+        <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 700 }}>
+          {isAr ? 'بيانات منشأة موثقة عبر منصة النفاذ الوطني وأبشر' : 'SAMA & Absher Verified Merchant Identity'}
         </span>
-        <SamaLogo height={18} themeMode="green" />
+        <SamaLogo height={14} themeMode="green" />
       </div>
     </div>
   );

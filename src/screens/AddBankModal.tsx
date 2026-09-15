@@ -6,7 +6,7 @@ import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 export const AddBankModal: React.FC = () => {
-  const { isAddBankModalOpen, setIsAddBankModalOpen, addBankAccount } = useApp();
+  const { isAddBankModalOpen, setIsAddBankModalOpen, addBankAccount, t, language } = useApp();
   const [selectedBank, setSelectedBank] = useState<string>('Al Rajhi Bank');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -27,16 +27,19 @@ export const AddBankModal: React.FC = () => {
     setIsAddBankModalOpen(false);
   };
 
+  const displaySelectedBank = t(selectedBank, selectedBank);
+
   return (
     <BottomSheet
       isOpen={isAddBankModalOpen}
       onClose={() => setIsAddBankModalOpen(false)}
-      title="Link Sarie Bank Account"
+      title={language === 'العربية' ? 'ربط حساب بنكي عبر سريع' : 'Link Sarie Bank Account'}
     >
       <div style={{ marginBottom: '20px' }}>
         <div role="radiogroup" aria-label="Available Banks" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {availableBanks.map((bank) => {
             const isSelected = selectedBank === bank.name;
+            const displayBankName = t(bank.name, bank.name);
             return (
               <div
                 key={bank.name}
@@ -83,9 +86,9 @@ export const AddBankModal: React.FC = () => {
                   </div>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: '14px', color: '#FFFFFF' }}>
-                      {bank.name}
+                      {displayBankName}
                     </div>
-                    <div style={{ fontSize: '11px', color: '#6E6E85', marginTop: '1px', fontFamily: 'monospace' }}>
+                    <div style={{ fontSize: '11px', color: '#6E6E85', marginTop: '1px', fontFamily: 'monospace' }} dir="ltr">
                       Sarie Rail • IBAN {bank.code}
                     </div>
                   </div>
@@ -112,14 +115,18 @@ export const AddBankModal: React.FC = () => {
       </div>
 
       <PrimaryButton onClick={handleAdd} disabled={isLoading}>
-        {isLoading ? 'Verifying & Linking...' : `Link ${selectedBank}`}
+        {isLoading
+          ? (language === 'العربية' ? 'جاري التحقق والربط...' : 'Verifying & Linking...')
+          : (language === 'العربية' ? `ربط ${displaySelectedBank}` : `Link ${selectedBank}`)}
       </PrimaryButton>
 
       {/* SAMA Verification Footer */}
       <div style={{ marginTop: '14px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
         <SamaLogo height={12} themeMode="green" />
         <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 600 }}>
-          Direct Bank Binding &bull; SAMA & Sarie Authenticated
+          {language === 'العربية'
+            ? 'ربط مباشر مع البنك • موثق من البنك المركزي وسريع'
+            : 'Direct Bank Binding • SAMA & Sarie Authenticated'}
         </span>
       </div>
     </BottomSheet>

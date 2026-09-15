@@ -2,13 +2,14 @@ import React from 'react';
 import { CheckCircle2, Info, BellRing } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
+import { translateText } from '../utils/i18n';
 
 export const NotificationsScreen: React.FC = () => {
-  const { notifications } = useApp();
+  const { notifications, language, t } = useApp();
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '36px' }}>
-      <AppHeader title="Notifications" showBack showSettings={false} />
+      <AppHeader title={t('notifications')} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {notifications.length === 0 ? (
@@ -39,9 +40,9 @@ export const NotificationsScreen: React.FC = () => {
             >
               <BellRing size={22} />
             </div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>No notifications</div>
+            <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>{translateText('No notifications', language)}</div>
             <p style={{ fontSize: '12.5px', color: '#6E6E85', marginTop: '4px' }}>
-              You're all caught up.
+              {translateText("You're all caught up.", language)}
             </p>
           </div>
         ) : (
@@ -87,10 +88,10 @@ export const NotificationsScreen: React.FC = () => {
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontWeight: 800, fontSize: '14px', color: '#FFFFFF' }}>
-                      {notif.title}
+                      {translateText(notif.title, language)}
                     </span>
                     <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 600 }}>
-                      {notif.timestamp}
+                      {translateText(notif.timestamp, language)}
                     </span>
                   </div>
                   <div
@@ -101,7 +102,7 @@ export const NotificationsScreen: React.FC = () => {
                       lineHeight: '1.45',
                     }}
                   >
-                    {notif.description}
+                    {translateText(notif.description, language)}
                   </div>
                 </div>
               </div>
@@ -112,3 +113,4 @@ export const NotificationsScreen: React.FC = () => {
     </div>
   );
 };
+

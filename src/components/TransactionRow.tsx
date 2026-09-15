@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Transaction } from '../types';
 import { formatCurrency } from '../utils/formatters';
+import { useApp } from '../state/AppContext';
 
 interface TransactionRowProps {
   transaction: Transaction;
@@ -11,7 +12,13 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
   transaction,
   onClick,
 }) => {
+  const { language, t } = useApp();
   const isReceived = transaction.type === 'received';
+
+  const defaultSub = isReceived ? 'Received via Sarie' : 'Paid via Sarie';
+  const displayTitle = t(transaction.title, transaction.title);
+  const displaySub = t(transaction.subTitle || defaultSub, transaction.subTitle || defaultSub);
+  const displayDate = t(transaction.date, transaction.date);
 
   return (
     <div
@@ -59,15 +66,15 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
         </div>
         <div>
           <div style={{ fontWeight: 800, fontSize: '14px', color: '#FFFFFF', lineHeight: '18px' }}>
-            {transaction.title}
+            {displayTitle}
           </div>
           <div style={{ fontSize: '11.5px', color: '#A2A2BA', marginTop: '2px' }}>
-            {transaction.subTitle || (isReceived ? 'Received via Sarie' : 'Paid via Sarie')} &bull; {transaction.utr.substring(0, 10)}
+            {displaySub} &bull; {transaction.utr.substring(0, 10)}
           </div>
         </div>
       </div>
 
-      <div style={{ textAlign: 'right' }}>
+      <div style={{ textAlign: language === 'العربية' ? 'left' : 'right' }}>
         <div
           className="tabular-nums"
           style={{
@@ -76,10 +83,10 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
             color: isReceived ? '#7FE87F' : '#FFFFFF',
           }}
         >
-          {isReceived ? '+' : '-'}{formatCurrency(transaction.amount)}
+          {isReceived ? '+' : '-'}{formatCurrency(transaction.amount, language)}
         </div>
         <div style={{ fontSize: '10.5px', color: '#6E6E85', marginTop: '2px', fontWeight: 600 }}>
-          {transaction.date}
+          {displayDate}
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ const SAUDI_SETTLEMENT_BANKS = [
   },
   {
     name: 'Saudi National Bank (SNB)',
-    arabicName: 'البنك الأهلي السعودي',
+    arabicName: 'البنك الأهلي السعودي (SNB)',
     iban: 'SA12 1000 0000 1903 4004',
     code: '10',
   },
@@ -31,14 +31,15 @@ const SAUDI_SETTLEMENT_BANKS = [
   },
   {
     name: 'Saudi Awwal Bank (SAB)',
-    arabicName: 'البنك السعودي الأول',
+    arabicName: 'البنك السعودي الأول (SAB)',
     iban: 'SA44 5000 0000 8821 3003',
     code: '45',
   },
 ];
 
 export const MerchantSettlementBankScreen: React.FC = () => {
-  const { merchantInfo, updateMerchantInfo, navigateTo } = useApp();
+  const { merchantInfo, updateMerchantInfo, navigateTo, language, isRtl, t } = useApp();
+  const isAr = language === 'العربية';
   const [selectedBank, setSelectedBank] = useState(merchantInfo.settlementBank || 'Al Rajhi Bank');
   const [selectedIban, setSelectedIban] = useState(merchantInfo.settlementIban || 'SA55 8000 0000 6271 5005');
 
@@ -88,10 +89,10 @@ export const MerchantSettlementBankScreen: React.FC = () => {
           <Landmark size={30} color="#7FE87F" />
         </div>
         <h2 style={{ fontSize: '20px', fontWeight: 800, margin: '0 0 6px 0', color: '#FFFFFF' }}>
-          Settlement Bank Account
+          {isAr ? 'حساب بنك التسوية للمنشأة' : 'Settlement Bank Account'}
         </h2>
         <p style={{ fontSize: '13px', color: '#A2A2BA', margin: 0 }}>
-          Choose your corporate Saudi bank for daily automated Sarie payouts
+          {isAr ? 'اختر حساب المنشأة البنكي السعودي للتحويل والإيداع اليومي الفوري عبر سريع' : 'Choose your corporate Saudi bank for daily automated Sarie payouts'}
         </p>
       </div>
 
@@ -134,76 +135,68 @@ export const MerchantSettlementBankScreen: React.FC = () => {
                 </div>
                 <div>
                   <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
-                    {bank.name}
+                    {isAr ? bank.arabicName : bank.name}
                   </div>
-                  <div style={{ fontSize: '11px', color: '#A2A2BA', fontFamily: 'monospace', letterSpacing: '0.04em', marginTop: '2px' }}>
+                  <div style={{ fontSize: '11px', color: '#A2A2BA', fontFamily: 'monospace', letterSpacing: '0.04em', marginTop: '2px', direction: 'ltr', textAlign: isRtl ? 'right' : 'left' }}>
                     {bank.iban}
                   </div>
                 </div>
               </div>
 
-              <div
-                style={{
-                  width: '22px',
-                  height: '22px',
-                  borderRadius: '50%',
-                  backgroundColor: isSelected ? '#7FE87F' : '#1E1E32',
-                  border: isSelected ? 'none' : '1.5px solid #2C2C44',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {isSelected && <Check size={14} color="#000000" strokeWidth={3} />}
-              </div>
+              {isSelected && (
+                <div
+                  style={{
+                    width: '24px',
+                    height: '24px',
+                    borderRadius: '50%',
+                    backgroundColor: '#7FE87F',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#000000',
+                  }}
+                >
+                  <Check size={14} strokeWidth={3} />
+                </div>
+              )}
             </div>
           );
         })}
 
-        {/* Daily Settlement Information Banner */}
+        {/* Settlement Payout Notice */}
         <div
           style={{
-            backgroundColor: 'rgba(127, 232, 127, 0.06)',
-            border: '1px solid rgba(127, 232, 127, 0.2)',
+            backgroundColor: '#151524',
+            border: '1px solid #2C2C44',
             borderRadius: '14px',
             padding: '12px 14px',
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
-            marginTop: '6px',
+            marginTop: '4px',
           }}
         >
-          <Clock size={18} color="#7FE87F" style={{ flexShrink: 0 }} />
-          <div style={{ fontSize: '11.5px', color: '#A2A2BA', lineHeight: 1.4 }}>
-            <span style={{ color: '#FFFFFF', fontWeight: 700 }}>Daily 12:00 AM Settlement:</span> All card and QR collections are credited directly to this IBAN with zero processing delay.
-          </div>
-        </div>
-
-        {/* Action Button */}
-        <div style={{ marginTop: '12px' }}>
-          <PrimaryButton onClick={handleContinue}>
-            Set Security PIN <ArrowRight size={18} />
-          </PrimaryButton>
+          <Clock size={18} color="#7FE87F" />
+          <span style={{ fontSize: '11.5px', color: '#A2A2BA' }}>
+            {isAr
+              ? 'تتم التسوية اليومية تلقائياً الساعة ١٢:٠٠ منتصف الليل مباشرة إلى حساب المنشأة.'
+              : 'Daily collections settle automatically at 12:00 AM directly via Sarie rail.'}
+          </span>
         </div>
       </div>
 
-      {/* SAMA Dock */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '6px',
-          width: '100%',
-          textAlign: 'center',
-          marginTop: '20px',
-        }}
-      >
-        <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-          Sarie Corporate Settlement Rail
-        </span>
-        <SamaLogo height={18} themeMode="green" />
+      {/* Footer & CTA */}
+      <div style={{ width: '100%', maxWidth: '380px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        <PrimaryButton onClick={handleContinue}>
+          {t('btn.continue', 'Continue')} <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+        </PrimaryButton>
+
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+          <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 700 }}>
+            {isAr ? 'تسوية معتمدة ومرخصة من البنك المركزي السعودي' : 'SAMA Sarie Regulated Direct Settlement'}
+          </span>
+          <SamaLogo height={14} themeMode="green" />
+        </div>
       </div>
     </div>
   );

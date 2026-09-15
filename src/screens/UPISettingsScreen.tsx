@@ -4,9 +4,10 @@ import { AppHeader } from '../components/AppHeader';
 import { ListRow } from '../components/ListRow';
 import { Modal } from '../components/Modal';
 import { useApp } from '../state/AppContext';
+import { translateText } from '../utils/i18n';
 
 export const UPISettingsScreen: React.FC = () => {
-  const { user, navigateTo } = useApp();
+  const { user, navigateTo, language, t } = useApp();
   const [copied, setCopied] = useState(false);
   const [isPinModalOpen, setIsPinModalOpen] = useState(false);
   const [oldPin, setOldPin] = useState('');
@@ -26,15 +27,15 @@ export const UPISettingsScreen: React.FC = () => {
     setPinError('');
 
     if (oldPin.length !== 4) {
-      setPinError('Old PIN must be 4 digits');
+      setPinError(translateText('Old PIN must be 4 digits', language));
       return;
     }
     if (newPin.length !== 4) {
-      setPinError('New PIN must be 4 digits');
+      setPinError(translateText('New PIN must be 4 digits', language));
       return;
     }
     if (newPin !== confirmPin) {
-      setPinError('New PIN and Confirm PIN do not match');
+      setPinError(translateText('New PIN and Confirm PIN do not match', language));
       return;
     }
 
@@ -50,7 +51,7 @@ export const UPISettingsScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
-      <AppHeader title="Sarie Settings" showBack showSettings={false} />
+      <AppHeader title={translateText('Sarie Settings', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Active Sarie ID Banner */}
@@ -66,10 +67,10 @@ export const UPISettingsScreen: React.FC = () => {
           }}
         >
           <div style={{ fontSize: '11px', color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>
-            Primary Sarie ID
+            {translateText('Primary Sarie ID', language)}
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px' }}>
-            <span style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em' }}>
+            <span style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em', direction: 'ltr' }}>
               {user.upiId}
             </span>
             <button
@@ -90,7 +91,7 @@ export const UPISettingsScreen: React.FC = () => {
                 boxShadow: 'none',
               }}
             >
-              {copied ? <Check size={13} /> : <Copy size={13} />} {copied ? 'Copied' : 'Copy'}
+              {copied ? <Check size={13} /> : <Copy size={13} />} {copied ? translateText('Copied', language) : t('copy')}
             </button>
           </div>
         </div>
@@ -99,26 +100,26 @@ export const UPISettingsScreen: React.FC = () => {
         <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', boxShadow: 'none' }}>
           <ListRow
             icon={<QrCode size={18} color="#7FE87F" />}
-            label="My Sarie QR Code"
+            label={translateText('My Sarie QR Code', language)}
             onClick={() => navigateTo('RECEIVE')}
           />
           <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<Key size={18} color="#7FE87F" />}
-            label="Change Payment PIN"
+            label={translateText('Change Payment PIN', language)}
             onClick={() => setIsPinModalOpen(true)}
           />
           <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<ShieldCheck size={18} color="#7FE87F" />}
-            label="Daily Transfer Limit"
-            rightElement={<span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 800, backgroundColor: '#1E1E32', border: '1px solid #2C2C44', padding: '3px 8px', borderRadius: '6px' }}>SAR 50,000 / day</span>}
+            label={translateText('Daily Transfer Limit', language)}
+            rightElement={<span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 800, backgroundColor: '#1E1E32', border: '1px solid #2C2C44', padding: '3px 8px', borderRadius: '6px' }}>{language === 'ar' ? '٥٠,٠٠٠ ر.س / يومياً' : 'SAR 50,000 / day'}</span>}
           />
         </div>
       </div>
 
       {/* Change PIN Modal */}
-      <Modal isOpen={isPinModalOpen} onClose={() => setIsPinModalOpen(false)} title="Change Payment PIN">
+      <Modal isOpen={isPinModalOpen} onClose={() => setIsPinModalOpen(false)} title={translateText('Change Payment PIN', language)}>
         {pinSuccess ? (
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
             <div
@@ -136,7 +137,7 @@ export const UPISettingsScreen: React.FC = () => {
             >
               <Check size={28} />
             </div>
-            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>Payment PIN Updated</h4>
+            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>{translateText('Payment PIN Updated', language)}</h4>
           </div>
         ) : (
           <form onSubmit={handlePinSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -147,7 +148,7 @@ export const UPISettingsScreen: React.FC = () => {
             )}
             <div>
               <label style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
-                Current 4-Digit PIN
+                {translateText('Current 4-Digit PIN', language)}
               </label>
               <input
                 type="password"
@@ -156,13 +157,13 @@ export const UPISettingsScreen: React.FC = () => {
                 onChange={(e) => setOldPin(e.target.value.replace(/\D/g, ''))}
                 placeholder="••••"
                 required
-                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none' }}
+                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none', direction: 'ltr' }}
               />
             </div>
 
             <div>
               <label style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
-                New 4-Digit PIN
+                {translateText('New 4-Digit PIN', language)}
               </label>
               <input
                 type="password"
@@ -171,13 +172,13 @@ export const UPISettingsScreen: React.FC = () => {
                 onChange={(e) => setNewPin(e.target.value.replace(/\D/g, ''))}
                 placeholder="••••"
                 required
-                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none' }}
+                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none', direction: 'ltr' }}
               />
             </div>
 
             <div>
               <label style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
-                Confirm New PIN
+                {translateText('Confirm New PIN', language)}
               </label>
               <input
                 type="password"
@@ -186,7 +187,7 @@ export const UPISettingsScreen: React.FC = () => {
                 onChange={(e) => setConfirmPin(e.target.value.replace(/\D/g, ''))}
                 placeholder="••••"
                 required
-                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none' }}
+                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #2C2C44', backgroundColor: '#1E1E32', color: '#FFFFFF', fontSize: '18px', textAlign: 'center', letterSpacing: '8px', outline: 'none', direction: 'ltr' }}
               />
             </div>
 
@@ -206,7 +207,7 @@ export const UPISettingsScreen: React.FC = () => {
                 boxShadow: 'none',
               }}
             >
-              Update PIN
+              {translateText('Update PIN', language)}
             </button>
           </form>
         )}
@@ -214,4 +215,5 @@ export const UPISettingsScreen: React.FC = () => {
     </div>
   );
 };
+
 

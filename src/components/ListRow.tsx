@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
+import { useApp } from '../state/AppContext';
 
 interface ListRowProps {
   icon?: React.ReactNode;
@@ -18,6 +19,10 @@ export const ListRow: React.FC<ListRowProps> = ({
   onClick,
   danger = false,
 }) => {
+  const { t, isRtl } = useApp();
+  const displayLabel = t(label, label);
+  const displaySubLabel = subLabel ? t(subLabel, subLabel) : undefined;
+
   return (
     <div
       role={onClick ? 'button' : undefined}
@@ -70,11 +75,11 @@ export const ListRow: React.FC<ListRowProps> = ({
               color: danger ? '#FF6B7A' : '#FFFFFF',
             }}
           >
-            {label}
+            {displayLabel}
           </div>
-          {subLabel && (
+          {displaySubLabel && (
             <div style={{ fontSize: '11.5px', color: '#B3B3C2', marginTop: '2px' }}>
-              {subLabel}
+              {displaySubLabel}
             </div>
           )}
         </div>
@@ -82,7 +87,9 @@ export const ListRow: React.FC<ListRowProps> = ({
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         {rightElement}
-        {onClick && !rightElement && <ChevronRight size={18} color="#808099" />}
+        {onClick && !rightElement && (
+          <ChevronRight size={18} color="#808099" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+        )}
       </div>
     </div>
   );

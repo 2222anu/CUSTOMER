@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowLeft, Volume2, Radio, Play } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { SamaLogo } from '../components/SamaLogo';
+import { formatSaudiCurrency, formatLocalizedNumber } from '../utils/i18n';
 
 export const SoundBoxNotifierScreen: React.FC = () => {
   const {
@@ -11,15 +12,21 @@ export const SoundBoxNotifierScreen: React.FC = () => {
     setSoundBoxVolume,
     speakSoundBox,
     goBack,
+    language,
+    isRtl,
+    t,
   } = useApp();
 
-  const [lastPlayedLog, setLastPlayedLog] = useState<string>('Ready for incoming Sarie/mada payments');
+  const isAr = language === 'العربية';
+  const [lastPlayedLog, setLastPlayedLog] = useState<string>(
+    isAr ? 'جاهز لاستقبال إشعارات سريع ومدى الفورية' : 'Ready for incoming Sarie/mada payments'
+  );
 
   const handlePlayTest = (amount: number) => {
     speakSoundBox(amount);
-    const msg = soundBoxLanguage === 'ar'
-      ? `تم تشغيل الإشعار الصوتي: تم استلام ${amount} ريال سعودي`
-      : `Played audio announcement: Received SAR ${amount}.00 on Alph Pay`;
+    const msg = soundBoxLanguage === 'ar' || isAr
+      ? `تم تشغيل الإشعار الصوتي: تم استلام ${amount} ريال سعودي عبر كيو تي باي`
+      : `Played audio announcement: Received SAR ${amount}.00 on QTPay`;
     setLastPlayedLog(msg);
   };
 
@@ -42,7 +49,7 @@ export const SoundBoxNotifierScreen: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <button
           onClick={goBack}
-          aria-label="Back"
+          aria-label={t('btn.back', 'Back')}
           className="interactive-tap"
           style={{
             backgroundColor: '#151524',
@@ -57,15 +64,15 @@ export const SoundBoxNotifierScreen: React.FC = () => {
             cursor: 'pointer',
           }}
         >
-          <ArrowLeft size={18} />
+          <ArrowLeft size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
         </button>
 
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
-            SoundBox Voice Unit
+            {t('merchant.soundbox_title', 'Smart SoundBox Notifier')}
           </div>
           <div style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
-            Real-time Audio Announcements
+            {t('merchant.soundbox_live', 'Instant Voice Announcements')}
           </div>
         </div>
 
@@ -134,7 +141,7 @@ export const SoundBoxNotifierScreen: React.FC = () => {
           </div>
 
           <div style={{ fontSize: '10.5px', fontWeight: 800, color: '#A2A2BA', marginTop: '12px', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-            AlphPay SoundBox 5G
+            QTPay SoundBox 5G
           </div>
         </div>
 
@@ -159,7 +166,7 @@ export const SoundBoxNotifierScreen: React.FC = () => {
           }}
         >
           <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
-            Voice Announcement Language
+            {isAr ? 'لغة الإشعار الصوتي' : 'Voice Announcement Language'}
           </span>
 
           <div style={{ display: 'flex', gap: '6px' }}>
@@ -207,10 +214,10 @@ export const SoundBoxNotifierScreen: React.FC = () => {
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
             <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
-              SoundBox Volume Level
+              {isAr ? 'مستوى الصوت' : 'SoundBox Volume Level'}
             </span>
             <span style={{ fontSize: '12px', fontWeight: 800, color: '#7FE87F' }}>
-              {Math.round(soundBoxVolume * 100)}%
+              {isAr ? `${formatLocalizedNumber(Math.round(soundBoxVolume * 100), language)}٪` : `${Math.round(soundBoxVolume * 100)}%`}
             </span>
           </div>
 
@@ -232,7 +239,7 @@ export const SoundBoxNotifierScreen: React.FC = () => {
         {/* Quick Test Voice Triggers */}
         <div>
           <div style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', marginBottom: '8px' }}>
-            Quick Audio Triggers
+            {isAr ? 'تجربة سريعة للإشعارات الصوتية' : 'Quick Audio Triggers'}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
             {[50, 150, 1200].map((amt) => (
@@ -256,7 +263,7 @@ export const SoundBoxNotifierScreen: React.FC = () => {
                   gap: '4px',
                 }}
               >
-                <Play size={13} color="#7FE87F" /> SAR {amt}
+                <Play size={13} color="#7FE87F" /> {formatSaudiCurrency(amt, language)}
               </button>
             ))}
           </div>
@@ -266,10 +273,11 @@ export const SoundBoxNotifierScreen: React.FC = () => {
       {/* SAMA Dock */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '10px' }}>
         <span style={{ fontSize: '10.5px', color: '#6E6E85', fontWeight: 700 }}>
-          SAMA Certified IoT Hardware Integration
+          {isAr ? 'عتاد ذكي معتمد ومتصل بشبكة البنك المركزي' : 'SAMA Certified IoT Hardware Integration'}
         </span>
         <SamaLogo height={14} themeMode="green" />
       </div>
     </div>
   );
 };
+

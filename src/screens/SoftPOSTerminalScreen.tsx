@@ -3,12 +3,13 @@ import { ArrowLeft, Delete, ShieldCheck } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { formatCurrency } from '../utils/formatters';
+import { translateText, formatSaudiCurrency, toArabicNumerals } from '../utils/i18n';
 
 const CARD_SCHEMES = [
-  { id: 'mada', label: 'mada Debit', icon: '🇸🇦' },
-  { id: 'applepay', label: 'Apple Pay', icon: '' },
-  { id: 'visa', label: 'Visa', icon: '💳' },
-  { id: 'mastercard', label: 'Mastercard', icon: '💳' },
+  { id: 'mada', label: 'mada Debit', labelAr: 'مدى', icon: '🇸🇦' },
+  { id: 'applepay', label: 'Apple Pay', labelAr: 'أبل باي', icon: '' },
+  { id: 'visa', label: 'Visa', labelAr: 'فيزا', icon: '💳' },
+  { id: 'mastercard', label: 'Mastercard', labelAr: 'ماستركارد', icon: '💳' },
 ];
 
 export const SoftPOSTerminalScreen: React.FC = () => {
@@ -20,7 +21,12 @@ export const SoftPOSTerminalScreen: React.FC = () => {
     navigateTo,
     goBack,
     merchantInfo,
+    language,
+    isRtl,
+    t,
   } = useApp();
+
+  const isAr = language === 'العربية';
 
   const [rawAmountStr, setRawAmountStr] = useState<string>(
     softPosAmount > 0 ? (softPosAmount * 100).toString() : '6700'
@@ -49,6 +55,8 @@ export const SoftPOSTerminalScreen: React.FC = () => {
     }
   };
 
+  const digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
   return (
     <div
       className="fade-in"
@@ -68,7 +76,7 @@ export const SoftPOSTerminalScreen: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <button
           onClick={goBack}
-          aria-label="Back"
+          aria-label={t('btn.back', 'Back')}
           className="interactive-tap"
           style={{
             backgroundColor: '#151524',
@@ -83,15 +91,15 @@ export const SoftPOSTerminalScreen: React.FC = () => {
             cursor: 'pointer',
           }}
         >
-          <ArrowLeft size={18} />
+          <ArrowLeft size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
         </button>
 
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
-            SoftPOS Terminal
+            {t('merchant.softpos', 'SoftPOS Terminal')}
           </div>
           <div style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
-            {merchantInfo.businessName}
+            {translateText(merchantInfo.businessName, language)}
           </div>
         </div>
 
@@ -128,16 +136,20 @@ export const SoftPOSTerminalScreen: React.FC = () => {
         }}
       >
         <div style={{ fontSize: '11.5px', color: '#C8E6C9', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 800, marginBottom: '4px' }}>
-          Charge Amount (Sarie SoftPOS)
+          {isAr ? 'مبلغ التحصيل (نقاط بيع بالجوال)' : 'Charge Amount (Sarie SoftPOS)'}
         </div>
 
         <div className="tabular-nums" style={{ fontSize: '40px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em', margin: '4px 0 8px 0' }}>
-          {formatCurrency(numericValue)}
+          {formatCurrency(numericValue, language)}
         </div>
 
         {/* 15% ZATCA VAT Breakdown Tag */}
         <div style={{ fontSize: '12px', color: '#A2E6A2', fontWeight: 700 }}>
-          Includes SAR {(numericValue - numericValue / 1.15).toFixed(2)} (15% ZATCA VAT)
+          {isAr ? (
+            <>شامل ضريبة زاتكا ١٥٪ ({formatSaudiCurrency(numericValue - numericValue / 1.15, language)})</>
+          ) : (
+            <>Includes SAR {(numericValue - numericValue / 1.15).toFixed(2)} (15% ZATCA VAT)</>
+          )}
         </div>
 
         {/* Card Scheme Selection */}
@@ -165,7 +177,7 @@ export const SoftPOSTerminalScreen: React.FC = () => {
                 }}
               >
                 <span>{scheme.icon}</span>
-                <span>{scheme.label}</span>
+                <span>{isAr ? scheme.labelAr : scheme.label}</span>
               </button>
             );
           })}
@@ -175,7 +187,7 @@ export const SoftPOSTerminalScreen: React.FC = () => {
       {/* POS Numeric Keypad */}
       <div style={{ width: '100%', maxWidth: '330px', margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
-          {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((d) => (
+          {digits.map((d) => (
             <button
               key={d}
               type="button"
@@ -195,7 +207,7 @@ export const SoftPOSTerminalScreen: React.FC = () => {
                 justifyContent: 'center',
               }}
             >
-              {d}
+              {isAr ? toArabicNumerals(d) : d}
             </button>
           ))}
 
@@ -218,7 +230,7 @@ export const SoftPOSTerminalScreen: React.FC = () => {
               justifyContent: 'center',
             }}
           >
-            00
+            {isAr ? '٠٠' : '00'}
           </button>
 
           {/* Zero */}
@@ -240,7 +252,7 @@ export const SoftPOSTerminalScreen: React.FC = () => {
               justifyContent: 'center',
             }}
           >
-            0
+            {isAr ? '٠' : '0'}
           </button>
 
           {/* Delete */}
@@ -260,17 +272,20 @@ export const SoftPOSTerminalScreen: React.FC = () => {
               justifyContent: 'center',
             }}
           >
-            <Delete size={20} />
+            <Delete size={20} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
           </button>
         </div>
 
         {/* Charge CTA */}
         <div style={{ marginTop: '16px' }}>
           <PrimaryButton onClick={handleCharge} disabled={numericValue <= 0}>
-            Charge Contactless ({formatCurrency(numericValue)})
+            {isAr
+              ? `تحصيل لا تلامسي (${formatCurrency(numericValue, language)})`
+              : `Charge Contactless (${formatCurrency(numericValue, language)})`}
           </PrimaryButton>
         </div>
       </div>
     </div>
   );
 };
+

@@ -4,7 +4,7 @@ import { BottomSheet } from '../components/BottomSheet';
 import { useApp } from '../state/AppContext';
 
 export const LogoutModal: React.FC = () => {
-  const { isLogoutModalOpen, setIsLogoutModalOpen, performLogout } = useApp();
+  const { isLogoutModalOpen, setIsLogoutModalOpen, performLogout, t, language } = useApp();
   const [isLoggedOutSuccess, setIsLoggedOutSuccess] = useState(false);
 
   const handleConfirmLogout = () => {
@@ -21,7 +21,7 @@ export const LogoutModal: React.FC = () => {
       onClose={() => {
         if (!isLoggedOutSuccess) setIsLogoutModalOpen(false);
       }}
-      title={isLoggedOutSuccess ? undefined : 'Log out'}
+      title={isLoggedOutSuccess ? undefined : t('profile.logout', 'Log out')}
     >
       {isLoggedOutSuccess ? (
         <div className="fade-in" style={{ textAlign: 'center', padding: '20px 0' }}>
@@ -43,10 +43,10 @@ export const LogoutModal: React.FC = () => {
             <CheckCircle2 size={32} />
           </div>
           <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#FFFFFF' }}>
-            Logged Out Successfully
+            {language === 'العربية' ? 'تم تسجيل الخروج بنجاح' : 'Logged Out Successfully'}
           </h3>
           <p style={{ color: '#B3B3C2', fontSize: '13px', marginTop: '6px' }}>
-            Returning to mobile registration screen...
+            {language === 'العربية' ? 'جاري العودة لشاشة تسجيل الدخول...' : 'Returning to mobile registration screen...'}
           </p>
         </div>
       ) : (
@@ -69,10 +69,12 @@ export const LogoutModal: React.FC = () => {
           </div>
 
           <h3 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px', color: '#FFFFFF' }}>
-            Confirm Logout
+            {language === 'العربية' ? 'تأكيد تسجيل الخروج' : 'Confirm Logout'}
           </h3>
           <p style={{ color: '#B3B3C2', fontSize: '14px', marginBottom: '24px' }}>
-            Are you sure you want to log out of alph pay? Your session will be safely cleared.
+            {language === 'العربية'
+              ? 'هل أنت متأكد من تسجيل الخروج من كيو تي باي؟ سيتم إنهاء جلستك بأمان.'
+              : 'Are you sure you want to log out of QTPay? Your session will be safely cleared.'}
           </p>
 
           <div style={{ display: 'flex', gap: '12px' }}>
@@ -91,7 +93,7 @@ export const LogoutModal: React.FC = () => {
                 boxShadow: 'none',
               }}
             >
-              Cancel
+              {t('btn.cancel', 'Cancel')}
             </button>
             <button
               onClick={handleConfirmLogout}
@@ -101,14 +103,14 @@ export const LogoutModal: React.FC = () => {
                 border: 'none',
                 borderRadius: '12px',
                 padding: '14px',
-                color: '#FFFFFF',
+                color: '#0B0B14',
                 fontWeight: '800',
                 fontSize: '14px',
                 cursor: 'pointer',
                 boxShadow: 'none',
               }}
             >
-              Log Out
+              {t('profile.logout', 'Log Out')}
             </button>
           </div>
         </div>

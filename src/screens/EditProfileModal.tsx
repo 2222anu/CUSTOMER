@@ -9,7 +9,7 @@ interface EditProfileModalProps {
 }
 
 const COLOR_PRESETS = [
-  { name: 'Lime Green', color: '#7FE87F' },
+  { name: 'Emerald Green', color: '#7FE87F' },
   { name: 'Light Mint', color: '#9FEE9F' },
   { name: 'Forest Green', color: '#3F963F' },
   { name: 'Deep Navy', color: '#1A1A2E' },
@@ -18,7 +18,7 @@ const COLOR_PRESETS = [
 ];
 
 export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: propIsOpen, onClose: propOnClose }) => {
-  const { user, updateUser, isEditProfileModalOpen, setIsEditProfileModalOpen } = useApp();
+  const { user, updateUser, isEditProfileModalOpen, setIsEditProfileModalOpen, t, isRtl, language } = useApp();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const isOpen = propIsOpen !== undefined ? propIsOpen : isEditProfileModalOpen;
@@ -65,13 +65,13 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
     .map((n) => n[0])
     .join('')
     .substring(0, 2)
-    .toUpperCase() || 'AP';
+    .toUpperCase() || 'QP';
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        setErrorMsg('Image size should be less than 5MB');
+        setErrorMsg(language === 'العربية' ? 'يجب أن يكون حجم الصورة أقل من ٥ ميجابايت' : 'Image size should be less than 5MB');
         return;
       }
       const reader = new FileReader();
@@ -89,19 +89,19 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
     setErrorMsg('');
 
     if (!name.trim()) {
-      setErrorMsg('Please enter your full name');
+      setErrorMsg(language === 'العربية' ? 'يرجى إدخال الاسم الكامل' : 'Please enter your full name');
       return;
     }
-    if (!mobile.trim() || mobile.trim().length < 10) {
-      setErrorMsg('Please enter a valid mobile number');
+    if (!mobile.trim() || mobile.trim().length < 9) {
+      setErrorMsg(language === 'العربية' ? 'يرجى إدخال رقم جوال صحيح' : 'Please enter a valid mobile number');
       return;
     }
     if (!upiId.trim() || !upiId.includes('@')) {
-      setErrorMsg('Please enter a valid UPI ID (e.g. name@alphpay)');
+      setErrorMsg(language === 'العربية' ? 'يرجى إدخال معرف سريع صحيح (مثال: name@sarie)' : 'Please enter a valid Sarie ID (e.g. name@sarie)');
       return;
     }
     if (!email.trim() || !email.includes('@')) {
-      setErrorMsg('Please enter a valid email address');
+      setErrorMsg(language === 'العربية' ? 'يرجى إدخال بريد إلكتروني صحيح' : 'Please enter a valid email address');
       return;
     }
 
@@ -155,11 +155,11 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <h3 id="edit-profile-title" style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF' }}>
-            Edit Profile Details
+            {language === 'العربية' ? 'تعديل بيانات الملف الشخصي' : 'Edit Profile Details'}
           </h3>
           <button
             onClick={handleClose}
-            aria-label="Close edit profile modal"
+            aria-label={t('btn.close', 'Close')}
             style={{
               backgroundColor: '#3A3A52',
               border: 'none',
@@ -220,7 +220,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
               style={{
                 position: 'absolute',
                 bottom: '-2px',
-                right: '-2px',
+                [isRtl ? 'left' : 'right']: '-2px',
                 width: '24px',
                 height: '24px',
                 borderRadius: designSystem.radii.full,
@@ -232,7 +232,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                 justifyContent: 'center',
                 cursor: 'pointer',
               }}
-              title="Upload Profile Picture"
+              title={language === 'العربية' ? 'رفع صورة شخصية' : 'Upload Profile Picture'}
             >
               <Camera size={12} />
             </button>
@@ -245,20 +245,20 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
             />
           </div>
 
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ flex: 1, minWidth: 0, textAlign: isRtl ? 'right' : 'left' }}>
             <div style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              {name || 'Your Name'}
+              {name || (language === 'العربية' ? 'اسمك الكامل' : 'Your Name')}
             </div>
-            <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 700, marginTop: '2px' }}>
-              {upiId || 'upi@alphpay'} &bull; {mobile || '+91...'}
+            <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 700, marginTop: '2px' }} dir="ltr">
+              {upiId || 'name@sarie'} &bull; {mobile || '+966...'}
             </div>
           </div>
         </div>
 
         {/* Color Presets */}
-        <div style={{ marginBottom: '20px' }}>
+        <div style={{ marginBottom: '20px', textAlign: isRtl ? 'right' : 'left' }}>
           <span style={{ fontSize: '12px', fontWeight: 700, color: '#B3B3C2', display: 'block', marginBottom: '8px' }}>
-            Choose Avatar Color Theme
+            {language === 'العربية' ? 'اختر لون الملف الشخصي' : 'Choose Avatar Color Theme'}
           </span>
           <div role="radiogroup" aria-label="Avatar Color Presets" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
             {COLOR_PRESETS.map((preset) => (
@@ -327,27 +327,29 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
             >
               <Check size={28} />
             </div>
-            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>Profile Updated Successfully!</h4>
+            <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
+              {language === 'العربية' ? 'تم تحديث الملف الشخصي بنجاح!' : 'Profile Updated Successfully!'}
+            </h4>
           </div>
         ) : (
-          <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '14px', textAlign: isRtl ? 'right' : 'left' }}>
             {/* Name */}
             <div>
               <label htmlFor="edit-name-input" style={{ fontSize: '12px', fontWeight: 700, color: '#B3B3C2', display: 'block', marginBottom: '6px' }}>
-                Full Name
+                {t('auth.full_name', 'Full Name')}
               </label>
               <div style={{ position: 'relative' }}>
-                <UserIcon size={18} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#7FE87F' }} />
+                <UserIcon size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: '#7FE87F' }} />
                 <input
                   id="edit-name-input"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Enter full name"
+                  placeholder={language === 'العربية' ? 'فهد الحربي' : 'Enter full name'}
                   required
                   style={{
                     width: '100%',
-                    padding: '12px 14px 12px 42px',
+                    padding: isRtl ? '12px 42px 12px 14px' : '12px 14px 12px 42px',
                     borderRadius: designSystem.radii.md,
                     border: '1px solid #4D4D6B',
                     backgroundColor: '#1A1A2E',
@@ -355,6 +357,8 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                     fontWeight: 700,
                     color: '#FFFFFF',
                     outline: 'none',
+                    boxSizing: 'border-box',
+                    textAlign: isRtl ? 'right' : 'left',
                   }}
                 />
               </div>
@@ -363,20 +367,20 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
             {/* Mobile Number */}
             <div>
               <label htmlFor="edit-mobile-input" style={{ fontSize: '12px', fontWeight: 700, color: '#B3B3C2', display: 'block', marginBottom: '6px' }}>
-                Mobile Number
+                {t('auth.mobile_number', 'Mobile Number')}
               </label>
               <div style={{ position: 'relative' }}>
-                <Phone size={18} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#7FE87F' }} />
+                <Phone size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: '#7FE87F' }} />
                 <input
                   id="edit-mobile-input"
                   type="tel"
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
-                  placeholder="Enter mobile number"
+                  placeholder="+966 50 123 4567"
                   required
                   style={{
                     width: '100%',
-                    padding: '12px 14px 12px 42px',
+                    padding: isRtl ? '12px 42px 12px 14px' : '12px 14px 12px 42px',
                     borderRadius: designSystem.radii.md,
                     border: '1px solid #4D4D6B',
                     backgroundColor: '#1A1A2E',
@@ -384,6 +388,9 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                     fontWeight: 700,
                     color: '#FFFFFF',
                     outline: 'none',
+                    boxSizing: 'border-box',
+                    direction: 'ltr',
+                    textAlign: isRtl ? 'right' : 'left',
                   }}
                 />
               </div>
@@ -392,20 +399,20 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
             {/* UPI ID */}
             <div>
               <label htmlFor="edit-upi-input" style={{ fontSize: '12px', fontWeight: 700, color: '#B3B3C2', display: 'block', marginBottom: '6px' }}>
-                Primary UPI ID
+                {t('pay.sarie_id', 'Primary Sarie ID')}
               </label>
               <div style={{ position: 'relative' }}>
-                <AtSign size={18} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#7FE87F' }} />
+                <AtSign size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: '#7FE87F' }} />
                 <input
                   id="edit-upi-input"
                   type="text"
                   value={upiId}
                   onChange={(e) => setUpiId(e.target.value)}
-                  placeholder="name@alphpay"
+                  placeholder="fahad@sarie"
                   required
                   style={{
                     width: '100%',
-                    padding: '12px 14px 12px 42px',
+                    padding: isRtl ? '12px 42px 12px 14px' : '12px 14px 12px 42px',
                     borderRadius: designSystem.radii.md,
                     border: '1px solid #4D4D6B',
                     backgroundColor: '#1A1A2E',
@@ -413,6 +420,9 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                     fontWeight: 700,
                     color: '#FFFFFF',
                     outline: 'none',
+                    boxSizing: 'border-box',
+                    direction: 'ltr',
+                    textAlign: isRtl ? 'right' : 'left',
                   }}
                 />
               </div>
@@ -421,20 +431,20 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
             {/* Email */}
             <div>
               <label htmlFor="edit-email-input" style={{ fontSize: '12px', fontWeight: 700, color: '#B3B3C2', display: 'block', marginBottom: '6px' }}>
-                Email Address
+                {language === 'العربية' ? 'البريد الإلكتروني' : 'Email Address'}
               </label>
               <div style={{ position: 'relative' }}>
-                <Mail size={18} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#7FE87F' }} />
+                <Mail size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: '#7FE87F' }} />
                 <input
                   id="edit-email-input"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@example.com"
+                  placeholder="fahad@example.com"
                   required
                   style={{
                     width: '100%',
-                    padding: '12px 14px 12px 42px',
+                    padding: isRtl ? '12px 42px 12px 14px' : '12px 14px 12px 42px',
                     borderRadius: designSystem.radii.md,
                     border: '1px solid #4D4D6B',
                     backgroundColor: '#1A1A2E',
@@ -442,6 +452,9 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                     fontWeight: 700,
                     color: '#FFFFFF',
                     outline: 'none',
+                    boxSizing: 'border-box',
+                    direction: 'ltr',
+                    textAlign: isRtl ? 'right' : 'left',
                   }}
                 />
               </div>
@@ -463,7 +476,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                 marginTop: '10px',
               }}
             >
-              Save Profile Changes
+              {t('btn.save', 'Save Changes')}
             </button>
           </form>
         )}

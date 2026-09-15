@@ -43,24 +43,7 @@ export const SplashScreen: React.FC = () => {
           textAlign: 'center',
         }}
       >
-        <div
-          style={{
-            width: '96px',
-            height: '96px',
-            borderRadius: '26px',
-            backgroundColor: '#12121E',
-            border: '1px solid #222238',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '20px',
-            boxShadow: 'none',
-          }}
-        >
-          <AlphPayLogo variant="icon" size={56} themeMode="dark" />
-        </div>
-
-        <AlphPayLogo variant="horizontal" size={38} themeMode="dark" />
+        <AlphPayLogo variant="horizontal" size={44} themeMode="dark" />
       </div>
 
       {/* Bottom Center: Powered by Quantira Technologies */}

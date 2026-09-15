@@ -8,27 +8,17 @@ interface BankCardCarouselProps {
   banks: BankAccount[];
 }
 
-const getBankStyle = (bankName: string, isPrimary: boolean) => {
-  const nameUpper = bankName.toUpperCase();
-  let tagText = bankName;
-  if (nameUpper.includes('RAJHI')) tagText = 'AL RAJHI BANK';
-  else if (nameUpper.includes('SNB') || nameUpper.includes('NATIONAL') || nameUpper.includes('AHLI')) tagText = 'SNB (AL AHLI)';
-  else if (nameUpper.includes('RIYAD')) tagText = 'RIYAD BANK';
-  else if (nameUpper.includes('ALINMA')) tagText = 'ALINMA BANK';
-  else if (nameUpper.includes('FRANSI') || nameUpper.includes('BSF')) tagText = 'BANQUE SAUDI FRANSI';
-  else if (nameUpper.includes('SAB') || nameUpper.includes('AWWAL')) tagText = 'SAB BANK';
-
+const getBankStyle = (_bankName: string, isPrimary: boolean) => {
   return {
     background: isPrimary
       ? 'linear-gradient(135deg, #18182E 0%, #151524 60%, #12121E 100%)'
       : 'linear-gradient(135deg, #151524 0%, #12121E 100%)',
     borderColor: isPrimary ? '#7FE87F' : '#2C2C44',
-    tagText,
   };
 };
 
 export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => {
-  const { navigateTo, openPinModal, toggleShowBalance, setIsAddBankModalOpen } = useApp();
+  const { navigateTo, openPinModal, toggleShowBalance, setIsAddBankModalOpen, t, language, isRtl } = useApp();
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -56,20 +46,23 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
 
   const handleScroll = () => {
     if (!carouselRef.current) return;
-    const cardWidth = 310;
-    const scrollPos = carouselRef.current.scrollLeft;
+    const cardWidth = 320;
+    const scrollPos = Math.abs(carouselRef.current.scrollLeft);
     const index = Math.round(scrollPos / cardWidth);
     setActiveCardIndex(Math.min(Math.max(index, 0), banks.length - 1));
   };
 
   const handleCardBalanceClick = (bank: BankAccount, e: React.MouseEvent) => {
     e.stopPropagation();
+    const bankTitle = t(bank.bankName, bank.bankName);
+    const accType = t(bank.accountType, bank.accountType);
+
     if (bank.showBalance) {
       toggleShowBalance(bank.id);
     } else {
       openPinModal({
-        title: `Check ${bank.bankName} Balance`,
-        subTitle: `${bank.accountType} • ${bank.accountNumberMasked}`,
+        title: `${t('banks.check_balance', 'Check Balance')} - ${bankTitle}`,
+        subTitle: `${accType} • ${bank.accountNumberMasked}`,
         amount: bank.balance,
         onSuccess: () => toggleShowBalance(bank.id),
       });
@@ -90,7 +83,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
-            My Bank Accounts
+            {t('banks.title', 'My Bank Accounts')}
           </h3>
           <span
             style={{
@@ -103,7 +96,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               border: '1px solid rgba(127, 232, 127, 0.25)',
             }}
           >
-            {banks.length} Linked
+            {language === 'العربية' ? `${banks.length} حسابات مرتبطة` : `${banks.length} Linked`}
           </span>
         </div>
 
@@ -122,7 +115,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
             boxShadow: 'none',
           }}
         >
-          Manage <ChevronRight size={14} />
+          {t('banks.title', 'Manage')} <ChevronRight size={14} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
         </button>
       </div>
 
@@ -139,16 +132,21 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
           gap: '14px',
           overflowX: 'auto',
           scrollSnapType: isMouseDown ? 'none' : 'x mandatory',
-          padding: '4px 20px 8px 20px',
+          padding: '4px 20px 10px 20px',
+          scrollPadding: '0 20px',
+          scrollPaddingInline: '20px',
           scrollbarWidth: 'none',
           WebkitOverflowScrolling: 'touch',
           cursor: isMouseDown ? 'grabbing' : 'grab',
           userSelect: 'none',
+          boxSizing: 'border-box',
         }}
       >
         {banks.map((bank) => {
           const style = getBankStyle(bank.bankName, bank.isPrimary);
           const rawNumbers = bank.accountNumberMasked.replace(/[^0-9]/g, '') || '3616';
+          const displayBankName = t(bank.bankName, bank.bankName);
+          const displayAccType = t(bank.accountType, bank.accountType);
 
           return (
             <div
@@ -157,7 +155,8 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               className="interactive-tap"
               style={{
                 scrollSnapAlign: 'start',
-                flex: '0 0 300px',
+                flex: '0 0 min(315px, calc(100% - 40px))',
+                width: 'min(315px, calc(100% - 40px))',
                 height: '175px',
                 background: style.background,
                 borderRadius: '16px',
@@ -176,7 +175,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
             >
               {/* 1. Card Top Header */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', zIndex: 2 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flex: 1, paddingRight: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flex: 1, paddingInlineEnd: '8px' }}>
                   <div
                     style={{
                       width: '36px',
@@ -194,13 +193,13 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                   </div>
                   <div style={{ minWidth: 0, flex: 1 }}>
                     <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em', lineHeight: '17px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {style.tagText}
+                      {displayBankName}
                     </div>
                     <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '5px', whiteSpace: 'nowrap' }}>
-                      <span>{bank.accountType}</span>
+                      <span>{displayAccType}</span>
                       <span>•</span>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: '#7FE87F', fontWeight: 600 }}>
-                        <ShieldCheck size={11} color="#7FE87F" /> Sarie Linked
+                        <ShieldCheck size={11} color="#7FE87F" /> {language === 'العربية' ? 'مرتبط بسريع' : 'Sarie Linked'}
                       </span>
                     </div>
                   </div>
@@ -222,7 +221,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                       flexShrink: 0,
                     }}
                   >
-                    PRIMARY
+                    {t('banks.primary', 'PRIMARY')}
                   </span>
                 )}
               </div>
@@ -238,7 +237,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                 </div>
 
                 {/* Masked Card Number */}
-                <div style={{ fontSize: '13.5px', fontWeight: 700, letterSpacing: '0.14em', color: '#FFFFFF', fontFamily: 'monospace' }}>
+                <div style={{ fontSize: '13.5px', fontWeight: 700, letterSpacing: '0.14em', color: '#FFFFFF', fontFamily: 'monospace', direction: 'ltr' }}>
                   ••••  ••••  ••••  {rawNumbers}
                 </div>
               </div>
@@ -247,16 +246,16 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', zIndex: 2 }}>
                 <div>
                   <div style={{ fontSize: '9.5px', color: '#A2A2BA', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.06em' }}>
-                    Available Balance
+                    {t('home.total_balance', 'Available Balance')}
                   </div>
                   <div style={{ fontSize: '18px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px', letterSpacing: '0.01em' }}>
-                    {bank.showBalance ? formatCurrency(bank.balance) : 'SAR ••••••••'}
+                    {bank.showBalance ? formatCurrency(bank.balance, language) : (language === 'العربية' ? '•••••••• ر.س' : 'SAR ••••••••')}
                   </div>
                 </div>
 
                 <button
                   onClick={(e) => handleCardBalanceClick(bank, e)}
-                  title="Check Bank Balance with Sarie PIN"
+                  title={t('banks.check_balance', 'Check Balance')}
                   className="interactive-tap"
                   style={{
                     backgroundColor: bank.showBalance ? '#1E1E32' : '#7FE87F',
@@ -275,7 +274,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                   }}
                 >
                   {bank.showBalance ? <EyeOff size={13} color="#FFFFFF" /> : <Eye size={13} color="#000000" />}
-                  {bank.showBalance ? 'Hide' : 'Check Balance'}
+                  {bank.showBalance ? t('home.hide', 'Hide') : t('banks.check_balance', 'Check Balance')}
                 </button>
               </div>
             </div>
@@ -320,9 +319,10 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
           >
             <Plus size={20} />
           </div>
-          <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>Add Bank</span>
-          <span style={{ fontSize: '10.5px', color: '#A2A2BA' }}>Link Account</span>
+          <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>{t('banks.add_bank', 'Add Bank')}</span>
+          <span style={{ fontSize: '10.5px', color: '#A2A2BA' }}>{language === 'العربية' ? 'ربط حساب' : 'Link Account'}</span>
         </div>
+        <div style={{ flex: '0 0 1px', width: '1px', flexShrink: 0 }} />
       </div>
 
       {/* Card Pagination Indicator Dots */}

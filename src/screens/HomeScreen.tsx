@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   Eye,
   EyeOff,
+  Lock,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { QPayHeroBanner } from '../components/QPayHeroBanner';
@@ -22,9 +23,10 @@ import { TransactionRow } from '../components/TransactionRow';
 import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
 import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
+import { formatCurrency } from '../utils/formatters';
 
 export const HomeScreen: React.FC = () => {
-  const { bankAccounts, transactions, navigateTo, setIsScanModalOpen, openPinModal, t, formatMoney, isRtl } = useApp();
+  const { bankAccounts, transactions, navigateTo, setIsScanModalOpen, openPinModal, t, language, isRtl } = useApp();
   const [isBalanceModalOpen, setIsBalanceModalOpen] = useState(false);
   const [showTotalBalance, setShowTotalBalance] = useState(false);
 
@@ -39,66 +41,46 @@ export const HomeScreen: React.FC = () => {
         title: t('sec.enter_pin', 'Enter PIN to View Balance'),
         subTitle: t('sec.enter_pin_sub', 'Enter 4-digit security PIN to view your total balance'),
         amount: totalBalance,
-        onSuccess: () => {
-          setShowTotalBalance(true);
-        },
+        onSuccess: () => setShowTotalBalance(true),
       });
     }
   };
 
   const handleCheckBalanceClick = () => {
-    openPinModal({
-      title: t('sec.enter_pin', 'Check Bank Balance Breakdown'),
-      subTitle: t('sec.enter_pin_sub', 'Enter 4-digit Sarie PIN to view individual account balances'),
-      amount: totalBalance,
-      onSuccess: () => {
-        setShowTotalBalance(true);
-        setIsBalanceModalOpen(true);
-      },
-    });
+    setIsBalanceModalOpen(true);
   };
 
   return (
-    <div
-      className="fade-in"
-      style={{
-        backgroundColor: '#000000',
-        minHeight: '100vh',
-        paddingBottom: '32px',
-        color: '#FFFFFF',
-        userSelect: 'none',
-      }}
-    >
-      {/* 1. App Header with Profile, AlphPay Emblem & Notification Bell */}
+    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '32px' }}>
+      {/* 1. Header with exact center brand logo and icon-only profile avatar */}
       <AppHeader
-        showUserInfo
         showSettings={false}
         rightAction={
           <button
             onClick={() => navigateTo('NOTIFICATIONS')}
-            aria-label="Notifications"
+            aria-label={t('notif.title', 'Notifications')}
             className="interactive-tap"
             style={{
+              backgroundColor: '#151524',
+              border: '1px solid #2C2C44',
+              color: '#FFFFFF',
               width: '38px',
               height: '38px',
               borderRadius: '12px',
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
               position: 'relative',
               boxShadow: 'none',
-              color: '#FFFFFF',
             }}
           >
-            <Bell size={18} color="#7FE87F" />
+            <Bell size={18} />
             <span
               style={{
                 position: 'absolute',
-                top: '8px',
-                right: '8px',
+                top: '9px',
+                right: '9px',
                 width: '7px',
                 height: '7px',
                 borderRadius: '50%',
@@ -109,128 +91,223 @@ export const HomeScreen: React.FC = () => {
         }
       />
 
-      {/* 2. Total Balance & Instant Sarie Overview Hero (Gradient Green-Black) */}
-      <div style={{ padding: '14px 20px 0 20px' }}>
+      {/* 2. Total Balance & Instant Sarie Overview Hero (Modern Premium Banking Card UI) */}
+      <div style={{ padding: '14px 20px 0 20px', position: 'relative' }}>
+        {/* Ambient background glow aura */}
         <div
           style={{
-            background: 'linear-gradient(135deg, #052e16 0%, #064e3b 35%, #031c12 70%, #0e0e18 100%)',
-            border: '1px solid rgba(127, 232, 127, 0.32)',
-            borderRadius: '20px',
-            padding: '22px',
-            boxShadow: 'none',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '90%',
+            height: '140px',
+            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.05) 50%, transparent 75%)',
+            filter: 'blur(35px)',
+            borderRadius: '50%',
+            pointerEvents: 'none',
+            zIndex: 0,
+          }}
+        />
+
+        <div
+          style={{
             position: 'relative',
+            zIndex: 1,
+            background: 'linear-gradient(145deg, #0a422a 0%, #031b11 100%)',
+            border: '1px solid rgba(52, 211, 153, 0.35)',
+            borderRadius: '24px',
+            padding: '24px 22px',
+            color: '#FFFFFF',
+            boxShadow: 'none',
             overflow: 'hidden',
+            boxSizing: 'border-box',
           }}
         >
-          {/* Subtle Decorative Background Glow */}
+          {/* Subtle Inner Glass Sheen Layer */}
           <div
             style={{
               position: 'absolute',
-              top: '-30px',
-              right: isRtl ? 'auto' : '-30px',
-              left: isRtl ? '-30px' : 'auto',
-              width: '120px',
-              height: '120px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(127, 232, 127, 0.15) 0%, transparent 70%)',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              borderRadius: '24px',
+              background: 'linear-gradient(125deg, rgba(255, 255, 255, 0.08) 0%, transparent 45%, transparent 100%)',
               pointerEvents: 'none',
             }}
           />
 
-          {/* Top meta row */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: '#C8E6C9', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                {t('home.total_balance', 'Total Available Balance')}
+          {/* Card Header Section */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '22px', position: 'relative', zIndex: 2 }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span
+                style={{
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  letterSpacing: '1.8px',
+                  color: '#86efac',
+                  textTransform: 'uppercase',
+                  lineHeight: 1.35,
+                }}
+              >
+                {t('home.total_balance', 'TOTAL AVAILABLE BALANCE')}
               </span>
+            </div>
+
+            {/* Badges Container */}
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
               <button
                 type="button"
                 onClick={handleToggleBalance}
-                aria-label={showTotalBalance ? 'Hide total balance' : 'Enter PIN to view total balance'}
+                aria-label={showTotalBalance ? t('home.hide', 'Hide') : t('home.pin_required', 'PIN Required')}
                 className="interactive-tap"
                 style={{
-                  background: 'rgba(127, 232, 127, 0.12)',
-                  border: '1px solid rgba(127, 232, 127, 0.25)',
-                  color: '#7FE87F',
-                  cursor: 'pointer',
-                  padding: '4px 6px',
-                  borderRadius: '6px',
+                  background: 'rgba(6, 78, 59, 0.6)',
+                  border: '1px solid rgba(52, 211, 153, 0.28)',
+                  borderRadius: '12px',
+                  padding: '6px 10px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '4px',
+                  gap: '6px',
                   fontSize: '11px',
                   fontWeight: 700,
+                  color: '#d1fae5',
+                  cursor: 'pointer',
+                  boxShadow: 'none',
                 }}
               >
-                {showTotalBalance ? <EyeOff size={13} /> : <Eye size={13} />}
+                {showTotalBalance ? <EyeOff size={13} color="#34d399" /> : <Eye size={13} color="#34d399" />}
                 <span>{showTotalBalance ? t('home.hide', 'Hide') : t('home.pin_required', 'PIN Required')}</span>
               </button>
-            </div>
 
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px',
-                backgroundColor: 'rgba(127, 232, 127, 0.16)',
-                border: '1px solid rgba(127, 232, 127, 0.35)',
-                color: '#7FE87F',
-                fontSize: '10.5px',
-                fontWeight: 800,
-                padding: '3px 9px',
-                borderRadius: '12px',
-              }}
-            >
-              <ShieldCheck size={12} color="#7FE87F" />
-              <span>{t('home.sarie_rail', 'Sarie 24/7 Rail')}</span>
+              <div
+                style={{
+                  background: 'rgba(6, 78, 59, 0.6)',
+                  border: '1px solid rgba(52, 211, 153, 0.28)',
+                  borderRadius: '12px',
+                  padding: '6px 10px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  color: '#d1fae5',
+                }}
+              >
+                <ShieldCheck size={13} color="#34d399" />
+                <span>{t('home.sarie_rail', 'Sarie 24/7 Rail')}</span>
+              </div>
             </div>
           </div>
 
-          {/* Amount Display & PIN View Action */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: '4px' }}>
-            <div
-              onClick={handleToggleBalance}
-              style={{ cursor: 'pointer' }}
-              title={showTotalBalance ? 'Click to hide balance' : 'Click to enter PIN & view balance'}
-            >
+          {/* Middle Balance Value Section */}
+          <div
+            onClick={handleToggleBalance}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              marginBottom: '22px',
+              cursor: 'pointer',
+              position: 'relative',
+              zIndex: 2,
+            }}
+          >
+            {showTotalBalance ? (
               <div
                 className="tabular-nums"
                 style={{
                   fontSize: '30px',
-                  fontWeight: 900,
-                  color: '#FFFFFF',
+                  fontWeight: 800,
                   letterSpacing: '-0.02em',
-                  lineHeight: 1.1,
+                  color: '#FFFFFF',
+                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
                 }}
               >
-                {showTotalBalance ? formatMoney(totalBalance) : (isRtl ? '•••••••• ر.س' : 'SAR ••••••••')}
+                {formatCurrency(totalBalance, language)}
               </div>
-              {!showTotalBalance && (
-                <div style={{ fontSize: '11px', color: '#A2E6A2', marginTop: '4px', fontWeight: 600 }}>
-                  {t('home.tap_to_view_pin', '🔒 Tap to enter PIN and view balance')}
+            ) : (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                <span
+                  style={{
+                    fontSize: '28px',
+                    fontWeight: 800,
+                    letterSpacing: '0.5px',
+                    color: '#FFFFFF',
+                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                  }}
+                >
+                  {language === 'العربية' ? 'ر.س' : 'SAR'}
+                </span>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center', paddingTop: '4px' }}>
+                  {[...Array(8)].map((_, idx) => (
+                    <div
+                      key={idx}
+                      className="masked-dot"
+                      style={{ animationDelay: `${idx * 0.18}s` }}
+                    />
+                  ))}
                 </div>
-              )}
+              </div>
+            )}
+          </div>
+
+          {/* Card Footer Section */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              position: 'relative',
+              zIndex: 2,
+            }}
+          >
+            <div
+              onClick={handleToggleBalance}
+              className="interactive-tap"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '7px',
+                fontSize: '11.5px',
+                fontWeight: 600,
+                color: '#86efac',
+                backgroundColor: 'rgba(4, 47, 46, 0.45)',
+                padding: '7px 12px',
+                borderRadius: '10px',
+                border: '1px solid rgba(52, 211, 153, 0.2)',
+                cursor: 'pointer',
+              }}
+            >
+              <Lock size={13} color="#fbbf24" />
+              <span>
+                {showTotalBalance
+                  ? (language === 'العربية' ? 'رصيد سريع فوري ومحدث' : 'Real-time Sarie Balance')
+                  : t('home.tap_to_view_pin', 'Tap to enter PIN and view balance')}
+              </span>
             </div>
 
             <button
               onClick={handleCheckBalanceClick}
               className="interactive-tap"
               style={{
-                background: 'linear-gradient(180deg, #1A4D2E 0%, #0F331E 100%)',
-                border: '1px solid rgba(127, 232, 127, 0.35)',
-                color: '#FFFFFF',
-                borderRadius: '10px',
-                padding: '8px 14px',
-                fontSize: '11.5px',
-                fontWeight: 800,
-                cursor: 'pointer',
+                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.48))',
+                border: '1px solid rgba(110, 231, 183, 0.35)',
+                borderRadius: '14px',
+                padding: '10px 18px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '5px',
+                gap: '8px',
+                color: '#FFFFFF',
+                fontSize: '13px',
+                fontWeight: 800,
+                cursor: 'pointer',
+                backdropFilter: 'blur(8px)',
                 boxShadow: 'none',
               }}
             >
-              <Landmark size={13} color="#7FE87F" />
+              <Landmark size={15} color="#34d399" />
               <span>{t('home.accounts', 'Accounts')}</span>
             </button>
           </div>
@@ -315,16 +392,16 @@ export const HomeScreen: React.FC = () => {
                   boxShadow: 'none',
                 }}
               >
-                <Send size={22} color="#7FE87F" />
+                <Send size={22} color="#7FE87F" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
               </div>
               <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                {t('home.pay_anyone', 'Pay Anyone')}
+                {t('home.send_money', 'Send Money')}
               </span>
             </div>
 
-            {/* Request Money */}
+            {/* Receive */}
             <div
-              onClick={() => navigateTo('REQUEST_MONEY')}
+              onClick={() => navigateTo('RECEIVE')}
               className="interactive-tap"
               style={{
                 display: 'flex',
@@ -350,13 +427,13 @@ export const HomeScreen: React.FC = () => {
                 <QrCode size={22} color="#7FE87F" />
               </div>
               <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                {t('home.request_money', 'Request')}
+                {t('home.receive', 'Receive')}
               </span>
             </div>
 
-            {/* Electricity & Bills */}
+            {/* Bank Accounts */}
             <div
-              onClick={() => navigateTo('ELECTRICITY')}
+              onClick={() => navigateTo('BANK_ACCOUNTS')}
               className="interactive-tap"
               style={{
                 display: 'flex',
@@ -379,15 +456,16 @@ export const HomeScreen: React.FC = () => {
                   boxShadow: 'none',
                 }}
               >
-                <Zap size={22} color="#7FE87F" />
+                <Landmark size={22} color="#7FE87F" />
               </div>
               <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                {t('home.bills_sadad', 'Bills')}
+                {t('home.accounts', 'Accounts')}
               </span>
             </div>
           </div>
         </div>
       </div>
+
       {/* 4. My Linked Saudi Bank Accounts Carousel */}
       {bankAccounts.length > 0 && (
         <div style={{ marginTop: '18px' }}>
@@ -398,7 +476,7 @@ export const HomeScreen: React.FC = () => {
       {/* 5. Promotional Hero Banner */}
       <QPayHeroBanner />
 
-      {/* 6. SADAD Bills & Public Utilities */}
+      {/* 6. Bills & Public Utilities */}
       <div style={{ padding: '14px 20px 0 20px' }}>
         <div
           style={{
@@ -412,7 +490,7 @@ export const HomeScreen: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
-                {t('home.bills_sadad', 'SADAD Utilities & Services')}
+                {t('home.utilities_services', 'Bills & Public Utilities')}
               </h3>
               <span
                 style={{
@@ -425,7 +503,7 @@ export const HomeScreen: React.FC = () => {
                   borderRadius: '6px',
                 }}
               >
-                {t('common.sadad', 'SADAD')}
+                {language === 'العربية' ? 'فوري ٢٤/٧' : '24/7 INSTANT'}
               </span>
             </div>
 
@@ -444,7 +522,7 @@ export const HomeScreen: React.FC = () => {
                 boxShadow: 'none',
               }}
             >
-              {t('common.view_all', 'View All')}
+              {t('home.view_all', 'View All')}
             </button>
           </div>
 
@@ -477,7 +555,7 @@ export const HomeScreen: React.FC = () => {
                 <Zap size={22} color="#7FE87F" />
               </div>
               <span style={{ fontSize: '11px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
-                {t('home.sec_electric', 'Electricity')}
+                {t('home.electricity', 'Electricity')}
               </span>
             </div>
 
@@ -584,7 +662,7 @@ export const HomeScreen: React.FC = () => {
       <div style={{ padding: '20px 20px 0 20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
           <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
-            {t('home.recent_activity', 'Recent Activity')}
+            {t('home.recent_txns', 'Recent Activity')}
           </h3>
           <button
             onClick={() => navigateTo('HISTORY')}
@@ -602,7 +680,7 @@ export const HomeScreen: React.FC = () => {
               padding: 0,
             }}
           >
-            {t('common.view_all', 'View All')} <ChevronRight size={14} style={{ transform: isRtl ? 'rotate(180deg)' : 'none' }} />
+            {t('home.view_all', 'View All')} <ChevronRight size={14} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
           </button>
         </div>
 
@@ -630,7 +708,7 @@ export const HomeScreen: React.FC = () => {
               {t('home.payment_partner', 'Official Payment Partner')}
             </div>
             <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#FFFFFF' }}>
-              {t('home.sama_license', 'Secured by SAMA National Banking Rail')}
+              {t('home.secured_sama', 'Secured by SAMA National Banking Rail')}
             </div>
           </div>
 

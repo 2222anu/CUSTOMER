@@ -6,7 +6,7 @@ import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 export const MobileNumberScreen: React.FC = () => {
-  const { navigateTo, user, updateUser, setUserRole, setIsKycModalOpen } = useApp();
+  const { navigateTo, user, updateUser, setUserRole, setIsKycModalOpen, t, isRtl, language } = useApp();
   const [accountType, setAccountType] = useState<'customer' | 'merchant'>('customer');
   const [fullName, setFullName] = useState<string>(user.name || 'Fahad Al-Harbi');
   const [mobileNumber, setMobileNumber] = useState<string>('501234567');
@@ -49,24 +49,7 @@ export const MobileNumberScreen: React.FC = () => {
           width: '100%',
         }}
       >
-        <div
-          style={{
-            width: '68px',
-            height: '68px',
-            borderRadius: '20px',
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '14px',
-            boxShadow: 'none',
-          }}
-        >
-          <AlphPayLogo variant="icon" size={40} themeMode="dark" />
-        </div>
-
-        <AlphPayLogo variant="horizontal" size={28} themeMode="dark" />
+        <AlphPayLogo variant="horizontal" size={32} themeMode="dark" />
       </div>
 
       {/* Main Form: Account Type Selector, Input Fields & Action Button */}
@@ -104,7 +87,7 @@ export const MobileNumberScreen: React.FC = () => {
               transition: 'all 0.15s ease',
             }}
           >
-            <UserIcon size={15} /> Personal
+            <UserIcon size={15} /> {t('auth.customer', 'Customer')}
           </button>
 
           <button
@@ -127,7 +110,7 @@ export const MobileNumberScreen: React.FC = () => {
               transition: 'all 0.15s ease',
             }}
           >
-            <Store size={15} /> Merchant
+            <Store size={15} /> {t('auth.merchant', 'Merchant')}
           </button>
         </div>
 
@@ -146,7 +129,7 @@ export const MobileNumberScreen: React.FC = () => {
                 display: 'block',
               }}
             >
-              Full Name (as per National ID / Iqama)
+              {language === 'العربية' ? 'الاسم الكامل (حسب الهوية الوطنية / الإقامة)' : 'Full Name (as per National ID / Iqama)'}
             </label>
             <div
               style={{
@@ -159,13 +142,13 @@ export const MobileNumberScreen: React.FC = () => {
                 transition: 'border-color 0.2s ease',
               }}
             >
-              <UserIcon size={18} color="#7FE87F" style={{ marginRight: '12px', flexShrink: 0 }} />
+              <UserIcon size={18} color="#7FE87F" style={{ marginInlineEnd: '12px', flexShrink: 0 }} />
               <input
                 id="fullname-input"
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                placeholder="Fahad Al-Harbi"
+                placeholder={language === 'العربية' ? 'فهد الحربي' : 'Fahad Al-Harbi'}
                 required
                 style={{
                   background: 'none',
@@ -194,7 +177,7 @@ export const MobileNumberScreen: React.FC = () => {
                 display: 'block',
               }}
             >
-              Saudi Mobile Number
+              {t('auth.mobile_number', 'Saudi Mobile Number')}
             </label>
             <div
               style={{
@@ -213,16 +196,16 @@ export const MobileNumberScreen: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  paddingRight: '12px',
-                  marginRight: '12px',
-                  borderRight: '1px solid #2C2C44',
+                  paddingInlineEnd: '12px',
+                  marginInlineEnd: '12px',
+                  borderInlineEnd: '1px solid #2C2C44',
                   fontWeight: 800,
                   fontSize: '14px',
                   color: '#FFFFFF',
                 }}
               >
                 <span>🇸🇦</span>
-                <span>+966</span>
+                <span dir="ltr">+966</span>
               </div>
 
               <input
@@ -243,6 +226,8 @@ export const MobileNumberScreen: React.FC = () => {
                   width: '100%',
                   fontVariantNumeric: 'tabular-nums',
                   letterSpacing: '0.05em',
+                  direction: 'ltr',
+                  textAlign: isRtl ? 'right' : 'left',
                 }}
               />
             </div>
@@ -251,7 +236,8 @@ export const MobileNumberScreen: React.FC = () => {
           {/* Primary Submit Button */}
           <div style={{ marginTop: '6px' }}>
             <PrimaryButton type="submit" disabled={mobileNumber.length < 9 || fullName.trim().length === 0}>
-              Get OTP & Verify <ArrowRight size={18} />
+              {t('auth.get_otp', 'Get OTP & Verify')}{' '}
+              <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
             </PrimaryButton>
           </div>
         </form>
@@ -278,7 +264,7 @@ export const MobileNumberScreen: React.FC = () => {
             letterSpacing: '0.08em',
           }}
         >
-          Associated with
+          {t('home.associated_sama', 'Associated with')}
         </span>
         <SamaLogo height={20} themeMode="green" />
       </div>

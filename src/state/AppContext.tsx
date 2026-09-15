@@ -21,15 +21,15 @@ import { bankService } from '../services/bankService';
 import { transactionService } from '../services/transactionService';
 import { notificationService } from '../services/notificationService';
 import { billPaymentService } from '../services/billPaymentService';
-import {
-  translateText,
-  formatSaudiCurrency,
-  formatLocalizedNumber,
-  formatLocalizedDate,
-} from '../utils/i18n';
-import type { SupportedLanguage } from '../utils/i18n';
+
+import { translateText, type SupportedLanguage } from '../utils/i18n';
 
 interface AppContextType {
+  // Localization & Translation
+  language: string;
+  isRtl: boolean;
+  t: (key: string, defaultText?: string) => string;
+
   // Navigation & Screen Stack
   currentScreen: ScreenId;
   navigateTo: (screen: ScreenId, params?: Record<string, any>) => void;
@@ -45,45 +45,33 @@ interface AppContextType {
   transactions: Transaction[];
   notifications: AppNotification[];
   contacts: Contact[];
-  frequentContacts: Contact[];
-  merchants: any[];
-  lastTransaction: Transaction | null;
-  electricityBill: ElectricityBill | null;
+  merchants: Contact[];
   moneyRequests: MoneyRequest[];
   deviceSessions: DeviceSession[];
-  language: string;
-  isRtl: boolean;
+  lastTransaction: Transaction | null;
+  electricityBill: ElectricityBill | null;
 
-  // I18n helper methods
-  t: (key: string, defaultText?: string) => string;
-  formatMoney: (amount: number) => string;
-  formatNum: (val: string | number) => string;
-  formatDt: (date: Date) => string;
-
-  // App Actions
+  // Actions
   updateUser: (updatedData: Partial<User>) => void;
-  toggleShowBalance: (bankAccountId: string) => void;
-  setPrimaryAccount: (bankAccountId: string) => void;
-  setPrimaryBank: (bankAccountId: string) => void;
-  unlinkAccount: (bankAccountId: string) => void;
-  removeBankAccount: (bankAccountId: string) => void;
-  addBankAccount: (bank: string | { bankName: string; accountNumber?: string; ifsc?: string }) => Promise<void> | void;
-  fetchElectricityBill: (consumerNumber: string) => Promise<ElectricityBill | null>;
-  completePayment: (
-    arg1: number | { title: string; subTitle: string; amount: number; avatarInitials?: string; category?: string; bankId?: string },
-    arg2?: string
-  ) => Promise<Transaction>;
-  receiveMoney: (
-    arg1: number | { senderName: string; senderUpi?: string; amount: number; note?: string; avatarInitials?: string },
-    arg2?: string
-  ) => Promise<Transaction>;
-  markNotificationAsRead: (notificationId: string) => void;
-  processPayment: (params: {
-    recipientName: string;
-    recipientUpiId: string;
+  toggleShowBalance: (bankId: string) => void;
+  addBankAccount: (bankName: string) => Promise<void>;
+  removeBankAccount: (bankId: string) => void;
+  setPrimaryBank: (bankId: string) => void;
+  fetchElectricityBill: (consumerNo: string) => Promise<ElectricityBill>;
+  completePayment: (params: {
+    title: string;
+    subTitle: string;
     amount: number;
-    sourceAccountId: string;
+    avatarInitials?: string;
+    category?: string;
+    bankId?: string;
+  }) => Promise<Transaction>;
+  receiveMoney: (params: {
+    senderName: string;
+    senderUpi?: string;
+    amount: number;
     note?: string;
+    avatarInitials?: string;
   }) => Promise<Transaction>;
 
   // Modals & Bottom Sheets
@@ -428,8 +416,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     );
   };
 
-  const addBankAccount = async (bank: string | { bankName: string; accountNumber?: string; ifsc?: string }) => {
-    const bankName = typeof bank === 'string' ? bank : bank.bankName;
+  const addBankAccount = async (bankName: string) => {
     const newBank = await bankService.addBankAccount(bankName);
     setBankAccounts((prev) => [...prev, newBank]);
 
@@ -454,10 +441,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
   };
 
-  const unlinkAccount = (bankId: string) => {
-    removeBankAccount(bankId);
-  };
-
   const setPrimaryBank = (bankId: string) => {
     setBankAccounts((prev) =>
       prev.map((acc) => ({
@@ -467,58 +450,38 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     );
   };
 
-  const setPrimaryAccount = (bankId: string) => {
-    setPrimaryBank(bankId);
-  };
-
   const fetchElectricityBill = async (consumerNo: string) => {
     const bill = await billPaymentService.fetchElectricityBill(consumerNo);
     setElectricityBill(bill);
     return bill;
   };
 
-  const completePayment = async (
-    arg1: number | { title: string; subTitle: string; amount: number; avatarInitials?: string; category?: string; bankId?: string },
-    arg2?: string
-  ) => {
-    let title = 'Payment';
-    let subTitle = 'Instant Sarie Transfer';
-    let amount = 0;
-    let avatarInitials: string | undefined;
-    let category = 'Payment';
-    let bankId: string | undefined;
-
-    if (typeof arg1 === 'number') {
-      amount = arg1;
-      title = arg2 || 'Payment';
-      subTitle = 'Instant Sarie Transfer';
-    } else {
-      title = arg1.title;
-      subTitle = arg1.subTitle;
-      amount = arg1.amount;
-      avatarInitials = arg1.avatarInitials;
-      category = arg1.category || 'Payment';
-      bankId = arg1.bankId;
-    }
-
+  const completePayment = async (params: {
+    title: string;
+    subTitle: string;
+    amount: number;
+    avatarInitials?: string;
+    category?: string;
+    bankId?: string;
+  }) => {
     const newTxn: Transaction = {
       id: 'QT' + Math.floor(10000000000 + Math.random() * 90000000000).toString(),
-      title,
-      subTitle,
-      amount,
+      title: params.title,
+      subTitle: params.subTitle,
+      amount: params.amount,
       type: 'sent',
       date: 'TODAY',
       timestamp: new Date(),
       utr: 'UTR' + Math.floor(100000000000 + Math.random() * 900000000000).toString(),
-      avatarInitials: avatarInitials || title.substring(0, 2).toUpperCase(),
-      category,
+      avatarInitials: params.avatarInitials || params.title.substring(0, 2).toUpperCase(),
+      category: params.category || 'Payment',
     };
 
     // Deduct from primary bank account (or specified bank account)
     setBankAccounts((prev) =>
       prev.map((acc) => {
-        if (bankId ? acc.id === bankId : acc.isPrimary) {
-          const newBal = Math.max(0, acc.balance - amount);
+        if (params.bankId ? acc.id === params.bankId : acc.isPrimary) {
+          const newBal = Math.max(0, acc.balance - params.amount);
           return { ...acc, balance: newBal };
         }
         return acc;
@@ -528,11 +491,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setTransactions((prev) => [newTxn, ...prev]);
     setLastTransaction(newTxn);
 
-    const formattedAmt = `SAR ${amount.toFixed(2)}`;
+    const formattedAmt = `SAR ${params.amount.toFixed(2)}`;
     const newNotif: AppNotification = {
       id: `notif-${Date.now()}`,
       title: 'Payment successful',
-      description: `${formattedAmt} paid to ${title}`,
+      description: `${formattedAmt} paid to ${params.title}`,
       timestamp: 'Just now',
       read: false,
       type: 'success',
@@ -542,35 +505,23 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return newTxn;
   };
 
-  const receiveMoney = async (
-    arg1: number | { senderName: string; senderUpi?: string; amount: number; note?: string; avatarInitials?: string },
-    arg2?: string
-  ) => {
-    let senderName = 'Sender';
-    let senderUpi: string | undefined;
-    let amount = 0;
-    let avatarInitials: string | undefined;
-
-    if (typeof arg1 === 'number') {
-      amount = arg1;
-      senderName = arg2 || 'Sender';
-    } else {
-      senderName = arg1.senderName;
-      senderUpi = arg1.senderUpi;
-      amount = arg1.amount;
-      avatarInitials = arg1.avatarInitials;
-    }
-
+  const receiveMoney = async (params: {
+    senderName: string;
+    senderUpi?: string;
+    amount: number;
+    note?: string;
+    avatarInitials?: string;
+  }) => {
     const newTxn: Transaction = {
       id: 'SAR' + Math.floor(10000000000 + Math.random() * 90000000000).toString(),
-      title: senderName,
-      subTitle: senderUpi ? `From ${senderUpi}` : 'Sarie Transfer Received',
-      amount,
+      title: params.senderName,
+      subTitle: params.senderUpi ? `From ${params.senderUpi}` : 'Sarie Transfer Received',
+      amount: params.amount,
       type: 'received',
       date: 'TODAY',
       timestamp: new Date(),
       utr: 'SARIE' + Math.floor(100000000000 + Math.random() * 900000000000).toString(),
-      avatarInitials: avatarInitials || senderName.substring(0, 2).toUpperCase(),
+      avatarInitials: params.avatarInitials || params.senderName.substring(0, 2).toUpperCase(),
       category: 'Received',
     };
 
@@ -578,7 +529,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setBankAccounts((prev) =>
       prev.map((acc) => {
         if (acc.isPrimary) {
-          return { ...acc, balance: acc.balance + amount };
+          return { ...acc, balance: acc.balance + params.amount };
         }
         return acc;
       })
@@ -587,11 +538,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setTransactions((prev) => [newTxn, ...prev]);
     setLastTransaction(newTxn);
 
-    const formattedAmt = `SAR ${amount.toFixed(2)}`;
+    const formattedAmt = `SAR ${params.amount.toFixed(2)}`;
     const newNotif: AppNotification = {
       id: `notif-${Date.now()}`,
       title: 'Payment Received',
-      description: `${formattedAmt} received from ${senderName}`,
+      description: `${formattedAmt} received from ${params.senderName}`,
       timestamp: 'Just now',
       read: false,
       type: 'success',
@@ -599,28 +550,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setNotifications((prev) => [newNotif, ...prev]);
 
     return newTxn;
-  };
-
-  const markNotificationAsRead = (notificationId: string) => {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === notificationId ? { ...n, read: true } : n))
-    );
-  };
-
-  const processPayment = async (params: {
-    recipientName: string;
-    recipientUpiId: string;
-    amount: number;
-    sourceAccountId: string;
-    note?: string;
-  }) => {
-    return completePayment({
-      title: params.recipientName,
-      subTitle: params.recipientUpiId,
-      amount: params.amount,
-      bankId: params.sourceAccountId,
-      category: 'Transfer',
-    });
   };
 
   // SoundBox Audio Chime & Speech Synthesizer
@@ -766,73 +695,26 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const t = (key: string, defaultText?: string) => {
-    return translateText(key, (language === 'العربية' ? 'العربية' : 'English') as SupportedLanguage, defaultText);
-  };
-
-  const formatMoney = (amount: number) => {
-    return formatSaudiCurrency(amount, (language === 'العربية' ? 'العربية' : 'English') as SupportedLanguage);
-  };
-
-  const formatNum = (val: string | number) => {
-    return formatLocalizedNumber(val, (language === 'العربية' ? 'العربية' : 'English') as SupportedLanguage);
-  };
-
-  const formatDt = (date: Date) => {
-    return formatLocalizedDate(date, (language === 'العربية' ? 'العربية' : 'English') as SupportedLanguage);
+    return translateText(key, language as SupportedLanguage, defaultText);
   };
 
   const setAppLanguage = (lang: string) => {
-    const isArabic = lang === 'العربية' || lang.includes('العربية') || lang.includes('Arabic') || lang.includes('Saudi');
-    const langKey = isArabic ? 'العربية' : 'English';
-    setLanguage(langKey);
-    setIsRtl(isArabic);
-    setSoundBoxLanguage(isArabic ? 'ar' : 'en');
-
+    setLanguage(lang);
+    const rtl = lang === 'العربية';
+    setIsRtl(rtl);
     if (typeof document !== 'undefined') {
-      document.documentElement.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
-      document.documentElement.setAttribute('lang', isArabic ? 'ar' : 'en');
+      document.documentElement.dir = rtl ? 'rtl' : 'ltr';
+      document.documentElement.lang = rtl ? 'ar' : 'en';
     }
-
-    if (isArabic) {
-      setUser((prev) => ({
-        ...prev,
-        name: prev.name === 'Fahad Al-Harbi' || prev.name === 'Fahad Al Harbi' ? 'فهد الحربي' : prev.name,
-        avatarInitials: 'ف.ح',
-      }));
-      setMerchantInfo((prev) => ({
-        ...prev,
-        businessName: prev.businessName === 'Starmart Supermarket' ? 'سوبرماركت ستار مارت' : prev.businessName,
-        category: 'البقالة والأغذية الفاخرة',
-        city: 'الرياض',
-      }));
-      setBankAccounts((prev) => [
-        { ...prev[0], bankName: 'مصرف الراجحي', accountType: 'حساب جاري' },
-        { ...prev[1], bankName: 'البنك الأهلي السعودي (SNB)', accountType: 'حساب ادخار' },
-        { ...prev[2], bankName: 'بنك الرياض', accountType: 'حساب شركات' },
-        { ...prev[3], bankName: 'مصرف الإنماء', accountType: 'حساب رواتب' },
-      ]);
-    } else {
-      setUser((prev) => ({
-        ...prev,
-        name: prev.name === 'فهد الحربي' ? 'Fahad Al-Harbi' : prev.name,
-        avatarInitials: 'FA',
-      }));
-      setMerchantInfo((prev) => ({
-        ...prev,
-        businessName: prev.businessName === 'سوبرماركت ستار مارت' ? 'Starmart Supermarket' : prev.businessName,
-        category: 'Groceries & Gourmet',
-        city: 'Riyadh',
-      }));
-      setBankAccounts((prev) => [
-        { ...prev[0], bankName: 'Al Rajhi Bank', accountType: 'Current Account' },
-        { ...prev[1], bankName: 'Saudi National Bank (SNB)', accountType: 'Savings Account' },
-        { ...prev[2], bankName: 'Riyad Bank', accountType: 'Corporate Payroll' },
-        { ...prev[3], bankName: 'Alinma Bank', accountType: 'Digital Checking' },
-      ]);
-    }
-
     setIsLanguageModalOpen(false);
   };
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+      document.documentElement.lang = isRtl ? 'ar' : 'en';
+    }
+  }, [isRtl]);
 
   const performLogout = () => {
     localStorage.removeItem('hasSeenOnboarding');
@@ -863,6 +745,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   return (
     <AppContext.Provider
       value={{
+        language,
+        isRtl,
+        t,
         currentScreen,
         navigateTo,
         goBack,
@@ -875,30 +760,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         transactions,
         notifications,
         contacts: FREQUENT_CONTACTS,
-        frequentContacts: FREQUENT_CONTACTS,
         merchants: MERCHANTS,
         moneyRequests,
         deviceSessions,
         lastTransaction,
         electricityBill,
-        language,
-        isRtl,
-        t,
-        formatMoney,
-        formatNum,
-        formatDt,
         updateUser,
         toggleShowBalance,
         addBankAccount,
         removeBankAccount,
-        unlinkAccount,
         setPrimaryBank,
-        setPrimaryAccount,
         fetchElectricityBill,
         completePayment,
         receiveMoney,
-        markNotificationAsRead,
-        processPayment,
         isPinModalOpen,
         openPinModal,
         closePinModal,

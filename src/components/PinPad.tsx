@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Delete } from 'lucide-react';
+import { useApp } from '../state/AppContext';
+import { toArabicNumerals } from '../utils/i18n';
 
 interface PinPadProps {
   length?: number;
@@ -8,6 +10,7 @@ interface PinPadProps {
 }
 
 export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error }) => {
+  const { language } = useApp();
   const [pin, setPin] = useState<string>('');
 
   const handleKeyPress = (num: string) => {
@@ -49,8 +52,8 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
       {/* PIN Dots Display */}
       <div
         role="group"
-        aria-label={`UPI PIN input, ${pin.length} of ${length} digits entered`}
-        style={{ display: 'flex', gap: '20px', margin: '20px 0 28px 0', alignItems: 'center' }}
+        aria-label={`PIN input, ${pin.length} of ${length} digits entered`}
+        style={{ display: 'flex', gap: '20px', margin: '20px 0 28px 0', alignItems: 'center', direction: 'ltr' }}
       >
         {Array.from({ length }).map((_, index) => {
           const isFilled = index < pin.length;
@@ -88,6 +91,7 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
           gap: '12px',
           width: '100%',
           maxWidth: '300px',
+          direction: 'ltr',
         }}
       >
         {keys.map((key, i) => {
@@ -119,6 +123,8 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
             );
           }
 
+          const displayDigit = language === 'العربية' ? toArabicNumerals(key) : key;
+
           return (
             <button
               key={i}
@@ -141,7 +147,7 @@ export const PinPad: React.FC<PinPadProps> = ({ length = 4, onComplete, error })
                 transition: 'background-color 0.12s ease, transform 0.08s ease',
               }}
             >
-              {key}
+              {displayDigit}
             </button>
           );
         })}

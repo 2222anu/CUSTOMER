@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Gift, Trophy, Sparkles, X, Check } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
+import { useApp } from '../state/AppContext';
+import { formatLocalizedNumber, translateText } from '../utils/i18n';
 
 interface ScratchCardItem {
   id: string;
@@ -14,40 +16,41 @@ interface ScratchCardItem {
 }
 
 export const RewardsScreen: React.FC = () => {
+  const { language, isRtl } = useApp();
   const [points, setPoints] = useState(1450);
   const [cards, setCards] = useState<ScratchCardItem[]>([
     {
       id: 'sc-1',
-      title: 'Sarie Transfer Reward',
-      subtitle: 'Earned on SAR 2,620 SEC Bill Payment',
-      rewardText: 'SAR 15 Instant Cashback',
+      title: language === 'ar' ? 'مكافأة تحويل ساريع' : 'Sarie Transfer Reward',
+      subtitle: language === 'ar' ? 'مكتسبة عند سداد فاتورة كهرباء بمبلغ ٢,٦٢٠ ر.س' : 'Earned on SAR 2,620 SEC Bill Payment',
+      rewardText: language === 'ar' ? 'كاش باك فوري ١٥ ر.س' : 'SAR 15 Instant Cashback',
       rewardType: 'cashback',
       amount: 15,
       isScratched: false,
     },
     {
       id: 'sc-2',
-      title: 'Merchant Super Saver',
-      subtitle: 'Earned at Panda Supermarket',
-      rewardText: 'Flat 25% Off Food & Groceries',
+      title: language === 'ar' ? 'توفير المتاجر الكبرى' : 'Merchant Super Saver',
+      subtitle: language === 'ar' ? 'مكتسبة لدى أسواق بنده' : 'Earned at Panda Supermarket',
+      rewardText: language === 'ar' ? 'خصم ٢٥٪ على الأغذية والمقاضي' : 'Flat 25% Off Food & Groceries',
       rewardType: 'voucher',
       code: 'PANDAFOOD25',
       isScratched: false,
     },
     {
       id: 'sc-3',
-      title: 'Weekend Bonus Scratch',
-      subtitle: 'Special reward for 5+ Sarie transactions',
-      rewardText: '+500 Extra AlphPoints',
+      title: language === 'ar' ? 'مكافأة عطلة نهاية الأسبوع' : 'Weekend Bonus Scratch',
+      subtitle: language === 'ar' ? 'مكافأة خاصة لإجراء أكثر من ٥ عمليات ساريع' : 'Special reward for 5+ Sarie transactions',
+      rewardText: language === 'ar' ? '+٥٠٠ نقطة ألف إضافية' : '+500 Extra AlphPoints',
       rewardType: 'points',
       amount: 500,
       isScratched: false,
     },
     {
       id: 'sc-4',
-      title: 'Travel Special Voucher',
-      subtitle: 'Saudia flight discount card',
-      rewardText: 'Flat SAR 150 Flight Discount',
+      title: language === 'ar' ? 'قسيمة سفر خاصة' : 'Travel Special Voucher',
+      subtitle: language === 'ar' ? 'بطاقة خصم رحلات الخطوط السعودية' : 'Saudia flight discount card',
+      rewardText: language === 'ar' ? 'خصم فوري ١٥٠ ر.س على الطيران' : 'Flat SAR 150 Flight Discount',
       rewardType: 'voucher',
       code: 'FLYSAR150',
       isScratched: true,
@@ -85,7 +88,7 @@ export const RewardsScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
-      <AppHeader title="Rewards & Scratch Cards" showBack showSettings={false} />
+      <AppHeader title={translateText('Rewards & Scratch Cards', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* AlphPoints Balance Hero Banner */}
@@ -117,21 +120,21 @@ export const RewardsScreen: React.FC = () => {
             <Trophy size={28} />
           </div>
           <div style={{ fontSize: '11px', fontWeight: 800, color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-            Total Reward Balance
+            {translateText('Total Reward Balance', language)}
           </div>
           <h2 style={{ fontSize: '26px', fontWeight: 900, color: '#FFFFFF', margin: '4px 0 6px 0', fontVariantNumeric: 'tabular-nums' }}>
-            {points.toLocaleString()} AlphPoints
+            {formatLocalizedNumber(points, language)} {translateText('AlphPoints', language)}
           </h2>
           <p style={{ fontSize: '12px', color: '#A2A2BA', margin: 0 }}>
-            Earn 10 AlphPoints on every SAR 100 spent via alph pay
+            {language === 'ar' ? 'اكسب ١٠ نقاط مكافأة على كل ١٠٠ ر.س تنفقها عبر كيو تي باي' : 'Earn 10 AlphPoints on every SAR 100 spent via alph pay'}
           </p>
         </div>
 
         {/* Unlocked Scratch Cards Grid */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-          <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>Unlocked Scratch Cards</h3>
+          <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>{translateText('Unlocked Scratch Cards', language)}</h3>
           <span style={{ fontSize: '12px', fontWeight: 700, color: '#7FE87F' }}>
-            {cards.filter((c) => !c.isScratched).length} Unopened
+            {formatLocalizedNumber(cards.filter((c) => !c.isScratched).length, language)} {translateText('Unopened', language)}
           </span>
         </div>
 
@@ -169,12 +172,12 @@ export const RewardsScreen: React.FC = () => {
                     <Check size={20} />
                   </div>
                   <div style={{ fontWeight: 800, fontSize: '13px', color: '#FFFFFF' }}>{card.rewardText}</div>
-                  <div style={{ fontSize: '11px', color: '#7FE87F', marginTop: '4px', fontWeight: 800 }}>Claimed</div>
+                  <div style={{ fontSize: '11px', color: '#7FE87F', marginTop: '4px', fontWeight: 800 }}>{translateText('Claimed', language)}</div>
                 </>
               ) : (
                 <>
                   <Sparkles size={28} color="#7FE87F" style={{ margin: '0 auto 8px auto' }} />
-                  <div style={{ fontWeight: 800, fontSize: '13px', color: '#FFFFFF' }}>Tap to Scratch</div>
+                  <div style={{ fontWeight: 800, fontSize: '13px', color: '#FFFFFF' }}>{translateText('Tap to Scratch', language)}</div>
                   <div style={{ fontSize: '11px', color: '#B3B3C2', marginTop: '4px', fontWeight: 700 }}>
                     {card.title}
                   </div>
@@ -221,7 +224,8 @@ export const RewardsScreen: React.FC = () => {
               style={{
                 position: 'absolute',
                 top: '16px',
-                right: '16px',
+                right: isRtl ? 'auto' : '16px',
+                left: isRtl ? '16px' : 'auto',
                 width: '32px',
                 height: '32px',
                 borderRadius: '50%',
@@ -265,7 +269,7 @@ export const RewardsScreen: React.FC = () => {
                 <div>
                   <Sparkles size={36} color="#7FE87F" style={{ animation: 'spin 1s linear infinite' }} />
                   <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF', marginTop: '10px' }}>
-                    Revealing Reward...
+                    {translateText('Revealing Reward...', language)}
                   </div>
                 </div>
               ) : isRevealed ? (
@@ -288,15 +292,15 @@ export const RewardsScreen: React.FC = () => {
                         letterSpacing: '0.05em',
                       }}
                     >
-                      CODE: {activeCard.code}
+                      {translateText('CODE', language)}: {activeCard.code}
                     </div>
                   )}
                 </div>
               ) : (
                 <div>
                   <Sparkles size={40} color="#7FE87F" style={{ margin: '0 auto 10px auto' }} />
-                  <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>Tap to Scratch</div>
-                  <div style={{ fontSize: '11px', color: '#B3B3C2', marginTop: '4px' }}>Click to reveal your reward!</div>
+                  <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{translateText('Tap to Scratch', language)}</div>
+                  <div style={{ fontSize: '11px', color: '#B3B3C2', marginTop: '4px' }}>{translateText('Click to reveal your reward!', language)}</div>
                 </div>
               )}
             </div>
@@ -317,7 +321,7 @@ export const RewardsScreen: React.FC = () => {
                   cursor: 'pointer',
                 }}
               >
-                Claimed & Saved
+                {translateText('Claimed & Saved', language)}
               </button>
             ) : (
               <button
@@ -335,7 +339,7 @@ export const RewardsScreen: React.FC = () => {
                   cursor: 'pointer',
                 }}
               >
-                Scratch Now
+                {translateText('Scratch Now', language)}
               </button>
             )}
           </div>
@@ -344,3 +348,4 @@ export const RewardsScreen: React.FC = () => {
     </div>
   );
 };
+

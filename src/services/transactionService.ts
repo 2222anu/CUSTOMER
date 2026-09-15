@@ -4,7 +4,7 @@ const INITIAL_TRANSACTIONS: Transaction[] = [
   {
     id: 'tx-1',
     title: 'Saudi Electricity Company (SEC)',
-    subTitle: 'SADAD Bill Payment',
+    subTitle: 'Utility Bill Payment',
     amount: 620.5,
     type: 'sent',
     date: 'TODAY',

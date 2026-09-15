@@ -32,11 +32,15 @@ export const ProfileScreen: React.FC = () => {
     setIsLanguageModalOpen,
     setIsLogoutModalOpen,
     setIsEditProfileModalOpen,
+    t,
+    isRtl,
   } = useApp();
+
+  const displayName = t(user.name, user.name);
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '36px' }}>
-      <AppHeader title="Profile" showSettings={false} showBack={true} onBack={() => navigateTo('HOME')} />
+      <AppHeader title={t('profile.title', 'Profile')} showSettings={false} showBack={true} onBack={() => navigateTo('HOME')} />
 
       {/* User Header Profile Hero Card */}
       <div
@@ -56,12 +60,12 @@ export const ProfileScreen: React.FC = () => {
           boxShadow: 'none',
         }}
       >
-        {/* Top Right Verified Pill */}
+        {/* Top Verified Pill */}
         <div
           style={{
             position: 'absolute',
             top: '16px',
-            right: '16px',
+            [isRtl ? 'left' : 'right']: '16px',
             backgroundColor: 'rgba(127, 232, 127, 0.15)',
             border: '1px solid #7FE87F',
             borderRadius: '20px',
@@ -76,7 +80,7 @@ export const ProfileScreen: React.FC = () => {
           }}
         >
           <SamaLogo height={10} themeMode="green" />
-          <span>KYC VERIFIED</span>
+          <span>{language === 'العربية' ? 'موثق عبر نفاذ' : 'KYC VERIFIED'}</span>
         </div>
 
         {/* Avatar with Edit Badge */}
@@ -85,7 +89,7 @@ export const ProfileScreen: React.FC = () => {
             onClick={() => navigateTo('HOME')}
             role="button"
             tabIndex={0}
-            aria-label="Go to Home"
+            aria-label={language === 'العربية' ? 'الذهاب للرئيسية' : 'Go to Home'}
             className="interactive-tap"
             style={{
               width: '80px',
@@ -104,19 +108,19 @@ export const ProfileScreen: React.FC = () => {
             }}
           >
             {user.avatarUrl ? (
-              <img src={user.avatarUrl} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={user.avatarUrl} alt={displayName} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             ) : (
               user.avatarInitials
             )}
           </div>
           <button
             onClick={() => setIsEditProfileModalOpen(true)}
-            aria-label="Edit profile picture"
+            aria-label={t('btn.edit_profile', 'Edit profile picture')}
             className="interactive-tap"
             style={{
               position: 'absolute',
               bottom: '0',
-              right: '-2px',
+              [isRtl ? 'left' : 'right']: '-2px',
               width: '28px',
               height: '28px',
               borderRadius: '50%',
@@ -129,7 +133,7 @@ export const ProfileScreen: React.FC = () => {
               cursor: 'pointer',
               boxShadow: 'none',
             }}
-            title="Edit Profile"
+            title={t('btn.edit_profile', 'Edit Profile')}
           >
             <Edit3 size={13} strokeWidth={2.5} />
           </button>
@@ -137,9 +141,9 @@ export const ProfileScreen: React.FC = () => {
 
         {/* User Details */}
         <h2 style={{ fontSize: '20px', fontWeight: '800', color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
-          {user.name}
+          {displayName}
         </h2>
-        <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: '700', marginTop: '4px', letterSpacing: '0.01em' }}>
+        <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: '700', marginTop: '4px', letterSpacing: '0.01em' }} dir="ltr">
           {user.upiId} • {user.mobile}
         </div>
         <div style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: '600', marginTop: '3px' }}>
@@ -170,7 +174,7 @@ export const ProfileScreen: React.FC = () => {
             }}
           >
             <Edit3 size={14} color="#0B0B14" />
-            Edit Profile
+            {t('btn.edit_profile', 'Edit Profile')}
           </button>
           <button
             onClick={() => navigateTo('RECEIVE')}
@@ -194,7 +198,7 @@ export const ProfileScreen: React.FC = () => {
             }}
           >
             <QrCode size={14} color="#7FE87F" />
-            My QR
+            {language === 'العربية' ? 'الرمز الخاص بي' : 'My QR'}
           </button>
         </div>
       </div>
@@ -203,8 +207,8 @@ export const ProfileScreen: React.FC = () => {
       <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* Payment & Banking */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '800', color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-            Payment & Accounts
+          <div style={{ fontSize: '11px', fontWeight: '800', color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+            {language === 'العربية' ? 'المدفوعات والحسابات' : 'Payment & Accounts'}
           </div>
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', padding: '6px 6px 0 6px', boxShadow: 'none' }}>
             <ListRow icon={<Landmark size={18} color="#7FE87F" />} label="Bank Accounts" onClick={() => navigateTo('BANK_ACCOUNTS')} />
@@ -215,8 +219,8 @@ export const ProfileScreen: React.FC = () => {
 
         {/* Transactions & Money */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '800', color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-            Transfers & Requests
+          <div style={{ fontSize: '11px', fontWeight: '800', color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+            {language === 'العربية' ? 'التحويلات والطلبات' : 'Transfers & Requests'}
           </div>
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', padding: '6px 6px 0 6px', boxShadow: 'none' }}>
             <ListRow icon={<Download size={18} color="#7FE87F" />} label="Money Requests" onClick={() => navigateTo('MONEY_REQUESTS')} />
@@ -227,8 +231,8 @@ export const ProfileScreen: React.FC = () => {
 
         {/* Lifestyle & Offers */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '800', color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-            Lifestyle & Rewards
+          <div style={{ fontSize: '11px', fontWeight: '800', color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+            {language === 'العربية' ? 'المكافآت والخدمات' : 'Lifestyle & Rewards'}
           </div>
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', padding: '6px 6px 0 6px', boxShadow: 'none' }}>
             <ListRow icon={<Gift size={18} color="#7FE87F" />} label="Rewards & Cashback" onClick={() => navigateTo('REWARDS')} />
@@ -241,8 +245,8 @@ export const ProfileScreen: React.FC = () => {
 
         {/* Security & System Settings */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '800', color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-            Settings & Security
+          <div style={{ fontSize: '11px', fontWeight: '800', color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+            {language === 'العربية' ? 'الإعدادات والأمان' : 'Settings & Security'}
           </div>
           <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', padding: '6px 6px 0 6px', boxShadow: 'none' }}>
             <ListRow icon={<ShieldCheck size={18} color="#7FE87F" />} label="Security & Devices" onClick={() => navigateTo('SECURITY')} />

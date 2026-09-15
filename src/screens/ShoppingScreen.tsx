@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ShoppingBag, Tag, ChevronRight, X, Check, Copy } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
+import { formatSaudiCurrency, translateText } from '../utils/i18n';
 
 interface DealItem {
   id: string;
@@ -15,7 +16,7 @@ interface DealItem {
 }
 
 export const ShoppingScreen: React.FC = () => {
-  const { openPinModal, completePayment } = useApp();
+  const { openPinModal, completePayment, language, t, isRtl } = useApp();
   const [selectedDeal, setSelectedDeal] = useState<DealItem | null>(null);
   const [copiedCode, setCopiedCode] = useState(false);
   const [purchasedDeal, setPurchasedDeal] = useState<{
@@ -27,30 +28,30 @@ export const ShoppingScreen: React.FC = () => {
   const deals: DealItem[] = [
     {
       id: 'deal-1',
-      merchant: 'Panda Supermarket',
-      title: 'Weekly Grocery Smart Saver',
-      offer: 'Flat SAR 50 Cashback on Sarie',
-      category: 'Groceries & Fresh Food',
+      merchant: language === 'ar' ? 'أسواق بنده' : 'Panda Supermarket',
+      title: language === 'ar' ? 'توفير البقالة والمقاضي الأسبوعية' : 'Weekly Grocery Smart Saver',
+      offer: language === 'ar' ? 'كاش باك ٥٠ ر.س عبر ساريع' : 'Flat SAR 50 Cashback on Sarie',
+      category: language === 'ar' ? 'بقالة ومواد غذائية طازجة' : 'Groceries & Fresh Food',
       couponCode: 'PANDASAVER50',
       originalPrice: 350,
       discountedPrice: 300,
     },
     {
       id: 'deal-2',
-      merchant: 'Jarir Bookstore',
-      title: 'Trending Books & Digital Stationery',
-      offer: 'Flat SAR 75 Instant OFF',
-      category: 'Books & Electronics',
+      merchant: language === 'ar' ? 'مكتبة جرير' : 'Jarir Bookstore',
+      title: language === 'ar' ? 'أفضل الكتب والأدوات الرقمية' : 'Trending Books & Digital Stationery',
+      offer: language === 'ar' ? 'خصم فوري ٧٥ ر.س' : 'Flat SAR 75 Instant OFF',
+      category: language === 'ar' ? 'كتب وإلكترونيات' : 'Books & Electronics',
       couponCode: 'JARIR75',
       originalPrice: 450,
       discountedPrice: 375,
     },
     {
       id: 'deal-3',
-      merchant: 'eXtra Stores',
-      title: 'Wireless Active Noise Cancelling Earbuds',
-      offer: 'Up to SAR 200 Instant Discount',
-      category: 'Audio & Tech Gadgets',
+      merchant: language === 'ar' ? 'معارض إكسترا' : 'eXtra Stores',
+      title: language === 'ar' ? 'سماعات لاسلكية عازلة للضوضاء' : 'Wireless Active Noise Cancelling Earbuds',
+      offer: language === 'ar' ? 'خصم فوري يصل إلى ٢٠٠ ر.س' : 'Up to SAR 200 Instant Discount',
+      category: language === 'ar' ? 'صوتيات وتقنية' : 'Audio & Tech Gadgets',
       couponCode: 'EXTRA200',
       originalPrice: 799,
       discountedPrice: 599,
@@ -67,8 +68,8 @@ export const ShoppingScreen: React.FC = () => {
     if (!selectedDeal) return;
 
     openPinModal({
-      title: `Buy ${selectedDeal.title}`,
-      subTitle: `${selectedDeal.merchant} • SAR ${selectedDeal.discountedPrice}`,
+      title: `${translateText('Buy', language)} ${selectedDeal.title}`,
+      subTitle: `${selectedDeal.merchant} • ${formatSaudiCurrency(selectedDeal.discountedPrice, language)}`,
       amount: selectedDeal.discountedPrice,
       onSuccess: async () => {
         await completePayment({
@@ -90,7 +91,7 @@ export const ShoppingScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
-      <AppHeader title="Shopping & Deals" showBack showSettings={false} />
+      <AppHeader title={translateText('Shopping & Deals', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Shopping Hero Banner */}
@@ -124,15 +125,15 @@ export const ShoppingScreen: React.FC = () => {
             <ShoppingBag size={24} />
           </div>
           <div>
-            <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>alph pay Partner Deals</h3>
+            <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>{translateText('alph pay Partner Deals', language)}</h3>
             <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '3px 0 0 0' }}>
-              Exclusive promo codes & instant discounts on top shopping brands
+              {translateText('Exclusive promo codes & instant discounts on top shopping brands', language)}
             </p>
           </div>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
-          Featured Partner Offers
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginInlineStart: '4px' }}>
+          {translateText('Featured Partner Offers', language)}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -174,7 +175,7 @@ export const ShoppingScreen: React.FC = () => {
                   <div style={{ fontSize: '12px', color: '#7FE87F', marginTop: '3px', fontWeight: 800 }}>{deal.offer}</div>
                 </div>
               </div>
-              <ChevronRight size={18} color="#B3B3C2" />
+              <ChevronRight size={18} color="#B3B3C2" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
             </div>
           ))}
         </div>
@@ -253,7 +254,7 @@ export const ShoppingScreen: React.FC = () => {
                 }}
               >
                 <div>
-                  <span style={{ fontSize: '11px', color: '#B3B3C2', display: 'block' }}>Coupon Code</span>
+                  <span style={{ fontSize: '11px', color: '#B3B3C2', display: 'block' }}>{translateText('Coupon Code', language)}</span>
                   <span style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.05em' }}>
                     {selectedDeal.couponCode}
                   </span>
@@ -277,18 +278,18 @@ export const ShoppingScreen: React.FC = () => {
                   }}
                 >
                   {copiedCode ? <Check size={14} /> : <Copy size={14} />}
-                  {copiedCode ? 'Copied!' : 'Copy'}
+                  {copiedCode ? translateText('Copied!', language) : t('copy')}
                 </button>
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px', paddingTop: '10px', borderTop: '1px dashed #4D4D6B' }}>
-                <span style={{ fontSize: '13px', fontWeight: 700, color: '#B3B3C2' }}>Special Discount Price</span>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#B3B3C2' }}>{translateText('Special Discount Price', language)}</span>
                 <div>
-                  <span style={{ fontSize: '13px', color: '#808099', textDecoration: 'line-through', marginRight: '8px', fontVariantNumeric: 'tabular-nums' }}>
-                    SAR {selectedDeal.originalPrice.toLocaleString()}
+                  <span style={{ fontSize: '13px', color: '#808099', textDecoration: 'line-through', marginInlineEnd: '8px', fontVariantNumeric: 'tabular-nums' }}>
+                    {formatSaudiCurrency(selectedDeal.originalPrice, language)}
                   </span>
                   <span style={{ fontSize: '20px', fontWeight: 900, color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>
-                    SAR {selectedDeal.discountedPrice.toLocaleString()}
+                    {formatSaudiCurrency(selectedDeal.discountedPrice, language)}
                   </span>
                 </div>
               </div>
@@ -309,7 +310,7 @@ export const ShoppingScreen: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              Order Now (SAR {selectedDeal.discountedPrice.toLocaleString()})
+              {translateText('Order Now', language)} ({formatSaudiCurrency(selectedDeal.discountedPrice, language)})
             </button>
           </div>
         </div>
@@ -363,16 +364,16 @@ export const ShoppingScreen: React.FC = () => {
             </div>
 
             <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 4px 0' }}>
-              Order Placed!
+              {translateText('Order Placed!', language)}
             </h3>
             <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '0 0 20px 0' }}>
-              Discount voucher redeemed at {purchasedDeal.merchant}
+              {language === 'ar' ? `تم تفعيل قسيمة الخصم لدى ${purchasedDeal.merchant}` : `Discount voucher redeemed at ${purchasedDeal.merchant}`}
             </p>
 
-            <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
+            <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: isRtl ? 'right' : 'left', marginBottom: '20px' }}>
               <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{purchasedDeal.title}</div>
               <div style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F', marginTop: '6px', fontVariantNumeric: 'tabular-nums' }}>
-                Paid SAR {purchasedDeal.paidAmount.toLocaleString()} via alph pay
+                {language === 'ar' ? `تم دفع ${formatSaudiCurrency(purchasedDeal.paidAmount, language)} عبر كيو تي باي` : `Paid SAR ${purchasedDeal.paidAmount.toLocaleString()} via alph pay`}
               </div>
             </div>
 
@@ -391,7 +392,7 @@ export const ShoppingScreen: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              Done & View Receipt
+              {translateText('Done & View Receipt', language)}
             </button>
           </div>
         </div>
@@ -399,3 +400,4 @@ export const ShoppingScreen: React.FC = () => {
     </div>
   );
 };
+

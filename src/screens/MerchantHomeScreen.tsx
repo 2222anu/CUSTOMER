@@ -13,8 +13,10 @@ import {
 } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
+import { translateText, formatLocalizedNumber, formatSaudiCurrency } from '../utils/i18n';
 import { SamaLogo } from '../components/SamaLogo';
 import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
+import { AlphPayLogo } from '../components/AlphPayLogo';
 
 export const MerchantHomeScreen: React.FC = () => {
   const {
@@ -23,8 +25,12 @@ export const MerchantHomeScreen: React.FC = () => {
     navigateTo,
     setUserRole,
     speakSoundBox,
+    language,
+    isRtl,
+    t,
   } = useApp();
 
+  const isAr = language === 'العربية';
   const totalToday = merchantCollections.reduce((acc, c) => acc + (c.status === 'settled' ? c.amount : 0), 0);
   const totalVat = merchantCollections.reduce((acc, c) => acc + (c.status === 'settled' ? c.vatAmount : 0), 0);
   const settledCount = merchantCollections.filter((c) => c.status === 'settled').length;
@@ -33,18 +39,18 @@ export const MerchantHomeScreen: React.FC = () => {
   const getMethodBadge = (method: string) => {
     switch (method) {
       case 'softpos_mada':
-        return { label: 'mada Tap', bg: 'rgba(127, 232, 127, 0.12)', color: '#7FE87F' };
+        return { label: isAr ? 'مدى Tap' : 'mada Tap', bg: 'rgba(127, 232, 127, 0.12)', color: '#7FE87F' };
       case 'softpos_applepay':
-        return { label: 'Apple Pay', bg: 'rgba(255, 255, 255, 0.12)', color: '#FFFFFF' };
+        return { label: isAr ? 'أبل باي' : 'Apple Pay', bg: 'rgba(255, 255, 255, 0.12)', color: '#FFFFFF' };
       case 'softpos_visa':
       case 'softpos_mastercard':
-        return { label: 'Card Tap', bg: 'rgba(92, 163, 255, 0.15)', color: '#5CA3FF' };
+        return { label: isAr ? 'بطاقة بنكية' : 'Card Tap', bg: 'rgba(92, 163, 255, 0.15)', color: '#5CA3FF' };
       case 'zatca_qr':
-        return { label: 'ZATCA QR', bg: 'rgba(235, 180, 50, 0.15)', color: '#EBB432' };
+        return { label: isAr ? 'رمز زاتكا' : 'ZATCA QR', bg: 'rgba(235, 180, 50, 0.15)', color: '#EBB432' };
       case 'payment_link':
-        return { label: 'Remote Link', bg: 'rgba(180, 120, 255, 0.15)', color: '#B478FF' };
+        return { label: isAr ? 'رابط دفع' : 'Remote Link', bg: 'rgba(180, 120, 255, 0.15)', color: '#B478FF' };
       default:
-        return { label: 'Sarie POS', bg: 'rgba(127, 232, 127, 0.12)', color: '#7FE87F' };
+        return { label: isAr ? 'نقاط بيع سريع' : 'Sarie POS', bg: 'rgba(127, 232, 127, 0.12)', color: '#7FE87F' };
     }
   };
 
@@ -59,63 +65,98 @@ export const MerchantHomeScreen: React.FC = () => {
         userSelect: 'none',
       }}
     >
-      {/* 1. Top Merchant Header */}
+      {/* 1. Top Merchant Header with Icon-Only Profile, Exact Center Logo & Action Controls */}
       <header
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '14px 20px',
-          backgroundColor: '#000000',
+          padding: '12px 18px',
+          backgroundColor: 'rgba(11, 11, 20, 0.96)',
+          backdropFilter: 'blur(16px)',
           borderBottom: '1px solid #2C2C44',
           position: 'sticky',
           top: 0,
-          zIndex: 30,
+          zIndex: 100,
+          minHeight: '58px',
+          boxSizing: 'border-box',
         }}
       >
-        {/* Merchant Info */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Left Slot: Merchant Profile Icon (No Text Next to It) */}
+        <div style={{ display: 'flex', alignItems: 'center', zIndex: 2, minWidth: '38px' }}>
           <div
+            onClick={() => navigateTo('PROFILE')}
+            role="button"
+            tabIndex={0}
+            aria-label="Merchant Profile"
+            className="interactive-tap"
             style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '12px',
+              width: '38px',
+              height: '38px',
+              borderRadius: '50%',
               backgroundColor: 'rgba(127, 232, 127, 0.15)',
-              border: '1px solid rgba(127, 232, 127, 0.3)',
+              border: '1.5px solid #7FE87F',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#7FE87F',
+              cursor: 'pointer',
+              flexShrink: 0,
             }}
           >
-            <Store size={20} />
-          </div>
-          <div>
-            <div style={{ fontSize: '14.5px', fontWeight: 800, color: '#FFFFFF', lineHeight: 1.2 }}>
-              {merchantInfo.businessName}
-            </div>
-            <div style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700, marginTop: '2px' }}>
-              CR: {merchantInfo.crNumber}
-            </div>
+            <Store size={18} />
           </div>
         </div>
 
-        {/* Action Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {/* Role Switcher Pill */}
+        {/* Exact Top Center Slot: Logo Wordmark with Merchant Indicator */}
+        <div
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px',
+            zIndex: 1,
+          }}
+        >
+          <div onClick={() => navigateTo('MERCHANT_HOME')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <AlphPayLogo variant="header" size={22} themeMode="dark" />
+            <span
+              style={{
+                fontSize: '9px',
+                fontWeight: 900,
+                backgroundColor: '#7FE87F',
+                color: '#000000',
+                padding: '2px 6px',
+                borderRadius: '4px',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+              }}
+            >
+              {isAr ? 'تاجر' : 'MERCHANT'}
+            </span>
+          </div>
+        </div>
+
+        {/* Right Slot: Customer Switch Pill + Web Portal Button */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2 }}>
+          {/* Role Switcher Button */}
           <button
             onClick={() => {
               setUserRole('customer');
               navigateTo('HOME');
             }}
-            title="Switch to Customer Mode"
+            title={isAr ? 'التبديل إلى وضع العميل' : 'Switch to Customer Mode'}
             className="interactive-tap"
             style={{
               backgroundColor: '#151524',
               border: '1px solid #2C2C44',
               color: '#FFFFFF',
-              borderRadius: '20px',
-              padding: '6px 12px',
+              borderRadius: '12px',
+              padding: '6px 10px',
               fontSize: '11.5px',
               fontWeight: 800,
               display: 'flex',
@@ -125,19 +166,19 @@ export const MerchantHomeScreen: React.FC = () => {
             }}
           >
             <User size={13} color="#7FE87F" />
-            <span>Personal</span>
+            <span>{isAr ? 'عميل' : 'Customer'}</span>
           </button>
 
-          {/* Web Admin Portal Mode */}
+          {/* Web Admin Portal Button */}
           <button
             onClick={() => navigateTo('MERCHANT_WEB')}
-            title="Open Merchant Web Admin"
+            title={isAr ? 'فتح بوابة الإدارة الإلكترونية' : 'Open Merchant Web Admin'}
             className="interactive-tap"
             style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '10px',
-              backgroundColor: '#1E1E32',
+              width: '38px',
+              height: '38px',
+              borderRadius: '12px',
+              backgroundColor: '#151524',
               border: '1px solid #2C2C44',
               display: 'flex',
               alignItems: 'center',
@@ -151,8 +192,23 @@ export const MerchantHomeScreen: React.FC = () => {
         </div>
       </header>
 
+      {/* Merchant Business Context Strip */}
+      <div style={{ padding: '16px 20px 0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', lineHeight: 1.2 }}>
+            {translateText(merchantInfo.businessName, language)}
+          </div>
+          <div style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700, marginTop: '2px' }}>
+            {isAr ? `السجل التجاري: ${formatLocalizedNumber(merchantInfo.crNumber, language)}` : `CR: ${merchantInfo.crNumber}`}
+          </div>
+        </div>
+        <div style={{ fontSize: '10.5px', fontWeight: 800, color: '#A2A2BA', backgroundColor: '#151524', border: '1px solid #2C2C44', padding: '4px 10px', borderRadius: '10px' }}>
+          {isAr ? 'نقاط بيع معتمدة' : 'Verified SoftPOS'}
+        </div>
+      </div>
+
       {/* 2. Today's Total Collections Hero Summary Card (Gradient Green-Black) */}
-      <div style={{ padding: '16px 20px 0 20px' }}>
+      <div style={{ padding: '12px 20px 0 20px' }}>
         <div
           style={{
             background: 'linear-gradient(135deg, #052e16 0%, #064e3b 35%, #031c12 70%, #0e0e18 100%)',
@@ -169,7 +225,8 @@ export const MerchantHomeScreen: React.FC = () => {
             style={{
               position: 'absolute',
               top: '-30px',
-              right: '-30px',
+              right: isRtl ? 'auto' : '-30px',
+              left: isRtl ? '-30px' : 'auto',
               width: '130px',
               height: '130px',
               borderRadius: '50%',
@@ -182,7 +239,7 @@ export const MerchantHomeScreen: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span style={{ fontSize: '11px', fontWeight: 800, color: '#C8E6C9', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                Today's Collections
+                {t('merchant.today_sales', "Today's Collections")}
               </span>
               <span
                 style={{
@@ -195,13 +252,13 @@ export const MerchantHomeScreen: React.FC = () => {
                   border: '1px solid rgba(127, 232, 127, 0.3)',
                 }}
               >
-                {settledCount} Sales
+                {formatLocalizedNumber(settledCount, language)} {t('merchant.sales_count', 'Sales')}
               </span>
             </div>
 
             <button
               onClick={() => speakSoundBox(totalToday)}
-              title="Test SoundBox Voice Announcement"
+              title={isAr ? 'تجربة إشعار الصوت الذكي' : 'Test SoundBox Voice Announcement'}
               className="interactive-tap"
               style={{
                 background: 'rgba(127, 232, 127, 0.12)',
@@ -217,7 +274,7 @@ export const MerchantHomeScreen: React.FC = () => {
                 borderRadius: '8px',
               }}
             >
-              <Volume2 size={14} /> SoundBox
+              <Volume2 size={14} /> {isAr ? 'صندوق الصوت' : 'SoundBox'}
             </button>
           </div>
 
@@ -225,10 +282,14 @@ export const MerchantHomeScreen: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '16px' }}>
             <div>
               <div className="tabular-nums" style={{ fontSize: '32px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em' }}>
-                {formatCurrency(totalToday)}
+                {formatCurrency(totalToday, language)}
               </div>
               <div style={{ fontSize: '11.5px', color: '#A2E6A2', marginTop: '2px', fontWeight: 600 }}>
-                Incl. <span style={{ color: '#FFFFFF', fontWeight: 800 }}>SAR {totalVat.toFixed(2)}</span> ZATCA 15% VAT
+                {isAr ? (
+                  <>شامل ضريبة زاتكا ١٥٪ (<span style={{ color: '#FFFFFF', fontWeight: 800 }}>{formatSaudiCurrency(totalVat, language)}</span>)</>
+                ) : (
+                  <>Incl. <span style={{ color: '#FFFFFF', fontWeight: 800 }}>SAR {totalVat.toFixed(2)}</span> ZATCA 15% VAT</>
+                )}
               </div>
             </div>
 
@@ -250,7 +311,7 @@ export const MerchantHomeScreen: React.FC = () => {
                 boxShadow: 'none',
               }}
             >
-              <CreditCard size={15} /> Collect
+              <CreditCard size={15} /> {t('btn.collect', 'Collect')}
             </button>
           </div>
 
@@ -268,9 +329,9 @@ export const MerchantHomeScreen: React.FC = () => {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <Landmark size={14} color="#7FE87F" />
-              <span>Settles to {merchantInfo.settlementBank}</span>
+              <span>{isAr ? `تسوية إلى ${translateText(merchantInfo.settlementBank, language)}` : `Settles to ${merchantInfo.settlementBank}`}</span>
             </div>
-            <span style={{ color: '#FFFFFF', fontWeight: 700 }}>Auto 12:00 AM</span>
+            <span style={{ color: '#FFFFFF', fontWeight: 700 }}>{isAr ? 'تلقائياً ١٢:٠٠ ص' : 'Auto 12:00 AM'}</span>
           </div>
         </div>
       </div>
@@ -279,10 +340,10 @@ export const MerchantHomeScreen: React.FC = () => {
       <div style={{ padding: '18px 20px 0 20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
           <h3 style={{ fontSize: '14.5px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
-            Payment Acceptance Suite
+            {isAr ? 'منظومة قبول المدفوعات' : 'Payment Acceptance Suite'}
           </h3>
           <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
-            mada & Sarie POS
+            {isAr ? 'نقاط بيع مدى وسريع' : 'mada & Sarie POS'}
           </span>
         </div>
 
@@ -326,10 +387,10 @@ export const MerchantHomeScreen: React.FC = () => {
             </div>
             <div>
               <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
-                SoftPOS Terminal
+                {t('merchant.softpos', 'SoftPOS Terminal')}
               </div>
               <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px' }}>
-                Contactless tap to pay
+                {isAr ? 'دفع بالبطاقة والجوال' : 'Contactless tap to pay'}
               </div>
             </div>
           </div>
@@ -368,15 +429,15 @@ export const MerchantHomeScreen: React.FC = () => {
                 <QrCode size={20} />
               </div>
               <span style={{ fontSize: '10px', fontWeight: 800, color: '#EBB432', backgroundColor: 'rgba(235, 180, 50, 0.12)', padding: '2px 6px', borderRadius: '6px' }}>
-                ZATCA Phase 2
+                {isAr ? 'زاتكا ٢' : 'ZATCA Phase 2'}
               </span>
             </div>
             <div>
               <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
-                ZATCA QR Code
+                {t('merchant.zatca_qr', 'ZATCA QR Code')}
               </div>
               <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px' }}>
-                Dynamic tax invoice QR
+                {isAr ? 'رمز ضريبي مفوتر ديناميكي' : 'Dynamic tax invoice QR'}
               </div>
             </div>
           </div>
@@ -415,15 +476,15 @@ export const MerchantHomeScreen: React.FC = () => {
                 <Link2 size={20} />
               </div>
               <span style={{ fontSize: '10px', fontWeight: 800, color: '#B478FF', backgroundColor: 'rgba(180, 120, 255, 0.12)', padding: '2px 6px', borderRadius: '6px' }}>
-                WhatsApp
+                {isAr ? 'واتساب' : 'WhatsApp'}
               </span>
             </div>
             <div>
               <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
-                Payment Link
+                {t('merchant.payment_link', 'Payment Link')}
               </div>
               <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px' }}>
-                Share remote order link
+                {isAr ? 'مشاركة رابط دفع عن بُعد' : 'Share remote order link'}
               </div>
             </div>
           </div>
@@ -462,15 +523,15 @@ export const MerchantHomeScreen: React.FC = () => {
                 <Volume2 size={20} />
               </div>
               <span style={{ fontSize: '10px', fontWeight: 800, color: '#7FE87F', backgroundColor: 'rgba(127, 232, 127, 0.12)', padding: '2px 6px', borderRadius: '6px' }}>
-                Voice Alert
+                {isAr ? 'إشعار صوتي' : 'Voice Alert'}
               </span>
             </div>
             <div>
               <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
-                SoundBox Unit
+                {t('merchant.soundbox', 'SoundBox Unit')}
               </div>
               <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px' }}>
-                Arabic & English audio
+                {isAr ? 'تنبيهات صوتية فورية' : 'Arabic & English audio'}
               </div>
             </div>
           </div>
@@ -481,7 +542,7 @@ export const MerchantHomeScreen: React.FC = () => {
       <div style={{ padding: '22px 20px 0 20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
           <h3 style={{ fontSize: '14.5px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
-            Recent Collections
+            {t('merchant.collections', 'Recent Collections')}
           </h3>
           <button
             onClick={() => navigateTo('MERCHANT_COLLECTIONS')}
@@ -499,7 +560,8 @@ export const MerchantHomeScreen: React.FC = () => {
               padding: 0,
             }}
           >
-            Full Ledger <ChevronRight size={14} />
+            {isAr ? 'سجل العمليات الكامل' : 'Full Ledger'}{' '}
+            <ChevronRight size={14} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
           </button>
         </div>
 
@@ -547,17 +609,17 @@ export const MerchantHomeScreen: React.FC = () => {
                     <div style={{ fontSize: '11px', color: '#A2A2BA', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <span style={{ color: badge.color, fontWeight: 700 }}>{badge.label}</span>
                       <span>&bull;</span>
-                      <span>{col.date}</span>
+                      <span>{translateText(col.date, language)}</span>
                     </div>
                   </div>
                 </div>
 
-                <div style={{ textAlign: 'right' }}>
+                <div style={{ textAlign: isRtl ? 'left' : 'right' }}>
                   <div className="tabular-nums" style={{ fontSize: '15px', fontWeight: 900, color: col.status === 'refunded' ? '#FF6B6B' : '#7FE87F' }}>
-                    {col.status === 'refunded' ? '- ' : '+ '}{formatCurrency(col.amount)}
+                    {col.status === 'refunded' ? '- ' : '+ '}{formatCurrency(col.amount, language)}
                   </div>
                   <div style={{ fontSize: '10px', color: '#6E6E85', marginTop: '2px', fontWeight: 600 }}>
-                    VAT: SAR {col.vatAmount.toFixed(2)}
+                    {isAr ? `الضريبة: ${formatSaudiCurrency(col.vatAmount, language)}` : `VAT: SAR ${col.vatAmount.toFixed(2)}`}
                   </div>
                 </div>
               </div>
@@ -581,10 +643,10 @@ export const MerchantHomeScreen: React.FC = () => {
         >
           <div>
             <div style={{ fontSize: '10px', color: '#7FE87F', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '2px' }}>
-              SAMA Certified Merchant Engine
+              {isAr ? 'محرك مدفوعات معتمد من البنك المركزي' : 'SAMA Certified Merchant Engine'}
             </div>
             <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#FFFFFF' }}>
-              ZATCA Phase 2 E-Invoicing Compliant
+              {isAr ? 'متوافق مع المرحلة الثانية للفوترة الإلكترونية (زاتكا)' : 'ZATCA Phase 2 E-Invoicing Compliant'}
             </div>
           </div>
 
@@ -601,3 +663,4 @@ export const MerchantHomeScreen: React.FC = () => {
     </div>
   );
 };
+

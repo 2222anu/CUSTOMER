@@ -2,13 +2,14 @@ import React from 'react';
 import { Smartphone, Monitor, ShieldCheck, LogOut, Lock } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
+import { formatLocalizedNumber, translateText } from '../utils/i18n';
 
 export const SecurityScreen: React.FC = () => {
-  const { deviceSessions, terminateSession } = useApp();
+  const { deviceSessions, terminateSession, language } = useApp();
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '36px', color: '#FFFFFF' }}>
-      <AppHeader title="Security & Devices" showBack showSettings={false} />
+      <AppHeader title={translateText('Security & Devices', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Biometrics / Security Status HUD Card */}
@@ -45,11 +46,11 @@ export const SecurityScreen: React.FC = () => {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <span style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF' }}>
-                  256-Bit Protection Active
+                  {translateText('256-Bit Protection Active', language)}
                 </span>
               </div>
               <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px' }}>
-                Hardware biometrics verified
+                {translateText('Hardware biometrics verified', language)}
               </div>
             </div>
           </div>
@@ -63,10 +64,10 @@ export const SecurityScreen: React.FC = () => {
             textTransform: 'uppercase',
             letterSpacing: '0.06em',
             marginBottom: '12px',
-            paddingLeft: '4px',
+            paddingInlineStart: '4px',
           }}
         >
-          Active Devices ({deviceSessions.length})
+          {translateText('Active Devices', language)} ({formatLocalizedNumber(deviceSessions.length, language)})
         </div>
 
         <div
@@ -112,7 +113,7 @@ export const SecurityScreen: React.FC = () => {
                       {session.deviceName}
                     </div>
                     <div style={{ fontSize: '11.5px', color: '#A2A2BA', marginTop: '2px' }}>
-                      {session.location} • {session.lastActive}
+                      {session.location} • {translateText(session.lastActive, language)}
                     </div>
                   </div>
                 </div>
@@ -130,7 +131,7 @@ export const SecurityScreen: React.FC = () => {
                       letterSpacing: '0.04em',
                     }}
                   >
-                    Current
+                    {translateText('Current', language)}
                   </span>
                 ) : (
                   <button
@@ -151,7 +152,7 @@ export const SecurityScreen: React.FC = () => {
                       boxShadow: 'none',
                     }}
                   >
-                    <LogOut size={12} /> End
+                    <LogOut size={12} /> {translateText('End', language)}
                   </button>
                 )}
               </div>
@@ -163,10 +164,11 @@ export const SecurityScreen: React.FC = () => {
         <div style={{ marginTop: '24px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
           <Lock size={13} color="#6E6E85" />
           <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 600 }}>
-            Automated session security enabled
+            {translateText('Automated session security enabled', language)}
           </span>
         </div>
       </div>
     </div>
   );
 };
+

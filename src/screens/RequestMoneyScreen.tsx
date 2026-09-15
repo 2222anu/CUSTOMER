@@ -3,10 +3,11 @@ import { Check } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
+import { formatSaudiCurrency, translateText } from '../utils/i18n';
 import type { Contact } from '../types';
 
 export const RequestMoneyScreen: React.FC = () => {
-  const { contacts, addMoneyRequest } = useApp();
+  const { contacts, addMoneyRequest, language, t } = useApp();
   const [selectedContact, setSelectedContact] = useState<Contact>(contacts[0] || {
     id: 'c1',
     name: 'Sara Al-Mansoor',
@@ -34,7 +35,7 @@ export const RequestMoneyScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '30px', color: '#FFFFFF' }}>
-      <AppHeader title="Request Money" showBack />
+      <AppHeader title={t('request_money')} showBack />
 
       <div style={{ padding: '20px' }}>
         {isSuccess ? (
@@ -56,10 +57,14 @@ export const RequestMoneyScreen: React.FC = () => {
               <Check size={32} />
             </div>
             <h3 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '6px', color: '#FFFFFF' }}>
-              Request Sent Successfully!
+              {translateText('Request Sent Successfully!', language)}
             </h3>
             <p style={{ color: '#A2A2BA', fontSize: '13px', margin: 0 }}>
-              Requested SAR {amountStr} from <strong style={{ color: '#FFFFFF' }}>{selectedContact.name}</strong>
+              {language === 'ar' ? (
+                <>تم إرسال طلب بمبلغ {formatSaudiCurrency(parseFloat(amountStr) || 0, language)} إلى <strong style={{ color: '#FFFFFF' }}>{selectedContact.name}</strong></>
+              ) : (
+                <>Requested SAR {amountStr} from <strong style={{ color: '#FFFFFF' }}>{selectedContact.name}</strong></>
+              )}
             </p>
           </div>
         ) : (
@@ -77,7 +82,7 @@ export const RequestMoneyScreen: React.FC = () => {
                   display: 'block',
                 }}
               >
-                Request From
+                {translateText('Request From', language)}
               </label>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
@@ -143,7 +148,7 @@ export const RequestMoneyScreen: React.FC = () => {
                   display: 'block',
                 }}
               >
-                Enter Request Amount
+                {translateText('Enter Request Amount', language)}
               </label>
 
               <div
@@ -157,7 +162,7 @@ export const RequestMoneyScreen: React.FC = () => {
                   marginBottom: '14px',
                 }}
               >
-                <span style={{ fontSize: '20px', fontWeight: 800, color: '#7FE87F', marginRight: '8px' }}>SAR</span>
+                <span style={{ fontSize: '20px', fontWeight: 800, color: '#7FE87F', marginInlineEnd: '8px' }}>{t('sar')}</span>
                 <input
                   type="number"
                   value={amountStr}
@@ -200,7 +205,7 @@ export const RequestMoneyScreen: React.FC = () => {
                       whiteSpace: 'nowrap',
                     }}
                   >
-                    +SAR {quickAmt}
+                    +{formatSaudiCurrency(quickAmt, language)}
                   </button>
                 ))}
               </div>
@@ -219,13 +224,13 @@ export const RequestMoneyScreen: React.FC = () => {
                   display: 'block',
                 }}
               >
-                Payment Note (Optional)
+                {translateText('Payment Note (Optional)', language)}
               </label>
               <input
                 type="text"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                placeholder="What is this request for? (e.g. Dinner, Rent)"
+                placeholder={translateText('What is this request for? (e.g. Dinner, Rent)', language)}
                 style={{
                   width: '100%',
                   backgroundColor: '#1E1E32',
@@ -241,7 +246,7 @@ export const RequestMoneyScreen: React.FC = () => {
             </div>
 
             <PrimaryButton onClick={handleSendRequest} disabled={!amountStr || parseFloat(amountStr) <= 0}>
-              Send Payment Request
+              {translateText('Send Payment Request', language)}
             </PrimaryButton>
           </div>
         )}
@@ -249,3 +254,4 @@ export const RequestMoneyScreen: React.FC = () => {
     </div>
   );
 };
+

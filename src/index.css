@@ -300,7 +300,28 @@ button:disabled {
   color: #000000;
 }
 
-/* Custom Scrollbar */
+/* Animated Masked Balance Glowing Dots */
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.9);
+  }
+}
+
+.masked-dot {
+  width: 9px;
+  height: 9px;
+  background: linear-gradient(135deg, #ffffff, #a7f3d0);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }

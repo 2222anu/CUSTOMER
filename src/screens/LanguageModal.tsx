@@ -1,43 +1,21 @@
 import React from 'react';
-import { Check } from 'lucide-react';
+import { Check, Globe } from 'lucide-react';
 import { BottomSheet } from '../components/BottomSheet';
 import { useApp } from '../state/AppContext';
 
 export const LanguageModal: React.FC = () => {
-  const { isLanguageModalOpen, setIsLanguageModalOpen, language, setAppLanguage } = useApp();
+  const { isLanguageModalOpen, setIsLanguageModalOpen, language, setAppLanguage, t } = useApp();
 
   const languages = [
-    {
-      name: 'العربية',
-      native: 'العربية (المملكة العربية السعودية)',
-      flag: '🇸🇦',
-      sub: 'Saudi Arabic (SAR & Eastern Numerals)',
-    },
-    {
-      name: 'English',
-      native: 'English (Saudi / Global)',
-      flag: '🌐',
-      sub: 'English (SAR Western Numerals)',
-    },
-    {
-      name: 'Hindi',
-      native: 'हिंदी',
-      flag: '🇮🇳',
-      sub: 'Hindi Translation',
-    },
-    {
-      name: 'Spanish',
-      native: 'Español',
-      flag: '🇪🇸',
-      sub: 'Spanish Translation',
-    },
+    { name: 'العربية', native: 'Arabic (Saudi Arabia / المملكة العربية السعودية)', badge: '🇸🇦 الرسمي' },
+    { name: 'English', native: 'English (US / Global Fintech)', badge: '🇺🇸 Global' },
   ];
 
   return (
     <BottomSheet
       isOpen={isLanguageModalOpen}
       onClose={() => setIsLanguageModalOpen(false)}
-      title={language === 'العربية' ? 'اختر لغة التطبيق' : 'Select Language'}
+      title={t('sec.select_lang', 'Select Language')}
     >
       <div role="radiogroup" aria-label="App Language Options" style={{ marginBottom: '16px' }}>
         {languages.map((lang) => {
@@ -54,14 +32,15 @@ export const LanguageModal: React.FC = () => {
                   setAppLanguage(lang.name);
                 }
               }}
+              className="interactive-tap"
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                padding: '14px 16px',
-                backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.14)' : '#1E1E32',
+                padding: '16px 18px',
+                backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.14)' : '#151524',
                 border: isSelected ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
-                borderRadius: '14px',
+                borderRadius: '16px',
                 marginBottom: '10px',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
@@ -69,13 +48,43 @@ export const LanguageModal: React.FC = () => {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <span style={{ fontSize: '24px' }}>{lang.flag}</span>
+                <div
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '12px',
+                    backgroundColor: isSelected ? '#7FE87F' : '#1E1E32',
+                    color: isSelected ? '#000000' : '#7FE87F',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 900,
+                    fontSize: '15px',
+                  }}
+                >
+                  <Globe size={20} />
+                </div>
                 <div>
-                  <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>
-                    {lang.native}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ fontWeight: 800, fontSize: '15.5px', color: '#FFFFFF' }}>
+                      {lang.name}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '10.5px',
+                        fontWeight: 800,
+                        backgroundColor: 'rgba(127, 232, 127, 0.12)',
+                        color: '#7FE87F',
+                        padding: '2px 7px',
+                        borderRadius: '6px',
+                        border: '1px solid rgba(127, 232, 127, 0.25)',
+                      }}
+                    >
+                      {lang.badge}
+                    </span>
                   </div>
-                  <div style={{ fontSize: '11px', color: isSelected ? '#7FE87F' : '#A2A2BA', marginTop: '2px' }}>
-                    {lang.sub}
+                  <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '3px' }}>
+                    {lang.native}
                   </div>
                 </div>
               </div>

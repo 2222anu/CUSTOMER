@@ -5,18 +5,18 @@ import { useApp } from '../state/AppContext';
 import type { Contact } from '../types';
 
 export const PayAnyoneScreen: React.FC = () => {
-  const { contacts, merchants, navigateTo } = useApp();
+  const { contacts, merchants, navigateTo, t, isRtl, language } = useApp();
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredContacts = contacts.filter(
-    (c: Contact) =>
+    (c) =>
       c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.upiId.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.mobile.includes(searchQuery)
   );
 
-  const filteredMerchants = (merchants || []).filter(
-    (m: Contact) =>
+  const filteredMerchants = merchants.filter(
+    (m) =>
       m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       m.upiId.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -27,7 +27,7 @@ export const PayAnyoneScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '24px' }}>
-      <AppHeader title="Pay Anyone" showBack showSettings />
+      <AppHeader title={t('pay.send_money', 'Pay Anyone')} showBack showSettings />
 
       {/* Search Input Field */}
       <div style={{ padding: '0 20px', margin: '16px 0 20px 0' }}>
@@ -48,7 +48,7 @@ export const PayAnyoneScreen: React.FC = () => {
           <input
             id="search-contact-input"
             type="text"
-            placeholder="Search name, UPI ID, or number"
+            placeholder={language === 'العربية' ? 'ابحث بالاسم، معرف سريع، أو رقم الجوال' : 'Search name, UPI ID, or number'}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             aria-label="Search UPI ID or mobile number"
@@ -61,6 +61,7 @@ export const PayAnyoneScreen: React.FC = () => {
               fontWeight: 600,
               width: '100%',
               padding: 0,
+              textAlign: isRtl ? 'right' : 'left',
             }}
           />
           {searchQuery && (
@@ -104,7 +105,7 @@ export const PayAnyoneScreen: React.FC = () => {
               letterSpacing: '0.05em',
             }}
           >
-            Contacts
+            {t('pay.quick_contacts', 'Contacts')}
           </span>
           <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
             {filteredContacts.length}
@@ -113,7 +114,7 @@ export const PayAnyoneScreen: React.FC = () => {
 
         {filteredContacts.length === 0 ? (
           <div style={{ color: '#6E6E85', fontSize: '13px', padding: '16px', textAlign: 'center', backgroundColor: '#151524', borderRadius: '12px', border: '1px solid #2C2C44' }}>
-            No contacts found
+            {language === 'العربية' ? 'لم يتم العثور على جهات اتصال' : 'No contacts found'}
           </div>
         ) : (
           <div
@@ -125,77 +126,81 @@ export const PayAnyoneScreen: React.FC = () => {
               boxShadow: 'none',
             }}
           >
-            {filteredContacts.map((contact, index) => (
-              <div
-                key={contact.id}
-                role="button"
-                tabIndex={0}
-                onClick={() => handleSelectContact(contact)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    handleSelectContact(contact);
-                  }
-                }}
-                className="interactive-tap"
-                aria-label={`Pay ${contact.name}, UPI ID ${contact.upiId}`}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '14px 16px',
-                  borderBottom: index < filteredContacts.length - 1 ? '1px solid #1E1E32' : 'none',
-                  cursor: 'pointer',
-                  backgroundColor: '#151524',
-                  transition: 'background-color 0.15s ease',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                  <div
-                    style={{
-                      width: '42px',
-                      height: '42px',
-                      borderRadius: '12px',
-                      backgroundColor: '#1E1E32',
-                      color: '#7FE87F',
-                      fontWeight: 800,
-                      fontSize: '14px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      border: '1px solid #2C2C44',
-                      flexShrink: 0,
-                    }}
-                  >
-                    {contact.avatarInitials}
+            {filteredContacts.map((contact, index) => {
+              const displayName = t(contact.name, contact.name);
+              return (
+                <div
+                  key={contact.id}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => handleSelectContact(contact)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleSelectContact(contact);
+                    }
+                  }}
+                  className="interactive-tap"
+                  aria-label={`Pay ${displayName}`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '14px 16px',
+                    borderBottom: index < filteredContacts.length - 1 ? '1px solid #1E1E32' : 'none',
+                    cursor: 'pointer',
+                    backgroundColor: '#151524',
+                    transition: 'background-color 0.15s ease',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                    <div
+                      style={{
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: '12px',
+                        backgroundColor: '#1E1E32',
+                        color: '#7FE87F',
+                        fontWeight: 800,
+                        fontSize: '14px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: '1px solid #2C2C44',
+                        flexShrink: 0,
+                      }}
+                    >
+                      {contact.avatarInitials}
+                    </div>
+                    <div>
+                      <div style={{ fontWeight: 800, fontSize: '14.5px', color: '#FFFFFF', lineHeight: '18px' }}>
+                        {displayName}
+                      </div>
+                      <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 600, marginTop: '2px' }}>
+                        {contact.upiId} &bull; <span style={{ color: '#A2A2BA' }} dir="ltr">{contact.mobile}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <div style={{ fontWeight: 800, fontSize: '14.5px', color: '#FFFFFF', lineHeight: '18px' }}>
-                      {contact.name}
-                    </div>
-                    <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 600, marginTop: '2px' }}>
-                      {contact.upiId} &bull; <span style={{ color: '#A2A2BA' }}>{contact.mobile}</span>
-                    </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span
+                      style={{
+                        fontSize: '11px',
+                        fontWeight: 800,
+                        backgroundColor: '#7FE87F',
+                        color: '#000000',
+                        padding: '4px 10px',
+                        borderRadius: '6px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '3px',
+                      }}
+                    >
+                      {t('nav.pay', 'Pay')}{' '}
+                      <ArrowRight size={12} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+                    </span>
                   </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span
-                    style={{
-                      fontSize: '11px',
-                      fontWeight: 800,
-                      backgroundColor: '#7FE87F',
-                      color: '#000000',
-                      padding: '4px 10px',
-                      borderRadius: '6px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '3px',
-                    }}
-                  >
-                    Pay <ArrowRight size={12} />
-                  </span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
@@ -212,7 +217,7 @@ export const PayAnyoneScreen: React.FC = () => {
               marginBottom: '12px',
             }}
           >
-            Merchants
+            {t('history.merchant', 'Merchants')}
           </div>
 
           <div
@@ -224,61 +229,64 @@ export const PayAnyoneScreen: React.FC = () => {
               boxShadow: 'none',
             }}
           >
-            {filteredMerchants.map((merchant: Contact, index: number) => (
-              <div
-                key={merchant.id}
-                role="button"
-                tabIndex={0}
-                onClick={() => handleSelectContact(merchant)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    handleSelectContact(merchant);
-                  }
-                }}
-                className="interactive-tap"
-                aria-label={`Pay merchant ${merchant.name}`}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '14px 16px',
-                  borderBottom: index < filteredMerchants.length - 1 ? '1px solid #1E1E32' : 'none',
-                  cursor: 'pointer',
-                  backgroundColor: '#151524',
-                  transition: 'background-color 0.15s ease',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                  <div
-                    style={{
-                      width: '42px',
-                      height: '42px',
-                      borderRadius: '12px',
-                      backgroundColor: '#1E1E32',
-                      color: '#7FE87F',
-                      fontWeight: 800,
-                      fontSize: '14px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      border: '1px solid #2C2C44',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Store size={20} />
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 800, fontSize: '14.5px', color: '#FFFFFF', lineHeight: '18px' }}>
-                      {merchant.name}
+            {filteredMerchants.map((merchant, index) => {
+              const displayMerchantName = t(merchant.name, merchant.name);
+              return (
+                <div
+                  key={merchant.id}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => handleSelectContact(merchant)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleSelectContact(merchant);
+                    }
+                  }}
+                  className="interactive-tap"
+                  aria-label={`Pay merchant ${displayMerchantName}`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '14px 16px',
+                    borderBottom: index < filteredMerchants.length - 1 ? '1px solid #1E1E32' : 'none',
+                    cursor: 'pointer',
+                    backgroundColor: '#151524',
+                    transition: 'background-color 0.15s ease',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                    <div
+                      style={{
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: '12px',
+                        backgroundColor: '#1E1E32',
+                        color: '#7FE87F',
+                        fontWeight: 800,
+                        fontSize: '14px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: '1px solid #2C2C44',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Store size={20} />
                     </div>
-                    <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 600, marginTop: '2px' }}>
-                      {merchant.upiId}
+                    <div>
+                      <div style={{ fontWeight: 800, fontSize: '14.5px', color: '#FFFFFF', lineHeight: '18px' }}>
+                        {displayMerchantName}
+                      </div>
+                      <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 600, marginTop: '2px' }}>
+                        {merchant.upiId}
+                      </div>
                     </div>
                   </div>
+                  <ChevronRight size={18} color="#6E6E85" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
                 </div>
-                <ChevronRight size={18} color="#6E6E85" />
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}

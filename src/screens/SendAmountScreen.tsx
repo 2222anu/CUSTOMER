@@ -4,9 +4,11 @@ import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
 import type { Contact } from '../types';
 import { ShieldCheck, MessageSquare } from 'lucide-react';
+import { toArabicNumerals } from '../utils/i18n';
+import { formatCurrency } from '../utils/formatters';
 
 export const SendAmountScreen: React.FC = () => {
-  const { screenParams, openPinModal, contacts, navigateTo, completePayment } = useApp();
+  const { screenParams, openPinModal, contacts, navigateTo, completePayment, t, language } = useApp();
   const contact: Contact = screenParams.contact || contacts[0] || {
     id: 'default',
     name: 'Tariq Al-Otaibi',
@@ -20,18 +22,19 @@ export const SendAmountScreen: React.FC = () => {
   const [note, setNote] = useState<string>('');
 
   const numAmount = parseFloat(amountStr) || 0;
+  const displayName = t(contact.name, contact.name);
 
   const handlePayClick = () => {
     if (numAmount <= 0) return;
 
     openPinModal({
-      title: `Pay ${contact.name}`,
+      title: `${t('nav.pay', 'Pay')} ${displayName}`,
       amount: numAmount,
-      subTitle: `To ${contact.upiId}`,
+      subTitle: `${language === 'العربية' ? 'إلى' : 'To'} ${contact.upiId}`,
       onSuccess: async () => {
         const txn = await completePayment({
           title: contact.name,
-          subTitle: `To ${contact.upiId}`,
+          subTitle: `${language === 'العربية' ? 'إلى' : 'To'} ${contact.upiId}`,
           amount: numAmount,
           avatarInitials: contact.avatarInitials,
           category: 'Transfer',
@@ -49,7 +52,7 @@ export const SendAmountScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '32px' }}>
-      <AppHeader title="Send Money" showBack />
+      <AppHeader title={t('pay.send_money', 'Send Money')} showBack />
 
       <div style={{ padding: '20px', textAlign: 'center' }}>
         {/* Recipient Profile Card */}
@@ -82,13 +85,13 @@ export const SendAmountScreen: React.FC = () => {
             {contact.avatarInitials}
           </div>
           <h2 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '4px', color: '#FFFFFF', letterSpacing: '-0.01em' }}>
-            {contact.name}
+            {displayName}
           </h2>
           <div style={{ fontSize: '12.5px', color: '#A2A2BA', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
             <span>{contact.upiId}</span>
             <span style={{ color: '#6E6E85' }}>•</span>
             <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: '#7FE87F', fontWeight: 700 }}>
-              <ShieldCheck size={14} /> Verified
+              <ShieldCheck size={14} /> {language === 'العربية' ? 'موثوق' : 'Verified'}
             </span>
           </div>
         </div>
@@ -114,7 +117,7 @@ export const SendAmountScreen: React.FC = () => {
               marginBottom: '12px',
             }}
           >
-            Enter Amount
+            {t('pay.enter_amount', 'Enter Amount')}
           </div>
 
           <div
@@ -126,7 +129,9 @@ export const SendAmountScreen: React.FC = () => {
               marginBottom: '20px',
             }}
           >
-            <span style={{ fontSize: '24px', fontWeight: 800, color: '#7FE87F' }}>SAR</span>
+            <span style={{ fontSize: '24px', fontWeight: 800, color: '#7FE87F' }}>
+              {language === 'العربية' ? 'ر.س' : 'SAR'}
+            </span>
             <input
               type="number"
               value={amountStr}
@@ -152,6 +157,7 @@ export const SendAmountScreen: React.FC = () => {
           <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '18px' }}>
             {['50', '100', '500', '1000', '2000'].map((val) => {
               const isSelected = amountStr === val;
+              const formattedVal = language === 'العربية' ? `+${toArabicNumerals(val)} ر.س` : `+SAR ${val}`;
               return (
                 <button
                   key={val}
@@ -170,7 +176,7 @@ export const SendAmountScreen: React.FC = () => {
                     transition: 'all 0.15s ease',
                   }}
                 >
-                  +SAR {val}
+                  {formattedVal}
                 </button>
               );
             })}
@@ -191,7 +197,7 @@ export const SendAmountScreen: React.FC = () => {
             <MessageSquare size={16} color="#6E6E85" />
             <input
               type="text"
-              placeholder="Add note (optional)"
+              placeholder={t('pay.add_note', 'Add note / Purpose')}
               value={note}
               onChange={(e) => setNote(e.target.value)}
               style={{
@@ -209,7 +215,9 @@ export const SendAmountScreen: React.FC = () => {
         </div>
 
         <PrimaryButton onClick={handlePayClick} disabled={numAmount <= 0}>
-          Pay SAR {numAmount ? numAmount.toLocaleString() : '0'}
+          {language === 'العربية'
+            ? `دفع ${formatCurrency(numAmount, language)}`
+            : `Pay SAR ${numAmount ? numAmount.toLocaleString() : '0'}`}
         </PrimaryButton>
       </div>
     </div>

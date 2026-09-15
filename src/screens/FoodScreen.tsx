@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Utensils, Star, X, Check, Clock, Plus, Minus } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
+import { formatSaudiCurrency, formatLocalizedNumber, translateText } from '../utils/i18n';
 
 interface MenuItem {
   id: string;
@@ -21,7 +22,7 @@ interface Restaurant {
 }
 
 export const FoodScreen: React.FC = () => {
-  const { openPinModal, completePayment } = useApp();
+  const { openPinModal, completePayment, language, t, isRtl } = useApp();
   const [selectedRes, setSelectedRes] = useState<Restaurant | null>(null);
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [orderConfirmed, setOrderConfirmed] = useState<{
@@ -33,40 +34,40 @@ export const FoodScreen: React.FC = () => {
   const restaurants: Restaurant[] = [
     {
       id: 'res-1',
-      name: 'Half Million Coffee',
-      rating: '4.9',
-      cuisine: 'Specialty Coffee, Spanish Latte & Pastries',
-      offer: 'Flat 20% OFF with ALPH20',
-      deliveryTime: '15-20 mins',
+      name: language === 'ar' ? 'كافيه هاف مليون' : 'Half Million Coffee',
+      rating: formatLocalizedNumber('4.9', language),
+      cuisine: language === 'ar' ? 'قهوة مختصة، سبانش لاتيه ومخبوزات طازجة' : 'Specialty Coffee, Spanish Latte & Pastries',
+      offer: language === 'ar' ? 'خصم ٢٠٪ مع كود ALPH20' : 'Flat 20% OFF with ALPH20',
+      deliveryTime: language === 'ar' ? '١٥-٢٠ دقيقة' : '15-20 mins',
       items: [
-        { id: 'i-1', name: 'Signature Spanish Latte', price: 24, qty: 1 },
-        { id: 'i-2', name: 'Pistachio Cruffin', price: 18, qty: 1 },
-        { id: 'i-3', name: 'Cardamom Iced Cold Brew', price: 22, qty: 0 },
+        { id: 'i-1', name: language === 'ar' ? 'سبانش لاتيه مميز' : 'Signature Spanish Latte', price: 24, qty: 1 },
+        { id: 'i-2', name: language === 'ar' ? 'كروفين فستق' : 'Pistachio Cruffin', price: 18, qty: 1 },
+        { id: 'i-3', name: language === 'ar' ? 'كولد برو بالهيل' : 'Cardamom Iced Cold Brew', price: 22, qty: 0 },
       ],
     },
     {
       id: 'res-2',
-      name: 'Al Romansiah Mandi',
-      rating: '4.9',
-      cuisine: 'Authentic Saudi Kabsa, Mandi & Grills',
-      offer: 'Free Dessert on orders > SAR 100',
-      deliveryTime: '25-30 mins',
+      name: language === 'ar' ? 'مطاعم الرومانسية للمندي' : 'Al Romansiah Mandi',
+      rating: formatLocalizedNumber('4.9', language),
+      cuisine: language === 'ar' ? 'كبسة ومندي سعودي أصيل ومشويات' : 'Authentic Saudi Kabsa, Mandi & Grills',
+      offer: language === 'ar' ? 'حلى مجاني للطلبات فوق ١٠٠ ر.س' : 'Free Dessert on orders > SAR 100',
+      deliveryTime: language === 'ar' ? '٢٥-٣٠ دقيقة' : '25-30 mins',
       items: [
-        { id: 'i-4', name: 'Special Hashi Meat Mandi', price: 78, qty: 1 },
-        { id: 'i-5', name: 'Charcoal Madhbi Chicken', price: 36, qty: 1 },
-        { id: 'i-6', name: 'Fresh Cream Kunafa', price: 20, qty: 0 },
+        { id: 'i-4', name: language === 'ar' ? 'مندي لحم حاشي خاص' : 'Special Hashi Meat Mandi', price: 78, qty: 1 },
+        { id: 'i-5', name: language === 'ar' ? 'مضبي دجاج على الفحم' : 'Charcoal Madhbi Chicken', price: 36, qty: 1 },
+        { id: 'i-6', name: language === 'ar' ? 'كنافة بالقشطة الطازجة' : 'Fresh Cream Kunafa', price: 20, qty: 0 },
       ],
     },
     {
       id: 'res-3',
-      name: 'Boga Super Foods',
-      rating: '4.8',
-      cuisine: 'Healthy Bowls, Sandwiches & Fresh Juices',
-      offer: '15% Cashback on alph pay',
-      deliveryTime: '20-25 mins',
+      name: language === 'ar' ? 'بوقا سوبر فودز' : 'Boga Super Foods',
+      rating: formatLocalizedNumber('4.8', language),
+      cuisine: language === 'ar' ? 'أطباق صحية، ساندويتشات وعصائر طازجة' : 'Healthy Bowls, Sandwiches & Fresh Juices',
+      offer: language === 'ar' ? '١٥٪ كاش باك عبر كيو تي باي' : '15% Cashback on alph pay',
+      deliveryTime: language === 'ar' ? '٢٠-٢٥ دقيقة' : '20-25 mins',
       items: [
-        { id: 'i-7', name: 'Smoked Salmon Quinoa Bowl', price: 48, qty: 1 },
-        { id: 'i-8', name: 'Fresh Taif Pomegranate Juice', price: 22, qty: 1 },
+        { id: 'i-7', name: language === 'ar' ? 'وعاء كينوا مع سلمون مدخن' : 'Smoked Salmon Quinoa Bowl', price: 48, qty: 1 },
+        { id: 'i-8', name: language === 'ar' ? 'عصير رمان طائفي طازج' : 'Fresh Taif Pomegranate Juice', price: 22, qty: 1 },
       ],
     },
   ];
@@ -98,13 +99,13 @@ export const FoodScreen: React.FC = () => {
     if (total <= 0) return;
 
     openPinModal({
-      title: `Order from ${selectedRes.name}`,
-      subTitle: `Food Delivery • ${selectedRes.deliveryTime}`,
+      title: `${t('order_from')} ${selectedRes.name}`,
+      subTitle: `${translateText('Food Delivery', language)} • ${selectedRes.deliveryTime}`,
       amount: total,
       onSuccess: async () => {
         await completePayment({
           title: selectedRes.name,
-          subTitle: `Food Order (${menuItems.filter((i) => i.qty > 0).length} items)`,
+          subTitle: `${translateText('Food Order', language)} (${menuItems.filter((i) => i.qty > 0).length} ${translateText('items', language)})`,
           amount: total,
           category: 'Food & Dining',
         });
@@ -121,7 +122,7 @@ export const FoodScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#1A1A2E', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
-      <AppHeader title="Food & Dining" showBack showSettings={false} />
+      <AppHeader title={translateText('Food & Dining', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Dining Offer Banner */}
@@ -155,15 +156,15 @@ export const FoodScreen: React.FC = () => {
             <Utensils size={24} />
           </div>
           <div>
-            <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>alph pay Food & Dining</h3>
+            <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>{translateText('alph pay Food & Dining', language)}</h3>
             <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '3px 0 0 0' }}>
-              Order food online with instant discounts & 0 delivery fee
+              {translateText('Order food online with instant discounts & 0 delivery fee', language)}
             </p>
           </div>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
-          Nearby Partner Restaurants
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginInlineStart: '4px' }}>
+          {translateText('Nearby Partner Restaurants', language)}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -204,7 +205,7 @@ export const FoodScreen: React.FC = () => {
                 <span style={{ fontSize: '11px', fontWeight: 700, color: '#000000', backgroundColor: '#7FE87F', padding: '3px 8px', borderRadius: '6px' }}>
                   {res.offer}
                 </span>
-                <span style={{ fontSize: '11px', color: '#B3B3C2', display: 'flex', alignItems: 'center', gap: '4px', marginLeft: 'auto' }}>
+                <span style={{ fontSize: '11px', color: '#B3B3C2', display: 'flex', alignItems: 'center', gap: '4px', marginInlineStart: 'auto' }}>
                   <Clock size={12} /> {res.deliveryTime}
                 </span>
               </div>
@@ -246,7 +247,7 @@ export const FoodScreen: React.FC = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div>
                 <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>{selectedRes.name}</h3>
-                <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '2px 0 0 0' }}>Select items to order</p>
+                <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '2px 0 0 0' }}>{translateText('Select items to order', language)}</p>
               </div>
               <button
                 onClick={() => setSelectedRes(null)}
@@ -285,7 +286,7 @@ export const FoodScreen: React.FC = () => {
                   <div>
                     <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{item.name}</div>
                     <div style={{ fontSize: '13px', fontWeight: 700, color: '#7FE87F', marginTop: '2px', fontVariantNumeric: 'tabular-nums' }}>
-                      SAR {item.price}
+                      {formatSaudiCurrency(item.price, language)}
                     </div>
                   </div>
 
@@ -309,7 +310,7 @@ export const FoodScreen: React.FC = () => {
                       <Minus size={14} />
                     </button>
                     <span style={{ fontSize: '14px', fontWeight: 800, minWidth: '16px', textAlign: 'center', color: '#FFFFFF', fontVariantNumeric: 'tabular-nums' }}>
-                      {item.qty}
+                      {formatLocalizedNumber(item.qty, language)}
                     </span>
                     <button
                       onClick={() => handleUpdateQty(item.id, 1)}
@@ -335,9 +336,9 @@ export const FoodScreen: React.FC = () => {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', paddingTop: '12px', borderTop: '1px dashed #4D4D6B' }}>
-              <span style={{ fontSize: '13px', fontWeight: 700, color: '#B3B3C2' }}>Total Bill Amount</span>
+              <span style={{ fontSize: '13px', fontWeight: 700, color: '#B3B3C2' }}>{translateText('Total Bill Amount', language)}</span>
               <span style={{ fontSize: '20px', fontWeight: 900, color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>
-                SAR {calculateSubtotal().toLocaleString()}
+                {formatSaudiCurrency(calculateSubtotal(), language)}
               </span>
             </div>
 
@@ -357,7 +358,9 @@ export const FoodScreen: React.FC = () => {
                 cursor: calculateSubtotal() > 0 ? 'pointer' : 'not-allowed',
               }}
             >
-              Order & Pay SAR {calculateSubtotal().toLocaleString()} via Sarie PIN
+              {language === 'ar'
+                ? `طلب ودفع ${formatSaudiCurrency(calculateSubtotal(), language)} عبر رمز ساريع`
+                : `Order & Pay SAR ${calculateSubtotal().toLocaleString()} via Sarie PIN`}
             </button>
           </div>
         </div>
@@ -411,21 +414,21 @@ export const FoodScreen: React.FC = () => {
             </div>
 
             <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 4px 0' }}>
-              Order Confirmed!
+              {translateText('Order Confirmed!', language)}
             </h3>
             <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '0 0 20px 0' }}>
-              {orderConfirmed.restaurantName} is preparing your meal
+              {language === 'ar' ? `${orderConfirmed.restaurantName} يجهز وجبتك الآن` : `${orderConfirmed.restaurantName} is preparing your meal`}
             </p>
 
-            <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: 'left', marginBottom: '20px' }}>
+            <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: isRtl ? 'right' : 'left', marginBottom: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <Clock size={16} color="#7FE87F" />
                 <span style={{ fontSize: '12px', fontWeight: 800, color: '#7FE87F' }}>
-                  Delivering in {orderConfirmed.estimatedTime}
+                  {language === 'ar' ? `التوصيل خلال ${orderConfirmed.estimatedTime}` : `Delivering in ${orderConfirmed.estimatedTime}`}
                 </span>
               </div>
               <div style={{ fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}>
-                Paid SAR {orderConfirmed.totalAmount} via alph pay
+                {language === 'ar' ? `تم دفع ${formatSaudiCurrency(orderConfirmed.totalAmount, language)} عبر كيو تي باي` : `Paid SAR ${orderConfirmed.totalAmount} via alph pay`}
               </div>
             </div>
 
@@ -444,7 +447,7 @@ export const FoodScreen: React.FC = () => {
                 cursor: 'pointer',
               }}
             >
-              Track Order Status
+              {translateText('Track Order Status', language)}
             </button>
           </div>
         </div>
@@ -452,3 +455,4 @@ export const FoodScreen: React.FC = () => {
     </div>
   );
 };
+

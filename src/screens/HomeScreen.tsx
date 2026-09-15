@@ -19,8 +19,6 @@ import { AppHeader } from '../components/AppHeader';
 import { BankCardCarousel } from '../components/BankCardCarousel';
 import { BalanceSummaryModal } from '../components/BalanceSummaryModal';
 import { TransactionRow } from '../components/TransactionRow';
-import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
-import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
 
@@ -664,45 +662,11 @@ export const HomeScreen: React.FC = () => {
         </div>
 
         {recentTransactions.map((txn) => (
-          <TransactionRow key={txn.id} transaction={txn} onClick={() => navigateTo('HISTORY')} />
+          <TransactionRow key={txn.id} transaction={txn} hideSubtitle={true} onClick={() => navigateTo('HISTORY')} />
         ))}
       </div>
 
-      {/* 8. Trust & Regulatory Dock (Payment Partner & SAMA) */}
-      <div style={{ padding: '14px 20px 0 20px' }}>
-        <div
-          style={{
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
-            borderRadius: '18px',
-            padding: '16px 18px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            boxShadow: 'none',
-          }}
-        >
-          <div>
-            <div style={{ fontSize: '10px', color: '#7FE87F', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '2px' }}>
-              {t('home.payment_partner', 'Official Payment Partner')}
-            </div>
-            <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#FFFFFF' }}>
-              {t('home.secured_sama', 'Secured by SAMA National Banking Rail')}
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ backgroundColor: '#1E1E32', border: '1px solid #2C2C44', borderRadius: '10px', padding: '6px 8px', display: 'flex', alignItems: 'center' }}>
-              <PaymentPartnerLogo size={20} width={64} height={32} themeMode="dark" />
-            </div>
-            <div style={{ backgroundColor: '#1E1E32', border: '1px solid #2C2C44', borderRadius: '10px', padding: '6px 8px', display: 'flex', alignItems: 'center' }}>
-              <SamaLogo height={16} themeMode="green" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 9. Verified Sarie Balance Modal Sheet */}
+      {/* 8. Verified Sarie Balance Modal Sheet */}
       <BalanceSummaryModal
         isOpen={isBalanceModalOpen}
         onClose={() => setIsBalanceModalOpen(false)}

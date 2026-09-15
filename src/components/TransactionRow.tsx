@@ -6,11 +6,13 @@ import { useApp } from '../state/AppContext';
 interface TransactionRowProps {
   transaction: Transaction;
   onClick?: () => void;
+  hideSubtitle?: boolean;
 }
 
 export const TransactionRow: React.FC<TransactionRowProps> = ({
   transaction,
   onClick,
+  hideSubtitle = false,
 }) => {
   const { language, t } = useApp();
   const isReceived = transaction.type === 'received';
@@ -68,9 +70,11 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
           <div style={{ fontWeight: 800, fontSize: '14px', color: '#FFFFFF', lineHeight: '18px' }}>
             {displayTitle}
           </div>
-          <div style={{ fontSize: '11.5px', color: '#A2A2BA', marginTop: '2px' }}>
-            {displaySub} &bull; {transaction.utr.substring(0, 10)}
-          </div>
+          {!hideSubtitle && (
+            <div style={{ fontSize: '11.5px', color: '#A2A2BA', marginTop: '2px' }}>
+              {displaySub} &bull; {transaction.utr.substring(0, 10)}
+            </div>
+          )}
         </div>
       </div>
 

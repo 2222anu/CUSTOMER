@@ -16,7 +16,6 @@ import {
   Lock,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
-import { QPayHeroBanner } from '../components/QPayHeroBanner';
 import { BankCardCarousel } from '../components/BankCardCarousel';
 import { BalanceSummaryModal } from '../components/BalanceSummaryModal';
 import { TransactionRow } from '../components/TransactionRow';
@@ -466,10 +465,7 @@ export const HomeScreen: React.FC = () => {
         </div>
       )}
 
-      {/* 5. Promotional Hero Banner */}
-      <QPayHeroBanner />
-
-      {/* 6. Bills & Public Utilities */}
+      {/* 5. Bills & Public Utilities */}
       <div style={{ padding: '14px 20px 0 20px' }}>
         <div
           style={{

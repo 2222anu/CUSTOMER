@@ -37,9 +37,9 @@ export const Modal: React.FC<ModalProps> = ({
       style={{
         position: 'fixed',
         inset: 0,
-        backgroundColor: 'rgba(15, 15, 26, 0.75)',
+        backgroundColor: 'rgba(0, 0, 0, 0.85)',
         backdropFilter: 'blur(8px)',
-        zIndex: 50,
+        zIndex: 100,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -53,11 +53,13 @@ export const Modal: React.FC<ModalProps> = ({
         style={{
           width: '100%',
           maxWidth: '420px',
-          backgroundColor: '#2A2A3E',
-          border: '1px solid #4D4D6B',
-          borderRadius: '16px',
+          backgroundColor: '#151524',
+          border: '1px solid #2C2C44',
+          borderRadius: '20px',
           padding: '24px',
           boxShadow: 'none',
+          boxSizing: 'border-box',
+          color: '#FFFFFF',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
@@ -73,9 +75,9 @@ export const Modal: React.FC<ModalProps> = ({
             aria-label="Close modal"
             className="interactive-tap"
             style={{
-              backgroundColor: '#3A3A52',
-              border: '1px solid #4D4D6B',
-              color: '#B3B3C2',
+              backgroundColor: '#1E1E32',
+              border: '1px solid #2C2C44',
+              color: '#A2A2BA',
               width: '32px',
               height: '32px',
               borderRadius: '50%',

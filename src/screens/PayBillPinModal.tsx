@@ -49,8 +49,8 @@ export const PayBillPinModal: React.FC = () => {
         {/* Payment / Check Balance Summary Box */}
         <div
           style={{
-            backgroundColor: '#3A3A52',
-            border: '1px solid #4D4D6B',
+            backgroundColor: '#1E1E32',
+            border: '1px solid #2C2C44',
             borderRadius: '16px',
             padding: '16px',
             marginBottom: '20px',
@@ -60,7 +60,7 @@ export const PayBillPinModal: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>{displayTitle}</div>
-              <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px' }}>
+              <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px' }}>
                 {displaySubTitle}
               </div>
             </div>
@@ -78,7 +78,7 @@ export const PayBillPinModal: React.FC = () => {
 
           <div
             style={{
-              borderTop: '1px solid #4D4D6B',
+              borderTop: '1px solid #2C2C44',
               marginTop: '12px',
               paddingTop: '10px',
               display: 'flex',
@@ -87,7 +87,7 @@ export const PayBillPinModal: React.FC = () => {
               fontSize: '12px',
             }}
           >
-            <span style={{ color: '#B3B3C2' }}>{language === 'العربية' ? 'الحساب المصدر:' : 'Account:'}</span>
+            <span style={{ color: '#A2A2BA' }}>{language === 'العربية' ? 'الحساب المصدر:' : 'Account:'}</span>
             <span style={{ fontWeight: '700', color: '#FFFFFF' }}>
               {primaryBank ? `${displayBankName} (${primaryBank.accountNumberMasked})` : (language === 'العربية' ? 'الحساب البنكي المرتبط' : 'Linked Bank Account')}
             </span>
@@ -95,7 +95,7 @@ export const PayBillPinModal: React.FC = () => {
         </div>
 
         <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-          <span style={{ fontSize: '12px', fontWeight: '800', color: '#B3B3C2', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <span style={{ fontSize: '12px', fontWeight: '800', color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             {isVerifying
               ? (language === 'العربية' ? 'جاري التحقق من الرمز السري...' : 'Verifying PIN...')
               : (language === 'العربية' ? 'أدخل الرمز السري المكون من ٤ أرقام' : 'ENTER 4-DIGIT PIN')}

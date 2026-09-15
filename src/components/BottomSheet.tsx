@@ -32,9 +32,9 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
       style={{
         position: 'fixed',
         inset: 0,
-        backgroundColor: 'rgba(15, 15, 26, 0.75)',
+        backgroundColor: 'rgba(0, 0, 0, 0.85)',
         backdropFilter: 'blur(8px)',
-        zIndex: 50,
+        zIndex: 100,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
@@ -45,11 +45,13 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
         className="slide-up"
         onClick={(e) => e.stopPropagation()}
         style={{
-          backgroundColor: '#2A2A3E',
+          backgroundColor: '#151524',
           color: '#FFFFFF',
-          borderTopLeftRadius: '20px',
-          borderTopRightRadius: '20px',
-          borderTop: '1px solid #4D4D6B',
+          borderTopLeftRadius: '24px',
+          borderTopRightRadius: '24px',
+          borderTop: '1px solid #2C2C44',
+          borderLeft: '1px solid #2C2C44',
+          borderRight: '1px solid #2C2C44',
           padding: '24px 20px',
           maxHeight: '88vh',
           overflowY: 'auto',
@@ -57,13 +59,14 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
           maxWidth: '600px',
           width: '100%',
           margin: '0 auto',
+          boxSizing: 'border-box',
         }}
       >
         <div
           style={{
             width: '40px',
             height: '4px',
-            backgroundColor: '#4D4D6B',
+            backgroundColor: '#2C2C44',
             borderRadius: '2px',
             margin: '0 auto 16px auto',
           }}
@@ -82,9 +85,9 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
             aria-label="Close sheet"
             className="interactive-tap"
             style={{
-              backgroundColor: '#3A3A52',
-              border: '1px solid #4D4D6B',
-              color: '#B3B3C2',
+              backgroundColor: '#1E1E32',
+              border: '1px solid #2C2C44',
+              color: '#A2A2BA',
               width: '32px',
               height: '32px',
               borderRadius: '50%',

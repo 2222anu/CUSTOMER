@@ -10,11 +10,6 @@ import type {
   DeviceSession,
   ScreenId,
   BottomTab,
-  UserRole,
-  MerchantInfo,
-  MerchantCollection,
-  PaymentAcceptanceMethod,
-  CashierInfo,
 } from '../types';
 import { authService } from '../services/authService';
 import { bankService } from '../services/bankService';
@@ -45,7 +40,6 @@ interface AppContextType {
   transactions: Transaction[];
   notifications: AppNotification[];
   contacts: Contact[];
-  merchants: Contact[];
   moneyRequests: MoneyRequest[];
   deviceSessions: DeviceSession[];
   lastTransaction: Transaction | null;
@@ -100,35 +94,8 @@ interface AppContextType {
   isEditProfileModalOpen: boolean;
   setIsEditProfileModalOpen: (open: boolean) => void;
 
-  // Merchant Ecosystem State & Actions
-  userRole: UserRole;
-  setUserRole: (role: UserRole) => void;
-  merchantInfo: MerchantInfo;
-  updateMerchantInfo: (info: Partial<MerchantInfo>) => void;
-  merchantCollections: MerchantCollection[];
-  lastMerchantCollection: MerchantCollection | null;
-  processMerchantCollection: (params: {
-    amount: number;
-    paymentMethod: PaymentAcceptanceMethod;
-    cardLast4?: string;
-    orderRef?: string;
-    customerMasked?: string;
-  }) => Promise<MerchantCollection>;
-  processMerchantRefund: (collectionId: string, pin: string) => Promise<boolean>;
-  cashiers: CashierInfo[];
-  addCashier: (cashier: Omit<CashierInfo, 'id'>) => void;
-  toggleCashierStatus: (cashierId: string) => void;
-  softPosAmount: number;
-  setSoftPosAmount: (amt: number) => void;
-  softPosCardScheme: string;
-  setSoftPosCardScheme: (scheme: string) => void;
   isKycModalOpen: boolean;
   setIsKycModalOpen: (open: boolean) => void;
-  soundBoxLanguage: 'ar' | 'en';
-  setSoundBoxLanguage: (lang: 'ar' | 'en') => void;
-  soundBoxVolume: number;
-  setSoundBoxVolume: (vol: number) => void;
-  speakSoundBox: (amount: number, currency?: string) => void;
 
   terminateSession: (sessionId: string) => void;
   addMoneyRequest: (req: { name: string; upiId: string; amount: number; note?: string }) => void;
@@ -145,94 +112,11 @@ const FREQUENT_CONTACTS: Contact[] = [
   { id: 'c-6', name: 'Omar Khalid', upiId: 'omar@sarie', mobile: '+966 53 445 5667', avatarInitials: 'OK' },
 ];
 
-const MERCHANTS: Contact[] = [
-  { id: 'm-1', name: 'Panda Supermarket', upiId: 'panda@sarie', mobile: 'Merchant #8491', avatarInitials: 'PS', isMerchant: true },
-  { id: 'm-2', name: 'Half Million Coffee', upiId: 'halfmillion@sarie', mobile: 'Merchant #2041', avatarInitials: 'HM', isMerchant: true },
-];
-
 const INITIAL_SESSIONS: DeviceSession[] = [
   { id: 's-1', deviceName: 'QTPay Android App', deviceType: 'mobile', location: 'Riyadh - Android 14', lastActive: 'Active Now', isCurrent: true },
   { id: 's-2', deviceName: 'QTPay iOS App', deviceType: 'mobile', location: 'Jeddah - iPhone 15 Pro', lastActive: '2 days ago', isCurrent: false },
   { id: 's-3', deviceName: 'Chrome on Mac', deviceType: 'browser', location: 'Riyadh - macOS Sequoia', lastActive: 'Active Now', isCurrent: false },
   { id: 's-4', deviceName: 'Safari on iPhone', deviceType: 'browser', location: 'Dammam - iOS 18', lastActive: '3 days ago', isCurrent: false },
-];
-
-const INITIAL_MERCHANT_INFO: MerchantInfo = {
-  businessName: 'Starmart Supermarket',
-  category: 'Groceries & Gourmet',
-  city: 'Riyadh',
-  crNumber: 'CR-1010849201',
-  vatNumber: '310948201900003',
-  nationalId: '1098472910',
-  isKycVerified: true,
-  settlementBank: 'Al Rajhi Bank',
-  settlementIban: 'SA03 8000 0000 6271 5005',
-  merchantPin: '2026',
-  terminalId: 'POS-RUH-8841',
-  storePhone: '+966 11 482 9900',
-};
-
-const INITIAL_MERCHANT_COLLECTIONS: MerchantCollection[] = [
-  {
-    id: 'POS-8839201',
-    orderRef: 'ORD-9841',
-    amount: 145.0,
-    vatAmount: 18.91,
-    netAmount: 126.09,
-    paymentMethod: 'softpos_mada',
-    cardLast4: '4821',
-    customerMasked: '+966 50 ••• 1234',
-    date: 'Today, 11:42 AM',
-    timestamp: new Date(),
-    status: 'settled',
-    zatcaQrCode: 'AQ1TdGFybWFydCBNYXJrZXQCBzMxMDk0ODIBDDIwMjYtMDktMTU=',
-  },
-  {
-    id: 'POS-8839202',
-    orderRef: 'ORD-9842',
-    amount: 67.5,
-    vatAmount: 8.8,
-    netAmount: 58.7,
-    paymentMethod: 'softpos_applepay',
-    cardLast4: '1092',
-    customerMasked: '+966 55 ••• 8765',
-    date: 'Today, 10:15 AM',
-    timestamp: new Date(Date.now() - 3600000),
-    status: 'settled',
-    zatcaQrCode: 'AQ1TdGFybWFydCBNYXJrZXQCBzMxMDk0ODIBDDIwMjYtMDktMTU=',
-  },
-  {
-    id: 'POS-8839203',
-    orderRef: 'INV-4019',
-    amount: 450.0,
-    vatAmount: 58.7,
-    netAmount: 391.3,
-    paymentMethod: 'zatca_qr',
-    customerMasked: 'Tariq Al-Otaibi',
-    date: 'Today, 09:30 AM',
-    timestamp: new Date(Date.now() - 7200000),
-    status: 'settled',
-    zatcaQrCode: 'AQ1TdGFybWFydCBNYXJrZXQCBzMxMDk0ODIBDDIwMjYtMDktMTU=',
-  },
-  {
-    id: 'POS-8839204',
-    orderRef: 'LNK-2041',
-    amount: 1200.0,
-    vatAmount: 156.52,
-    netAmount: 1043.48,
-    paymentMethod: 'payment_link',
-    customerMasked: 'Sara Al-Mansoor',
-    date: 'Yesterday, 04:15 PM',
-    timestamp: new Date(Date.now() - 86400000),
-    status: 'settled',
-    zatcaQrCode: 'AQ1TdGFybWFydCBNYXJrZXQCBzMxMDk0ODIBDDIwMjYtMDktMTU=',
-  },
-];
-
-const INITIAL_CASHIERS: CashierInfo[] = [
-  { id: 'csh-1', name: 'Khalid Mansour', role: 'Supervisor', pin: '1122', active: true, terminal: 'Terminal 01 (Main POS)' },
-  { id: 'csh-2', name: 'Yasmin Al-Harbi', role: 'Cashier', pin: '3344', active: true, terminal: 'Terminal 02 (Express Checkout)' },
-  { id: 'csh-3', name: 'Sultan Al-Ghamdi', role: 'Cashier', pin: '5566', active: false, terminal: 'Terminal 03 (Drive Thru)' },
 ];
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -254,17 +138,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   });
   const [screenParams, setScreenParams] = useState<Record<string, any>>({});
   const [activeTab, setActiveTabState] = useState<BottomTab>('home');
-
-  const [userRole, setUserRole] = useState<UserRole>('customer');
-  const [merchantInfo, setMerchantInfo] = useState<MerchantInfo>(INITIAL_MERCHANT_INFO);
-  const [merchantCollections, setMerchantCollections] = useState<MerchantCollection[]>(INITIAL_MERCHANT_COLLECTIONS);
-  const [lastMerchantCollection, setLastMerchantCollection] = useState<MerchantCollection | null>(null);
-  const [cashiers, setCashiers] = useState<CashierInfo[]>(INITIAL_CASHIERS);
-  const [softPosAmount, setSoftPosAmount] = useState<number>(67.0);
-  const [softPosCardScheme, setSoftPosCardScheme] = useState<string>('mada');
   const [isKycModalOpen, setIsKycModalOpen] = useState<boolean>(false);
-  const [soundBoxLanguage, setSoundBoxLanguage] = useState<'ar' | 'en'>('ar');
-  const [soundBoxVolume, setSoundBoxVolume] = useState<number>(1.0);
+
 
   const [user, setUser] = useState<User>({
     name: 'Fahad Al-Harbi',
@@ -552,120 +427,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return newTxn;
   };
 
-  // SoundBox Audio Chime & Speech Synthesizer
-  const speakSoundBox = (amount: number) => {
-    try {
-      if (typeof window !== 'undefined' && ((window as any).AudioContext || (window as any).webkitAudioContext)) {
-        const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
-        const ctx = new AudioCtx();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(587.33, ctx.currentTime);
-        osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1);
-        gain.gain.setValueAtTime(0.3, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.35);
-      }
-    } catch {
-      // AudioContext fallback ignored
-    }
-
-    try {
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const isArabic = soundBoxLanguage === 'ar';
-        const text = isArabic
-          ? `تم استلام ${amount} ريال سعودي عبر كيو تي باي`
-          : `Received ${amount} Saudi Riyals on QTPay`;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = isArabic ? 'ar-SA' : 'en-US';
-        utterance.rate = 1.0;
-        utterance.volume = soundBoxVolume;
-        window.speechSynthesis.speak(utterance);
-      }
-    } catch {
-      // Speech synthesis fallback ignored
-    }
-  };
-
-  const updateMerchantInfo = (info: Partial<MerchantInfo>) => {
-    setMerchantInfo((prev) => ({ ...prev, ...info }));
-  };
-
-  const processMerchantCollection = async (params: {
-    amount: number;
-    paymentMethod: PaymentAcceptanceMethod;
-    cardLast4?: string;
-    orderRef?: string;
-    customerMasked?: string;
-  }): Promise<MerchantCollection> => {
-    const grossAmount = params.amount;
-    // 15% ZATCA Standard VAT calculation: VAT = Gross - (Gross / 1.15)
-    const netAmount = Number((grossAmount / 1.15).toFixed(2));
-    const vatAmount = Number((grossAmount - netAmount).toFixed(2));
-
-    const newCollection: MerchantCollection = {
-      id: 'POS-' + Math.floor(1000000 + Math.random() * 9000000).toString(),
-      orderRef: params.orderRef || 'ORD-' + Math.floor(1000 + Math.random() * 9000).toString(),
-      amount: grossAmount,
-      vatAmount,
-      netAmount,
-      paymentMethod: params.paymentMethod,
-      cardLast4: params.cardLast4,
-      customerMasked: params.customerMasked || '+966 50 ••• ' + Math.floor(1000 + Math.random() * 9000).toString(),
-      date: 'Today, ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      timestamp: new Date(),
-      status: 'settled',
-      zatcaQrCode: btoa(`${merchantInfo.businessName}|${merchantInfo.vatNumber}|${new Date().toISOString()}|${grossAmount}|${vatAmount}`),
-    };
-
-    setMerchantCollections((prev) => [newCollection, ...prev]);
-    setLastMerchantCollection(newCollection);
-
-    // Trigger SoundBox Voice Alert
-    speakSoundBox(grossAmount);
-
-    const newNotif: AppNotification = {
-      id: `notif-${Date.now()}`,
-      title: 'Merchant Payment Received',
-      description: `SAR ${grossAmount.toFixed(2)} collected via ${params.paymentMethod.replace('_', ' ').toUpperCase()}`,
-      timestamp: 'Just now',
-      read: false,
-      type: 'success',
-    };
-    setNotifications((prev) => [newNotif, ...prev]);
-
-    return newCollection;
-  };
-
-  const processMerchantRefund = async (collectionId: string, pin: string): Promise<boolean> => {
-    if (pin !== merchantInfo.merchantPin && pin !== '2026') {
-      return false;
-    }
-    setMerchantCollections((prev) =>
-      prev.map((c) => (c.id === collectionId ? { ...c, status: 'refunded' as const } : c))
-    );
-    return true;
-  };
-
-  const addCashier = (cashierData: Omit<CashierInfo, 'id'>) => {
-    const newCashier: CashierInfo = {
-      id: `csh-${Date.now()}`,
-      ...cashierData,
-    };
-    setCashiers((prev) => [...prev, newCashier]);
-  };
-
-  const toggleCashierStatus = (cashierId: string) => {
-    setCashiers((prev) =>
-      prev.map((c) => (c.id === cashierId ? { ...c, active: !c.active } : c))
-    );
-  };
-
   const openPinModal = (data: { title: string; amount: number; subTitle: string; onSuccess?: () => void }) => {
     setPendingPaymentData(data);
     setIsPinModalOpen(true);
@@ -760,7 +521,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         transactions,
         notifications,
         contacts: FREQUENT_CONTACTS,
-        merchants: MERCHANTS,
         moneyRequests,
         deviceSessions,
         lastTransaction,
@@ -791,31 +551,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsAppLinksModalOpen,
         isEditProfileModalOpen,
         setIsEditProfileModalOpen,
-        terminateSession,
-        addMoneyRequest,
-        // Merchant State & Handlers
-        userRole,
-        setUserRole,
-        merchantInfo,
-        updateMerchantInfo,
-        merchantCollections,
-        lastMerchantCollection,
-        processMerchantCollection,
-        processMerchantRefund,
-        cashiers,
-        addCashier,
-        toggleCashierStatus,
-        softPosAmount,
-        setSoftPosAmount,
-        softPosCardScheme,
-        setSoftPosCardScheme,
         isKycModalOpen,
         setIsKycModalOpen,
-        soundBoxLanguage,
-        setSoundBoxLanguage,
-        soundBoxVolume,
-        setSoundBoxVolume,
-        speakSoundBox,
+        terminateSession,
+        addMoneyRequest,
       }}
     >
       {children}

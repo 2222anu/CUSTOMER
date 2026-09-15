@@ -6,7 +6,7 @@ import { formatSaudiCurrency, translateText } from '../utils/i18n';
 
 interface DealItem {
   id: string;
-  merchant: string;
+  store: string;
   title: string;
   offer: string;
   category: string;
@@ -22,14 +22,14 @@ export const ShoppingScreen: React.FC = () => {
   const [copiedCode, setCopiedCode] = useState(false);
   const [purchasedDeal, setPurchasedDeal] = useState<{
     title: string;
-    merchant: string;
+    store: string;
     paidAmount: number;
   } | null>(null);
 
   const deals: DealItem[] = [
     {
       id: 'deal-1',
-      merchant: isAr ? 'أسواق بنده' : 'Panda Supermarket',
+      store: isAr ? 'أسواق بنده' : 'Panda Supermarket',
       title: isAr ? 'توفير البقالة والمقاضي الأسبوعية' : 'Weekly Grocery Smart Saver',
       offer: isAr ? 'كاش باك ٥٠ ر.س عبر سريع' : 'Flat SAR 50 Cashback on Sarie',
       category: isAr ? 'بقالة ومواد غذائية طازجة' : 'Groceries & Fresh Food',
@@ -39,7 +39,7 @@ export const ShoppingScreen: React.FC = () => {
     },
     {
       id: 'deal-2',
-      merchant: isAr ? 'مكتبة جرير' : 'Jarir Bookstore',
+      store: isAr ? 'مكتبة جرير' : 'Jarir Bookstore',
       title: isAr ? 'أفضل الكتب والأدوات الرقمية' : 'Trending Books & Digital Stationery',
       offer: isAr ? 'خصم فوري ٧٥ ر.س' : 'Flat SAR 75 Instant OFF',
       category: isAr ? 'كتب وإلكترونيات' : 'Books & Electronics',
@@ -49,7 +49,7 @@ export const ShoppingScreen: React.FC = () => {
     },
     {
       id: 'deal-3',
-      merchant: isAr ? 'معارض إكسترا' : 'eXtra Stores',
+      store: isAr ? 'معارض إكسترا' : 'eXtra Stores',
       title: isAr ? 'سماعات لاسلكية عازلة للضوضاء' : 'Wireless Active Noise Cancelling Earbuds',
       offer: isAr ? 'خصم فوري يصل إلى ٢٠٠ ر.س' : 'Up to SAR 200 Instant Discount',
       category: isAr ? 'صوتيات وتقنية' : 'Audio & Tech Gadgets',
@@ -70,11 +70,11 @@ export const ShoppingScreen: React.FC = () => {
 
     openPinModal({
       title: `${translateText('Buy', language)} ${selectedDeal.title}`,
-      subTitle: `${selectedDeal.merchant} • ${formatSaudiCurrency(selectedDeal.discountedPrice, language)}`,
+      subTitle: `${selectedDeal.store} • ${formatSaudiCurrency(selectedDeal.discountedPrice, language)}`,
       amount: selectedDeal.discountedPrice,
       onSuccess: async () => {
         await completePayment({
-          title: selectedDeal.merchant,
+          title: selectedDeal.store,
           subTitle: selectedDeal.title,
           amount: selectedDeal.discountedPrice,
           category: 'Shopping Purchase',
@@ -82,7 +82,7 @@ export const ShoppingScreen: React.FC = () => {
 
         setPurchasedDeal({
           title: selectedDeal.title,
-          merchant: selectedDeal.merchant,
+          store: selectedDeal.store,
           paidAmount: selectedDeal.discountedPrice,
         });
         setSelectedDeal(null);
@@ -171,7 +171,7 @@ export const ShoppingScreen: React.FC = () => {
                   <Tag size={20} />
                 </div>
                 <div>
-                  <div style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF' }}>{deal.merchant}</div>
+                  <div style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF' }}>{deal.store}</div>
                   <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '2px' }}>{deal.title}</div>
                   <div style={{ fontSize: '12px', color: '#7FE87F', marginTop: '3px', fontWeight: 800 }}>{deal.offer}</div>
                 </div>
@@ -212,7 +212,7 @@ export const ShoppingScreen: React.FC = () => {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div>
-                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>{selectedDeal.merchant}</h3>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>{selectedDeal.store}</h3>
                 <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '2px 0 0 0' }}>{selectedDeal.category}</p>
               </div>
               <button
@@ -368,7 +368,7 @@ export const ShoppingScreen: React.FC = () => {
               {translateText('Order Placed!', language)}
             </h3>
             <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '0 0 20px 0' }}>
-              {isAr ? `تم تفعيل قسيمة الخصم لدى ${purchasedDeal.merchant}` : `Discount voucher redeemed at ${purchasedDeal.merchant}`}
+              {isAr ? `تم تفعيل قسيمة الخصم لدى ${purchasedDeal.store}` : `Discount voucher redeemed at ${purchasedDeal.store}`}
             </p>
 
             <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: isRtl ? 'right' : 'left', marginBottom: '20px' }}>

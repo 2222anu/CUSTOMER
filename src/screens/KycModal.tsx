@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { X, ShieldCheck, CheckCircle2, FileText, UserCheck, ArrowRight, Loader2 } from 'lucide-react';
+import { X, ShieldCheck, CheckCircle2, UserCheck, ArrowRight, Loader2 } from 'lucide-react';
 import { useApp } from '../state/AppContext';
 import { SamaLogo } from '../components/SamaLogo';
-import { ZatcaLogo } from '../components/ZatcaLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 
 export const KycModal: React.FC = () => {
-  const { isKycModalOpen, setIsKycModalOpen, merchantInfo, updateMerchantInfo, navigateTo, t, isRtl, language } = useApp();
-  const [nationalId, setNationalId] = useState(merchantInfo.nationalId || '1098472910');
-  const [crNumber, setCrNumber] = useState(merchantInfo.crNumber || 'CR-1010849201');
+  const { isKycModalOpen, setIsKycModalOpen, t, isRtl, language } = useApp();
+  const [nationalId, setNationalId] = useState('1098472910');
   const [isVerifying, setIsVerifying] = useState(false);
   const [verifiedSuccess, setVerifiedSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -21,27 +19,17 @@ export const KycModal: React.FC = () => {
       setErrorMsg(language === 'العربية' ? 'يرجى إدخال رقم هوية وطنية أو إقامة صحيح من ١٠ أرقام.' : 'Please enter a valid 10-digit National ID or Iqama Number.');
       return;
     }
-    if (!crNumber.trim()) {
-      setErrorMsg(language === 'العربية' ? 'يرجى إدخال رقم السجل التجاري للمنشأة.' : 'Please enter your Commercial Registration (CR) Number.');
-      return;
-    }
 
     setErrorMsg('');
     setIsVerifying(true);
 
-    // Simulate Absher & SAMA/ZATCA National Database Verification
+    // Simulate Absher / Nafath National Verification
     setTimeout(() => {
       setIsVerifying(false);
       setVerifiedSuccess(true);
-      updateMerchantInfo({
-        nationalId,
-        crNumber: crNumber.toUpperCase().startsWith('CR-') ? crNumber.toUpperCase() : `CR-${crNumber.toUpperCase()}`,
-        isKycVerified: true,
-      });
 
       setTimeout(() => {
         setIsKycModalOpen(false);
-        navigateTo('MERCHANT_SETUP');
       }, 1200);
     }, 1500);
   };
@@ -95,10 +83,10 @@ export const KycModal: React.FC = () => {
             </div>
             <div>
               <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>
-                {t('sec.absher_kyc', 'SAMA & ZATCA e-KYC')}
+                {language === 'العربية' ? 'توثيق الهوية عبر نفاذ وأبشر' : 'Nafath & Absher e-KYC'}
               </h3>
               <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
-                {language === 'العربية' ? 'التحقق التجاري عبر أبشر' : 'Absher Business Validation'}
+                {language === 'العربية' ? 'التحقق الوطني المعتمد من البنك المركزي' : 'SAMA-Compliant Identity Verification'}
               </span>
             </div>
           </div>
@@ -141,12 +129,12 @@ export const KycModal: React.FC = () => {
               <CheckCircle2 size={36} color="#7FE87F" />
             </div>
             <h4 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>
-              {language === 'العربية' ? 'تم التحقق من الهوية عبر منصة أبشر' : 'Identity Verified via Absher'}
+              {language === 'العربية' ? 'تم التحقق من الهوية بنجاح' : 'Identity Verified Successfully'}
             </h4>
             <p style={{ fontSize: '13px', color: '#A2A2BA', margin: 0 }}>
               {language === 'العربية'
-                ? 'تم استيفاء متطلبات البنك المركزي وهيئة الزكاة. جاري الانتقال للملف التجاري...'
-                : 'SAMA regulatory requirements fulfilled. Directing to Merchant Business Profile...'}
+                ? 'تم توثيق الحساب بالكامل وفق لوائح البنك المركزي السعودي (ساما).'
+                : 'Account fully verified in accordance with SAMA regulations.'}
             </p>
           </div>
         ) : (
@@ -200,54 +188,6 @@ export const KycModal: React.FC = () => {
               </div>
             </div>
 
-            {/* Commercial Registration (CR) Number */}
-            <div>
-              <label
-                style={{
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  color: '#A2A2BA',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
-                  marginBottom: '8px',
-                  display: 'block',
-                }}
-              >
-                {t('zatca.cr_number', 'Commercial Registration (CR) Number')}
-              </label>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
-                  borderRadius: '14px',
-                  padding: '13px 16px',
-                }}
-              >
-                <FileText size={18} color="#7FE87F" style={{ marginInlineEnd: '12px', flexShrink: 0 }} />
-                <input
-                  type="text"
-                  value={crNumber}
-                  onChange={(e) => setCrNumber(e.target.value)}
-                  placeholder="CR-1010849201"
-                  required
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none',
-                    fontSize: '15px',
-                    fontWeight: 700,
-                    color: '#FFFFFF',
-                    width: '100%',
-                    textTransform: 'uppercase',
-                    direction: 'ltr',
-                    textAlign: isRtl ? 'right' : 'left',
-                  }}
-                />
-              </div>
-            </div>
-
             {errorMsg && (
               <div style={{ fontSize: '12px', color: '#FF6B6B', fontWeight: 700 }}>
                 {errorMsg}
@@ -267,22 +207,19 @@ export const KycModal: React.FC = () => {
                 marginTop: '4px',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <ZatcaLogo variant="icon" size={18} />
-                <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 600 }}>
-                  {language === 'العربية' ? 'معتمد من ساما وهيئة الزكاة والضريبة (ZATCA)' : 'SAMA & ZATCA Verified'}
-                </span>
-              </div>
+              <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 600 }}>
+                {language === 'العربية' ? 'معتمد من البنك المركزي السعودي (ساما)' : 'SAMA Authorized & Regulated'}
+              </span>
               <SamaLogo height={16} themeMode="green" />
             </div>
 
             {/* Submit Button */}
             <div style={{ marginTop: '8px' }}>
-              <PrimaryButton type="submit" disabled={isVerifying || nationalId.length < 10 || !crNumber.trim()}>
+              <PrimaryButton type="submit" disabled={isVerifying || nationalId.length < 10}>
                 {isVerifying ? (
                   <>
                     <Loader2 size={18} className="animate-spin" />{' '}
-                    {language === 'العربية' ? 'جاري التحقق عبر أبشر...' : 'Verifying with Absher...'}
+                    {language === 'العربية' ? 'جاري التحقق عبر نفاذ...' : 'Verifying with Nafath...'}
                   </>
                 ) : (
                   <>

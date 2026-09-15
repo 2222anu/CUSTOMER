@@ -24,7 +24,6 @@ export interface Contact {
   upiId: string;
   mobile: string;
   avatarInitials: string;
-  isMerchant?: boolean;
 }
 
 export interface Transaction {
@@ -78,55 +77,6 @@ export interface DeviceSession {
   isCurrent: boolean;
 }
 
-export type UserRole = 'customer' | 'merchant';
-
-export interface MerchantInfo {
-  businessName: string;
-  category: string;
-  city: string;
-  crNumber: string;
-  vatNumber: string;
-  nationalId: string;
-  isKycVerified: boolean;
-  settlementBank: string;
-  settlementIban: string;
-  merchantPin: string;
-  terminalId: string;
-  storePhone: string;
-}
-
-export type PaymentAcceptanceMethod =
-  | 'softpos_mada'
-  | 'softpos_visa'
-  | 'softpos_mastercard'
-  | 'softpos_applepay'
-  | 'zatca_qr'
-  | 'payment_link';
-
-export interface MerchantCollection {
-  id: string;
-  orderRef: string;
-  amount: number; // Gross SAR
-  vatAmount: number; // 15% ZATCA VAT
-  netAmount: number; // SAR without VAT
-  paymentMethod: PaymentAcceptanceMethod;
-  cardLast4?: string;
-  customerMasked?: string;
-  date: string;
-  timestamp: Date;
-  status: 'settled' | 'refunded';
-  zatcaQrCode?: string;
-}
-
-export interface CashierInfo {
-  id: string;
-  name: string;
-  role: 'Manager' | 'Cashier' | 'Supervisor';
-  pin: string;
-  active: boolean;
-  terminal: string;
-}
-
 export type ScreenId =
   | 'SPLASH'
   | 'ONBOARDING'
@@ -156,20 +106,7 @@ export type ScreenId =
   | 'MESSAGES'
   | 'TRAVEL'
   | 'REWARDS'
-  | 'FOOD'
-  // Merchant Ecosystem Screens
-  | 'MERCHANT_HOME'
-  | 'MERCHANT_SETUP'
-  | 'MERCHANT_BANK_LINK'
-  | 'MERCHANT_PIN_SETUP'
-  | 'SOFTPOS_TERMINAL'
-  | 'SOFTPOS_TAP'
-  | 'MERCHANT_PAYMENT_SUCCESS'
-  | 'MERCHANT_QR_GENERATOR'
-  | 'PAYMENT_LINK_GENERATOR'
-  | 'SOUNDBOX_NOTIFIER'
-  | 'MERCHANT_COLLECTIONS'
-  | 'MERCHANT_WEB';
+  | 'FOOD';
 
 export type BottomTab = 'home' | 'account' | 'pay' | 'scan' | 'history' | 'profile';
 

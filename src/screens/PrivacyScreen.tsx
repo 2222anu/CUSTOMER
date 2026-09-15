@@ -112,7 +112,7 @@ export const PrivacyScreen: React.FC = () => {
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px', backgroundColor: '#1A1A2E', borderRadius: '14px', border: '1px solid #4D4D6B' }}>
             <div>
-              <div style={{ fontSize: '14px', fontWeight: 700, color: '#FFFFFF' }}>{translateText('Merchant Analytics', language)}</div>
+              <div style={{ fontSize: '14px', fontWeight: 700, color: '#FFFFFF' }}>{translateText('Spending Analytics', language)}</div>
               <div style={{ fontSize: '11px', color: '#B3B3C2', marginTop: '2px' }}>{translateText('Share anonymized spending statistics', language)}</div>
             </div>
             <input type="checkbox" checked={shareData} onChange={(e) => setShareData(e.target.checked)} style={{ width: '20px', height: '20px', accentColor: '#7FE87F', cursor: 'pointer' }} />

@@ -376,11 +376,11 @@ export const ScanScreen: React.FC = () => {
           }}
         >
           {hasCameraPermission === false
-            ? language === 'العربية' ? 'الكاميرا غير متاحة، اختر متجر تجريبي:' : 'Camera unavailable. Tap demo merchant:'
+            ? language === 'العربية' ? 'الكاميرا غير متاحة، اختر مستلم تجريبي:' : 'Camera unavailable. Tap demo recipient:'
             : t('scan.align_qr', 'Point at any QR code to pay')}
         </p>
 
-        {/* Quick Sample Merchant Presets for Instant Demo Scanning */}
+        {/* Quick Sample Presets for Instant Demo Scanning */}
         <div
           style={{
             display: 'flex',

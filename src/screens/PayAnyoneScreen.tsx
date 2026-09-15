@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Search, ChevronRight, Store, X, ArrowRight } from 'lucide-react';
+import { Search, X, ArrowRight } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { useApp } from '../state/AppContext';
 import type { Contact } from '../types';
 
 export const PayAnyoneScreen: React.FC = () => {
-  const { contacts, merchants, navigateTo, t, isRtl, language } = useApp();
+  const { contacts, navigateTo, t, isRtl, language } = useApp();
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredContacts = contacts.filter(
@@ -13,12 +13,6 @@ export const PayAnyoneScreen: React.FC = () => {
       c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.upiId.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.mobile.includes(searchQuery)
-  );
-
-  const filteredMerchants = merchants.filter(
-    (m) =>
-      m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      m.upiId.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleSelectContact = (contact: Contact) => {
@@ -204,92 +198,6 @@ export const PayAnyoneScreen: React.FC = () => {
           </div>
         )}
       </div>
-
-      {filteredMerchants.length > 0 && (
-        <div style={{ padding: '0 20px', marginBottom: '24px' }}>
-          <div
-            style={{
-              fontSize: '12px',
-              fontWeight: 800,
-              color: '#A2A2BA',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              marginBottom: '12px',
-            }}
-          >
-            {t('history.merchant', 'Merchants')}
-          </div>
-
-          <div
-            style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
-              borderRadius: '14px',
-              overflow: 'hidden',
-              boxShadow: 'none',
-            }}
-          >
-            {filteredMerchants.map((merchant, index) => {
-              const displayMerchantName = t(merchant.name, merchant.name);
-              return (
-                <div
-                  key={merchant.id}
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => handleSelectContact(merchant)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      handleSelectContact(merchant);
-                    }
-                  }}
-                  className="interactive-tap"
-                  aria-label={`Pay merchant ${displayMerchantName}`}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '14px 16px',
-                    borderBottom: index < filteredMerchants.length - 1 ? '1px solid #1E1E32' : 'none',
-                    cursor: 'pointer',
-                    backgroundColor: '#151524',
-                    transition: 'background-color 0.15s ease',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                    <div
-                      style={{
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: '12px',
-                        backgroundColor: '#1E1E32',
-                        color: '#7FE87F',
-                        fontWeight: 800,
-                        fontSize: '14px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        border: '1px solid #2C2C44',
-                        flexShrink: 0,
-                      }}
-                    >
-                      <Store size={20} />
-                    </div>
-                    <div>
-                      <div style={{ fontWeight: 800, fontSize: '14.5px', color: '#FFFFFF', lineHeight: '18px' }}>
-                        {displayMerchantName}
-                      </div>
-                      <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 600, marginTop: '2px' }}>
-                        {merchant.upiId}
-                      </div>
-                    </div>
-                  </div>
-                  <ChevronRight size={18} color="#6E6E85" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -35,20 +35,6 @@ import { TravelScreen } from './screens/TravelScreen';
 import { RewardsScreen } from './screens/RewardsScreen';
 import { FoodScreen } from './screens/FoodScreen';
 
-// Merchant Screens
-import { MerchantHomeScreen } from './screens/MerchantHomeScreen';
-import { MerchantSetupScreen } from './screens/MerchantSetupScreen';
-import { MerchantSettlementBankScreen } from './screens/MerchantSettlementBankScreen';
-import { MerchantPinSetupScreen } from './screens/MerchantPinSetupScreen';
-import { SoftPOSTerminalScreen } from './screens/SoftPOSTerminalScreen';
-import { TapCardScreen } from './screens/TapCardScreen';
-import { MerchantPaymentReceivedScreen } from './screens/MerchantPaymentReceivedScreen';
-import { MerchantQrGeneratorScreen } from './screens/MerchantQrGeneratorScreen';
-import { PaymentLinkGeneratorScreen } from './screens/PaymentLinkGeneratorScreen';
-import { SoundBoxNotifierScreen } from './screens/SoundBoxNotifierScreen';
-import { MerchantCollectionsScreen } from './screens/MerchantCollectionsScreen';
-import { MerchantWebLayoutScreen } from './screens/MerchantWebLayoutScreen';
-
 // Modals
 import { PayBillPinModal } from './screens/PayBillPinModal';
 import { LanguageModal } from './screens/LanguageModal';
@@ -119,31 +105,6 @@ const AppContent: React.FC = () => {
         return <RewardsScreen />;
       case 'FOOD':
         return <FoodScreen />;
-      // Merchant Screens
-      case 'MERCHANT_HOME':
-        return <MerchantHomeScreen />;
-      case 'MERCHANT_SETUP':
-        return <MerchantSetupScreen />;
-      case 'MERCHANT_BANK_LINK':
-        return <MerchantSettlementBankScreen />;
-      case 'MERCHANT_PIN_SETUP':
-        return <MerchantPinSetupScreen />;
-      case 'SOFTPOS_TERMINAL':
-        return <SoftPOSTerminalScreen />;
-      case 'SOFTPOS_TAP':
-        return <TapCardScreen />;
-      case 'MERCHANT_PAYMENT_SUCCESS':
-        return <MerchantPaymentReceivedScreen />;
-      case 'MERCHANT_QR_GENERATOR':
-        return <MerchantQrGeneratorScreen />;
-      case 'PAYMENT_LINK_GENERATOR':
-        return <PaymentLinkGeneratorScreen />;
-      case 'SOUNDBOX_NOTIFIER':
-        return <SoundBoxNotifierScreen />;
-      case 'MERCHANT_COLLECTIONS':
-        return <MerchantCollectionsScreen />;
-      case 'MERCHANT_WEB':
-        return <MerchantWebLayoutScreen />;
       default:
         return <HomeScreen />;
     }
@@ -155,13 +116,7 @@ const AppContent: React.FC = () => {
     currentScreen !== 'MOBILE_NUMBER' &&
     currentScreen !== 'SMS_OTP' &&
     currentScreen !== 'PERMISSIONS' &&
-    currentScreen !== 'PAYMENT_SUCCESS' &&
-    currentScreen !== 'MERCHANT_SETUP' &&
-    currentScreen !== 'MERCHANT_BANK_LINK' &&
-    currentScreen !== 'MERCHANT_PIN_SETUP' &&
-    currentScreen !== 'SOFTPOS_TAP' &&
-    currentScreen !== 'MERCHANT_PAYMENT_SUCCESS' &&
-    currentScreen !== 'MERCHANT_WEB';
+    currentScreen !== 'PAYMENT_SUCCESS';
 
   return (
     <div className={`app-viewport ${isRtl ? 'rtl' : ''}`}>

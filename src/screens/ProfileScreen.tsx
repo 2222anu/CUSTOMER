@@ -203,53 +203,7 @@ export const ProfileScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* Standalone Merchant Suite Discovery Card */}
-      <div style={{ padding: '0 20px', marginBottom: '20px' }}>
-        <div
-          onClick={() => navigateTo('MERCHANT_HOME')}
-          className="interactive-tap"
-          style={{
-            background: 'linear-gradient(135deg, rgba(6, 78, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%)',
-            border: '1px solid rgba(52, 211, 153, 0.3)',
-            borderRadius: '18px',
-            padding: '16px 18px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            cursor: 'pointer',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div
-              style={{
-                width: '44px',
-                height: '44px',
-                borderRadius: '14px',
-                backgroundColor: 'rgba(52, 211, 153, 0.15)',
-                border: '1px solid rgba(52, 211, 153, 0.3)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#34d399',
-                flexShrink: 0,
-              }}
-            >
-              <CreditCard size={22} />
-            </div>
-            <div>
-              <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
-                {language === 'العربية' ? 'منصة كيو تي باي للتجار والأعمال' : 'QTPay for Merchants & Business'}
-              </div>
-              <div style={{ fontSize: '11px', color: '#86efac', marginTop: '2px' }}>
-                {language === 'العربية' ? 'نقاط بيع SoftPOS وفواتير زاتكا الإلكترونية' : 'SoftPOS Tap to Pay & ZATCA E-Invoicing'}
-              </div>
-            </div>
-          </div>
-          <span style={{ fontSize: '10.5px', fontWeight: 800, backgroundColor: '#34d399', color: '#070D0A', padding: '4px 8px', borderRadius: '8px', textTransform: 'uppercase' }}>
-            {language === 'العربية' ? 'فتح' : 'OPEN'}
-          </span>
-        </div>
-      </div>
+
 
       {/* Menu Sections */}
       <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>

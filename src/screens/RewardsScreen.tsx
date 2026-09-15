@@ -31,7 +31,7 @@ export const RewardsScreen: React.FC = () => {
     },
     {
       id: 'sc-2',
-      title: isAr ? 'توفير المتاجر الكبرى' : 'Merchant Super Saver',
+      title: isAr ? 'توفير المتاجر الكبرى' : 'Supermarket Saver',
       subtitle: isAr ? 'مكتسبة لدى أسواق بنده' : 'Earned at Panda Supermarket',
       rewardText: isAr ? 'خصم ٢٥٪ على الأغذية والمقاضي' : 'Flat 25% Off Food & Groceries',
       rewardType: 'voucher',

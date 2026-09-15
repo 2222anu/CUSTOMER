@@ -43,7 +43,7 @@ const getTierIcon = (bank: BankAccount) => {
   if (lowerType.includes('saving')) {
     return <PiggyBank size={17} color="#34d399" />;
   }
-  if (lowerType.includes('business') || lowerType.includes('merchant')) {
+  if (lowerType.includes('business')) {
     return <Briefcase size={17} color="#34d399" />;
   }
   return <Star size={17} color="#34d399" />;

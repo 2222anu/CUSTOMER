@@ -173,11 +173,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     const alRajhiBank = page.getByText('Al Rajhi Bank').first();
     await alRajhiBank.click();
 
-    // Click Continue to Account Match
-    const continueMatchBtn = page.getByRole('button', { name: /Continue to Account Match|المتابعة لمطابقة الحساب/i });
-    await continueMatchBtn.click();
-
-    // Request Bank OTP
+    // Request Bank OTP (Step 1 includes inline matching)
     const requestOtpBtn = page.getByRole('button', { name: /Request Bank OTP|طلب رمز التحقق البنكي/i });
     await expect(requestOtpBtn).toBeVisible({ timeout: 5000 });
     await requestOtpBtn.click();

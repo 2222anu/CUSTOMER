@@ -49,22 +49,30 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 'calc(10px + env(safe-area-inset-top, 0px)) 16px 10px 16px',
+        padding: 'calc(14px + env(safe-area-inset-top, 0px)) 16px 12px 16px',
         backgroundColor: 'rgba(11, 11, 20, 0.96)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
         position: 'sticky',
         top: 0,
         zIndex: 100,
         borderBottom: `1px solid ${designSystem.colors.borderHairline}`,
-        boxShadow: 'none',
-        minHeight: 'calc(56px + env(safe-area-inset-top, 0px))',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.35)',
+        minHeight: 'calc(62px + env(safe-area-inset-top, 0px))',
         boxSizing: 'border-box',
         width: '100%',
+        gap: '12px',
       }}
     >
-      {/* Left Slot: Back Button or User Avatar Icon (No text) */}
-      <div style={{ display: 'flex', alignItems: 'center', zIndex: 2, minWidth: '40px' }}>
+      {/* Left Slot: Back Button or User Avatar Icon */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          flexShrink: 0,
+          minWidth: '40px',
+        }}
+      >
         {showBack ? (
           <button
             onClick={handleBack}
@@ -122,24 +130,21 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         )}
       </div>
 
-      {/* Exact Top Center Slot: Logo Wordmark or Page Title */}
+      {/* Center Slot: Flexible Non-overlapping Brand Logo or Screen Title */}
       <div
         style={{
-          position: 'absolute',
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          zIndex: 1,
-          maxWidth: 'calc(100% - 110px)',
+          flex: 1,
+          minWidth: 0,
+          textAlign: 'center',
         }}
       >
         {displayTitle ? (
           <h2
             style={{
-              fontSize: '16px',
+              fontSize: '15.5px',
               fontWeight: '800',
               color: '#FFFFFF',
               margin: 0,
@@ -148,19 +153,38 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               whiteSpace: 'nowrap',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
+              maxWidth: '100%',
             }}
           >
             {displayTitle}
           </h2>
         ) : (
-          <div onClick={() => navigateTo('HOME')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-            <AlphPayLogo variant="header" size={24} themeMode="dark" />
+          <div
+            onClick={() => navigateTo('HOME')}
+            style={{
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              maxWidth: '100%',
+            }}
+          >
+            <AlphPayLogo variant="header" size={22} themeMode="dark" />
           </div>
         )}
       </div>
 
-      {/* Right Slot: Search / Settings / Custom Action */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', zIndex: 2, minWidth: '40px', justifyContent: 'flex-end' }}>
+      {/* Right Slot: Actions */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          flexShrink: 0,
+          minWidth: '40px',
+          justifyContent: 'flex-end',
+        }}
+      >
         {showSearch && (
           <button
             onClick={onSearchClick}

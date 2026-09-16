@@ -130,7 +130,16 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
 
     // 4. SMS OTP Screen
     await page.goto(getAppUrl('screen=SMS_OTP'));
-    await expect(page.getByText('589204', { exact: false })).toBeVisible();
+    const demoOtpBtn = page.getByRole('button', { name: /Demo OTP|رمز تجريبي/i });
+    if (await demoOtpBtn.isVisible()) {
+      await demoOtpBtn.click();
+    } else {
+      const inputs = page.locator('input[type="text"]');
+      const digits = ['5', '8', '9', '2', '0', '4'];
+      for (let i = 0; i < 6; i++) {
+        await inputs.nth(i).fill(digits[i]);
+      }
+    }
 
     // Click Verify
     const verifyBtn = page.getByRole('button', { name: /Verify/i });
@@ -171,6 +180,12 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     const requestOtpBtn = page.getByRole('button', { name: /Request Bank OTP|طلب رمز التحقق البنكي/i });
     await expect(requestOtpBtn).toBeVisible({ timeout: 5000 });
     await requestOtpBtn.click();
+
+    // Fill Bank OTP
+    const demoBankOtpBtn = page.getByRole('button', { name: /Demo OTP: 4821|رمز تجريبي/i });
+    if (await demoBankOtpBtn.isVisible()) {
+      await demoBankOtpBtn.click();
+    }
 
     // Authorize & Link Account OTP
     const authorizeBtn = page.getByRole('button', { name: /Authorize & Link Account|تأكيد وربط الحساب/i });

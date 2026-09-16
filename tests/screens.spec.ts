@@ -183,13 +183,12 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
 
     // Fill Bank OTP
     const demoBankOtpBtn = page.getByRole('button', { name: /Demo OTP: 4821|رمز تجريبي/i });
-    if (await demoBankOtpBtn.isVisible()) {
-      await demoBankOtpBtn.click();
-    }
+    await expect(demoBankOtpBtn).toBeVisible({ timeout: 5000 });
+    await demoBankOtpBtn.click();
 
     // Authorize & Link Account OTP
     const authorizeBtn = page.getByRole('button', { name: /Authorize & Link Account|تأكيد وربط الحساب/i });
-    await expect(authorizeBtn).toBeVisible({ timeout: 5000 });
+    await expect(authorizeBtn).toBeEnabled({ timeout: 5000 });
     await authorizeBtn.click();
 
     // Success Screen -> Go to Home

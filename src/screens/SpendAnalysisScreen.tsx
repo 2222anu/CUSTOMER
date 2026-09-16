@@ -10,7 +10,6 @@ import {
   Send,
   PieChart as PieChartIcon,
   BarChart3,
-  Sparkles,
   ChevronRight,
   CheckCircle2,
   Building2,
@@ -45,6 +44,7 @@ interface MerchantData {
   txnCount: number;
   icon: React.ReactNode;
   iconBg: string;
+  iconColor: string;
 }
 
 export const SpendAnalysisScreen: React.FC = () => {
@@ -52,7 +52,6 @@ export const SpendAnalysisScreen: React.FC = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<PeriodType>('MONTH');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [hoveredBarIndex, setHoveredBarIndex] = useState<number | null>(null);
-  const [chartView, setChartView] = useState<'bar' | 'pie'>('bar');
   const [isExporting, setIsExporting] = useState<boolean>(false);
   const [exportToast, setExportToast] = useState<string | null>(null);
 
@@ -132,7 +131,7 @@ export const SpendAnalysisScreen: React.FC = () => {
   const budgetProgress = Math.min(100, Math.round((currentData.totalSpent / currentData.budgetLimit) * 100));
   const remainingBudget = Math.max(0, currentData.budgetLimit - currentData.totalSpent);
 
-  // Brand harmonized color palette
+  // Exquisite green tints, shades, and tones palette
   const categories: CategoryData[] = [
     {
       id: 'shopping',
@@ -141,8 +140,8 @@ export const SpendAnalysisScreen: React.FC = () => {
       amount: selectedPeriod === 'WEEK' ? 950 : selectedPeriod === 'YEAR' ? 38600 : 4200,
       percentage: 28,
       txnCount: selectedPeriod === 'WEEK' ? 3 : 14,
-      color: '#7FE87F',
-      bgColor: 'rgba(127, 232, 127, 0.15)',
+      color: '#7FE87F', // Signature Brand Bright Green
+      bgColor: 'rgba(127, 232, 127, 0.16)',
       icon: <ShoppingBag size={18} color="#7FE87F" />,
       merchants: ['Jarir Bookstore', 'Amazon SA', 'Noon'],
     },
@@ -153,9 +152,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       amount: selectedPeriod === 'WEEK' ? 880 : selectedPeriod === 'YEAR' ? 35200 : 3850,
       percentage: 26,
       txnCount: selectedPeriod === 'WEEK' ? 6 : 28,
-      color: '#60A5FA',
-      bgColor: 'rgba(96, 165, 250, 0.15)',
-      icon: <Utensils size={18} color="#60A5FA" />,
+      color: '#4ADE80', // Vibrant Mint Emerald
+      bgColor: 'rgba(74, 222, 128, 0.16)',
+      icon: <Utensils size={18} color="#4ADE80" />,
       merchants: ['HungerStation', 'Jahez', 'Al Baik'],
     },
     {
@@ -165,9 +164,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       amount: selectedPeriod === 'WEEK' ? 520 : selectedPeriod === 'YEAR' ? 24500 : 2450,
       percentage: 16,
       txnCount: selectedPeriod === 'WEEK' ? 1 : 5,
-      color: '#FBBF24',
-      bgColor: 'rgba(251, 191, 36, 0.15)',
-      icon: <Zap size={18} color="#FBBF24" />,
+      color: '#22C55E', // Classic Fintech Green
+      bgColor: 'rgba(34, 197, 94, 0.16)',
+      icon: <Zap size={18} color="#22C55E" />,
       merchants: ['Saudi Electricity Co.', 'STC Pay'],
     },
     {
@@ -177,9 +176,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       amount: selectedPeriod === 'WEEK' ? 440 : selectedPeriod === 'YEAR' ? 18400 : 1920,
       percentage: 13,
       txnCount: selectedPeriod === 'WEEK' ? 4 : 12,
-      color: '#C084FC',
-      bgColor: 'rgba(192, 132, 252, 0.15)',
-      icon: <Car size={18} color="#C084FC" />,
+      color: '#10B981', // Deep Teal-Green Tone
+      bgColor: 'rgba(16, 185, 129, 0.16)',
+      icon: <Car size={18} color="#10B981" />,
       merchants: ['Uber Riyadh', 'Aramco Fuel'],
     },
     {
@@ -189,9 +188,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       amount: selectedPeriod === 'WEEK' ? 380 : selectedPeriod === 'YEAR' ? 11700 : 1250,
       percentage: 9,
       txnCount: selectedPeriod === 'WEEK' ? 2 : 8,
-      color: '#2DD4BF',
-      bgColor: 'rgba(45, 212, 191, 0.15)',
-      icon: <Send size={18} color="#2DD4BF" />,
+      color: '#A7F3D0', // Soft Pastel Mint Tint
+      bgColor: 'rgba(167, 243, 208, 0.16)',
+      icon: <Send size={18} color="#A7F3D0" />,
       merchants: ['Sarie Transfer', 'Apple Services'],
     },
     {
@@ -201,9 +200,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       amount: selectedPeriod === 'WEEK' ? 250 : selectedPeriod === 'YEAR' ? 10000 : 1180,
       percentage: 8,
       txnCount: selectedPeriod === 'WEEK' ? 1 : 4,
-      color: '#F87171',
-      bgColor: 'rgba(248, 113, 113, 0.15)',
-      icon: <HeartPulse size={18} color="#F87171" />,
+      color: '#059669', // Rich Forest Jade Green
+      bgColor: 'rgba(5, 150, 105, 0.16)',
+      icon: <HeartPulse size={18} color="#059669" />,
       merchants: ['Nahdi Pharmacy', 'Dr. Sulaiman Al-Habib'],
     },
   ];
@@ -215,8 +214,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       categoryAr: 'الفواتير والخدمات',
       amount: 1450,
       txnCount: 2,
-      icon: <Zap size={18} color="#FBBF24" />,
-      iconBg: 'rgba(251, 191, 36, 0.15)',
+      icon: <Zap size={18} color="#22C55E" />,
+      iconBg: 'rgba(34, 197, 94, 0.16)',
+      iconColor: '#22C55E',
     },
     {
       name: language === 'العربية' ? 'مكتبة جرير' : 'Jarir Bookstore',
@@ -225,7 +225,8 @@ export const SpendAnalysisScreen: React.FC = () => {
       amount: 1280,
       txnCount: 3,
       icon: <BookOpen size={18} color="#7FE87F" />,
-      iconBg: 'rgba(127, 232, 127, 0.15)',
+      iconBg: 'rgba(127, 232, 127, 0.16)',
+      iconColor: '#7FE87F',
     },
     {
       name: language === 'العربية' ? 'لولو هايبرماركت' : 'Lulu Hypermarket',
@@ -233,8 +234,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       categoryAr: 'التموينات والتجزئة',
       amount: 980,
       txnCount: 4,
-      icon: <Store size={18} color="#60A5FA" />,
-      iconBg: 'rgba(96, 165, 250, 0.15)',
+      icon: <Store size={18} color="#4ADE80" />,
+      iconBg: 'rgba(74, 222, 128, 0.16)',
+      iconColor: '#4ADE80',
     },
     {
       name: language === 'العربية' ? 'هنقرستيشن' : 'HungerStation',
@@ -242,8 +244,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       categoryAr: 'توصيل الطعام',
       amount: 740,
       txnCount: 8,
-      icon: <Utensils size={18} color="#C084FC" />,
-      iconBg: 'rgba(192, 132, 252, 0.15)',
+      icon: <Utensils size={18} color="#10B981" />,
+      iconBg: 'rgba(16, 185, 129, 0.16)',
+      iconColor: '#10B981',
     },
     {
       name: language === 'العربية' ? 'صيدليات النهدي' : 'Nahdi Pharmacy',
@@ -251,8 +254,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       categoryAr: 'الصحة والعناية',
       amount: 620,
       txnCount: 3,
-      icon: <HeartPulse size={18} color="#F87171" />,
-      iconBg: 'rgba(248, 113, 113, 0.15)',
+      icon: <HeartPulse size={18} color="#059669" />,
+      iconBg: 'rgba(5, 150, 105, 0.16)',
+      iconColor: '#059669',
     },
   ];
 
@@ -280,7 +284,19 @@ export const SpendAnalysisScreen: React.FC = () => {
   // Pie Chart SVG calculations (Circumference of radius 68 = 427.25)
   const radius = 68;
   const circumference = 2 * Math.PI * radius;
-  let cumulativePercent = 0;
+
+  // Compute slice offsets dynamically
+  let sliceOffsetAccumulator = 0;
+  const sliceMeta = categories.map((cat) => {
+    const strokeLength = (cat.percentage / 100) * circumference;
+    const offset = (sliceOffsetAccumulator / 100) * circumference;
+    sliceOffsetAccumulator += cat.percentage;
+    return {
+      ...cat,
+      strokeLength,
+      strokeOffset: offset,
+    };
+  });
 
   return (
     <div
@@ -477,7 +493,7 @@ export const SpendAnalysisScreen: React.FC = () => {
             </div>
           </div>
 
-          {/* Clean Integrated Budget Progress */}
+          {/* Integrated Budget Progress */}
           <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11.5px', marginBottom: '6px' }}>
               <span style={{ color: '#8E8EA8', fontWeight: 600 }}>
@@ -509,7 +525,159 @@ export const SpendAnalysisScreen: React.FC = () => {
           </div>
         </div>
 
-        {/* VISUAL CHARTS CARD (Interactive Bar / Pie with Brand Green) */}
+        {/* 1. PIE / DONUT CHART (With Green Color Tints, Shades & Tones) */}
+        <div
+          className="fade-in"
+          style={{
+            backgroundColor: 'var(--color-surface, #111726)',
+            borderRadius: '20px',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+            padding: '22px 20px',
+          }}
+        >
+          {/* Header */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <PieChartIcon size={17} color="var(--brand-green, #7FE87F)" />
+              <span style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
+                {language === 'العربية' ? 'التوزيع الدائري للمصروفات' : 'Category Spend Distribution'}
+              </span>
+            </div>
+
+            {selectedCategory && (
+              <button
+                onClick={() => setSelectedCategory(null)}
+                className="interactive-tap"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--brand-green, #7FE87F)',
+                  fontSize: '11.5px',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                }}
+              >
+                {language === 'العربية' ? 'إعادة ضبط' : 'Reset'}
+              </button>
+            )}
+          </div>
+
+          {/* SVG Donut Slices */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ position: 'relative', width: '210px', height: '210px' }}>
+              <svg viewBox="0 0 200 200" style={{ transform: 'rotate(-90deg)', width: '100%', height: '100%' }}>
+                {/* Background Ring Track */}
+                <circle
+                  cx="100"
+                  cy="100"
+                  r={radius}
+                  fill="none"
+                  stroke="#182236"
+                  strokeWidth="22"
+                />
+
+                {/* Slices in Green Shades & Tints */}
+                {sliceMeta.map((cat) => {
+                  const isSelected = selectedCategory === cat.id;
+                  return (
+                    <circle
+                      key={cat.id}
+                      cx="100"
+                      cy="100"
+                      r={radius}
+                      fill="none"
+                      stroke={cat.color}
+                      strokeWidth={isSelected ? 28 : 22}
+                      strokeDasharray={`${cat.strokeLength} ${circumference}`}
+                      strokeDashoffset={-cat.strokeOffset}
+                      style={{
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        opacity: selectedCategory === null || isSelected ? 1 : 0.35,
+                        filter: isSelected ? `drop-shadow(0 0 8px ${cat.color})` : 'none',
+                      }}
+                      onClick={() => setSelectedCategory(isSelected ? null : cat.id)}
+                    />
+                  );
+                })}
+              </svg>
+
+              {/* Center Readout inside Donut */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  pointerEvents: 'none',
+                  padding: '8px',
+                }}
+              >
+                <span style={{ fontSize: '10px', fontWeight: 800, color: selectedCategoryObj ? selectedCategoryObj.color : '#8E8EA8', textTransform: 'uppercase' }}>
+                  {selectedCategoryObj
+                    ? (language === 'العربية' ? selectedCategoryObj.nameAr : selectedCategoryObj.nameEn)
+                    : (language === 'العربية' ? 'الإجمالي' : 'Total')}
+                </span>
+                <span className="tabular-nums" style={{ fontSize: '17px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px' }}>
+                  {formatCurrency(selectedCategoryObj ? selectedCategoryObj.amount : currentData.totalSpent, language)}
+                </span>
+                <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)', marginTop: '2px' }}>
+                  {selectedCategoryObj ? `${selectedCategoryObj.percentage}%` : '100%'}
+                </span>
+              </div>
+            </div>
+
+            {/* Pie Legends Grid */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: '8px 12px',
+                width: '100%',
+                marginTop: '16px',
+                paddingTop: '16px',
+                borderTop: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+              }}
+            >
+              {categories.map((cat) => {
+                const isSelected = selectedCategory === cat.id;
+                return (
+                  <div
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(isSelected ? null : cat.id)}
+                    className="interactive-tap"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '6px 8px',
+                      borderRadius: '8px',
+                      backgroundColor: isSelected ? 'var(--color-surface-elevated, #182236)' : 'transparent',
+                      border: isSelected ? `1px solid ${cat.color}` : '1px solid transparent',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '7px', minWidth: 0, flex: 1 }}>
+                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: cat.color, flexShrink: 0 }} />
+                      <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {language === 'العربية' ? cat.nameAr : cat.nameEn}
+                      </span>
+                    </div>
+                    <span style={{ fontSize: '11px', fontWeight: 800, color: cat.color, marginInlineStart: '6px' }}>
+                      {cat.percentage}%
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* 2. TIMELINE BAR GRAPH */}
         <div
           style={{
             backgroundColor: 'var(--color-surface, #111726)',
@@ -518,295 +686,114 @@ export const SpendAnalysisScreen: React.FC = () => {
             padding: '20px',
           }}
         >
-          {/* Header & View Toggle */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              {chartView === 'bar' ? (
-                <BarChart3 size={16} color="var(--brand-green, #7FE87F)" />
-              ) : (
-                <PieChartIcon size={16} color="var(--brand-green, #7FE87F)" />
-              )}
+              <BarChart3 size={16} color="var(--brand-green, #7FE87F)" />
               <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
-                {chartView === 'bar'
-                  ? (language === 'العربية' ? 'المخطط الزمني' : 'Timeline Spending')
-                  : (language === 'العربية' ? 'توزيع الفئات' : 'Category Distribution')}
+                {language === 'العربية' ? 'المخطط الزمني للإنفاق' : 'Timeline Spending Trend'}
               </span>
             </div>
-
-            {/* Segmented View Switcher */}
-            <div
-              style={{
-                display: 'flex',
-                backgroundColor: 'var(--color-surface-elevated, #182236)',
-                border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-                borderRadius: '10px',
-                padding: '2px',
-                gap: '2px',
-              }}
-            >
-              <button
-                onClick={() => setChartView('bar')}
-                className="interactive-tap"
-                style={{
-                  border: 'none',
-                  padding: '4px 10px',
-                  borderRadius: '8px',
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  backgroundColor: chartView === 'bar' ? 'var(--brand-green, #7FE87F)' : 'transparent',
-                  color: chartView === 'bar' ? 'var(--brand-green-ink, #080C14)' : '#8E8EA8',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                }}
-              >
-                <BarChart3 size={12} />
-                <span>{language === 'العربية' ? 'أعمدة' : 'Bar'}</span>
-              </button>
-              <button
-                onClick={() => setChartView('pie')}
-                className="interactive-tap"
-                style={{
-                  border: 'none',
-                  padding: '4px 10px',
-                  borderRadius: '8px',
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  backgroundColor: chartView === 'pie' ? 'var(--brand-green, #7FE87F)' : 'transparent',
-                  color: chartView === 'pie' ? 'var(--brand-green-ink, #080C14)' : '#8E8EA8',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                }}
-              >
-                <PieChartIcon size={12} />
-                <span>{language === 'العربية' ? 'دائري' : 'Pie'}</span>
-              </button>
-            </div>
+            <span style={{ fontSize: '11px', color: '#8E8EA8', fontWeight: 600 }}>
+              {language === 'العربية' ? 'المبالغ بالريال' : 'SAR amounts'}
+            </span>
           </div>
 
-          {/* VIEW 1: TIMELINE BAR GRAPH */}
-          {chartView === 'bar' && (
-            <div className="fade-in">
-              {/* Tooltip */}
-              {hoveredBarIndex !== null && (
-                <div
-                  className="fade-in"
-                  style={{
-                    backgroundColor: 'var(--color-surface-elevated, #182236)',
-                    border: '1px solid var(--brand-green, #7FE87F)',
-                    borderRadius: '8px',
-                    padding: '5px 10px',
-                    marginBottom: '10px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
-                  <span style={{ fontSize: '11px', color: '#8E8EA8', fontWeight: 600 }}>
-                    {currentData.chartData[hoveredBarIndex]?.label}
-                  </span>
-                  <span className="tabular-nums" style={{ fontSize: '12.5px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)' }}>
-                    {formatCurrency(currentData.chartData[hoveredBarIndex]?.amount, language)}
-                  </span>
-                </div>
-              )}
-
-              {/* Bars Graphic */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'flex-end',
-                  justifyContent: 'space-between',
-                  height: '130px',
-                  gap: '8px',
-                  paddingBottom: '8px',
-                  borderBottom: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-                }}
-              >
-                {currentData.chartData.map((bar, i) => {
-                  const heightPercent = Math.max(16, Math.round((bar.amount / maxChartAmount) * 100));
-                  const isMax = bar.amount === maxChartAmount;
-                  const isHovered = hoveredBarIndex === i;
-
-                  return (
-                    <div
-                      key={i}
-                      onMouseEnter={() => setHoveredBarIndex(i)}
-                      onMouseLeave={() => setHoveredBarIndex(null)}
-                      onClick={() => setHoveredBarIndex(hoveredBarIndex === i ? null : i)}
-                      className="interactive-tap"
-                      style={{
-                        flex: 1,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        height: '100%',
-                        justifyContent: 'flex-end',
-                        gap: '6px',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      <span
-                        className="tabular-nums"
-                        style={{
-                          fontSize: '9.5px',
-                          fontWeight: 800,
-                          color: isHovered || isMax ? 'var(--brand-green, #7FE87F)' : '#6E6E85',
-                          whiteSpace: 'nowrap',
-                        }}
-                      >
-                        {Math.round(bar.amount)}
-                      </span>
-                      <div
-                        style={{
-                          width: '100%',
-                          maxWidth: '36px',
-                          height: `${heightPercent}%`,
-                          backgroundColor: isHovered || isMax ? 'var(--brand-green, #7FE87F)' : 'var(--color-surface-elevated, #182236)',
-                          borderRadius: '6px 6px 3px 3px',
-                          transition: 'all 0.25s ease',
-                        }}
-                      />
-                      <span
-                        style={{
-                          fontSize: '10.5px',
-                          fontWeight: isHovered || isMax ? 800 : 600,
-                          color: isHovered || isMax ? '#FFFFFF' : '#8E8EA8',
-                        }}
-                      >
-                        {bar.label}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
+          {/* Tooltip */}
+          {hoveredBarIndex !== null && (
+            <div
+              className="fade-in"
+              style={{
+                backgroundColor: 'var(--color-surface-elevated, #182236)',
+                border: '1px solid var(--brand-green, #7FE87F)',
+                borderRadius: '8px',
+                padding: '5px 10px',
+                marginBottom: '10px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <span style={{ fontSize: '11px', color: '#8E8EA8', fontWeight: 600 }}>
+                {currentData.chartData[hoveredBarIndex]?.label}
+              </span>
+              <span className="tabular-nums" style={{ fontSize: '12.5px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)' }}>
+                {formatCurrency(currentData.chartData[hoveredBarIndex]?.amount, language)}
+              </span>
             </div>
           )}
 
-          {/* VIEW 2: PIE / DONUT CHART */}
-          {chartView === 'pie' && (
-            <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <div style={{ position: 'relative', width: '200px', height: '200px' }}>
-                <svg viewBox="0 0 200 200" style={{ transform: 'rotate(-90deg)', width: '100%', height: '100%' }}>
-                  {/* Track */}
-                  <circle
-                    cx="100"
-                    cy="100"
-                    r={radius}
-                    fill="none"
-                    stroke="#182236"
-                    strokeWidth="22"
-                  />
+          {/* Bars Graphic */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              height: '125px',
+              gap: '8px',
+              paddingBottom: '8px',
+              borderBottom: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+            }}
+          >
+            {currentData.chartData.map((bar, i) => {
+              const heightPercent = Math.max(16, Math.round((bar.amount / maxChartAmount) * 100));
+              const isMax = bar.amount === maxChartAmount;
+              const isHovered = hoveredBarIndex === i;
 
-                  {/* Slices */}
-                  {categories.map((cat) => {
-                    const strokeLength = (cat.percentage / 100) * circumference;
-                    const strokeOffset = (cumulativePercent / 100) * circumference;
-                    cumulativePercent += cat.percentage;
-                    const isSelected = selectedCategory === cat.id;
-
-                    return (
-                      <circle
-                        key={cat.id}
-                        cx="100"
-                        cy="100"
-                        r={radius}
-                        fill="none"
-                        stroke={cat.color}
-                        strokeWidth={isSelected ? 28 : 22}
-                        strokeDasharray={`${strokeLength} ${circumference}`}
-                        strokeDashoffset={-strokeOffset}
-                        style={{
-                          cursor: 'pointer',
-                          transition: 'all 0.3s ease',
-                          opacity: selectedCategory === null || isSelected ? 1 : 0.3,
-                          filter: isSelected ? `drop-shadow(0 0 6px ${cat.color})` : 'none',
-                        }}
-                        onClick={() => setSelectedCategory(isSelected ? null : cat.id)}
-                      />
-                    );
-                  })}
-                </svg>
-
-                {/* Center Content */}
+              return (
                 <div
+                  key={i}
+                  onMouseEnter={() => setHoveredBarIndex(i)}
+                  onMouseLeave={() => setHoveredBarIndex(null)}
+                  onClick={() => setHoveredBarIndex(hoveredBarIndex === i ? null : i)}
+                  className="interactive-tap"
                   style={{
-                    position: 'absolute',
-                    inset: 0,
+                    flex: 1,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    textAlign: 'center',
-                    pointerEvents: 'none',
-                    padding: '8px',
+                    height: '100%',
+                    justifyContent: 'flex-end',
+                    gap: '6px',
+                    cursor: 'pointer',
                   }}
                 >
-                  <span style={{ fontSize: '10px', fontWeight: 800, color: selectedCategoryObj ? selectedCategoryObj.color : '#8E8EA8', textTransform: 'uppercase' }}>
-                    {selectedCategoryObj
-                      ? (language === 'العربية' ? selectedCategoryObj.nameAr : selectedCategoryObj.nameEn)
-                      : (language === 'العربية' ? 'الإجمالي' : 'Total')}
+                  <span
+                    className="tabular-nums"
+                    style={{
+                      fontSize: '9.5px',
+                      fontWeight: 800,
+                      color: isHovered || isMax ? 'var(--brand-green, #7FE87F)' : '#6E6E85',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {Math.round(bar.amount)}
                   </span>
-                  <span className="tabular-nums" style={{ fontSize: '16px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px' }}>
-                    {formatCurrency(selectedCategoryObj ? selectedCategoryObj.amount : currentData.totalSpent, language)}
-                  </span>
-                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)', marginTop: '2px' }}>
-                    {selectedCategoryObj ? `${selectedCategoryObj.percentage}%` : '100%'}
+                  <div
+                    style={{
+                      width: '100%',
+                      maxWidth: '36px',
+                      height: `${heightPercent}%`,
+                      backgroundColor: isHovered || isMax ? 'var(--brand-green, #7FE87F)' : 'var(--color-surface-elevated, #182236)',
+                      borderRadius: '6px 6px 3px 3px',
+                      transition: 'all 0.25s ease',
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontSize: '10.5px',
+                      fontWeight: isHovered || isMax ? 800 : 600,
+                      color: isHovered || isMax ? '#FFFFFF' : '#8E8EA8',
+                    }}
+                  >
+                    {bar.label}
                   </span>
                 </div>
-              </div>
-
-              {/* Pie Legends */}
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: '6px 12px',
-                  width: '100%',
-                  marginTop: '14px',
-                  paddingTop: '14px',
-                  borderTop: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-                }}
-              >
-                {categories.map((cat) => {
-                  const isSelected = selectedCategory === cat.id;
-                  return (
-                    <div
-                      key={cat.id}
-                      onClick={() => setSelectedCategory(isSelected ? null : cat.id)}
-                      className="interactive-tap"
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        padding: '5px 8px',
-                        borderRadius: '8px',
-                        backgroundColor: isSelected ? 'var(--color-surface-elevated, #182236)' : 'transparent',
-                        border: isSelected ? `1px solid ${cat.color}` : '1px solid transparent',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0, flex: 1 }}>
-                        <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: cat.color, flexShrink: 0 }} />
-                        <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                          {language === 'العربية' ? cat.nameAr : cat.nameEn}
-                        </span>
-                      </div>
-                      <span style={{ fontSize: '11px', fontWeight: 800, color: cat.color, marginInlineStart: '6px' }}>
-                        {cat.percentage}%
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
+              );
+            })}
+          </div>
         </div>
 
-        {/* ITEMIZED CATEGORY BREAKDOWN */}
+        {/* 3. ITEMIZED CATEGORY BREAKDOWN */}
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
             <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
@@ -910,7 +897,7 @@ export const SpendAnalysisScreen: React.FC = () => {
           </div>
         </div>
 
-        {/* TOP MERCHANTS (With Clean Lucide Icons) */}
+        {/* 4. TOP MERCHANTS (With Clean Lucide Icons & Green Accents) */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
             <Building2 size={15} color="var(--brand-green, #7FE87F)" />
@@ -975,7 +962,7 @@ export const SpendAnalysisScreen: React.FC = () => {
           </div>
         </div>
 
-        {/* SMART INSIGHT (Decluttered single banner) */}
+        {/* 5. SMART INSIGHT */}
         <div
           style={{
             backgroundColor: 'var(--color-surface, #111726)',
@@ -1003,12 +990,12 @@ export const SpendAnalysisScreen: React.FC = () => {
           </div>
           <div style={{ fontSize: '12px', color: '#B0B0C4', lineHeight: '1.45' }}>
             {language === 'العربية'
-              ? 'وفرت ١٢.٤٪ في مصاريف هذا الشهر مقارنة بالشهر السابق. أحسنت!'
+              ? 'وفرت ١٢.٤٪ في مصاريف هذا الشهر مقارنة بالشهر السابق. استمر في هذا الأداء الرائع!'
               : 'You spent 12.4% less this month compared to last month. Keep up the great pace!'}
           </div>
         </div>
 
-        {/* Manage Bank Accounts Navigation */}
+        {/* 6. MANAGE BANK ACCOUNTS LINK */}
         <div
           onClick={() => navigateTo('BANK_ACCOUNTS')}
           className="interactive-tap"

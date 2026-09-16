@@ -26,7 +26,7 @@ export const MoneyRequestsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '32px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#080c14', minHeight: '100vh', paddingBottom: '32px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Money Requests', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
@@ -34,9 +34,9 @@ export const MoneyRequestsScreen: React.FC = () => {
           <div
             style={{
               textAlign: 'center',
-              backgroundColor: '#151524',
+              backgroundColor: 'var(--color-surface, #111726)',
               borderRadius: '16px',
-              border: '1px solid #2C2C44',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               padding: '48px 24px',
             }}
           >
@@ -45,9 +45,8 @@ export const MoneyRequestsScreen: React.FC = () => {
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                color: '#7FE87F',
-                border: '1px solid rgba(127, 232, 127, 0.3)',
+                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                color: 'var(--brand-green, #00D09C)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -68,8 +67,8 @@ export const MoneyRequestsScreen: React.FC = () => {
             <div
               key={req.id}
               style={{
-                backgroundColor: '#151524',
-                border: '1px solid #2C2C44',
+                backgroundColor: 'var(--color-surface, #111726)',
+                border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                 borderRadius: '16px',
                 padding: '20px',
                 marginBottom: '16px',
@@ -89,14 +88,14 @@ export const MoneyRequestsScreen: React.FC = () => {
                       width: '46px',
                       height: '46px',
                       borderRadius: '14px',
-                      backgroundColor: '#1E1E32',
-                      color: '#7FE87F',
+                      backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                      color: 'var(--brand-green, #00D09C)',
                       fontWeight: 800,
                       fontSize: '15px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      border: '1px solid #2C2C44',
+                      border: 'none',
                       flexShrink: 0,
                     }}
                   >
@@ -110,7 +109,7 @@ export const MoneyRequestsScreen: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: '#7FE87F' }}>
+                <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: 'var(--brand-green, #00D09C)' }}>
                   {formatSaudiCurrency(req.amount, language)}
                 </div>
               </div>
@@ -118,8 +117,8 @@ export const MoneyRequestsScreen: React.FC = () => {
               {req.note && (
                 <div
                   style={{
-                    backgroundColor: '#1E1E32',
-                    border: '1px solid #2C2C44',
+                    backgroundColor: 'var(--color-surface-elevated, #182236)',
+                    border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                     borderRadius: '10px',
                     padding: '10px 14px',
                     fontSize: '12.5px',
@@ -137,8 +136,8 @@ export const MoneyRequestsScreen: React.FC = () => {
                   className="interactive-tap"
                   style={{
                     flex: 1,
-                    backgroundColor: '#1E1E32',
-                    border: '1px solid #2C2C44',
+                    backgroundColor: 'var(--color-surface-elevated, #182236)',
+                    border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                     color: '#A2A2BA',
                     borderRadius: '12px',
                     padding: '12px',

@@ -1,55 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  /* alph pay — Brand Theme Tokens */
-  --color-primary: #7FE87F;
-  --color-primary-hover: #5FBF5F;
-  --color-primary-active: #3F963F;
-  --color-primary-light: rgba(127, 232, 127, 0.12);
-  --color-primary-border: #7FE87F;
-  --color-primary-dark: #1F6D1F;
-  --color-text-on-primary: #000000;
+  /* Unified QTPay Brand Theme Tokens */
+  --brand-green: #00D09C;
+  --brand-green-hover: #00B88A;
+  --brand-green-active: #009E75;
+  --brand-green-tint: rgba(0, 208, 156, 0.12);
+  --brand-green-border: rgba(0, 208, 156, 0.35);
+  --brand-green-ink: #080C14;
 
-  --color-background: #0B0B14;
-  --color-surface: #151524;
-  --color-surface-elevated: #1E1E32;
-  --color-sub-surface: #1E1E32;
-  --color-overlay: rgba(5, 5, 10, 0.85);
+  --color-primary: var(--brand-green);
+  --color-primary-hover: var(--brand-green-hover);
+  --color-primary-active: var(--brand-green-active);
+  --color-primary-light: var(--brand-green-tint);
+  --color-primary-border: var(--brand-green);
+  --color-primary-dark: #00664B;
+  --color-text-on-primary: var(--brand-green-ink);
+
+  --color-background: #080C14;
+  --color-surface: #111726;
+  --color-surface-elevated: #182236;
+  --color-sub-surface: #182236;
+  --color-overlay: rgba(4, 7, 13, 0.85);
 
   --color-text-primary: #FFFFFF;
-  --color-text-secondary: #A2A2BA;
-  --color-text-muted: #6E6E85;
-  --color-text-disabled: #6E6E85;
+  --color-text-secondary: #9CA3AF;
+  --color-text-muted: #6B7280;
+  --color-text-disabled: #4B5563;
 
-  --color-border: #2C2C44;
-  --color-border-hairline: #2C2C44;
-  --color-border-strong: #4A4A68;
-  --color-border-focus: #7FE87F;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hairline: rgba(255, 255, 255, 0.04);
+  --color-border-strong: rgba(255, 255, 255, 0.12);
+  --color-border-focus: var(--brand-green);
 
-  --color-success: #7FE87F;
+  --color-success: var(--brand-green);
   --color-warning: #F59E0B;
   --color-danger: #FF4757;
 
   /* Aliases for backwards compatibility */
-  --primary: #7FE87F;
-  --primary-hover: #5FBF5F;
-  --accent: #7FE87F;
-  --blue-base: #7FE87F;
-  --blue-hover: #5FBF5F;
-  --blue-light: rgba(127, 232, 127, 0.12);
-  --blue-tint: #9FEE9F;
+  --primary: var(--brand-green);
+  --primary-hover: var(--brand-green-hover);
+  --accent: var(--brand-green);
+  --blue-base: var(--brand-green);
+  --blue-hover: var(--brand-green-hover);
+  --blue-light: var(--brand-green-tint);
+  --blue-tint: #4EEDB9;
 
-  --bg-page: #0B0B14;
-  --bg-card: #151524;
-  --bg-secondary: #1E1E32;
-  --card-bg: #151524;
-  --card-border: #2C2C44;
-  --border-color: #2C2C44;
-  --border-strong: #4A4A68;
+  --bg-page: #080C14;
+  --bg-card: #111726;
+  --bg-secondary: #182236;
+  --card-bg: #111726;
+  --card-border: rgba(255, 255, 255, 0.06);
+  --border-color: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.12);
 
   --text-primary: #FFFFFF;
-  --text-secondary: #A2A2BA;
-  --text-muted: #6E6E85;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
   --text-white: #FFFFFF;
   --text-dark: #FFFFFF;
 
@@ -516,10 +523,11 @@ button:disabled {
 .main-card {
   width: 100%;
   max-width: 440px;
-  background: #111726;
-  border-radius: 28px;
-  padding: 28px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  background: var(--color-surface);
+  border-radius: 24px;
+  padding: 24px 20px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -527,19 +535,19 @@ button:disabled {
 }
 
 .section-title {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: #f3f4f6;
-  margin-bottom: 16px;
-  letter-spacing: -0.2px;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
 }
 
 .bank-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-  max-height: 290px;
+  gap: 10px;
+  margin-bottom: 20px;
+  max-height: 270px;
   overflow-y: auto;
   padding-right: 2px;
 }
@@ -553,10 +561,10 @@ button:disabled {
 }
 
 .bank-item {
-  background: #182236;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
   border-radius: 16px;
-  padding: 14px 16px;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -566,45 +574,43 @@ button:disabled {
 }
 
 .bank-item:hover {
-  background: #1e2942;
-  border-color: rgba(52, 211, 153, 0.3);
+  background: #1c273c;
+  border-color: var(--brand-green-border);
 }
 
 .bank-item.selected {
-  background: rgba(52, 211, 153, 0.06);
-  border-color: #34d399;
-  box-shadow: 0 0 20px rgba(52, 211, 153, 0.1);
+  background: var(--brand-green-tint);
+  border-color: var(--brand-green);
 }
 
 .bank-info {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .bank-icon {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--brand-green-tint);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #34d399;
+  color: var(--brand-green);
   font-size: 18px;
   flex-shrink: 0;
 }
 
 .bank-name {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   color: #ffffff;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .bank-meta {
-  font-size: 12px;
+  font-size: 11px;
   color: #9ca3af;
 }
 
@@ -622,9 +628,8 @@ button:disabled {
 }
 
 .bank-item.selected .radio-dot {
-  border-color: #34d399;
-  background: #34d399;
-  box-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
+  border-color: var(--brand-green);
+  background: var(--brand-green);
 }
 
 .radio-dot::after {
@@ -643,7 +648,7 @@ button:disabled {
 
 /* Account Match Method Section */
 .match-section {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .match-tabs {
@@ -653,16 +658,16 @@ button:disabled {
 }
 
 .match-tab {
-  background: #182236;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
   border-radius: 14px;
-  padding: 12px;
+  padding: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12.5px;
+  font-weight: 600;
   color: #9ca3af;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -671,39 +676,37 @@ button:disabled {
 
 .match-tab:hover {
   color: #ffffff;
-  background: #1e2942;
+  background: #1c273c;
 }
 
 .match-tab.active {
-  background: rgba(52, 211, 153, 0.08);
-  border-color: #34d399;
-  color: #34d399;
-  font-weight: 600;
+  background: var(--brand-green-tint);
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+  font-weight: 700;
 }
 
 /* Main Action Button */
 .action-btn {
   width: 100%;
-  background: #34d399;
-  color: #0b0f19;
+  background: var(--brand-green);
+  color: var(--brand-green-ink);
   border: none;
   border-radius: 16px;
-  padding: 16px;
-  font-size: 15px;
-  font-weight: 600;
+  padding: 15px;
+  font-size: 14.5px;
+  font-weight: 800;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 20px rgba(52, 211, 153, 0.3);
 }
 
 .action-btn:hover {
-  background: #2ebb84;
+  background: var(--brand-green-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(52, 211, 153, 0.4);
 }
 
 .action-btn:active {
@@ -717,28 +720,28 @@ button:disabled {
 }
 
 .otp-desc {
-  font-size: 13px;
+  font-size: 12.5px;
   color: #9ca3af;
-  margin-bottom: 24px;
-  line-height: 1.5;
+  margin-bottom: 20px;
+  line-height: 1.4;
 }
 
 .otp-inputs {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-bottom: 22px;
   direction: ltr;
 }
 
 .otp-box {
-  width: 50px;
-  height: 56px;
-  background: #182236;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 48px;
+  height: 52px;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
   border-radius: 14px;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: #ffffff;
   text-align: center;
   outline: none;
@@ -746,18 +749,17 @@ button:disabled {
 }
 
 .otp-box:focus {
-  border-color: #34d399;
-  box-shadow: 0 0 12px rgba(52, 211, 153, 0.3);
-  background: #1e2942;
+  border-color: var(--brand-green);
+  background: #1c273c;
 }
 
 .back-link {
   background: none;
   border: none;
   color: #9ca3af;
-  font-size: 13px;
+  font-size: 12.5px;
   cursor: pointer;
-  margin-top: 16px;
+  margin-top: 14px;
   transition: color 0.2s;
 }
 

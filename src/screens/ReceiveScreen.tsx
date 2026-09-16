@@ -88,7 +88,7 @@ export const ReceiveScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '30px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#080c14', minHeight: '100%', paddingBottom: '30px' }}>
       <AppHeader title={t('receive.title', 'Receive Money')} showBack />
 
       {/* Floating Success Toast when Money is Received */}
@@ -103,8 +103,8 @@ export const ReceiveScreen: React.FC = () => {
             zIndex: 100,
             width: '90%',
             maxWidth: '500px',
-            backgroundColor: '#151524',
-            border: '1.5px solid #7FE87F',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--brand-green, #00D09C)',
             color: '#FFFFFF',
             borderRadius: '12px',
             padding: '14px 18px',
@@ -120,18 +120,17 @@ export const ReceiveScreen: React.FC = () => {
                 width: '36px',
                 height: '36px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                color: '#7FE87F',
-                border: '1px solid #7FE87F',
+                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                color: 'var(--brand-green, #00D09C)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <ArrowDownLeft size={20} color="#7FE87F" />
+              <ArrowDownLeft size={20} color="var(--brand-green, #00D09C)" />
             </div>
             <div>
-              <div style={{ fontSize: '14px', fontWeight: 800, color: '#7FE87F' }}>
+              <div className="tabular-nums" style={{ fontSize: '14px', fontWeight: 800, color: 'var(--brand-green, #00D09C)' }}>
                 +{formatCurrency(receivedToast.amount, language)} {language === 'العربية' ? 'تم الاستلام' : 'Received'}
               </div>
               <div style={{ fontSize: '12px', color: '#A2A2BA' }}>
@@ -142,8 +141,8 @@ export const ReceiveScreen: React.FC = () => {
           <button
             onClick={() => navigateTo('HISTORY')}
             style={{
-              backgroundColor: '#1E1E32',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface-elevated, #182236)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               color: '#FFFFFF',
               borderRadius: '6px',
               padding: '6px 12px',
@@ -161,8 +160,8 @@ export const ReceiveScreen: React.FC = () => {
         {/* Dark QR Showcase Card */}
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
             borderRadius: '20px',
             padding: '24px 20px',
             marginBottom: '16px',
@@ -178,15 +177,15 @@ export const ReceiveScreen: React.FC = () => {
               width: '60px',
               height: '60px',
               borderRadius: '50%',
-              backgroundColor: '#1E1E32',
-              color: '#7FE87F',
+              backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+              color: 'var(--brand-green, #00D09C)',
               fontWeight: 800,
               fontSize: '20px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: '10px',
-              border: '2px solid #7FE87F',
+              border: 'none',
               overflow: 'hidden',
             }}
           >
@@ -209,20 +208,20 @@ export const ReceiveScreen: React.FC = () => {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              backgroundColor: '#1E1E32',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface-elevated, #182236)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               borderRadius: '20px',
               padding: '5px 12px',
               marginTop: '6px',
               marginBottom: '14px',
-              color: '#7FE87F',
+              color: 'var(--brand-green, #00D09C)',
               fontSize: '12.5px',
               fontWeight: 700,
               cursor: 'pointer',
             }}
           >
             <span>{user.upiId}</span>
-            {copied ? <CheckCircle2 size={14} color="#7FE87F" /> : <Copy size={13} />}
+            {copied ? <CheckCircle2 size={14} color="var(--brand-green, #00D09C)" /> : <Copy size={13} />}
           </button>
 
           {/* Machine-Readable QR Code */}
@@ -232,13 +231,14 @@ export const ReceiveScreen: React.FC = () => {
 
           {numAmount > 0 ? (
             <div
+              className="tabular-nums"
               style={{
                 fontSize: '15px',
                 fontWeight: 800,
-                color: '#7FE87F',
+                color: 'var(--brand-green, #00D09C)',
                 marginTop: '12px',
-                backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                border: '1px solid #7FE87F',
+                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
                 padding: '4px 14px',
                 borderRadius: '12px',
               }}
@@ -252,10 +252,10 @@ export const ReceiveScreen: React.FC = () => {
                 color: '#A2A2BA',
                 marginTop: '12px',
                 fontWeight: 700,
-                backgroundColor: '#1E1E32',
+                backgroundColor: 'var(--color-surface-elevated, #182236)',
                 padding: '4px 12px',
                 borderRadius: '12px',
-                border: '1px solid #2C2C44',
+                border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               }}
             >
               {language === 'العربية'
@@ -269,7 +269,7 @@ export const ReceiveScreen: React.FC = () => {
             style={{
               marginTop: '16px',
               paddingTop: '14px',
-              borderTop: '1px solid #2C2C44',
+              borderTop: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               width: '100%',
               display: 'flex',
               flexDirection: 'column',
@@ -289,8 +289,8 @@ export const ReceiveScreen: React.FC = () => {
         {/* Set Specific Amount Box */}
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
             borderRadius: '16px',
             padding: '14px 16px',
             marginBottom: '16px',
@@ -307,13 +307,13 @@ export const ReceiveScreen: React.FC = () => {
                 flex: 1,
                 display: 'flex',
                 alignItems: 'center',
-                backgroundColor: '#1E1E32',
-                border: '1px solid #2C2C44',
+                backgroundColor: 'var(--color-surface-elevated, #182236)',
+                border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                 borderRadius: '8px',
                 padding: '0 12px',
               }}
             >
-              <span style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F', marginInlineEnd: '6px' }}>
+              <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--brand-green, #00D09C)', marginInlineEnd: '6px' }}>
                 {language === 'العربية' ? 'ر.س' : 'SAR'}
               </span>
               <input
@@ -331,6 +331,7 @@ export const ReceiveScreen: React.FC = () => {
                   fontWeight: 700,
                   color: '#FFFFFF',
                   textAlign: isRtl ? 'right' : 'left',
+                  fontVariantNumeric: 'tabular-nums',
                 }}
               />
               {customAmount && (
@@ -349,13 +350,14 @@ export const ReceiveScreen: React.FC = () => {
               <button
                 key={amt}
                 onClick={() => setCustomAmount(String(amt))}
+                className="interactive-tap"
                 style={{
                   flex: 1,
                   padding: '6px 0',
                   borderRadius: '6px',
-                  border: customAmount === String(amt) ? '1px solid #7FE87F' : '1px solid #2C2C44',
-                  backgroundColor: customAmount === String(amt) ? 'rgba(127, 232, 127, 0.15)' : '#1E1E32',
-                  color: customAmount === String(amt) ? '#7FE87F' : '#FFFFFF',
+                  border: customAmount === String(amt) ? '1px solid var(--brand-green, #00D09C)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+                  backgroundColor: customAmount === String(amt) ? 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))' : 'var(--color-surface-elevated, #182236)',
+                  color: customAmount === String(amt) ? 'var(--brand-green, #00D09C)' : '#FFFFFF',
                   fontSize: '12px',
                   fontWeight: 700,
                   cursor: 'pointer',
@@ -375,8 +377,8 @@ export const ReceiveScreen: React.FC = () => {
             style={{
               width: '100%',
               minHeight: '52px',
-              backgroundColor: '#7FE87F',
-              color: '#0B0B14',
+              backgroundColor: 'var(--brand-green, #00D09C)',
+              color: 'var(--brand-green-ink, #080C14)',
               border: 'none',
               borderRadius: '14px',
               padding: '0 20px',
@@ -387,11 +389,11 @@ export const ReceiveScreen: React.FC = () => {
               justifyContent: 'center',
               gap: '8px',
               cursor: 'pointer',
-              boxShadow: '0 4px 14px rgba(127, 232, 127, 0.25)',
+              boxShadow: 'none',
               boxSizing: 'border-box',
             }}
           >
-            <Sparkles size={18} color="#0B0B14" />{' '}
+            <Sparkles size={18} color="var(--brand-green-ink, #080C14)" />{' '}
             {language === 'العربية'
               ? `استلام دفعة تجريبية (${formatCurrency(numAmount > 0 ? numAmount : 500, language)})`
               : `Receive Demo Payment (${formatCurrency(numAmount > 0 ? numAmount : 500)})`}

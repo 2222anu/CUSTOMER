@@ -8,7 +8,7 @@ export const NotificationsScreen: React.FC = () => {
   const { notifications, language, t } = useApp();
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '36px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#080c14', minHeight: '100%', paddingBottom: '36px' }}>
       <AppHeader title={t('notifications')} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
@@ -16,8 +16,8 @@ export const NotificationsScreen: React.FC = () => {
           <div
             style={{
               textAlign: 'center',
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               borderRadius: '16px',
               padding: '48px 20px',
               color: '#A2A2BA',
@@ -29,9 +29,8 @@ export const NotificationsScreen: React.FC = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '14px',
-                backgroundColor: '#1E1E32',
-                color: '#7FE87F',
-                border: '1px solid #2C2C44',
+                backgroundColor: 'var(--color-surface-elevated, #182236)',
+                color: 'var(--brand-green, #00D09C)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -56,8 +55,8 @@ export const NotificationsScreen: React.FC = () => {
                   alignItems: 'flex-start',
                   gap: '14px',
                   padding: '16px 18px',
-                  backgroundColor: '#151524',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--color-surface, #111726)',
+                  border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                   borderRadius: '16px',
                   boxShadow: 'none',
                 }}
@@ -67,13 +66,12 @@ export const NotificationsScreen: React.FC = () => {
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    backgroundColor: '#1E1E32',
-                    color: '#7FE87F',
+                    backgroundColor: notif.type === 'success' ? 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))' : 'var(--color-surface-elevated, #182236)',
+                    color: notif.type === 'success' ? 'var(--brand-green, #00D09C)' : '#A2A2BA',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    border: '1px solid #2C2C44',
                   }}
                 >
                   {notif.type === 'success' ? (

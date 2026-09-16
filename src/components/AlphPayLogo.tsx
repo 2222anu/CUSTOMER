@@ -14,8 +14,8 @@ export const AlphPayLogo: React.FC<AlphPayLogoProps> = ({
   className,
 }) => {
   const isDark = themeMode === 'dark';
-  const primaryGreen = '#7FE87F';
-  const textColor = isDark ? '#FFFFFF' : '#0B0B14';
+  const primaryGreen = 'var(--brand-green, #00D09C)';
+  const textColor = isDark ? '#FFFFFF' : '#080C14';
 
   if (variant === 'icon') {
     const iconDim = size || 36;

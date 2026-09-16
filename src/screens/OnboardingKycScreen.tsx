@@ -67,11 +67,11 @@ export const OnboardingKycScreen: React.FC = () => {
           style={{
             width: '100%',
             maxWidth: '440px',
-            backgroundColor: '#111726',
+            backgroundColor: 'var(--color-surface)',
             borderRadius: '24px',
             padding: '24px 20px',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
+            border: '1px solid var(--color-border)',
+            boxShadow: 'none',
             boxSizing: 'border-box',
           }}
         >
@@ -82,15 +82,15 @@ export const OnboardingKycScreen: React.FC = () => {
                 width: '44px',
                 height: '44px',
                 borderRadius: '14px',
-                backgroundColor: 'rgba(52, 211, 153, 0.12)',
-                border: '1px solid rgba(52, 211, 153, 0.3)',
+                backgroundColor: 'var(--brand-green-tint)',
+                border: 'none',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexShrink: 0,
               }}
             >
-              <ShieldCheck size={24} color="#34d399" />
+              <ShieldCheck size={24} color="var(--brand-green)" />
             </div>
             <div>
               <h3 style={{ fontSize: '17px', fontWeight: 800, margin: 0, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
@@ -125,14 +125,14 @@ export const OnboardingKycScreen: React.FC = () => {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    backgroundColor: '#182236',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    backgroundColor: 'var(--color-surface-elevated)',
+                    border: '1px solid var(--color-border)',
                     borderRadius: '14px',
                     padding: '13px 16px',
                     gap: '12px',
                   }}
                 >
-                  <UserCheck size={18} color="#34d399" style={{ flexShrink: 0 }} />
+                  <UserCheck size={18} color="var(--brand-green)" style={{ flexShrink: 0 }} />
                   <input
                     id="onboarding-national-id"
                     type="text"
@@ -179,14 +179,14 @@ export const OnboardingKycScreen: React.FC = () => {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    backgroundColor: '#182236',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    backgroundColor: 'var(--color-surface-elevated)',
+                    border: '1px solid var(--color-border)',
                     borderRadius: '14px',
                     padding: '13px 16px',
                     gap: '12px',
                   }}
                 >
-                  <Calendar size={18} color="#34d399" style={{ flexShrink: 0 }} />
+                  <Calendar size={18} color="var(--brand-green)" style={{ flexShrink: 0 }} />
                   <input
                     id="onboarding-dob"
                     type="date"
@@ -222,8 +222,8 @@ export const OnboardingKycScreen: React.FC = () => {
                   marginTop: '6px',
                   width: '100%',
                   padding: '15px',
-                  backgroundColor: nationalId.length >= 10 ? '#34d399' : '#1f293d',
-                  color: nationalId.length >= 10 ? '#0b0f19' : '#6b7280',
+                  backgroundColor: nationalId.length >= 10 ? 'var(--brand-green)' : '#1f293d',
+                  color: nationalId.length >= 10 ? 'var(--brand-green-ink)' : '#6b7280',
                   border: 'none',
                   borderRadius: '16px',
                   fontSize: '14.5px',
@@ -233,7 +233,7 @@ export const OnboardingKycScreen: React.FC = () => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   gap: '8px',
-                  boxShadow: nationalId.length >= 10 ? '0 10px 25px -5px rgba(52, 211, 153, 0.3)' : 'none',
+                  boxShadow: 'none',
                   transition: 'all 0.2s ease',
                 }}
               >
@@ -251,15 +251,15 @@ export const OnboardingKycScreen: React.FC = () => {
                   width: '64px',
                   height: '64px',
                   borderRadius: '50%',
-                  backgroundColor: 'rgba(52, 211, 153, 0.12)',
-                  border: '1.5px solid #34d399',
+                  backgroundColor: 'var(--brand-green-tint)',
+                  border: '1.5px solid var(--brand-green)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   margin: '0 auto 16px auto',
                 }}
               >
-                <Loader2 size={32} color="#34d399" className="animate-spin" />
+                <Loader2 size={32} color="var(--brand-green)" className="animate-spin" />
               </div>
               <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>
                 {language === 'العربية' ? 'جاري التحقق من الهوية الرقمية...' : 'Verifying Digital Identity...'}
@@ -278,15 +278,15 @@ export const OnboardingKycScreen: React.FC = () => {
                   width: '64px',
                   height: '64px',
                   borderRadius: '50%',
-                  backgroundColor: 'rgba(52, 211, 153, 0.15)',
-                  border: '1.5px solid #34d399',
+                  backgroundColor: 'var(--brand-green-tint)',
+                  border: '1.5px solid var(--brand-green)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   margin: '0 auto 16px auto',
                 }}
               >
-                <CheckCircle2 size={36} color="#34d399" />
+                <CheckCircle2 size={36} color="var(--brand-green)" />
               </div>
 
               <h4 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 16px 0' }}>
@@ -295,9 +295,9 @@ export const OnboardingKycScreen: React.FC = () => {
 
               <div
                 style={{
-                  backgroundColor: '#182236',
+                  backgroundColor: 'var(--color-surface-elevated)',
                   borderRadius: '16px',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  border: '1px solid var(--color-border)',
                   padding: '16px',
                   marginBottom: '20px',
                   textAlign: isRtl ? 'right' : 'left',
@@ -311,13 +311,13 @@ export const OnboardingKycScreen: React.FC = () => {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                   <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'حالة التوثيق' : 'Status'}</span>
-                  <span style={{ fontSize: '12.5px', fontWeight: 800, color: '#34d399' }}>
+                  <span style={{ fontSize: '12.5px', fontWeight: 800, color: 'var(--brand-green)' }}>
                     {language === 'العربية' ? 'موثق' : 'Verified'}
                   </span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'الحد اليومي' : 'Daily Limit'}</span>
-                  <span style={{ fontSize: '12.5px', fontWeight: 800, color: '#34d399' }}>SAR 50,000</span>
+                  <span style={{ fontSize: '12.5px', fontWeight: 800, color: 'var(--brand-green)' }}>SAR 50,000</span>
                 </div>
               </div>
 
@@ -328,8 +328,8 @@ export const OnboardingKycScreen: React.FC = () => {
                 style={{
                   width: '100%',
                   padding: '15px',
-                  backgroundColor: '#34d399',
-                  color: '#080c14',
+                  backgroundColor: 'var(--brand-green)',
+                  color: 'var(--brand-green-ink)',
                   border: 'none',
                   borderRadius: '16px',
                   fontSize: '14.5px',
@@ -339,7 +339,7 @@ export const OnboardingKycScreen: React.FC = () => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   gap: '8px',
-                  boxShadow: '0 10px 25px -5px rgba(52, 211, 153, 0.3)',
+                  boxShadow: 'none',
                 }}
               >
                 <span>{language === 'العربية' ? 'متابعة لربط الحساب البنكي' : 'Continue to Link Bank'}</span>

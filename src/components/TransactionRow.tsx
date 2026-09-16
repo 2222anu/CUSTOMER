@@ -38,12 +38,12 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '14px 16px',
-        backgroundColor: '#111726',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
+        backgroundColor: 'var(--color-surface, #111726)',
+        border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
         borderRadius: '16px',
         marginBottom: '10px',
         cursor: onClick ? 'pointer' : 'default',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+        boxShadow: 'none',
         transition: 'all 0.15s ease',
       }}
     >
@@ -53,9 +53,9 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
             width: '42px',
             height: '42px',
             borderRadius: '12px',
-            backgroundColor: isReceived ? 'rgba(52, 211, 153, 0.12)' : '#182236',
-            border: `1px solid ${isReceived ? 'rgba(52, 211, 153, 0.3)' : 'rgba(255, 255, 255, 0.08)'}`,
-            color: isReceived ? '#34d399' : '#FFFFFF',
+            backgroundColor: isReceived ? 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))' : 'var(--color-surface-elevated, #182236)',
+            border: 'none',
+            color: isReceived ? 'var(--brand-green, #00D09C)' : '#FFFFFF',
             fontWeight: 800,
             fontSize: '13px',
             display: 'flex',
@@ -84,7 +84,7 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
           style={{
             fontWeight: 900,
             fontSize: '15px',
-            color: isReceived ? '#34d399' : '#FFFFFF',
+            color: isReceived ? 'var(--brand-green, #00D09C)' : '#FFFFFF',
           }}
         >
           {isReceived ? '+' : '-'}{formatCurrency(transaction.amount, language)}

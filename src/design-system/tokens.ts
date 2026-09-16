@@ -1,38 +1,38 @@
 /**
- * alph pay — Official Mobile App Design System Tokens
- * Primary: Vibrant Lime Green (#7FE87F)
- * UI Base: Deep Navy Charcoal (#1A1A2E) & Dark Card Surfaces (#2A2A3E)
- * Secondary: Pure Black (#000000) & Pure White (#FFFFFF)
+ * QTPay — Official Mobile App Design System Tokens
+ * Primary: Unified Brand Green (#00D09C)
+ * UI Base: Deep Dark Surfaces (#111726 & #182236)
+ * Secondary: Pure Black (#080C14) & Pure White (#FFFFFF)
  * Typography: Inter / SF Pro / Google Sans Flex Scale
- * Border Radius: 8px (Buttons/Inputs), 12px (Cards), 16px (Modals), 24px (Hero)
- * Contrast: High contrast WCAG AA compliant (black text on green CTAs, white text on dark cards)
+ * Border Radius: 8px (Buttons/Inputs), 14px (Cards), 20px (Modals), 24px (Hero)
+ * Contrast: High contrast WCAG AA compliant (dark text on green CTAs, white text on dark cards)
  */
 
 export const colors = {
-  // 1. Primary Color — Vibrant Lime Green & Tiers
-  primary: '#7FE87F',
-  primaryHover: '#5FBF5F',
-  primaryActive: '#3F963F',
-  primaryLight: 'rgba(127, 232, 127, 0.12)',
-  primaryLightHover: 'rgba(127, 232, 127, 0.2)',
-  primaryBorder: '#7FE87F',
-  primaryDark: '#1F6D1F',
-  textOnPrimary: '#000000', // Black text on Lime Green for maximum readability
+  // 1. Primary Color — Unified Brand Green & Tiers
+  primary: '#00D09C',
+  primaryHover: '#00B88A',
+  primaryActive: '#009E75',
+  primaryLight: 'rgba(0, 208, 156, 0.12)',
+  primaryLightHover: 'rgba(0, 208, 156, 0.2)',
+  primaryBorder: 'rgba(0, 208, 156, 0.35)',
+  primaryDark: '#006E52',
+  textOnPrimary: '#080C14', // Dark ink text on Brand Green for maximum readability
 
   // 2. Secondary Color — Pure Black & Grays
-  secondary: '#000000',
-  secondaryHover: '#2A2A2A',
+  secondary: '#080C14',
+  secondaryHover: '#111726',
   gray25: '#333333',
   gray50: '#666666',
   gray75: '#999999',
   gray90: '#CCCCCC',
 
-  // 3. Accent Dark — Ultra Deep Pitch Navy Charcoal UI Surfaces
-  darkBg: '#0B0B14',
-  darkSurface: '#151524',
-  darkSurfaceElevated: '#1E1E32',
-  darkBorder: '#2C2C44',
-  darkDisabled: '#2C2C44',
+  // 3. Accent Dark — Dark Navy Charcoal UI Surfaces
+  darkBg: '#080C14',
+  darkSurface: '#111726',
+  darkSurfaceElevated: '#182236',
+  darkBorder: 'rgba(255, 255, 255, 0.06)',
+  darkDisabled: 'rgba(255, 255, 255, 0.08)',
   darkPlaceholder: '#9E9EB2',
 
   // 4. Neutral — Pure White & Light Surfaces
@@ -41,14 +41,14 @@ export const colors = {
   lightSurfaceElevated: '#FFFFFF',
   lightBorder: '#E6E6E6',
 
-  // Active App Surfaces (alph pay Signature Pitch Dark Experience)
-  surface: '#151524',
-  surfaceElevated: '#1E1E32',
-  background: '#0B0B14',
-  subSurface: '#1E1E32',
-  surfaceHover: '#222238',
-  inputFill: '#0F0F1D',
-  overlay: 'rgba(5, 5, 10, 0.85)',
+  // Active App Surfaces (QTPay Signature Dark Experience)
+  surface: '#111726',
+  surfaceElevated: '#182236',
+  background: '#080C14',
+  subSurface: '#182236',
+  surfaceHover: '#1E293B',
+  inputFill: '#111726',
+  overlay: 'rgba(0, 0, 0, 0.75)',
 
   // Typography Tiers
   textPrimary: '#FFFFFF',
@@ -57,14 +57,14 @@ export const colors = {
   textDisabled: '#6E6E85',
 
   // Borders & Dividers
-  borderHairline: '#2C2C44',
-  borderStrong: '#4A4A68',
-  borderFocus: '#7FE87F',
+  borderHairline: 'rgba(255, 255, 255, 0.06)',
+  borderStrong: 'rgba(255, 255, 255, 0.12)',
+  borderFocus: '#00D09C',
 
   // Semantic & Feedback Colors
-  success: '#7FE87F',
-  successLight: 'rgba(127, 232, 127, 0.12)',
-  successText: '#7FE87F',
+  success: '#00D09C',
+  successLight: 'rgba(0, 208, 156, 0.12)',
+  successText: '#00D09C',
 
   warning: '#F59E0B',
   warningLight: 'rgba(245, 158, 11, 0.12)',
@@ -74,9 +74,9 @@ export const colors = {
   dangerLight: 'rgba(255, 71, 87, 0.12)',
   dangerText: '#FF6B7A',
 
-  info: '#7FE87F',
-  infoLight: 'rgba(127, 232, 127, 0.12)',
-  infoText: '#000000',
+  info: '#00D09C',
+  infoLight: 'rgba(0, 208, 156, 0.12)',
+  infoText: '#080C14',
 } as const;
 
 export const typography = {

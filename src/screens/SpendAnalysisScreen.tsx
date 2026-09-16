@@ -184,9 +184,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       amount: selectedPeriod === 'WEEK' ? 380 : selectedPeriod === 'YEAR' ? 11700 : 1250,
       percentage: 9,
       txnCount: selectedPeriod === 'WEEK' ? 2 : 8,
-      color: '#7FE87F',
-      bgColor: 'rgba(127, 232, 127, 0.15)',
-      icon: <Send size={18} color="#7FE87F" />,
+      color: 'var(--brand-green, #00D09C)',
+      bgColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+      icon: <Send size={18} color="var(--brand-green, #00D09C)" />,
       merchants: ['Sarie Instant Transfer', 'Apple Services', 'Netflix SA'],
     },
     {
@@ -276,8 +276,7 @@ export const SpendAnalysisScreen: React.FC = () => {
     <div
       className="fade-in"
       style={{
-        backgroundColor: '#070D0A',
-        backgroundImage: 'radial-gradient(circle at 50% 10%, rgba(52, 211, 153, 0.08) 0%, rgba(7, 13, 10, 0.98) 60%)',
+        backgroundColor: '#080c14',
         minHeight: '100vh',
         paddingBottom: '100px',
         color: '#FFFFFF',
@@ -302,8 +301,8 @@ export const SpendAnalysisScreen: React.FC = () => {
             maxWidth: '560px',
             margin: '0 auto',
             zIndex: 100,
-            backgroundColor: '#111726',
-            border: '1px solid #7FE87F',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--brand-green, #00D09C)',
             borderRadius: '16px',
             padding: '12px 18px',
             display: 'flex',
@@ -312,7 +311,7 @@ export const SpendAnalysisScreen: React.FC = () => {
             boxShadow: '0 12px 30px rgba(0,0,0,0.6)',
           }}
         >
-          <CheckCircle2 size={18} color="#7FE87F" />
+          <CheckCircle2 size={18} color="var(--brand-green, #00D09C)" />
           <span style={{ fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}>{exportToast}</span>
         </div>
       )}
@@ -322,8 +321,8 @@ export const SpendAnalysisScreen: React.FC = () => {
         <div
           style={{
             display: 'flex',
-            backgroundColor: '#111726',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
             borderRadius: '16px',
             padding: '4px',
             gap: '4px',
@@ -351,8 +350,8 @@ export const SpendAnalysisScreen: React.FC = () => {
                   padding: '9px 4px',
                   borderRadius: '12px',
                   border: 'none',
-                  backgroundColor: isActive ? '#7FE87F' : 'transparent',
-                  color: isActive ? '#0B0B14' : '#A2A2BA',
+                  backgroundColor: isActive ? 'var(--brand-green, #00D09C)' : 'transparent',
+                  color: isActive ? 'var(--brand-green-ink, #080C14)' : '#A2A2BA',
                   fontSize: '12px',
                   fontWeight: isActive ? 800 : 600,
                   cursor: 'pointer',
@@ -369,30 +368,14 @@ export const SpendAnalysisScreen: React.FC = () => {
         {/* HERO TOTAL SPEND & METRICS */}
         <div
           style={{
-            backgroundColor: '#111726',
-            borderRadius: '24px',
-            border: '1px solid #2C2C44',
-            padding: '24px',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04)',
+            backgroundColor: 'var(--color-surface, #111726)',
+            borderRadius: '20px',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+            padding: '22px',
             position: 'relative',
             overflow: 'hidden',
           }}
         >
-          {/* Ambient Glow */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '-40px',
-              right: '-40px',
-              width: '150px',
-              height: '150px',
-              borderRadius: '50%',
-              backgroundColor: 'rgba(127, 232, 127, 0.1)',
-              filter: 'blur(35px)',
-              pointerEvents: 'none',
-            }}
-          />
-
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
             <div>
               <span
@@ -421,9 +404,9 @@ export const SpendAnalysisScreen: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
-                backgroundColor: '#182236',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                color: '#7FE87F',
+                backgroundColor: 'var(--color-surface-elevated, #182236)',
+                border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+                color: 'var(--brand-green, #00D09C)',
                 borderRadius: '12px',
                 padding: '8px 12px',
                 fontSize: '11.5px',
@@ -438,7 +421,7 @@ export const SpendAnalysisScreen: React.FC = () => {
 
           {/* Amount Display */}
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginTop: '6px' }}>
-            <span style={{ fontSize: '34px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em' }}>
+            <span className="tabular-nums" style={{ fontSize: '32px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em' }}>
               {formatCurrency(currentData.totalSpent, language)}
             </span>
           </div>
@@ -452,11 +435,11 @@ export const SpendAnalysisScreen: React.FC = () => {
                 gap: '5px',
                 padding: '5px 12px',
                 borderRadius: '20px',
-                backgroundColor: 'rgba(127, 232, 127, 0.12)',
-                border: '1px solid rgba(127, 232, 127, 0.35)',
+                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
                 fontSize: '11.5px',
                 fontWeight: 800,
-                color: '#7FE87F',
+                color: 'var(--brand-green, #00D09C)',
               }}
             >
               <TrendingDown size={14} />
@@ -472,15 +455,15 @@ export const SpendAnalysisScreen: React.FC = () => {
                 gap: '6px',
                 padding: '5px 12px',
                 borderRadius: '20px',
-                backgroundColor: '#182236',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                backgroundColor: 'var(--color-surface-elevated, #182236)',
+                border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                 fontSize: '11.5px',
                 fontWeight: 700,
                 color: '#A2A2BA',
               }}
             >
               <span>{language === 'العربية' ? 'المعدل اليومي:' : 'Daily Avg:'}</span>
-              <span style={{ color: '#FFFFFF', fontWeight: 800 }}>
+              <span className="tabular-nums" style={{ color: '#FFFFFF', fontWeight: 800 }}>
                 {formatCurrency(currentData.dailyAverage, language)}
               </span>
             </div>
@@ -490,7 +473,7 @@ export const SpendAnalysisScreen: React.FC = () => {
         {/* CHART VIEW SWITCHER TABS */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <BarChart3 size={18} color="#7FE87F" />
+            <BarChart3 size={18} color="var(--brand-green, #00D09C)" />
             <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
               {language === 'العربية' ? 'الرسوم البيانية والتحليلات' : 'Visual Spend Analytics'}
             </h3>
@@ -499,8 +482,8 @@ export const SpendAnalysisScreen: React.FC = () => {
           <div
             style={{
               display: 'flex',
-              backgroundColor: '#111726',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               borderRadius: '12px',
               padding: '3px',
               gap: '3px',
@@ -515,8 +498,8 @@ export const SpendAnalysisScreen: React.FC = () => {
                 borderRadius: '8px',
                 fontSize: '11px',
                 fontWeight: 800,
-                backgroundColor: activeChartTab === 'both' ? '#7FE87F' : 'transparent',
-                color: activeChartTab === 'both' ? '#0B0B14' : '#A2A2BA',
+                backgroundColor: activeChartTab === 'both' ? 'var(--brand-green, #00D09C)' : 'transparent',
+                color: activeChartTab === 'both' ? 'var(--brand-green-ink, #080C14)' : '#A2A2BA',
                 cursor: 'pointer',
               }}
             >
@@ -531,8 +514,8 @@ export const SpendAnalysisScreen: React.FC = () => {
                 borderRadius: '8px',
                 fontSize: '11px',
                 fontWeight: 800,
-                backgroundColor: activeChartTab === 'bar' ? '#7FE87F' : 'transparent',
-                color: activeChartTab === 'bar' ? '#0B0B14' : '#A2A2BA',
+                backgroundColor: activeChartTab === 'bar' ? 'var(--brand-green, #00D09C)' : 'transparent',
+                color: activeChartTab === 'bar' ? 'var(--brand-green-ink, #080C14)' : '#A2A2BA',
                 cursor: 'pointer',
               }}
             >
@@ -547,8 +530,8 @@ export const SpendAnalysisScreen: React.FC = () => {
                 borderRadius: '8px',
                 fontSize: '11px',
                 fontWeight: 800,
-                backgroundColor: activeChartTab === 'pie' ? '#7FE87F' : 'transparent',
-                color: activeChartTab === 'pie' ? '#0B0B14' : '#A2A2BA',
+                backgroundColor: activeChartTab === 'pie' ? 'var(--brand-green, #00D09C)' : 'transparent',
+                color: activeChartTab === 'pie' ? 'var(--brand-green-ink, #080C14)' : '#A2A2BA',
                 cursor: 'pointer',
               }}
             >
@@ -562,21 +545,20 @@ export const SpendAnalysisScreen: React.FC = () => {
           <div
             className="fade-in"
             style={{
-              backgroundColor: '#111726',
-              borderRadius: '24px',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface, #111726)',
+              borderRadius: '20px',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               padding: '22px 20px',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04)',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <PieChartIcon size={16} color="#7FE87F" />
+                <PieChartIcon size={16} color="var(--brand-green, #00D09C)" />
                 <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
                   {language === 'العربية' ? 'التوزيع الدائري للمصروفات' : 'Category Distribution (Pie Chart)'}
                 </span>
               </div>
-              <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
+              <span style={{ fontSize: '11px', color: 'var(--brand-green, #00D09C)', fontWeight: 700 }}>
                 {selectedCategory
                   ? (language === 'العربية' ? 'انقر لإلغاء التحديد' : 'Tap to reset')
                   : (language === 'العربية' ? 'انقر للتفاصيل' : 'Tap slice for details')}
@@ -646,10 +628,10 @@ export const SpendAnalysisScreen: React.FC = () => {
                       ? (language === 'العربية' ? selectedCategoryObj.nameAr : selectedCategoryObj.nameEn)
                       : (language === 'العربية' ? 'الإجمالي' : 'Total')}
                   </span>
-                  <span style={{ fontSize: '18px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px' }}>
+                  <span className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px' }}>
                     {formatCurrency(selectedCategoryObj ? selectedCategoryObj.amount : currentData.totalSpent, language)}
                   </span>
-                  <span style={{ fontSize: '11px', fontWeight: 800, color: '#7FE87F', marginTop: '2px' }}>
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--brand-green, #00D09C)', marginTop: '2px' }}>
                     {selectedCategoryObj ? `${selectedCategoryObj.percentage}%` : '100%'}
                   </span>
                 </div>
@@ -664,7 +646,7 @@ export const SpendAnalysisScreen: React.FC = () => {
                   width: '100%',
                   marginTop: '18px',
                   paddingTop: '16px',
-                  borderTop: '1px solid #182236',
+                  borderTop: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                 }}
               >
                 {categories.map((cat) => {
@@ -680,7 +662,7 @@ export const SpendAnalysisScreen: React.FC = () => {
                         justifyContent: 'space-between',
                         padding: '6px 8px',
                         borderRadius: '10px',
-                        backgroundColor: isSelected ? '#182236' : 'transparent',
+                        backgroundColor: isSelected ? 'var(--color-surface-elevated, #182236)' : 'transparent',
                         border: isSelected ? `1px solid ${cat.color}` : '1px solid transparent',
                         cursor: 'pointer',
                         transition: 'all 0.2s ease',
@@ -708,16 +690,15 @@ export const SpendAnalysisScreen: React.FC = () => {
           <div
             className="fade-in"
             style={{
-              backgroundColor: '#111726',
-              borderRadius: '24px',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface, #111726)',
+              borderRadius: '20px',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               padding: '22px 20px',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04)',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <BarChart3 size={16} color="#7FE87F" />
+                <BarChart3 size={16} color="var(--brand-green, #00D09C)" />
                 <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
                   {language === 'العربية' ? 'المخطط الزمني للأعمدة (Bar Graph)' : 'Timeline Spending (Bar Graph)'}
                 </span>
@@ -732,8 +713,8 @@ export const SpendAnalysisScreen: React.FC = () => {
               <div
                 className="fade-in"
                 style={{
-                  backgroundColor: '#182236',
-                  border: '1px solid #7FE87F',
+                  backgroundColor: 'var(--color-surface-elevated, #182236)',
+                  border: '1px solid var(--brand-green, #00D09C)',
                   borderRadius: '10px',
                   padding: '6px 12px',
                   marginBottom: '10px',
@@ -745,7 +726,7 @@ export const SpendAnalysisScreen: React.FC = () => {
                 <span style={{ fontSize: '11.5px', color: '#A2A2BA', fontWeight: 600 }}>
                   {currentData.chartData[hoveredBarIndex]?.label}
                 </span>
-                <span style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F' }}>
+                <span className="tabular-nums" style={{ fontSize: '13px', fontWeight: 800, color: 'var(--brand-green, #00D09C)' }}>
                   {formatCurrency(currentData.chartData[hoveredBarIndex]?.amount, language)}
                 </span>
               </div>
@@ -760,7 +741,7 @@ export const SpendAnalysisScreen: React.FC = () => {
                 height: '140px',
                 gap: '8px',
                 paddingBottom: '8px',
-                borderBottom: '1px solid #182236',
+                borderBottom: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               }}
             >
               {currentData.chartData.map((bar, i) => {
@@ -787,10 +768,11 @@ export const SpendAnalysisScreen: React.FC = () => {
                     }}
                   >
                     <span
+                      className="tabular-nums"
                       style={{
                         fontSize: '9.5px',
                         fontWeight: 800,
-                        color: isHovered || isMax ? '#7FE87F' : '#6E6E85',
+                        color: isHovered || isMax ? 'var(--brand-green, #00D09C)' : '#6E6E85',
                         whiteSpace: 'nowrap',
                       }}
                     >
@@ -801,11 +783,9 @@ export const SpendAnalysisScreen: React.FC = () => {
                         width: '100%',
                         maxWidth: '38px',
                         height: `${heightPercent}%`,
-                        backgroundColor: isHovered ? '#34d399' : isMax ? '#7FE87F' : '#182236',
-                        border: isHovered || isMax ? '1px solid #7FE87F' : '1px solid rgba(255, 255, 255, 0.08)',
+                        backgroundColor: isHovered || isMax ? 'var(--brand-green, #00D09C)' : 'var(--color-surface-elevated, #182236)',
                         borderRadius: '8px 8px 4px 4px',
                         transition: 'all 0.3s ease',
-                        boxShadow: isHovered || isMax ? '0 0 16px rgba(127, 232, 127, 0.35)' : 'none',
                       }}
                     />
                     <span
@@ -827,11 +807,10 @@ export const SpendAnalysisScreen: React.FC = () => {
         {/* BUDGET TRACKER CARD */}
         <div
           style={{
-            backgroundColor: '#111726',
-            borderRadius: '24px',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface, #111726)',
+            borderRadius: '20px',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
             padding: '20px 22px',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04)',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
@@ -841,14 +820,13 @@ export const SpendAnalysisScreen: React.FC = () => {
                   width: '36px',
                   height: '36px',
                   borderRadius: '10px',
-                  backgroundColor: 'rgba(127, 232, 127, 0.12)',
-                  border: '1px solid rgba(127, 232, 127, 0.3)',
+                  backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
-                <Sparkles size={18} color="#7FE87F" />
+                <Sparkles size={18} color="var(--brand-green, #00D09C)" />
               </div>
               <div>
                 <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
@@ -864,11 +842,10 @@ export const SpendAnalysisScreen: React.FC = () => {
               style={{
                 fontSize: '11.5px',
                 fontWeight: 800,
-                color: budgetProgress <= 90 ? '#7FE87F' : '#FF4757',
+                color: budgetProgress <= 90 ? 'var(--brand-green, #00D09C)' : '#FF4757',
                 padding: '4px 10px',
                 borderRadius: '8px',
-                backgroundColor: budgetProgress <= 90 ? 'rgba(127, 232, 127, 0.12)' : 'rgba(239, 68, 68, 0.12)',
-                border: budgetProgress <= 90 ? '1px solid rgba(127, 232, 127, 0.3)' : '1px solid rgba(239, 68, 68, 0.3)',
+                backgroundColor: budgetProgress <= 90 ? 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))' : 'rgba(239, 68, 68, 0.12)',
               }}
             >
               {budgetProgress}% {language === 'العربية' ? 'مستخدم' : 'Used'}
@@ -880,7 +857,7 @@ export const SpendAnalysisScreen: React.FC = () => {
             style={{
               width: '100%',
               height: '8px',
-              backgroundColor: '#182236',
+              backgroundColor: 'var(--color-surface-elevated, #182236)',
               borderRadius: '6px',
               overflow: 'hidden',
               marginTop: '10px',
@@ -890,7 +867,7 @@ export const SpendAnalysisScreen: React.FC = () => {
               style={{
                 width: `${budgetProgress}%`,
                 height: '100%',
-                backgroundColor: budgetProgress <= 90 ? '#7FE87F' : '#FF4757',
+                backgroundColor: budgetProgress <= 90 ? 'var(--brand-green, #00D09C)' : '#FF4757',
                 borderRadius: '6px',
                 transition: 'width 0.5s ease',
               }}
@@ -899,7 +876,7 @@ export const SpendAnalysisScreen: React.FC = () => {
 
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#6E6E85', marginTop: '6px' }}>
             <span>0 SAR</span>
-            <span>{formatCurrency(currentData.budgetLimit, language)}</span>
+            <span className="tabular-nums">{formatCurrency(currentData.budgetLimit, language)}</span>
           </div>
         </div>
 
@@ -907,7 +884,7 @@ export const SpendAnalysisScreen: React.FC = () => {
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <ShoppingBag size={16} color="#7FE87F" />
+              <ShoppingBag size={16} color="var(--brand-green, #00D09C)" />
               <span style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
                 {language === 'العربية' ? 'تفاصيل الفئات والإنفاق' : 'Category Details'}
               </span>
@@ -919,7 +896,7 @@ export const SpendAnalysisScreen: React.FC = () => {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: '#7FE87F',
+                  color: 'var(--brand-green, #00D09C)',
                   fontSize: '11.5px',
                   fontWeight: 800,
                   cursor: 'pointer',
@@ -932,12 +909,11 @@ export const SpendAnalysisScreen: React.FC = () => {
 
           <div
             style={{
-              backgroundColor: '#111726',
-              borderRadius: '24px',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface, #111726)',
+              borderRadius: '20px',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               overflow: 'hidden',
               padding: '8px',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04)',
             }}
           >
             {filteredCategories.map((cat, index) => {
@@ -953,9 +929,9 @@ export const SpendAnalysisScreen: React.FC = () => {
                     justifyContent: 'space-between',
                     padding: '14px',
                     borderRadius: '16px',
-                    backgroundColor: isSelected ? '#182236' : 'transparent',
+                    backgroundColor: isSelected ? 'var(--color-surface-elevated, #182236)' : 'transparent',
                     border: isSelected ? `1px solid ${cat.color}` : '1px solid transparent',
-                    borderBottom: !isSelected && index < filteredCategories.length - 1 ? '1px solid #182236' : 'none',
+                    borderBottom: !isSelected && index < filteredCategories.length - 1 ? '1px solid var(--color-border, rgba(255, 255, 255, 0.06))' : 'none',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
                   }}
@@ -1001,7 +977,7 @@ export const SpendAnalysisScreen: React.FC = () => {
                   </div>
 
                   <div style={{ textAlign: isRtl ? 'left' : 'right', marginInlineStart: '12px' }}>
-                    <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
+                    <div className="tabular-nums" style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
                       {formatCurrency(cat.amount, language)}
                     </div>
                   </div>
@@ -1014,7 +990,7 @@ export const SpendAnalysisScreen: React.FC = () => {
         {/* TOP MERCHANTS */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <Building2 size={16} color="#7FE87F" />
+            <Building2 size={16} color="var(--brand-green, #00D09C)" />
             <span style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
               {language === 'العربية' ? 'أعلى الجهات والمتاجر إنفاقاً' : 'Top Saudi Merchants'}
             </span>
@@ -1022,12 +998,11 @@ export const SpendAnalysisScreen: React.FC = () => {
 
           <div
             style={{
-              backgroundColor: '#111726',
-              borderRadius: '24px',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface, #111726)',
+              borderRadius: '20px',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               overflow: 'hidden',
               padding: '8px',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04)',
             }}
           >
             {topMerchants.map((merchant, index) => (
@@ -1038,7 +1013,7 @@ export const SpendAnalysisScreen: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '12px 14px',
-                  borderBottom: index < topMerchants.length - 1 ? '1px solid #182236' : 'none',
+                  borderBottom: index < topMerchants.length - 1 ? '1px solid var(--color-border, rgba(255, 255, 255, 0.06))' : 'none',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
@@ -1047,8 +1022,7 @@ export const SpendAnalysisScreen: React.FC = () => {
                       width: '38px',
                       height: '38px',
                       borderRadius: '12px',
-                      backgroundColor: '#182236',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      backgroundColor: 'var(--color-surface-elevated, #182236)',
                       fontSize: '18px',
                       display: 'flex',
                       alignItems: 'center',
@@ -1070,7 +1044,7 @@ export const SpendAnalysisScreen: React.FC = () => {
                 </div>
 
                 <div style={{ textAlign: isRtl ? 'left' : 'right', marginInlineStart: '12px' }}>
-                  <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
+                  <div className="tabular-nums" style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
                     {formatCurrency(merchant.amount, language)}
                   </div>
                 </div>
@@ -1082,18 +1056,17 @@ export const SpendAnalysisScreen: React.FC = () => {
         {/* SMART FINANCIAL INSIGHTS */}
         <div
           style={{
-            backgroundColor: '#111726',
-            borderRadius: '24px',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface, #111726)',
+            borderRadius: '20px',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
             padding: '20px',
             display: 'flex',
             flexDirection: 'column',
             gap: '12px',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Sparkles size={18} color="#7FE87F" />
+            <Sparkles size={18} color="var(--brand-green, #00D09C)" />
             <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
               {language === 'العربية' ? 'رؤى ونصائح مالية ذكية' : 'Smart Spend Insights'}
             </span>
@@ -1102,9 +1075,8 @@ export const SpendAnalysisScreen: React.FC = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <div
               style={{
-                backgroundColor: '#182236',
+                backgroundColor: 'var(--color-surface-elevated, #182236)',
                 borderRadius: '14px',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
                 padding: '12px 14px',
                 display: 'flex',
                 alignItems: 'flex-start',
@@ -1121,9 +1093,8 @@ export const SpendAnalysisScreen: React.FC = () => {
 
             <div
               style={{
-                backgroundColor: '#182236',
+                backgroundColor: 'var(--color-surface-elevated, #182236)',
                 borderRadius: '14px',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
                 padding: '12px 14px',
                 display: 'flex',
                 alignItems: 'flex-start',
@@ -1145,15 +1116,14 @@ export const SpendAnalysisScreen: React.FC = () => {
           onClick={() => navigateTo('BANK_ACCOUNTS')}
           className="interactive-tap"
           style={{
-            backgroundColor: '#111726',
+            backgroundColor: 'var(--color-surface, #111726)',
             borderRadius: '20px',
-            border: '1px solid #2C2C44',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
             padding: '16px 20px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             cursor: 'pointer',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -1162,14 +1132,13 @@ export const SpendAnalysisScreen: React.FC = () => {
                 width: '40px',
                 height: '40px',
                 borderRadius: '12px',
-                backgroundColor: 'rgba(127, 232, 127, 0.12)',
-                border: '1px solid rgba(127, 232, 127, 0.3)',
+                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <Building2 size={20} color="#7FE87F" />
+              <Building2 size={20} color="var(--brand-green, #00D09C)" />
             </div>
             <div>
               <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>

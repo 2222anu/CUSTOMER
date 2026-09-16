@@ -8,20 +8,19 @@ export const SecurityScreen: React.FC = () => {
   const { deviceSessions, terminateSession, language } = useApp();
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '36px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0F19', minHeight: '100vh', paddingBottom: '36px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Security & Devices', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Biometrics / Security Status HUD Card */}
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1.5px solid rgba(127, 232, 127, 0.35)',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
             borderRadius: '16px',
             padding: '20px',
             marginBottom: '24px',
             color: '#FFFFFF',
-            boxShadow: 'none',
             position: 'relative',
             overflow: 'hidden',
           }}
@@ -32,9 +31,8 @@ export const SecurityScreen: React.FC = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '14px',
-                backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                color: '#7FE87F',
-                border: '1px solid rgba(127, 232, 127, 0.3)',
+                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                color: 'var(--brand-green, #00D09C)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -49,7 +47,7 @@ export const SecurityScreen: React.FC = () => {
                   {translateText('256-Bit Protection Active', language)}
                 </span>
               </div>
-              <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px' }}>
+              <div style={{ fontSize: '12px', color: '#8E9BAE', marginTop: '2px' }}>
                 {translateText('Hardware biometrics verified', language)}
               </div>
             </div>
@@ -60,7 +58,7 @@ export const SecurityScreen: React.FC = () => {
           style={{
             fontSize: '11px',
             fontWeight: 800,
-            color: '#6E6E85',
+            color: '#8E9BAE',
             textTransform: 'uppercase',
             letterSpacing: '0.06em',
             marginBottom: '12px',
@@ -72,23 +70,22 @@ export const SecurityScreen: React.FC = () => {
 
         <div
           style={{
-            backgroundColor: '#151524',
+            backgroundColor: 'var(--color-surface, #111726)',
             borderRadius: '16px',
-            border: '1px solid #2C2C44',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
             overflow: 'hidden',
-            boxShadow: 'none',
           }}
         >
           {deviceSessions.map((session, index) => (
             <React.Fragment key={session.id}>
-              {index > 0 && <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />}
+              {index > 0 && <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />}
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '16px 18px',
-                  backgroundColor: session.isCurrent ? '#1E1E32' : '#151524',
+                  backgroundColor: session.isCurrent ? 'rgba(0, 208, 156, 0.04)' : 'transparent',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
@@ -97,9 +94,8 @@ export const SecurityScreen: React.FC = () => {
                       width: '42px',
                       height: '42px',
                       borderRadius: '12px',
-                      backgroundColor: '#151524',
-                      color: session.isCurrent ? '#7FE87F' : '#A2A2BA',
-                      border: '1px solid #2C2C44',
+                      backgroundColor: 'var(--color-surface-elevated, #182236)',
+                      color: session.isCurrent ? 'var(--brand-green, #00D09C)' : '#8E9BAE',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -112,7 +108,7 @@ export const SecurityScreen: React.FC = () => {
                     <div style={{ fontWeight: 800, fontSize: '14px', color: '#FFFFFF' }}>
                       {session.deviceName}
                     </div>
-                    <div style={{ fontSize: '11.5px', color: '#A2A2BA', marginTop: '2px' }}>
+                    <div style={{ fontSize: '11.5px', color: '#8E9BAE', marginTop: '2px' }}>
                       {session.location} • {translateText(session.lastActive, language)}
                     </div>
                   </div>
@@ -123,8 +119,8 @@ export const SecurityScreen: React.FC = () => {
                     style={{
                       fontSize: '10.5px',
                       fontWeight: 800,
-                      color: '#0B0B14',
-                      backgroundColor: '#7FE87F',
+                      color: 'var(--brand-green-ink, #080C14)',
+                      backgroundColor: 'var(--brand-green, #00D09C)',
                       padding: '4px 10px',
                       borderRadius: '12px',
                       textTransform: 'uppercase',
@@ -138,9 +134,9 @@ export const SecurityScreen: React.FC = () => {
                     onClick={() => terminateSession(session.id)}
                     className="interactive-tap"
                     style={{
-                      backgroundColor: '#1E1E32',
-                      border: '1px solid #2C2C44',
-                      color: '#A2A2BA',
+                      backgroundColor: 'var(--color-surface-elevated, #182236)',
+                      border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
+                      color: '#8E9BAE',
                       padding: '6px 12px',
                       borderRadius: '10px',
                       fontSize: '11.5px',
@@ -149,7 +145,6 @@ export const SecurityScreen: React.FC = () => {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '4px',
-                      boxShadow: 'none',
                     }}
                   >
                     <LogOut size={12} /> {translateText('End', language)}
@@ -162,8 +157,8 @@ export const SecurityScreen: React.FC = () => {
 
         {/* Security Footnote */}
         <div style={{ marginTop: '24px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-          <Lock size={13} color="#6E6E85" />
-          <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 600 }}>
+          <Lock size={13} color="#6B7A90" />
+          <span style={{ fontSize: '11px', color: '#6B7A90', fontWeight: 600 }}>
             {translateText('Automated session security enabled', language)}
           </span>
         </div>

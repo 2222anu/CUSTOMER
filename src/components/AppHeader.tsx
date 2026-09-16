@@ -68,8 +68,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             aria-label={t('btn.back', 'Go back')}
             className="interactive-tap"
             style={{
-              backgroundColor: '#151524',
-              border: `1px solid ${designSystem.colors.borderHairline}`,
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               color: '#FFFFFF',
               width: '38px',
               height: '38px',
@@ -95,8 +95,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               width: '38px',
               height: '38px',
               borderRadius: '50%',
-              backgroundColor: '#7FE87F',
-              color: '#000000',
+              backgroundColor: 'var(--brand-green, #00D09C)',
+              color: 'var(--brand-green-ink, #080C14)',
               fontWeight: '800',
               fontSize: '13.5px',
               display: 'flex',
@@ -105,8 +105,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               cursor: 'pointer',
               boxShadow: 'none',
               overflow: 'hidden',
-              border: '2px solid #0B0B14',
-              outline: '1.5px solid #7FE87F',
+              border: '2px solid #080C14',
               transition: 'transform 0.15s ease',
               flexShrink: 0,
             }}
@@ -165,8 +164,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             aria-label="Search"
             className="interactive-tap"
             style={{
-              backgroundColor: '#151524',
-              border: `1px solid ${designSystem.colors.borderHairline}`,
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               color: '#FFFFFF',
               width: '38px',
               height: '38px',
@@ -191,8 +190,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             aria-label="Settings"
             className="interactive-tap"
             style={{
-              backgroundColor: '#151524',
-              border: `1px solid ${designSystem.colors.borderHairline}`,
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               color: '#FFFFFF',
               width: '38px',
               height: '38px',

@@ -38,13 +38,12 @@ export const LanguageModal: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '16px 18px',
-                backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.14)' : '#151524',
-                border: isSelected ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
+                backgroundColor: isSelected ? 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))' : 'var(--color-surface, #111726)',
+                border: isSelected ? '1.5px solid var(--brand-green, #00D09C)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
                 borderRadius: '16px',
                 marginBottom: '10px',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
-                boxShadow: 'none',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -53,8 +52,8 @@ export const LanguageModal: React.FC = () => {
                     width: '40px',
                     height: '40px',
                     borderRadius: '12px',
-                    backgroundColor: isSelected ? '#7FE87F' : '#1E1E32',
-                    color: isSelected ? '#000000' : '#7FE87F',
+                    backgroundColor: isSelected ? 'var(--brand-green, #00D09C)' : 'var(--color-surface-elevated, #182236)',
+                    color: isSelected ? 'var(--brand-green-ink, #080C14)' : 'var(--brand-green, #00D09C)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -73,22 +72,21 @@ export const LanguageModal: React.FC = () => {
                       style={{
                         fontSize: '10.5px',
                         fontWeight: 800,
-                        backgroundColor: 'rgba(127, 232, 127, 0.12)',
-                        color: '#7FE87F',
+                        backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                        color: 'var(--brand-green, #00D09C)',
                         padding: '2px 7px',
                         borderRadius: '6px',
-                        border: '1px solid rgba(127, 232, 127, 0.25)',
                       }}
                     >
                       {lang.badge}
                     </span>
                   </div>
-                  <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '3px' }}>
+                  <div style={{ fontSize: '12px', color: '#8E9BAE', marginTop: '3px' }}>
                     {lang.native}
                   </div>
                 </div>
               </div>
-              {isSelected && <Check size={20} color="#7FE87F" />}
+              {isSelected && <Check size={20} color="var(--brand-green, #00D09C)" />}
             </div>
           );
         })}

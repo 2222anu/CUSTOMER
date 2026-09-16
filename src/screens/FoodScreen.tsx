@@ -128,15 +128,15 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0F19', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Food & Dining', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Dining Offer Banner */}
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1.5px solid rgba(127, 232, 127, 0.35)',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
             borderRadius: '20px',
             padding: '20px',
             marginBottom: '20px',
@@ -148,29 +148,28 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
         >
           <div
             style={{
-              width: '50px',
-              height: '50px',
-              borderRadius: '16px',
-              backgroundColor: 'rgba(127, 232, 127, 0.15)',
-              color: '#7FE87F',
+              width: '48px',
+              height: '48px',
+              borderRadius: '14px',
+              backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+              color: 'var(--brand-green, #00D09C)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
-              border: '1.5px solid rgba(127, 232, 127, 0.3)',
             }}
           >
-            <Utensils size={24} />
+            <Utensils size={22} />
           </div>
           <div>
-            <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>{translateText('QTPay Food & Dining', language)}</h3>
-            <p style={{ fontSize: '12px', color: '#A2A2BA', margin: '3px 0 0 0' }}>
+            <h3 style={{ fontSize: '15px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>{translateText('QTPay Food & Dining', language)}</h3>
+            <p style={{ fontSize: '12px', color: '#8E9BAE', margin: '3px 0 0 0' }}>
               {translateText('Order food online with instant discounts & 0 delivery fee', language)}
             </p>
           </div>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginInlineStart: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#8E9BAE', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginInlineStart: '4px' }}>
           {translateText('Nearby Partner Restaurants', language)}
         </div>
 
@@ -182,8 +181,8 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
               className="interactive-tap"
               style={{
                 padding: '16px',
-                backgroundColor: '#151524',
-                border: '1px solid #2C2C44',
+                backgroundColor: 'var(--color-surface, #111726)',
+                border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
                 borderRadius: '16px',
                 cursor: 'pointer',
               }}
@@ -194,25 +193,24 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
                   style={{
                     fontSize: '12px',
                     fontWeight: 800,
-                    backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                    color: '#7FE87F',
+                    backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                    color: 'var(--brand-green, #00D09C)',
                     padding: '3px 8px',
                     borderRadius: '8px',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px',
-                    border: '1px solid rgba(127, 232, 127, 0.3)',
                   }}
                 >
-                  <Star size={12} fill="#7FE87F" /> {res.rating}
+                  <Star size={12} fill="var(--brand-green, #00D09C)" /> {res.rating}
                 </span>
               </div>
-              <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '4px' }}>{res.cuisine}</div>
+              <div style={{ fontSize: '12px', color: '#8E9BAE', marginTop: '4px' }}>{res.cuisine}</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px' }}>
-                <span style={{ fontSize: '11px', fontWeight: 700, color: '#000000', backgroundColor: '#7FE87F', padding: '3px 8px', borderRadius: '6px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #00D09C)', padding: '3px 8px', borderRadius: '6px' }}>
                   {res.offer}
                 </span>
-                <span style={{ fontSize: '11px', color: '#A2A2BA', display: 'flex', alignItems: 'center', gap: '4px', marginInlineStart: 'auto' }}>
+                <span style={{ fontSize: '11px', color: '#8E9BAE', display: 'flex', alignItems: 'center', gap: '4px', marginInlineStart: 'auto' }}>
                   <Clock size={12} /> {res.deliveryTime}
                 </span>
               </div>
@@ -227,7 +225,7 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 15, 26, 0.75)',
+            backgroundColor: 'rgba(11, 15, 25, 0.75)',
             backdropFilter: 'blur(8px)',
             zIndex: 1000,
             display: 'flex',
@@ -240,8 +238,8 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
             style={{
               width: '100%',
               maxWidth: '440px',
-              backgroundColor: '#2A2A3E',
-              borderTop: '1px solid #4D4D6B',
+              backgroundColor: 'var(--color-surface, #111726)',
+              borderTop: '1px solid var(--color-border, rgba(255, 255, 255, 0.12))',
               borderTopLeftRadius: '20px',
               borderTopRightRadius: '20px',
               padding: '24px 20px',
@@ -254,7 +252,7 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div>
                 <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>{selectedRes.name}</h3>
-                <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '2px 0 0 0' }}>{translateText('Select items to order', language)}</p>
+                <p style={{ fontSize: '12px', color: '#8E9BAE', margin: '2px 0 0 0' }}>{translateText('Select items to order', language)}</p>
               </div>
               <button
                 onClick={() => setSelectedRes(null)}
@@ -263,13 +261,13 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
                   width: '32px',
                   height: '32px',
                   borderRadius: '50%',
-                  backgroundColor: '#3A3A52',
+                  backgroundColor: 'var(--color-surface-elevated, #182236)',
                   border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  color: '#B3B3C2',
+                  color: '#8E9BAE',
                 }}
               >
                 <X size={18} />
@@ -285,14 +283,13 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     padding: '12px 14px',
-                    backgroundColor: '#1A1A2E',
-                    border: '1px solid #4D4D6B',
+                    backgroundColor: 'var(--color-surface-elevated, #182236)',
                     borderRadius: '14px',
                   }}
                 >
                   <div>
                     <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{item.name}</div>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#7FE87F', marginTop: '2px', fontVariantNumeric: 'tabular-nums' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--brand-green, #00D09C)', marginTop: '2px', fontVariantNumeric: 'tabular-nums' }}>
                       {formatSaudiCurrency(item.price, language)}
                     </div>
                   </div>
@@ -305,8 +302,8 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
                         width: '28px',
                         height: '28px',
                         borderRadius: '8px',
-                        backgroundColor: '#3A3A52',
-                        border: '1px solid #4D4D6B',
+                        backgroundColor: 'var(--color-surface, #111726)',
+                        border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -326,9 +323,9 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
                         width: '28px',
                         height: '28px',
                         borderRadius: '8px',
-                        backgroundColor: '#7FE87F',
+                        backgroundColor: 'var(--brand-green, #00D09C)',
                         border: 'none',
-                        color: '#000000',
+                        color: 'var(--brand-green-ink, #080C14)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -342,9 +339,9 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
               ))}
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', paddingTop: '12px', borderTop: '1px dashed #4D4D6B' }}>
-              <span style={{ fontSize: '13px', fontWeight: 700, color: '#B3B3C2' }}>{translateText('Total Bill Amount', language)}</span>
-              <span style={{ fontSize: '20px', fontWeight: 900, color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', paddingTop: '12px', borderTop: '1px dashed var(--color-border, rgba(255, 255, 255, 0.12))' }}>
+              <span style={{ fontSize: '13px', fontWeight: 700, color: '#8E9BAE' }}>{translateText('Total Bill Amount', language)}</span>
+              <span style={{ fontSize: '20px', fontWeight: 900, color: 'var(--brand-green, #00D09C)', fontVariantNumeric: 'tabular-nums' }}>
                 {formatSaudiCurrency(calculateSubtotal(), language)}
               </span>
             </div>
@@ -357,9 +354,9 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
                 width: '100%',
                 padding: '14px',
                 borderRadius: '12px',
-                backgroundColor: calculateSubtotal() > 0 ? '#7FE87F' : '#3A3A52',
+                backgroundColor: calculateSubtotal() > 0 ? 'var(--brand-green, #00D09C)' : 'var(--color-surface-elevated, #182236)',
                 border: 'none',
-                color: calculateSubtotal() > 0 ? '#000000' : '#808099',
+                color: calculateSubtotal() > 0 ? 'var(--brand-green-ink, #080C14)' : '#6B7A90',
                 fontSize: '14px',
                 fontWeight: 800,
                 cursor: calculateSubtotal() > 0 ? 'pointer' : 'not-allowed',
@@ -379,7 +376,7 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 15, 26, 0.75)',
+            backgroundColor: 'rgba(11, 15, 25, 0.75)',
             backdropFilter: 'blur(8px)',
             zIndex: 1000,
             display: 'flex',
@@ -393,8 +390,8 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
             style={{
               width: '100%',
               maxWidth: '360px',
-              backgroundColor: '#2A2A3E',
-              border: '1px solid #4D4D6B',
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.12))',
               borderRadius: '20px',
               padding: '24px',
               textAlign: 'center',
@@ -408,13 +405,12 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                color: '#7FE87F',
+                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                color: 'var(--brand-green, #00D09C)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 12px auto',
-                border: '1.5px solid rgba(127, 232, 127, 0.3)',
               }}
             >
               <Check size={32} />
@@ -423,14 +419,14 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
             <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 4px 0' }}>
               {translateText('Order Confirmed!', language)}
             </h3>
-            <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '0 0 20px 0' }}>
+            <p style={{ fontSize: '12px', color: '#8E9BAE', margin: '0 0 20px 0' }}>
               {isAr ? `${orderConfirmed.restaurantName} يجهز وجبتك الآن` : `${orderConfirmed.restaurantName} is preparing your meal`}
             </p>
 
-            <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: isRtl ? 'right' : 'left', marginBottom: '20px' }}>
+            <div style={{ backgroundColor: 'var(--color-surface-elevated, #182236)', borderRadius: '16px', padding: '16px', textAlign: isRtl ? 'right' : 'left', marginBottom: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                <Clock size={16} color="#7FE87F" />
-                <span style={{ fontSize: '12px', fontWeight: 800, color: '#7FE87F' }}>
+                <Clock size={16} color="var(--brand-green, #00D09C)" />
+                <span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green, #00D09C)' }}>
                   {isAr ? `التوصيل خلال ${orderConfirmed.estimatedTime}` : `Delivering in ${orderConfirmed.estimatedTime}`}
                 </span>
               </div>
@@ -446,9 +442,9 @@ export const FoodScreen: React.FC<FoodScreenProps> = ({ initialRestaurants }) =>
                 width: '100%',
                 padding: '12px',
                 borderRadius: '12px',
-                backgroundColor: '#7FE87F',
+                backgroundColor: 'var(--brand-green, #00D09C)',
                 border: 'none',
-                color: '#000000',
+                color: 'var(--brand-green-ink, #080C14)',
                 fontSize: '14px',
                 fontWeight: 800,
                 cursor: 'pointer',

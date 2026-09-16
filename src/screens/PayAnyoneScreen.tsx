@@ -25,7 +25,7 @@ export const PayAnyoneScreen: React.FC<PayAnyoneScreenProps> = ({ initialContact
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '24px' }}>
+    <div className="fade-in" style={{ backgroundColor: '#080c14', minHeight: '100%', paddingBottom: '24px' }}>
       <AppHeader title={t('pay.send_money', 'Pay Anyone')} showBack showSettings />
 
       {/* Search Input Field */}
@@ -35,15 +35,14 @@ export const PayAnyoneScreen: React.FC<PayAnyoneScreenProps> = ({ initialContact
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
-            borderRadius: '12px',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+            borderRadius: '14px',
             padding: '12px 16px',
             boxShadow: 'none',
-            transition: 'border-color 0.2s ease',
           }}
         >
-          <Search size={18} color="#7FE87F" />
+          <Search size={18} color="var(--brand-green, #00D09C)" />
           <input
             id="search-contact-input"
             type="text"
@@ -99,28 +98,28 @@ export const PayAnyoneScreen: React.FC<PayAnyoneScreenProps> = ({ initialContact
             style={{
               fontSize: '12px',
               fontWeight: 800,
-              color: '#A2A2BA',
+              color: '#9ca3af',
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
             }}
           >
             {t('pay.quick_contacts', 'Contacts')}
           </span>
-          <span style={{ fontSize: '11px', color: '#7FE87F', fontWeight: 700 }}>
+          <span style={{ fontSize: '11px', color: 'var(--brand-green)', fontWeight: 700 }}>
             {filteredContacts.length}
           </span>
         </div>
 
         {filteredContacts.length === 0 ? (
-          <div style={{ color: '#6E6E85', fontSize: '13px', padding: '16px', textAlign: 'center', backgroundColor: '#151524', borderRadius: '12px', border: '1px solid #2C2C44' }}>
+          <div style={{ color: '#6b7280', fontSize: '13px', padding: '16px', textAlign: 'center', backgroundColor: 'var(--color-surface)', borderRadius: '12px', border: '1px solid var(--color-border)' }}>
             {language === 'العربية' ? 'لم يتم العثور على جهات اتصال' : 'No contacts found'}
           </div>
         ) : (
           <div
             style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
-              borderRadius: '14px',
+              backgroundColor: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
+              borderRadius: '16px',
               overflow: 'hidden',
               boxShadow: 'none',
             }}
@@ -145,37 +144,34 @@ export const PayAnyoneScreen: React.FC<PayAnyoneScreenProps> = ({ initialContact
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: '14px 16px',
-                    borderBottom: index < filteredContacts.length - 1 ? '1px solid #1E1E32' : 'none',
+                    borderBottom: index < filteredContacts.length - 1 ? '1px solid var(--color-border)' : 'none',
                     cursor: 'pointer',
-                    backgroundColor: '#151524',
-                    transition: 'background-color 0.15s ease',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <div
                       style={{
                         width: '42px',
                         height: '42px',
-                        borderRadius: '12px',
-                        backgroundColor: '#1E1E32',
-                        color: '#7FE87F',
+                        borderRadius: '50%',
+                        backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                        color: 'var(--brand-green, #00D09C)',
                         fontWeight: 800,
-                        fontSize: '14px',
+                        fontSize: '15px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        border: '1px solid #2C2C44',
-                        flexShrink: 0,
+                        border: 'none',
                       }}
                     >
                       {contact.avatarInitials}
                     </div>
                     <div>
-                      <div style={{ fontWeight: 800, fontSize: '14.5px', color: '#FFFFFF', lineHeight: '18px' }}>
+                      <div style={{ fontWeight: 800, fontSize: '14px', color: '#FFFFFF', lineHeight: '18px' }}>
                         {displayName}
                       </div>
-                      <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 600, marginTop: '2px' }}>
-                        {contact.upiId} &bull; <span style={{ color: '#A2A2BA' }} dir="ltr">{contact.mobile}</span>
+                      <div style={{ fontSize: '11.5px', color: '#9ca3af', marginTop: '2px' }}>
+                        {contact.upiId || contact.mobile}
                       </div>
                     </div>
                   </div>
@@ -184,8 +180,8 @@ export const PayAnyoneScreen: React.FC<PayAnyoneScreenProps> = ({ initialContact
                       style={{
                         fontSize: '11px',
                         fontWeight: 800,
-                        backgroundColor: '#7FE87F',
-                        color: '#000000',
+                        backgroundColor: 'var(--brand-green, #00D09C)',
+                        color: 'var(--brand-green-ink, #080C14)',
                         padding: '4px 10px',
                         borderRadius: '6px',
                         display: 'flex',

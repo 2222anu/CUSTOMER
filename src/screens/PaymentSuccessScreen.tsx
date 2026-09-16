@@ -69,9 +69,9 @@ export const PaymentSuccessScreen: React.FC = () => {
         {/* Large Amount Display */}
         <div
           style={{
-            fontSize: '32px',
+            fontSize: '34px',
             fontWeight: '900',
-            color: '#7FE87F',
+            color: 'var(--brand-green)',
             marginBottom: '20px',
             fontVariantNumeric: 'tabular-nums',
             letterSpacing: '-0.02em',
@@ -83,8 +83,8 @@ export const PaymentSuccessScreen: React.FC = () => {
         {/* Transaction Details Breakdown Card */}
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: '16px',
             padding: '20px',
             marginBottom: '20px',
@@ -93,36 +93,36 @@ export const PaymentSuccessScreen: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <span style={{ color: '#A2A2BA', fontSize: '13px' }}>{t('pay.recipient', 'Payee')}</span>
+            <span style={{ color: '#9ca3af', fontSize: '13px' }}>{t('pay.recipient', 'Payee')}</span>
             <span style={{ fontWeight: '700', fontSize: '13px', color: '#FFFFFF' }}>{displayTitle}</span>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <span style={{ color: '#A2A2BA', fontSize: '13px' }}>{language === 'العربية' ? 'رقم العملية' : 'Transaction ID'}</span>
+            <span style={{ color: '#9ca3af', fontSize: '13px' }}>{language === 'العربية' ? 'رقم العملية' : 'Transaction ID'}</span>
             <span style={{ fontWeight: '600', fontSize: '12px', color: '#FFFFFF', fontFamily: 'monospace' }}>{txn.id}</span>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <span style={{ color: '#A2A2BA', fontSize: '13px' }}>{t('pay.txn_reference', 'Reference / UTR')}</span>
-            <span style={{ fontWeight: '600', fontSize: '12px', color: '#FFFFFF', fontFamily: 'monospace' }}>{txn.utr}</span>
+            <span style={{ color: '#9ca3af', fontSize: '13px' }}>{t('pay.txn_reference', 'Reference / UTR')}</span>
+            <span style={{ fontWeight: '600', fontSize: '12px', color: 'var(--brand-green)', fontFamily: 'monospace' }}>{txn.utr}</span>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <span style={{ color: '#A2A2BA', fontSize: '13px' }}>{language === 'العربية' ? 'التاريخ والوقت' : 'Date & Time'}</span>
+            <span style={{ color: '#9ca3af', fontSize: '13px' }}>{language === 'العربية' ? 'التاريخ والوقت' : 'Date & Time'}</span>
             <span style={{ fontWeight: '600', fontSize: '13px', color: '#FFFFFF' }}>{formatDate(txn.timestamp, language)}</span>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #2C2C44', paddingTop: '12px' }}>
-            <span style={{ color: '#A2A2BA', fontSize: '13px' }}>{t('pay.source_account', 'Payment Method')}</span>
-            <span style={{ fontWeight: '700', fontSize: '13px', color: '#7FE87F' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--color-border)', paddingTop: '12px' }}>
+            <span style={{ color: '#9ca3af', fontSize: '13px' }}>{t('pay.source_account', 'Payment Method')}</span>
+            <span style={{ fontWeight: '700', fontSize: '13px', color: 'var(--brand-green)' }}>
               {t('Al Rajhi Bank', 'Al Rajhi Bank')} •••• 4821
             </span>
           </div>
         </div>
 
         {downloadMsg && (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '12px', color: '#7FE87F', fontWeight: '700', marginBottom: '16px' }}>
-            <CheckCircle2 size={16} color="#7FE87F" /> {language === 'العربية' ? 'تم حفظ الإيصال بنجاح' : 'Receipt saved successfully'}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '12px', color: 'var(--brand-green)', fontWeight: '700', marginBottom: '16px' }}>
+            <CheckCircle2 size={16} color="var(--brand-green)" /> {language === 'العربية' ? 'تم حفظ الإيصال بنجاح' : 'Receipt saved successfully'}
           </div>
         )}
 

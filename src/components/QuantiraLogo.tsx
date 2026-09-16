@@ -10,7 +10,7 @@ interface QuantiraLogoProps {
 export const QuantiraLogo: React.FC<QuantiraLogoProps> = ({
   size = 20,
   showText = true,
-  color = '#7FE87F',
+  color = 'var(--brand-green, #00D09C)',
   textColor = '#A2A2BA',
 }) => {
   return (

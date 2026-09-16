@@ -45,17 +45,17 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
         className="slide-up"
         onClick={(e) => e.stopPropagation()}
         style={{
-          backgroundColor: '#111726',
+          backgroundColor: 'var(--color-surface, #111726)',
           color: '#FFFFFF',
           borderTopLeftRadius: '28px',
           borderTopRightRadius: '28px',
-          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-          borderLeft: '1px solid rgba(255, 255, 255, 0.08)',
-          borderRight: '1px solid rgba(255, 255, 255, 0.08)',
+          borderTop: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+          borderLeft: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+          borderRight: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
           padding: '24px 20px',
           maxHeight: '88vh',
           overflowY: 'auto',
-          boxShadow: '0 -20px 40px rgba(0, 0, 0, 0.8)',
+          boxShadow: 'none',
           maxWidth: '600px',
           width: '100%',
           margin: '0 auto',
@@ -85,8 +85,8 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
             aria-label="Close sheet"
             className="interactive-tap"
             style={{
-              backgroundColor: '#182236',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
+              backgroundColor: 'var(--color-surface-elevated, #182236)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               color: '#9ca3af',
               width: '32px',
               height: '32px',

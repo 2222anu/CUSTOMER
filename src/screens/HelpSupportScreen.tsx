@@ -84,31 +84,29 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
       <AppHeader title={translateText('Help & Support', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
-        {/* Priority Hero Banner */}
+        {/* Help Hero Card */}
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
-            borderRadius: '16px',
-            padding: '22px 20px',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
+            borderRadius: '20px',
+            padding: '24px 20px',
             marginBottom: '20px',
             textAlign: 'center',
             color: '#FFFFFF',
-            boxShadow: 'none',
           }}
         >
           <div
             style={{
-              width: '50px',
-              height: '50px',
+              width: '48px',
+              height: '48px',
               borderRadius: '14px',
-              backgroundColor: 'rgba(127, 232, 127, 0.15)',
-              color: '#7FE87F',
+              backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+              color: 'var(--brand-green, #00D09C)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 12px auto',
-              border: '1px solid rgba(127, 232, 127, 0.3)',
             }}
           >
             <HelpCircle size={24} />
@@ -116,32 +114,32 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
           <h3 style={{ fontSize: '17px', fontWeight: 800, marginBottom: '4px', color: '#FFFFFF', margin: 0 }}>
             {isAr ? 'كيف نقدر نساعدك؟' : 'How can we help?'}
           </h3>
-          <p style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '4px', marginBottom: 0 }}>
+          <p style={{ fontSize: '12px', color: '#8E9BAE', marginTop: '4px', marginBottom: 0 }}>
             {isAr ? 'فريق الدعم متواجد على مدار الساعة' : 'Support team available 24/7'}
           </p>
         </div>
 
-        <div style={{ fontSize: '11.5px', fontWeight: 700, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px', marginLeft: '4px' }}>
+        <div style={{ fontSize: '11.5px', fontWeight: 700, color: '#8E9BAE', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px', marginLeft: '4px' }}>
           {isAr ? 'قنوات التواصل' : 'Get in Touch'}
         </div>
 
-        <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', marginBottom: '24px', boxShadow: 'none' }}>
+        <div style={{ backgroundColor: 'var(--color-surface, #111726)', border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))', borderRadius: '16px', overflow: 'hidden', marginBottom: '24px' }}>
           <ListRow
-            icon={<MessageSquare size={18} color="#7FE87F" />}
+            icon={<MessageSquare size={18} color="var(--brand-green, #00D09C)" />}
             label={isAr ? 'المحادثة المباشرة' : 'Live Chat'}
             subLabel={isAr ? 'متوسط الرد: ~١ دقيقة' : 'Avg response: ~1 min'}
             onClick={() => setActiveModal('chat')}
           />
-          <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<PhoneCall size={18} color="#7FE87F" />}
+            icon={<PhoneCall size={18} color="var(--brand-green, #00D09C)" />}
             label={isAr ? 'الهاتف المجاني' : 'Toll-Free Phone'}
             subLabel="800-123-QTPAY"
             onClick={() => setActiveModal('call')}
           />
-          <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<ShieldAlert size={18} color="#7FE87F" />}
+            icon={<ShieldAlert size={18} color="var(--brand-green, #00D09C)" />}
             label={isAr ? 'الإبلاغ عن مشكلة' : 'Report an Issue'}
             subLabel={isAr ? 'اعتراض على عملية أو اشتباه احتيال' : 'Dispute or fraud report'}
             onClick={() => setActiveModal('dispute')}
@@ -233,25 +231,24 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
               width: '56px',
               height: '56px',
               borderRadius: '16px',
-              backgroundColor: 'rgba(127, 232, 127, 0.15)',
-              color: '#7FE87F',
+              backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+              color: 'var(--brand-green, #00D09C)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 14px auto',
-              border: '1.5px solid rgba(127, 232, 127, 0.3)',
             }}
           >
             <PhoneCall size={28} />
           </div>
           <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0', direction: 'ltr' }}>800-123-QTPAY</h4>
-          <p style={{ fontSize: '12.5px', color: '#A2A2BA', margin: '0 0 20px 0' }}>
+          <p style={{ fontSize: '12.5px', color: '#8E9BAE', margin: '0 0 20px 0' }}>
             {isAr ? 'متاح على مدار الساعة بالعربية والإنجليزية (مجاني داخل المملكة)' : 'Available 24x7 in Arabic and English (Toll-Free in KSA)'}
           </p>
           <a
             href="tel:80012378729"
             className="interactive-tap"
-            style={{ display: 'inline-block', padding: '12px 28px', backgroundColor: '#7FE87F', color: '#0B0B14', borderRadius: '12px', fontWeight: 800, fontSize: '13px', textDecoration: 'none', boxShadow: 'none' }}
+            style={{ display: 'inline-block', padding: '12px 28px', backgroundColor: 'var(--brand-green, #00D09C)', color: 'var(--brand-green-ink, #080C14)', borderRadius: '12px', fontWeight: 800, fontSize: '13px', textDecoration: 'none' }}
           >
             {isAr ? 'اتصال الآن' : 'Call Now'}
           </a>
@@ -267,8 +264,8 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                color: '#7FE87F',
+                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                color: 'var(--brand-green, #00D09C)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -278,12 +275,12 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
               <Check size={28} />
             </div>
             <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>{isAr ? 'تم تسجيل الاعتراض بنجاح' : 'Dispute Filed Successfully'}</h4>
-            <p style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '4px' }}>Ticket #QT-DISP-{Math.floor(100000 + Math.random() * 900000)}</p>
+            <p style={{ fontSize: '12px', color: '#8E9BAE', marginTop: '4px' }}>Ticket #QT-DISP-{Math.floor(100000 + Math.random() * 900000)}</p>
           </div>
         ) : (
           <form onSubmit={handleDisputeSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             <div>
-              <label style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
+              <label style={{ fontSize: '11px', fontWeight: 800, color: '#8E9BAE', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>
                 {isAr ? 'الرقم المرجعي للمعاملة' : 'Transaction Reference'}
               </label>
               <input

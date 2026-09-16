@@ -40,24 +40,23 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '96px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#080c14', minHeight: '100%', paddingBottom: '96px', color: '#FFFFFF' }}>
       <AppHeader title={t('request_money')} showBack />
 
       <div style={{ padding: '20px' }}>
         {isSuccess ? (
-          <div className="fade-in" style={{ textAlign: 'center', backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '20px', padding: '40px 20px' }}>
+          <div className="fade-in" style={{ textAlign: 'center', backgroundColor: 'var(--color-surface, #111726)', border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))', borderRadius: '20px', padding: '40px 20px' }}>
             <div
               style={{
                 width: '60px',
                 height: '60px',
                 borderRadius: '16px',
-                backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                color: '#7FE87F',
+                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                color: 'var(--brand-green, #00D09C)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 16px auto',
-                border: '1.5px solid rgba(127, 232, 127, 0.4)',
               }}
             >
               <Check size={32} />
@@ -76,7 +75,7 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Selected Contact Card */}
-            <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px' }}>
+            <div style={{ backgroundColor: 'var(--color-surface, #111726)', border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))', borderRadius: '16px', padding: '16px' }}>
               <label
                 style={{
                   fontSize: '11px',
@@ -97,9 +96,8 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
                     width: '44px',
                     height: '44px',
                     borderRadius: '12px',
-                    backgroundColor: '#1E1E32',
-                    border: '1px solid #2C2C44',
-                    color: '#7FE87F',
+                    backgroundColor: 'var(--color-surface-elevated, #182236)',
+                    color: 'var(--brand-green, #00D09C)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -123,8 +121,8 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
                 }}
                 style={{
                   width: '100%',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--color-surface-elevated, #182236)',
+                  border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                   borderRadius: '10px',
                   padding: '10px 12px',
                   color: '#FFFFFF',
@@ -134,7 +132,7 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
                 }}
               >
                 {contacts.map((c) => (
-                  <option key={c.id} value={c.id} style={{ backgroundColor: '#1E1E32', color: '#FFFFFF' }}>
+                  <option key={c.id} value={c.id} style={{ backgroundColor: '#182236', color: '#FFFFFF' }}>
                     {c.name} ({c.upiId})
                   </option>
                 ))}
@@ -142,7 +140,7 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
             </div>
 
             {/* Enter Amount Card */}
-            <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '20px' }}>
+            <div style={{ backgroundColor: 'var(--color-surface, #111726)', border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))', borderRadius: '16px', padding: '20px' }}>
               <label
                 style={{
                   fontSize: '11px',
@@ -161,14 +159,14 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  backgroundColor: '#1E1E32',
-                  border: '1.5px solid #7FE87F',
+                  backgroundColor: 'var(--color-surface-elevated, #182236)',
+                  border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
                   borderRadius: '14px',
                   padding: '12px 18px',
                   marginBottom: '14px',
                 }}
               >
-                <span style={{ fontSize: '20px', fontWeight: 800, color: '#7FE87F', marginInlineEnd: '8px' }}>{t('sar')}</span>
+                <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--brand-green, #00D09C)', marginInlineEnd: '8px' }}>{t('sar')}</span>
                 <input
                   type="number"
                   value={amountStr}
@@ -202,9 +200,9 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
                       flex: 1,
                       padding: '7px 0',
                       borderRadius: '10px',
-                      backgroundColor: '#1E1E32',
-                      border: '1px solid #2C2C44',
-                      color: '#7FE87F',
+                      backgroundColor: 'var(--color-surface-elevated, #182236)',
+                      border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+                      color: 'var(--brand-green, #00D09C)',
                       fontSize: '12px',
                       fontWeight: 700,
                       cursor: 'pointer',
@@ -218,7 +216,7 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
             </div>
 
             {/* Note Card */}
-            <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px' }}>
+            <div style={{ backgroundColor: 'var(--color-surface, #111726)', border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))', borderRadius: '16px', padding: '16px' }}>
               <label
                 style={{
                   fontSize: '11px',
@@ -239,8 +237,8 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
                 placeholder={translateText('What is this request for? (e.g. Dinner, Rent)', language)}
                 style={{
                   width: '100%',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--color-surface-elevated, #182236)',
+                  border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                   borderRadius: '12px',
                   padding: '12px 14px',
                   color: '#FFFFFF',

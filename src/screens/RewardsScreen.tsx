@@ -100,8 +100,8 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
         {/* QTPoints Balance Hero Banner */}
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1.5px solid rgba(127, 232, 127, 0.35)',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
             borderRadius: '20px',
             padding: '24px 20px',
             textAlign: 'center',
@@ -114,24 +114,23 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
               width: '56px',
               height: '56px',
               borderRadius: '16px',
-              backgroundColor: 'rgba(127, 232, 127, 0.15)',
-              color: '#7FE87F',
+              backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+              color: 'var(--brand-green, #00D09C)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 12px auto',
-              border: '1.5px solid rgba(127, 232, 127, 0.3)',
             }}
           >
             <Trophy size={28} />
           </div>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <div style={{ fontSize: '11px', fontWeight: 800, color: 'var(--brand-green, #00D09C)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             {translateText('Total Reward Balance', language)}
           </div>
           <h2 style={{ fontSize: '26px', fontWeight: 900, color: '#FFFFFF', margin: '4px 0 6px 0', fontVariantNumeric: 'tabular-nums' }}>
             {formatLocalizedNumber(points, language)} {isAr ? 'نقاط كيو تي' : 'QTPoints'}
           </h2>
-          <p style={{ fontSize: '12px', color: '#A2A2BA', margin: 0 }}>
+          <p style={{ fontSize: '12px', color: '#8E9BAE', margin: 0 }}>
             {isAr ? 'اكسب ١٠ نقاط مكافأة على كل ١٠٠ ر.س تنفقها عبر كيو تي باي' : 'Earn 10 QTPoints on every SAR 100 spent via QTPay'}
           </p>
         </div>
@@ -139,7 +138,7 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
         {/* Unlocked Scratch Cards Grid */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
           <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>{translateText('Unlocked Scratch Cards', language)}</h3>
-          <span style={{ fontSize: '12px', fontWeight: 700, color: '#7FE87F' }}>
+          <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--brand-green, #00D09C)' }}>
             {formatLocalizedNumber(cards.filter((c) => !c.isScratched).length, language)} {translateText('Unopened', language)}
           </span>
         </div>
@@ -151,8 +150,8 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
               onClick={() => handleCardClick(card)}
               className="interactive-tap"
               style={{
-                backgroundColor: card.isScratched ? '#2A2A3E' : '#3A3A52',
-                border: card.isScratched ? '1px solid #4D4D6B' : '1.5px dashed #7FE87F',
+                backgroundColor: card.isScratched ? 'var(--color-surface, #111726)' : 'var(--color-surface-elevated, #182236)',
+                border: card.isScratched ? '1px solid var(--color-border, rgba(255, 255, 255, 0.08))' : '1px dashed var(--brand-green-border, rgba(0, 208, 156, 0.35))',
                 borderRadius: '16px',
                 padding: '18px 14px',
                 textAlign: 'center',
@@ -167,8 +166,8 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
                       width: '32px',
                       height: '32px',
                       borderRadius: '50%',
-                      backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                      color: '#7FE87F',
+                      backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                      color: 'var(--brand-green, #00D09C)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -178,13 +177,13 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
                     <Check size={20} />
                   </div>
                   <div style={{ fontWeight: 800, fontSize: '13px', color: '#FFFFFF' }}>{card.rewardText}</div>
-                  <div style={{ fontSize: '11px', color: '#7FE87F', marginTop: '4px', fontWeight: 800 }}>{translateText('Claimed', language)}</div>
+                  <div style={{ fontSize: '11px', color: 'var(--brand-green, #00D09C)', marginTop: '4px', fontWeight: 800 }}>{translateText('Claimed', language)}</div>
                 </>
               ) : (
                 <>
-                  <Sparkles size={28} color="#7FE87F" style={{ margin: '0 auto 8px auto' }} />
+                  <Sparkles size={28} color="var(--brand-green, #00D09C)" style={{ margin: '0 auto 8px auto' }} />
                   <div style={{ fontWeight: 800, fontSize: '13px', color: '#FFFFFF' }}>{translateText('Tap to Scratch', language)}</div>
-                  <div style={{ fontSize: '11px', color: '#B3B3C2', marginTop: '4px', fontWeight: 700 }}>
+                  <div style={{ fontSize: '11px', color: '#8E9BAE', marginTop: '4px', fontWeight: 700 }}>
                     {card.title}
                   </div>
                 </>
@@ -200,7 +199,7 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 15, 26, 0.75)',
+            backgroundColor: 'rgba(11, 15, 25, 0.75)',
             backdropFilter: 'blur(8px)',
             zIndex: 1000,
             display: 'flex',
@@ -214,8 +213,8 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
             style={{
               width: '100%',
               maxWidth: '360px',
-              backgroundColor: '#2A2A3E',
-              border: '1px solid #4D4D6B',
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.12))',
               borderRadius: '20px',
               padding: '24px',
               textAlign: 'center',
@@ -235,13 +234,13 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
                 width: '32px',
                 height: '32px',
                 borderRadius: '50%',
-                backgroundColor: '#3A3A52',
+                backgroundColor: 'var(--color-surface-elevated, #182236)',
                 border: 'none',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                color: '#B3B3C2',
+                color: '#8E9BAE',
               }}
             >
               <X size={18} />
@@ -250,7 +249,7 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
             <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '8px 0 4px 0' }}>
               {activeCard.title}
             </h3>
-            <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '0 0 20px 0' }}>{activeCard.subtitle}</p>
+            <p style={{ fontSize: '12px', color: '#8E9BAE', margin: '0 0 20px 0' }}>{activeCard.subtitle}</p>
 
             {/* Scratch Surface Box */}
             <div
@@ -260,8 +259,8 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
                 height: '200px',
                 margin: '0 auto 20px auto',
                 borderRadius: '20px',
-                backgroundColor: isRevealed ? '#1A1A2E' : '#3A3A52',
-                border: isRevealed ? '2px solid #7FE87F' : '2px dashed #7FE87F',
+                backgroundColor: isRevealed ? 'var(--color-surface, #111726)' : 'var(--color-surface-elevated, #182236)',
+                border: isRevealed ? '2px solid var(--brand-green, #00D09C)' : '2px dashed var(--brand-green, #00D09C)',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -273,14 +272,14 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
             >
               {isScratching ? (
                 <div>
-                  <Sparkles size={36} color="#7FE87F" style={{ animation: 'spin 1s linear infinite' }} />
+                  <Sparkles size={36} color="var(--brand-green, #00D09C)" style={{ animation: 'spin 1s linear infinite' }} />
                   <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF', marginTop: '10px' }}>
                     {translateText('Revealing Reward...', language)}
                   </div>
                 </div>
               ) : isRevealed ? (
                 <div style={{ padding: '16px' }}>
-                  <Gift size={40} color="#7FE87F" style={{ margin: '0 auto 10px auto' }} />
+                  <Gift size={40} color="var(--brand-green, #00D09C)" style={{ margin: '0 auto 10px auto' }} />
                   <div style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF' }}>
                     {activeCard.rewardText}
                   </div>
@@ -289,12 +288,12 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
                       style={{
                         marginTop: '10px',
                         padding: '6px 12px',
-                        backgroundColor: '#2A2A3E',
-                        border: '1px dashed #7FE87F',
+                        backgroundColor: 'var(--color-surface-elevated, #182236)',
+                        border: '1px dashed var(--brand-green, #00D09C)',
                         borderRadius: '10px',
                         fontSize: '12px',
                         fontWeight: 800,
-                        color: '#7FE87F',
+                        color: 'var(--brand-green, #00D09C)',
                         letterSpacing: '0.05em',
                       }}
                     >
@@ -304,9 +303,9 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
                 </div>
               ) : (
                 <div>
-                  <Sparkles size={40} color="#7FE87F" style={{ margin: '0 auto 10px auto' }} />
+                  <Sparkles size={40} color="var(--brand-green, #00D09C)" style={{ margin: '0 auto 10px auto' }} />
                   <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{translateText('Tap to Scratch', language)}</div>
-                  <div style={{ fontSize: '11px', color: '#B3B3C2', marginTop: '4px' }}>{translateText('Click to reveal your reward!', language)}</div>
+                  <div style={{ fontSize: '11px', color: '#8E9BAE', marginTop: '4px' }}>{translateText('Click to reveal your reward!', language)}</div>
                 </div>
               )}
             </div>
@@ -319,9 +318,9 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
                   width: '100%',
                   padding: '12px',
                   borderRadius: '12px',
-                  backgroundColor: '#7FE87F',
+                  backgroundColor: 'var(--brand-green, #00D09C)',
                   border: 'none',
-                  color: '#000000',
+                  color: 'var(--brand-green-ink, #080C14)',
                   fontSize: '14px',
                   fontWeight: 800,
                   cursor: 'pointer',
@@ -337,9 +336,9 @@ export const RewardsScreen: React.FC<RewardsScreenProps> = ({ initialCards, init
                   width: '100%',
                   padding: '12px',
                   borderRadius: '12px',
-                  backgroundColor: '#7FE87F',
+                  backgroundColor: 'var(--brand-green, #00D09C)',
                   border: 'none',
-                  color: '#000000',
+                  color: 'var(--brand-green-ink, #080C14)',
                   fontSize: '14px',
                   fontWeight: 800,
                   cursor: 'pointer',

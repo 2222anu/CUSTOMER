@@ -89,14 +89,13 @@ export const HistoryScreen: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
-              backgroundColor: '#111726',
-              border: '1px solid #34d399',
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
               borderRadius: '14px',
               padding: '11px 14px',
-              boxShadow: '0 4px 12px rgba(52, 211, 153, 0.15)',
             }}
           >
-            <Search size={16} color="#34d399" />
+            <Search size={16} color="var(--brand-green, #00D09C)" />
             <input
               type="text"
               placeholder={isAr ? 'البحث بالاسم أو المرجع البنكي (SARIE UTR)...' : 'Search by name or SARIE UTR...'}
@@ -153,9 +152,9 @@ export const HistoryScreen: React.FC = () => {
               onClick={() => setFilter(f)}
               className="interactive-tap"
               style={{
-                backgroundColor: isActive ? '#34d399' : '#111726',
-                border: isActive ? '1px solid #34d399' : '1px solid rgba(255, 255, 255, 0.08)',
-                color: isActive ? '#080c14' : '#9ca3af',
+                backgroundColor: isActive ? 'var(--brand-green, #00D09C)' : 'var(--color-surface, #111726)',
+                border: isActive ? '1px solid var(--brand-green, #00D09C)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+                color: isActive ? 'var(--brand-green-ink, #080C14)' : '#9ca3af',
                 borderRadius: '20px',
                 padding: '7px 16px',
                 fontSize: '12px',
@@ -164,7 +163,6 @@ export const HistoryScreen: React.FC = () => {
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
                 transition: 'all 0.15s ease',
-                boxShadow: isActive ? '0 4px 12px rgba(52, 211, 153, 0.25)' : 'none',
               }}
             >
               {getFilterLabel(f)}
@@ -179,8 +177,8 @@ export const HistoryScreen: React.FC = () => {
           <div
             style={{
               textAlign: 'center',
-              backgroundColor: '#111726',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               borderRadius: '20px',
               padding: '40px 20px',
               color: '#9ca3af',
@@ -192,9 +190,8 @@ export const HistoryScreen: React.FC = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '14px',
-                backgroundColor: '#182236',
-                color: '#34d399',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                backgroundColor: 'var(--color-surface-elevated, #182236)',
+                color: 'var(--brand-green, #00D09C)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -228,8 +225,8 @@ export const HistoryScreen: React.FC = () => {
               </div>
               <div
                 style={{
-                  backgroundColor: '#111726',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  backgroundColor: 'var(--color-surface, #111726)',
+                  border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                   borderRadius: '18px',
                   overflow: 'hidden',
                   padding: '8px 8px 0 8px',
@@ -266,20 +263,19 @@ export const HistoryScreen: React.FC = () => {
                       width: '54px',
                       height: '54px',
                       borderRadius: '50%',
-                      backgroundColor: selectedTxn.type === 'received' ? 'rgba(52, 211, 153, 0.15)' : 'rgba(52, 211, 153, 0.12)',
-                      border: '1.5px solid #34d399',
+                      backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       margin: '0 auto 12px auto',
                     }}
                   >
-                    <CheckCircle2 size={28} color="#34d399" />
+                    <CheckCircle2 size={28} color="var(--brand-green, #00D09C)" />
                   </div>
                   <div className="tabular-nums" style={{ fontSize: '26px', fontWeight: 900, color: '#FFFFFF' }}>
                     {selectedTxn.type === 'received' ? '+' : '-'}{formatCurrency(selectedTxn.amount, language)}
                   </div>
-                  <div style={{ fontSize: '13px', color: '#34d399', fontWeight: 700, marginTop: '3px' }}>
+                  <div style={{ fontSize: '13px', color: 'var(--brand-green, #00D09C)', fontWeight: 700, marginTop: '3px' }}>
                     {isAr ? 'عملية مكتملة' : 'Transfer Complete'}
                   </div>
                 </div>
@@ -287,9 +283,9 @@ export const HistoryScreen: React.FC = () => {
                 {/* Details Breakdown */}
                 <div
                   style={{
-                    backgroundColor: '#182236',
+                    backgroundColor: 'var(--color-surface-elevated, #182236)',
                     borderRadius: '16px',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                     padding: '16px',
                     marginBottom: '18px',
                     display: 'flex',
@@ -303,7 +299,7 @@ export const HistoryScreen: React.FC = () => {
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <span style={{ fontSize: '12px', color: '#9ca3af' }}>{isAr ? 'المرجع البنكي' : 'Reference'}</span>
-                    <span style={{ fontSize: '12px', fontWeight: 700, color: '#34d399', fontFamily: 'monospace' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--brand-green, #00D09C)', fontFamily: 'monospace' }}>
                       {selectedTxn.utr}
                     </span>
                   </div>
@@ -349,11 +345,11 @@ export const HistoryScreen: React.FC = () => {
                     className="action-btn interactive-tap"
                     style={{
                       flex: 1,
-                      backgroundColor: '#34d399',
+                      backgroundColor: 'var(--brand-green, #00D09C)',
                       border: 'none',
                       borderRadius: '14px',
                       padding: '13px',
-                      color: '#080c14',
+                      color: 'var(--brand-green-ink, #080C14)',
                       fontSize: '13px',
                       fontWeight: 800,
                       cursor: 'pointer',
@@ -394,13 +390,13 @@ export const HistoryScreen: React.FC = () => {
                         onClick={() => setDisputeReason(reason.en)}
                         className="interactive-tap"
                         style={{
-                          backgroundColor: disputeReason === reason.en ? 'rgba(52, 211, 153, 0.12)' : '#182236',
-                          border: disputeReason === reason.en ? '1.5px solid #34d399' : '1px solid rgba(255, 255, 255, 0.08)',
+                          backgroundColor: disputeReason === reason.en ? 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))' : 'var(--color-surface-elevated, #182236)',
+                          border: disputeReason === reason.en ? '1px solid var(--brand-green, #00D09C)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                           borderRadius: '12px',
                           padding: '11px 14px',
                           fontSize: '12.5px',
                           fontWeight: 700,
-                          color: disputeReason === reason.en ? '#34d399' : '#FFFFFF',
+                          color: disputeReason === reason.en ? 'var(--brand-green, #00D09C)' : '#FFFFFF',
                           cursor: 'pointer',
                         }}
                       >
@@ -413,8 +409,8 @@ export const HistoryScreen: React.FC = () => {
                 {/* SLA Guarantee Card */}
                 <div
                   style={{
-                    backgroundColor: '#182236',
-                    border: '1px solid rgba(52, 211, 153, 0.25)',
+                    backgroundColor: 'var(--color-surface-elevated, #182236)',
+                    border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
                     borderRadius: '14px',
                     padding: '12px 14px',
                     marginBottom: '18px',
@@ -423,9 +419,9 @@ export const HistoryScreen: React.FC = () => {
                     gap: '10px',
                   }}
                 >
-                  <Clock size={18} color="#34d399" />
+                  <Clock size={18} color="var(--brand-green, #00D09C)" />
                   <div>
-                    <div style={{ fontSize: '12px', fontWeight: 800, color: '#34d399' }}>
+                    <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green, #00D09C)' }}>
                       {isAr ? 'اتفاقية مستوى الخدمة (SLA): ٢٤ - ٤٨ ساعة' : 'Resolution SLA: 24 - 48 Hours'}
                     </div>
                     <div style={{ fontSize: '10.5px', color: '#9ca3af', marginTop: '1px' }}>
@@ -440,8 +436,8 @@ export const HistoryScreen: React.FC = () => {
                     onClick={() => setIsDisputing(false)}
                     style={{
                       flex: 1,
-                      backgroundColor: '#182236',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      backgroundColor: 'var(--color-surface-elevated, #182236)',
+                      border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                       borderRadius: '14px',
                       padding: '13px',
                       color: '#9ca3af',
@@ -458,11 +454,11 @@ export const HistoryScreen: React.FC = () => {
                     className="action-btn interactive-tap"
                     style={{
                       flex: 2,
-                      backgroundColor: '#34d399',
+                      backgroundColor: 'var(--brand-green, #00D09C)',
                       border: 'none',
                       borderRadius: '14px',
                       padding: '13px',
-                      color: '#080c14',
+                      color: 'var(--brand-green-ink, #080C14)',
                       fontWeight: 800,
                       fontSize: '13.5px',
                       cursor: 'pointer',
@@ -484,15 +480,14 @@ export const HistoryScreen: React.FC = () => {
                     width: '56px',
                     height: '56px',
                     borderRadius: '50%',
-                    backgroundColor: 'rgba(52, 211, 153, 0.15)',
-                    border: '1.5px solid #34d399',
+                    backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     margin: '0 auto 14px auto',
                   }}
                 >
-                  <CheckCircle2 size={30} color="#34d399" />
+                  <CheckCircle2 size={30} color="var(--brand-green, #00D09C)" />
                 </div>
                 <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px 0' }}>
                   {isAr ? 'تم تسجيل الاعتراض بنجاح' : 'Dispute Claim Registered'}
@@ -508,11 +503,11 @@ export const HistoryScreen: React.FC = () => {
                   className="action-btn interactive-tap"
                   style={{
                     width: '100%',
-                    backgroundColor: '#34d399',
+                    backgroundColor: 'var(--brand-green, #00D09C)',
                     border: 'none',
                     borderRadius: '14px',
                     padding: '13px',
-                    color: '#080c14',
+                    color: 'var(--brand-green-ink, #080C14)',
                     fontWeight: 800,
                     fontSize: '14px',
                     cursor: 'pointer',

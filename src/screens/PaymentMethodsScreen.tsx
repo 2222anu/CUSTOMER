@@ -33,10 +33,9 @@ export const PaymentMethodsScreen: React.FC = () => {
           <div
             style={{
               background: 'linear-gradient(135deg, #052e16 0%, #064e3b 40%, #031c12 75%, #0e0e18 100%)',
-              border: '1px solid rgba(127, 232, 127, 0.35)',
+              border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
               borderRadius: '20px',
               padding: '22px',
-              boxShadow: 'none',
               position: 'relative',
               overflow: 'hidden',
               minHeight: '175px',
@@ -53,27 +52,26 @@ export const PaymentMethodsScreen: React.FC = () => {
                     width: '32px',
                     height: '32px',
                     borderRadius: '8px',
-                    backgroundColor: 'rgba(127, 232, 127, 0.2)',
-                    border: '1px solid rgba(127, 232, 127, 0.4)',
+                    backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}
                 >
-                  <ShieldCheck size={18} color="#7FE87F" />
+                  <ShieldCheck size={18} color="var(--brand-green, #00D09C)" />
                 </div>
                 <div>
                   <div style={{ fontSize: '13px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '0.04em' }}>
                     {t('cards.platinum', 'QTPay Platinum')}
                   </div>
-                  <div style={{ fontSize: '10px', color: '#7FE87F', fontWeight: 700 }}>
+                  <div style={{ fontSize: '10px', color: 'var(--brand-green, #00D09C)', fontWeight: 700 }}>
                     {t('cards.instant_debit', 'Sarie Instant Debit')}
                   </div>
                 </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Wifi size={18} color="#7FE87F" style={{ transform: 'rotate(90deg)' }} />
+                <Wifi size={18} color="var(--brand-green, #00D09C)" style={{ transform: 'rotate(90deg)' }} />
               </div>
             </div>
 
@@ -118,10 +116,10 @@ export const PaymentMethodsScreen: React.FC = () => {
                   backgroundColor: 'rgba(0, 0, 0, 0.4)',
                   padding: '4px 8px',
                   borderRadius: '6px',
-                  border: '1px solid rgba(127, 232, 127, 0.25)',
+                  border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
                 }}
               >
-                <span style={{ fontSize: '12px', fontWeight: 900, color: '#7FE87F', letterSpacing: '0.05em' }}>
+                <span style={{ fontSize: '12px', fontWeight: 900, color: 'var(--brand-green, #00D09C)', letterSpacing: '0.05em' }}>
                   mada
                 </span>
               </div>
@@ -151,11 +149,11 @@ export const PaymentMethodsScreen: React.FC = () => {
               onClick={() => navigateTo('BANK_ACCOUNTS')}
               className="interactive-tap"
               style={{
-                backgroundColor: '#151524',
+                backgroundColor: 'var(--color-surface, #111726)',
                 borderRadius: '16px',
                 padding: '16px 18px',
                 color: '#FFFFFF',
-                border: '1.5px solid #2C2C44',
+                border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                 boxShadow: 'none',
                 cursor: 'pointer',
                 display: 'flex',
@@ -169,12 +167,11 @@ export const PaymentMethodsScreen: React.FC = () => {
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    backgroundColor: '#1E1E32',
-                    border: '1px solid #2C2C44',
+                    backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#7FE87F',
+                    color: 'var(--brand-green, #00D09C)',
                   }}
                 >
                   <Landmark size={20} />
@@ -191,8 +188,8 @@ export const PaymentMethodsScreen: React.FC = () => {
 
               <div
                 style={{
-                  backgroundColor: '#7FE87F',
-                  color: '#000000',
+                  backgroundColor: 'var(--brand-green, #00D09C)',
+                  color: 'var(--brand-green-ink, #080C14)',
                   fontSize: '10px',
                   fontWeight: 900,
                   letterSpacing: '0.05em',
@@ -203,7 +200,7 @@ export const PaymentMethodsScreen: React.FC = () => {
                   gap: '4px',
                 }}
               >
-                <Star size={10} fill="#000000" color="#000000" /> {t('banks.primary', 'PRIMARY')}
+                <Star size={10} fill="currentColor" color="currentColor" /> {t('banks.primary', 'PRIMARY')}
               </div>
             </div>
 
@@ -212,8 +209,8 @@ export const PaymentMethodsScreen: React.FC = () => {
               onClick={() => navigateTo('BANK_ACCOUNTS')}
               className="interactive-tap"
               style={{
-                backgroundColor: '#151524',
-                border: '1px solid #2C2C44',
+                backgroundColor: 'var(--color-surface, #111726)',
+                border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                 borderRadius: '16px',
                 padding: '16px 18px',
                 cursor: 'pointer',
@@ -228,12 +225,11 @@ export const PaymentMethodsScreen: React.FC = () => {
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    backgroundColor: '#1E1E32',
-                    border: '1px solid #2C2C44',
+                    backgroundColor: 'var(--color-surface-elevated, #182236)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#7FE87F',
+                    color: 'var(--brand-green, #00D09C)',
                   }}
                 >
                   <Landmark size={20} />
@@ -250,9 +246,8 @@ export const PaymentMethodsScreen: React.FC = () => {
 
               <div
                 style={{
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
-                  color: '#7FE87F',
+                  backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                  color: 'var(--brand-green, #00D09C)',
                   fontSize: '10.5px',
                   fontWeight: 800,
                   padding: '4px 9px',
@@ -283,8 +278,8 @@ export const PaymentMethodsScreen: React.FC = () => {
 
           <div
             style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               borderRadius: '16px',
               padding: '16px 18px',
               display: 'flex',
@@ -298,12 +293,11 @@ export const PaymentMethodsScreen: React.FC = () => {
                   width: '42px',
                   height: '42px',
                   borderRadius: '12px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--color-surface-elevated, #182236)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#7FE87F',
+                  color: 'var(--brand-green, #00D09C)',
                 }}
               >
                 <CreditCard size={20} />
@@ -324,9 +318,8 @@ export const PaymentMethodsScreen: React.FC = () => {
                 style={{
                   fontSize: '10.5px',
                   fontWeight: 800,
-                  color: '#7FE87F',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  color: 'var(--brand-green, #00D09C)',
+                  backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
                   padding: '3px 8px',
                   borderRadius: '10px',
                 }}
@@ -354,13 +347,13 @@ export const PaymentMethodsScreen: React.FC = () => {
             alignItems: 'center',
             gap: '8px',
             padding: '12px',
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
             borderRadius: '12px',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-            <ShieldCheck size={13} color="#7FE87F" />
+            <ShieldCheck size={13} color="var(--brand-green, #00D09C)" />
             <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 600 }}>
               {language === 'العربية' ? 'مدفوعات بطاقات مشفرة • معتمدة من ساما وسريع' : 'Tokenized Card Payments • SAMA & Sarie Secured'}
             </span>

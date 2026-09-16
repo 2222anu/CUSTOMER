@@ -99,15 +99,15 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0F19', minHeight: '100vh', paddingBottom: '30px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Travel & Bookings', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {/* Travel Desk Hero Banner */}
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1.5px solid rgba(127, 232, 127, 0.35)',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
             borderRadius: '20px',
             padding: '24px 20px',
             marginBottom: '20px',
@@ -117,16 +117,15 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
         >
           <div
             style={{
-              width: '54px',
-              height: '54px',
+              width: '52px',
+              height: '52px',
               borderRadius: '16px',
-              backgroundColor: 'rgba(127, 232, 127, 0.15)',
-              color: '#7FE87F',
+              backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+              color: 'var(--brand-green, #00D09C)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 12px auto',
-              border: '1.5px solid rgba(127, 232, 127, 0.3)',
             }}
           >
             <Plane size={26} />
@@ -134,45 +133,45 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
           <h3 style={{ fontSize: '18px', fontWeight: 800, margin: '0 0 4px 0', color: '#FFFFFF' }}>
             {translateText('QTPay Travel Desk', language)}
           </h3>
-          <p style={{ fontSize: '12px', color: '#A2A2BA', margin: 0 }}>
+          <p style={{ fontSize: '12px', color: '#8E9BAE', margin: 0 }}>
             {translateText('Book flights, cabs, and hotels with zero convenience fee & instant cashbacks', language)}
           </p>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 800, color: '#8E9BAE', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
           {translateText('Available Travel Bookings', language)}
         </div>
 
-        <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden' }}>
+        <div style={{ backgroundColor: 'var(--color-surface, #111726)', border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))', borderRadius: '16px', overflow: 'hidden' }}>
           <ListRow
-            icon={<Plane size={18} color="#7FE87F" />}
+            icon={<Plane size={18} color="var(--brand-green, #00D09C)" />}
             label={translateText('Flight Bookings', language)}
             subLabel={bookings[0].subtitle}
-            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(650, language)}` : 'Book SAR 650'}</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #00D09C)', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(650, language)}` : 'Book SAR 650'}</span>}
             onClick={() => handleStartBooking(bookings[0])}
           />
-          <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<Car size={18} color="#7FE87F" />}
+            icon={<Car size={18} color="var(--brand-green, #00D09C)" />}
             label={translateText('Airport Chauffeur', language)}
             subLabel={bookings[1].subtitle}
-            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(120, language)}` : 'Book SAR 120'}</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #00D09C)', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(120, language)}` : 'Book SAR 120'}</span>}
             onClick={() => handleStartBooking(bookings[1])}
           />
-          <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<Hotel size={18} color="#7FE87F" />}
+            icon={<Hotel size={18} color="var(--brand-green, #00D09C)" />}
             label={translateText('Hotel Reservations', language)}
             subLabel={bookings[2].subtitle}
-            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>{translateText('Reserve', language)}</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #00D09C)', padding: '4px 10px', borderRadius: '8px' }}>{translateText('Reserve', language)}</span>}
             onClick={() => handleStartBooking(bookings[2])}
           />
-          <div style={{ height: '1px', backgroundColor: '#3A3A52', margin: '0 16px' }} />
+          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<Compass size={18} color="#7FE87F" />}
+            icon={<Compass size={18} color="var(--brand-green, #00D09C)" />}
             label={translateText('Holiday Packages', language)}
             subLabel={bookings[3].subtitle}
-            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: '#000000', backgroundColor: '#7FE87F', padding: '4px 10px', borderRadius: '8px' }}>{translateText('Explore', language)}</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #00D09C)', padding: '4px 10px', borderRadius: '8px' }}>{translateText('Explore', language)}</span>}
             onClick={() => handleStartBooking(bookings[3])}
           />
         </div>
@@ -184,7 +183,7 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 15, 26, 0.75)',
+            backgroundColor: 'rgba(11, 15, 25, 0.75)',
             backdropFilter: 'blur(8px)',
             zIndex: 1000,
             display: 'flex',
@@ -197,8 +196,8 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
             style={{
               width: '100%',
               maxWidth: '440px',
-              backgroundColor: '#2A2A3E',
-              borderTop: '1px solid #4D4D6B',
+              backgroundColor: 'var(--color-surface, #111726)',
+              borderTop: '1px solid var(--color-border, rgba(255, 255, 255, 0.12))',
               borderTopLeftRadius: '20px',
               borderTopRightRadius: '20px',
               padding: '24px 20px',
@@ -211,7 +210,7 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
                 <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
                   {translateText('Confirm Booking', language)}
                 </h3>
-                <p style={{ fontSize: '12px', color: '#B3B3C2', margin: '2px 0 0 0' }}>{selectedBooking.provider}</p>
+                <p style={{ fontSize: '12px', color: '#8E9BAE', margin: '2px 0 0 0' }}>{selectedBooking.provider}</p>
               </div>
               <button
                 onClick={() => setSelectedBooking(null)}
@@ -220,25 +219,25 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
                   width: '32px',
                   height: '32px',
                   borderRadius: '50%',
-                  backgroundColor: '#3A3A52',
+                  backgroundColor: 'var(--color-surface-elevated, #182236)',
                   border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  color: '#B3B3C2',
+                  color: '#8E9BAE',
                 }}
               >
                 <X size={18} />
               </button>
             </div>
 
-            <div style={{ padding: '16px', backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', marginBottom: '20px' }}>
+            <div style={{ padding: '16px', backgroundColor: 'var(--color-surface-elevated, #182236)', borderRadius: '16px', marginBottom: '20px' }}>
               <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>{selectedBooking.title}</div>
-              <div style={{ fontSize: '12px', color: '#B3B3C2', marginTop: '4px' }}>{selectedBooking.subtitle}</div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px', paddingTop: '10px', borderTop: '1px dashed #4D4D6B' }}>
-                <span style={{ fontSize: '13px', fontWeight: 700, color: '#B3B3C2' }}>{translateText('Total Payable Amount', language)}</span>
-                <span style={{ fontSize: '20px', fontWeight: 900, color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>{formatSaudiCurrency(selectedBooking.amount, language)}</span>
+              <div style={{ fontSize: '12px', color: '#8E9BAE', marginTop: '4px' }}>{selectedBooking.subtitle}</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px', paddingTop: '10px', borderTop: '1px dashed var(--color-border, rgba(255, 255, 255, 0.12))' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: '#8E9BAE' }}>{translateText('Total Payable Amount', language)}</span>
+                <span style={{ fontSize: '20px', fontWeight: 900, color: 'var(--brand-green, #00D09C)', fontVariantNumeric: 'tabular-nums' }}>{formatSaudiCurrency(selectedBooking.amount, language)}</span>
               </div>
             </div>
 
@@ -249,9 +248,9 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
                 width: '100%',
                 padding: '14px',
                 borderRadius: '12px',
-                backgroundColor: '#7FE87F',
+                backgroundColor: 'var(--brand-green, #00D09C)',
                 border: 'none',
-                color: '#000000',
+                color: 'var(--brand-green-ink, #080C14)',
                 fontSize: '14px',
                 fontWeight: 800,
                 cursor: 'pointer',
@@ -271,7 +270,7 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 15, 26, 0.75)',
+            backgroundColor: 'rgba(11, 15, 25, 0.75)',
             backdropFilter: 'blur(8px)',
             zIndex: 1000,
             display: 'flex',
@@ -285,8 +284,8 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
             style={{
               width: '100%',
               maxWidth: '380px',
-              backgroundColor: '#2A2A3E',
-              border: '1px solid #4D4D6B',
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.12))',
               borderRadius: '20px',
               padding: '24px',
               textAlign: 'center',
@@ -300,13 +299,12 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                color: '#7FE87F',
+                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                color: 'var(--brand-green, #00D09C)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 12px auto',
-                border: '1.5px solid rgba(127, 232, 127, 0.3)',
               }}
             >
               <Check size={32} />
@@ -315,20 +313,20 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
             <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 4px 0' }}>
               {translateText('Booking Confirmed!', language)}
             </h3>
-            <p style={{ fontSize: '13px', color: '#B3B3C2', margin: '0 0 20px 0' }}>{confirmedTicket.title}</p>
+            <p style={{ fontSize: '13px', color: '#8E9BAE', margin: '0 0 20px 0' }}>{confirmedTicket.title}</p>
 
-            <div style={{ backgroundColor: '#1A1A2E', border: '1px solid #4D4D6B', borderRadius: '16px', padding: '16px', textAlign: isRtl ? 'right' : 'left', marginBottom: '20px' }}>
+            <div style={{ backgroundColor: 'var(--color-surface-elevated, #182236)', borderRadius: '16px', padding: '16px', textAlign: isRtl ? 'right' : 'left', marginBottom: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <span style={{ fontSize: '12px', color: '#B3B3C2' }}>{translateText('Booking Reference (PNR)', language)}</span>
-                <span style={{ fontSize: '12px', fontWeight: 800, color: '#7FE87F', fontFamily: 'monospace' }}>{confirmedTicket.pnr}</span>
+                <span style={{ fontSize: '12px', color: '#8E9BAE' }}>{translateText('Booking Reference (PNR)', language)}</span>
+                <span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green, #00D09C)', fontFamily: 'monospace' }}>{confirmedTicket.pnr}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <span style={{ fontSize: '12px', color: '#B3B3C2' }}>{t('txn_ref')}</span>
+                <span style={{ fontSize: '12px', color: '#8E9BAE' }}>{t('txn_ref')}</span>
                 <span style={{ fontSize: '12px', fontWeight: 800, color: '#FFFFFF', fontFamily: 'monospace' }}>{confirmedTicket.utr}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '8px', borderTop: '1px dashed #4D4D6B' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '8px', borderTop: '1px dashed var(--color-border, rgba(255, 255, 255, 0.12))' }}>
                 <span style={{ fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}>{translateText('Amount Paid', language)}</span>
-                <span style={{ fontSize: '15px', fontWeight: 900, color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>{formatSaudiCurrency(confirmedTicket.amount, language)}</span>
+                <span style={{ fontSize: '15px', fontWeight: 900, color: 'var(--brand-green, #00D09C)', fontVariantNumeric: 'tabular-nums' }}>{formatSaudiCurrency(confirmedTicket.amount, language)}</span>
               </div>
             </div>
 
@@ -339,9 +337,9 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
                 width: '100%',
                 padding: '12px',
                 borderRadius: '12px',
-                backgroundColor: '#7FE87F',
+                backgroundColor: 'var(--brand-green, #00D09C)',
                 border: 'none',
-                color: '#000000',
+                color: 'var(--brand-green-ink, #080C14)',
                 fontSize: '14px',
                 fontWeight: 800,
                 cursor: 'pointer',

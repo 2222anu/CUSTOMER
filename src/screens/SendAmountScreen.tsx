@@ -58,8 +58,8 @@ export const SendAmountScreen: React.FC = () => {
         {/* Recipient Profile Card */}
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: '16px',
             padding: '24px 20px',
             marginBottom: '20px',
@@ -71,15 +71,15 @@ export const SendAmountScreen: React.FC = () => {
               width: '64px',
               height: '64px',
               borderRadius: '50%',
-              backgroundColor: '#1E1E32',
-              color: '#7FE87F',
+              backgroundColor: 'var(--brand-green-tint)',
+              color: 'var(--brand-green)',
               fontWeight: 800,
               fontSize: '22px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 12px auto',
-              border: '2px solid #7FE87F',
+              border: 'none',
             }}
           >
             {contact.avatarInitials}
@@ -87,10 +87,10 @@ export const SendAmountScreen: React.FC = () => {
           <h2 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '4px', color: '#FFFFFF', letterSpacing: '-0.01em' }}>
             {displayName}
           </h2>
-          <div style={{ fontSize: '12.5px', color: '#A2A2BA', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+          <div style={{ fontSize: '12.5px', color: '#9ca3af', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
             <span>{contact.upiId}</span>
-            <span style={{ color: '#6E6E85' }}>•</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: '#7FE87F', fontWeight: 700 }}>
+            <span style={{ color: '#4b5563' }}>•</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: 'var(--brand-green)', fontWeight: 700 }}>
               <ShieldCheck size={14} /> {language === 'العربية' ? 'موثوق' : 'Verified'}
             </span>
           </div>
@@ -99,8 +99,8 @@ export const SendAmountScreen: React.FC = () => {
         {/* Amount Input Card */}
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: '16px',
             padding: '24px 20px',
             marginBottom: '20px',
@@ -110,7 +110,7 @@ export const SendAmountScreen: React.FC = () => {
           <div
             style={{
               fontSize: '11px',
-              color: '#A2A2BA',
+              color: '#9ca3af',
               fontWeight: 800,
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
@@ -129,7 +129,7 @@ export const SendAmountScreen: React.FC = () => {
               marginBottom: '20px',
             }}
           >
-            <span style={{ fontSize: '24px', fontWeight: 800, color: '#7FE87F' }}>
+            <span style={{ fontSize: '24px', fontWeight: 800, color: 'var(--brand-green)' }}>
               {language === 'العربية' ? 'ر.س' : 'SAR'}
             </span>
             <input
@@ -165,9 +165,9 @@ export const SendAmountScreen: React.FC = () => {
                   onClick={() => setAmountStr(val)}
                   className="interactive-tap"
                   style={{
-                    backgroundColor: isSelected ? 'rgba(127, 232, 127, 0.15)' : '#1E1E32',
-                    border: isSelected ? '1.5px solid #7FE87F' : '1px solid #2C2C44',
-                    color: isSelected ? '#7FE87F' : '#FFFFFF',
+                    backgroundColor: isSelected ? 'var(--brand-green-tint)' : 'var(--color-surface-elevated)',
+                    border: isSelected ? '1.5px solid var(--brand-green)' : '1px solid var(--color-border)',
+                    color: isSelected ? 'var(--brand-green)' : '#FFFFFF',
                     borderRadius: '20px',
                     padding: '8px 16px',
                     fontSize: '13px',
@@ -182,42 +182,41 @@ export const SendAmountScreen: React.FC = () => {
             })}
           </div>
 
-          {/* Optional Note Field */}
+          {/* Note Input */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
-              backgroundColor: '#1E1E32',
-              border: '1px solid #2C2C44',
-              borderRadius: '10px',
+              backgroundColor: 'var(--color-surface-elevated)',
+              borderRadius: '12px',
               padding: '10px 14px',
+              border: '1px solid var(--color-border)',
             }}
           >
-            <MessageSquare size={16} color="#6E6E85" />
+            <MessageSquare size={16} color="var(--brand-green)" style={{ flexShrink: 0 }} />
             <input
               type="text"
-              placeholder={t('pay.add_note', 'Add note / Purpose')}
+              placeholder={language === 'العربية' ? 'إضافة ملاحظة (اختياري)...' : 'Add a note (optional)...'}
               value={note}
               onChange={(e) => setNote(e.target.value)}
               style={{
-                width: '100%',
                 background: 'none',
                 border: 'none',
-                padding: 0,
-                fontSize: '13.5px',
-                fontWeight: 600,
-                color: '#FFFFFF',
                 outline: 'none',
+                color: '#FFFFFF',
+                fontSize: '13px',
+                width: '100%',
+                padding: 0,
               }}
             />
           </div>
         </div>
 
         <PrimaryButton onClick={handlePayClick} disabled={numAmount <= 0}>
-          {language === 'العربية'
-            ? `دفع ${formatCurrency(numAmount, language)}`
-            : `Pay SAR ${numAmount ? numAmount.toLocaleString() : '0'}`}
+          {numAmount > 0
+            ? `${t('nav.pay', 'Pay')} ${formatCurrency(numAmount, language)}`
+            : t('pay.enter_valid_amount', 'Enter Valid Amount')}
         </PrimaryButton>
       </div>
     </div>

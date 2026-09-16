@@ -77,16 +77,16 @@ export const AllServicesScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100%', paddingBottom: '24px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0F19', minHeight: '100%', paddingBottom: '24px', color: '#FFFFFF' }}>
       <AppHeader title={t('all_services')} showBack showSettings />
 
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* Bill Payments Grid */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#8E9BAE', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
             {translateText('Recharge & Utilities', language)}
           </div>
-          <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
+          <div style={{ backgroundColor: 'var(--color-surface, #111726)', border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))', borderRadius: '16px', padding: '16px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
               <ServiceCard label={translateText('Electricity', language)} icon={<Zap size={20} />} onClick={() => navigateTo('ELECTRICITY')} />
               <ServiceCard
@@ -130,10 +130,10 @@ export const AllServicesScreen: React.FC = () => {
 
         {/* Financial Services */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#8E9BAE', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
             {translateText('Banking & Finance (SAMA)', language)}
           </div>
-          <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
+          <div style={{ backgroundColor: 'var(--color-surface, #111726)', border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))', borderRadius: '16px', padding: '16px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
               <ServiceCard label={translateText('mada Cards', language)} icon={<CreditCard size={20} />} onClick={() => navigateTo('PAYMENT_METHODS')} />
               <ServiceCard
@@ -157,10 +157,10 @@ export const AllServicesScreen: React.FC = () => {
 
         {/* Travel & Bookings */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#8E9BAE', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
             {translateText('Travel & Lifestyle', language)}
           </div>
-          <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', padding: '16px', boxShadow: 'none' }}>
+          <div style={{ backgroundColor: 'var(--color-surface, #111726)', border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))', borderRadius: '16px', padding: '16px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
               <ServiceCard
                 label={translateText('Saudia', language)}
@@ -196,24 +196,23 @@ export const AllServicesScreen: React.FC = () => {
                   width: '44px',
                   height: '44px',
                   borderRadius: '12px',
-                  backgroundColor: 'rgba(127, 232, 127, 0.15)',
-                  color: '#7FE87F',
+                  backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                  color: 'var(--brand-green, #00D09C)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '1.5px solid rgba(127, 232, 127, 0.3)',
                 }}
               >
                 {selectedService.icon}
               </div>
               <div>
                 <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>{selectedService.title}</h3>
-                <p style={{ fontSize: '12px', color: '#A2A2BA', margin: '2px 0 0 0' }}>{selectedService.subTitle}</p>
+                <p style={{ fontSize: '12px', color: '#8E9BAE', margin: '2px 0 0 0' }}>{selectedService.subTitle}</p>
               </div>
             </div>
 
             <div style={{ marginBottom: '16px' }}>
-              <label htmlFor="modal-acc-input" style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
+              <label htmlFor="modal-acc-input" style={{ fontSize: '11px', fontWeight: 800, color: '#8E9BAE', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
                 {translateText('Account / Consumer Number', language)}
               </label>
               <input
@@ -226,8 +225,8 @@ export const AllServicesScreen: React.FC = () => {
                   width: '100%',
                   padding: '12px 14px',
                   borderRadius: '12px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--color-surface-elevated, #182236)',
+                  border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
                   fontSize: '14px',
                   fontWeight: 700,
                   color: '#FFFFFF',
@@ -237,7 +236,7 @@ export const AllServicesScreen: React.FC = () => {
             </div>
 
             <div style={{ marginBottom: '24px' }}>
-              <label htmlFor="modal-amt-input" style={{ fontSize: '11px', fontWeight: 800, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
+              <label htmlFor="modal-amt-input" style={{ fontSize: '11px', fontWeight: 800, color: '#8E9BAE', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
                 {t('amount')} ({t('sar')})
               </label>
               <input
@@ -250,11 +249,11 @@ export const AllServicesScreen: React.FC = () => {
                   width: '100%',
                   padding: '12px 14px',
                   borderRadius: '12px',
-                  backgroundColor: '#1E1E32',
-                  border: '1.5px solid #7FE87F',
+                  backgroundColor: 'var(--color-surface-elevated, #182236)',
+                  border: '1.5px solid var(--brand-green, #00D09C)',
                   fontSize: '20px',
                   fontWeight: 900,
-                  color: '#7FE87F',
+                  color: 'var(--brand-green, #00D09C)',
                   outline: 'none',
                   fontVariantNumeric: 'tabular-nums',
                 }}

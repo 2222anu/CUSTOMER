@@ -170,15 +170,15 @@ export const ScanScreen: React.FC = () => {
           alignItems: 'center',
           padding: '16px 20px',
           zIndex: 20,
-          background: 'linear-gradient(to bottom, rgba(11, 11, 20, 0.95), transparent)',
+          background: 'linear-gradient(to bottom, rgba(11, 15, 25, 0.95), transparent)',
         }}
       >
         <button
           onClick={() => setIsScanModalOpen(false)}
           aria-label={t('btn.close', 'Close Scanner')}
           style={{
-            backgroundColor: '#1E1E32',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface-elevated, #182236)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
             color: '#FFFFFF',
             width: '40px',
             height: '40px',
@@ -196,7 +196,7 @@ export const ScanScreen: React.FC = () => {
           <h2 style={{ color: '#FFFFFF', fontSize: '16px', fontWeight: '800', margin: 0 }}>
             {t('scan.title', 'Scan QR Code')}
           </h2>
-          <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: '600' }}>
+          <span style={{ fontSize: '11px', color: '#8E9BAE', fontWeight: '600' }}>
             {language === 'العربية' ? 'دفع فوري عبر شبكة سريع' : 'Instant Payment'}
           </span>
         </div>
@@ -205,9 +205,9 @@ export const ScanScreen: React.FC = () => {
           onClick={toggleFlash}
           aria-label="Toggle Flashlight"
           style={{
-            backgroundColor: isFlashOn ? '#7FE87F' : '#1E1E32',
-            border: '1px solid #2C2C44',
-            color: isFlashOn ? '#0B0B14' : '#FFFFFF',
+            backgroundColor: isFlashOn ? 'var(--brand-green, #00D09C)' : 'var(--color-surface-elevated, #182236)',
+            border: isFlashOn ? 'none' : '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
+            color: isFlashOn ? 'var(--brand-green-ink, #080C14)' : '#FFFFFF',
             width: '40px',
             height: '40px',
             borderRadius: designSystem.radii.full,
@@ -260,18 +260,18 @@ export const ScanScreen: React.FC = () => {
             borderRadius: '20px',
             position: 'relative',
             zIndex: 10,
-            boxShadow: '0 0 0 4000px rgba(15, 15, 26, 0.85)',
+            boxShadow: '0 0 0 4000px rgba(11, 15, 25, 0.88)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             overflow: 'hidden',
             border: scanSuccessContact
-              ? '3px solid #7FE87F'
-              : '1.5px solid rgba(127, 232, 127, 0.35)',
+              ? '3px solid var(--brand-green, #00D09C)'
+              : '1.5px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
             transition: 'border 0.3s ease',
           }}
         >
-          {/* Corner Guides (QTPay Emerald Green) */}
+          {/* Corner Guides (QTPay Brand Green) */}
           <div
             style={{
               position: 'absolute',
@@ -279,8 +279,8 @@ export const ScanScreen: React.FC = () => {
               left: 10,
               width: 32,
               height: 32,
-              borderTop: '4px solid #7FE87F',
-              borderLeft: '4px solid #7FE87F',
+              borderTop: '4px solid var(--brand-green, #00D09C)',
+              borderLeft: '4px solid var(--brand-green, #00D09C)',
               borderTopLeftRadius: '10px',
             }}
           />
@@ -291,8 +291,8 @@ export const ScanScreen: React.FC = () => {
               right: 10,
               width: 32,
               height: 32,
-              borderTop: '4px solid #7FE87F',
-              borderRight: '4px solid #7FE87F',
+              borderTop: '4px solid var(--brand-green, #00D09C)',
+              borderRight: '4px solid var(--brand-green, #00D09C)',
               borderTopRightRadius: '10px',
             }}
           />
@@ -303,8 +303,8 @@ export const ScanScreen: React.FC = () => {
               left: 10,
               width: 32,
               height: 32,
-              borderBottom: '4px solid #7FE87F',
-              borderLeft: '4px solid #7FE87F',
+              borderBottom: '4px solid var(--brand-green, #00D09C)',
+              borderLeft: '4px solid var(--brand-green, #00D09C)',
               borderBottomLeftRadius: '10px',
             }}
           />
@@ -315,8 +315,8 @@ export const ScanScreen: React.FC = () => {
               right: 10,
               width: 32,
               height: 32,
-              borderBottom: '4px solid #7FE87F',
-              borderRight: '4px solid #7FE87F',
+              borderBottom: '4px solid var(--brand-green, #00D09C)',
+              borderRight: '4px solid var(--brand-green, #00D09C)',
               borderBottomRightRadius: '10px',
             }}
           />
@@ -328,9 +328,9 @@ export const ScanScreen: React.FC = () => {
               style={{
                 width: '100%',
                 height: '2px',
-                backgroundColor: '#7FE87F',
+                backgroundColor: 'var(--brand-green, #00D09C)',
                 position: 'absolute',
-                boxShadow: '0 0 12px #7FE87F, 0 0 4px #ffffff',
+                boxShadow: '0 0 12px var(--brand-green, #00D09C), 0 0 4px #ffffff',
                 animation: 'scanLaser 2.2s infinite ease-in-out alternate',
               }}
             />
@@ -342,7 +342,7 @@ export const ScanScreen: React.FC = () => {
               style={{
                 position: 'absolute',
                 inset: 0,
-                backgroundColor: 'rgba(127, 232, 127, 0.25)',
+                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.16))',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -351,7 +351,7 @@ export const ScanScreen: React.FC = () => {
                 backdropFilter: 'blur(4px)',
               }}
             >
-              <CheckCircle size={48} color="#7FE87F" />
+              <CheckCircle size={48} color="var(--brand-green, #00D09C)" />
               <span style={{ color: '#FFFFFF', fontWeight: '700', fontSize: '15px' }}>
                 {language === 'العربية' ? 'تم التحقق من الرمز بنجاح!' : 'QR Verified!'}
               </span>
@@ -368,11 +368,10 @@ export const ScanScreen: React.FC = () => {
             fontWeight: '600',
             zIndex: 10,
             textAlign: 'center',
-            backgroundColor: 'rgba(21, 21, 36, 0.9)',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
             padding: '6px 16px',
             borderRadius: '20px',
-            boxShadow: 'none',
           }}
         >
           {hasCameraPermission === false
@@ -400,8 +399,8 @@ export const ScanScreen: React.FC = () => {
               )
             }
             style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface-elevated, #182236)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
               borderRadius: designSystem.radii.sm,
               padding: '6px 12px',
               color: '#FFFFFF',
@@ -412,10 +411,9 @@ export const ScanScreen: React.FC = () => {
               gap: '6px',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
-              boxShadow: 'none',
             }}
           >
-            <Store size={13} color="#7FE87F" /> {language === 'العربية' ? 'أسواق بنده' : 'Star Supermarket'}
+            <Store size={13} color="var(--brand-green, #00D09C)" /> {language === 'العربية' ? 'أسواق بنده' : 'Star Supermarket'}
           </button>
 
           <button
@@ -426,8 +424,8 @@ export const ScanScreen: React.FC = () => {
               )
             }
             style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface-elevated, #182236)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
               borderRadius: designSystem.radii.sm,
               padding: '6px 12px',
               color: '#FFFFFF',
@@ -438,10 +436,9 @@ export const ScanScreen: React.FC = () => {
               gap: '6px',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
-              boxShadow: 'none',
             }}
           >
-            <Coffee size={13} color="#7FE87F" /> {language === 'العربية' ? 'هاف مليون كافيه' : 'Half Million Coffee'}
+            <Coffee size={13} color="var(--brand-green, #00D09C)" /> {language === 'العربية' ? 'هاف مليون كافيه' : 'Half Million Coffee'}
           </button>
 
           <button
@@ -452,8 +449,8 @@ export const ScanScreen: React.FC = () => {
               )
             }
             style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface-elevated, #182236)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
               borderRadius: designSystem.radii.sm,
               padding: '6px 12px',
               color: '#FFFFFF',
@@ -464,10 +461,9 @@ export const ScanScreen: React.FC = () => {
               gap: '6px',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
-              boxShadow: 'none',
             }}
           >
-            <Train size={13} color="#7FE87F" /> {language === 'العربية' ? 'فاتورة الكهرباء' : 'SEC Electricity'}
+            <Train size={13} color="var(--brand-green, #00D09C)" /> {language === 'العربية' ? 'فاتورة الكهرباء' : 'SEC Electricity'}
           </button>
         </div>
       </div>
@@ -479,7 +475,7 @@ export const ScanScreen: React.FC = () => {
           flexDirection: 'column',
           gap: '10px',
           padding: '20px',
-          background: 'linear-gradient(to top, rgba(11, 11, 20, 0.95), transparent)',
+          background: 'linear-gradient(to top, rgba(11, 15, 25, 0.95), transparent)',
           zIndex: 20,
         }}
       >
@@ -487,8 +483,8 @@ export const ScanScreen: React.FC = () => {
           <button
             onClick={() => fileInputRef.current?.click()}
             style={{
-              backgroundColor: '#151524',
-              border: '1px solid #2C2C44',
+              backgroundColor: 'var(--color-surface-elevated, #182236)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
               borderRadius: designSystem.radii.md,
               padding: '12px',
               color: '#FFFFFF',
@@ -499,20 +495,19 @@ export const ScanScreen: React.FC = () => {
               justifyContent: 'center',
               gap: '8px',
               cursor: 'pointer',
-              boxShadow: 'none',
             }}
           >
-            <ImageIcon size={16} color="#7FE87F" /> {t('scan.upload_gallery', 'Upload QR')}
+            <ImageIcon size={16} color="var(--brand-green, #00D09C)" /> {t('scan.upload_gallery', 'Upload QR')}
           </button>
 
           <button
             onClick={() => handleScanSuccess(contacts[0] || { name: 'Tariq Al-Otaibi', upiId: 'tariq@sarie' })}
             style={{
-              backgroundColor: '#7FE87F',
+              backgroundColor: 'var(--brand-green, #00D09C)',
               border: 'none',
               borderRadius: designSystem.radii.md,
               padding: '12px',
-              color: '#0B0B14',
+              color: 'var(--brand-green-ink, #080C14)',
               fontSize: '13px',
               fontWeight: '700',
               display: 'flex',
@@ -520,10 +515,9 @@ export const ScanScreen: React.FC = () => {
               justifyContent: 'center',
               gap: '8px',
               cursor: 'pointer',
-              boxShadow: 'none',
             }}
           >
-            <Zap size={16} color="#0B0B14" /> {language === 'العربية' ? 'دفع تجريبي' : 'Demo Pay'}
+            <Zap size={16} color="var(--brand-green-ink, #080C14)" /> {language === 'العربية' ? 'دفع تجريبي' : 'Demo Pay'}
           </button>
         </div>
       </div>

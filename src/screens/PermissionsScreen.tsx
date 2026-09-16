@@ -69,7 +69,7 @@ export const PermissionsScreen: React.FC = () => {
   };
 
   return (
-    <div className="fade-in" style={{ backgroundColor: '#0B0B14', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingBottom: '32px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#0B0F19', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingBottom: '32px', color: '#FFFFFF' }}>
       <div>
         <AppHeader title={t('auth.permissions_title', 'App Permissions')} showBack={true} onBack={goBack} showSettings={false} />
 
@@ -78,7 +78,7 @@ export const PermissionsScreen: React.FC = () => {
             style={{
               fontSize: '11.5px',
               fontWeight: 800,
-              color: '#6E6E85',
+              color: '#8E9BAE',
               textTransform: 'uppercase',
               letterSpacing: '0.06em',
               marginBottom: '10px',
@@ -93,18 +93,17 @@ export const PermissionsScreen: React.FC = () => {
           {/* Grouped Permissions Card */}
           <div
             style={{
-              backgroundColor: '#151524',
+              backgroundColor: 'var(--color-surface, #111726)',
               borderRadius: '16px',
-              border: '1px solid #2C2C44',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
               overflow: 'hidden',
-              boxShadow: 'none',
             }}
           >
             {permissions.map((perm, index) => {
               const isOn = toggles[perm.key];
               return (
                 <React.Fragment key={perm.key}>
-                  {index > 0 && <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />}
+                  {index > 0 && <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />}
                   <div
                     style={{
                       display: 'flex',
@@ -120,9 +119,8 @@ export const PermissionsScreen: React.FC = () => {
                           width: '38px',
                           height: '38px',
                           borderRadius: '10px',
-                          backgroundColor: isOn ? 'rgba(127, 232, 127, 0.15)' : '#1E1E32',
-                          color: isOn ? '#7FE87F' : '#A2A2BA',
-                          border: isOn ? '1px solid rgba(127, 232, 127, 0.35)' : '1px solid #2C2C44',
+                          backgroundColor: isOn ? 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))' : 'var(--color-surface-elevated, #182236)',
+                          color: isOn ? 'var(--brand-green, #00D09C)' : '#8E9BAE',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -137,7 +135,7 @@ export const PermissionsScreen: React.FC = () => {
                           {perm.name}
                         </span>
                         {perm.required && (
-                          <span style={{ fontSize: '9px', fontWeight: 800, backgroundColor: 'rgba(127, 232, 127, 0.15)', color: '#7FE87F', padding: '2px 6px', borderRadius: '4px', border: '1px solid rgba(127, 232, 127, 0.3)' }}>
+                          <span style={{ fontSize: '9px', fontWeight: 800, backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))', color: 'var(--brand-green, #00D09C)', padding: '2px 6px', borderRadius: '4px' }}>
                             {language === 'العربية' ? 'إلزامي' : 'REQUIRED'}
                           </span>
                         )}
@@ -160,8 +158,8 @@ export const PermissionsScreen: React.FC = () => {
                         width: '46px',
                         height: '26px',
                         borderRadius: '9999px',
-                        backgroundColor: isOn ? '#7FE87F' : '#1E1E32',
-                        border: isOn ? 'none' : '1px solid #2C2C44',
+                        backgroundColor: isOn ? 'var(--brand-green, #00D09C)' : 'var(--color-surface-elevated, #182236)',
+                        border: isOn ? 'none' : '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
                         display: 'flex',
                         alignItems: 'center',
                         padding: '2px',
@@ -176,10 +174,9 @@ export const PermissionsScreen: React.FC = () => {
                           width: '22px',
                           height: '22px',
                           borderRadius: '50%',
-                          backgroundColor: isOn ? '#0B0B14' : '#A2A2BA',
+                          backgroundColor: isOn ? 'var(--brand-green-ink, #080C14)' : '#8E9BAE',
                           transform: isOn ? 'translateX(20px)' : 'translateX(0px)',
                           transition: 'transform 0.2s ease',
-                          boxShadow: 'none',
                         }}
                       />
                     </div>
@@ -199,8 +196,8 @@ export const PermissionsScreen: React.FC = () => {
         </PrimaryButton>
 
         <div style={{ textAlign: 'center', marginTop: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-          <Lock size={12} color="#6E6E85" />
-          <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 600 }}>
+          <Lock size={12} color="#6B7A90" />
+          <span style={{ fontSize: '11px', color: '#6B7A90', fontWeight: 600 }}>
             {language === 'العربية' ? 'تشفير أجهزة متقدم بمستوى ٢٥٦ بت' : '256-Bit Hardware Encrypted'}
           </span>
         </div>

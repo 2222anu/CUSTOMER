@@ -41,10 +41,10 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
         style={{
           width: '100%',
           maxWidth: '440px',
-          backgroundColor: '#151524',
+          backgroundColor: 'var(--color-surface, #111726)',
           borderTopLeftRadius: '20px',
           borderTopRightRadius: '20px',
-          borderTop: '1px solid #2C2C44',
+          borderTop: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
           padding: '24px 20px',
           boxSizing: 'border-box',
           animation: 'slideUpSheet 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -60,12 +60,12 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
 
         {/* Sheet Handle & Header */}
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '14px' }}>
-          <div style={{ width: '40px', height: '4px', borderRadius: '2px', backgroundColor: '#2C2C44' }} />
+          <div style={{ width: '40px', height: '4px', borderRadius: '2px', backgroundColor: 'rgba(255, 255, 255, 0.15)' }} />
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <CheckCircle2 size={20} color="#7FE87F" />
+            <CheckCircle2 size={20} color="var(--brand-green, #00D09C)" />
             <span style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF' }}>
               {language === 'العربية' ? 'رصيد سريع المعتمد' : 'Sarie Balance Verified'}
             </span>
@@ -74,8 +74,8 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
             onClick={onClose}
             aria-label={t('btn.close', 'Close')}
             style={{
-              background: '#1E1E32',
-              border: '1px solid #2C2C44',
+              background: 'var(--color-surface-elevated, #182236)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
               borderRadius: '50%',
               width: '32px',
               height: '32px',
@@ -93,8 +93,8 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
         {/* Total Balance Card */}
         <div
           style={{
-            backgroundColor: '#1E1E32',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface-elevated, #182236)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
             borderRadius: '14px',
             padding: '16px',
             color: '#FFFFFF',
@@ -104,7 +104,7 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
           <div style={{ fontSize: '11px', fontWeight: 700, color: '#A2A2BA', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             {t('home.total_balance', 'Total Available Balance')}
           </div>
-          <div style={{ fontSize: '26px', fontWeight: 900, marginTop: '4px', letterSpacing: '0.01em', color: '#7FE87F' }}>
+          <div className="tabular-nums" style={{ fontSize: '26px', fontWeight: 900, marginTop: '4px', letterSpacing: '0.01em', color: 'var(--brand-green, #00D09C)' }}>
             {formatCurrency(totalBalance, language)}
           </div>
           <div style={{ fontSize: '11px', color: '#6E6E85', marginTop: '4px' }}>
@@ -132,23 +132,22 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     padding: '12px',
-                    borderRadius: '10px',
-                    backgroundColor: '#1E1E32',
-                    border: '1px solid #2C2C44',
+                    borderRadius: '12px',
+                    backgroundColor: 'var(--color-surface-elevated, #182236)',
+                    border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div
                       style={{
-                        width: '32px',
-                        height: '32px',
-                        borderRadius: '8px',
-                        backgroundColor: 'rgba(127, 232, 127, 0.12)',
+                        width: '34px',
+                        height: '34px',
+                        borderRadius: '10px',
+                        backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: '#7FE87F',
-                        border: '1px solid rgba(127, 232, 127, 0.3)',
+                        color: 'var(--brand-green, #00D09C)',
                       }}
                     >
                       <Landmark size={16} />
@@ -163,11 +162,11 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
                     </div>
                   </div>
                   <div style={{ textAlign: language === 'العربية' ? 'left' : 'right' }}>
-                    <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
+                    <div className="tabular-nums" style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
                       {formatCurrency(bank.balance, language)}
                     </div>
                     {bank.isPrimary && (
-                      <span style={{ fontSize: '9px', fontWeight: 800, color: '#7FE87F' }}>
+                      <span style={{ fontSize: '9px', fontWeight: 800, color: 'var(--brand-green, #00D09C)' }}>
                         {t('banks.primary', 'PRIMARY')}
                       </span>
                     )}
@@ -185,11 +184,12 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
               onClose();
               onManageAccounts();
             }}
+            className="interactive-tap"
             style={{
               flex: 1,
-              backgroundColor: '#1E1E32',
-              border: '1px solid #2C2C44',
-              borderRadius: '10px',
+              backgroundColor: 'var(--color-surface-elevated, #182236)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+              borderRadius: '12px',
               padding: '12px',
               fontSize: '13px',
               fontWeight: 800,
@@ -202,19 +202,20 @@ export const BalanceSummaryModal: React.FC<BalanceSummaryModalProps> = ({
             }}
           >
             {t('banks.title', 'Manage Accounts')}{' '}
-            <ArrowRight size={14} color="#7FE87F" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+            <ArrowRight size={14} color="var(--brand-green, #00D09C)" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
           </button>
           <button
             onClick={onClose}
+            className="interactive-tap"
             style={{
               flex: 1,
-              backgroundColor: '#7FE87F',
+              backgroundColor: 'var(--brand-green, #00D09C)',
               border: 'none',
-              borderRadius: '10px',
+              borderRadius: '12px',
               padding: '12px',
               fontSize: '13px',
               fontWeight: 800,
-              color: '#000000',
+              color: 'var(--brand-green-ink, #080C14)',
               cursor: 'pointer',
             }}
           >

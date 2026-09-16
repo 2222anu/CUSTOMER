@@ -203,8 +203,8 @@ export const AddBankModal: React.FC = () => {
                     }}
                     className={`bank-item interactive-tap ${isSelected ? 'selected' : ''}`}
                     style={{
-                      backgroundColor: isSelected ? 'rgba(52, 211, 153, 0.08)' : '#182236',
-                      border: isSelected ? '1.5px solid #34d399' : '1px solid rgba(255, 255, 255, 0.06)',
+                      backgroundColor: isSelected ? 'var(--brand-green-tint)' : 'var(--color-surface-elevated)',
+                      border: isSelected ? '1.5px solid var(--brand-green)' : '1px solid var(--color-border)',
                       borderRadius: '16px',
                       padding: '12px 14px',
                       display: 'flex',
@@ -221,15 +221,15 @@ export const AddBankModal: React.FC = () => {
                           width: '40px',
                           height: '40px',
                           borderRadius: '12px',
-                          backgroundColor: '#111726',
-                          border: '1px solid rgba(255, 255, 255, 0.08)',
+                          backgroundColor: 'var(--brand-green-tint)',
+                          border: 'none',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           flexShrink: 0,
                         }}
                       >
-                        <Landmark size={20} color="#34d399" />
+                        <Landmark size={20} color="var(--brand-green)" />
                       </div>
                       <div>
                         <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{displayBankName}</div>
@@ -248,24 +248,24 @@ export const AddBankModal: React.FC = () => {
             <div className="match-section" style={{ marginBottom: '18px' }}>
               <div
                 style={{
-                  fontSize: '11px',
-                  fontWeight: 800,
+                  fontSize: '11.5px',
+                  fontWeight: 700,
                   color: '#9ca3af',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
+                  letterSpacing: '0.04em',
                   marginBottom: '10px',
                 }}
               >
-                {language === 'العربية' ? 'طريقة مطابقة الحساب' : 'ACCOUNT MATCH METHOD'}
+                {language === 'العربية' ? 'طريقة الربط' : 'Link With'}
               </div>
               <div className="match-tabs" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                 <div
                   className={`match-tab interactive-tap ${matchMethod === 'mobile' ? 'active' : ''}`}
                   onClick={() => setMatchMethod('mobile')}
                   style={{
-                    backgroundColor: matchMethod === 'mobile' ? 'rgba(52, 211, 153, 0.12)' : '#182236',
-                    border: matchMethod === 'mobile' ? '1px solid #34d399' : '1px solid rgba(255, 255, 255, 0.06)',
-                    color: matchMethod === 'mobile' ? '#34d399' : '#9ca3af',
+                    backgroundColor: matchMethod === 'mobile' ? 'var(--brand-green-tint)' : 'var(--color-surface-elevated)',
+                    border: matchMethod === 'mobile' ? '1px solid var(--brand-green)' : '1px solid var(--color-border)',
+                    color: matchMethod === 'mobile' ? 'var(--brand-green)' : '#9ca3af',
                     borderRadius: '14px',
                     padding: '11px',
                     display: 'flex',
@@ -277,16 +277,16 @@ export const AddBankModal: React.FC = () => {
                     cursor: 'pointer',
                   }}
                 >
-                  <Smartphone size={16} color={matchMethod === 'mobile' ? '#34d399' : '#9ca3af'} />
-                  <span>{language === 'العربية' ? 'الجوال المسجل' : 'Registered Mobile'}</span>
+                  <Smartphone size={16} color={matchMethod === 'mobile' ? 'var(--brand-green)' : '#9ca3af'} />
+                  <span>{language === 'العربية' ? 'رقم الجوال' : 'Mobile Number'}</span>
                 </div>
                 <div
                   className={`match-tab interactive-tap ${matchMethod === 'iban' ? 'active' : ''}`}
                   onClick={() => setMatchMethod('iban')}
                   style={{
-                    backgroundColor: matchMethod === 'iban' ? 'rgba(52, 211, 153, 0.12)' : '#182236',
-                    border: matchMethod === 'iban' ? '1px solid #34d399' : '1px solid rgba(255, 255, 255, 0.06)',
-                    color: matchMethod === 'iban' ? '#34d399' : '#9ca3af',
+                    backgroundColor: matchMethod === 'iban' ? 'var(--brand-green-tint)' : 'var(--color-surface-elevated)',
+                    border: matchMethod === 'iban' ? '1px solid var(--brand-green)' : '1px solid var(--color-border)',
+                    color: matchMethod === 'iban' ? 'var(--brand-green)' : '#9ca3af',
                     borderRadius: '14px',
                     padding: '11px',
                     display: 'flex',
@@ -298,8 +298,8 @@ export const AddBankModal: React.FC = () => {
                     cursor: 'pointer',
                   }}
                 >
-                  <CreditCard size={16} color={matchMethod === 'iban' ? '#34d399' : '#9ca3af'} />
-                  <span>{language === 'العربية' ? 'الآيبان السعودي' : 'Saudi IBAN'}</span>
+                  <CreditCard size={16} color={matchMethod === 'iban' ? 'var(--brand-green)' : '#9ca3af'} />
+                  <span>{language === 'العربية' ? 'الآيبان (IBAN)' : 'IBAN'}</span>
                 </div>
               </div>
 
@@ -315,8 +315,8 @@ export const AddBankModal: React.FC = () => {
                       width: '100%',
                       padding: '13px 16px',
                       borderRadius: '14px',
-                      backgroundColor: '#182236',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      backgroundColor: 'var(--color-surface-elevated)',
+                      border: '1px solid var(--color-border)',
                       color: '#FFFFFF',
                       fontSize: '13.5px',
                       fontWeight: 700,

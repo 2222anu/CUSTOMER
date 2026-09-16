@@ -97,15 +97,14 @@ export const HomeScreen: React.FC = () => {
             className="interactive-tap"
             onClick={() => navigateTo('ONBOARDING_KYC')}
             style={{
-              backgroundColor: '#111726',
-              border: '1px solid rgba(52, 211, 153, 0.4)',
+              backgroundColor: 'var(--color-surface)',
+              border: '1px solid var(--brand-green-border)',
               borderRadius: '20px',
               padding: '16px 18px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               gap: '12px',
-              boxShadow: '0 10px 25px -5px rgba(52, 211, 153, 0.15)',
               cursor: 'pointer',
             }}
           >
@@ -115,22 +114,22 @@ export const HomeScreen: React.FC = () => {
                   width: '42px',
                   height: '42px',
                   borderRadius: '12px',
-                  backgroundColor: 'rgba(52, 211, 153, 0.12)',
-                  border: '1px solid rgba(52, 211, 153, 0.3)',
+                  backgroundColor: 'var(--brand-green-tint)',
+                  border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
                 }}
               >
-                <ShieldCheck size={22} color="#34d399" />
+                <ShieldCheck size={22} color="var(--brand-green)" />
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
-                  {language === 'العربية' ? 'توثيق الهوية الوطنية الرقمية (e-KYC)' : 'Digital ID Verification (e-KYC)'}
+                <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
+                  {language === 'العربية' ? 'توثيق الهوية' : 'Verify Identity'}
                 </div>
-                <div style={{ fontSize: '11px', color: '#9ca3af', fontWeight: 600, marginTop: '2px' }}>
-                  {language === 'العربية' ? 'وثّق هويتك لفتح سقف التحويل اليومي (٥٠,٠٠٠ ر.س)' : 'Verify identity to unlock full SAR 50,000 limits'}
+                <div style={{ fontSize: '11.5px', color: 'var(--color-text-secondary)', fontWeight: 500, marginTop: '2px' }}>
+                  {language === 'العربية' ? 'وثّق هويتك لفتح سقف التحويل اليومي' : 'Verify with Absher to unlock SAR 50,000 limit'}
                 </div>
               </div>
             </div>
@@ -140,15 +139,15 @@ export const HomeScreen: React.FC = () => {
                 e.stopPropagation();
                 navigateTo('ONBOARDING_KYC');
               }}
-              className="action-btn interactive-tap"
+              className="interactive-tap"
               style={{
                 width: 'auto',
                 padding: '8px 14px',
                 borderRadius: '12px',
                 fontSize: '12px',
                 fontWeight: 800,
-                backgroundColor: '#34d399',
-                color: '#080c14',
+                backgroundColor: 'var(--brand-green)',
+                color: 'var(--brand-green-ink)',
                 border: 'none',
                 cursor: 'pointer',
                 flexShrink: 0,
@@ -160,31 +159,13 @@ export const HomeScreen: React.FC = () => {
         </div>
       )}
 
-      {/* 2. Total Balance & Instant Sarie Overview Hero (Modern Premium Banking Card UI) */}
+      {/* 2. Total Balance & Instant Sarie Overview Hero */}
       <div style={{ padding: '14px 20px 0 20px', position: 'relative' }}>
-        {/* Ambient background glow aura */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '90%',
-            height: '140px',
-            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.05) 50%, transparent 75%)',
-            filter: 'blur(35px)',
-            borderRadius: '50%',
-            pointerEvents: 'none',
-            zIndex: 0,
-          }}
-        />
-
         <div
           style={{
             position: 'relative',
-            zIndex: 1,
-            background: 'linear-gradient(145deg, #0a422a 0%, #031b11 100%)',
-            border: '1px solid rgba(52, 211, 153, 0.35)',
+            background: 'linear-gradient(145deg, #0d3829 0%, #061e16 100%)',
+            border: '1px solid var(--brand-green-border)',
             borderRadius: '24px',
             padding: '24px 22px',
             color: '#FFFFFF',
@@ -372,7 +353,7 @@ export const HomeScreen: React.FC = () => {
                 boxShadow: 'none',
               }}
             >
-              <Landmark size={15} color="#34d399" />
+              <Landmark size={15} color="var(--brand-green)" />
               <span>{t('home.accounts', 'Accounts')}</span>
             </button>
           </div>
@@ -383,8 +364,8 @@ export const HomeScreen: React.FC = () => {
       <div style={{ padding: '14px 20px 0 20px' }}>
         <div
           style={{
-            backgroundColor: '#151524',
-            border: '1px solid #2C2C44',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: '18px',
             padding: '18px 16px',
             boxShadow: 'none',
@@ -414,15 +395,15 @@ export const HomeScreen: React.FC = () => {
                   width: '54px',
                   height: '54px',
                   borderRadius: '16px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--brand-green-tint)',
+                  border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   boxShadow: 'none',
                 }}
               >
-                <Camera size={22} color="#7FE87F" />
+                <Camera size={22} color="var(--brand-green)" />
               </div>
               <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
                 {t('home.scan_qr', 'Scan QR')}
@@ -446,15 +427,15 @@ export const HomeScreen: React.FC = () => {
                   width: '54px',
                   height: '54px',
                   borderRadius: '16px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--brand-green-tint)',
+                  border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   boxShadow: 'none',
                 }}
               >
-                <Send size={22} color="#7FE87F" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+                <Send size={22} color="var(--brand-green)" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
               </div>
               <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
                 {t('home.send_money', 'Send Money')}
@@ -478,15 +459,15 @@ export const HomeScreen: React.FC = () => {
                   width: '54px',
                   height: '54px',
                   borderRadius: '16px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--brand-green-tint)',
+                  border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   boxShadow: 'none',
                 }}
               >
-                <QrCode size={22} color="#7FE87F" />
+                <QrCode size={22} color="var(--brand-green)" />
               </div>
               <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
                 {t('home.receive', 'Receive')}
@@ -510,15 +491,15 @@ export const HomeScreen: React.FC = () => {
                   width: '54px',
                   height: '54px',
                   borderRadius: '16px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--brand-green-tint)',
+                  border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   boxShadow: 'none',
                 }}
               >
-                <Landmark size={22} color="#7FE87F" />
+                <Landmark size={22} color="var(--brand-green)" />
               </div>
               <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
                 {t('home.accounts', 'Accounts')}
@@ -557,7 +538,7 @@ export const HomeScreen: React.FC = () => {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#34d399',
+                color: 'var(--brand-green)',
                 fontSize: '12.5px',
                 fontWeight: 700,
                 cursor: 'pointer',
@@ -591,15 +572,15 @@ export const HomeScreen: React.FC = () => {
                   width: '50px',
                   height: '50px',
                   borderRadius: '14px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--brand-green-tint)',
+                  border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   boxShadow: 'none',
                 }}
               >
-                <Zap size={22} color="#7FE87F" />
+                <Zap size={22} color="var(--brand-green)" />
               </div>
               <span style={{ fontSize: '11px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
                 {t('home.electricity', 'Electricity')}
@@ -623,15 +604,15 @@ export const HomeScreen: React.FC = () => {
                   width: '50px',
                   height: '50px',
                   borderRadius: '14px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--brand-green-tint)',
+                  border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   boxShadow: 'none',
                 }}
               >
-                <Smartphone size={22} color="#7FE87F" />
+                <Smartphone size={22} color="var(--brand-green)" />
               </div>
               <span style={{ fontSize: '11px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
                 {t('home.telecom', 'Telecom')}
@@ -655,15 +636,15 @@ export const HomeScreen: React.FC = () => {
                   width: '50px',
                   height: '50px',
                   borderRadius: '14px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--brand-green-tint)',
+                  border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   boxShadow: 'none',
                 }}
               >
-                <Droplets size={22} color="#7FE87F" />
+                <Droplets size={22} color="var(--brand-green)" />
               </div>
               <span style={{ fontSize: '11px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
                 {t('home.water', 'Water')}
@@ -687,15 +668,15 @@ export const HomeScreen: React.FC = () => {
                   width: '50px',
                   height: '50px',
                   borderRadius: '14px',
-                  backgroundColor: '#1E1E32',
-                  border: '1px solid #2C2C44',
+                  backgroundColor: 'var(--brand-green-tint)',
+                  border: 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   boxShadow: 'none',
                 }}
               >
-                <Car size={22} color="#7FE87F" />
+                <Car size={22} color="var(--brand-green)" />
               </div>
               <span style={{ fontSize: '11px', fontWeight: 700, color: '#FFFFFF', textAlign: 'center' }}>
                 {t('home.traffic_fines', 'Traffic Fines')}
@@ -711,9 +692,9 @@ export const HomeScreen: React.FC = () => {
           onClick={() => navigateTo('SPEND_ANALYSIS')}
           className="interactive-tap"
           style={{
-            backgroundColor: '#111726',
+            backgroundColor: 'var(--color-surface)',
             borderRadius: '20px',
-            border: '1px solid #2C2C44',
+            border: '1px solid var(--color-border)',
             padding: '16px 18px',
             display: 'flex',
             alignItems: 'center',
@@ -728,15 +709,15 @@ export const HomeScreen: React.FC = () => {
                 width: '42px',
                 height: '42px',
                 borderRadius: '12px',
-                backgroundColor: 'rgba(127, 232, 127, 0.12)',
-                border: '1px solid rgba(127, 232, 127, 0.3)',
+                backgroundColor: 'var(--brand-green-tint)',
+                border: 'none',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexShrink: 0,
               }}
             >
-              <PieChart size={20} color="#7FE87F" />
+              <PieChart size={20} color="var(--brand-green)" />
             </div>
 
             <div style={{ flex: 1, minWidth: 0 }}>
@@ -751,8 +732,8 @@ export const HomeScreen: React.FC = () => {
                     gap: '2px',
                     fontSize: '10.5px',
                     fontWeight: 800,
-                    color: '#7FE87F',
-                    backgroundColor: 'rgba(127, 232, 127, 0.15)',
+                    color: 'var(--brand-green)',
+                    backgroundColor: 'var(--brand-green-tint)',
                     padding: '2px 6px',
                     borderRadius: '6px',
                   }}
@@ -785,7 +766,7 @@ export const HomeScreen: React.FC = () => {
             style={{
               background: 'none',
               border: 'none',
-              color: '#34d399',
+              color: 'var(--brand-green)',
               fontSize: '12.5px',
               fontWeight: 700,
               cursor: 'pointer',

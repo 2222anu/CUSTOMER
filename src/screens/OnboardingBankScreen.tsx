@@ -174,11 +174,11 @@ export const OnboardingBankScreen: React.FC = () => {
               <Landmark size={24} color="#34d399" />
             </div>
             <div>
-              <h3 style={{ fontSize: '16.5px', fontWeight: 800, margin: 0, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
-                {language === 'العربية' ? 'ربط الحساب البنكي السعودي' : 'Link Saudi Bank Account'}
+              <h3 style={{ fontSize: '17px', fontWeight: 800, margin: 0, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
+                {language === 'العربية' ? 'اختر البنك' : 'Select Bank'}
               </h3>
-              <span style={{ fontSize: '11.5px', color: '#34d399', fontWeight: 700, marginTop: '2px', display: 'block' }}>
-                {language === 'العربية' ? 'ربط فوري ومعتمد عبر نظام سريع' : 'Sarie Instant Clearing & Verification'}
+              <span style={{ fontSize: '12px', color: '#9ca3af', fontWeight: 500, marginTop: '2px', display: 'block' }}>
+                {language === 'العربية' ? 'ربط فوري عبر نظام سريع' : 'Instant linking with Sarie'}
               </span>
             </div>
           </div>
@@ -188,16 +188,16 @@ export const OnboardingBankScreen: React.FC = () => {
             <div id="selectionView" className="fade-in">
               <div
                 style={{
-                  fontSize: '11px',
-                  fontWeight: 800,
+                  fontSize: '11.5px',
+                  fontWeight: 700,
                   color: '#9ca3af',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
+                  letterSpacing: '0.04em',
                   marginBottom: '10px',
                   display: 'block',
                 }}
               >
-                {language === 'العربية' ? 'اختر البنك السعودي' : 'Select Saudi Bank'}
+                {language === 'العربية' ? 'البنوك المتاحة' : 'Available Banks'}
               </div>
 
               <div
@@ -274,15 +274,15 @@ export const OnboardingBankScreen: React.FC = () => {
               <div className="match-section" style={{ marginBottom: '20px' }}>
                 <div
                   style={{
-                    fontSize: '11px',
-                    fontWeight: 800,
+                    fontSize: '11.5px',
+                    fontWeight: 700,
                     color: '#9ca3af',
                     textTransform: 'uppercase',
-                    letterSpacing: '0.06em',
+                    letterSpacing: '0.04em',
                     marginBottom: '10px',
                   }}
                 >
-                  {language === 'العربية' ? 'طريقة مطابقة الحساب' : 'ACCOUNT MATCH METHOD'}
+                  {language === 'العربية' ? 'طريقة الربط' : 'Link With'}
                 </div>
                 <div className="match-tabs" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                   <div
@@ -304,7 +304,7 @@ export const OnboardingBankScreen: React.FC = () => {
                     }}
                   >
                     <Smartphone size={16} color={matchMethod === 'mobile' ? '#34d399' : '#9ca3af'} />
-                    <span>{language === 'العربية' ? 'الجوال المسجل' : 'Registered Mobile'}</span>
+                    <span>{language === 'العربية' ? 'رقم الجوال' : 'Mobile Number'}</span>
                   </div>
                   <div
                     className={`match-tab interactive-tap ${matchMethod === 'iban' ? 'active' : ''}`}
@@ -325,7 +325,7 @@ export const OnboardingBankScreen: React.FC = () => {
                     }}
                   >
                     <CreditCard size={16} color={matchMethod === 'iban' ? '#34d399' : '#9ca3af'} />
-                    <span>{language === 'العربية' ? 'الآيبان السعودي' : 'Saudi IBAN'}</span>
+                    <span>{language === 'العربية' ? 'الآيبان (IBAN)' : 'IBAN'}</span>
                   </div>
                 </div>
 

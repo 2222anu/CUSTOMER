@@ -73,8 +73,8 @@ export const UPISettingsScreen: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ fontSize: '11px', color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>
-              {isAr ? 'معرّف الدفع الافتراضي (VPA)' : 'Primary Payment Alias (VPA)'}
+            <div style={{ fontSize: '11.5px', color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 800 }}>
+              {isAr ? 'معرّف الدفع (Alias)' : 'Payment Alias'}
             </div>
             <span
               style={{
@@ -87,7 +87,7 @@ export const UPISettingsScreen: React.FC = () => {
                 border: '1px solid rgba(52, 211, 153, 0.25)',
               }}
             >
-              {isAr ? 'مشفر ومرتبط بسريع' : 'SARIE Tokenized'}
+              {isAr ? 'موثق عبر سريع' : 'Sarie Verified'}
             </span>
           </div>
 
@@ -276,10 +276,10 @@ export const UPISettingsScreen: React.FC = () => {
           title={isAr ? 'تبديل الحساب المرتبط بالمعرّف' : 'Switch Alias Receiving Bank'}
         >
           <div style={{ padding: '8px 0' }}>
-            <p style={{ fontSize: '12.5px', color: '#9ca3af', marginBottom: '16px', lineHeight: '1.5' }}>
+            <p style={{ fontSize: '13px', color: '#9ca3af', marginBottom: '16px', lineHeight: '1.4' }}>
               {isAr
-                ? 'اختر الحساب البنكي الذي ترغب في استقبال الحوالات الموجهة إلى معرّفك عليه مباشرة دون تغيير المعرّف.'
-                : 'Select the linked bank account to receive payments sent to your @qtpay alias seamlessly without changing your address.'}
+                ? 'اختر الحساب البنكي الذي ترغب في استقبال الحوالات عليه مباشرة عبر معرّفك.'
+                : 'Choose which bank account receives transfers sent to your @qtpay alias.'}
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>

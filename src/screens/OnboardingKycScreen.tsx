@@ -93,11 +93,11 @@ export const OnboardingKycScreen: React.FC = () => {
               <ShieldCheck size={24} color="#34d399" />
             </div>
             <div>
-              <h3 style={{ fontSize: '16.5px', fontWeight: 800, margin: 0, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
-                {language === 'العربية' ? 'توثيق الهوية عبر أبشر' : 'Absher Digital e-KYC Verification'}
+              <h3 style={{ fontSize: '17px', fontWeight: 800, margin: 0, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
+                {language === 'العربية' ? 'توثيق الهوية' : 'Verify Identity'}
               </h3>
-              <span style={{ fontSize: '11.5px', color: '#34d399', fontWeight: 700, marginTop: '2px', display: 'block' }}>
-                {language === 'العربية' ? 'ربط آمن ومعتمد عبر منصة أبشر والسجل الوطني' : 'Absher & Saudi National Registry Integrated'}
+              <span style={{ fontSize: '12px', color: '#9ca3af', fontWeight: 500, marginTop: '2px', display: 'block' }}>
+                {language === 'العربية' ? 'توثيق سريع عبر منصة أبشر' : 'Quick verification with Absher'}
               </span>
             </div>
           </div>
@@ -110,16 +110,16 @@ export const OnboardingKycScreen: React.FC = () => {
                 <label
                   htmlFor="onboarding-national-id"
                   style={{
-                    fontSize: '11px',
-                    fontWeight: 800,
+                    fontSize: '11.5px',
+                    fontWeight: 700,
                     color: '#9ca3af',
                     textTransform: 'uppercase',
-                    letterSpacing: '0.06em',
+                    letterSpacing: '0.04em',
                     marginBottom: '8px',
                     display: 'block',
                   }}
                 >
-                  {language === 'العربية' ? 'رقم الهوية الوطنية / الإقامة (١٠ أرقام)' : 'National ID / Iqama (10 Digits)'}
+                  {language === 'العربية' ? 'رقم الهوية الوطنية / الإقامة' : 'National ID / Iqama'}
                 </label>
                 <div
                   style={{

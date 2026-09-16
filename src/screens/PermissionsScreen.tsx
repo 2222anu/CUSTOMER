@@ -24,7 +24,7 @@ export const PermissionsScreen: React.FC = () => {
     {
       key: 'sms',
       icon: <MessageSquare size={19} />,
-      name: language === 'العربية' ? 'التحقق عبر الرسائل القصيرة (SMS)' : 'SMS Verification',
+      name: language === 'العربية' ? 'الرسائل النصية (SMS)' : 'SMS Verification',
       required: true,
     },
     {
@@ -36,25 +36,25 @@ export const PermissionsScreen: React.FC = () => {
     {
       key: 'contacts',
       icon: <Users size={19} />,
-      name: language === 'العربية' ? 'الوصول لجهات الاتصال' : 'Contacts Access',
+      name: language === 'العربية' ? 'جهات الاتصال' : 'Contacts',
       required: false,
     },
     {
       key: 'camera',
       icon: <Camera size={19} />,
-      name: language === 'العربية' ? 'الكاميرا ومسح الباركود' : 'Camera & QR Scanner',
+      name: language === 'العربية' ? 'الكاميرا (مسح QR)' : 'Camera (QR Scanner)',
       required: false,
     },
     {
       key: 'location',
       icon: <MapPin size={19} />,
-      name: language === 'العربية' ? 'أمان الموقع الجغرافي' : 'Location Security',
+      name: language === 'العربية' ? 'الموقع الجغرافي' : 'Location',
       required: false,
     },
     {
       key: 'mic',
       icon: <Mic size={19} />,
-      name: language === 'العربية' ? 'التنبيهات الصوتية والدفع الصوتي' : 'Audio Alerts & Voice Pay',
+      name: language === 'العربية' ? 'الميكروفون' : 'Microphone',
       required: false,
     },
   ];

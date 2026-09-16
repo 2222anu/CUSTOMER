@@ -212,15 +212,15 @@ export const HomeScreen: React.FC = () => {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span
                 style={{
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  letterSpacing: '1.6px',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  letterSpacing: '0.04em',
                   color: '#86efac',
                   textTransform: 'uppercase',
                   lineHeight: 1.35,
                 }}
               >
-                {t('home.total_balance', 'TOTAL AVAILABLE BALANCE')}
+                {t('home.total_balance', 'Total Balance')}
               </span>
             </div>
 
@@ -391,8 +391,8 @@ export const HomeScreen: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
-              {t('home.transfer_pay', 'Transfer & Pay')}
+            <h3 style={{ fontSize: '14.5px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
+              {t('home.quick_actions', 'Quick Actions')}
             </h3>
           </div>
 
@@ -547,8 +547,8 @@ export const HomeScreen: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
-              {t('home.utilities_services', 'Bills & Public Utilities')}
+            <h3 style={{ fontSize: '14.5px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
+              {t('home.utilities_services', 'Bills & Utilities')}
             </h3>
 
             <button
@@ -741,15 +741,15 @@ export const HomeScreen: React.FC = () => {
 
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
-                  {language === 'العربية' ? 'تحليل المصاريف الشهرية' : 'Monthly Spend Analysis'}
+                <span style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
+                  {language === 'العربية' ? 'مصاريف الشهر' : 'Monthly Spend'}
                 </span>
                 <span
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '2px',
-                    fontSize: '10px',
+                    fontSize: '10.5px',
                     fontWeight: 800,
                     color: '#7FE87F',
                     backgroundColor: 'rgba(127, 232, 127, 0.15)',
@@ -761,10 +761,10 @@ export const HomeScreen: React.FC = () => {
                   12.4%
                 </span>
               </div>
-              <div style={{ fontSize: '11.5px', color: '#A2A2BA', marginTop: '2px' }}>
+              <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px' }}>
                 {language === 'العربية'
-                  ? 'تم إنفاق ١٤٬٨٥٠ ر.س في سبتمبر • اضغط لعرض التحليل الكامل'
-                  : 'SAR 14,850.00 spent in September • Tap to view insights'}
+                  ? '١٤٬٨٥٠ ر.س في سبتمبر • عرض التحليل'
+                  : 'SAR 14,850.00 in September • View breakdown'}
               </div>
             </div>
           </div>

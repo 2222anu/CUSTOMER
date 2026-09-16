@@ -83,20 +83,20 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
   const slides: OnboardingSlideData[] = [
     {
       id: 'cards',
-      title: 'Diverse Card Options',
-      subtitle: 'Explore a variety of payment cards tailored to your daily needs. Pay instantly with bank-grade security.',
+      title: 'Pay Anyone Instantly',
+      subtitle: 'Send and receive money across all Saudi banks with zero fees.',
       visual: <CardsIllustration />,
     },
     {
       id: 'wealth',
-      title: 'Grow Your Wealth',
-      subtitle: 'Discover a smarter way to manage your finances. Link and control all Saudi bank accounts in one unified dashboard.',
+      title: 'All Banks in One Place',
+      subtitle: 'Link your accounts and view your balances at a glance.',
       visual: <HubIllustration />,
     },
     {
       id: 'security',
-      title: 'Secure & Reliable',
-      subtitle: 'Your security is our top priority. Protected by SAMA 256-bit encryption and Sarie national payment rail.',
+      title: 'Safe & Protected',
+      subtitle: 'Secured by Absher verification and SAMA regulations.',
       visual: <SecurityIllustration />,
     },
   ];

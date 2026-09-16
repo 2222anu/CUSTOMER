@@ -88,10 +88,10 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
         <div
           style={{
             backgroundColor: '#151524',
-            border: '1.5px solid rgba(127, 232, 127, 0.35)',
+            border: '1px solid #2C2C44',
             borderRadius: '16px',
-            padding: '24px 20px',
-            marginBottom: '22px',
+            padding: '22px 20px',
+            marginBottom: '20px',
             textAlign: 'center',
             color: '#FFFFFF',
             boxShadow: 'none',
@@ -99,9 +99,9 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
         >
           <div
             style={{
-              width: '54px',
-              height: '54px',
-              borderRadius: '16px',
+              width: '50px',
+              height: '50px',
+              borderRadius: '14px',
               backgroundColor: 'rgba(127, 232, 127, 0.15)',
               color: '#7FE87F',
               display: 'flex',
@@ -111,46 +111,46 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
               border: '1px solid rgba(127, 232, 127, 0.3)',
             }}
           >
-            <HelpCircle size={28} />
+            <HelpCircle size={24} />
           </div>
-          <h3 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '6px', color: '#FFFFFF', margin: 0 }}>
-            {isAr ? 'الدعم الفني المباشر ٢٤/٧' : '24/7 Priority Support'}
+          <h3 style={{ fontSize: '17px', fontWeight: 800, marginBottom: '4px', color: '#FFFFFF', margin: 0 }}>
+            {isAr ? 'كيف نقدر نساعدك؟' : 'How can we help?'}
           </h3>
-          <p style={{ fontSize: '12.5px', color: '#A2A2BA', marginTop: '6px', marginBottom: 0 }}>
-            {isAr ? 'حل فوري للشكاوى ومساعدة مصرفية معتمدة' : 'Instant dispute resolution and accredited banking assistance'}
+          <p style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '4px', marginBottom: 0 }}>
+            {isAr ? 'فريق الدعم متواجد على مدار الساعة' : 'Support team available 24/7'}
           </p>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginLeft: '4px' }}>
-          {isAr ? 'قنوات الاتصال المباشرة' : 'Contact Channels'}
+        <div style={{ fontSize: '11.5px', fontWeight: 700, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px', marginLeft: '4px' }}>
+          {isAr ? 'قنوات التواصل' : 'Get in Touch'}
         </div>
 
         <div style={{ backgroundColor: '#151524', border: '1px solid #2C2C44', borderRadius: '16px', overflow: 'hidden', marginBottom: '24px', boxShadow: 'none' }}>
           <ListRow
             icon={<MessageSquare size={18} color="#7FE87F" />}
-            label={isAr ? 'المحادثة الفورية' : 'Live Chat'}
+            label={isAr ? 'المحادثة المباشرة' : 'Live Chat'}
             subLabel={isAr ? 'متوسط الرد: ~١ دقيقة' : 'Avg response: ~1 min'}
             onClick={() => setActiveModal('chat')}
           />
           <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<PhoneCall size={18} color="#7FE87F" />}
-            label={isAr ? 'الرقم المجاني الموحد' : 'Toll-Free Hotline'}
+            label={isAr ? 'الهاتف المجاني' : 'Toll-Free Phone'}
             subLabel="800-123-QTPAY"
             onClick={() => setActiveModal('call')}
           />
           <div style={{ height: '1px', backgroundColor: '#2C2C44', margin: '0 16px' }} />
           <ListRow
             icon={<ShieldAlert size={18} color="#7FE87F" />}
-            label={isAr ? 'النزاعات وعمليات الاحتيال' : 'Dispute & Fraud'}
-            subLabel={isAr ? 'تقديم اعتراض على معاملة مالية' : 'File a transaction complaint'}
+            label={isAr ? 'الإبلاغ عن مشكلة' : 'Report an Issue'}
+            subLabel={isAr ? 'اعتراض على عملية أو اشتباه احتيال' : 'Dispute or fraud report'}
             onClick={() => setActiveModal('dispute')}
           />
         </div>
 
         {/* FAQs */}
-        <div style={{ fontSize: '11px', fontWeight: 800, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px', marginLeft: '4px' }}>
-          {isAr ? 'الأسئلة الشائعة' : 'Frequently Asked Questions'}
+        <div style={{ fontSize: '11.5px', fontWeight: 700, color: '#6E6E85', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '10px', marginLeft: '4px' }}>
+          {isAr ? 'الأسئلة الشائعة' : 'FAQs'}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>

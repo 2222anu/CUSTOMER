@@ -83,8 +83,8 @@ export const ElectricityScreen: React.FC = () => {
           <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>
             {language === 'العربية' ? 'فاتورة الكهرباء' : 'Electricity Bill'}
           </h2>
-          <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 800, marginTop: '4px' }}>
-            {language === 'العربية' ? 'الشركة السعودية للكهرباء (SEC) • معتمد' : 'Saudi Electricity Company (SEC) • Verified Provider'}
+          <div style={{ fontSize: '12px', color: '#7FE87F', fontWeight: 700, marginTop: '4px' }}>
+            {language === 'العربية' ? 'الشركة السعودية للكهرباء (SEC)' : 'Saudi Electricity Company (SEC)'}
           </div>
         </div>
 
@@ -93,17 +93,17 @@ export const ElectricityScreen: React.FC = () => {
           <label
             htmlFor="elec-consumer-input"
             style={{
-              fontSize: '11px',
-              color: '#6E6E85',
-              fontWeight: '800',
-              letterSpacing: '0.06em',
+              fontSize: '11.5px',
+              color: '#9ca3af',
+              fontWeight: 700,
+              letterSpacing: '0.04em',
               textTransform: 'uppercase',
               marginBottom: '8px',
               display: 'block',
               marginInlineStart: '4px',
             }}
           >
-            {t('bills.consumer_num', 'Consumer / Account Number')}
+            {t('bills.consumer_num', 'Account Number')}
           </label>
           <div
             style={{

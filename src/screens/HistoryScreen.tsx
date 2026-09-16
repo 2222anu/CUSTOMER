@@ -254,7 +254,7 @@ export const HistoryScreen: React.FC = () => {
         <BottomSheet
           isOpen={Boolean(selectedTxn)}
           onClose={handleCloseModal}
-          title={isAr ? 'تفاصيل العملية والإيصال' : 'Transaction Details & SLA'}
+          title={isAr ? 'إيصال العملية' : 'Receipt'}
         >
           <div style={{ paddingBottom: '12px' }}>
             {!isDisputing ? (
@@ -276,11 +276,11 @@ export const HistoryScreen: React.FC = () => {
                   >
                     <CheckCircle2 size={28} color="#34d399" />
                   </div>
-                  <div className="tabular-nums" style={{ fontSize: '24px', fontWeight: 900, color: '#FFFFFF' }}>
+                  <div className="tabular-nums" style={{ fontSize: '26px', fontWeight: 900, color: '#FFFFFF' }}>
                     {selectedTxn.type === 'received' ? '+' : '-'}{formatCurrency(selectedTxn.amount, language)}
                   </div>
-                  <div style={{ fontSize: '13px', color: '#34d399', fontWeight: 800, marginTop: '3px' }}>
-                    {isAr ? 'عملية مكتملة عبر سريع' : 'Completed via SARIE Instant Rails'}
+                  <div style={{ fontSize: '13px', color: '#34d399', fontWeight: 700, marginTop: '3px' }}>
+                    {isAr ? 'عملية مكتملة' : 'Transfer Complete'}
                   </div>
                 </div>
 
@@ -298,23 +298,23 @@ export const HistoryScreen: React.FC = () => {
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '12px', color: '#9ca3af' }}>{isAr ? 'الطرف الآخر' : 'Beneficiary / Sender'}</span>
+                    <span style={{ fontSize: '12px', color: '#9ca3af' }}>{selectedTxn.type === 'received' ? (isAr ? 'من' : 'From') : (isAr ? 'إلى' : 'To')}</span>
                     <span style={{ fontSize: '12.5px', fontWeight: 800, color: '#FFFFFF' }}>{selectedTxn.title}</span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '12px', color: '#9ca3af' }}>{isAr ? 'المرجع البنكي (UTR)' : 'SARIE Reference (UTR)'}</span>
+                    <span style={{ fontSize: '12px', color: '#9ca3af' }}>{isAr ? 'المرجع البنكي' : 'Reference'}</span>
                     <span style={{ fontSize: '12px', fontWeight: 700, color: '#34d399', fontFamily: 'monospace' }}>
                       {selectedTxn.utr}
                     </span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '12px', color: '#9ca3af' }}>{isAr ? 'التاريخ والوقت' : 'Date & Timestamp'}</span>
-                    <span style={{ fontSize: '12px', color: '#FFFFFF', fontWeight: 600 }}>{selectedTxn.date} • 14:22 GMT+3</span>
+                    <span style={{ fontSize: '12px', color: '#9ca3af' }}>{isAr ? 'التاريخ' : 'Date'}</span>
+                    <span style={{ fontSize: '12px', color: '#FFFFFF', fontWeight: 600 }}>{selectedTxn.date} • 14:22</span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '12px', color: '#9ca3af' }}>{isAr ? 'طريقة التحويل' : 'Payment Method'}</span>
+                    <span style={{ fontSize: '12px', color: '#9ca3af' }}>{isAr ? 'طريقة الدفع' : 'Payment'}</span>
                     <span style={{ fontSize: '12px', color: '#FFFFFF', fontWeight: 700 }}>
-                      {isAr ? 'معرّف الدفع الافتراضي (VPA)' : 'Payment Alias (VPA)'}
+                      {isAr ? 'معرّف الدفع (@qtpay)' : 'Alias (@qtpay)'}
                     </span>
                   </div>
                 </div>
@@ -341,7 +341,7 @@ export const HistoryScreen: React.FC = () => {
                     }}
                   >
                     <ShieldAlert size={16} />
-                    <span>{isAr ? 'تقديم اعتراض / استرداد' : 'Raise Dispute / Refund'}</span>
+                    <span>{isAr ? 'الإبلاغ عن مشكلة' : 'Report an Issue'}</span>
                   </button>
 
                   <button

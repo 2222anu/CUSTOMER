@@ -4,9 +4,10 @@ import { AlphPayLogo } from '../components/AlphPayLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
 import { toArabicNumerals } from '../utils/i18n';
+import { authenticateWithAnyOtp } from '../services/supabaseClient';
 
 export const SmsOtpScreen: React.FC = () => {
-  const { navigateTo, screenParams, goBack, t, isRtl, language } = useApp();
+  const { navigateTo, screenParams, goBack, t, isRtl, language, updateUser } = useApp();
   const mobile = screenParams.mobile || '501234567';
 
   const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
@@ -50,8 +51,14 @@ export const SmsOtpScreen: React.FC = () => {
 
   const isComplete = otp.every((digit) => digit.length > 0);
 
-  const handleVerify = () => {
+  const handleVerify = async () => {
     if (isComplete) {
+      try {
+        const authedUser = await authenticateWithAnyOtp(mobile, otp.join(''));
+        updateUser(authedUser);
+      } catch (e) {
+        console.warn('Auth notice:', e);
+      }
       navigateTo('PERMISSIONS');
     }
   };

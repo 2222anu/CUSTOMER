@@ -18,6 +18,7 @@ import { notificationService } from '../services/notificationService';
 import { billPaymentService } from '../services/billPaymentService';
 
 import { translateText, type SupportedLanguage } from '../utils/i18n';
+import { syncTransactionToSupabase, subscribeToTransactions } from '../services/supabaseClient';
 
 interface AppContextType {
   // Localization & Translation
@@ -217,6 +218,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     bankService.getBankAccounts().then(setBankAccounts);
     transactionService.getInitialTransactions().then(setTransactions);
     notificationService.getInitialNotifications().then(setNotifications);
+
+    // Subscribe to Supabase real-time transactions
+    const unsubscribe = subscribeToTransactions((newTx) => {
+      setTransactions((prev) => {
+        if (prev.some((t) => t.id === newTx.id || (newTx.utr && t.utr === newTx.utr))) {
+          return prev;
+        }
+        return [newTx, ...prev];
+      });
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   // Expose global test helpers for Playwright / automation verification
@@ -463,6 +478,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     setTransactions((prev) => [newTxn, ...prev]);
     setLastTransaction(newTxn);
+    syncTransactionToSupabase(newTxn);
 
     const formattedAmt = `SAR ${params.amount.toFixed(2)}`;
     const newNotif: AppNotification = {

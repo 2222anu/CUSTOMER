@@ -25,7 +25,7 @@ import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
 
 export const HomeScreen: React.FC = () => {
-  const { bankAccounts, transactions, navigateTo, setIsScanModalOpen, openPinModal, isKycVerified, t, language, isRtl } = useApp();
+  const { user, bankAccounts, transactions, navigateTo, setIsScanModalOpen, openPinModal, isKycVerified, t, language, isRtl } = useApp();
   const [isBalanceModalOpen, setIsBalanceModalOpen] = useState(false);
   const [showTotalBalance, setShowTotalBalance] = useState(false);
 

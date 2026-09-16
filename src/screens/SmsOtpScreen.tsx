@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { CheckCircle2, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { AlphPayLogo } from '../components/AlphPayLogo';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
@@ -9,9 +9,18 @@ export const SmsOtpScreen: React.FC = () => {
   const { navigateTo, screenParams, goBack, t, isRtl, language } = useApp();
   const mobile = screenParams.mobile || '501234567';
 
-  const [otp, setOtp] = useState<string[]>(['5', '8', '9', '2', '0', '4']);
+  const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
   const [timer, setTimer] = useState(28);
   const [isResent, setIsResent] = useState(false);
+
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,8 +29,31 @@ export const SmsOtpScreen: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleOtpChange = (index: number, value: string) => {
+    const cleanVal = value.replace(/\D/g, '').slice(-1);
+    const newOtp = [...otp];
+    newOtp[index] = cleanVal;
+    setOtp(newOtp);
+
+    if (cleanVal && index < 5) {
+      inputRefs[index + 1].current?.focus();
+    }
+  };
+
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace') {
+      if (!otp[index] && index > 0) {
+        inputRefs[index - 1].current?.focus();
+      }
+    }
+  };
+
+  const isComplete = otp.every((digit) => digit.length > 0);
+
   const handleVerify = () => {
-    navigateTo('PERMISSIONS');
+    if (isComplete) {
+      navigateTo('PERMISSIONS');
+    }
   };
 
   const handleResend = () => {
@@ -30,8 +62,9 @@ export const SmsOtpScreen: React.FC = () => {
     setTimeout(() => setIsResent(false), 3000);
   };
 
-  const handleAutofillDemo = () => {
+  const handleQuickFill = () => {
     setOtp(['5', '8', '9', '2', '0', '4']);
+    inputRefs[5].current?.focus();
   };
 
   return (
@@ -69,8 +102,7 @@ export const SmsOtpScreen: React.FC = () => {
           width: '100%',
           maxWidth: '380px',
           margin: '0 auto',
-          backgroundColor: 'rgba(21, 21, 36, 0.8)',
-          backdropFilter: 'blur(16px)',
+          backgroundColor: '#111726',
           border: '1px solid rgba(255, 255, 255, 0.08)',
           borderRadius: '24px',
           padding: '24px 20px',
@@ -103,78 +135,39 @@ export const SmsOtpScreen: React.FC = () => {
           </button>
         </div>
 
-        {/* 6-Digit OTP Boxes */}
-        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '18px', direction: 'ltr' }}>
+        {/* 6-Digit Clean OTP Boxes */}
+        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '20px', direction: 'ltr' }}>
           {otp.map((digit, i) => (
             <input
               key={i}
+              ref={inputRefs[i]}
               type="text"
+              inputMode="numeric"
               maxLength={1}
-              value={language === 'العربية' && digit ? toArabicNumerals(digit) : digit}
-              onChange={(e) => {
-                const val = e.target.value.replace(/[^0-9]/g, '');
-                const newOtp = [...otp];
-                newOtp[i] = val;
-                setOtp(newOtp);
-              }}
+              value={digit}
+              autoFocus={i === 0}
+              onChange={(e) => handleOtpChange(i, e.target.value)}
+              onKeyDown={(e) => handleKeyDown(i, e)}
               className="tabular-nums"
               style={{
                 width: '46px',
                 height: '52px',
                 borderRadius: '12px',
-                backgroundColor: 'var(--color-surface, #111726)',
-                border: digit ? '1px solid var(--brand-green, #7FE87F)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+                backgroundColor: '#182236',
+                border: digit ? '1.5px solid #7FE87F' : '1px solid rgba(255, 255, 255, 0.08)',
                 fontSize: '20px',
-                fontWeight: 900,
+                fontWeight: 800,
                 color: '#FFFFFF',
                 textAlign: 'center',
                 outline: 'none',
-                transition: 'border-color 0.2s ease',
+                transition: 'border-color 0.15s ease',
               }}
             />
           ))}
         </div>
 
-        {/* Auto-Read Pill */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
-            border: '1px solid var(--brand-green-border, rgba(127, 232, 127, 0.35))',
-            padding: '10px 14px',
-            borderRadius: '10px',
-            marginBottom: '18px',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <CheckCircle2 size={16} color="var(--brand-green, #7FE87F)" />
-            <span style={{ fontSize: '12px', fontWeight: 700, color: '#FFFFFF' }}>
-              {language === 'العربية' ? `التعرف التلقائي على الرمز: ${toArabicNumerals('589204')}` : 'Auto-Read OTP: 589204'}
-            </span>
-          </div>
-          <button
-            type="button"
-            onClick={handleAutofillDemo}
-            className="interactive-tap"
-            style={{
-              backgroundColor: 'var(--brand-green, #7FE87F)',
-              color: 'var(--brand-green-ink, #080C14)',
-              border: 'none',
-              borderRadius: '6px',
-              padding: '4px 10px',
-              fontSize: '11px',
-              fontWeight: 800,
-              cursor: 'pointer',
-            }}
-          >
-            {language === 'العربية' ? 'تعبئة تلقائية' : 'Autofill'}
-          </button>
-        </div>
-
-        {/* Resend SMS Counter */}
-        <div style={{ textAlign: 'center', fontSize: '12.5px', color: '#A2A2BA', marginBottom: '20px' }}>
+        {/* Resend SMS Counter & Optional Quick-fill Helper */}
+        <div style={{ textAlign: 'center', fontSize: '12.5px', color: '#A2A2BA', marginBottom: '18px' }}>
           {language === 'العربية' ? 'لم تستلم الرمز؟ ' : "Didn't receive SMS? "}
           <button
             disabled={timer > 0}
@@ -198,16 +191,32 @@ export const SmsOtpScreen: React.FC = () => {
 
         {isResent && (
           <div style={{ textAlign: 'center', fontSize: '12px', color: 'var(--brand-green, #7FE87F)', fontWeight: 700, marginBottom: '14px' }}>
-            {language === 'العربية'
-              ? `✓ تم إرسال رمز جديد إلى +966 ${mobile}`
-              : `✓ New 6-digit code dispatched to +966 ${mobile}`}
+            {language === 'العربية' ? 'تم إعادة إرسال الرمز بنجاح' : 'Code resent successfully!'}
           </div>
         )}
 
-        <PrimaryButton onClick={handleVerify} disabled={otp.some((d) => !d)}>
-          {t('btn.verify', 'Verify & Continue')}{' '}
-          <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+        <PrimaryButton onClick={handleVerify} disabled={!isComplete}>
+          {t('auth.verify_continue', 'Verify & Continue')} <ArrowRight size={18} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
         </PrimaryButton>
+
+        {/* Subtle Testing Helper */}
+        <div style={{ textAlign: 'center', marginTop: '12px' }}>
+          <button
+            type="button"
+            onClick={handleQuickFill}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#6E6E85',
+              fontSize: '11px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              textDecoration: 'none',
+            }}
+          >
+            {language === 'العربية' ? 'رمز تجريبي: 589204' : 'Demo OTP: 589204'}
+          </button>
+        </div>
       </div>
 
       <div style={{ height: '20px' }} />

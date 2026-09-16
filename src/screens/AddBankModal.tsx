@@ -1,24 +1,24 @@
 import React, { useState, useRef } from 'react';
-import { Loader2, CheckCircle2, Landmark, Smartphone, CreditCard } from 'lucide-react';
+import { Loader2, CheckCircle2, Landmark, Smartphone, CreditCard, ShieldCheck } from 'lucide-react';
 import { BottomSheet } from '../components/BottomSheet';
-import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 interface SaudiBankOption {
   name: string;
-  code: string;
-  prefix: string;
+  category: string;
 }
 
 const SAUDI_BANKS: SaudiBankOption[] = [
-  { name: 'Al Rajhi Bank', code: 'SA03', prefix: 'RJHI' },
-  { name: 'Saudi National Bank (SNB)', code: 'SA58', prefix: 'NCBK' },
-  { name: 'Riyad Bank', code: 'SA44', prefix: 'RIBL' },
-  { name: 'Banque Saudi Fransi', code: 'SA12', prefix: 'BSFR' },
-  { name: 'Alinma Bank', code: 'SA05', prefix: 'INMA' },
-  { name: 'Arab National Bank (anb)', code: 'SA10', prefix: 'ARNB' },
-  { name: 'Saudi Awwal Bank (SAB)', code: 'SA22', prefix: 'SABB' },
-  { name: 'Bank AlJazira', code: 'SA60', prefix: 'BJAZ' },
+  { name: 'Al Rajhi Bank', category: 'Fast Connect' },
+  { name: 'Saudi National Bank (SNB)', category: 'Fast Connect' },
+  { name: 'Riyad Bank', category: 'Fast Connect' },
+  { name: 'Alinma Bank', category: 'Fast Connect' },
+  { name: 'Saudi Awwal Bank (SAB)', category: 'Fast Connect' },
+  { name: 'Banque Saudi Fransi (BSFR)', category: 'Fast Connect' },
+  { name: 'Arab National Bank (ANB)', category: 'Fast Connect' },
+  { name: 'Bank AlJazira', category: 'Fast Connect' },
+  { name: 'Gulf International Bank (GIB)', category: 'Fast Connect' },
+  { name: 'D360 Bank', category: 'Digital Bank' },
 ];
 
 type BankStep = 'SELECT_AND_MATCH' | 'AUTHORIZE_AND_CONNECT';
@@ -30,7 +30,7 @@ export const AddBankModal: React.FC = () => {
   const [selectedBank, setSelectedBank] = useState<string>('Al Rajhi Bank');
   const [matchMethod, setMatchMethod] = useState<'mobile' | 'iban'>('mobile');
   const [customIban, setCustomIban] = useState<string>('');
-  const [otpDigits, setOtpDigits] = useState<string[]>(['4', '8', '2', '1']);
+  const [otpDigits, setOtpDigits] = useState<string[]>(['', '', '', '']);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -234,7 +234,7 @@ export const AddBankModal: React.FC = () => {
                       <div>
                         <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{displayBankName}</div>
                         <div style={{ fontSize: '11px', color: '#9ca3af', fontWeight: 600, marginTop: '2px' }}>
-                          Sarie • {bank.code}
+                          {language === 'العربية' ? 'ربط مباشر وسريع' : 'Online Banking • Fast Connect'}
                         </div>
                       </div>
                     </div>
@@ -511,10 +511,18 @@ export const AddBankModal: React.FC = () => {
                     <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'البنك' : 'Bank'}</span>
                     <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>{t(selectedBank, selectedBank)}</span>
                   </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'معرّف الدفع (الاسم المستعار)' : 'Payment Alias'}</span>
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F', fontFamily: 'monospace' }}>
+                      {user.upiId || 'fahad@sarie'}
+                    </span>
+                  </div>
+
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'حالة الربط' : 'Status'}</span>
-                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F' }}>
-                      {language === 'العربية' ? 'نشط عبر سريع' : 'Active on Sarie'}
+                    <span style={{ fontSize: '12.5px', fontWeight: 800, color: '#7FE87F', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <ShieldCheck size={14} color="#7FE87F" />
+                      {language === 'العربية' ? 'نشط وموثق' : 'Active'}
                     </span>
                   </div>
                 </div>
@@ -526,7 +534,7 @@ export const AddBankModal: React.FC = () => {
                     width: '100%',
                     padding: '15px',
                     backgroundColor: '#7FE87F',
-                    color: '#0b0f19',
+                    color: '#080c14',
                     border: 'none',
                     borderRadius: '16px',
                     fontSize: '14.5px',
@@ -536,7 +544,7 @@ export const AddBankModal: React.FC = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     gap: '8px',
-                    boxShadow: '0 10px 25px -5px rgba(127, 232, 127, 0.3)',
+                    boxShadow: 'none',
                   }}
                 >
                   <span>{language === 'العربية' ? 'تم ومتابعة' : 'Done & Return'}</span>
@@ -545,16 +553,6 @@ export const AddBankModal: React.FC = () => {
             )}
           </div>
         )}
-
-        {/* SAMA Verification Footer */}
-        <div style={{ marginTop: '20px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-          <SamaLogo height={12} themeMode="green" />
-          <span style={{ fontSize: '10.5px', color: '#9ca3af', fontWeight: 600 }}>
-            {language === 'العربية'
-              ? 'ربط مباشر مع البنك • موثق من البنك المركزي وسريع'
-              : 'Direct Bank Binding • SAMA & Sarie Authenticated'}
-          </span>
-        </div>
       </div>
     </BottomSheet>
   );

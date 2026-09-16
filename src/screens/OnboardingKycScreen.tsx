@@ -10,8 +10,8 @@ export const OnboardingKycScreen: React.FC = () => {
   const { navigateTo, goBack, setIsKycVerified, kycData, isRtl, language } = useApp();
 
   const [step, setStep] = useState<KycStep>('FORM');
-  const [nationalId, setNationalId] = useState(kycData?.nationalId || '1098472910');
-  const [dob, setDob] = useState(kycData?.dob || '1992-05-14');
+  const [nationalId, setNationalId] = useState(kycData?.nationalId || '');
+  const [dob, setDob] = useState(kycData?.dob || '');
   const [errorMsg, setErrorMsg] = useState('');
 
   const handleVerify = (e?: React.FormEvent) => {
@@ -140,7 +140,7 @@ export const OnboardingKycScreen: React.FC = () => {
                     maxLength={10}
                     value={nationalId}
                     onChange={(e) => setNationalId(e.target.value.replace(/\D/g, '').slice(0, 10))}
-                    placeholder="1098472910"
+                    placeholder="10XXXXXXXX"
                     required
                     style={{
                       background: 'none',
@@ -309,15 +309,11 @@ export const OnboardingKycScreen: React.FC = () => {
                     {nationalId}
                   </span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'حالة التوثيق' : 'Status'}</span>
                   <span style={{ fontSize: '12.5px', fontWeight: 800, color: 'var(--brand-green)' }}>
-                    {language === 'العربية' ? 'موثق' : 'Verified'}
+                    {language === 'العربية' ? 'موثق بنجاح' : 'Verified'}
                   </span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'الحد اليومي' : 'Daily Limit'}</span>
-                  <span style={{ fontSize: '12.5px', fontWeight: 800, color: 'var(--brand-green)' }}>SAR 50,000</span>
                 </div>
               </div>
 
@@ -347,16 +343,6 @@ export const OnboardingKycScreen: React.FC = () => {
               </button>
             </div>
           )}
-
-          {/* SAMA Verification Footer */}
-          <div style={{ marginTop: '20px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-            <SamaLogo height={12} themeMode="green" />
-            <span style={{ fontSize: '10.5px', color: '#9ca3af', fontWeight: 600 }}>
-              {language === 'العربية'
-                ? 'توثيق رسمي ومعتمد • البنك المركزي السعودي'
-                : 'Official Identity Verification • SAMA Regulated'}
-            </span>
-          </div>
         </div>
       </div>
     </div>

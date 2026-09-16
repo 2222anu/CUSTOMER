@@ -129,7 +129,7 @@ export const HomeScreen: React.FC = () => {
                   {language === 'العربية' ? 'توثيق الهوية' : 'Verify Identity'}
                 </div>
                 <div style={{ fontSize: '11.5px', color: 'var(--color-text-secondary)', fontWeight: 500, marginTop: '2px' }}>
-                  {language === 'العربية' ? 'وثّق هويتك لفتح سقف التحويل اليومي' : 'Verify with Absher to unlock SAR 50,000 limit'}
+                  {language === 'العربية' ? 'وثّق هويتك لتفعيل كافة الخدمات والمزايا' : 'Verify your identity to activate all features'}
                 </div>
               </div>
             </div>
@@ -203,6 +203,24 @@ export const HomeScreen: React.FC = () => {
               >
                 {t('home.total_balance', 'Total Balance')}
               </span>
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  color: '#7FE87F',
+                  backgroundColor: 'rgba(127, 232, 127, 0.14)',
+                  padding: '2px 8px',
+                  borderRadius: '6px',
+                  marginTop: '4px',
+                  width: 'fit-content',
+                  fontFamily: 'monospace',
+                }}
+              >
+                <span>{user.upiId || 'fahad@sarie'}</span>
+              </div>
             </div>
 
             {/* Badges Container: Clean, Minimal Icon Buttons */}

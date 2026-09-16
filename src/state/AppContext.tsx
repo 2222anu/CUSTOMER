@@ -49,6 +49,7 @@ interface AppContextType {
   updateUser: (updatedData: Partial<User>) => void;
   toggleShowBalance: (bankId: string) => void;
   addBankAccount: (bankName: string, details?: { iban?: string; accountType?: string; matchedWith?: string; balance?: number }) => Promise<BankAccount>;
+  setSingleOnboardingBank: (bankName: string, details?: { iban?: string; accountType?: string; matchedWith?: string; balance?: number }) => BankAccount;
   removeBankAccount: (bankId: string) => void;
   setPrimaryBank: (bankId: string) => void;
   fetchElectricityBill: (consumerNo: string) => Promise<ElectricityBill>;
@@ -371,6 +372,27 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return newBank;
   };
 
+  const setSingleOnboardingBank = (
+    bankName: string,
+    details?: { iban?: string; accountType?: string; matchedWith?: string; balance?: number }
+  ) => {
+    const maskedAcc = details?.iban
+      ? `${details.iban.slice(0, 4)} •••• ${details.iban.slice(-4)}`
+      : 'SA' + Math.floor(10 + Math.random() * 89).toString() + ' •••• ' + Math.floor(1000 + Math.random() * 9000).toString();
+
+    const singleBank: BankAccount = {
+      id: `bank-${Date.now()}`,
+      bankName,
+      accountType: details?.accountType || 'Current Account',
+      accountNumberMasked: maskedAcc,
+      isPrimary: true,
+      balance: details?.balance ?? 48250.0,
+      showBalance: false,
+    };
+    setBankAccounts([singleBank]);
+    return singleBank;
+  };
+
   const removeBankAccount = (bankId: string) => {
     setBankAccounts((prev) => {
       const remaining = prev.filter((acc) => acc.id !== bankId);
@@ -593,6 +615,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         updateUser,
         toggleShowBalance,
         addBankAccount,
+        setSingleOnboardingBank,
         removeBankAccount,
         setPrimaryBank,
         fetchElectricityBill,

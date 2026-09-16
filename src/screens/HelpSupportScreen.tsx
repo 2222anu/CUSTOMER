@@ -63,7 +63,13 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
     setTimeout(() => {
       setChatMessages((prev) => [
         ...prev,
-        { sender: 'agent', text: `Thank you for reaching out regarding "${userText}". Our customer support team is reviewing your inquiry and will respond shortly.`, time: 'Just now' },
+        {
+          sender: 'agent',
+          text: isAr
+            ? `شكراً لتواصلك معنا بخصوص "${userText}". يقوم فريق خدمة العملاء بمراجعة استفسارك وسيتم الرد عليك في أقرب وقت.`
+            : `Thank you for reaching out regarding "${userText}". Our customer support team is reviewing your inquiry and will respond shortly.`,
+          time: isAr ? 'الآن' : 'Just now',
+        },
       ]);
     }, 1000);
   };

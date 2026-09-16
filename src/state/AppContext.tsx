@@ -173,8 +173,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   ]);
   const [deviceSessions, setDeviceSessions] = useState<DeviceSession[]>(INITIAL_SESSIONS);
 
-  const [language, setLanguage] = useState<string>('English');
-  const [isRtl, setIsRtl] = useState<boolean>(false);
+  const [language, setLanguage] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('app_language') || 'English';
+    }
+    return 'English';
+  });
+  const [isRtl, setIsRtl] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('app_language');
+      return stored === 'العربية';
+    }
+    return false;
+  });
 
   // Modals state
   const [isPinModalOpen, setIsPinModalOpen] = useState<boolean>(false);
@@ -548,6 +559,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const setAppLanguage = (lang: string) => {
     setLanguage(lang);
+    try {
+      localStorage.setItem('app_language', lang);
+    } catch {
+      // ignore
+    }
     const rtl = lang === 'العربية';
     setIsRtl(rtl);
     if (typeof document !== 'undefined') {

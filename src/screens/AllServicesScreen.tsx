@@ -78,7 +78,7 @@ export const AllServicesScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0F19', minHeight: '100%', paddingBottom: '24px', color: '#FFFFFF' }}>
-      <AppHeader title={t('all_services')} showBack showSettings />
+      <AppHeader title={t('services.all', 'All Services & Utilities')} showBack showSettings />
 
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* Bill Payments Grid */}

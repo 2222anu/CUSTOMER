@@ -41,7 +41,7 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#080c14', minHeight: '100%', paddingBottom: '96px', color: '#FFFFFF' }}>
-      <AppHeader title={t('request_money')} showBack />
+      <AppHeader title={t('home.request_money', 'Request Money')} showBack />
 
       <div style={{ padding: '20px' }}>
         {isSuccess ? (
@@ -166,7 +166,9 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
                   marginBottom: '14px',
                 }}
               >
-                <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)', marginInlineEnd: '8px' }}>{t('sar')}</span>
+                <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)', marginInlineEnd: '8px' }}>
+                  {isAr ? 'ر.س' : 'SAR'}
+                </span>
                 <input
                   type="number"
                   value={amountStr}

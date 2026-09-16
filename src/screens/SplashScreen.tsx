@@ -4,7 +4,7 @@ import { QuantiraLogo } from '../components/QuantiraLogo';
 import { useApp } from '../state/AppContext';
 
 export const SplashScreen: React.FC = () => {
-  const { navigateTo } = useApp();
+  const { navigateTo, language } = useApp();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -67,7 +67,7 @@ export const SplashScreen: React.FC = () => {
             textTransform: 'uppercase',
           }}
         >
-          Quick • Trusted • Payments
+          {language === 'العربية' ? 'مدفوعات سريعة • موثوقة • فورية' : 'Quick • Trusted • Payments'}
         </div>
       </div>
 
@@ -90,7 +90,7 @@ export const SplashScreen: React.FC = () => {
             textTransform: 'uppercase',
           }}
         >
-          powered by
+          {language === 'العربية' ? 'مشغل بواسطة' : 'powered by'}
         </span>
         <QuantiraLogo size={22} color="#7FE87F" textColor="#E2E2F0" />
       </div>

@@ -1,17 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Globe } from 'lucide-react';
 import { AlphPayLogo } from '../AlphPayLogo';
 import { QPayOnboardingProgress } from './QPayOnboardingProgress';
 import { QPayOnboardingSlide, type OnboardingSlideData } from './QPayOnboardingSlide';
 import { CardsIllustration } from './CardsIllustration';
 import { HubIllustration } from './HubIllustration';
 import { SecurityIllustration } from './SecurityIllustration';
+import { useApp } from '../../state/AppContext';
 
 interface QPayOnboardingProps {
   onComplete: () => void;
 }
 
 export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) => {
+  const { language, setAppLanguage, isRtl } = useApp();
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   // Touch gesture handling for smooth horizontal swiping
@@ -57,9 +59,13 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
     const diff = touchStartXRef.current - touchEndXRef.current;
     const threshold = 45;
 
-    if (diff > threshold && currentSlide < slides.length - 1) {
+    // Adjust for RTL direction if Arabic
+    const swipeForward = isRtl ? diff < -threshold : diff > threshold;
+    const swipeBackward = isRtl ? diff > threshold : diff < -threshold;
+
+    if (swipeForward && currentSlide < slides.length - 1) {
       handleNext();
-    } else if (diff < -threshold && currentSlide > 0) {
+    } else if (swipeBackward && currentSlide > 0) {
       goToSlide(currentSlide - 1);
     }
 
@@ -71,37 +77,57 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') {
-        if (currentSlide < slides.length - 1) goToSlide(currentSlide + 1);
+        if (isRtl) {
+          if (currentSlide > 0) goToSlide(currentSlide - 1);
+        } else {
+          if (currentSlide < slides.length - 1) goToSlide(currentSlide + 1);
+        }
       } else if (e.key === 'ArrowLeft') {
-        if (currentSlide > 0) goToSlide(currentSlide - 1);
+        if (isRtl) {
+          if (currentSlide < slides.length - 1) goToSlide(currentSlide + 1);
+        } else {
+          if (currentSlide > 0) goToSlide(currentSlide - 1);
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentSlide]);
+  }, [currentSlide, isRtl]);
 
   const slides: OnboardingSlideData[] = [
     {
       id: 'cards',
-      title: 'Pay Anyone Instantly',
-      subtitle: 'Send and receive money across all Saudi banks with zero fees.',
+      title: language === 'العربية' ? 'تحويل فوري لأي شخص' : 'Pay Anyone Instantly',
+      subtitle: language === 'العربية'
+        ? 'إرسال واستلام الأموال عبر جميع البنوك السعودية فوراً وبدون أي رسوم.'
+        : 'Send and receive money across all Saudi banks with zero fees.',
       visual: <CardsIllustration />,
     },
     {
       id: 'wealth',
-      title: 'All Banks in One Place',
-      subtitle: 'Link your accounts and view your balances at a glance.',
+      title: language === 'العربية' ? 'جميع بنوكك في مكان واحد' : 'All Banks in One Place',
+      subtitle: language === 'العربية'
+        ? 'اربط حساباتك البنكية واطلع على جميع أرصدتك في واجهة موحدة.'
+        : 'Link your accounts and view your balances at a glance.',
       visual: <HubIllustration />,
     },
     {
       id: 'security',
-      title: 'Safe & Protected',
-      subtitle: 'Secured by Absher verification and SAMA regulations.',
+      title: language === 'العربية' ? 'أمان وحماية موثوقة' : 'Safe & Protected',
+      subtitle: language === 'العربية'
+        ? 'حماية متقدمة وموثقة عبر نفاذ وأبشر وتحت مظلة البنك المركزي السعودي.'
+        : 'Secured by Absher verification and SAMA regulations.',
       visual: <SecurityIllustration />,
     },
   ];
 
   const isFinalSlide = currentSlide === slides.length - 1;
+
+  const toggleLanguage = () => {
+    triggerHaptic();
+    const nextLang = language === 'العربية' ? 'English' : 'العربية';
+    setAppLanguage(nextLang);
+  };
 
   return (
     <div
@@ -123,7 +149,7 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
         userSelect: 'none',
       }}
     >
-      {/* Top Bar: Brand / Time & Skip Pill */}
+      {/* Top Bar: Brand, Language Toggle & Skip Pill */}
       <header
         style={{
           display: 'flex',
@@ -138,28 +164,53 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
           <AlphPayLogo variant="horizontal" size={24} themeMode="dark" />
         </div>
 
-        <button
-          type="button"
-          onClick={() => {
-            triggerHaptic();
-            onComplete();
-          }}
-          className="interactive-tap"
-          style={{
-            backgroundColor: '#1E1E32',
-            border: '1px solid #2C2C44',
-            color: '#A2A2BA',
-            fontSize: '12px',
-            fontWeight: 700,
-            padding: '5px 14px',
-            borderRadius: '20px',
-            cursor: 'pointer',
-            boxShadow: 'none',
-            transition: 'all 0.15s ease',
-          }}
-        >
-          Skip
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {/* Quick Language Toggle Pill */}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="interactive-tap"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px',
+              backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+              border: '1px solid var(--brand-green-border, rgba(127, 232, 127, 0.35))',
+              color: 'var(--brand-green, #7FE87F)',
+              fontSize: '11.5px',
+              fontWeight: 800,
+              padding: '5px 10px',
+              borderRadius: '16px',
+              cursor: 'pointer',
+            }}
+          >
+            <Globe size={13} />
+            <span>{language === 'العربية' ? 'English' : '🇸🇦 العربية'}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              triggerHaptic();
+              onComplete();
+            }}
+            className="interactive-tap"
+            style={{
+              backgroundColor: '#1E1E32',
+              border: '1px solid #2C2C44',
+              color: '#A2A2BA',
+              fontSize: '12px',
+              fontWeight: 700,
+              padding: '5px 14px',
+              borderRadius: '20px',
+              cursor: 'pointer',
+              boxShadow: 'none',
+              transition: 'all 0.15s ease',
+            }}
+          >
+            {language === 'العربية' ? 'تخطي' : 'Skip'}
+          </button>
+        </div>
       </header>
 
       {/* Main Slide Carousel Area */}
@@ -235,8 +286,12 @@ export const QPayOnboarding: React.FC<QPayOnboardingProps> = ({ onComplete }) =>
             transition: 'all 0.15s ease',
           }}
         >
-          <span>{isFinalSlide ? 'Get started' : 'Next'}</span>
-          <ArrowRight size={16} />
+          <span>
+            {isFinalSlide
+              ? language === 'العربية' ? 'ابدأ الآن' : 'Get started'
+              : language === 'العربية' ? 'التالي' : 'Next'}
+          </span>
+          <ArrowRight size={16} style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
         </button>
       </footer>
     </div>

@@ -9,7 +9,7 @@ export const NotificationsScreen: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#080c14', minHeight: '100%', paddingBottom: '36px' }}>
-      <AppHeader title={t('notifications')} showBack showSettings={false} />
+      <AppHeader title={t('notif.title', 'Notifications')} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
         {notifications.length === 0 ? (

@@ -11,11 +11,12 @@ export const toArabicNumerals = (val: string | number): string => {
 
 export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   // Common & Navigation
-  'app.name': { en: 'QTPay', ar: 'كيو تي باي' },
-  'app.tagline': { en: 'QUICK. TRUSTED. PAYMENTS.', ar: 'مدفوعات سريعة وموثوقة' },
+  'app.name': { en: 'QtPay', ar: 'كيو تي باي' },
+  'app.tagline': { en: 'QUICK • TRUSTED • PAYMENTS', ar: 'مدفوعات سريعة • موثوقة • فورية' },
   'powered.by': { en: 'powered by', ar: 'مشغل بواسطة' },
   'nav.home': { en: 'Home', ar: 'الرئيسية' },
   'nav.accounts': { en: 'Accounts', ar: 'الحسابات' },
+  'nav.spend': { en: 'Analytics', ar: 'التحليلات' },
   'nav.pay': { en: 'Pay', ar: 'دفع' },
   'nav.scan': { en: 'Scan', ar: 'مسح' },
   'nav.history': { en: 'History', ar: 'العمليات' },
@@ -37,12 +38,18 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   'btn.logout': { en: 'Log Out', ar: 'تسجيل الخروج' },
   'btn.add_bank': { en: 'Add Bank Account', ar: 'إضافة حساب بنكي' },
   'btn.edit_profile': { en: 'Edit Profile', ar: 'تعديل الملف الشخصي' },
+  'btn.skip': { en: 'Skip', ar: 'تخطي' },
+  'btn.next': { en: 'Next', ar: 'التالي' },
+  'btn.get_started': { en: 'Get Started', ar: 'ابدأ الآن' },
+  'btn.show_all': { en: 'Show All', ar: 'عرض الكل' },
+  'btn.reset': { en: 'Reset', ar: 'إعادة ضبط' },
+  'btn.export': { en: 'Export', ar: 'تصدير' },
 
   // Home & Balance
   'home.total_balance': { en: 'Total Available Balance', ar: 'إجمالي الرصيد المتاح' },
   'home.pin_required': { en: 'PIN Required', ar: 'رمز السري مطلوب' },
   'home.hide': { en: 'Hide', ar: 'إخفاء' },
-  'home.tap_to_view_pin': { en: '🔒 Tap to enter PIN and view balance', ar: '🔒 اضغط لإدخال الرمز السري وعرض الرصيد' },
+  'home.tap_to_view_pin': { en: 'Tap to enter PIN and view balance', ar: 'اضغط لإدخال الرمز السري وعرض الرصيد' },
   'home.sarie_rail': { en: 'Sarie 24/7 Rail', ar: 'شبكة سريع الفورية ٢٤/٧' },
   'home.accounts': { en: 'Accounts', ar: 'الحسابات' },
   'home.transfer_pay': { en: 'Transfer & Pay', ar: 'تحويل ومدفوعات' },
@@ -66,23 +73,32 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   'home.telecom': { en: 'Telecom', ar: 'الاتصالات' },
   'home.water': { en: 'Water', ar: 'المياه' },
   'home.traffic_fines': { en: 'Traffic Fines', ar: 'المخالفات المرورية' },
+  'home.verify_identity': { en: 'Verify Identity', ar: 'توثيق الهوية' },
+  'home.verify_identity_sub': { en: 'Verify your identity to activate all features', ar: 'وثّق هويتك لتفعيل كافة الخدمات والمزايا' },
 
   // Authentication & Onboarding
-  'auth.welcome': { en: 'Welcome to QTPay', ar: 'مرحباً بك في كيو تي باي' },
+  'auth.welcome': { en: 'Welcome to QtPay', ar: 'مرحباً بك في كيو تي باي' },
   'auth.account_type': { en: 'Select Account Type', ar: 'اختر نوع الحساب' },
   'auth.customer': { en: 'Customer', ar: 'عميل' },
   'auth.full_name': { en: 'Full Legal Name', ar: 'الاسم الكامل' },
   'auth.mobile_number': { en: 'Saudi Mobile Number', ar: 'رقم الجوال السعودي' },
   'auth.get_otp': { en: 'Get OTP & Verify', ar: 'الحصول على رمز التحقق' },
-  'auth.enter_otp': { en: 'Enter 6-Digit OTP', ar: 'أدخل رمز التحقق المكون من ٦ أرقام' },
+  'auth.enter_otp': { en: 'Enter 4-Digit OTP', ar: 'أدخل رمز التحقق المكون من ٤ أرقام' },
   'auth.otp_sent_to': { en: 'Sent via SMS to', ar: 'تم الإرسال عبر رسالة نصية إلى' },
   'auth.resend_otp': { en: 'Resend OTP in', ar: 'إعادة الإرسال بعد' },
-  'auth.permissions_title': { en: 'Required Permissions', ar: 'الأذونات المطلوبة' },
-  'auth.permissions_sub': { en: 'Enable device permissions for seamless payments', ar: 'فعّل صلاحيات الجهاز لتجربة دفع سلسة' },
+  'auth.resend_now': { en: 'Resend OTP', ar: 'إعادة إرسال الرمز' },
+  'auth.permissions_title': { en: 'Device Permissions', ar: 'أذونات الجهاز' },
+  'auth.permissions_sub': { en: 'Enable device permissions for seamless payments', ar: 'فعّل صلاحيات الجهاز لتجربة دفع سلسة وآمنة' },
   'auth.perm_camera': { en: 'Camera for QR Payments', ar: 'الكاميرا لمسح باركود الدفع' },
   'auth.perm_notif': { en: 'Instant Payment Alerts', ar: 'تنبيهات العمليات الفورية' },
   'auth.perm_biometric': { en: 'Biometric Face ID / Fingerprint', ar: 'البصمة الحيوية لتأكيد العمليات' },
   'auth.allow_continue': { en: 'Allow & Continue', ar: 'سماح ومتابعة' },
+  'auth.onboarding_slide1_title': { en: 'Pay Anyone Instantly', ar: 'تحويل فوري لأي شخص' },
+  'auth.onboarding_slide1_sub': { en: 'Send and receive money across all Saudi banks with zero fees.', ar: 'إرسال واستلام الأموال عبر جميع البنوك السعودية فوراً وبدون أي رسوم.' },
+  'auth.onboarding_slide2_title': { en: 'All Banks in One Place', ar: 'جميع بنوكك في مكان واحد' },
+  'auth.onboarding_slide2_sub': { en: 'Link your accounts and view your balances at a glance.', ar: 'اربط حساباتك البنكية واطلع على جميع أرصدتك في واجهة موحدة.' },
+  'auth.onboarding_slide3_title': { en: 'Safe & Protected', ar: 'أمان وحماية موثوقة' },
+  'auth.onboarding_slide3_sub': { en: 'Secured by Absher verification and SAMA regulations.', ar: 'حماية متقدمة وموثقة عبر نفاذ وأبشر وتحت مظلة البنك المركزي السعودي.' },
 
   // Pay Anyone & Send
   'pay.send_money': { en: 'Send Money', ar: 'إرسال أموال' },
@@ -100,6 +116,10 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   'pay.quick_contacts': { en: 'Quick Contacts', ar: 'جهات الاتصال السريعة' },
   'pay.recent_recipients': { en: 'Recent Recipients', ar: 'المستلمون مؤخراً' },
   'pay.instant_sarie_transfer': { en: 'Instant Sarie Transfer', ar: 'تحويل سريع فوري' },
+  'pay.purpose_personal': { en: 'Personal & Friends', ar: 'شخصي وللأصدقاء' },
+  'pay.purpose_rent': { en: 'Rent & Housing', ar: 'إيجار وسكن' },
+  'pay.purpose_services': { en: 'Services & Bills', ar: 'خدمات وفواتير' },
+  'pay.purpose_family': { en: 'Family Support', ar: 'مصاريف عائلية' },
 
   // Receive & Scan
   'receive.title': { en: 'Receive Money', ar: 'استلام أموال' },
@@ -110,17 +130,6 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   'scan.align_qr': { en: 'Align QR Code within the frame', ar: 'وجّه الكاميرا نحو رمز الاستجابة' },
   'scan.upload_gallery': { en: 'Upload from Gallery', ar: 'تحميل من المعرض' },
 
-  // ZATCA & E-Invoice
-  'zatca.title': { en: 'ZATCA Phase 2 E-Invoice', ar: 'فاتورة إلكترونية معتمدة (المرحلة الثانية)' },
-  'zatca.qr_generator': { en: 'ZATCA Phase 2 QR Generator', ar: 'مُوَلِّد باركود زاتكا الذكي' },
-  'zatca.tlv_qr': { en: 'TLV Cryptographic QR', ar: 'رمز استجابة سريع مشفر' },
-  'zatca.vat_id': { en: 'ZATCA VAT ID', ar: 'الرقم الضريبي للمنشأة' },
-  'zatca.cr_number': { en: 'Commercial Registration (CR)', ar: 'السجل التجاري' },
-  'zatca.gross_total': { en: 'Gross Total', ar: 'المبلغ الإجمالي' },
-  'zatca.net_total': { en: 'Net Amount (Excl. VAT)', ar: 'المبلغ غير شامل الضريبة' },
-  'zatca.vat_amount': { en: '15% ZATCA VAT', ar: 'ضريبة القيمة المضافة (١٥٪)' },
-  'zatca.fatoora': { en: 'ZATCA Fatoora Platform', ar: 'منصة فاتورة المعتمدة' },
-
   // Bank Accounts & Cards
   'banks.title': { en: 'Bank Accounts', ar: 'الحسابات البنكية' },
   'banks.linked': { en: 'Linked Saudi Accounts', ar: 'الحسابات السعودية المرتبطة' },
@@ -130,9 +139,11 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   'banks.check_balance': { en: 'Check Balance', ar: 'استعلام عن الرصيد' },
   'banks.current_account': { en: 'Current Account', ar: 'حساب جاري' },
   'banks.savings_account': { en: 'Savings Account', ar: 'حساب ادخار' },
+  'banks.set_primary': { en: 'Set as Primary', ar: 'تعيين كحساب أساسي' },
+  'banks.refresh_balance': { en: 'Refresh Balances', ar: 'تحديث الأرصدة' },
   'cards.title': { en: 'Cards & Payment Methods', ar: 'البطاقات وطرق الدفع' },
   'cards.digital_mada': { en: 'Digital Debit Card (mada & Apple Pay)', ar: 'بطاقة مدى الرقمية (أبل باي)' },
-  'cards.platinum': { en: 'QTPay Platinum', ar: 'كيو تي باي بلاتينيوم' },
+  'cards.platinum': { en: 'QtPay Platinum', ar: 'كيو تي باي بلاتينيوم' },
   'cards.instant_debit': { en: 'Sarie Instant Debit', ar: 'خصم مباشر فوري - سريع' },
   'cards.cardholder': { en: 'Cardholder', ar: 'حامل البطاقة' },
   'cards.expires': { en: 'Expires', ar: 'تاريخ الانتهاء' },
@@ -140,13 +151,42 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
 
   // Bills & Utilities
   'bills.title': { en: 'Bills & Public Utilities', ar: 'الفواتير والخدمات العامة' },
-  'bills.electricity': { en: 'Saudi Electricity Company (SEC)', ar: 'الشركة السعودية للكهرباء' },
-  'bills.water': { en: 'National Water Company (NWC)', ar: 'شركة المياه الوطنية' },
+  'bills.electricity': { en: 'Saudi Electricity Company (SEC)', ar: 'الشركة السعودية للكهرباء (SEC)' },
+  'bills.water': { en: 'National Water Company (NWC)', ar: 'شركة المياه الوطنية (NWC)' },
   'bills.telecom': { en: 'Telecom & Internet', ar: 'الاتصالات والإنترنت' },
   'bills.consumer_num': { en: 'Account / Consumer Number', ar: 'رقم الحساب / المشترك' },
   'bills.bill_amount': { en: 'Due Amount', ar: 'المبلغ المستحق' },
   'bills.due_date': { en: 'Due Date', ar: 'تاريخ الاستحقاق' },
   'bills.pay_now': { en: 'Pay Bill via Sarie', ar: 'دفع الفاتورة عبر سريع' },
+  'bills.fetch_bill': { en: 'Fetch Bill', ar: 'استعلام عن الفاتورة' },
+  'bills.paid_success': { en: 'Bill Paid Successfully', ar: 'تم سداد الفاتورة بنجاح' },
+
+  // Spend Analysis & Analytics
+  'spend.title': { en: 'Spend Analysis', ar: 'تحليل المصاريف' },
+  'spend.total_spent': { en: 'Total Spending', ar: 'إجمالي المصروفات' },
+  'spend.period_week': { en: 'Week', ar: 'أسبوع' },
+  'spend.period_month': { en: 'Month', ar: 'شهر' },
+  'spend.period_last_month': { en: 'Last Mo.', ar: 'الشهر الماضي' },
+  'spend.period_year': { en: 'Year', ar: 'سنة' },
+  'spend.daily_avg': { en: 'Daily Avg:', ar: 'المعدل اليومي:' },
+  'spend.vs_last_period': { en: 'vs last period', ar: 'أقل من السابق' },
+  'spend.budget_target': { en: 'Monthly Budget & Target', ar: 'الحد المالي والميزانية' },
+  'spend.remaining_budget': { en: 'remaining of budget', ar: 'متبقي من الميزانية' },
+  'spend.category_distribution': { en: 'Category Spend Distribution', ar: 'التوزيع الدائري للمصروفات' },
+  'spend.timeline_trend': { en: 'Timeline Spending Trend', ar: 'المخطط الزمني للإنفاق' },
+  'spend.category_details': { en: 'Category Details', ar: 'تفاصيل الفئات' },
+  'spend.top_merchants': { en: 'Top Merchants', ar: 'أعلى المتاجر إنفاقاً' },
+  'spend.smart_insights': { en: 'Smart Spend Insights', ar: 'رؤى ونصائح مالية ذكية' },
+  'spend.export_statement': { en: 'Export Statement', ar: 'تصدير التقرير' },
+  'spend.exported_success': { en: 'Spend statement exported successfully (PDF/CSV)', ar: 'تم تصدير تقرير المصروفات (PDF/CSV) بنجاح' },
+
+  // Categories
+  'cat.shopping': { en: 'Shopping & Retail', ar: 'التسوق والتجزئة' },
+  'cat.food': { en: 'Food & Dining', ar: 'المطاعم والمقاهي' },
+  'cat.bills': { en: 'Bills & Utilities', ar: 'الفواتير والخدمات' },
+  'cat.transport': { en: 'Travel & Transport', ar: 'السفر والمواصلات' },
+  'cat.transfers': { en: 'Transfers & Others', ar: 'التحويلات ومدفوعات أخرى' },
+  'cat.health': { en: 'Health & Medical', ar: 'الصحة والرعاية' },
 
   // History & Notifications
   'history.title': { en: 'Transaction History', ar: 'سجل العمليات' },
@@ -155,6 +195,8 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   'history.bills': { en: 'Bills', ar: 'فواتير' },
   'history.empty': { en: 'No transactions yet', ar: 'لا توجد عمليات سابقة' },
   'history.empty_sub': { en: 'Make your first transfer or bill payment to see activity here.', ar: 'قم بإجراء أول تحويل أو دفع فاتورة لعرض سجل العمليات هنا.' },
+  'notif.title': { en: 'Notifications', ar: 'الإشعارات' },
+  'notif.empty': { en: 'No new notifications', ar: 'لا توجد إشعارات جديدة' },
 
   // Profile & Settings
   'profile.title': { en: 'Profile & Settings', ar: 'الملف الشخصي والإعدادات' },
@@ -165,11 +207,20 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   'profile.privacy': { en: 'Data & Privacy', ar: 'البيانات والخصوصية' },
   'profile.help': { en: 'Help & Customer Support', ar: 'المساعدة ودعم العملاء' },
   'profile.app_links': { en: 'App Info & Licenses', ar: 'معلومات التطبيق والتراخيص' },
-  'profile.switch_customer': { en: 'Switch to Customer Mode', ar: 'التبديل إلى وضع العميل' },
+  'profile.language': { en: 'Language', ar: 'اللغة' },
   'profile.edit': { en: 'Edit Profile', ar: 'تعديل الملف الشخصي' },
   'profile.verified_kyc': { en: 'National ID Verified (Absher KYC)', ar: 'هوية وطنية موثقة عبر أبشر' },
+  'profile.unverified_kyc': { en: 'Unverified ID', ar: 'هوية غير موثقة' },
+  'profile.logout': { en: 'Log Out', ar: 'تسجيل الخروج' },
 
-  // Banks List
+  // Security & Passcode
+  'sec.enter_pin': { en: 'Enter PIN to View Balance', ar: 'أدخل الرمز السري لعرض الرصيد' },
+  'sec.enter_pin_sub': { en: 'Enter 4-digit security PIN to view your total balance', ar: 'أدخل الرمز السري المكون من ٤ أرقام لعرض رصيدك الإجمالي' },
+  'sec.select_lang': { en: 'Select Language', ar: 'اختر لغة التطبيق' },
+  'sec.biometrics': { en: 'Biometric Authentication', ar: 'المصادقة بالبصمة الحيوية' },
+  'sec.device_sessions': { en: 'Active Device Sessions', ar: 'الأجهزة النشطة' },
+
+  // Saudi Banks
   'Al Rajhi Bank': { en: 'Al Rajhi Bank', ar: 'مصرف الراجحي' },
   'Saudi National Bank (SNB)': { en: 'Saudi National Bank (SNB)', ar: 'البنك الأهلي السعودي (SNB)' },
   'Riyad Bank': { en: 'Riyad Bank', ar: 'بنك الرياض' },
@@ -178,45 +229,41 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   'Arab National Bank (anb)': { en: 'Arab National Bank (anb)', ar: 'البنك العربي الوطني (anb)' },
   'Banque Saudi Fransi': { en: 'Banque Saudi Fransi', ar: 'البنك السعودي الفرنسي' },
   'Bank AlJazira': { en: 'Bank AlJazira', ar: 'بنك الجزيرة' },
+  'Bank Albilad': { en: 'Bank Albilad', ar: 'بنك البلاد' },
+  'Gulf International Bank': { en: 'Gulf International Bank (meem)', ar: 'بنك الخليج الدولي (ميم)' },
 
+  // Saudi Entities & Merchants
   'Saudi Electricity Company (SEC)': { en: 'Saudi Electricity Company (SEC)', ar: 'الشركة السعودية للكهرباء (SEC)' },
-  'Utility Bill Payment': { en: 'Utility Bill Payment', ar: 'دفع فاتورة الخدمات' },
-  'Electricity Bill Payment': { en: 'Electricity Bill Payment', ar: 'دفع فاتورة الكهرباء' },
-  'Tariq Al-Otaibi': { en: 'Tariq Al-Otaibi', ar: 'طارق العتيبي' },
-  'Sarie Instant Transfer': { en: 'Sarie Instant Transfer', ar: 'تحويل سريع فوري' },
+  'Jarir Bookstore': { en: 'Jarir Bookstore', ar: 'مكتبة جرير' },
+  'Lulu Hypermarket': { en: 'Lulu Hypermarket', ar: 'لولو هايبرماركت' },
+  'HungerStation': { en: 'HungerStation', ar: 'هنقرستيشن' },
+  'Nahdi Pharmacy': { en: 'Nahdi Pharmacy', ar: 'صيدليات النهدي' },
   'Panda Supermarket': { en: 'Panda Supermarket', ar: 'أسواق بنده' },
-  'mada POS Payment': { en: 'mada POS Payment', ar: 'عملية نقاط بيع مدى' },
+  'Dr. Sulaiman Al-Habib': { en: 'Dr. Sulaiman Al-Habib Hospital', ar: 'مستشفى د. سليمان الحبيب' },
+  'STC Pay': { en: 'STC Pay', ar: 'إس تي سي باي' },
+  'Uber Riyadh': { en: 'Uber Riyadh', ar: 'أوبر الرياض' },
+  'Aramco Fuel': { en: 'Aramco Fuel Station', ar: 'محطات وقود أرامكو' },
+  'Sarie Instant Transfer': { en: 'Sarie Instant Transfer', ar: 'تحويل سريع فوري' },
+  'Sarie Transfer': { en: 'Sarie Transfer', ar: 'تحويل عبر سريع' },
+
+  // Contacts
+  'Tariq Al-Otaibi': { en: 'Tariq Al-Otaibi', ar: 'طارق العتيبي' },
   'Sara Al-Mansoor': { en: 'Sara Al-Mansoor', ar: 'سارة المنصور' },
-  'Sarie Transfer': { en: 'Sarie Transfer', ar: 'تحويل سريع' },
-  'Half Million Coffee': { en: 'Half Million Coffee', ar: 'هاف مليون كافيه' },
-  'mada Contactless': { en: 'mada Contactless', ar: 'مدى أثير لا تلامسي' },
   'Mohammed Al-Ghamdi': { en: 'Mohammed Al-Ghamdi', ar: 'محمد الغامدي' },
-  'Salary / Sarie Received': { en: 'Salary / Sarie Received', ar: 'راتب / وارد عبر سريع' },
-  'Fahad Al-Harbi': { en: 'Fahad Al-Harbi', ar: 'فهد الحربي' },
   'Abdullah Al-Shehri': { en: 'Abdullah Al-Shehri', ar: 'عبدالله الشهري' },
-  'Reem Al-Dossari': { en: 'Reem Al-Dossari', ar: 'ريم الدوسري' },
-  'Starmart Market': { en: 'Starmart Market', ar: 'تموينات ستار مارت' },
+  'Reem Al-Dosari': { en: 'Reem Al-Dosari', ar: 'ريم الدوسري' },
+  'Omar Khalid': { en: 'Omar Khalid', ar: 'عمر خالد' },
+  'Fahad Al-Harbi': { en: 'Fahad Al-Harbi', ar: 'فهد الحربي' },
+
+  // Time & Labels
   'TODAY': { en: 'TODAY', ar: 'اليوم' },
   'Today': { en: 'Today', ar: 'اليوم' },
   'YESTERDAY': { en: 'YESTERDAY', ar: 'أمس' },
   'Yesterday': { en: 'Yesterday', ar: 'أمس' },
   'Current Account': { en: 'Current Account', ar: 'حساب جاري' },
   'Savings Account': { en: 'Savings Account', ar: 'حساب ادخار' },
-  'Groceries & Supermarket': { en: 'Groceries & Supermarket', ar: 'بقالة وتموينات' },
-  'Food & Beverage': { en: 'Food & Beverage', ar: 'مطاعم ومقاهي' },
-  'Retail & Shopping': { en: 'Retail & Shopping', ar: 'تجارة تجزئة وتسوق' },
-  'Electronics & Digital': { en: 'Electronics & Digital', ar: 'إلكترونيات وأجهزة' },
-  'Fuel & Automotive': { en: 'Fuel & Automotive', ar: 'محطات وقود وسيارات' },
-  'Healthcare & Pharmacy': { en: 'Healthcare & Pharmacy', ar: 'صيدليات ورعاية صحية' },
-  'Professional Services': { en: 'Professional Services', ar: 'خدمات مهنية وأعمال' },
-  'Riyadh, Saudi Arabia': { en: 'Riyadh, Saudi Arabia', ar: 'الرياض، المملكة العربية السعودية' },
-  'Jeddah, Saudi Arabia': { en: 'Jeddah, Saudi Arabia', ar: 'جدة، المملكة العربية السعودية' },
-  'Dammam, Saudi Arabia': { en: 'Dammam, Saudi Arabia', ar: 'الدمام، المملكة العربية السعودية' },
-  'Khobar, Saudi Arabia': { en: 'Khobar, Saudi Arabia', ar: 'الخبر، المملكة العربية السعودية' },
-  'Makkah, Saudi Arabia': { en: 'Makkah, Saudi Arabia', ar: 'مكة المكرمة، المملكة العربية السعودية' },
-  'Madinah, Saudi Arabia': { en: 'Madinah, Saudi Arabia', ar: 'المدينة المنورة، المملكة العربية السعودية' },
 
-  // Services & Categories
+  // Services
   'services.all': { en: 'All Services & Utilities', ar: 'جميع الخدمات والمرافق' },
   'services.food': { en: 'Food & Dining', ar: 'المطاعم والكافيهات' },
   'services.shopping': { en: 'Shopping & Retail', ar: 'التسوق والتجزئة' },
@@ -229,28 +276,18 @@ export const TRANSLATIONS: Record<string, { en: string; ar: string }> = {
   'services.security': { en: 'Security Center', ar: 'مركز الأمان والحماية' },
   'services.privacy': { en: 'Privacy Policy & Terms', ar: 'سياسة الخصوصية والشروط' },
   'services.help': { en: 'SAMA Support & Helpdesk', ar: 'الدعم والمساعدة الرسمية' },
-  
-
-  // Deals & Travel
-  'QTPay Travel Desk': { en: 'QTPay Travel Desk', ar: 'مكتب سفريات كيو تي باي' },
-  'QTPay Partner Deals': { en: 'QTPay Partner Deals', ar: 'عروض شركاء كيو تي باي' },
-  'Exclusive promo codes & instant discounts on top shopping brands': { en: 'Exclusive promo codes & instant discounts on top shopping brands', ar: 'أكواد خصم حصرية وتخفيضات فورية على أشهر الماركات' },
-  'Book flights, cabs, and hotels with zero convenience fee & instant cashbacks': { en: 'Book flights, cabs, and hotels with zero convenience fee & instant cashbacks', ar: 'حجز طيران وسيارات وفنادق بدون رسوم إضافية واسترداد نقدي فوري' },
-  'Featured Partner Offers': { en: 'Featured Partner Offers', ar: 'عروض الشركاء المميزة' },
-  'Available Travel Bookings': { en: 'Available Travel Bookings', ar: 'خيارات السفر المتاحة' },
-  'Order Placed!': { en: 'Order Placed!', ar: 'تم تأكيد الطلب!' },
 };
 
 export const translateText = (keyOrText: string, language: SupportedLanguage = 'English', defaultText?: string): string => {
   const isAr = language === 'العربية' || language === 'ar';
-  
-  // 1. Direct match by key or text
+
+  // 1. Direct match by key
   const directMatch = TRANSLATIONS[keyOrText];
   if (directMatch) {
     return isAr ? directMatch.ar : directMatch.en;
   }
 
-  // 2. Case-insensitive text match
+  // 2. Case-insensitive text match across English and Arabic keys
   const lowerKey = keyOrText.trim().toLowerCase();
   for (const [k, v] of Object.entries(TRANSLATIONS)) {
     if (k.toLowerCase() === lowerKey || v.en.toLowerCase() === lowerKey) {

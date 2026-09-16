@@ -109,7 +109,7 @@ export const AddBankModal: React.FC = () => {
     const generatedIban =
       matchMethod === 'iban' && customIban
         ? customIban.toUpperCase()
-        : `${selectedBankObj.code} •••• ${Math.floor(1000 + Math.random() * 9000)}`;
+        : `SA${Math.floor(10 + Math.random() * 89)} •••• ${Math.floor(1000 + Math.random() * 9000)}`;
 
     const matchedValue = matchMethod === 'mobile' ? user.mobile : generatedIban;
 

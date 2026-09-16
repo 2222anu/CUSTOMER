@@ -4,7 +4,8 @@ import { AlphPayLogo } from '../components/AlphPayLogo';
 import { useApp } from '../state/AppContext';
 
 export const AppLinksModal: React.FC = () => {
-  const { isAppLinksModalOpen, setIsAppLinksModalOpen } = useApp();
+  const { isAppLinksModalOpen, setIsAppLinksModalOpen, language } = useApp();
+  const isAr = language === 'العربية';
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -67,8 +68,12 @@ export const AppLinksModal: React.FC = () => {
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <div>
-            <h3 id="app-links-title" style={{ fontSize: '18px', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>QTPay Application Links</h3>
-            <p style={{ fontSize: '12px', color: '#A2A2BA', margin: '4px 0 0 0' }}>Web, Android APK & iOS Access</p>
+            <h3 id="app-links-title" style={{ fontSize: '18px', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>
+              {isAr ? 'روابط ومصادر تطبيق كيو تي باي' : 'QTPay Application Links'}
+            </h3>
+            <p style={{ fontSize: '12px', color: '#A2A2BA', margin: '4px 0 0 0' }}>
+              {isAr ? 'الويب وتطبيق أندرويد وتطبيق الآيفون' : 'Web, Android APK & iOS Access'}
+            </p>
           </div>
           <button
             onClick={() => setIsAppLinksModalOpen(false)}
@@ -128,9 +133,11 @@ export const AppLinksModal: React.FC = () => {
                   <Globe size={22} />
                 </div>
                 <div>
-                  <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>Web Application</div>
+                  <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>
+                    {isAr ? 'تطبيق الويب المباشر' : 'Web Application'}
+                  </div>
                   <div style={{ fontSize: '11px', color: 'var(--brand-green, #7FE87F)', fontWeight: '700' }}>
-                    Live Web Version (Active)
+                    {isAr ? 'الإصدار الحي المباشر (نشط)' : 'Live Web Version (Active)'}
                   </div>
                 </div>
               </div>
@@ -144,11 +151,11 @@ export const AppLinksModal: React.FC = () => {
                   borderRadius: '10px',
                 }}
               >
-                Online
+                {isAr ? 'متصل' : 'Online'}
               </span>
             </div>
             <p style={{ fontSize: '12px', color: '#8E9BAE', margin: '4px 0 0 0' }}>
-              URL: <code style={{ color: 'var(--brand-green, #7FE87F)', fontWeight: '700' }}>{webUrl}</code>
+              {isAr ? 'الرابط: ' : 'URL: '}<code style={{ color: 'var(--brand-green, #7FE87F)', fontWeight: '700' }}>{webUrl}</code>
             </p>
           </div>
 
@@ -181,8 +188,12 @@ export const AppLinksModal: React.FC = () => {
                   <Smartphone size={22} />
                 </div>
                 <div>
-                  <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>Android Application</div>
-                  <div style={{ fontSize: '11px', color: '#8E9BAE' }}>Google Play & APK Direct</div>
+                  <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>
+                    {isAr ? 'تطبيق أندرويد الرسمي' : 'Android Application'}
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#8E9BAE' }}>
+                    {isAr ? 'جوجل بلاي وتحميل مباشر APK' : 'Google Play & APK Direct'}
+                  </div>
                 </div>
               </div>
               <span
@@ -217,13 +228,13 @@ export const AppLinksModal: React.FC = () => {
                 gap: '8px',
               }}
             >
-              <Download size={16} /> Download Android APK
+              <Download size={16} /> {isAr ? 'تحميل تطبيق أندرويد (APK)' : 'Download Android APK'}
             </button>
           </div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#8E9BAE', justifyContent: 'center' }}>
-          <CheckCircle2 size={14} color="var(--brand-green, #7FE87F)" /> All links are secured and verified for QTPay
+          <CheckCircle2 size={14} color="var(--brand-green, #7FE87F)" /> {isAr ? 'جميع الروابط مشفرة وموثقة لكيو تي باي' : 'All links are secured and verified for QTPay'}
         </div>
       </div>
     </div>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ShieldCheck, CheckCircle2, UserCheck, ArrowRight, Loader2, Calendar } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
-import { SamaLogo } from '../components/SamaLogo';
 import { useApp } from '../state/AppContext';
 
 type KycStep = 'FORM' | 'VERIFYING' | 'CERTIFIED';

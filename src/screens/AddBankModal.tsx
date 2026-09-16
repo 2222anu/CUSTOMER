@@ -52,8 +52,6 @@ export const AddBankModal: React.FC = () => {
     }, 300);
   };
 
-  const selectedBankObj = SAUDI_BANKS.find((b) => b.name === selectedBank) || SAUDI_BANKS[0];
-
   const handleRequestOtp = () => {
     if (matchMethod === 'iban') {
       const cleanIban = customIban.replace(/\s+/g, '').toUpperCase();

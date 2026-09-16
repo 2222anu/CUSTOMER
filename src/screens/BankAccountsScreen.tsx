@@ -25,7 +25,6 @@ export const BankAccountsScreen: React.FC = () => {
     openPinModal,
     t,
     language,
-    isRtl,
   } = useApp();
 
   const [bankToRemove, setBankToRemove] = useState<string | null>(null);

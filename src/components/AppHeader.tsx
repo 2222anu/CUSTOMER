@@ -44,20 +44,23 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
 
   return (
     <header
+      className="app-header"
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '12px 18px',
+        padding: 'calc(10px + env(safe-area-inset-top, 0px)) 16px 10px 16px',
         backgroundColor: 'rgba(11, 11, 20, 0.96)',
         backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         position: 'sticky',
         top: 0,
         zIndex: 100,
         borderBottom: `1px solid ${designSystem.colors.borderHairline}`,
         boxShadow: 'none',
-        minHeight: '58px',
+        minHeight: 'calc(56px + env(safe-area-inset-top, 0px))',
         boxSizing: 'border-box',
+        width: '100%',
       }}
     >
       {/* Left Slot: Back Button or User Avatar Icon (No text) */}

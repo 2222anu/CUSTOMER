@@ -94,10 +94,10 @@ export const OnboardingKycScreen: React.FC = () => {
             </div>
             <div>
               <h3 style={{ fontSize: '16.5px', fontWeight: 800, margin: 0, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
-                {language === 'العربية' ? 'توثيق الهوية الوطنية الرقمية' : 'Digital Identity Verification'}
+                {language === 'العربية' ? 'توثيق الهوية عبر أبشر' : 'Absher Digital e-KYC Verification'}
               </h3>
               <span style={{ fontSize: '11.5px', color: '#34d399', fontWeight: 700, marginTop: '2px', display: 'block' }}>
-                {language === 'العربية' ? 'توثيق فوري وآمن عبر السجل الوطني' : 'Instant National Verification'}
+                {language === 'العربية' ? 'ربط آمن ومعتمد عبر منصة أبشر والسجل الوطني' : 'Absher & Saudi National Registry Integrated'}
               </span>
             </div>
           </div>

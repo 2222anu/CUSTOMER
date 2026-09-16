@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">QTPay</string>
+    <string name="title_activity_main">QTPay</string>
+    <string name="package_name">com.qtpay.app</string>
+    <string name="custom_url_scheme">com.qtpay.app</string>
+</resources>

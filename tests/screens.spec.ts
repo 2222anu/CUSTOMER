@@ -303,8 +303,8 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     const monthBtn = page.getByRole('button', { name: /Month|شهر/i }).first();
     await monthBtn.click();
 
-    // Click Category breakdown filter (e.g. Shopping & Retail)
-    const shoppingCat = page.getByText(/Shopping & Retail|التسوق والتجزئة/i).first();
+    // Click Category breakdown filter (e.g. Shopping)
+    const shoppingCat = page.getByText(/Shopping|التسوق/i).first();
     await shoppingCat.click();
 
     // Export Statement

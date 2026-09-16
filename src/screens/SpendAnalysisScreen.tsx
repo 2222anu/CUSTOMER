@@ -131,78 +131,84 @@ export const SpendAnalysisScreen: React.FC = () => {
   const budgetProgress = Math.min(100, Math.round((currentData.totalSpent / currentData.budgetLimit) * 100));
   const remainingBudget = Math.max(0, currentData.budgetLimit - currentData.totalSpent);
 
-  // Exquisite green tints, shades, and tones palette
+  // Distinct Color Wheel Palette for Segments
+  // --c1: #3b82f6 (Blue - Shopping)
+  // --c2: #10b981 (Emerald - Food)
+  // --c3: #f59e0b (Amber - Bills)
+  // --c4: #ec4899 (Pink - Travel)
+  // --c5: #8b5cf6 (Purple - Transfers)
+  // --c6: #06b6d4 (Cyan - Health)
   const categories: CategoryData[] = [
     {
       id: 'shopping',
-      nameEn: 'Shopping & Retail',
-      nameAr: 'التسوق والتجزئة',
+      nameEn: 'Shopping',
+      nameAr: 'التسوق',
       amount: selectedPeriod === 'WEEK' ? 950 : selectedPeriod === 'YEAR' ? 38600 : 4200,
       percentage: 28,
       txnCount: selectedPeriod === 'WEEK' ? 3 : 14,
-      color: '#7FE87F', // Signature Brand Bright Green
-      bgColor: 'rgba(127, 232, 127, 0.16)',
-      icon: <ShoppingBag size={18} color="#7FE87F" />,
+      color: '#3b82f6', // Blue - Shopping
+      bgColor: 'rgba(59, 130, 246, 0.16)',
+      icon: <ShoppingBag size={14} color="#3b82f6" />,
       merchants: ['Jarir Bookstore', 'Amazon SA', 'Noon'],
     },
     {
       id: 'food',
-      nameEn: 'Food & Dining',
-      nameAr: 'المطاعم والمقاهي',
+      nameEn: 'Food',
+      nameAr: 'المطاعم',
       amount: selectedPeriod === 'WEEK' ? 880 : selectedPeriod === 'YEAR' ? 35200 : 3850,
       percentage: 26,
       txnCount: selectedPeriod === 'WEEK' ? 6 : 28,
-      color: '#4ADE80', // Vibrant Mint Emerald
-      bgColor: 'rgba(74, 222, 128, 0.16)',
-      icon: <Utensils size={18} color="#4ADE80" />,
+      color: '#10b981', // Emerald - Food
+      bgColor: 'rgba(16, 185, 129, 0.16)',
+      icon: <Utensils size={14} color="#10b981" />,
       merchants: ['HungerStation', 'Jahez', 'Al Baik'],
     },
     {
       id: 'bills',
-      nameEn: 'Bills & Utilities',
-      nameAr: 'الفواتير والخدمات',
+      nameEn: 'Bills',
+      nameAr: 'الفواتير',
       amount: selectedPeriod === 'WEEK' ? 520 : selectedPeriod === 'YEAR' ? 24500 : 2450,
       percentage: 16,
       txnCount: selectedPeriod === 'WEEK' ? 1 : 5,
-      color: '#22C55E', // Classic Fintech Green
-      bgColor: 'rgba(34, 197, 94, 0.16)',
-      icon: <Zap size={18} color="#22C55E" />,
+      color: '#f59e0b', // Amber - Bills
+      bgColor: 'rgba(245, 158, 11, 0.16)',
+      icon: <Zap size={14} color="#f59e0b" />,
       merchants: ['Saudi Electricity Co.', 'STC Pay'],
     },
     {
-      id: 'transport',
-      nameEn: 'Travel & Transport',
-      nameAr: 'السفر والمواصلات',
+      id: 'travel',
+      nameEn: 'Travel',
+      nameAr: 'السفر',
       amount: selectedPeriod === 'WEEK' ? 440 : selectedPeriod === 'YEAR' ? 18400 : 1920,
       percentage: 13,
       txnCount: selectedPeriod === 'WEEK' ? 4 : 12,
-      color: '#10B981', // Deep Teal-Green Tone
-      bgColor: 'rgba(16, 185, 129, 0.16)',
-      icon: <Car size={18} color="#10B981" />,
+      color: '#ec4899', // Pink - Travel
+      bgColor: 'rgba(236, 72, 153, 0.16)',
+      icon: <Car size={14} color="#ec4899" />,
       merchants: ['Uber Riyadh', 'Aramco Fuel'],
     },
     {
       id: 'transfers',
-      nameEn: 'Transfers & Others',
-      nameAr: 'التحويلات ومدفوعات أخرى',
+      nameEn: 'Transfers',
+      nameAr: 'التحويلات',
       amount: selectedPeriod === 'WEEK' ? 380 : selectedPeriod === 'YEAR' ? 11700 : 1250,
       percentage: 9,
       txnCount: selectedPeriod === 'WEEK' ? 2 : 8,
-      color: '#A7F3D0', // Soft Pastel Mint Tint
-      bgColor: 'rgba(167, 243, 208, 0.16)',
-      icon: <Send size={18} color="#A7F3D0" />,
+      color: '#8b5cf6', // Purple - Transfers
+      bgColor: 'rgba(139, 92, 246, 0.16)',
+      icon: <Send size={14} color="#8b5cf6" />,
       merchants: ['Sarie Transfer', 'Apple Services'],
     },
     {
       id: 'health',
-      nameEn: 'Health & Medical',
-      nameAr: 'الصحة والرعاية',
+      nameEn: 'Health',
+      nameAr: 'الصحة',
       amount: selectedPeriod === 'WEEK' ? 250 : selectedPeriod === 'YEAR' ? 10000 : 1180,
       percentage: 8,
       txnCount: selectedPeriod === 'WEEK' ? 1 : 4,
-      color: '#059669', // Rich Forest Jade Green
-      bgColor: 'rgba(5, 150, 105, 0.16)',
-      icon: <HeartPulse size={18} color="#059669" />,
+      color: '#06b6d4', // Cyan - Health
+      bgColor: 'rgba(6, 182, 212, 0.16)',
+      icon: <HeartPulse size={14} color="#06b6d4" />,
       merchants: ['Nahdi Pharmacy', 'Dr. Sulaiman Al-Habib'],
     },
   ];
@@ -214,9 +220,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       categoryAr: 'الفواتير والخدمات',
       amount: 1450,
       txnCount: 2,
-      icon: <Zap size={18} color="#22C55E" />,
-      iconBg: 'rgba(34, 197, 94, 0.16)',
-      iconColor: '#22C55E',
+      icon: <Zap size={18} color="#f59e0b" />,
+      iconBg: 'rgba(245, 158, 11, 0.16)',
+      iconColor: '#f59e0b',
     },
     {
       name: language === 'العربية' ? 'مكتبة جرير' : 'Jarir Bookstore',
@@ -224,9 +230,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       categoryAr: 'التسوق والإلكترونيات',
       amount: 1280,
       txnCount: 3,
-      icon: <BookOpen size={18} color="#7FE87F" />,
-      iconBg: 'rgba(127, 232, 127, 0.16)',
-      iconColor: '#7FE87F',
+      icon: <BookOpen size={18} color="#3b82f6" />,
+      iconBg: 'rgba(59, 130, 246, 0.16)',
+      iconColor: '#3b82f6',
     },
     {
       name: language === 'العربية' ? 'لولو هايبرماركت' : 'Lulu Hypermarket',
@@ -234,9 +240,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       categoryAr: 'التموينات والتجزئة',
       amount: 980,
       txnCount: 4,
-      icon: <Store size={18} color="#4ADE80" />,
-      iconBg: 'rgba(74, 222, 128, 0.16)',
-      iconColor: '#4ADE80',
+      icon: <Store size={18} color="#10b981" />,
+      iconBg: 'rgba(16, 185, 129, 0.16)',
+      iconColor: '#10b981',
     },
     {
       name: language === 'العربية' ? 'هنقرستيشن' : 'HungerStation',
@@ -244,9 +250,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       categoryAr: 'توصيل الطعام',
       amount: 740,
       txnCount: 8,
-      icon: <Utensils size={18} color="#10B981" />,
+      icon: <Utensils size={18} color="#10b981" />,
       iconBg: 'rgba(16, 185, 129, 0.16)',
-      iconColor: '#10B981',
+      iconColor: '#10b981',
     },
     {
       name: language === 'العربية' ? 'صيدليات النهدي' : 'Nahdi Pharmacy',
@@ -254,9 +260,9 @@ export const SpendAnalysisScreen: React.FC = () => {
       categoryAr: 'الصحة والعناية',
       amount: 620,
       txnCount: 3,
-      icon: <HeartPulse size={18} color="#059669" />,
-      iconBg: 'rgba(5, 150, 105, 0.16)',
-      iconColor: '#059669',
+      icon: <HeartPulse size={18} color="#06b6d4" />,
+      iconBg: 'rgba(6, 182, 212, 0.16)',
+      iconColor: '#06b6d4',
     },
   ];
 
@@ -281,31 +287,24 @@ export const SpendAnalysisScreen: React.FC = () => {
   // Bar scale calculation
   const maxChartAmount = Math.max(...currentData.chartData.map((d) => d.amount));
 
-  // Pie Chart SVG calculations (Circumference of radius 68 = 427.25)
-  const radius = 68;
-  const circumference = 2 * Math.PI * radius;
-
-  // Compute slice offsets dynamically
-  let sliceOffsetAccumulator = 0;
-  const sliceMeta = categories.map((cat) => {
-    const strokeLength = (cat.percentage / 100) * circumference;
-    const offset = (sliceOffsetAccumulator / 100) * circumference;
-    sliceOffsetAccumulator += cat.percentage;
-    return {
-      ...cat,
-      strokeLength,
-      strokeOffset: offset,
-    };
-  });
+  // Compute conic gradient segments for Donut chart
+  let currentPercent = 0;
+  const conicGradientSegments = categories.map((cat) => {
+    const start = currentPercent;
+    const end = currentPercent + cat.percentage;
+    currentPercent = end;
+    return `${cat.color} ${start}% ${end}%`;
+  }).join(', ');
+  const conicGradientStyle = `conic-gradient(${conicGradientSegments})`;
 
   return (
     <div
       className="fade-in"
       style={{
-        backgroundColor: '#080c14',
+        backgroundColor: '#07090e',
         minHeight: '100vh',
         paddingBottom: '100px',
-        color: '#FFFFFF',
+        color: '#f8fafc',
       }}
     >
       {/* App Header */}
@@ -327,8 +326,8 @@ export const SpendAnalysisScreen: React.FC = () => {
             maxWidth: '520px',
             margin: '0 auto',
             zIndex: 100,
-            backgroundColor: 'var(--color-surface, #111726)',
-            border: '1px solid var(--brand-green, #7FE87F)',
+            backgroundColor: '#0f1623',
+            border: '1px solid #10b981',
             borderRadius: '16px',
             padding: '12px 18px',
             display: 'flex',
@@ -337,18 +336,18 @@ export const SpendAnalysisScreen: React.FC = () => {
             boxShadow: '0 12px 30px rgba(0,0,0,0.6)',
           }}
         >
-          <CheckCircle2 size={18} color="var(--brand-green, #7FE87F)" />
+          <CheckCircle2 size={18} color="#10b981" />
           <span style={{ fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}>{exportToast}</span>
         </div>
       )}
 
-      <div style={{ padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+      <div style={{ padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {/* Period Selector Pills */}
         <div
           style={{
             display: 'flex',
-            backgroundColor: 'var(--color-surface, #111726)',
-            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+            backgroundColor: '#0f1623',
+            border: '1px solid #1e293b',
             borderRadius: '14px',
             padding: '3px',
             gap: '3px',
@@ -376,8 +375,8 @@ export const SpendAnalysisScreen: React.FC = () => {
                   padding: '8px 4px',
                   borderRadius: '11px',
                   border: 'none',
-                  backgroundColor: isActive ? 'var(--brand-green, #7FE87F)' : 'transparent',
-                  color: isActive ? 'var(--brand-green-ink, #080C14)' : '#8E8EA8',
+                  backgroundColor: isActive ? '#10b981' : 'transparent',
+                  color: isActive ? '#080C14' : '#64748b',
                   fontSize: '12px',
                   fontWeight: isActive ? 800 : 600,
                   cursor: 'pointer',
@@ -391,159 +390,132 @@ export const SpendAnalysisScreen: React.FC = () => {
           })}
         </div>
 
-        {/* HERO TOTAL SPEND & BUDGET SUMMARY */}
+        {/* Card 1: Total Spending (Inspiration UI) */}
         <div
+          className="card"
           style={{
-            backgroundColor: 'var(--color-surface, #111726)',
+            backgroundColor: '#0f1623',
+            border: '1px solid #1e293b',
             borderRadius: '20px',
-            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-            padding: '20px',
-            position: 'relative',
-            overflow: 'hidden',
+            padding: '24px',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4)',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
             <div>
-              <span
-                style={{
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  color: '#6E6E85',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                }}
-              >
+              <div style={{ fontSize: '11px', fontFeatureSettings: "'cv02', 'cv03', 'cv04', 'cv11'", fontWeight: 700, letterSpacing: '0.08em', color: '#64748b', textTransform: 'uppercase' }}>
                 {language === 'العربية' ? 'إجمالي المصروفات' : 'Total Spending'}
-              </span>
-              <div style={{ fontSize: '12px', color: '#8E8EA8', fontWeight: 600, marginTop: '2px' }}>
+              </div>
+              <div style={{ fontSize: '13px', color: '#64748b', marginTop: '2px' }}>
                 {language === 'العربية' ? currentData.periodNameAr : currentData.periodNameEn}
               </div>
             </div>
-
-            {/* Export Statement Button */}
             <button
               onClick={handleExport}
               disabled={isExporting}
-              className="interactive-tap"
+              className="btn-action interactive-tap"
               style={{
+                background: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid #1e293b',
+                color: '#f8fafc',
+                padding: '6px 12px',
+                borderRadius: '8px',
+                fontSize: '12px',
+                fontWeight: 500,
+                cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
-                backgroundColor: 'var(--color-surface-elevated, #182236)',
-                border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-                color: 'var(--brand-green, #7FE87F)',
-                borderRadius: '10px',
-                padding: '7px 12px',
-                fontSize: '11.5px',
-                fontWeight: 700,
-                cursor: 'pointer',
+                transition: 'all 0.2s ease',
               }}
             >
-              <Download size={13} />
+              <Download size={14} />
               <span>{isExporting ? (language === 'العربية' ? 'جاري...' : 'Exporting...') : (language === 'العربية' ? 'تصدير' : 'Export')}</span>
             </button>
           </div>
 
-          {/* Amount Display */}
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginTop: '6px' }}>
-            <span className="tabular-nums" style={{ fontSize: '30px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em' }}>
-              {formatCurrency(currentData.totalSpent, language)}
-            </span>
+          <div className="amount-main tabular-nums" style={{ fontSize: '30px', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: '16px', color: '#f8fafc' }}>
+            {formatCurrency(currentData.totalSpent, language)}
           </div>
 
-          {/* Delta Trend Pill & Daily Average */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '12px', alignItems: 'center' }}>
+          <div className="badge-row" style={{ display: 'flex', gap: '8px', marginBottom: '20px', flexWrap: 'wrap' }}>
             <div
+              className="tag tag-green"
               style={{
-                display: 'inline-flex',
+                fontSize: '12px',
+                padding: '5px 10px',
+                borderRadius: '6px',
+                fontWeight: 500,
+                display: 'flex',
                 alignItems: 'center',
                 gap: '5px',
-                padding: '4px 10px',
-                borderRadius: '16px',
-                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
-                border: '1px solid var(--brand-green-border, rgba(127, 232, 127, 0.35))',
-                fontSize: '11px',
-                fontWeight: 800,
-                color: 'var(--brand-green, #7FE87F)',
+                background: 'rgba(16, 185, 129, 0.1)',
+                color: '#10b981',
               }}
             >
-              <TrendingDown size={13} />
-              <span>
-                {Math.abs(currentData.deltaPercent)}% {language === 'العربية' ? 'أقل من السابق' : 'vs last period'}
-              </span>
+              <TrendingDown size={12} strokeWidth={2.5} />
+              <span>{Math.abs(currentData.deltaPercent)}% {language === 'العربية' ? 'أقل من السابق' : 'vs last period'}</span>
             </div>
-
             <div
+              className="tag tag-dark"
               style={{
-                display: 'inline-flex',
+                fontSize: '12px',
+                padding: '5px 10px',
+                borderRadius: '6px',
+                fontWeight: 500,
+                display: 'flex',
                 alignItems: 'center',
                 gap: '5px',
-                padding: '4px 10px',
-                borderRadius: '16px',
-                backgroundColor: 'var(--color-surface-elevated, #182236)',
-                fontSize: '11px',
-                fontWeight: 700,
-                color: '#8E8EA8',
+                background: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+                color: '#64748b',
               }}
             >
               <span>{language === 'العربية' ? 'المعدل اليومي:' : 'Daily Avg:'}</span>
-              <span className="tabular-nums" style={{ color: '#FFFFFF', fontWeight: 800 }}>
+              <strong style={{ color: '#f8fafc', marginInlineStart: '3px' }}>
                 {formatCurrency(currentData.dailyAverage, language)}
-              </span>
+              </strong>
             </div>
           </div>
 
-          {/* Integrated Budget Progress */}
-          <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11.5px', marginBottom: '6px' }}>
-              <span style={{ color: '#8E8EA8', fontWeight: 600 }}>
-                {language === 'العربية' ? `متبقي من الميزانية ${formatCurrency(remainingBudget, language)}` : `${formatCurrency(remainingBudget, language)} remaining of budget`}
-              </span>
-              <span style={{ fontWeight: 800, color: 'var(--brand-green, #7FE87F)' }}>
-                {budgetProgress}%
-              </span>
-            </div>
+          <div className="progress-details" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#64748b', marginBottom: '6px' }}>
+            <span>
+              {language === 'العربية'
+                ? `${formatCurrency(remainingBudget, language)} متبقي من الميزانية`
+                : `${formatCurrency(remainingBudget, language)} remaining`}
+            </span>
+            <strong style={{ color: '#f8fafc' }}>{budgetProgress}%</strong>
+          </div>
+          <div className="progress-bar-bg" style={{ background: 'rgba(255, 255, 255, 0.05)', height: '6px', borderRadius: '3px', overflow: 'hidden' }}>
             <div
+              className="progress-bar-fill"
               style={{
-                width: '100%',
-                height: '6px',
-                backgroundColor: 'var(--color-surface-elevated, #182236)',
-                borderRadius: '4px',
-                overflow: 'hidden',
+                background: 'linear-gradient(90deg, #3b82f6, #10b981)',
+                height: '100%',
+                width: `${budgetProgress}%`,
+                borderRadius: '3px',
+                transition: 'width 0.4s ease',
               }}
-            >
-              <div
-                style={{
-                  width: `${budgetProgress}%`,
-                  height: '100%',
-                  backgroundColor: 'var(--brand-green, #7FE87F)',
-                  borderRadius: '4px',
-                  transition: 'width 0.4s ease',
-                }}
-              />
-            </div>
+            />
           </div>
         </div>
 
-        {/* 1. PIE / DONUT CHART (With Green Color Tints, Shades & Tones) */}
+        {/* Card 2: Category Distribution (Inspiration UI) */}
         <div
-          className="fade-in"
+          className="card"
           style={{
-            backgroundColor: 'var(--color-surface, #111726)',
+            backgroundColor: '#0f1623',
+            border: '1px solid #1e293b',
             borderRadius: '20px',
-            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-            padding: '22px 20px',
+            padding: '24px',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4)',
           }}
         >
-          {/* Header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <PieChartIcon size={17} color="var(--brand-green, #7FE87F)" />
-              <span style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
-                {language === 'العربية' ? 'التوزيع الدائري للمصروفات' : 'Category Spend Distribution'}
-              </span>
+          <div className="section-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', fontWeight: 600, color: '#f8fafc' }}>
+              <PieChartIcon size={16} color="#10b981" />
+              <span>{language === 'العربية' ? 'التوزيع الدائري للمصروفات' : 'Category Spend Distribution'}</span>
             </div>
-
             {selectedCategory && (
               <button
                 onClick={() => setSelectedCategory(null)}
@@ -551,9 +523,9 @@ export const SpendAnalysisScreen: React.FC = () => {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: 'var(--brand-green, #7FE87F)',
+                  color: '#10b981',
                   fontSize: '11.5px',
-                  fontWeight: 800,
+                  fontWeight: 700,
                   cursor: 'pointer',
                 }}
               >
@@ -562,118 +534,107 @@ export const SpendAnalysisScreen: React.FC = () => {
             )}
           </div>
 
-          {/* SVG Donut Slices */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ position: 'relative', width: '210px', height: '210px' }}>
-              <svg viewBox="0 0 200 200" style={{ transform: 'rotate(-90deg)', width: '100%', height: '100%' }}>
-                {/* Background Ring Track */}
-                <circle
-                  cx="100"
-                  cy="100"
-                  r={radius}
-                  fill="none"
-                  stroke="#182236"
-                  strokeWidth="22"
-                />
-
-                {/* Slices in Green Shades & Tints */}
-                {sliceMeta.map((cat) => {
-                  const isSelected = selectedCategory === cat.id;
-                  return (
-                    <circle
-                      key={cat.id}
-                      cx="100"
-                      cy="100"
-                      r={radius}
-                      fill="none"
-                      stroke={cat.color}
-                      strokeWidth={isSelected ? 28 : 22}
-                      strokeDasharray={`${cat.strokeLength} ${circumference}`}
-                      strokeDashoffset={-cat.strokeOffset}
-                      style={{
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease',
-                        opacity: selectedCategory === null || isSelected ? 1 : 0.35,
-                        filter: isSelected ? `drop-shadow(0 0 8px ${cat.color})` : 'none',
-                      }}
-                      onClick={() => setSelectedCategory(isSelected ? null : cat.id)}
-                    />
-                  );
-                })}
-              </svg>
-
-              {/* Center Readout inside Donut */}
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  textAlign: 'center',
-                  pointerEvents: 'none',
-                  padding: '8px',
-                }}
-              >
-                <span style={{ fontSize: '10px', fontWeight: 800, color: selectedCategoryObj ? selectedCategoryObj.color : '#8E8EA8', textTransform: 'uppercase' }}>
-                  {selectedCategoryObj
-                    ? (language === 'العربية' ? selectedCategoryObj.nameAr : selectedCategoryObj.nameEn)
-                    : (language === 'العربية' ? 'الإجمالي' : 'Total')}
-                </span>
-                <span className="tabular-nums" style={{ fontSize: '17px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px' }}>
-                  {formatCurrency(selectedCategoryObj ? selectedCategoryObj.amount : currentData.totalSpent, language)}
-                </span>
-                <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)', marginTop: '2px' }}>
-                  {selectedCategoryObj ? `${selectedCategoryObj.percentage}%` : '100%'}
-                </span>
-              </div>
-            </div>
-
-            {/* Pie Legends Grid */}
+          <div
+            className="donut-container"
+            style={{
+              position: 'relative',
+              width: '160px',
+              height: '160px',
+              margin: '0 auto 20px auto',
+              borderRadius: '50%',
+              background: conicGradientStyle,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
+            }}
+          >
             <div
+              className="donut-hole"
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: '8px 12px',
-                width: '100%',
-                marginTop: '16px',
-                paddingTop: '16px',
-                borderTop: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+                width: '116px',
+                height: '116px',
+                backgroundColor: '#0f1623',
+                borderRadius: '50%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                padding: '6px',
               }}
             >
-              {categories.map((cat) => {
-                const isSelected = selectedCategory === cat.id;
-                return (
-                  <div
-                    key={cat.id}
-                    onClick={() => setSelectedCategory(isSelected ? null : cat.id)}
-                    className="interactive-tap"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '6px 8px',
-                      borderRadius: '8px',
-                      backgroundColor: isSelected ? 'var(--color-surface-elevated, #182236)' : 'transparent',
-                      border: isSelected ? `1px solid ${cat.color}` : '1px solid transparent',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '7px', minWidth: 0, flex: 1 }}>
-                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: cat.color, flexShrink: 0 }} />
-                      <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#FFFFFF', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {language === 'العربية' ? cat.nameAr : cat.nameEn}
-                      </span>
-                    </div>
-                    <span style={{ fontSize: '11px', fontWeight: 800, color: cat.color, marginInlineStart: '6px' }}>
-                      {cat.percentage}%
+              <span style={{ fontSize: '9px', fontWeight: 700, color: '#64748b', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                {selectedCategoryObj
+                  ? (language === 'العربية' ? selectedCategoryObj.nameAr : selectedCategoryObj.nameEn)
+                  : (language === 'العربية' ? 'المصروفات' : 'SPENT')}
+              </span>
+              <span style={{ fontSize: '14px', fontWeight: 800, margin: '2px 0', color: '#f8fafc' }}>
+                {selectedCategoryObj
+                  ? formatCurrency(selectedCategoryObj.amount, language)
+                  : (language === 'العربية' ? formatCurrency(currentData.totalSpent, language) : `SAR ${(currentData.totalSpent / 1000).toFixed(1)}K`)}
+              </span>
+              {selectedCategoryObj && (
+                <span style={{ fontSize: '10px', fontWeight: 800, color: selectedCategoryObj.color }}>
+                  {selectedCategoryObj.percentage}%
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div
+            className="category-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '12px 16px',
+              borderTop: '1px solid #1e293b',
+              paddingTop: '16px',
+            }}
+          >
+            {categories.map((cat) => {
+              const isSelected = selectedCategory === cat.id;
+              return (
+                <div
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(isSelected ? null : cat.id)}
+                  className="category-item interactive-tap"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: '12px',
+                    cursor: 'pointer',
+                    padding: '4px 6px',
+                    borderRadius: '6px',
+                    backgroundColor: isSelected ? 'rgba(255, 255, 255, 0.05)' : 'transparent',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  <div className="category-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#64748b', minWidth: 0 }}>
+                    <span
+                      className="dot"
+                      style={{
+                        width: '6px',
+                        height: '6px',
+                        borderRadius: '50%',
+                        backgroundColor: cat.color,
+                        flexShrink: 0,
+                      }}
+                    />
+                    <span style={{ display: 'flex', alignItems: 'center', color: cat.color, flexShrink: 0 }}>
+                      {cat.icon}
+                    </span>
+                    <span style={{ color: isSelected ? '#f8fafc' : '#94a3b8', fontWeight: isSelected ? 700 : 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {language === 'العربية' ? cat.nameAr : cat.nameEn}
                     </span>
                   </div>
-                );
-              })}
-            </div>
+                  <span className="category-val" style={{ fontWeight: 700, color: cat.color, marginInlineStart: '6px', flexShrink: 0 }}>
+                    {cat.percentage}%
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
 

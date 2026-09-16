@@ -108,7 +108,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
 
     // 2. Transition to Onboarding
     await page.goto(getAppUrl('screen=ONBOARDING'));
-    await expect(page.getByText('Diverse Card Options')).toBeVisible();
+    await expect(page.getByText('Pay Anyone Instantly')).toBeVisible();
 
     // Skip onboarding to go to Mobile Login
     const skipBtn = page.getByRole('button', { name: /Skip|تخطي/i });
@@ -161,7 +161,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     await continueToBankBtn.click();
 
     // 7. Onboarding Bank Screen (Link Saudi Bank)
-    await expect(page.getByText(/Select Saudi Bank|اختر البنك السعودي/i).first()).toBeVisible({ timeout: 5000 });
+    await expect(page.getByText(/Select Bank|اختر البنك/i).first()).toBeVisible({ timeout: 5000 });
     
     // Select Al Rajhi Bank
     const alRajhiBank = page.getByText('Al Rajhi Bank').first();
@@ -183,7 +183,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     await completeSetupBtn.click();
 
     // 8. Verify seamless auto-navigation to Home Dashboard
-    await expect(page.getByText('Transfer & Pay')).toBeVisible({ timeout: 6000 });
+    await expect(page.getByText('Quick Actions')).toBeVisible({ timeout: 6000 });
 
     expect(consoleErrors).toEqual([]);
   });
@@ -221,7 +221,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     // Click Done to return Home
     const doneBtn = page.getByRole('button', { name: 'Done' });
     await doneBtn.click();
-    await expect(page.getByText('Transfer & Pay')).toBeVisible();
+    await expect(page.getByText('Quick Actions')).toBeVisible();
 
     expect(consoleErrors).toEqual([]);
   });

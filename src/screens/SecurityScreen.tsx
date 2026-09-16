@@ -54,6 +54,36 @@ export const SecurityScreen: React.FC = () => {
           </div>
         </div>
 
+        {/* SAMA Daily Limit & AI Fraud Shield Card */}
+        <div
+          style={{
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
+            borderRadius: '16px',
+            padding: '18px 20px',
+            marginBottom: '24px',
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <span style={{ fontSize: '12px', fontWeight: 800, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              {language === 'العربية' ? 'الحد اليومي للتحويل (سريع)' : 'Daily Sarie Limit'}
+            </span>
+            <span style={{ fontSize: '12px', fontWeight: 800, color: '#7FE87F', fontVariantNumeric: 'tabular-nums' }}>
+              {language === 'العربية' ? '٥٠,٠٠٠ ر.س' : 'SAR 50,000'}
+            </span>
+          </div>
+
+          {/* Progress Bar */}
+          <div style={{ width: '100%', height: '6px', backgroundColor: 'var(--color-surface-elevated, #182236)', borderRadius: '999px', overflow: 'hidden', marginBottom: '8px' }}>
+            <div style={{ width: '14%', height: '100%', backgroundColor: '#7FE87F', borderRadius: '999px' }} />
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11.5px', color: '#9ca3af' }}>
+            <span>{language === 'العربية' ? 'المستخدم اليوم: ٤,٨٠٠ ر.س' : 'Used Today: SAR 4,800'}</span>
+            <span>{language === 'العربية' ? 'المتبقي: ٤٥,٢٠٠ ر.س' : 'Remaining: SAR 45,200'}</span>
+          </div>
+        </div>
+
         <div
           style={{
             fontSize: '11px',
@@ -85,7 +115,7 @@ export const SecurityScreen: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '16px 18px',
-                  backgroundColor: session.isCurrent ? 'rgba(0, 208, 156, 0.04)' : 'transparent',
+                  backgroundColor: session.isCurrent ? 'rgba(127, 232, 127, 0.08)' : 'transparent',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>

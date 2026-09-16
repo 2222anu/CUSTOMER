@@ -197,7 +197,7 @@ export const ScanScreen: React.FC = () => {
             {t('scan.title', 'Scan QR Code')}
           </h2>
           <span style={{ fontSize: '11px', color: '#8E9BAE', fontWeight: '600' }}>
-            {language === 'العربية' ? 'دفع فوري عبر شبكة سريع' : 'Instant Payment'}
+            {language === 'العربية' ? 'مدى QR • سريع • دفع فوري للمتاجر' : 'mada QR • Sarie • In-store & Online Checkout'}
           </span>
         </div>
 
@@ -342,7 +342,7 @@ export const ScanScreen: React.FC = () => {
               style={{
                 position: 'absolute',
                 inset: 0,
-                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.16))',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.16))',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',

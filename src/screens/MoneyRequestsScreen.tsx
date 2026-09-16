@@ -102,10 +102,33 @@ export const MoneyRequestsScreen: React.FC = () => {
                     {req.requesterName.substring(0, 2).toUpperCase()}
                   </div>
                   <div>
-                    <div style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF' }}>
-                      {req.requesterName}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF' }}>
+                        {req.requesterName}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: '10px',
+                          fontWeight: 800,
+                          backgroundColor: 'rgba(127, 232, 127, 0.12)',
+                          color: '#7FE87F',
+                          padding: '2px 6px',
+                          borderRadius: '6px',
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        {req.upiId.includes('merchant') || req.upiId.includes('store')
+                          ? (language === 'العربية' ? 'طلب متجر' : 'Merchant RTP')
+                          : (language === 'العربية' ? 'طلب فوري' : 'Direct RTP')}
+                      </span>
                     </div>
-                    <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px' }}>{req.upiId}</div>
+                    <div style={{ fontSize: '12px', color: '#A2A2BA', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span>{req.upiId}</span>
+                      <span>•</span>
+                      <span style={{ color: '#F59E0B', fontWeight: 600 }}>
+                        {language === 'العربية' ? 'ينتهي خلال ١٥ د' : 'Expires in 15m'}
+                      </span>
+                    </div>
                   </div>
                 </div>
 

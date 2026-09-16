@@ -68,7 +68,7 @@ export const PayBillPinModal: React.FC = () => {
             <span style={{ color: '#9ca3af', fontSize: '13px' }}>
               {language === 'العربية' ? 'المبلغ المطلوب' : 'Amount'}
             </span>
-            <span style={{ color: '#34d399', fontWeight: 700, fontSize: '16px' }}>
+            <span style={{ color: '#7FE87F', fontWeight: 700, fontSize: '16px' }}>
               {formatCurrency(pendingPaymentData.amount, language)}
             </span>
           </div>

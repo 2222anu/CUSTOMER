@@ -120,8 +120,8 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
               width: '52px',
               height: '52px',
               borderRadius: '16px',
-              backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-              color: 'var(--brand-green, #00D09C)',
+              backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+              color: 'var(--brand-green, #7FE87F)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -144,34 +144,34 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
 
         <div style={{ backgroundColor: 'var(--color-surface, #111726)', border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))', borderRadius: '16px', overflow: 'hidden' }}>
           <ListRow
-            icon={<Plane size={18} color="var(--brand-green, #00D09C)" />}
+            icon={<Plane size={18} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Flight Bookings', language)}
             subLabel={bookings[0].subtitle}
-            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #00D09C)', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(650, language)}` : 'Book SAR 650'}</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #7FE87F)', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(650, language)}` : 'Book SAR 650'}</span>}
             onClick={() => handleStartBooking(bookings[0])}
           />
           <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<Car size={18} color="var(--brand-green, #00D09C)" />}
+            icon={<Car size={18} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Airport Chauffeur', language)}
             subLabel={bookings[1].subtitle}
-            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #00D09C)', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(120, language)}` : 'Book SAR 120'}</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #7FE87F)', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(120, language)}` : 'Book SAR 120'}</span>}
             onClick={() => handleStartBooking(bookings[1])}
           />
           <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<Hotel size={18} color="var(--brand-green, #00D09C)" />}
+            icon={<Hotel size={18} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Hotel Reservations', language)}
             subLabel={bookings[2].subtitle}
-            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #00D09C)', padding: '4px 10px', borderRadius: '8px' }}>{translateText('Reserve', language)}</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #7FE87F)', padding: '4px 10px', borderRadius: '8px' }}>{translateText('Reserve', language)}</span>}
             onClick={() => handleStartBooking(bookings[2])}
           />
           <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<Compass size={18} color="var(--brand-green, #00D09C)" />}
+            icon={<Compass size={18} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Holiday Packages', language)}
             subLabel={bookings[3].subtitle}
-            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #00D09C)', padding: '4px 10px', borderRadius: '8px' }}>{translateText('Explore', language)}</span>}
+            rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #7FE87F)', padding: '4px 10px', borderRadius: '8px' }}>{translateText('Explore', language)}</span>}
             onClick={() => handleStartBooking(bookings[3])}
           />
         </div>
@@ -237,7 +237,7 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
               <div style={{ fontSize: '12px', color: '#8E9BAE', marginTop: '4px' }}>{selectedBooking.subtitle}</div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px', paddingTop: '10px', borderTop: '1px dashed var(--color-border, rgba(255, 255, 255, 0.12))' }}>
                 <span style={{ fontSize: '13px', fontWeight: 700, color: '#8E9BAE' }}>{translateText('Total Payable Amount', language)}</span>
-                <span style={{ fontSize: '20px', fontWeight: 900, color: 'var(--brand-green, #00D09C)', fontVariantNumeric: 'tabular-nums' }}>{formatSaudiCurrency(selectedBooking.amount, language)}</span>
+                <span style={{ fontSize: '20px', fontWeight: 900, color: 'var(--brand-green, #7FE87F)', fontVariantNumeric: 'tabular-nums' }}>{formatSaudiCurrency(selectedBooking.amount, language)}</span>
               </div>
             </div>
 
@@ -248,7 +248,7 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
                 width: '100%',
                 padding: '14px',
                 borderRadius: '12px',
-                backgroundColor: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green, #7FE87F)',
                 border: 'none',
                 color: 'var(--brand-green-ink, #080C14)',
                 fontSize: '14px',
@@ -299,8 +299,8 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                color: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                color: 'var(--brand-green, #7FE87F)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -318,7 +318,7 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
             <div style={{ backgroundColor: 'var(--color-surface-elevated, #182236)', borderRadius: '16px', padding: '16px', textAlign: isRtl ? 'right' : 'left', marginBottom: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                 <span style={{ fontSize: '12px', color: '#8E9BAE' }}>{translateText('Booking Reference (PNR)', language)}</span>
-                <span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green, #00D09C)', fontFamily: 'monospace' }}>{confirmedTicket.pnr}</span>
+                <span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)', fontFamily: 'monospace' }}>{confirmedTicket.pnr}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                 <span style={{ fontSize: '12px', color: '#8E9BAE' }}>{t('txn_ref')}</span>
@@ -326,7 +326,7 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '8px', borderTop: '1px dashed var(--color-border, rgba(255, 255, 255, 0.12))' }}>
                 <span style={{ fontSize: '13px', fontWeight: 700, color: '#FFFFFF' }}>{translateText('Amount Paid', language)}</span>
-                <span style={{ fontSize: '15px', fontWeight: 900, color: 'var(--brand-green, #00D09C)', fontVariantNumeric: 'tabular-nums' }}>{formatSaudiCurrency(confirmedTicket.amount, language)}</span>
+                <span style={{ fontSize: '15px', fontWeight: 900, color: 'var(--brand-green, #7FE87F)', fontVariantNumeric: 'tabular-nums' }}>{formatSaudiCurrency(confirmedTicket.amount, language)}</span>
               </div>
             </div>
 
@@ -337,7 +337,7 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
                 width: '100%',
                 padding: '12px',
                 borderRadius: '12px',
-                backgroundColor: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green, #7FE87F)',
                 border: 'none',
                 color: 'var(--brand-green-ink, #080C14)',
                 fontSize: '14px',

@@ -19,7 +19,7 @@ export const SplashScreen: React.FC = () => {
       style={{
         minHeight: '100vh',
         backgroundColor: '#070D0A',
-        backgroundImage: 'radial-gradient(circle at 50% 40%, rgba(52, 211, 153, 0.15) 0%, rgba(7, 13, 10, 0.95) 70%)',
+        backgroundImage: 'radial-gradient(circle at 50% 40%, rgba(127, 232, 127, 0.16) 0%, rgba(7, 13, 10, 0.95) 70%)',
         color: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
@@ -51,7 +51,7 @@ export const SplashScreen: React.FC = () => {
             width: '140px',
             height: '140px',
             borderRadius: '50%',
-            backgroundColor: 'rgba(52, 211, 153, 0.2)',
+            backgroundColor: 'rgba(127, 232, 127, 0.22)',
             filter: 'blur(40px)',
             pointerEvents: 'none',
           }}

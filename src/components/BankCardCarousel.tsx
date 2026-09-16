@@ -24,29 +24,29 @@ interface BankCardCarouselProps {
 const getBankIcon = (bankName: string) => {
   const lower = bankName.toLowerCase();
   if (lower.includes('rajhi')) {
-    return <Landmark size={20} color="#34d399" />;
+    return <Landmark size={20} color="#7FE87F" />;
   }
   if (lower.includes('snb') || lower.includes('national')) {
-    return <Building2 size={20} color="#34d399" />;
+    return <Building2 size={20} color="#7FE87F" />;
   }
   if (lower.includes('riyad') || lower.includes('alinma')) {
-    return <Wallet size={20} color="#34d399" />;
+    return <Wallet size={20} color="#7FE87F" />;
   }
-  return <Landmark size={20} color="#34d399" />;
+  return <Landmark size={20} color="#7FE87F" />;
 };
 
 const getTierIcon = (bank: BankAccount) => {
   if (bank.isPrimary) {
-    return <Star size={17} color="#34d399" fill="#34d399" />;
+    return <Star size={17} color="#7FE87F" fill="#7FE87F" />;
   }
   const lowerType = bank.accountType.toLowerCase();
   if (lowerType.includes('saving')) {
-    return <PiggyBank size={17} color="#34d399" />;
+    return <PiggyBank size={17} color="#7FE87F" />;
   }
   if (lowerType.includes('business')) {
-    return <Briefcase size={17} color="#34d399" />;
+    return <Briefcase size={17} color="#7FE87F" />;
   }
-  return <Star size={17} color="#34d399" />;
+  return <Star size={17} color="#7FE87F" />;
 };
 
 export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => {
@@ -124,7 +124,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
             border: 'none',
             fontSize: '13px',
             fontWeight: 700,
-            color: '#34d399',
+            color: '#7FE87F',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -186,7 +186,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                 color: '#FFFFFF',
                 position: 'relative',
                 overflow: 'hidden',
-                border: '1px solid rgba(52, 211, 153, 0.3)',
+                border: '1px solid rgba(127, 232, 127, 0.3)',
                 boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12)',
               }}
             >
@@ -198,7 +198,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                       width: '42px',
                       height: '42px',
                       backgroundColor: 'rgba(8, 45, 30, 0.9)',
-                      border: '1px solid rgba(52, 211, 153, 0.25)',
+                      border: '1px solid rgba(127, 232, 127, 0.22)',
                       borderRadius: '13px',
                       display: 'flex',
                       alignItems: 'center',
@@ -238,8 +238,8 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                     >
                       <span>{displayAccType}</span>
                       <span>•</span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: '#34d399', fontWeight: 600 }}>
-                        <ShieldCheck size={11} color="#34d399" /> {language === 'العربية' ? 'سريع' : 'Sarie'}
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: '#7FE87F', fontWeight: 600 }}>
+                        <ShieldCheck size={11} color="#7FE87F" /> {language === 'العربية' ? 'سريع' : 'Sarie'}
                       </span>
                     </div>
                   </div>
@@ -252,7 +252,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                     width: '36px',
                     height: '36px',
                     backgroundColor: 'rgba(8, 45, 30, 0.9)',
-                    border: '1px solid rgba(52, 211, 153, 0.25)',
+                    border: '1px solid rgba(127, 232, 127, 0.22)',
                     borderRadius: '12px',
                     display: 'flex',
                     alignItems: 'center',
@@ -317,7 +317,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  borderTop: '1px solid rgba(52, 211, 153, 0.15)',
+                  borderTop: '1px solid rgba(127, 232, 127, 0.16)',
                   paddingTop: '12px',
                   zIndex: 2,
                 }}
@@ -371,7 +371,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
             scrollSnapAlign: 'start',
             flex: '0 0 135px',
             background: 'linear-gradient(135deg, #072e1f 0%, #021710 100%)',
-            border: '1.5px dashed rgba(52, 211, 153, 0.35)',
+            border: '1.5px dashed rgba(127, 232, 127, 0.35)',
             borderRadius: '24px',
             padding: '16px',
             display: 'flex',
@@ -390,12 +390,12 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               width: '38px',
               height: '38px',
               borderRadius: '50%',
-              backgroundColor: 'rgba(52, 211, 153, 0.15)',
-              color: '#34d399',
+              backgroundColor: 'rgba(127, 232, 127, 0.16)',
+              color: '#7FE87F',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              border: '1px solid rgba(52, 211, 153, 0.3)',
+              border: '1px solid rgba(127, 232, 127, 0.3)',
             }}
           >
             <Plus size={20} />
@@ -415,7 +415,7 @@ export const BankCardCarousel: React.FC<BankCardCarouselProps> = ({ banks }) => 
               width: i === activeCardIndex ? '16px' : '6px',
               height: '5px',
               borderRadius: i === activeCardIndex ? '3px' : '50%',
-              backgroundColor: i === activeCardIndex ? '#34d399' : 'rgba(52, 211, 153, 0.25)',
+              backgroundColor: i === activeCardIndex ? '#7FE87F' : 'rgba(127, 232, 127, 0.22)',
               transition: 'all 0.3s ease',
             }}
           />

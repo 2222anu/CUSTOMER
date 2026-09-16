@@ -64,7 +64,7 @@ export const UPISettingsScreen: React.FC = () => {
         <div
           style={{
             backgroundColor: '#111726',
-            border: '1px solid rgba(52, 211, 153, 0.35)',
+            border: '1px solid rgba(127, 232, 127, 0.35)',
             borderRadius: '20px',
             padding: '20px',
             marginBottom: '20px',
@@ -73,18 +73,18 @@ export const UPISettingsScreen: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ fontSize: '11.5px', color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 800 }}>
+            <div style={{ fontSize: '11.5px', color: '#7FE87F', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 800 }}>
               {isAr ? 'معرّف الدفع (Alias)' : 'Payment Alias'}
             </div>
             <span
               style={{
                 fontSize: '10.5px',
                 fontWeight: 800,
-                color: '#34d399',
-                backgroundColor: 'rgba(52, 211, 153, 0.12)',
+                color: '#7FE87F',
+                backgroundColor: 'rgba(127, 232, 127, 0.14)',
                 padding: '3px 8px',
                 borderRadius: '8px',
-                border: '1px solid rgba(52, 211, 153, 0.25)',
+                border: '1px solid rgba(127, 232, 127, 0.22)',
               }}
             >
               {isAr ? 'موثق عبر سريع' : 'Sarie Verified'}
@@ -99,7 +99,7 @@ export const UPISettingsScreen: React.FC = () => {
               onClick={handleCopy}
               className="interactive-tap"
               style={{
-                backgroundColor: '#34d399',
+                backgroundColor: '#7FE87F',
                 border: 'none',
                 color: '#080c14',
                 padding: '7px 14px',
@@ -110,7 +110,7 @@ export const UPISettingsScreen: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '5px',
-                boxShadow: '0 4px 12px rgba(52, 211, 153, 0.25)',
+                boxShadow: '0 4px 12px rgba(127, 232, 127, 0.22)',
               }}
             >
               {copied ? <Check size={13} /> : <Copy size={13} />} {copied ? translateText('Copied', language) : t('copy')}
@@ -129,7 +129,7 @@ export const UPISettingsScreen: React.FC = () => {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Landmark size={15} color="#34d399" />
+              <Landmark size={15} color="#7FE87F" />
               <div style={{ fontSize: '12px', color: '#9ca3af' }}>
                 {isAr ? 'مرتبط حالياً بـ:' : 'Mapped to:'}{' '}
                 <strong style={{ color: '#FFFFFF' }}>{primaryBank?.bankName || 'Al Rajhi Bank'}</strong>
@@ -141,7 +141,7 @@ export const UPISettingsScreen: React.FC = () => {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#34d399',
+                color: '#7FE87F',
                 fontSize: '11.5px',
                 fontWeight: 800,
                 cursor: 'pointer',
@@ -181,7 +181,7 @@ export const UPISettingsScreen: React.FC = () => {
                 justifyContent: 'center',
               }}
             >
-              <EyeOff size={18} color="#34d399" />
+              <EyeOff size={18} color="#7FE87F" />
             </div>
             <div>
               <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
@@ -202,7 +202,7 @@ export const UPISettingsScreen: React.FC = () => {
               width: '46px',
               height: '26px',
               borderRadius: '13px',
-              backgroundColor: maskIban ? '#34d399' : '#182236',
+              backgroundColor: maskIban ? '#7FE87F' : '#182236',
               border: '1px solid rgba(255, 255, 255, 0.1)',
               position: 'relative',
               cursor: 'pointer',
@@ -227,25 +227,25 @@ export const UPISettingsScreen: React.FC = () => {
         {/* Config Menu Items */}
         <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', boxShadow: 'none' }}>
           <ListRow
-            icon={<QrCode size={18} color="#34d399" />}
+            icon={<QrCode size={18} color="#7FE87F" />}
             label={isAr ? 'رمز سريع QR الخاص بي' : 'My Sarie QR Code'}
             onClick={() => navigateTo('RECEIVE')}
           />
           <div style={{ height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', margin: '0 16px' }} />
           <ListRow
-            icon={<Key size={18} color="#34d399" />}
+            icon={<Key size={18} color="#7FE87F" />}
             label={isAr ? 'تغيير الرمز السري للتحويل' : 'Change Sarie Payment PIN'}
             onClick={() => setIsPinModalOpen(true)}
           />
           <div style={{ height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', margin: '0 16px' }} />
           <ListRow
-            icon={<ShieldCheck size={18} color="#34d399" />}
+            icon={<ShieldCheck size={18} color="#7FE87F" />}
             label={isAr ? 'الحد اليومي للتحويل' : 'Daily Transfer Limit'}
             rightElement={
               <span
                 style={{
                   fontSize: '11px',
-                  color: '#34d399',
+                  color: '#7FE87F',
                   fontWeight: 800,
                   backgroundColor: '#182236',
                   border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -292,8 +292,8 @@ export const UPISettingsScreen: React.FC = () => {
                   }}
                   className="interactive-tap"
                   style={{
-                    backgroundColor: b.isPrimary ? 'rgba(52, 211, 153, 0.12)' : '#182236',
-                    border: b.isPrimary ? '1.5px solid #34d399' : '1px solid rgba(255, 255, 255, 0.08)',
+                    backgroundColor: b.isPrimary ? 'rgba(127, 232, 127, 0.14)' : '#182236',
+                    border: b.isPrimary ? '1.5px solid #7FE87F' : '1px solid rgba(255, 255, 255, 0.08)',
                     borderRadius: '14px',
                     padding: '12px 14px',
                     display: 'flex',
@@ -303,13 +303,13 @@ export const UPISettingsScreen: React.FC = () => {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <Landmark size={18} color="#34d399" />
+                    <Landmark size={18} color="#7FE87F" />
                     <div>
                       <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>{b.bankName}</div>
                       <div style={{ fontSize: '11px', color: '#9ca3af' }}>{b.accountNumberMasked}</div>
                     </div>
                   </div>
-                  {b.isPrimary && <Check size={18} color="#34d399" />}
+                  {b.isPrimary && <Check size={18} color="#7FE87F" />}
                 </div>
               ))}
             </div>
@@ -326,8 +326,8 @@ export const UPISettingsScreen: React.FC = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(52, 211, 153, 0.15)',
-                color: '#34d399',
+                backgroundColor: 'rgba(127, 232, 127, 0.16)',
+                color: '#7FE87F',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -397,13 +397,13 @@ export const UPISettingsScreen: React.FC = () => {
                 marginTop: '10px',
                 padding: '14px',
                 borderRadius: '14px',
-                backgroundColor: '#34d399',
+                backgroundColor: '#7FE87F',
                 color: '#080c14',
                 border: 'none',
                 fontWeight: 800,
                 fontSize: '14px',
                 cursor: 'pointer',
-                boxShadow: '0 4px 14px rgba(52, 211, 153, 0.25)',
+                boxShadow: '0 4px 14px rgba(127, 232, 127, 0.22)',
               }}
             >
               {translateText('Update PIN', language)}

@@ -72,7 +72,7 @@ export const PinPad: React.FC<PinPadProps> = ({
     titleColor = '#f87171';
   } else if (successMessage) {
     titleText = successMessage;
-    titleColor = '#34d399';
+    titleColor = '#7FE87F';
   } else if (!titleText) {
     titleText = language === 'العربية' ? 'أدخل الرمز السري المكون من ٤ أرقام' : 'Enter 4-Digit PIN';
   }
@@ -134,13 +134,13 @@ export const PinPad: React.FC<PinPadProps> = ({
                   backgroundColor: isError
                     ? '#f87171'
                     : isFilled
-                    ? '#34d399'
+                    ? '#7FE87F'
                     : 'rgba(255, 255, 255, 0.1)',
                   transform: isFilled ? 'scale(1.2)' : 'scale(1)',
                   boxShadow: isError
                     ? '0 0 12px rgba(248, 113, 113, 0.5)'
                     : isFilled
-                    ? '0 0 12px rgba(52, 211, 153, 0.5)'
+                    ? '0 0 12px rgba(127, 232, 127, 0.5)'
                     : 'none',
                   transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}

@@ -118,8 +118,8 @@ export const AppLinksModal: React.FC = () => {
                     width: '40px',
                     height: '40px',
                     borderRadius: '12px',
-                    backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                    color: 'var(--brand-green, #00D09C)',
+                    backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                    color: 'var(--brand-green, #7FE87F)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -129,7 +129,7 @@ export const AppLinksModal: React.FC = () => {
                 </div>
                 <div>
                   <div style={{ fontWeight: '800', fontSize: '15px', color: '#FFFFFF' }}>Web Application</div>
-                  <div style={{ fontSize: '11px', color: 'var(--brand-green, #00D09C)', fontWeight: '700' }}>
+                  <div style={{ fontSize: '11px', color: 'var(--brand-green, #7FE87F)', fontWeight: '700' }}>
                     Live Web Version (Active)
                   </div>
                 </div>
@@ -138,8 +138,8 @@ export const AppLinksModal: React.FC = () => {
                 style={{
                   fontSize: '10px',
                   fontWeight: '800',
-                  backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                  color: 'var(--brand-green, #00D09C)',
+                  backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                  color: 'var(--brand-green, #7FE87F)',
                   padding: '4px 8px',
                   borderRadius: '10px',
                 }}
@@ -148,7 +148,7 @@ export const AppLinksModal: React.FC = () => {
               </span>
             </div>
             <p style={{ fontSize: '12px', color: '#8E9BAE', margin: '4px 0 0 0' }}>
-              URL: <code style={{ color: 'var(--brand-green, #00D09C)', fontWeight: '700' }}>{webUrl}</code>
+              URL: <code style={{ color: 'var(--brand-green, #7FE87F)', fontWeight: '700' }}>{webUrl}</code>
             </p>
           </div>
 
@@ -205,7 +205,7 @@ export const AppLinksModal: React.FC = () => {
                 width: '100%',
                 padding: '12px',
                 borderRadius: '10px',
-                backgroundColor: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green, #7FE87F)',
                 color: 'var(--brand-green-ink, #080C14)',
                 border: 'none',
                 fontWeight: '800',
@@ -223,7 +223,7 @@ export const AppLinksModal: React.FC = () => {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#8E9BAE', justifyContent: 'center' }}>
-          <CheckCircle2 size={14} color="var(--brand-green, #00D09C)" /> All links are secured and verified for QTPay
+          <CheckCircle2 size={14} color="var(--brand-green, #7FE87F)" /> All links are secured and verified for QTPay
         </div>
       </div>
     </div>

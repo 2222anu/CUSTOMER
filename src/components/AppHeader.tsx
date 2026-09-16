@@ -95,7 +95,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               width: '38px',
               height: '38px',
               borderRadius: '50%',
-              backgroundColor: 'var(--brand-green, #00D09C)',
+              backgroundColor: 'var(--brand-green, #7FE87F)',
               color: 'var(--brand-green-ink, #080C14)',
               fontWeight: '800',
               fontSize: '13.5px',

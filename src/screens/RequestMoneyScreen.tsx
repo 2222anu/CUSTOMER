@@ -51,8 +51,8 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
                 width: '60px',
                 height: '60px',
                 borderRadius: '16px',
-                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                color: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                color: 'var(--brand-green, #7FE87F)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -97,7 +97,7 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
                     height: '44px',
                     borderRadius: '12px',
                     backgroundColor: 'var(--color-surface-elevated, #182236)',
-                    color: 'var(--brand-green, #00D09C)',
+                    color: 'var(--brand-green, #7FE87F)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -160,13 +160,13 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
                   display: 'flex',
                   alignItems: 'center',
                   backgroundColor: 'var(--color-surface-elevated, #182236)',
-                  border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
+                  border: '1px solid var(--brand-green-border, rgba(127, 232, 127, 0.35))',
                   borderRadius: '14px',
                   padding: '12px 18px',
                   marginBottom: '14px',
                 }}
               >
-                <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--brand-green, #00D09C)', marginInlineEnd: '8px' }}>{t('sar')}</span>
+                <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)', marginInlineEnd: '8px' }}>{t('sar')}</span>
                 <input
                   type="number"
                   value={amountStr}
@@ -202,7 +202,7 @@ export const RequestMoneyScreen: React.FC<RequestMoneyScreenProps> = ({ initialC
                       borderRadius: '10px',
                       backgroundColor: 'var(--color-surface-elevated, #182236)',
                       border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-                      color: 'var(--brand-green, #00D09C)',
+                      color: 'var(--brand-green, #7FE87F)',
                       fontSize: '12px',
                       fontWeight: 700,
                       cursor: 'pointer',

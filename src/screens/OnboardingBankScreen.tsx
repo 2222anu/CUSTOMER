@@ -127,7 +127,7 @@ export const OnboardingBankScreen: React.FC = () => {
       className="fade-in"
       style={{
         backgroundColor: '#080c14',
-        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(52, 211, 153, 0.08) 0%, rgba(7, 13, 10, 0.98) 60%)',
+        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(127, 232, 127, 0.08) 0%, rgba(7, 13, 10, 0.98) 60%)',
         minHeight: '100%',
         paddingBottom: '40px',
         color: '#FFFFFF',
@@ -163,15 +163,15 @@ export const OnboardingBankScreen: React.FC = () => {
                 width: '44px',
                 height: '44px',
                 borderRadius: '14px',
-                backgroundColor: 'rgba(52, 211, 153, 0.12)',
-                border: '1px solid rgba(52, 211, 153, 0.3)',
+                backgroundColor: 'rgba(127, 232, 127, 0.14)',
+                border: '1px solid rgba(127, 232, 127, 0.3)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexShrink: 0,
               }}
             >
-              <Landmark size={24} color="#34d399" />
+              <Landmark size={24} color="#7FE87F" />
             </div>
             <div>
               <h3 style={{ fontSize: '17px', fontWeight: 800, margin: 0, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
@@ -369,7 +369,7 @@ export const OnboardingBankScreen: React.FC = () => {
                 style={{
                   width: '100%',
                   padding: '15px',
-                  backgroundColor: '#34d399',
+                  backgroundColor: '#7FE87F',
                   color: '#080c14',
                   border: 'none',
                   borderRadius: '16px',
@@ -380,7 +380,7 @@ export const OnboardingBankScreen: React.FC = () => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   gap: '8px',
-                  boxShadow: '0 10px 25px -5px rgba(52, 211, 153, 0.3)',
+                  boxShadow: '0 10px 25px -5px rgba(127, 232, 127, 0.3)',
                 }}
               >
                 {isLoading ? (
@@ -434,7 +434,7 @@ export const OnboardingBankScreen: React.FC = () => {
                           width: '48px',
                           height: '52px',
                           backgroundColor: '#182236',
-                          border: digit ? '1.5px solid #34d399' : '1px solid rgba(255, 255, 255, 0.08)',
+                          border: digit ? '1.5px solid #7FE87F' : '1px solid rgba(255, 255, 255, 0.08)',
                           borderRadius: '14px',
                           fontSize: '20px',
                           fontWeight: 800,
@@ -459,7 +459,7 @@ export const OnboardingBankScreen: React.FC = () => {
                     style={{
                       width: '100%',
                       padding: '15px',
-                      backgroundColor: '#34d399',
+                      backgroundColor: '#7FE87F',
                       color: '#0b0f19',
                       border: 'none',
                       borderRadius: '16px',
@@ -470,7 +470,7 @@ export const OnboardingBankScreen: React.FC = () => {
                       justifyContent: 'center',
                       alignItems: 'center',
                       gap: '8px',
-                      boxShadow: '0 10px 25px -5px rgba(52, 211, 153, 0.3)',
+                      boxShadow: '0 10px 25px -5px rgba(127, 232, 127, 0.3)',
                     }}
                   >
                     {isLoading ? (
@@ -505,15 +505,15 @@ export const OnboardingBankScreen: React.FC = () => {
                       width: '64px',
                       height: '64px',
                       borderRadius: '50%',
-                      backgroundColor: 'rgba(52, 211, 153, 0.15)',
-                      border: '1.5px solid #34d399',
+                      backgroundColor: 'rgba(127, 232, 127, 0.16)',
+                      border: '1.5px solid #7FE87F',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       margin: '0 auto 16px auto',
                     }}
                   >
-                    <CheckCircle2 size={36} color="#34d399" />
+                    <CheckCircle2 size={36} color="#7FE87F" />
                   </div>
 
                   <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 16px 0' }}>
@@ -536,7 +536,7 @@ export const OnboardingBankScreen: React.FC = () => {
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <span style={{ fontSize: '12px', color: '#9ca3af' }}>{language === 'العربية' ? 'حالة الربط' : 'Status'}</span>
-                      <span style={{ fontSize: '13px', fontWeight: 800, color: '#34d399' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 800, color: '#7FE87F' }}>
                         {language === 'العربية' ? 'نشط عبر سريع' : 'Active on Sarie'}
                       </span>
                     </div>
@@ -548,7 +548,7 @@ export const OnboardingBankScreen: React.FC = () => {
                     style={{
                       width: '100%',
                       padding: '15px',
-                      backgroundColor: '#34d399',
+                      backgroundColor: '#7FE87F',
                       color: '#080c14',
                       border: 'none',
                       borderRadius: '16px',
@@ -559,7 +559,7 @@ export const OnboardingBankScreen: React.FC = () => {
                       justifyContent: 'center',
                       alignItems: 'center',
                       gap: '8px',
-                      boxShadow: '0 10px 25px -5px rgba(52, 211, 153, 0.3)',
+                      boxShadow: '0 10px 25px -5px rgba(127, 232, 127, 0.3)',
                     }}
                   >
                     <span>{language === 'العربية' ? 'إتمام الإعداد والدخول للرئيسية' : 'Complete Setup & Go to Home'}</span>

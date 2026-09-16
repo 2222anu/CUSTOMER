@@ -2,11 +2,11 @@
 
 :root {
   /* Unified QTPay Brand Theme Tokens */
-  --brand-green: #00D09C;
-  --brand-green-hover: #00B88A;
-  --brand-green-active: #009E75;
-  --brand-green-tint: rgba(0, 208, 156, 0.12);
-  --brand-green-border: rgba(0, 208, 156, 0.35);
+  --brand-green: #7FE87F;
+  --brand-green-hover: #6FD86F;
+  --brand-green-active: #5FBF5F;
+  --brand-green-tint: rgba(127, 232, 127, 0.14);
+  --brand-green-border: rgba(127, 232, 127, 0.35);
   --brand-green-ink: #080C14;
 
   --color-primary: var(--brand-green);
@@ -14,7 +14,7 @@
   --color-primary-active: var(--brand-green-active);
   --color-primary-light: var(--brand-green-tint);
   --color-primary-border: var(--brand-green);
-  --color-primary-dark: #00664B;
+  --color-primary-dark: #5FBF5F;
   --color-text-on-primary: var(--brand-green-ink);
 
   --color-background: #080C14;
@@ -320,7 +320,7 @@ button:disabled {
   50% {
     opacity: 1;
     transform: scale(1.15);
-    box-shadow: 0 0 12px rgba(52, 211, 153, 0.9);
+    box-shadow: 0 0 12px rgba(127, 232, 127, 0.9);
   }
 }
 
@@ -329,7 +329,7 @@ button:disabled {
   height: 9px;
   background: linear-gradient(135deg, #ffffff, #a7f3d0);
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+  box-shadow: 0 0 8px rgba(127, 232, 127, 0.6);
   animation: pulse-dot 2s infinite ease-in-out;
 }
 
@@ -445,9 +445,9 @@ button:disabled {
 
 .dot.active,
 .pin-dot.active {
-  background: #34d399 !important;
+  background: #7FE87F !important;
   transform: scale(1.2);
-  box-shadow: 0 0 12px rgba(52, 211, 153, 0.5);
+  box-shadow: 0 0 12px rgba(127, 232, 127, 0.5);
 }
 
 .dot.error,

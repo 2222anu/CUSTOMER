@@ -66,7 +66,7 @@ export const HubIllustration: React.FC = () => {
             height="250"
             rx="28"
             fill="url(#phoneBody)"
-            stroke="rgba(0, 208, 156, 0.4)"
+            stroke="rgba(127, 232, 127, 0.4)"
             strokeWidth="2"
           />
 
@@ -91,13 +91,13 @@ export const HubIllustration: React.FC = () => {
 
           {/* Transfer Success Card inside Screen */}
           <g transform="translate(20, 96)">
-            <rect width="120" height="85" rx="12" fill="rgba(0, 208, 156, 0.12)" stroke="#00D09C" strokeWidth="1.2" />
-            <circle cx="28" cy="24" r="14" fill="#00D09C" />
+            <rect width="120" height="85" rx="12" fill="rgba(127, 232, 127, 0.14)" stroke="#7FE87F" strokeWidth="1.2" />
+            <circle cx="28" cy="24" r="14" fill="#7FE87F" />
             <path d="M23 24 L 27 28 L 34 20" stroke="#080C14" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
             <text x="48" y="20" fill="#FFFFFF" fontSize="9" fontWeight="800">Sarie Instant</text>
-            <text x="48" y="31" fill="#00D09C" fontSize="8" fontWeight="700">+SAR 1,250.00</text>
+            <text x="48" y="31" fill="#7FE87F" fontSize="8" fontWeight="700">+SAR 1,250.00</text>
 
-            <line x1="12" y1="46" x2="108" y2="46" stroke="rgba(0, 208, 156, 0.2)" strokeWidth="1" />
+            <line x1="12" y1="46" x2="108" y2="46" stroke="rgba(127, 232, 127, 0.22)" strokeWidth="1" />
 
             <text x="12" y="60" fill="#A2A2BA" fontSize="7.5" fontWeight="600">To: Tariq Al-Otaibi</text>
             <text x="12" y="72" fill="#6E6E85" fontSize="7" fontWeight="600">Al Rajhi • SA03••••4821</text>
@@ -105,7 +105,7 @@ export const HubIllustration: React.FC = () => {
 
           {/* Quick Pay Buttons row inside screen */}
           <rect x="20" y="192" width="36" height="32" rx="8" fill="#1E1E32" stroke="rgba(255,255,255,0.1)" />
-          <text x="26" y="212" fill="#00D09C" fontSize="9" fontWeight="bold">QR</text>
+          <text x="26" y="212" fill="#7FE87F" fontSize="9" fontWeight="bold">QR</text>
           <rect x="62" y="192" width="36" height="32" rx="8" fill="#1E1E32" stroke="rgba(255,255,255,0.1)" />
           <text x="67" y="212" fill="#FFFFFF" fontSize="8" fontWeight="bold">Send</text>
           <rect x="104" y="192" width="36" height="32" rx="8" fill="#1E1E32" stroke="rgba(255,255,255,0.1)" />

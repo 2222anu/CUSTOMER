@@ -38,8 +38,8 @@ export const QPayHeroBanner: React.FC = () => {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '6px',
-            backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-            color: 'var(--brand-green, #00D09C)',
+            backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+            color: 'var(--brand-green, #7FE87F)',
             fontSize: '11px',
             fontWeight: 800,
             padding: '3px 9px',
@@ -48,7 +48,7 @@ export const QPayHeroBanner: React.FC = () => {
             letterSpacing: '0.03em',
           }}
         >
-          <ShieldCheck size={13} color="var(--brand-green, #00D09C)" />
+          <ShieldCheck size={13} color="var(--brand-green, #7FE87F)" />
           <span>Zero Fees</span>
         </div>
 
@@ -83,7 +83,7 @@ export const QPayHeroBanner: React.FC = () => {
             navigateTo('PAY_ANYONE');
           }}
           style={{
-            backgroundColor: 'var(--brand-green, #00D09C)',
+            backgroundColor: 'var(--brand-green, #7FE87F)',
             color: 'var(--brand-green-ink, #080C14)',
             border: 'none',
             borderRadius: '8px',
@@ -110,12 +110,12 @@ export const QPayHeroBanner: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: 'var(--brand-green, #00D09C)',
+          color: 'var(--brand-green, #7FE87F)',
           flexShrink: 0,
           zIndex: 2,
         }}
       >
-        <span style={{ fontSize: '18px', fontWeight: 900, color: 'var(--brand-green, #00D09C)' }}>SAR</span>
+        <span style={{ fontSize: '18px', fontWeight: 900, color: 'var(--brand-green, #7FE87F)' }}>SAR</span>
       </div>
     </div>
   );

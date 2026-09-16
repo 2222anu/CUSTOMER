@@ -38,8 +38,8 @@ export const LanguageModal: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '16px 18px',
-                backgroundColor: isSelected ? 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))' : 'var(--color-surface, #111726)',
-                border: isSelected ? '1.5px solid var(--brand-green, #00D09C)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
+                backgroundColor: isSelected ? 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))' : 'var(--color-surface, #111726)',
+                border: isSelected ? '1.5px solid var(--brand-green, #7FE87F)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
                 borderRadius: '16px',
                 marginBottom: '10px',
                 cursor: 'pointer',
@@ -52,8 +52,8 @@ export const LanguageModal: React.FC = () => {
                     width: '40px',
                     height: '40px',
                     borderRadius: '12px',
-                    backgroundColor: isSelected ? 'var(--brand-green, #00D09C)' : 'var(--color-surface-elevated, #182236)',
-                    color: isSelected ? 'var(--brand-green-ink, #080C14)' : 'var(--brand-green, #00D09C)',
+                    backgroundColor: isSelected ? 'var(--brand-green, #7FE87F)' : 'var(--color-surface-elevated, #182236)',
+                    color: isSelected ? 'var(--brand-green-ink, #080C14)' : 'var(--brand-green, #7FE87F)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -72,8 +72,8 @@ export const LanguageModal: React.FC = () => {
                       style={{
                         fontSize: '10.5px',
                         fontWeight: 800,
-                        backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                        color: 'var(--brand-green, #00D09C)',
+                        backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                        color: 'var(--brand-green, #7FE87F)',
                         padding: '2px 7px',
                         borderRadius: '6px',
                       }}
@@ -86,7 +86,7 @@ export const LanguageModal: React.FC = () => {
                   </div>
                 </div>
               </div>
-              {isSelected && <Check size={20} color="var(--brand-green, #00D09C)" />}
+              {isSelected && <Check size={20} color="var(--brand-green, #7FE87F)" />}
             </div>
           );
         })}

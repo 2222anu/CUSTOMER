@@ -119,8 +119,8 @@ export const PermissionsScreen: React.FC = () => {
                           width: '38px',
                           height: '38px',
                           borderRadius: '10px',
-                          backgroundColor: isOn ? 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))' : 'var(--color-surface-elevated, #182236)',
-                          color: isOn ? 'var(--brand-green, #00D09C)' : '#8E9BAE',
+                          backgroundColor: isOn ? 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))' : 'var(--color-surface-elevated, #182236)',
+                          color: isOn ? 'var(--brand-green, #7FE87F)' : '#8E9BAE',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -135,7 +135,7 @@ export const PermissionsScreen: React.FC = () => {
                           {perm.name}
                         </span>
                         {perm.required && (
-                          <span style={{ fontSize: '9px', fontWeight: 800, backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))', color: 'var(--brand-green, #00D09C)', padding: '2px 6px', borderRadius: '4px' }}>
+                          <span style={{ fontSize: '9px', fontWeight: 800, backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))', color: 'var(--brand-green, #7FE87F)', padding: '2px 6px', borderRadius: '4px' }}>
                             {language === 'العربية' ? 'إلزامي' : 'REQUIRED'}
                           </span>
                         )}
@@ -158,7 +158,7 @@ export const PermissionsScreen: React.FC = () => {
                         width: '46px',
                         height: '26px',
                         borderRadius: '9999px',
-                        backgroundColor: isOn ? 'var(--brand-green, #00D09C)' : 'var(--color-surface-elevated, #182236)',
+                        backgroundColor: isOn ? 'var(--brand-green, #7FE87F)' : 'var(--color-surface-elevated, #182236)',
                         border: isOn ? 'none' : '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
                         display: 'flex',
                         alignItems: 'center',

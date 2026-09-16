@@ -33,7 +33,7 @@ export const PaymentMethodsScreen: React.FC = () => {
           <div
             style={{
               background: 'linear-gradient(135deg, #052e16 0%, #064e3b 40%, #031c12 75%, #0e0e18 100%)',
-              border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
+              border: '1px solid var(--brand-green-border, rgba(127, 232, 127, 0.35))',
               borderRadius: '20px',
               padding: '22px',
               position: 'relative',
@@ -52,26 +52,26 @@ export const PaymentMethodsScreen: React.FC = () => {
                     width: '32px',
                     height: '32px',
                     borderRadius: '8px',
-                    backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                    backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}
                 >
-                  <ShieldCheck size={18} color="var(--brand-green, #00D09C)" />
+                  <ShieldCheck size={18} color="var(--brand-green, #7FE87F)" />
                 </div>
                 <div>
                   <div style={{ fontSize: '13px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '0.04em' }}>
                     {t('cards.platinum', 'QTPay Platinum')}
                   </div>
-                  <div style={{ fontSize: '10px', color: 'var(--brand-green, #00D09C)', fontWeight: 700 }}>
+                  <div style={{ fontSize: '10px', color: 'var(--brand-green, #7FE87F)', fontWeight: 700 }}>
                     {t('cards.instant_debit', 'Sarie Instant Debit')}
                   </div>
                 </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Wifi size={18} color="var(--brand-green, #00D09C)" style={{ transform: 'rotate(90deg)' }} />
+                <Wifi size={18} color="var(--brand-green, #7FE87F)" style={{ transform: 'rotate(90deg)' }} />
               </div>
             </div>
 
@@ -116,10 +116,10 @@ export const PaymentMethodsScreen: React.FC = () => {
                   backgroundColor: 'rgba(0, 0, 0, 0.4)',
                   padding: '4px 8px',
                   borderRadius: '6px',
-                  border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
+                  border: '1px solid var(--brand-green-border, rgba(127, 232, 127, 0.35))',
                 }}
               >
-                <span style={{ fontSize: '12px', fontWeight: 900, color: 'var(--brand-green, #00D09C)', letterSpacing: '0.05em' }}>
+                <span style={{ fontSize: '12px', fontWeight: 900, color: 'var(--brand-green, #7FE87F)', letterSpacing: '0.05em' }}>
                   mada
                 </span>
               </div>
@@ -167,11 +167,11 @@ export const PaymentMethodsScreen: React.FC = () => {
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                    backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: 'var(--brand-green, #00D09C)',
+                    color: 'var(--brand-green, #7FE87F)',
                   }}
                 >
                   <Landmark size={20} />
@@ -188,7 +188,7 @@ export const PaymentMethodsScreen: React.FC = () => {
 
               <div
                 style={{
-                  backgroundColor: 'var(--brand-green, #00D09C)',
+                  backgroundColor: 'var(--brand-green, #7FE87F)',
                   color: 'var(--brand-green-ink, #080C14)',
                   fontSize: '10px',
                   fontWeight: 900,
@@ -229,7 +229,7 @@ export const PaymentMethodsScreen: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: 'var(--brand-green, #00D09C)',
+                    color: 'var(--brand-green, #7FE87F)',
                   }}
                 >
                   <Landmark size={20} />
@@ -246,8 +246,8 @@ export const PaymentMethodsScreen: React.FC = () => {
 
               <div
                 style={{
-                  backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                  color: 'var(--brand-green, #00D09C)',
+                  backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                  color: 'var(--brand-green, #7FE87F)',
                   fontSize: '10.5px',
                   fontWeight: 800,
                   padding: '4px 9px',
@@ -297,7 +297,7 @@ export const PaymentMethodsScreen: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: 'var(--brand-green, #00D09C)',
+                  color: 'var(--brand-green, #7FE87F)',
                 }}
               >
                 <CreditCard size={20} />
@@ -318,8 +318,8 @@ export const PaymentMethodsScreen: React.FC = () => {
                 style={{
                   fontSize: '10.5px',
                   fontWeight: 800,
-                  color: 'var(--brand-green, #00D09C)',
-                  backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                  color: 'var(--brand-green, #7FE87F)',
+                  backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
                   padding: '3px 8px',
                   borderRadius: '10px',
                 }}
@@ -353,7 +353,7 @@ export const PaymentMethodsScreen: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-            <ShieldCheck size={13} color="var(--brand-green, #00D09C)" />
+            <ShieldCheck size={13} color="var(--brand-green, #7FE87F)" />
             <span style={{ fontSize: '11px', color: '#A2A2BA', fontWeight: 600 }}>
               {language === 'العربية' ? 'مدفوعات بطاقات مشفرة • معتمدة من ساما وسريع' : 'Tokenized Card Payments • SAMA & Sarie Secured'}
             </span>

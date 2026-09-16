@@ -120,8 +120,8 @@ export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) 
               width: '48px',
               height: '48px',
               borderRadius: '14px',
-              backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-              color: 'var(--brand-green, #00D09C)',
+              backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+              color: 'var(--brand-green, #7FE87F)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -165,8 +165,8 @@ export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) 
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                    color: 'var(--brand-green, #00D09C)',
+                    backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                    color: 'var(--brand-green, #7FE87F)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -177,7 +177,7 @@ export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) 
                 <div>
                   <div style={{ fontWeight: 800, fontSize: '15px', color: '#FFFFFF' }}>{deal.store}</div>
                   <div style={{ fontSize: '12px', color: '#8E9BAE', marginTop: '2px' }}>{deal.title}</div>
-                  <div style={{ fontSize: '12px', color: 'var(--brand-green, #00D09C)', marginTop: '3px', fontWeight: 800 }}>{deal.offer}</div>
+                  <div style={{ fontSize: '12px', color: 'var(--brand-green, #7FE87F)', marginTop: '3px', fontWeight: 800 }}>{deal.offer}</div>
                 </div>
               </div>
               <ChevronRight size={18} color="#8E9BAE" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
@@ -241,7 +241,7 @@ export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) 
 
             <div style={{ padding: '16px', backgroundColor: 'var(--color-surface-elevated, #182236)', borderRadius: '16px', marginBottom: '20px' }}>
               <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>{selectedDeal.title}</div>
-              <div style={{ fontSize: '13px', fontWeight: 800, color: 'var(--brand-green, #00D09C)', marginTop: '4px' }}>
+              <div style={{ fontSize: '13px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)', marginTop: '4px' }}>
                 {selectedDeal.offer}
               </div>
 
@@ -254,7 +254,7 @@ export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) 
                   marginTop: '14px',
                   padding: '10px 14px',
                   backgroundColor: 'var(--color-surface, #111726)',
-                  border: '1px dashed var(--brand-green-border, rgba(0, 208, 156, 0.35))',
+                  border: '1px dashed var(--brand-green-border, rgba(127, 232, 127, 0.35))',
                   borderRadius: '12px',
                 }}
               >
@@ -269,7 +269,7 @@ export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) 
                   onClick={() => handleCopyCode(selectedDeal.couponCode)}
                   className="interactive-tap"
                   style={{
-                    backgroundColor: 'var(--brand-green, #00D09C)',
+                    backgroundColor: 'var(--brand-green, #7FE87F)',
                     border: 'none',
                     borderRadius: '8px',
                     color: 'var(--brand-green-ink, #080C14)',
@@ -293,7 +293,7 @@ export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) 
                   <span style={{ fontSize: '13px', color: '#6B7A90', textDecoration: 'line-through', marginInlineEnd: '8px', fontVariantNumeric: 'tabular-nums' }}>
                     {formatSaudiCurrency(selectedDeal.originalPrice, language)}
                   </span>
-                  <span style={{ fontSize: '20px', fontWeight: 900, color: 'var(--brand-green, #00D09C)', fontVariantNumeric: 'tabular-nums' }}>
+                  <span style={{ fontSize: '20px', fontWeight: 900, color: 'var(--brand-green, #7FE87F)', fontVariantNumeric: 'tabular-nums' }}>
                     {formatSaudiCurrency(selectedDeal.discountedPrice, language)}
                   </span>
                 </div>
@@ -307,7 +307,7 @@ export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) 
                 width: '100%',
                 padding: '14px',
                 borderRadius: '12px',
-                backgroundColor: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green, #7FE87F)',
                 border: 'none',
                 color: 'var(--brand-green-ink, #080C14)',
                 fontSize: '14px',
@@ -356,8 +356,8 @@ export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) 
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                color: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                color: 'var(--brand-green, #7FE87F)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -376,7 +376,7 @@ export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) 
 
             <div style={{ backgroundColor: 'var(--color-surface-elevated, #182236)', borderRadius: '16px', padding: '16px', textAlign: isRtl ? 'right' : 'left', marginBottom: '20px' }}>
               <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>{purchasedDeal.title}</div>
-              <div style={{ fontSize: '13px', fontWeight: 800, color: 'var(--brand-green, #00D09C)', marginTop: '6px', fontVariantNumeric: 'tabular-nums' }}>
+              <div style={{ fontSize: '13px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)', marginTop: '6px', fontVariantNumeric: 'tabular-nums' }}>
                 {isAr ? `تم دفع ${formatSaudiCurrency(purchasedDeal.paidAmount, language)} عبر كيو تي باي` : `Paid ${formatSaudiCurrency(purchasedDeal.paidAmount, language)} via QTPay`}
               </div>
             </div>
@@ -388,7 +388,7 @@ export const ShoppingScreen: React.FC<ShoppingScreenProps> = ({ initialDeals }) 
                 width: '100%',
                 padding: '12px',
                 borderRadius: '12px',
-                backgroundColor: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green, #7FE87F)',
                 border: 'none',
                 color: 'var(--brand-green-ink, #080C14)',
                 fontSize: '14px',

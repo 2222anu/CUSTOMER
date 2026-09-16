@@ -9,8 +9,8 @@ interface EditProfileModalProps {
 }
 
 const COLOR_PRESETS = [
-  { name: 'Brand Green', color: '#00D09C' },
-  { name: 'Light Mint', color: '#34D399' },
+  { name: 'Brand Green', color: '#7FE87F' },
+  { name: 'Light Mint', color: '#7FE87F' },
   { name: 'Forest Green', color: '#059669' },
   { name: 'Deep Navy', color: '#111726' },
   { name: 'Surface Dark', color: '#182236' },
@@ -32,7 +32,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
   const [upiId, setUpiId] = useState(user.upiId);
   const [email, setEmail] = useState(user.email);
   const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl || '');
-  const [avatarBgColor, setAvatarBgColor] = useState(user.avatarBgColor || '#00D09C');
+  const [avatarBgColor, setAvatarBgColor] = useState(user.avatarBgColor || '#7FE87F');
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState(false);
 
@@ -43,7 +43,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
       setUpiId(user.upiId);
       setEmail(user.email);
       setAvatarUrl(user.avatarUrl || '');
-      setAvatarBgColor(user.avatarBgColor || '#00D09C');
+      setAvatarBgColor(user.avatarBgColor || '#7FE87F');
       setErrorMsg('');
       setSuccessMsg(false);
     }
@@ -224,7 +224,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                 width: '24px',
                 height: '24px',
                 borderRadius: '50%',
-                backgroundColor: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green, #7FE87F)',
                 color: 'var(--brand-green-ink, #080C14)',
                 border: '2px solid #080c14',
                 display: 'flex',
@@ -249,7 +249,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
             <div style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
               {name || (language === 'العربية' ? 'اسمك الكامل' : 'Your Name')}
             </div>
-            <div style={{ fontSize: '12px', color: 'var(--brand-green, #00D09C)', fontWeight: 700, marginTop: '2px' }} dir="ltr">
+            <div style={{ fontSize: '12px', color: 'var(--brand-green, #7FE87F)', fontWeight: 700, marginTop: '2px' }} dir="ltr">
               {upiId || 'name@sarie'} &bull; {mobile || '+966...'}
             </div>
           </div>
@@ -317,8 +317,8 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
-                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                color: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                color: 'var(--brand-green, #7FE87F)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -339,7 +339,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                 {t('auth.full_name', 'Full Name')}
               </label>
               <div style={{ position: 'relative' }}>
-                <UserIcon size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--brand-green, #00D09C)' }} />
+                <UserIcon size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--brand-green, #7FE87F)' }} />
                 <input
                   id="edit-name-input"
                   type="text"
@@ -370,7 +370,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                 {t('auth.mobile_number', 'Mobile Number')}
               </label>
               <div style={{ position: 'relative' }}>
-                <Phone size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--brand-green, #00D09C)' }} />
+                <Phone size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--brand-green, #7FE87F)' }} />
                 <input
                   id="edit-mobile-input"
                   type="tel"
@@ -402,7 +402,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                 {t('pay.sarie_id', 'Primary Sarie ID')}
               </label>
               <div style={{ position: 'relative' }}>
-                <AtSign size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--brand-green, #00D09C)' }} />
+                <AtSign size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--brand-green, #7FE87F)' }} />
                 <input
                   id="edit-upi-input"
                   type="text"
@@ -434,7 +434,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
                 {language === 'العربية' ? 'البريد الإلكتروني' : 'Email Address'}
               </label>
               <div style={{ position: 'relative' }}>
-                <Mail size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--brand-green, #00D09C)' }} />
+                <Mail size={18} style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--brand-green, #7FE87F)' }} />
                 <input
                   id="edit-email-input"
                   type="email"
@@ -466,7 +466,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen: prop
               className="interactive-tap"
               style={{
                 width: '100%',
-                backgroundColor: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green, #7FE87F)',
                 color: 'var(--brand-green-ink, #080C14)',
                 border: 'none',
                 borderRadius: '12px',

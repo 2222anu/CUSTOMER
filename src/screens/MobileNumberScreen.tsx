@@ -23,7 +23,7 @@ export const MobileNumberScreen: React.FC = () => {
       style={{
         minHeight: '100vh',
         backgroundColor: '#070D0A',
-        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(52, 211, 153, 0.12) 0%, rgba(7, 13, 10, 0.98) 60%)',
+        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(127, 232, 127, 0.14) 0%, rgba(7, 13, 10, 0.98) 60%)',
         color: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',

@@ -42,7 +42,7 @@ export const PayAnyoneScreen: React.FC<PayAnyoneScreenProps> = ({ initialContact
             boxShadow: 'none',
           }}
         >
-          <Search size={18} color="var(--brand-green, #00D09C)" />
+          <Search size={18} color="var(--brand-green, #7FE87F)" />
           <input
             id="search-contact-input"
             type="text"
@@ -154,8 +154,8 @@ export const PayAnyoneScreen: React.FC<PayAnyoneScreenProps> = ({ initialContact
                         width: '42px',
                         height: '42px',
                         borderRadius: '50%',
-                        backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                        color: 'var(--brand-green, #00D09C)',
+                        backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                        color: 'var(--brand-green, #7FE87F)',
                         fontWeight: 800,
                         fontSize: '15px',
                         display: 'flex',
@@ -180,7 +180,7 @@ export const PayAnyoneScreen: React.FC<PayAnyoneScreenProps> = ({ initialContact
                       style={{
                         fontSize: '11px',
                         fontWeight: 800,
-                        backgroundColor: 'var(--brand-green, #00D09C)',
+                        backgroundColor: 'var(--brand-green, #7FE87F)',
                         color: 'var(--brand-green-ink, #080C14)',
                         padding: '4px 10px',
                         borderRadius: '6px',

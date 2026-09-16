@@ -1,6 +1,6 @@
 /**
  * QTPay — Official Mobile App Design System Tokens
- * Primary: Unified Brand Green (#00D09C)
+ * Primary: Unified Brand Green (#7FE87F)
  * UI Base: Deep Dark Surfaces (#111726 & #182236)
  * Secondary: Pure Black (#080C14) & Pure White (#FFFFFF)
  * Typography: Inter / SF Pro / Google Sans Flex Scale
@@ -10,13 +10,13 @@
 
 export const colors = {
   // 1. Primary Color — Unified Brand Green & Tiers
-  primary: '#00D09C',
-  primaryHover: '#00B88A',
-  primaryActive: '#009E75',
-  primaryLight: 'rgba(0, 208, 156, 0.12)',
-  primaryLightHover: 'rgba(0, 208, 156, 0.2)',
-  primaryBorder: 'rgba(0, 208, 156, 0.35)',
-  primaryDark: '#006E52',
+  primary: '#7FE87F',
+  primaryHover: '#6FD86F',
+  primaryActive: '#5FBF5F',
+  primaryLight: 'rgba(127, 232, 127, 0.14)',
+  primaryLightHover: 'rgba(127, 232, 127, 0.22)',
+  primaryBorder: 'rgba(127, 232, 127, 0.35)',
+  primaryDark: '#5FBF5F',
   textOnPrimary: '#080C14', // Dark ink text on Brand Green for maximum readability
 
   // 2. Secondary Color — Pure Black & Grays
@@ -59,12 +59,12 @@ export const colors = {
   // Borders & Dividers
   borderHairline: 'rgba(255, 255, 255, 0.06)',
   borderStrong: 'rgba(255, 255, 255, 0.12)',
-  borderFocus: '#00D09C',
+  borderFocus: '#7FE87F',
 
   // Semantic & Feedback Colors
-  success: '#00D09C',
-  successLight: 'rgba(0, 208, 156, 0.12)',
-  successText: '#00D09C',
+  success: '#7FE87F',
+  successLight: 'rgba(127, 232, 127, 0.14)',
+  successText: '#7FE87F',
 
   warning: '#F59E0B',
   warningLight: 'rgba(245, 158, 11, 0.12)',
@@ -74,8 +74,8 @@ export const colors = {
   dangerLight: 'rgba(255, 71, 87, 0.12)',
   dangerText: '#FF6B7A',
 
-  info: '#00D09C',
-  infoLight: 'rgba(0, 208, 156, 0.12)',
+  info: '#7FE87F',
+  infoLight: 'rgba(127, 232, 127, 0.14)',
   infoText: '#080C14',
 } as const;
 

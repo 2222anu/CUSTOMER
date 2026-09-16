@@ -34,7 +34,7 @@ export const QPayOnboardingProgress: React.FC<QPayOnboardingProgressProps> = ({
               width: isActive ? '32px' : '8px',
               height: '7px',
               borderRadius: '6px',
-              backgroundColor: isActive ? '#00D09C' : 'rgba(255, 255, 255, 0.2)',
+              backgroundColor: isActive ? '#7FE87F' : 'rgba(255, 255, 255, 0.2)',
               border: 'none',
               padding: 0,
               cursor: 'pointer',

@@ -40,7 +40,7 @@ export const SmsOtpScreen: React.FC = () => {
       style={{
         minHeight: '100vh',
         backgroundColor: '#070D0A',
-        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(52, 211, 153, 0.12) 0%, rgba(7, 13, 10, 0.98) 60%)',
+        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(127, 232, 127, 0.14) 0%, rgba(7, 13, 10, 0.98) 60%)',
         color: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
@@ -83,7 +83,7 @@ export const SmsOtpScreen: React.FC = () => {
           </h2>
           <p style={{ fontSize: '13px', color: '#A2A2BA', margin: '0 0 10px 0' }}>
             {t('auth.otp_sent_to', 'Sent via SMS to')}{' '}
-            <span style={{ color: 'var(--brand-green, #00D09C)', fontWeight: 700 }} dir="ltr">
+            <span style={{ color: 'var(--brand-green, #7FE87F)', fontWeight: 700 }} dir="ltr">
               +966 {mobile}
             </span>
           </p>
@@ -123,7 +123,7 @@ export const SmsOtpScreen: React.FC = () => {
                 height: '52px',
                 borderRadius: '12px',
                 backgroundColor: 'var(--color-surface, #111726)',
-                border: digit ? '1px solid var(--brand-green, #00D09C)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+                border: digit ? '1px solid var(--brand-green, #7FE87F)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
                 fontSize: '20px',
                 fontWeight: 900,
                 color: '#FFFFFF',
@@ -141,15 +141,15 @@ export const SmsOtpScreen: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-            border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
+            backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+            border: '1px solid var(--brand-green-border, rgba(127, 232, 127, 0.35))',
             padding: '10px 14px',
             borderRadius: '10px',
             marginBottom: '18px',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <CheckCircle2 size={16} color="var(--brand-green, #00D09C)" />
+            <CheckCircle2 size={16} color="var(--brand-green, #7FE87F)" />
             <span style={{ fontSize: '12px', fontWeight: 700, color: '#FFFFFF' }}>
               {language === 'العربية' ? `التعرف التلقائي على الرمز: ${toArabicNumerals('589204')}` : 'Auto-Read OTP: 589204'}
             </span>
@@ -159,7 +159,7 @@ export const SmsOtpScreen: React.FC = () => {
             onClick={handleAutofillDemo}
             className="interactive-tap"
             style={{
-              backgroundColor: 'var(--brand-green, #00D09C)',
+              backgroundColor: 'var(--brand-green, #7FE87F)',
               color: 'var(--brand-green-ink, #080C14)',
               border: 'none',
               borderRadius: '6px',
@@ -182,7 +182,7 @@ export const SmsOtpScreen: React.FC = () => {
             style={{
               background: 'none',
               border: 'none',
-              color: timer > 0 ? '#6E6E85' : 'var(--brand-green, #00D09C)',
+              color: timer > 0 ? '#6E6E85' : 'var(--brand-green, #7FE87F)',
               fontWeight: 800,
               cursor: timer > 0 ? 'not-allowed' : 'pointer',
               padding: 0,
@@ -197,7 +197,7 @@ export const SmsOtpScreen: React.FC = () => {
         </div>
 
         {isResent && (
-          <div style={{ textAlign: 'center', fontSize: '12px', color: 'var(--brand-green, #00D09C)', fontWeight: 700, marginBottom: '14px' }}>
+          <div style={{ textAlign: 'center', fontSize: '12px', color: 'var(--brand-green, #7FE87F)', fontWeight: 700, marginBottom: '14px' }}>
             {language === 'العربية'
               ? `✓ تم إرسال رمز جديد إلى +966 ${mobile}`
               : `✓ New 6-digit code dispatched to +966 ${mobile}`}

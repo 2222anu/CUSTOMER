@@ -117,15 +117,15 @@ export const CardsIllustration: React.FC = () => {
             height="140"
             rx="16"
             fill="url(#card2Grad)"
-            stroke="rgba(0, 208, 156, 0.5)"
+            stroke="rgba(127, 232, 127, 0.5)"
             strokeWidth="1.5"
           />
           {/* Geometric Accents */}
-          <circle cx="230" cy="80" r="45" fill="none" stroke="rgba(0, 208, 156, 0.15)" strokeWidth="12" />
+          <circle cx="230" cy="80" r="45" fill="none" stroke="rgba(127, 232, 127, 0.16)" strokeWidth="12" />
           <rect x="65" y="80" width="30" height="22" rx="4" fill="url(#goldChip)" />
           <path
             d="M108 86 A 8 8 0 0 1 108 98 M113 82 A 14 14 0 0 1 113 102"
-            stroke="#00D09C"
+            stroke="#7FE87F"
             strokeWidth="1.8"
             strokeLinecap="round"
             fill="none"
@@ -133,7 +133,7 @@ export const CardsIllustration: React.FC = () => {
           <text x="65" y="136" fill="#FFFFFF" fontSize="11" fontFamily="monospace" fontWeight="bold" letterSpacing="2">
             SA58 •••• 1092
           </text>
-          <text x="65" y="165" fill="#00D09C" fontSize="9" fontWeight="800" letterSpacing="1">
+          <text x="65" y="165" fill="#7FE87F" fontSize="9" fontWeight="800" letterSpacing="1">
             SARIE DIRECT DEBIT
           </text>
           <circle cx="215" cy="155" r="14" fill="#FF4757" opacity="0.85" />

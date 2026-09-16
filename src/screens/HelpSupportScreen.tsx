@@ -101,8 +101,8 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
               width: '48px',
               height: '48px',
               borderRadius: '14px',
-              backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-              color: 'var(--brand-green, #00D09C)',
+              backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+              color: 'var(--brand-green, #7FE87F)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -125,21 +125,21 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
 
         <div style={{ backgroundColor: 'var(--color-surface, #111726)', border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))', borderRadius: '16px', overflow: 'hidden', marginBottom: '24px' }}>
           <ListRow
-            icon={<MessageSquare size={18} color="var(--brand-green, #00D09C)" />}
+            icon={<MessageSquare size={18} color="var(--brand-green, #7FE87F)" />}
             label={isAr ? 'المحادثة المباشرة' : 'Live Chat'}
             subLabel={isAr ? 'متوسط الرد: ~١ دقيقة' : 'Avg response: ~1 min'}
             onClick={() => setActiveModal('chat')}
           />
           <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<PhoneCall size={18} color="var(--brand-green, #00D09C)" />}
+            icon={<PhoneCall size={18} color="var(--brand-green, #7FE87F)" />}
             label={isAr ? 'الهاتف المجاني' : 'Toll-Free Phone'}
             subLabel="800-123-QTPAY"
             onClick={() => setActiveModal('call')}
           />
           <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<ShieldAlert size={18} color="var(--brand-green, #00D09C)" />}
+            icon={<ShieldAlert size={18} color="var(--brand-green, #7FE87F)" />}
             label={isAr ? 'الإبلاغ عن مشكلة' : 'Report an Issue'}
             subLabel={isAr ? 'اعتراض على عملية أو اشتباه احتيال' : 'Dispute or fraud report'}
             onClick={() => setActiveModal('dispute')}
@@ -231,8 +231,8 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
               width: '56px',
               height: '56px',
               borderRadius: '16px',
-              backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-              color: 'var(--brand-green, #00D09C)',
+              backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+              color: 'var(--brand-green, #7FE87F)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -248,7 +248,7 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
           <a
             href="tel:80012378729"
             className="interactive-tap"
-            style={{ display: 'inline-block', padding: '12px 28px', backgroundColor: 'var(--brand-green, #00D09C)', color: 'var(--brand-green-ink, #080C14)', borderRadius: '12px', fontWeight: 800, fontSize: '13px', textDecoration: 'none' }}
+            style={{ display: 'inline-block', padding: '12px 28px', backgroundColor: 'var(--brand-green, #7FE87F)', color: 'var(--brand-green-ink, #080C14)', borderRadius: '12px', fontWeight: 800, fontSize: '13px', textDecoration: 'none' }}
           >
             {isAr ? 'اتصال الآن' : 'Call Now'}
           </a>
@@ -264,8 +264,8 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
-                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                color: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                color: 'var(--brand-green, #7FE87F)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

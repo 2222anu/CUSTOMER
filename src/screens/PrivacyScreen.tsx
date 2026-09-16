@@ -46,11 +46,11 @@ export const PrivacyScreen: React.FC = () => {
                 width: '46px',
                 height: '46px',
                 borderRadius: '14px',
-                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: 'var(--brand-green, #00D09C)',
+                color: 'var(--brand-green, #7FE87F)',
                 flexShrink: 0,
               }}
             >
@@ -78,19 +78,19 @@ export const PrivacyScreen: React.FC = () => {
           }}
         >
           <ListRow
-            icon={<Eye size={20} color="var(--brand-green, #00D09C)" />}
+            icon={<Eye size={20} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Data Sharing Preferences', language)}
             onClick={() => setActiveModal('preferences')}
           />
           <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<Database size={20} color="var(--brand-green, #00D09C)" />}
+            icon={<Database size={20} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Download Account Data', language)}
             onClick={() => setActiveModal('export')}
           />
           <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
-            icon={<ShieldCheck size={20} color="var(--brand-green, #00D09C)" />}
+            icon={<ShieldCheck size={20} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Terms of Service & Privacy Statement', language)}
             onClick={() => setActiveModal('terms')}
           />
@@ -105,7 +105,7 @@ export const PrivacyScreen: React.FC = () => {
               <div style={{ fontSize: '14px', fontWeight: 700, color: '#FFFFFF' }}>{translateText('Personalized Offers', language)}</div>
               <div style={{ fontSize: '11px', color: '#8E9BAE', marginTop: '2px' }}>{translateText('Allow curated cashback & reward recommendations', language)}</div>
             </div>
-            <input type="checkbox" checked={marketingConsent} onChange={(e) => setMarketingConsent(e.target.checked)} style={{ width: '20px', height: '20px', accentColor: 'var(--brand-green, #00D09C)', cursor: 'pointer' }} />
+            <input type="checkbox" checked={marketingConsent} onChange={(e) => setMarketingConsent(e.target.checked)} style={{ width: '20px', height: '20px', accentColor: 'var(--brand-green, #7FE87F)', cursor: 'pointer' }} />
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px', backgroundColor: 'var(--color-surface-elevated, #182236)', borderRadius: '14px' }}>
@@ -113,7 +113,7 @@ export const PrivacyScreen: React.FC = () => {
               <div style={{ fontSize: '14px', fontWeight: 700, color: '#FFFFFF' }}>{translateText('Spending Analytics', language)}</div>
               <div style={{ fontSize: '11px', color: '#8E9BAE', marginTop: '2px' }}>{translateText('Share anonymized spending statistics', language)}</div>
             </div>
-            <input type="checkbox" checked={shareData} onChange={(e) => setShareData(e.target.checked)} style={{ width: '20px', height: '20px', accentColor: 'var(--brand-green, #00D09C)', cursor: 'pointer' }} />
+            <input type="checkbox" checked={shareData} onChange={(e) => setShareData(e.target.checked)} style={{ width: '20px', height: '20px', accentColor: 'var(--brand-green, #7FE87F)', cursor: 'pointer' }} />
           </div>
 
           <PrimaryButton onClick={() => setActiveModal(null)}>
@@ -131,8 +131,8 @@ export const PrivacyScreen: React.FC = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
-                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                color: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                color: 'var(--brand-green, #7FE87F)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

@@ -218,7 +218,7 @@ export const HomeScreen: React.FC = () => {
                   height: '34px',
                   borderRadius: '10px',
                   background: 'rgba(6, 78, 59, 0.6)',
-                  border: '1px solid rgba(52, 211, 153, 0.3)',
+                  border: '1px solid rgba(127, 232, 127, 0.3)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -226,7 +226,7 @@ export const HomeScreen: React.FC = () => {
                   boxShadow: 'none',
                 }}
               >
-                {showTotalBalance ? <EyeOff size={16} color="#34d399" /> : <Eye size={16} color="#34d399" />}
+                {showTotalBalance ? <EyeOff size={16} color="#7FE87F" /> : <Eye size={16} color="#7FE87F" />}
               </button>
 
               <div
@@ -236,13 +236,13 @@ export const HomeScreen: React.FC = () => {
                   height: '34px',
                   borderRadius: '10px',
                   background: 'rgba(6, 78, 59, 0.6)',
-                  border: '1px solid rgba(52, 211, 153, 0.3)',
+                  border: '1px solid rgba(127, 232, 127, 0.3)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
-                <ShieldCheck size={16} color="#34d399" />
+                <ShieldCheck size={16} color="#7FE87F" />
               </div>
             </div>
           </div>
@@ -322,7 +322,7 @@ export const HomeScreen: React.FC = () => {
                 backgroundColor: 'rgba(4, 47, 46, 0.45)',
                 padding: '7px 12px',
                 borderRadius: '10px',
-                border: '1px solid rgba(52, 211, 153, 0.2)',
+                border: '1px solid rgba(127, 232, 127, 0.22)',
                 cursor: 'pointer',
               }}
             >

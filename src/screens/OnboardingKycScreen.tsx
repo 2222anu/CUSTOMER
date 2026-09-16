@@ -46,7 +46,7 @@ export const OnboardingKycScreen: React.FC = () => {
       className="fade-in"
       style={{
         backgroundColor: '#080c14',
-        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(52, 211, 153, 0.08) 0%, rgba(7, 13, 10, 0.98) 60%)',
+        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(127, 232, 127, 0.08) 0%, rgba(7, 13, 10, 0.98) 60%)',
         minHeight: '100%',
         paddingBottom: '40px',
         color: '#FFFFFF',

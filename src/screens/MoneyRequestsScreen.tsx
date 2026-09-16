@@ -45,8 +45,8 @@ export const MoneyRequestsScreen: React.FC = () => {
                 width: '56px',
                 height: '56px',
                 borderRadius: '16px',
-                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                color: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                color: 'var(--brand-green, #7FE87F)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -88,8 +88,8 @@ export const MoneyRequestsScreen: React.FC = () => {
                       width: '46px',
                       height: '46px',
                       borderRadius: '14px',
-                      backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                      color: 'var(--brand-green, #00D09C)',
+                      backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                      color: 'var(--brand-green, #7FE87F)',
                       fontWeight: 800,
                       fontSize: '15px',
                       display: 'flex',
@@ -109,7 +109,7 @@ export const MoneyRequestsScreen: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: 'var(--brand-green, #00D09C)' }}>
+                <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: 'var(--brand-green, #7FE87F)' }}>
                   {formatSaudiCurrency(req.amount, language)}
                 </div>
               </div>

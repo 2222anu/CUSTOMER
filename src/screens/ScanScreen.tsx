@@ -205,7 +205,7 @@ export const ScanScreen: React.FC = () => {
           onClick={toggleFlash}
           aria-label="Toggle Flashlight"
           style={{
-            backgroundColor: isFlashOn ? 'var(--brand-green, #00D09C)' : 'var(--color-surface-elevated, #182236)',
+            backgroundColor: isFlashOn ? 'var(--brand-green, #7FE87F)' : 'var(--color-surface-elevated, #182236)',
             border: isFlashOn ? 'none' : '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
             color: isFlashOn ? 'var(--brand-green-ink, #080C14)' : '#FFFFFF',
             width: '40px',
@@ -266,8 +266,8 @@ export const ScanScreen: React.FC = () => {
             justifyContent: 'center',
             overflow: 'hidden',
             border: scanSuccessContact
-              ? '3px solid var(--brand-green, #00D09C)'
-              : '1.5px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
+              ? '3px solid var(--brand-green, #7FE87F)'
+              : '1.5px solid var(--brand-green-border, rgba(127, 232, 127, 0.35))',
             transition: 'border 0.3s ease',
           }}
         >
@@ -279,8 +279,8 @@ export const ScanScreen: React.FC = () => {
               left: 10,
               width: 32,
               height: 32,
-              borderTop: '4px solid var(--brand-green, #00D09C)',
-              borderLeft: '4px solid var(--brand-green, #00D09C)',
+              borderTop: '4px solid var(--brand-green, #7FE87F)',
+              borderLeft: '4px solid var(--brand-green, #7FE87F)',
               borderTopLeftRadius: '10px',
             }}
           />
@@ -291,8 +291,8 @@ export const ScanScreen: React.FC = () => {
               right: 10,
               width: 32,
               height: 32,
-              borderTop: '4px solid var(--brand-green, #00D09C)',
-              borderRight: '4px solid var(--brand-green, #00D09C)',
+              borderTop: '4px solid var(--brand-green, #7FE87F)',
+              borderRight: '4px solid var(--brand-green, #7FE87F)',
               borderTopRightRadius: '10px',
             }}
           />
@@ -303,8 +303,8 @@ export const ScanScreen: React.FC = () => {
               left: 10,
               width: 32,
               height: 32,
-              borderBottom: '4px solid var(--brand-green, #00D09C)',
-              borderLeft: '4px solid var(--brand-green, #00D09C)',
+              borderBottom: '4px solid var(--brand-green, #7FE87F)',
+              borderLeft: '4px solid var(--brand-green, #7FE87F)',
               borderBottomLeftRadius: '10px',
             }}
           />
@@ -315,8 +315,8 @@ export const ScanScreen: React.FC = () => {
               right: 10,
               width: 32,
               height: 32,
-              borderBottom: '4px solid var(--brand-green, #00D09C)',
-              borderRight: '4px solid var(--brand-green, #00D09C)',
+              borderBottom: '4px solid var(--brand-green, #7FE87F)',
+              borderRight: '4px solid var(--brand-green, #7FE87F)',
               borderBottomRightRadius: '10px',
             }}
           />
@@ -328,9 +328,9 @@ export const ScanScreen: React.FC = () => {
               style={{
                 width: '100%',
                 height: '2px',
-                backgroundColor: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green, #7FE87F)',
                 position: 'absolute',
-                boxShadow: '0 0 12px var(--brand-green, #00D09C), 0 0 4px #ffffff',
+                boxShadow: '0 0 12px var(--brand-green, #7FE87F), 0 0 4px #ffffff',
                 animation: 'scanLaser 2.2s infinite ease-in-out alternate',
               }}
             />
@@ -351,7 +351,7 @@ export const ScanScreen: React.FC = () => {
                 backdropFilter: 'blur(4px)',
               }}
             >
-              <CheckCircle size={48} color="var(--brand-green, #00D09C)" />
+              <CheckCircle size={48} color="var(--brand-green, #7FE87F)" />
               <span style={{ color: '#FFFFFF', fontWeight: '700', fontSize: '15px' }}>
                 {language === 'العربية' ? 'تم التحقق من الرمز بنجاح!' : 'QR Verified!'}
               </span>
@@ -413,7 +413,7 @@ export const ScanScreen: React.FC = () => {
               whiteSpace: 'nowrap',
             }}
           >
-            <Store size={13} color="var(--brand-green, #00D09C)" /> {language === 'العربية' ? 'أسواق بنده' : 'Star Supermarket'}
+            <Store size={13} color="var(--brand-green, #7FE87F)" /> {language === 'العربية' ? 'أسواق بنده' : 'Star Supermarket'}
           </button>
 
           <button
@@ -438,7 +438,7 @@ export const ScanScreen: React.FC = () => {
               whiteSpace: 'nowrap',
             }}
           >
-            <Coffee size={13} color="var(--brand-green, #00D09C)" /> {language === 'العربية' ? 'هاف مليون كافيه' : 'Half Million Coffee'}
+            <Coffee size={13} color="var(--brand-green, #7FE87F)" /> {language === 'العربية' ? 'هاف مليون كافيه' : 'Half Million Coffee'}
           </button>
 
           <button
@@ -463,7 +463,7 @@ export const ScanScreen: React.FC = () => {
               whiteSpace: 'nowrap',
             }}
           >
-            <Train size={13} color="var(--brand-green, #00D09C)" /> {language === 'العربية' ? 'فاتورة الكهرباء' : 'SEC Electricity'}
+            <Train size={13} color="var(--brand-green, #7FE87F)" /> {language === 'العربية' ? 'فاتورة الكهرباء' : 'SEC Electricity'}
           </button>
         </div>
       </div>
@@ -497,13 +497,13 @@ export const ScanScreen: React.FC = () => {
               cursor: 'pointer',
             }}
           >
-            <ImageIcon size={16} color="var(--brand-green, #00D09C)" /> {t('scan.upload_gallery', 'Upload QR')}
+            <ImageIcon size={16} color="var(--brand-green, #7FE87F)" /> {t('scan.upload_gallery', 'Upload QR')}
           </button>
 
           <button
             onClick={() => handleScanSuccess(contacts[0] || { name: 'Tariq Al-Otaibi', upiId: 'tariq@sarie' })}
             style={{
-              backgroundColor: 'var(--brand-green, #00D09C)',
+              backgroundColor: 'var(--brand-green, #7FE87F)',
               border: 'none',
               borderRadius: designSystem.radii.md,
               padding: '12px',

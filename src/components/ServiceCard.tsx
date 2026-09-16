@@ -17,7 +17,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   onClick,
   badge,
   iconBg = 'var(--color-surface-elevated, #182236)',
-  iconColor = 'var(--brand-green, #00D09C)',
+  iconColor = 'var(--brand-green, #7FE87F)',
   borderColor = 'transparent',
 }) => {
   return (
@@ -50,7 +50,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             right: '2px',
             fontSize: '9px',
             fontWeight: 800,
-            backgroundColor: 'var(--brand-green, #00D09C)',
+            backgroundColor: 'var(--brand-green, #7FE87F)',
             color: 'var(--brand-green-ink, #080C14)',
             padding: '2px 6px',
             borderRadius: '6px',

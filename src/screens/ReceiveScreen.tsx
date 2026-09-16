@@ -104,7 +104,7 @@ export const ReceiveScreen: React.FC = () => {
             width: '90%',
             maxWidth: '500px',
             backgroundColor: 'var(--color-surface, #111726)',
-            border: '1px solid var(--brand-green, #00D09C)',
+            border: '1px solid var(--brand-green, #7FE87F)',
             color: '#FFFFFF',
             borderRadius: '12px',
             padding: '14px 18px',
@@ -120,17 +120,17 @@ export const ReceiveScreen: React.FC = () => {
                 width: '36px',
                 height: '36px',
                 borderRadius: '50%',
-                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                color: 'var(--brand-green, #00D09C)',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                color: 'var(--brand-green, #7FE87F)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <ArrowDownLeft size={20} color="var(--brand-green, #00D09C)" />
+              <ArrowDownLeft size={20} color="var(--brand-green, #7FE87F)" />
             </div>
             <div>
-              <div className="tabular-nums" style={{ fontSize: '14px', fontWeight: 800, color: 'var(--brand-green, #00D09C)' }}>
+              <div className="tabular-nums" style={{ fontSize: '14px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)' }}>
                 +{formatCurrency(receivedToast.amount, language)} {language === 'العربية' ? 'تم الاستلام' : 'Received'}
               </div>
               <div style={{ fontSize: '12px', color: '#A2A2BA' }}>
@@ -177,8 +177,8 @@ export const ReceiveScreen: React.FC = () => {
               width: '60px',
               height: '60px',
               borderRadius: '50%',
-              backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-              color: 'var(--brand-green, #00D09C)',
+              backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+              color: 'var(--brand-green, #7FE87F)',
               fontWeight: 800,
               fontSize: '20px',
               display: 'flex',
@@ -214,14 +214,14 @@ export const ReceiveScreen: React.FC = () => {
               padding: '5px 12px',
               marginTop: '6px',
               marginBottom: '14px',
-              color: 'var(--brand-green, #00D09C)',
+              color: 'var(--brand-green, #7FE87F)',
               fontSize: '12.5px',
               fontWeight: 700,
               cursor: 'pointer',
             }}
           >
             <span>{user.upiId}</span>
-            {copied ? <CheckCircle2 size={14} color="var(--brand-green, #00D09C)" /> : <Copy size={13} />}
+            {copied ? <CheckCircle2 size={14} color="var(--brand-green, #7FE87F)" /> : <Copy size={13} />}
           </button>
 
           {/* Machine-Readable QR Code */}
@@ -235,10 +235,10 @@ export const ReceiveScreen: React.FC = () => {
               style={{
                 fontSize: '15px',
                 fontWeight: 800,
-                color: 'var(--brand-green, #00D09C)',
+                color: 'var(--brand-green, #7FE87F)',
                 marginTop: '12px',
-                backgroundColor: 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))',
-                border: '1px solid var(--brand-green-border, rgba(0, 208, 156, 0.35))',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                border: '1px solid var(--brand-green-border, rgba(127, 232, 127, 0.35))',
                 padding: '4px 14px',
                 borderRadius: '12px',
               }}
@@ -313,7 +313,7 @@ export const ReceiveScreen: React.FC = () => {
                 padding: '0 12px',
               }}
             >
-              <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--brand-green, #00D09C)', marginInlineEnd: '6px' }}>
+              <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)', marginInlineEnd: '6px' }}>
                 {language === 'العربية' ? 'ر.س' : 'SAR'}
               </span>
               <input
@@ -355,9 +355,9 @@ export const ReceiveScreen: React.FC = () => {
                   flex: 1,
                   padding: '6px 0',
                   borderRadius: '6px',
-                  border: customAmount === String(amt) ? '1px solid var(--brand-green, #00D09C)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-                  backgroundColor: customAmount === String(amt) ? 'var(--brand-green-tint, rgba(0, 208, 156, 0.12))' : 'var(--color-surface-elevated, #182236)',
-                  color: customAmount === String(amt) ? 'var(--brand-green, #00D09C)' : '#FFFFFF',
+                  border: customAmount === String(amt) ? '1px solid var(--brand-green, #7FE87F)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+                  backgroundColor: customAmount === String(amt) ? 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))' : 'var(--color-surface-elevated, #182236)',
+                  color: customAmount === String(amt) ? 'var(--brand-green, #7FE87F)' : '#FFFFFF',
                   fontSize: '12px',
                   fontWeight: 700,
                   cursor: 'pointer',
@@ -377,7 +377,7 @@ export const ReceiveScreen: React.FC = () => {
             style={{
               width: '100%',
               minHeight: '52px',
-              backgroundColor: 'var(--brand-green, #00D09C)',
+              backgroundColor: 'var(--brand-green, #7FE87F)',
               color: 'var(--brand-green-ink, #080C14)',
               border: 'none',
               borderRadius: '14px',

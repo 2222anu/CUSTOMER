@@ -45,8 +45,15 @@ export const NotificationsScreen: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {notifications.map((notif) => (
+          <div
+            style={{
+              backgroundColor: 'var(--color-surface, #111726)',
+              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
+              borderRadius: '20px',
+              overflow: 'hidden',
+            }}
+          >
+            {notifications.map((notif, index) => (
               <div
                 key={notif.id}
                 className="interactive-tap"
@@ -55,16 +62,15 @@ export const NotificationsScreen: React.FC = () => {
                   alignItems: 'flex-start',
                   gap: '14px',
                   padding: '16px 18px',
-                  backgroundColor: 'var(--color-surface, #111726)',
-                  border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-                  borderRadius: '16px',
+                  backgroundColor: 'transparent',
+                  borderBottom: index === notifications.length - 1 ? 'none' : '1px solid rgba(255, 255, 255, 0.05)',
                   boxShadow: 'none',
                 }}
               >
                 <div
                   style={{
-                    width: '42px',
-                    height: '42px',
+                    width: '40px',
+                    height: '40px',
                     borderRadius: '12px',
                     backgroundColor: notif.type === 'success' ? 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))' : 'var(--color-surface-elevated, #182236)',
                     color: notif.type === 'success' ? 'var(--brand-green, #7FE87F)' : '#A2A2BA',
@@ -75,11 +81,11 @@ export const NotificationsScreen: React.FC = () => {
                   }}
                 >
                   {notif.type === 'success' ? (
-                    <CheckCircle2 size={20} />
+                    <CheckCircle2 size={19} />
                   ) : notif.type === 'alert' ? (
-                    <BellRing size={20} />
+                    <BellRing size={19} />
                   ) : (
-                    <Info size={20} />
+                    <Info size={19} />
                   )}
                 </div>
 
@@ -88,14 +94,14 @@ export const NotificationsScreen: React.FC = () => {
                     <span style={{ fontWeight: 800, fontSize: '14px', color: '#FFFFFF' }}>
                       {translateText(notif.title, language)}
                     </span>
-                    <span style={{ fontSize: '11px', color: '#6E6E85', fontWeight: 600 }}>
+                    <span style={{ fontSize: '11px', color: '#8E9BAE', fontWeight: 600 }}>
                       {translateText(notif.timestamp, language)}
                     </span>
                   </div>
                   <div
                     style={{
                       fontSize: '12px',
-                      color: '#A2A2BA',
+                      color: '#8E9BAE',
                       marginTop: '4px',
                       lineHeight: '1.45',
                     }}

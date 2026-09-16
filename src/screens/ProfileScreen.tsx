@@ -243,10 +243,10 @@ export const ProfileScreen: React.FC = () => {
           <div style={{ fontSize: '11px', fontWeight: '800', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
             {language === 'العربية' ? 'المدفوعات والحسابات' : 'Payment & Accounts'}
           </div>
-          <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', padding: '6px 6px 0 6px', boxShadow: 'none' }}>
+          <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', padding: 0, boxShadow: 'none' }}>
             <ListRow icon={<Landmark size={18} color="#7FE87F" />} label={language === 'العربية' ? 'الحسابات البنكية' : 'Bank Accounts'} onClick={() => navigateTo('BANK_ACCOUNTS')} />
             <ListRow icon={<Zap size={18} color="#7FE87F" />} label={language === 'العربية' ? 'إعدادات سريع والرمز السري' : 'Sarie Settings & PIN'} onClick={() => navigateTo('UPI_SETTINGS')} />
-            <ListRow icon={<CreditCard size={18} color="#7FE87F" />} label={language === 'العربية' ? 'البطاقات وطرق الدفع' : 'Saved Cards & Methods'} onClick={() => navigateTo('PAYMENT_METHODS')} />
+            <ListRow icon={<CreditCard size={18} color="#7FE87F" />} label={language === 'العربية' ? 'البطاقات وطرق الدفع' : 'Saved Cards & Methods'} isLast={true} onClick={() => navigateTo('PAYMENT_METHODS')} />
           </div>
         </div>
 
@@ -255,10 +255,10 @@ export const ProfileScreen: React.FC = () => {
           <div style={{ fontSize: '11px', fontWeight: '800', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
             {language === 'العربية' ? 'التحويلات والطلبات' : 'Transfers & Requests'}
           </div>
-          <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', padding: '6px 6px 0 6px', boxShadow: 'none' }}>
+          <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', padding: 0, boxShadow: 'none' }}>
             <ListRow icon={<Download size={18} color="#7FE87F" />} label={language === 'العربية' ? 'طلبات الأموال' : 'Money Requests'} onClick={() => navigateTo('MONEY_REQUESTS')} />
             <ListRow icon={<History size={18} color="#7FE87F" />} label={language === 'العربية' ? 'سجل العمليات' : 'Transaction History'} onClick={() => navigateTo('HISTORY')} />
-            <ListRow icon={<QrCode size={18} color="#7FE87F" />} label={language === 'العربية' ? 'الرمز الخاص بي' : 'My QR Code'} onClick={() => navigateTo('RECEIVE')} />
+            <ListRow icon={<QrCode size={18} color="#7FE87F" />} label={language === 'العربية' ? 'الرمز الخاص بي' : 'My QR Code'} isLast={true} onClick={() => navigateTo('RECEIVE')} />
           </div>
         </div>
 
@@ -267,12 +267,12 @@ export const ProfileScreen: React.FC = () => {
           <div style={{ fontSize: '11px', fontWeight: '800', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
             {language === 'العربية' ? 'المكافآت والخدمات' : 'Lifestyle & Rewards'}
           </div>
-          <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', padding: '6px 6px 0 6px', boxShadow: 'none' }}>
+          <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', padding: 0, boxShadow: 'none' }}>
             <ListRow icon={<Gift size={18} color="#7FE87F" />} label={language === 'العربية' ? 'المكافآت والاسترداد' : 'Rewards & Cashback'} onClick={() => navigateTo('REWARDS')} />
             <ListRow icon={<ShoppingBag size={18} color="#7FE87F" />} label={language === 'العربية' ? 'عروض التسوق' : 'Shopping Deals'} onClick={() => navigateTo('SHOPPING')} />
             <ListRow icon={<MessageSquare size={18} color="#7FE87F" />} label={language === 'العربية' ? 'الرسائل' : 'Messages'} onClick={() => navigateTo('MESSAGES')} />
             <ListRow icon={<Plane size={18} color="#7FE87F" />} label={language === 'العربية' ? 'حجوزات السفر' : 'Travel Bookings'} onClick={() => navigateTo('TRAVEL')} />
-            <ListRow icon={<Utensils size={18} color="#7FE87F" />} label={language === 'العربية' ? 'المطاعم والمقاهي' : 'Dining & Food'} onClick={() => navigateTo('FOOD')} />
+            <ListRow icon={<Utensils size={18} color="#7FE87F" />} label={language === 'العربية' ? 'المطاعم والمقاهي' : 'Dining & Food'} isLast={true} onClick={() => navigateTo('FOOD')} />
           </div>
         </div>
 
@@ -281,7 +281,7 @@ export const ProfileScreen: React.FC = () => {
           <div style={{ fontSize: '11px', fontWeight: '800', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', marginInlineStart: '4px' }}>
             {language === 'العربية' ? 'الإعدادات والأمان' : 'Settings & Security'}
           </div>
-          <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', padding: '6px 6px 0 6px', boxShadow: 'none' }}>
+          <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', padding: 0, boxShadow: 'none' }}>
             <ListRow
               icon={<ShieldCheck size={18} color="#7FE87F" />}
               label={language === 'العربية' ? 'توثيق الهوية الوطنية' : 'National ID Verification'}
@@ -303,17 +303,18 @@ export const ProfileScreen: React.FC = () => {
               onClick={() => setIsLanguageModalOpen(true)}
             />
             <ListRow icon={<HelpCircle size={18} color="#7FE87F" />} label={language === 'العربية' ? 'المساعدة والدعم' : 'Help & Support'} onClick={() => navigateTo('HELP_SUPPORT')} />
-            <ListRow icon={<Lock size={18} color="#7FE87F" />} label={language === 'العربية' ? 'الخصوصية والشروط' : 'Privacy & Terms'} onClick={() => navigateTo('PRIVACY')} />
+            <ListRow icon={<Lock size={18} color="#7FE87F" />} label={language === 'العربية' ? 'الخصوصية والشروط' : 'Privacy & Terms'} isLast={true} onClick={() => navigateTo('PRIVACY')} />
           </div>
         </div>
 
         {/* Log Out */}
         <div>
-          <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', padding: '6px 6px 0 6px', boxShadow: 'none' }}>
+          <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', padding: 0, boxShadow: 'none' }}>
             <ListRow
               icon={<LogOut size={18} color="#FF4757" />}
               label={language === 'العربية' ? 'تسجيل الخروج' : 'Log Out'}
               danger={true}
+              isLast={true}
               onClick={() => setIsLogoutModalOpen(true)}
             />
           </div>

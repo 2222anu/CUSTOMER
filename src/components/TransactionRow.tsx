@@ -7,12 +7,14 @@ interface TransactionRowProps {
   transaction: Transaction;
   onClick?: () => void;
   hideSubtitle?: boolean;
+  isLast?: boolean;
 }
 
 export const TransactionRow: React.FC<TransactionRowProps> = ({
   transaction,
   onClick,
   hideSubtitle = false,
+  isLast = false,
 }) => {
   const { language, t } = useApp();
   const isReceived = transaction.type === 'received';
@@ -37,17 +39,16 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '14px 16px',
-        backgroundColor: 'var(--color-surface, #111726)',
-        border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-        borderRadius: '16px',
-        marginBottom: '10px',
+        padding: '15px 18px',
+        backgroundColor: 'transparent',
+        border: 'none',
+        borderBottom: isLast ? 'none' : '1px solid rgba(255, 255, 255, 0.05)',
         cursor: onClick ? 'pointer' : 'default',
         boxShadow: 'none',
-        transition: 'all 0.15s ease',
+        transition: 'background-color 0.15s ease',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
         <div
           style={{
             width: '42px',
@@ -55,7 +56,7 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
             borderRadius: '12px',
             backgroundColor: isReceived ? 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))' : 'var(--color-surface-elevated, #182236)',
             border: 'none',
-            color: isReceived ? 'var(--brand-green, #7FE87F)' : '#FFFFFF',
+            color: isReceived ? 'var(--brand-green, #7FE87F)' : '#A2A2BA',
             fontWeight: 800,
             fontSize: '13px',
             display: 'flex',
@@ -71,7 +72,7 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
             {displayTitle}
           </div>
           {!hideSubtitle && (
-            <div style={{ fontSize: '11.5px', color: '#9ca3af', marginTop: '2px' }}>
+            <div style={{ fontSize: '11.5px', color: '#8E9BAE', marginTop: '2px' }}>
               {displaySub} &bull; {transaction.utr.substring(0, 10)}
             </div>
           )}
@@ -89,7 +90,7 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
         >
           {isReceived ? '+' : '-'}{formatCurrency(transaction.amount, language)}
         </div>
-        <div style={{ fontSize: '10.5px', color: '#9ca3af', marginTop: '2px', fontWeight: 600 }}>
+        <div style={{ fontSize: '11px', color: '#8E9BAE', marginTop: '2px', fontWeight: 600 }}>
           {displayDate}
         </div>
       </div>

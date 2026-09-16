@@ -82,16 +82,15 @@ export const PrivacyScreen: React.FC = () => {
             label={translateText('Data Sharing Preferences', language)}
             onClick={() => setActiveModal('preferences')}
           />
-          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
             icon={<Database size={20} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Download Account Data', language)}
             onClick={() => setActiveModal('export')}
           />
-          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
             icon={<ShieldCheck size={20} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Terms of Service & Privacy Statement', language)}
+            isLast={true}
             onClick={() => setActiveModal('terms')}
           />
         </div>

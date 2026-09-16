@@ -130,18 +130,17 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
             subLabel={isAr ? 'متوسط الرد: ~١ دقيقة' : 'Avg response: ~1 min'}
             onClick={() => setActiveModal('chat')}
           />
-          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
             icon={<PhoneCall size={18} color="var(--brand-green, #7FE87F)" />}
             label={isAr ? 'الهاتف المجاني' : 'Toll-Free Phone'}
             subLabel="800-123-QTPAY"
             onClick={() => setActiveModal('call')}
           />
-          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
             icon={<ShieldAlert size={18} color="var(--brand-green, #7FE87F)" />}
             label={isAr ? 'الإبلاغ عن مشكلة' : 'Report an Issue'}
             subLabel={isAr ? 'اعتراض على عملية أو اشتباه احتيال' : 'Dispute or fraud report'}
+            isLast={true}
             onClick={() => setActiveModal('dispute')}
           />
         </div>

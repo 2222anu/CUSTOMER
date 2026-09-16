@@ -150,7 +150,6 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
             rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #7FE87F)', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(650, language)}` : 'Book SAR 650'}</span>}
             onClick={() => handleStartBooking(bookings[0])}
           />
-          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
             icon={<Car size={18} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Airport Chauffeur', language)}
@@ -158,7 +157,6 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
             rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #7FE87F)', padding: '4px 10px', borderRadius: '8px' }}>{isAr ? `حجز ${formatSaudiCurrency(120, language)}` : 'Book SAR 120'}</span>}
             onClick={() => handleStartBooking(bookings[1])}
           />
-          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
             icon={<Hotel size={18} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Hotel Reservations', language)}
@@ -166,11 +164,11 @@ export const TravelScreen: React.FC<TravelScreenProps> = ({ initialBookings }) =
             rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #7FE87F)', padding: '4px 10px', borderRadius: '8px' }}>{translateText('Reserve', language)}</span>}
             onClick={() => handleStartBooking(bookings[2])}
           />
-          <div style={{ height: '1px', backgroundColor: 'var(--color-border, rgba(255, 255, 255, 0.06))', margin: '0 16px' }} />
           <ListRow
             icon={<Compass size={18} color="var(--brand-green, #7FE87F)" />}
             label={translateText('Holiday Packages', language)}
             subLabel={bookings[3].subtitle}
+            isLast={true}
             rightElement={<span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green-ink, #080C14)', backgroundColor: 'var(--brand-green, #7FE87F)', padding: '4px 10px', borderRadius: '8px' }}>{translateText('Explore', language)}</span>}
             onClick={() => handleStartBooking(bookings[3])}
           />

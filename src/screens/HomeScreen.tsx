@@ -800,9 +800,24 @@ export const HomeScreen: React.FC = () => {
           </button>
         </div>
 
-        {recentTransactions.map((txn) => (
-          <TransactionRow key={txn.id} transaction={txn} hideSubtitle={true} onClick={() => navigateTo('HISTORY')} />
-        ))}
+        <div
+          style={{
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
+            borderRadius: '20px',
+            overflow: 'hidden',
+          }}
+        >
+          {recentTransactions.map((txn, idx) => (
+            <TransactionRow
+              key={txn.id}
+              transaction={txn}
+              hideSubtitle={true}
+              isLast={idx === recentTransactions.length - 1}
+              onClick={() => navigateTo('HISTORY')}
+            />
+          ))}
+        </div>
       </div>
 
       {/* 8. Verified Sarie Balance Modal Sheet */}

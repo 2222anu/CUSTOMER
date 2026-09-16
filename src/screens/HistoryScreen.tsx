@@ -226,17 +226,18 @@ export const HistoryScreen: React.FC = () => {
               <div
                 style={{
                   backgroundColor: 'var(--color-surface, #111726)',
-                  border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+                  border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
                   borderRadius: '18px',
                   overflow: 'hidden',
-                  padding: '8px 8px 0 8px',
+                  padding: 0,
                   boxShadow: 'none',
                 }}
               >
-                {items.map((txn) => (
+                {items.map((txn, idx) => (
                   <TransactionRow
                     key={txn.id}
                     transaction={txn}
+                    isLast={idx === items.length - 1}
                     onClick={() => handleOpenReceipt(txn)}
                   />
                 ))}

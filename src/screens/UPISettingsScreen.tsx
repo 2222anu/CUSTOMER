@@ -231,16 +231,15 @@ export const UPISettingsScreen: React.FC = () => {
             label={isAr ? 'رمز سريع QR الخاص بي' : 'My Sarie QR Code'}
             onClick={() => navigateTo('RECEIVE')}
           />
-          <div style={{ height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', margin: '0 16px' }} />
           <ListRow
             icon={<Key size={18} color="#7FE87F" />}
             label={isAr ? 'تغيير الرمز السري للتحويل' : 'Change Sarie Payment PIN'}
             onClick={() => setIsPinModalOpen(true)}
           />
-          <div style={{ height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', margin: '0 16px' }} />
           <ListRow
             icon={<ShieldCheck size={18} color="#7FE87F" />}
             label={isAr ? 'الحد اليومي للتحويل' : 'Daily Transfer Limit'}
+            isLast={true}
             rightElement={
               <span
                 style={{

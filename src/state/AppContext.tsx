@@ -526,6 +526,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     setTransactions((prev) => [newTxn, ...prev]);
     setLastTransaction(newTxn);
+    syncTransactionToSupabase(newTxn);
 
     const formattedAmt = `SAR ${params.amount.toFixed(2)}`;
     const newNotif: AppNotification = {

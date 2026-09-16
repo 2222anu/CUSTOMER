@@ -7,27 +7,27 @@ import {
   EyeOff,
   Star,
   CheckCircle2,
+  Zap,
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
-import { PrimaryButton } from '../components/PrimaryButton';
-import { PaymentPartnerLogo } from '../components/PaymentPartnerLogo';
 import { SamaLogo } from '../components/SamaLogo';
 import { Modal } from '../components/Modal';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
 
-// Contactless NFC Waves Icon
-const ContactlessIcon: React.FC<{ color?: string; size?: number }> = ({ color = '#ffffff', size = 18 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: 'rotate(90deg)', flexShrink: 0 }}>
-    <path d="M5 12.55a11 11 0 0 1 14.08 0" />
-    <path d="M1.42 9a16 16 0 0 1 21.16 0" />
-    <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
-    <circle cx="12" cy="20" r="1" fill={color} />
-  </svg>
-);
-
 export const BankAccountsScreen: React.FC = () => {
-  const { bankAccounts, toggleShowBalance, setPrimaryBank, removeBankAccount, setIsAddBankModalOpen, openPinModal, t, language } = useApp();
+  const {
+    bankAccounts,
+    toggleShowBalance,
+    setPrimaryBank,
+    removeBankAccount,
+    setIsAddBankModalOpen,
+    openPinModal,
+    t,
+    language,
+    isRtl,
+  } = useApp();
+
   const [bankToRemove, setBankToRemove] = useState<string | null>(null);
 
   const confirmRemove = () => {
@@ -57,212 +57,275 @@ export const BankAccountsScreen: React.FC = () => {
     <div
       className="fade-in"
       style={{
-        backgroundColor: '#080c14',
-        backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(127, 232, 127, 0.08) 0%, rgba(7, 13, 10, 0.98) 60%)',
+        backgroundColor: '#07090E',
         minHeight: '100%',
         paddingBottom: '96px',
+        color: '#F3F6F9',
       }}
     >
       <AppHeader title={t('banks.title', 'Bank Accounts')} showBack showSettings />
 
-      <div style={{ padding: '16px 20px' }}>
-        {/* Top Summary Banner */}
-        <div
+      <div style={{ padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+        {/* Overview Hero Banner */}
+        <section
           style={{
-            backgroundColor: '#111726',
-            borderRadius: '20px',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            padding: '16px 18px',
-            marginBottom: '20px',
+            background: 'linear-gradient(135deg, rgba(20, 64, 42, 0.45) 0%, rgba(10, 15, 24, 0.95) 100%)',
+            border: '1px solid rgba(127, 232, 127, 0.22)',
+            borderRadius: '24px',
+            padding: '22px',
             display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
+            flexDirection: 'column',
+            gap: '16px',
+            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+              <div
+                style={{
+                  background: 'rgba(127, 232, 127, 0.12)',
+                  border: '1px solid rgba(127, 232, 127, 0.25)',
+                  color: '#7FE87F',
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <Landmark size={22} />
+              </div>
+              <div>
+                <h2 style={{ fontSize: '15px', fontWeight: 700, color: '#F3F6F9', marginBottom: '2px' }}>
+                  {t('banks.linked', 'Linked Saudi Accounts')}
+                </h2>
+                <div style={{ fontSize: '10px', color: '#8A9BB0', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                  {language === 'العربية' ? 'شبكة مالية موثقة' : 'SECURE FINANCIAL NETWORK'}
+                </div>
+              </div>
+            </div>
+
+            <span
               style={{
-                width: '42px',
-                height: '42px',
-                borderRadius: '12px',
-                backgroundColor: '#182236',
+                background: 'rgba(127, 232, 127, 0.12)',
                 color: '#7FE87F',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
+                fontSize: '10.5px',
+                fontWeight: 800,
+                padding: '4px 10px',
+                borderRadius: '20px',
+                letterSpacing: '0.04em',
+                border: '1px solid rgba(127, 232, 127, 0.25)',
               }}
             >
-              <Landmark size={20} />
-            </div>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF' }}>
-                  {t('banks.linked', 'Linked Saudi Accounts')}
-                </span>
-                <span
-                  style={{
-                    fontSize: '11px',
-                    fontWeight: 800,
-                    color: '#7FE87F',
-                    backgroundColor: 'rgba(127, 232, 127, 0.14)',
-                    border: '1px solid rgba(127, 232, 127, 0.22)',
-                    padding: '2px 8px',
-                    borderRadius: '10px',
-                  }}
-                >
-                  {language === 'العربية' ? `${bankAccounts.length} نشطة` : `${bankAccounts.length} Active`}
-                </span>
-              </div>
-              <div style={{ fontSize: '11.5px', color: '#9ca3af', fontWeight: 600, marginTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <SamaLogo height={12} themeMode="green" />
-                <span>&bull; {language === 'العربية' ? 'محمي عبر البنية التحتية لسريع' : 'Sarie Instant Rails Secured'}</span>
-              </div>
-            </div>
+              {language === 'العربية' ? `${bankAccounts.length} نشطة` : `${bankAccounts.length} ACTIVE`}
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#8A9BB0', fontWeight: 500 }}>
+            <Zap size={14} color="#7FE87F" />
+            <span>{language === 'العربية' ? 'محمي عبر البنية التحتية لسريع' : 'Sarie Instant Rails Secured'}</span>
           </div>
 
           <button
             onClick={() => setIsAddBankModalOpen(true)}
-            className="action-btn interactive-tap"
+            className="interactive-tap"
             style={{
-              backgroundColor: '#7FE87F',
-              color: '#080c14',
+              background: '#7FE87F',
+              color: '#04120A',
               border: 'none',
-              borderRadius: '12px',
-              padding: '9px 14px',
-              fontSize: '12px',
               fontWeight: 800,
+              padding: '13px',
+              borderRadius: '14px',
               cursor: 'pointer',
+              width: '100%',
+              fontSize: '13px',
+              letterSpacing: '-0.1px',
               display: 'flex',
               alignItems: 'center',
-              gap: '5px',
-              boxShadow: '0 4px 12px rgba(127, 232, 127, 0.22)',
+              justifyContent: 'center',
+              gap: '6px',
+              boxShadow: '0 4px 14px rgba(127, 232, 127, 0.25)',
             }}
           >
-            <Plus size={15} color="#080c14" /> {t('banks.add_bank', 'Add Bank')}
+            <Plus size={16} strokeWidth={2.5} />
+            <span>{t('banks.add_bank', 'Add Bank Account')}</span>
           </button>
-        </div>
+        </section>
 
-        {/* Bank Cards List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', marginBottom: '24px' }}>
-          {bankAccounts.map((bank) => {
-            const rawNumbers = bank.accountNumberMasked.replace(/[^0-9]/g, '') || '3616';
-            const displayBankName = t(bank.bankName, bank.bankName);
-            const displayAccType = t(bank.accountType, bank.accountType);
+        {/* Accounts List Container */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {bankAccounts.length === 0 ? (
+            <div
+              style={{
+                background: 'linear-gradient(135deg, rgba(14, 38, 26, 0.35) 0%, rgba(10, 15, 24, 0.9) 100%)',
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+                borderRadius: '22px',
+                padding: '36px 20px',
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '12px',
+              }}
+            >
+              <div
+                style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '16px',
+                  backgroundColor: 'rgba(127, 232, 127, 0.12)',
+                  color: '#7FE87F',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Landmark size={26} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#F3F6F9' }}>
+                  {language === 'العربية' ? 'لا توجد حسابات بنكية مرتبطة بعد' : 'No bank accounts linked yet'}
+                </h3>
+                <p style={{ fontSize: '12.5px', color: '#8A9BB0', marginTop: '4px', maxWidth: '280px' }}>
+                  {language === 'العربية'
+                    ? 'اربط حسابك البنكي السعودي للبدء في إرسال واستلام الأموال فورياً عبر سريع.'
+                    : 'Link your Saudi bank account to start sending and receiving instant payments via Sarie.'}
+                </p>
+              </div>
+              <button
+                onClick={() => setIsAddBankModalOpen(true)}
+                className="interactive-tap"
+                style={{
+                  background: 'rgba(127, 232, 127, 0.12)',
+                  border: '1px solid rgba(127, 232, 127, 0.3)',
+                  color: '#7FE87F',
+                  fontWeight: 700,
+                  fontSize: '12.5px',
+                  padding: '10px 18px',
+                  borderRadius: '12px',
+                  cursor: 'pointer',
+                  marginTop: '6px',
+                }}
+              >
+                + {t('banks.add_bank', 'Link Bank Account')}
+              </button>
+            </div>
+          ) : (
+            bankAccounts.map((bank) => {
+              const rawNumbers = bank.accountNumberMasked.replace(/[^0-9]/g, '') || '034821';
+              const lastDigits = rawNumbers.slice(-6);
+              const displayBankName = t(bank.bankName, bank.bankName);
+              const displayAccType = t(bank.accountType, bank.accountType);
 
-            // PRIMARY BANK CARD MODEL
-            if (bank.isPrimary) {
               return (
-                <div
+                <article
                   key={bank.id}
                   style={{
-                    backgroundColor: '#111726',
-                    borderRadius: '24px',
-                    padding: '22px',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    border: '1.5px solid #7FE87F',
-                    boxShadow: '0 20px 40px -10px rgba(127, 232, 127, 0.14), 0 0 0 1px rgba(127, 232, 127, 0.22)',
-                    color: '#FFFFFF',
-                    transition: 'all 0.15s ease',
+                    background: bank.isPrimary
+                      ? 'linear-gradient(135deg, rgba(20, 64, 42, 0.75) 0%, rgba(11, 20, 32, 0.96) 100%)'
+                      : 'linear-gradient(135deg, rgba(14, 38, 26, 0.5) 0%, rgba(10, 15, 24, 0.92) 100%)',
+                    border: bank.isPrimary
+                      ? '1px solid rgba(127, 232, 127, 0.3)'
+                      : '1px solid rgba(255, 255, 255, 0.06)',
+                    borderRadius: '22px',
+                    padding: '20px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '16px',
+                    boxShadow: '0 12px 28px rgba(0, 0, 0, 0.35)',
+                    transition: 'border-color 0.2s ease',
                   }}
                 >
-                  {/* Card Header Row */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', position: 'relative', zIndex: 2 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  {/* Card Header */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                       <div
                         style={{
-                          width: '42px',
-                          height: '42px',
+                          background: 'rgba(127, 232, 127, 0.12)',
+                          border: '1px solid rgba(127, 232, 127, 0.25)',
+                          color: '#7FE87F',
+                          width: '38px',
+                          height: '38px',
                           borderRadius: '12px',
-                          backgroundColor: '#182236',
-                          border: '1px solid rgba(255, 255, 255, 0.08)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
+                          flexShrink: 0,
                         }}
                       >
-                        <Landmark size={20} color="#7FE87F" />
+                        <Landmark size={18} />
                       </div>
                       <div>
-                        <div style={{ fontSize: '16px', fontWeight: 800, letterSpacing: '0.01em', color: '#FFFFFF' }}>
+                        <h3 style={{ fontSize: '14.5px', fontWeight: 700, color: '#F3F6F9', letterSpacing: '-0.1px', margin: 0 }}>
                           {displayBankName}
-                        </div>
-                        <div style={{ fontSize: '11px', fontWeight: 600, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '1px' }}>
+                        </h3>
+                        <div style={{ fontSize: '10px', color: '#8A9BB0', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: '1px' }}>
                           {displayAccType}
                         </div>
                       </div>
                     </div>
 
-                    <div
-                      style={{
-                        backgroundColor: 'rgba(127, 232, 127, 0.16)',
-                        border: '1px solid #7FE87F',
-                        color: '#7FE87F',
-                        fontSize: '10.5px',
-                        fontWeight: 800,
-                        letterSpacing: '0.06em',
-                        padding: '4px 10px',
-                        borderRadius: '20px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px',
-                      }}
-                    >
-                      <Star size={11} fill="#7FE87F" color="#7FE87F" /> {t('banks.primary', 'PRIMARY')}
-                    </div>
-                  </div>
-
-                  {/* EMV Chip & Account Number Row */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '18px 0 20px 0', position: 'relative', zIndex: 2 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                      <div
+                    {bank.isPrimary && (
+                      <span
                         style={{
-                          width: '32px',
-                          height: '24px',
-                          borderRadius: '4px',
-                          backgroundColor: '#7FE87F',
+                          background: 'rgba(127, 232, 127, 0.12)',
+                          color: '#7FE87F',
+                          fontSize: '9.5px',
+                          fontWeight: 800,
+                          padding: '4px 8px',
+                          borderRadius: '6px',
+                          border: '1px solid rgba(127, 232, 127, 0.25)',
+                          letterSpacing: '0.5px',
                         }}
-                      />
-                      <ContactlessIcon color="#7FE87F" size={18} />
-                    </div>
-
-                    <div
-                      style={{
-                        fontFamily: 'monospace',
-                        fontSize: '16px',
-                        letterSpacing: '0.12em',
-                        fontWeight: 700,
-                        color: '#FFFFFF',
-                        direction: 'ltr',
-                      }}
-                    >
-                      •••• &nbsp; •••• &nbsp; •••• &nbsp; {rawNumbers}
-                    </div>
+                      >
+                        {t('banks.primary', 'PRIMARY')}
+                      </span>
+                    )}
                   </div>
 
-                  {/* Integrated Balance Container */}
+                  {/* Account Digits */}
+                  <div style={{ fontSize: '13px', letterSpacing: '2px', color: '#8A9BB0', fontWeight: 500, direction: 'ltr' }}>
+                    <span>•••• &nbsp; •••• &nbsp; •••• &nbsp; </span>
+                    <strong style={{ color: '#F3F6F9', fontWeight: 700 }}>{lastDigits}</strong>
+                  </div>
+
+                  {/* Balance Section Module */}
                   <div
                     style={{
-                      backgroundColor: '#182236',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      borderRadius: '16px',
-                      padding: '12px 16px',
+                      background: 'rgba(4, 8, 14, 0.55)',
+                      border: '1px solid rgba(255, 255, 255, 0.05)',
+                      borderRadius: '14px',
+                      padding: '12px 14px',
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      marginBottom: '16px',
-                      position: 'relative',
-                      zIndex: 2,
                     }}
                   >
                     <div>
-                      <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#9ca3af' }}>
-                        {t('home.total_balance', 'Available Balance')}
-                      </div>
-                      <div className="tabular-nums" style={{ fontSize: '19px', fontWeight: 900, color: '#7FE87F', marginTop: '2px', letterSpacing: '0.02em' }}>
+                      <span
+                        style={{
+                          fontSize: '9px',
+                          color: '#52637A',
+                          fontWeight: 800,
+                          letterSpacing: '0.06em',
+                          textTransform: 'uppercase',
+                          marginBottom: '3px',
+                          display: 'block',
+                        }}
+                      >
+                        {t('home.total_balance', 'TOTAL AVAILABLE BALANCE')}
+                      </span>
+                      <div
+                        className="tabular-nums"
+                        style={{
+                          fontSize: '13.5px',
+                          fontWeight: 800,
+                          color: '#7FE87F',
+                          letterSpacing: '0.3px',
+                        }}
+                      >
                         {bank.showBalance ? formatCurrency(bank.balance, language) : (language === 'العربية' ? '•••••••• ر.س' : 'SAR ••••••••')}
                       </div>
                     </div>
@@ -271,255 +334,125 @@ export const BankAccountsScreen: React.FC = () => {
                       onClick={() => handleBalanceCheck(bank)}
                       className="interactive-tap"
                       style={{
-                        backgroundColor: '#7FE87F',
-                        border: 'none',
-                        color: '#080c14',
-                        padding: '6px 14px',
-                        borderRadius: '20px',
-                        fontSize: '11.5px',
-                        fontWeight: 800,
+                        background: 'rgba(127, 232, 127, 0.08)',
+                        border: '1px solid rgba(127, 232, 127, 0.2)',
+                        color: '#7FE87F',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        padding: '7px 12px',
+                        borderRadius: '8px',
+                        cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '6px',
-                        cursor: 'pointer',
+                        gap: '5px',
+                        transition: 'background 0.2s',
                       }}
                     >
-                      {bank.showBalance ? <EyeOff size={13} color="#080c14" /> : <Eye size={13} color="#080c14" />}
+                      {bank.showBalance ? <EyeOff size={13} /> : <Eye size={13} />}
                       <span>{bank.showBalance ? t('home.hide', 'Hide') : t('banks.check_balance', 'Check')}</span>
                     </button>
                   </div>
 
-                  {/* Action Strip */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 2 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 700, color: '#7FE87F' }}>
-                      <CheckCircle2 size={15} color="#7FE87F" />
-                      <span>{language === 'العربية' ? 'الحساب الافتراضي لاستلام الأموال' : 'Default for receiving money'}</span>
-                    </div>
-
-                    <button
-                      onClick={() => setBankToRemove(bank.id)}
-                      className="interactive-tap"
-                      style={{
-                        backgroundColor: '#182236',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
-                        color: '#9ca3af',
-                        padding: '7px 12px',
-                        borderRadius: '10px',
-                        fontSize: '11.5px',
-                        fontWeight: 700,
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      <Trash2 size={13} color="#9ca3af" />
-                      <span>{language === 'العربية' ? 'حذف' : 'Remove'}</span>
-                    </button>
+                  {/* Card Footer Actions */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '2px' }}>
+                    {bank.isPrimary ? (
+                      <>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11.5px', color: '#7FE87F', fontWeight: 600 }}>
+                          <CheckCircle2 size={14} color="#7FE87F" />
+                          <span>{language === 'العربية' ? 'الحساب الافتراضي للاستلام' : 'Default for receiving money'}</span>
+                        </div>
+                        <button
+                          onClick={() => setBankToRemove(bank.id)}
+                          className="interactive-tap"
+                          style={{
+                            background: 'rgba(255, 75, 75, 0.06)',
+                            border: '1px solid rgba(255, 75, 75, 0.18)',
+                            color: '#FF5C5C',
+                            padding: '7px 12px',
+                            borderRadius: '10px',
+                            fontSize: '11px',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                          }}
+                        >
+                          <Trash2 size={12} />
+                          <span>{language === 'العربية' ? 'حذف' : 'Remove'}</span>
+                        </button>
+                      </>
+                    ) : (
+                      <div style={{ display: 'flex', gap: '8px', width: '100%' }}>
+                        <button
+                          onClick={() => setPrimaryBank(bank.id)}
+                          className="interactive-tap"
+                          style={{
+                            background: 'rgba(127, 232, 127, 0.12)',
+                            border: '1px solid rgba(127, 232, 127, 0.25)',
+                            color: '#7FE87F',
+                            flex: 2,
+                            padding: '9px 12px',
+                            borderRadius: '10px',
+                            fontSize: '11.5px',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '5px',
+                          }}
+                        >
+                          <Star size={13} color="#7FE87F" />
+                          <span>{language === 'العربية' ? 'تعيين كأساسي' : 'Set as Primary'}</span>
+                        </button>
+                        <button
+                          onClick={() => setBankToRemove(bank.id)}
+                          className="interactive-tap"
+                          style={{
+                            background: 'rgba(255, 75, 75, 0.06)',
+                            border: '1px solid rgba(255, 75, 75, 0.18)',
+                            color: '#FF5C5C',
+                            flex: 1,
+                            padding: '9px 12px',
+                            borderRadius: '10px',
+                            fontSize: '11.5px',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '4px',
+                          }}
+                        >
+                          <Trash2 size={12} />
+                          <span>{language === 'العربية' ? 'حذف' : 'Remove'}</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
-                </div>
+                </article>
               );
-            }
-
-            // SECONDARY BANK CARD MODEL
-            return (
-              <div
-                key={bank.id}
-                style={{
-                  backgroundColor: '#111726',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  borderRadius: '24px',
-                  padding: '22px',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  boxShadow: '0 15px 35px -10px rgba(0, 0, 0, 0.5)',
-                  transition: 'all 0.2s ease',
-                }}
-              >
-                {/* Header Row */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div
-                      style={{
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: '12px',
-                        backgroundColor: '#182236',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
-                        color: '#7FE87F',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                      }}
-                    >
-                      <Landmark size={20} />
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.01em' }}>
-                        {displayBankName}
-                      </div>
-                      <div style={{ fontSize: '11px', fontWeight: 600, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '1px' }}>
-                        {displayAccType}
-                      </div>
-                    </div>
-                  </div>
-
-                  <ContactlessIcon color="#6b7280" size={18} />
-                </div>
-
-                {/* EMV Chip & Account Number Row */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '16px 0 18px 0' }}>
-                  <div
-                    style={{
-                      width: '32px',
-                      height: '24px',
-                      borderRadius: '4px',
-                      backgroundColor: '#2C394B',
-                    }}
-                  />
-
-                  <div
-                    style={{
-                      fontFamily: 'monospace',
-                      fontSize: '15px',
-                      letterSpacing: '0.1em',
-                      fontWeight: 700,
-                      color: '#FFFFFF',
-                      direction: 'ltr',
-                    }}
-                  >
-                    •••• &nbsp; •••• &nbsp; •••• &nbsp; {rawNumbers}
-                  </div>
-                </div>
-
-                {/* Integrated Balance Container */}
-                <div
-                  style={{
-                    backgroundColor: '#182236',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '16px',
-                    padding: '12px 16px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '16px',
-                  }}
-                >
-                  <div>
-                    <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#9ca3af' }}>
-                      {t('home.total_balance', 'Available Balance')}
-                    </div>
-                    <div className="tabular-nums" style={{ fontSize: '18px', fontWeight: 900, color: '#FFFFFF', marginTop: '2px', letterSpacing: '0.01em' }}>
-                      {bank.showBalance ? formatCurrency(bank.balance, language) : (language === 'العربية' ? '•••••••• ر.س' : 'SAR ••••••••')}
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => handleBalanceCheck(bank)}
-                    className="interactive-tap"
-                    style={{
-                      backgroundColor: '#182236',
-                      border: '1px solid rgba(127, 232, 127, 0.3)',
-                      color: '#7FE87F',
-                      padding: '6px 14px',
-                      borderRadius: '20px',
-                      fontSize: '11.5px',
-                      fontWeight: 800,
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {bank.showBalance ? <EyeOff size={13} color="#9ca3af" /> : <Eye size={13} color="#7FE87F" />}
-                    <span>{bank.showBalance ? t('home.hide', 'Hide') : t('banks.check_balance', 'Check')}</span>
-                  </button>
-                </div>
-
-                {/* Action Strip */}
-                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <button
-                    onClick={() => setPrimaryBank(bank.id)}
-                    className="interactive-tap"
-                    style={{
-                      flex: 1,
-                      backgroundColor: 'rgba(127, 232, 127, 0.14)',
-                      border: '1px solid rgba(127, 232, 127, 0.3)',
-                      color: '#7FE87F',
-                      padding: '9px 12px',
-                      borderRadius: '10px',
-                      fontSize: '12px',
-                      fontWeight: 800,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '5px',
-                    }}
-                  >
-                    <Star size={13} color="#7FE87F" /> {language === 'العربية' ? 'تعيين كأساسي' : 'Set as Primary'}
-                  </button>
-
-                  <button
-                    onClick={() => setBankToRemove(bank.id)}
-                    className="interactive-tap"
-                    style={{
-                      backgroundColor: '#182236',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      color: '#9ca3af',
-                      padding: '9px 14px',
-                      borderRadius: '10px',
-                      fontSize: '12px',
-                      fontWeight: 700,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '5px',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <Trash2 size={13} color="#9ca3af" />
-                    <span>{language === 'العربية' ? 'حذف' : 'Remove'}</span>
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+            })
+          )}
         </div>
 
-        {/* Add New Bank Account Action */}
-        <PrimaryButton onClick={() => setIsAddBankModalOpen(true)}>
-          <Plus size={18} /> {t('banks.add_bank', 'Add New Bank Account')}
-        </PrimaryButton>
-
-        {/* Security & SAMA Trust Footer */}
+        {/* SAMA Trust Footer */}
         <div
           style={{
-            marginTop: '24px',
+            marginTop: '8px',
             textAlign: 'center',
             display: 'flex',
-            flexDirection: 'column',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: '8px',
-            padding: '14px',
-            backgroundColor: '#111726',
-            border: '1px solid rgba(255, 255, 255, 0.06)',
-            borderRadius: '16px',
+            padding: '12px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-            <SamaLogo height={12} themeMode="green" />
-            <span style={{ fontSize: '11px', color: '#9ca3af', fontWeight: 600 }}>
-              &bull; {language === 'العربية' ? 'تشفير أجهزة ٢٥٦ بت • خاضع لإشراف البنك المركزي السعودي (ساما)' : '256-Bit Hardware Encrypted • Sarie Regulated'}
-            </span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ fontSize: '10px', color: '#6b7280', fontWeight: 700, textTransform: 'uppercase' }}>
-              {t('home.payment_partner', 'Official Payment Partner:')}
-            </span>
-            <PaymentPartnerLogo height={16} themeMode="dark" />
-          </div>
+          <SamaLogo height={12} themeMode="green" />
+          <span style={{ fontSize: '11px', color: '#8A9BB0', fontWeight: 600 }}>
+            &bull; {language === 'العربية' ? 'مدفوعات فورية آمنة خاضعة لإشراف البنك المركزي السعودي (ساما)' : 'Secured under Saudi Central Bank (SAMA) Regulations'}
+          </span>
         </div>
       </div>
 
@@ -531,7 +464,7 @@ export const BankAccountsScreen: React.FC = () => {
           title={language === 'العربية' ? 'إلغاء ربط الحساب البنكي' : 'Remove Bank Account'}
         >
           <div style={{ textAlign: 'center', padding: '10px 0' }}>
-            <p style={{ color: '#9ca3af', fontSize: '14px', marginBottom: '20px', lineHeight: '20px' }}>
+            <p style={{ color: '#8A9BB0', fontSize: '13.5px', marginBottom: '20px', lineHeight: '20px' }}>
               {language === 'العربية'
                 ? 'هل أنت متأكد من رغبتك في إلغاء ربط هذا الحساب البنكي من كيو تي باي؟'
                 : 'Are you sure you want to unlink this bank account from QTPay?'}

@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-apk:
     runs-on: ubuntu-latest
@@ -13,10 +16,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install dependencies
@@ -31,8 +34,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Accept Android SDK Licenses
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || yes | sdkmanager --licenses || true
 
       - name: Sync Capacitor Android
         run: npx cap sync android
@@ -41,7 +48,7 @@ jobs:
         working-directory: ./android
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
@@ -51,17 +58,20 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
-      - name: Create Release with APK
+      - name: Create GitHub Release with APK
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
         with:
-          tag_name: v1.0.0-${{ github.run_number }}
-          name: QTPay Android APK (Build #${{ github.run_number }})
+          tag_name: v1.0.${{ github.run_number }}
+          name: QTPay Android App (Build #${{ github.run_number }})
           body: |
-            ### 🚀 QTPay Android APK Build
-            - Native Capacitor Android package for QTPay
-            - Direct installable APK for Android devices
-            - Verified with SAMA / Sarie digital payment flows & e-KYC
+            ### 📱 QTPay Android APK Download
+            - **Build Number**: #${{ github.run_number }}
+            - **Package**: `com.qtpay.app`
+            - **Platform**: Android 8.0+ (API 26+)
+            - **Features**: SAMA / Sarie Payment Integration, e-KYC Verification, Spend Analysis, Biometric Security
+            
+            ⬇️ **Download `app-debug.apk` below and install directly on your Android device.**
           files: |
             android/app/build/outputs/apk/debug/app-debug.apk
         env:

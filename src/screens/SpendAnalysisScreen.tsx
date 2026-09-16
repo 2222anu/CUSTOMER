@@ -640,21 +640,23 @@ export const SpendAnalysisScreen: React.FC = () => {
 
         {/* 2. TIMELINE BAR GRAPH */}
         <div
+          className="card"
           style={{
-            backgroundColor: 'var(--color-surface, #111726)',
+            backgroundColor: '#0f1623',
             borderRadius: '20px',
-            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-            padding: '20px',
+            border: '1px solid #1e293b',
+            padding: '24px',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4)',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <BarChart3 size={16} color="var(--brand-green, #7FE87F)" />
-              <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
+              <BarChart3 size={16} color="#10b981" />
+              <span style={{ fontSize: '14px', fontWeight: 600, color: '#f8fafc' }}>
                 {language === 'العربية' ? 'المخطط الزمني للإنفاق' : 'Timeline Spending Trend'}
               </span>
             </div>
-            <span style={{ fontSize: '11px', color: '#8E8EA8', fontWeight: 600 }}>
+            <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
               {language === 'العربية' ? 'المبالغ بالريال' : 'SAR amounts'}
             </span>
           </div>
@@ -664,20 +666,20 @@ export const SpendAnalysisScreen: React.FC = () => {
             <div
               className="fade-in"
               style={{
-                backgroundColor: 'var(--color-surface-elevated, #182236)',
-                border: '1px solid var(--brand-green, #7FE87F)',
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid #10b981',
                 borderRadius: '8px',
-                padding: '5px 10px',
-                marginBottom: '10px',
+                padding: '6px 12px',
+                marginBottom: '12px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}
             >
-              <span style={{ fontSize: '11px', color: '#8E8EA8', fontWeight: 600 }}>
+              <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
                 {currentData.chartData[hoveredBarIndex]?.label}
               </span>
-              <span className="tabular-nums" style={{ fontSize: '12.5px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)' }}>
+              <span className="tabular-nums" style={{ fontSize: '12.5px', fontWeight: 800, color: '#10b981' }}>
                 {formatCurrency(currentData.chartData[hoveredBarIndex]?.amount, language)}
               </span>
             </div>
@@ -689,10 +691,10 @@ export const SpendAnalysisScreen: React.FC = () => {
               display: 'flex',
               alignItems: 'flex-end',
               justifyContent: 'space-between',
-              height: '125px',
+              height: '130px',
               gap: '8px',
               paddingBottom: '8px',
-              borderBottom: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+              borderBottom: '1px solid #1e293b',
             }}
           >
             {currentData.chartData.map((bar, i) => {
@@ -723,7 +725,7 @@ export const SpendAnalysisScreen: React.FC = () => {
                     style={{
                       fontSize: '9.5px',
                       fontWeight: 800,
-                      color: isHovered || isMax ? 'var(--brand-green, #7FE87F)' : '#6E6E85',
+                      color: isHovered || isMax ? '#10b981' : '#64748b',
                       whiteSpace: 'nowrap',
                     }}
                   >
@@ -734,7 +736,7 @@ export const SpendAnalysisScreen: React.FC = () => {
                       width: '100%',
                       maxWidth: '36px',
                       height: `${heightPercent}%`,
-                      backgroundColor: isHovered || isMax ? 'var(--brand-green, #7FE87F)' : 'var(--color-surface-elevated, #182236)',
+                      background: isHovered || isMax ? 'linear-gradient(180deg, #3b82f6 0%, #10b981 100%)' : 'rgba(255, 255, 255, 0.05)',
                       borderRadius: '6px 6px 3px 3px',
                       transition: 'all 0.25s ease',
                     }}
@@ -742,8 +744,8 @@ export const SpendAnalysisScreen: React.FC = () => {
                   <span
                     style={{
                       fontSize: '10.5px',
-                      fontWeight: isHovered || isMax ? 800 : 600,
-                      color: isHovered || isMax ? '#FFFFFF' : '#8E8EA8',
+                      fontWeight: isHovered || isMax ? 800 : 500,
+                      color: isHovered || isMax ? '#f8fafc' : '#64748b',
                     }}
                   >
                     {bar.label}
@@ -757,7 +759,7 @@ export const SpendAnalysisScreen: React.FC = () => {
         {/* 3. ITEMIZED CATEGORY BREAKDOWN */}
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
+            <span style={{ fontSize: '14px', fontWeight: 600, color: '#f8fafc' }}>
               {language === 'العربية' ? 'تفاصيل الفئات' : 'Category Details'}
             </span>
 
@@ -767,9 +769,9 @@ export const SpendAnalysisScreen: React.FC = () => {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: 'var(--brand-green, #7FE87F)',
+                  color: '#10b981',
                   fontSize: '11.5px',
-                  fontWeight: 800,
+                  fontWeight: 700,
                   cursor: 'pointer',
                 }}
               >
@@ -779,12 +781,14 @@ export const SpendAnalysisScreen: React.FC = () => {
           </div>
 
           <div
+            className="card"
             style={{
-              backgroundColor: 'var(--color-surface, #111726)',
+              backgroundColor: '#0f1623',
               borderRadius: '20px',
-              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+              border: '1px solid #1e293b',
               overflow: 'hidden',
               padding: '6px',
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4)',
             }}
           >
             {filteredCategories.map((cat, index) => {
@@ -798,11 +802,11 @@ export const SpendAnalysisScreen: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '12px',
+                    padding: '12px 14px',
                     borderRadius: '14px',
-                    backgroundColor: isSelected ? 'var(--color-surface-elevated, #182236)' : 'transparent',
+                    backgroundColor: isSelected ? 'rgba(255, 255, 255, 0.05)' : 'transparent',
                     border: isSelected ? `1px solid ${cat.color}` : '1px solid transparent',
-                    borderBottom: !isSelected && index < filteredCategories.length - 1 ? '1px solid var(--color-border, rgba(255, 255, 255, 0.06))' : 'none',
+                    borderBottom: !isSelected && index < filteredCategories.length - 1 ? '1px solid #1e293b' : 'none',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
                   }}
@@ -825,7 +829,7 @@ export const SpendAnalysisScreen: React.FC = () => {
 
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <span style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
+                        <span style={{ fontSize: '13px', fontWeight: 700, color: '#f8fafc' }}>
                           {language === 'العربية' ? cat.nameAr : cat.nameEn}
                         </span>
                         <span
@@ -841,14 +845,14 @@ export const SpendAnalysisScreen: React.FC = () => {
                           {cat.percentage}%
                         </span>
                       </div>
-                      <div style={{ fontSize: '11px', color: '#8E8EA8', marginTop: '2px' }}>
+                      <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>
                         {cat.txnCount} {language === 'العربية' ? 'عمليات' : 'txns'} • {cat.merchants.slice(0, 2).join(', ')}
                       </div>
                     </div>
                   </div>
 
                   <div style={{ textAlign: isRtl ? 'left' : 'right', marginInlineStart: '12px' }}>
-                    <div className="tabular-nums" style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
+                    <div className="tabular-nums" style={{ fontSize: '13.5px', fontWeight: 800, color: '#f8fafc' }}>
                       {formatCurrency(cat.amount, language)}
                     </div>
                   </div>
@@ -858,22 +862,24 @@ export const SpendAnalysisScreen: React.FC = () => {
           </div>
         </div>
 
-        {/* 4. TOP MERCHANTS (With Clean Lucide Icons & Green Accents) */}
+        {/* 4. TOP MERCHANTS */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-            <Building2 size={15} color="var(--brand-green, #7FE87F)" />
-            <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#FFFFFF' }}>
+            <Building2 size={15} color="#10b981" />
+            <span style={{ fontSize: '14px', fontWeight: 600, color: '#f8fafc' }}>
               {language === 'العربية' ? 'أعلى المتاجر إنفاقاً' : 'Top Merchants'}
             </span>
           </div>
 
           <div
+            className="card"
             style={{
-              backgroundColor: 'var(--color-surface, #111726)',
+              backgroundColor: '#0f1623',
               borderRadius: '20px',
-              border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+              border: '1px solid #1e293b',
               overflow: 'hidden',
               padding: '6px',
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4)',
             }}
           >
             {topMerchants.map((merchant, index) => (
@@ -883,8 +889,8 @@ export const SpendAnalysisScreen: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '11px 12px',
-                  borderBottom: index < topMerchants.length - 1 ? '1px solid var(--color-border, rgba(255, 255, 255, 0.06))' : 'none',
+                  padding: '11px 14px',
+                  borderBottom: index < topMerchants.length - 1 ? '1px solid #1e293b' : 'none',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '11px', flex: 1, minWidth: 0 }}>
@@ -904,17 +910,17 @@ export const SpendAnalysisScreen: React.FC = () => {
                   </div>
 
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#FFFFFF', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <div style={{ fontSize: '12.5px', fontWeight: 700, color: '#f8fafc', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {merchant.name}
                     </div>
-                    <div style={{ fontSize: '10.5px', color: '#8E8EA8', marginTop: '1px' }}>
+                    <div style={{ fontSize: '10.5px', color: '#64748b', marginTop: '1px' }}>
                       {language === 'العربية' ? merchant.categoryAr : merchant.category} • {merchant.txnCount} {language === 'العربية' ? 'مدفوعات' : 'txns'}
                     </div>
                   </div>
                 </div>
 
                 <div style={{ textAlign: isRtl ? 'left' : 'right', marginInlineStart: '10px' }}>
-                  <div className="tabular-nums" style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
+                  <div className="tabular-nums" style={{ fontSize: '13px', fontWeight: 800, color: '#f8fafc' }}>
                     {formatCurrency(merchant.amount, language)}
                   </div>
                 </div>
@@ -926,9 +932,9 @@ export const SpendAnalysisScreen: React.FC = () => {
         {/* 5. SMART INSIGHT */}
         <div
           style={{
-            backgroundColor: 'var(--color-surface, #111726)',
+            backgroundColor: '#0f1623',
             borderRadius: '18px',
-            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+            border: '1px solid #1e293b',
             padding: '14px 16px',
             display: 'flex',
             alignItems: 'center',
@@ -940,16 +946,16 @@ export const SpendAnalysisScreen: React.FC = () => {
               width: '36px',
               height: '36px',
               borderRadius: '10px',
-              backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+              backgroundColor: 'rgba(16, 185, 129, 0.1)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
             }}
           >
-            <Lightbulb size={18} color="var(--brand-green, #7FE87F)" />
+            <Lightbulb size={18} color="#10b981" />
           </div>
-          <div style={{ fontSize: '12px', color: '#B0B0C4', lineHeight: '1.45' }}>
+          <div style={{ fontSize: '12px', color: '#94a3b8', lineHeight: '1.45' }}>
             {language === 'العربية'
               ? 'وفرت ١٢.٤٪ في مصاريف هذا الشهر مقارنة بالشهر السابق. استمر في هذا الأداء الرائع!'
               : 'You spent 12.4% less this month compared to last month. Keep up the great pace!'}
@@ -961,9 +967,9 @@ export const SpendAnalysisScreen: React.FC = () => {
           onClick={() => navigateTo('BANK_ACCOUNTS')}
           className="interactive-tap"
           style={{
-            backgroundColor: 'var(--color-surface, #111726)',
+            backgroundColor: '#0f1623',
             borderRadius: '18px',
-            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+            border: '1px solid #1e293b',
             padding: '14px 18px',
             display: 'flex',
             alignItems: 'center',
@@ -977,25 +983,25 @@ export const SpendAnalysisScreen: React.FC = () => {
                 width: '36px',
                 height: '36px',
                 borderRadius: '10px',
-                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <Building2 size={18} color="var(--brand-green, #7FE87F)" />
+              <Building2 size={18} color="#10b981" />
             </div>
             <div>
-              <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#f8fafc' }}>
                 {language === 'العربية' ? 'الحسابات البنكية المرتبطة' : 'Linked Bank Accounts'}
               </div>
-              <div style={{ fontSize: '11px', color: '#8E8EA8' }}>
+              <div style={{ fontSize: '11px', color: '#64748b' }}>
                 {language === 'العربية' ? 'عرض أرصدة وبطاقات البنوك السعودية' : 'View Saudi bank cards & balances'}
               </div>
             </div>
           </div>
 
-          <ChevronRight size={18} color="#8E8EA8" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
+          <ChevronRight size={18} color="#64748b" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }} />
         </div>
       </div>
     </div>

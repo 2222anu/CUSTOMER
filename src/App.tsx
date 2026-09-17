@@ -34,7 +34,6 @@ import { PrivacyScreen } from './screens/PrivacyScreen';
 
 // Lifestyle Screens
 import { ShoppingScreen } from './screens/ShoppingScreen';
-import { MessagesScreen } from './screens/MessagesScreen';
 import { TravelScreen } from './screens/TravelScreen';
 import { RewardsScreen } from './screens/RewardsScreen';
 import { FoodScreen } from './screens/FoodScreen';
@@ -108,8 +107,6 @@ const AppContent: React.FC = () => {
         return <PrivacyScreen />;
       case 'SHOPPING':
         return <ShoppingScreen />;
-      case 'MESSAGES':
-        return <MessagesScreen />;
       case 'TRAVEL':
         return <TravelScreen />;
       case 'REWARDS':

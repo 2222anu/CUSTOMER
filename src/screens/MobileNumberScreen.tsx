@@ -94,8 +94,9 @@ export const MobileNumberScreen: React.FC = () => {
               <input
                 id="fullname-input"
                 type="text"
+                maxLength={60}
                 value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                onChange={(e) => setFullName(e.target.value.slice(0, 60))}
                 placeholder={language === 'العربية' ? 'فهد الحربي' : 'Fahad Al-Harbi'}
                 required
                 style={{
@@ -160,9 +161,15 @@ export const MobileNumberScreen: React.FC = () => {
                 id="mobile-input"
                 type="tel"
                 value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, '').slice(0, 9))}
+                onChange={(e) => {
+                  let val = e.target.value.replace(/\D/g, '');
+                  if (val.startsWith('009665')) val = val.substring(5);
+                  else if (val.startsWith('9665')) val = val.substring(3);
+                  else if (val.startsWith('05')) val = val.substring(1);
+                  setMobileNumber(val.slice(0, 9));
+                }}
                 placeholder="50 123 4567"
-                maxLength={9}
+                maxLength={20}
                 required
                 style={{
                   background: 'none',

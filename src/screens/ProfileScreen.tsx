@@ -15,7 +15,6 @@ import {
   HelpCircle,
   LogOut,
   Lock,
-  MessageSquare,
   Plane,
   Utensils,
 } from 'lucide-react';
@@ -270,7 +269,6 @@ export const ProfileScreen: React.FC = () => {
           <div style={{ backgroundColor: '#111726', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '18px', overflow: 'hidden', padding: 0, boxShadow: 'none' }}>
             <ListRow icon={<Gift size={18} color="#7FE87F" />} label={language === 'العربية' ? 'المكافآت والاسترداد' : 'Rewards & Cashback'} onClick={() => navigateTo('REWARDS')} />
             <ListRow icon={<ShoppingBag size={18} color="#7FE87F" />} label={language === 'العربية' ? 'عروض التسوق' : 'Shopping Deals'} onClick={() => navigateTo('SHOPPING')} />
-            <ListRow icon={<MessageSquare size={18} color="#7FE87F" />} label={language === 'العربية' ? 'الرسائل' : 'Messages'} onClick={() => navigateTo('MESSAGES')} />
             <ListRow icon={<Plane size={18} color="#7FE87F" />} label={language === 'العربية' ? 'حجوزات السفر' : 'Travel Bookings'} onClick={() => navigateTo('TRAVEL')} />
             <ListRow icon={<Utensils size={18} color="#7FE87F" />} label={language === 'العربية' ? 'المطاعم والمقاهي' : 'Dining & Food'} isLast={true} onClick={() => navigateTo('FOOD')} />
           </div>

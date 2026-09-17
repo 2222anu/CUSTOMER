@@ -107,7 +107,6 @@ export type ScreenId =
   | 'HELP_SUPPORT'
   | 'PRIVACY'
   | 'SHOPPING'
-  | 'MESSAGES'
   | 'TRAVEL'
   | 'REWARDS'
   | 'FOOD';

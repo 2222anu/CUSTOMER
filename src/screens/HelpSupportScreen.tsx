@@ -204,6 +204,8 @@ export const HelpSupportScreen: React.FC<HelpSupportScreenProps> = ({ initialFaq
                 maxWidth: '80%',
                 fontSize: '13px',
                 fontWeight: 600,
+                wordBreak: 'break-word',
+                overflowWrap: 'break-word',
               }}
             >
               {msg.text}

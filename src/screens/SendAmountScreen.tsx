@@ -8,7 +8,7 @@ import { toArabicNumerals } from '../utils/i18n';
 import { formatCurrency } from '../utils/formatters';
 
 export const SendAmountScreen: React.FC = () => {
-  const { screenParams, openPinModal, contacts, navigateTo, completePayment, t, language } = useApp();
+  const { screenParams, openPinModal, contacts, bankAccounts, navigateTo, completePayment, t, language } = useApp();
   const contact: Contact = screenParams.contact || contacts[0] || {
     id: 'default',
     name: 'Tariq Al-Otaibi',
@@ -17,15 +17,21 @@ export const SendAmountScreen: React.FC = () => {
     mobile: '+966 50 234 5678',
   };
 
+  const totalBalance = bankAccounts && bankAccounts.length > 0
+    ? bankAccounts.reduce((acc, bank) => acc + bank.balance, 0)
+    : 24850.0;
+
   const initialAmount = screenParams.defaultAmount ? String(screenParams.defaultAmount) : '';
   const [amountStr, setAmountStr] = useState<string>(initialAmount);
   const [note, setNote] = useState<string>('');
 
   const numAmount = parseFloat(amountStr) || 0;
+  const isExceedingBalance = numAmount > totalBalance;
+  const isValidAmount = numAmount > 0 && !isExceedingBalance;
   const displayName = t(contact.name, contact.name);
 
   const handlePayClick = () => {
-    if (numAmount <= 0) return;
+    if (!isValidAmount) return;
 
     openPinModal({
       title: `${t('nav.pay', 'Pay')} ${displayName}`,
@@ -133,9 +139,15 @@ export const SendAmountScreen: React.FC = () => {
               {language === 'العربية' ? 'ر.س' : 'SAR'}
             </span>
             <input
-              type="number"
+              type="text"
+              inputMode="decimal"
               value={amountStr}
-              onChange={(e) => setAmountStr(e.target.value)}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (/^\d*\.?\d{0,2}$/.test(val) || val === '') {
+                  setAmountStr(val);
+                }
+              }}
               placeholder="0"
               autoFocus
               className="tabular-nums"
@@ -197,9 +209,10 @@ export const SendAmountScreen: React.FC = () => {
             <MessageSquare size={16} color="var(--brand-green)" style={{ flexShrink: 0 }} />
             <input
               type="text"
+              maxLength={80}
               placeholder={language === 'العربية' ? 'إضافة ملاحظة (اختياري)...' : 'Add a note (optional)...'}
               value={note}
-              onChange={(e) => setNote(e.target.value)}
+              onChange={(e) => setNote(e.target.value.slice(0, 80))}
               style={{
                 background: 'none',
                 border: 'none',
@@ -211,12 +224,34 @@ export const SendAmountScreen: React.FC = () => {
               }}
             />
           </div>
+
+          {/* Insufficient Balance Error Banner */}
+          {isExceedingBalance && (
+            <div
+              style={{
+                backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                borderRadius: '12px',
+                padding: '8px 12px',
+                marginTop: '12px',
+                fontSize: '12px',
+                color: '#EF4444',
+                fontWeight: 700,
+              }}
+            >
+              {language === 'العربية'
+                ? `الرصيد غير كافٍ (المتاح: ${formatCurrency(totalBalance, language)})`
+                : `Insufficient Balance (Available: ${formatCurrency(totalBalance, language)})`}
+            </div>
+          )}
         </div>
 
-        <PrimaryButton onClick={handlePayClick} disabled={numAmount <= 0}>
-          {numAmount > 0
-            ? `${t('nav.pay', 'Pay')} ${formatCurrency(numAmount, language)}`
-            : t('pay.enter_valid_amount', 'Enter Valid Amount')}
+        <PrimaryButton onClick={handlePayClick} disabled={!isValidAmount}>
+          {isExceedingBalance
+            ? (language === 'العربية' ? 'الرصيد غير كافٍ' : 'Insufficient Balance')
+            : (numAmount > 0
+                ? `${t('nav.pay', 'Pay')} ${formatCurrency(numAmount, language)}`
+                : t('pay.enter_valid_amount', 'Enter Valid Amount'))}
         </PrimaryButton>
 
         {/* Smart Routing & Settlement Guarantee */}

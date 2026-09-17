@@ -44,7 +44,6 @@ import { PayBillPinModal } from './screens/PayBillPinModal';
 import { LanguageModal } from './screens/LanguageModal';
 import { LogoutModal } from './screens/LogoutModal';
 import { AddBankModal } from './screens/AddBankModal';
-import { AppLinksModal } from './screens/AppLinksModal';
 import { EditProfileModal } from './screens/EditProfileModal';
 import { KycModal } from './screens/KycModal';
 
@@ -148,7 +147,6 @@ const AppContent: React.FC = () => {
       <LanguageModal />
       <LogoutModal />
       <AddBankModal />
-      <AppLinksModal />
       <EditProfileModal />
       <KycModal />
     </div>

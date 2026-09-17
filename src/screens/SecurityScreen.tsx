@@ -5,7 +5,7 @@ import { useApp } from '../state/AppContext';
 import { formatLocalizedNumber, translateText } from '../utils/i18n';
 
 export const SecurityScreen: React.FC = () => {
-  const { deviceSessions, terminateSession, language } = useApp();
+  const { deviceSessions, terminateSession, language, navigateTo } = useApp();
 
   return (
     <div className="fade-in" style={{ backgroundColor: '#0B0F19', minHeight: '100vh', paddingBottom: '36px', color: '#FFFFFF' }}>
@@ -82,6 +82,61 @@ export const SecurityScreen: React.FC = () => {
             <span>{language === 'العربية' ? 'المستخدم اليوم: ٤,٨٠٠ ر.س' : 'Used Today: SAR 4,800'}</span>
             <span>{language === 'العربية' ? 'المتبقي: ٤٥,٢٠٠ ر.س' : 'Remaining: SAR 45,200'}</span>
           </div>
+        </div>
+
+        {/* Security MPIN Management Card */}
+        <div
+          style={{
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--color-border, rgba(255, 255, 255, 0.08))',
+            borderRadius: '16px',
+            padding: '18px 20px',
+            marginBottom: '24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <div
+              style={{
+                width: '44px',
+                height: '44px',
+                borderRadius: '12px',
+                backgroundColor: 'rgba(0, 255, 36, 0.12)',
+                color: '#00FF24',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <Lock size={22} />
+            </div>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '14px', color: '#FFFFFF' }}>
+                {language === 'العربية' ? 'رمز الأمان السري (MPIN)' : 'Security PIN (MPIN)'}
+              </div>
+              <div style={{ fontSize: '12px', color: '#8E9BAE', marginTop: '2px' }}>
+                {language === 'العربية' ? 'تعديل الرمز السري المكون من ٤ أرقام' : 'Change your 4-digit transaction PIN'}
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={() => navigateTo('SET_PIN', { fromSettings: true })}
+            style={{
+              backgroundColor: 'rgba(0, 255, 36, 0.12)',
+              border: '1px solid rgba(0, 255, 36, 0.3)',
+              color: '#00FF24',
+              borderRadius: '10px',
+              padding: '8px 14px',
+              fontSize: '12px',
+              fontWeight: 800,
+              cursor: 'pointer',
+            }}
+          >
+            {language === 'العربية' ? 'تعديل' : 'Change'}
+          </button>
         </div>
 
         <div

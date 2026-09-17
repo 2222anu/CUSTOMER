@@ -7,6 +7,7 @@ import { SplashScreen } from './screens/SplashScreen';
 import { OnboardingScreen } from './screens/OnboardingScreen';
 import { MobileNumberScreen } from './screens/MobileNumberScreen';
 import { SmsOtpScreen } from './screens/SmsOtpScreen';
+import { SetPinScreen } from './screens/SetPinScreen';
 import { PermissionsScreen } from './screens/PermissionsScreen';
 import { OnboardingKycScreen } from './screens/OnboardingKycScreen';
 import { OnboardingBankScreen } from './screens/OnboardingBankScreen';
@@ -60,6 +61,8 @@ const AppContent: React.FC = () => {
         return <MobileNumberScreen />;
       case 'SMS_OTP':
         return <SmsOtpScreen />;
+      case 'SET_PIN':
+        return <SetPinScreen />;
       case 'PERMISSIONS':
         return <PermissionsScreen />;
       case 'ONBOARDING_KYC':

@@ -3,10 +3,9 @@ import { BottomSheet } from '../components/BottomSheet';
 import { PinPad } from '../components/PinPad';
 import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
-import { authService } from '../services/authService';
 
 export const PayBillPinModal: React.FC = () => {
-  const { isPinModalOpen, closePinModal, pendingPaymentData, bankAccounts, t, language } = useApp();
+  const { isPinModalOpen, closePinModal, pendingPaymentData, bankAccounts, t, language, verifyUserPin } = useApp();
   const [error, setError] = useState<string>('');
   const [isVerifying, setIsVerifying] = useState<boolean>(false);
 
@@ -23,7 +22,7 @@ export const PayBillPinModal: React.FC = () => {
     setIsVerifying(true);
     setError('');
     try {
-      const isValid = await authService.verifyPin(pin);
+      const isValid = verifyUserPin(pin);
       if (isValid) {
         closePinModal();
         if (pendingPaymentData.onSuccess) {

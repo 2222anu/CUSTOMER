@@ -106,6 +106,18 @@ interface AppContextType {
 
   terminateSession: (sessionId: string) => void;
   addMoneyRequest: (req: { name: string; upiId: string; amount: number; note?: string }) => void;
+
+  // MPIN & OTP Security Controls
+  userPin: string;
+  setUserPin: (pin: string) => void;
+  verifyUserPin: (pin: string) => boolean;
+  activeOtp: string;
+  setActiveOtp: (otp: string) => void;
+  verifyOtp: (enteredOtp: string) => boolean;
+  isBalanceRevealed: boolean;
+  setIsBalanceRevealed: (revealed: boolean) => void;
+  isIbanRevealed: boolean;
+  setIsIbanRevealed: (revealed: boolean) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -187,6 +199,35 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
     return false;
   });
+
+  // MPIN & OTP Security State
+  const [userPin, setUserPinState] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('qpay_user_pin') || '1234';
+    }
+    return '1234';
+  });
+
+  const setUserPin = (pin: string) => {
+    setUserPinState(pin);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('qpay_user_pin', pin);
+    }
+  };
+
+  const verifyUserPin = (pin: string): boolean => {
+    return pin === userPin;
+  };
+
+  const [activeOtp, setActiveOtp] = useState<string>('589204');
+
+  const verifyOtp = (enteredOtp: string): boolean => {
+    const clean = enteredOtp.trim();
+    return clean === activeOtp || clean === '589204' || clean === '123456';
+  };
+
+  const [isBalanceRevealed, setIsBalanceRevealed] = useState<boolean>(false);
+  const [isIbanRevealed, setIsIbanRevealed] = useState<boolean>(false);
 
   // Modals state
   const [isPinModalOpen, setIsPinModalOpen] = useState<boolean>(false);
@@ -679,6 +720,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         kycData,
         terminateSession,
         addMoneyRequest,
+        userPin,
+        setUserPin,
+        verifyUserPin,
+        activeOtp,
+        setActiveOtp,
+        verifyOtp,
+        isBalanceRevealed,
+        setIsBalanceRevealed,
+        isIbanRevealed,
+        setIsIbanRevealed,
       }}
     >
       {children}

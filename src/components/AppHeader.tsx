@@ -24,7 +24,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   showSettings = true,
   rightAction,
 }) => {
-  const { user, goBack, navigateTo, currentScreen, isRtl, t } = useApp();
+  const { user, goBack, navigateTo, currentScreen, isRtl, t, language } = useApp();
 
   const handleBack = () => {
     if (onBack) onBack();
@@ -130,10 +130,11 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         )}
       </div>
 
-      {/* Center Slot: Flexible Non-overlapping Brand Logo or Screen Title */}
+      {/* Center Slot: Flexible Non-overlapping Brand Logo or Screen Title with Day & Date */}
       <div
         style={{
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           flex: 1,
@@ -164,12 +165,29 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             style={{
               cursor: 'pointer',
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
               maxWidth: '100%',
+              gap: '2px',
             }}
           >
-            <AlphPayLogo variant="header" size={22} themeMode="dark" />
+            <AlphPayLogo variant="header" size={20} themeMode="dark" />
+            <div
+              style={{
+                fontSize: '10px',
+                fontWeight: 700,
+                color: 'var(--brand-green, #7FE87F)',
+                letterSpacing: '0.02em',
+                lineHeight: 1.2,
+              }}
+            >
+              {new Date().toLocaleDateString(language === 'العربية' ? 'ar-SA' : 'en-US', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'short',
+              })}
+            </div>
           </div>
         )}
       </div>

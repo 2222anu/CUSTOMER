@@ -8,10 +8,12 @@ import { useApp } from '../state/AppContext';
 import { formatCurrency } from '../utils/formatters';
 import type { Transaction } from '../types';
 
+import { pdfGenerator } from '../utils/pdfGenerator';
+
 type FilterType = 'all' | 'sent' | 'received' | 'pending';
 
 export const HistoryScreen: React.FC = () => {
-  const { transactions, t, isRtl, language } = useApp();
+  const { transactions, user, t, isRtl, language } = useApp();
   const isAr = language === 'العربية' || language === 'ar';
   const [filter, setFilter] = useState<FilterType>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -20,6 +22,7 @@ export const HistoryScreen: React.FC = () => {
   const [isDisputing, setIsDisputing] = useState(false);
   const [disputeReason, setDisputeReason] = useState('Duplicate Charge');
   const [disputeSubmitted, setDisputeSubmitted] = useState(false);
+  const [downloadSuccessToast, setDownloadSuccessToast] = useState(false);
 
   const filteredTransactions = transactions.filter((t) => {
     const matchesFilter =
@@ -56,6 +59,12 @@ export const HistoryScreen: React.FC = () => {
     return f;
   };
 
+  const handleDownloadStatement = () => {
+    pdfGenerator.downloadHistoryPdf(filteredTransactions, user.name, 'SA03 •••• 4821', isAr);
+    setDownloadSuccessToast(true);
+    setTimeout(() => setDownloadSuccessToast(false), 3000);
+  };
+
   const handleOpenReceipt = (txn: Transaction) => {
     setSelectedTxn(txn);
     setIsDisputing(false);
@@ -81,6 +90,29 @@ export const HistoryScreen: React.FC = () => {
         onSearchClick={() => setShowSearchInput(!showSearchInput)}
         showSettings
       />
+
+      {/* Download Toast */}
+      {downloadSuccessToast && (
+        <div
+          className="fade-in"
+          style={{
+            margin: '0 20px 14px 20px',
+            backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.16))',
+            border: '1px solid var(--brand-green, #7FE87F)',
+            borderRadius: '12px',
+            padding: '10px 16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            color: 'var(--brand-green, #7FE87F)',
+            fontSize: '12.5px',
+            fontWeight: 800,
+          }}
+        >
+          <CheckCircle2 size={16} />
+          <span>{isAr ? 'تم إنشاء وتحميل كشف الحساب بنجاح (PDF)' : 'Statement generated & downloaded successfully (PDF)'}</span>
+        </div>
+      )}
 
       {showSearchInput && (
         <div style={{ padding: '0 20px', marginBottom: '16px' }}>
@@ -133,42 +165,77 @@ export const HistoryScreen: React.FC = () => {
         </div>
       )}
 
-      {/* Filter Tabs / Chips */}
+      {/* Filter Tabs & Download Statement Action */}
       <div
         style={{
           display: 'flex',
-          gap: '8px',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           padding: '0 20px',
           marginBottom: '18px',
-          overflowX: 'auto',
-          scrollbarWidth: 'none',
+          gap: '10px',
         }}
       >
-        {(['all', 'sent', 'received', 'pending'] as FilterType[]).map((f) => {
-          const isActive = filter === f;
-          return (
-            <button
-              key={f}
-              onClick={() => setFilter(f)}
-              className="interactive-tap"
-              style={{
-                backgroundColor: isActive ? 'var(--brand-green, #7FE87F)' : 'var(--color-surface, #111726)',
-                border: isActive ? '1px solid var(--brand-green, #7FE87F)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-                color: isActive ? 'var(--brand-green-ink, #080C14)' : '#9ca3af',
-                borderRadius: '20px',
-                padding: '7px 16px',
-                fontSize: '12px',
-                fontWeight: 800,
-                textTransform: 'capitalize',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-                transition: 'all 0.15s ease',
-              }}
-            >
-              {getFilterLabel(f)}
-            </button>
-          );
-        })}
+        <div
+          style={{
+            display: 'flex',
+            gap: '8px',
+            overflowX: 'auto',
+            scrollbarWidth: 'none',
+            flex: 1,
+          }}
+        >
+          {(['all', 'sent', 'received', 'pending'] as FilterType[]).map((f) => {
+            const isActive = filter === f;
+            return (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className="interactive-tap"
+                style={{
+                  backgroundColor: isActive ? 'var(--brand-green, #7FE87F)' : 'var(--color-surface, #111726)',
+                  border: isActive ? '1px solid var(--brand-green, #7FE87F)' : '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
+                  color: isActive ? 'var(--brand-green-ink, #080C14)' : '#9ca3af',
+                  borderRadius: '20px',
+                  padding: '7px 14px',
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  textTransform: 'capitalize',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {getFilterLabel(f)}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Download Statement Action Button */}
+        <button
+          onClick={handleDownloadStatement}
+          className="interactive-tap"
+          title={isAr ? 'تحميل كشف الحساب PDF' : 'Download Statement PDF'}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+            border: '1px solid var(--brand-green-border, rgba(127, 232, 127, 0.35))',
+            color: 'var(--brand-green, #7FE87F)',
+            borderRadius: '14px',
+            padding: '7px 12px',
+            fontSize: '12px',
+            fontWeight: 800,
+            cursor: 'pointer',
+            flexShrink: 0,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <Receipt size={14} />
+          <span>{isAr ? 'كشف الحساب PDF' : 'PDF Statement'}</span>
+        </button>
       </div>
 
       {/* Grouped Transaction Lists */}

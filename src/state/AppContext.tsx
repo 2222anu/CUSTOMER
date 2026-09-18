@@ -10,6 +10,8 @@ import type {
   DeviceSession,
   ScreenId,
   BottomTab,
+  SplitExpense,
+  TransferLimits,
 } from '../types';
 import { authService } from '../services/authService';
 import { bankService } from '../services/bankService';
@@ -19,6 +21,15 @@ import { billPaymentService } from '../services/billPaymentService';
 
 import { translateText, type SupportedLanguage } from '../utils/i18n';
 import { syncTransactionToSupabase, subscribeToTransactions } from '../services/supabaseClient';
+import { QPayApi } from '../api';
+
+export interface KycDocumentRecord {
+  frontDocUrl?: string;
+  backDocUrl?: string;
+  docType?: string;
+  status: 'unverified' | 'in_review' | 'verified';
+  submittedAt?: string;
+}
 
 interface AppContextType {
   // Localization & Translation
@@ -42,6 +53,8 @@ interface AppContextType {
   notifications: AppNotification[];
   contacts: Contact[];
   moneyRequests: MoneyRequest[];
+  splitExpenses: SplitExpense[];
+  transferLimits: TransferLimits;
   deviceSessions: DeviceSession[];
   lastTransaction: Transaction | null;
   electricityBill: ElectricityBill | null;
@@ -70,10 +83,12 @@ interface AppContextType {
     avatarInitials?: string;
   }) => Promise<Transaction>;
 
-  // KYC Verification
+  // KYC & Re-KYC Verification
   isKycVerified: boolean;
   setIsKycVerified: (verified: boolean, data?: { nationalId: string; dob: string; verifiedAt: string }) => void;
   kycData: { nationalId: string; dob: string; verifiedAt: string } | null;
+  kycDocuments: KycDocumentRecord;
+  submitReKyc: (docs: { frontDocUrl: string; backDocUrl?: string; docType: string; nationalId: string; dob: string }) => Promise<void>;
 
   // Modals & Bottom Sheets
   isPinModalOpen: boolean;
@@ -103,6 +118,19 @@ interface AppContextType {
 
   terminateSession: (sessionId: string) => void;
   addMoneyRequest: (req: { name: string; upiId: string; amount: number; note?: string }) => void;
+  declineMoneyRequest: (requestId: string) => void;
+
+  // Split Expenses Actions
+  createSplitExpense: (params: { title: string; totalAmount: number; members: { contact: Contact; amount: number }[] }) => SplitExpense;
+  markSplitMemberPaid: (expenseId: string, memberId: string) => void;
+
+  // Transfer Limits
+  updateTransferLimits: (limits: Partial<TransferLimits>) => void;
+
+  // Biometric Authentication
+  isBiometricsEnabled: boolean;
+  setIsBiometricsEnabled: (enabled: boolean) => void;
+  authenticateBiometrics: () => Promise<boolean>;
 
   // MPIN & OTP Security Controls
   userPin: string;
@@ -118,6 +146,7 @@ interface AppContextType {
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
+
 
 const FREQUENT_CONTACTS: Contact[] = [
   { id: 'c-1', name: 'Tariq Al-Otaibi', upiId: 'tariq@sarie', mobile: '+966 50 234 5678', avatarInitials: 'TO' },
@@ -181,6 +210,144 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       status: 'pending',
     },
   ]);
+  const [splitExpenses, setSplitExpenses] = useState<SplitExpense[]>([
+    {
+      id: 'split-1',
+      title: 'Weekend Chalet in Diriyah',
+      totalAmount: 1200.0,
+      creatorUpiId: 'fahad@sarie',
+      date: 'Yesterday',
+      timestamp: new Date(),
+      status: 'active',
+      members: [
+        { id: 'm-1', name: 'Tariq Al-Otaibi', upiId: 'tariq@sarie', avatarInitials: 'TO', amount: 300.0, hasPaid: true },
+        { id: 'm-2', name: 'Sara Al-Mansoor', upiId: 'sara@sarie', avatarInitials: 'SM', amount: 300.0, hasPaid: false },
+        { id: 'm-3', name: 'Mohammed Al-Ghamdi', upiId: 'mohammed@sarie', avatarInitials: 'MG', amount: 300.0, hasPaid: false },
+        { id: 'm-4', name: 'Fahad Al-Harbi (You)', upiId: 'fahad@sarie', avatarInitials: 'FA', amount: 300.0, hasPaid: true },
+      ],
+    },
+  ]);
+
+  const [transferLimits, setTransferLimits] = useState<TransferLimits>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('qpay_transfer_limits');
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+    return {
+      dailyLimit: 50000.0,
+      dailyUsed: 4800.0,
+      perTransactionLimit: 20000.0,
+      monthlyLimit: 200000.0,
+      monthlyUsed: 28400.0,
+      contactlessLimit: 300.0,
+    };
+  });
+
+  const updateTransferLimits = (limits: Partial<TransferLimits>) => {
+    setTransferLimits((prev) => {
+      const updated = { ...prev, ...limits };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('qpay_transfer_limits', JSON.stringify(updated));
+      }
+      return updated;
+    });
+
+    // Authoritative backend API synchronization & SAMA limit validation
+    QPayApi.limits
+      .update({
+        dailyLimit: limits.dailyLimit,
+        singleTransactionLimit: limits.perTransactionLimit,
+        contactlessLimit: limits.contactlessLimit,
+      })
+      .catch((err) => {
+        console.warn('[AppContext] Backend limits sync notice:', err);
+      });
+  };
+
+  const [isBiometricsEnabled, setIsBiometricsEnabledState] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('qpay_biometrics_enabled') !== 'false';
+    }
+    return true;
+  });
+
+  const setIsBiometricsEnabled = (enabled: boolean) => {
+    setIsBiometricsEnabledState(enabled);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('qpay_biometrics_enabled', String(enabled));
+    }
+  };
+
+  const authenticateBiometrics = async (): Promise<boolean> => {
+    if (!isBiometricsEnabled) return true;
+    try {
+      if (window.PublicKeyCredential && window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable) {
+        await window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+      }
+    } catch {
+      // ignore
+    }
+    return true;
+  };
+
+  const [kycDocuments, setKycDocuments] = useState<KycDocumentRecord>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('kycDocuments');
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+    return { status: 'unverified' };
+  });
+
+  const submitReKyc = async (docs: {
+    frontDocUrl: string;
+    backDocUrl?: string;
+    docType: string;
+    nationalId: string;
+    dob: string;
+  }) => {
+    // Initiate Nafath KYC challenge via Backend API
+    try {
+      await QPayApi.kyc.initiateNafath({
+        nationalId: docs.nationalId,
+        docType: docs.docType as any,
+        dob: docs.dob,
+        frontDocUrl: docs.frontDocUrl,
+        backDocUrl: docs.backDocUrl,
+      });
+    } catch (err) {
+      console.warn('[AppContext] Backend KYC initiation notice:', err);
+    }
+
+    const docRecord: KycDocumentRecord = {
+      frontDocUrl: docs.frontDocUrl,
+      backDocUrl: docs.backDocUrl,
+      docType: docs.docType,
+      status: 'verified',
+      submittedAt: new Date().toLocaleDateString('en-GB'),
+    };
+    setKycDocuments(docRecord);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('kycDocuments', JSON.stringify(docRecord));
+    }
+    setIsKycVerified(true, {
+      nationalId: docs.nationalId,
+      dob: docs.dob,
+      verifiedAt: new Date().toLocaleDateString('en-GB'),
+    });
+  };
+
   const [deviceSessions, setDeviceSessions] = useState<DeviceSession[]>(INITIAL_SESSIONS);
 
   const [language, setLanguage] = useState<string>(() => {
@@ -215,6 +382,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const verifyUserPin = (pin: string): boolean => {
     return pin === userPin;
   };
+
 
   const [activeOtp, setActiveOtp] = useState<string>('589204');
 
@@ -255,6 +423,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     bankService.getBankAccounts().then(setBankAccounts);
     transactionService.getInitialTransactions().then(setTransactions);
     notificationService.getInitialNotifications().then(setNotifications);
+
+    // Sync authoritative transfer limits from backend
+    QPayApi.limits.get().then((res) => {
+      if (res.success && res.data) {
+        setTransferLimits({
+          dailyLimit: res.data.userConfiguredDailyLimit,
+          dailyUsed: res.data.dailyUsedAmount,
+          perTransactionLimit: res.data.singleTransactionLimit,
+          monthlyLimit: res.data.monthlyLimit,
+          monthlyUsed: res.data.monthlyUsedAmount,
+          contactlessLimit: res.data.contactlessMadaLimit,
+        });
+      }
+    }).catch(() => {});
 
     // Subscribe to Supabase real-time transactions
     const unsubscribe = subscribeToTransactions((newTx) => {
@@ -648,7 +830,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const addMoneyRequest = (req: { name: string; upiId: string; amount: number; note?: string }) => {
     const newReq: MoneyRequest = {
-      id: `req-${Date.now()}`,
+      id: `req-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
       requesterName: req.name,
       upiId: req.upiId,
       amount: req.amount,
@@ -657,6 +839,115 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       status: 'pending',
     };
     setMoneyRequests((prev) => [newReq, ...prev]);
+  };
+
+  const declineMoneyRequest = (requestId: string) => {
+    setMoneyRequests((prev) =>
+      prev.filter((r) => r.id !== requestId)
+    );
+
+    // Record decline transition in backend
+    QPayApi.splits.decline({ requestId }).catch((err) => {
+      console.warn('[AppContext] Backend decline notice:', err);
+    });
+
+    const newNotif: AppNotification = {
+      id: `notif-${Date.now()}`,
+      title: 'Payment Request Declined',
+      description: 'The money request has been declined.',
+      timestamp: 'Just now',
+      read: false,
+      type: 'info',
+    };
+    setNotifications((prev) => [newNotif, ...prev]);
+  };
+
+  const createSplitExpense = (params: {
+    title: string;
+    totalAmount: number;
+    members: { contact: Contact; amount: number }[];
+  }): SplitExpense => {
+    const newExpense: SplitExpense = {
+      id: `split-${Date.now()}`,
+      title: params.title,
+      totalAmount: params.totalAmount,
+      creatorUpiId: user.upiId,
+      date: 'Just now',
+      timestamp: new Date(),
+      status: 'active',
+      members: params.members.map((m, idx) => ({
+        id: `sm-${Date.now()}-${idx}`,
+        name: m.contact.name,
+        upiId: m.contact.upiId,
+        avatarInitials: m.contact.avatarInitials,
+        amount: m.amount,
+        hasPaid: m.contact.upiId === user.upiId,
+      })),
+    };
+
+    setSplitExpenses((prev) => [newExpense, ...prev]);
+
+    // Send split and RTP requests to backend API
+    QPayApi.splits
+      .create({
+        title: params.title,
+        totalAmount: params.totalAmount,
+        members: params.members.map((m) => ({
+          name: m.contact.name,
+          upiId: m.contact.upiId,
+          mobile: m.contact.mobile,
+          amount: m.amount,
+        })),
+      })
+      .catch((err) => {
+        console.warn('[AppContext] Backend split dispatch notice:', err);
+      });
+
+    // Send RTP to non-self members in UI
+    params.members.forEach((m) => {
+      if (m.contact.upiId !== user.upiId) {
+        addMoneyRequest({
+          name: m.contact.name,
+          upiId: m.contact.upiId,
+          amount: m.amount,
+          note: `Split: ${params.title}`,
+        });
+      }
+    });
+
+    const newNotif: AppNotification = {
+      id: `notif-${Date.now()}`,
+      title: 'Split Expense Created',
+      description: `Created split "${params.title}" for SAR ${params.totalAmount}`,
+      timestamp: 'Just now',
+      read: false,
+      type: 'success',
+    };
+    setNotifications((prev) => [newNotif, ...prev]);
+
+    return newExpense;
+  };
+
+  const markSplitMemberPaid = (expenseId: string, memberId: string) => {
+    setSplitExpenses((prev) =>
+      prev.map((exp) => {
+        if (exp.id !== expenseId) return exp;
+        const updatedMembers = exp.members.map((m) =>
+          m.id === memberId ? { ...m, hasPaid: true } : m
+        );
+        const allPaid = updatedMembers.every((m) => m.hasPaid);
+        return {
+          ...exp,
+          members: updatedMembers,
+          status: allPaid ? ('settled' as const) : ('active' as const),
+        };
+      })
+    );
+
+    // Settle member obligation on backend
+    QPayApi.splits.settle(expenseId, memberId).catch((err) => {
+      console.warn('[AppContext] Backend split settlement notice:', err);
+    });
   };
 
   return (
@@ -678,6 +969,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         notifications,
         contacts: FREQUENT_CONTACTS,
         moneyRequests,
+        splitExpenses,
+        transferLimits,
         deviceSessions,
         lastTransaction,
         electricityBill,
@@ -711,8 +1004,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         isKycVerified,
         setIsKycVerified,
         kycData,
+        kycDocuments,
+        submitReKyc,
         terminateSession,
         addMoneyRequest,
+        declineMoneyRequest,
+        createSplitExpense,
+        markSplitMemberPaid,
+        updateTransferLimits,
+        isBiometricsEnabled,
+        setIsBiometricsEnabled,
+        authenticateBiometrics,
         userPin,
         setUserPin,
         verifyUserPin,

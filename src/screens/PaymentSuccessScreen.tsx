@@ -8,9 +8,12 @@ import { useApp } from '../state/AppContext';
 import { formatCurrency, formatDate } from '../utils/formatters';
 import type { Transaction } from '../types';
 
+import { receiptGenerator } from '../utils/receiptGenerator';
+
 export const PaymentSuccessScreen: React.FC = () => {
   const { screenParams, lastTransaction, navigateTo, t, language, isRtl } = useApp();
   const [downloadMsg, setDownloadMsg] = useState(false);
+  const [isProcessingReceipt, setIsProcessingReceipt] = useState(false);
 
   const txn: Transaction = screenParams.transaction || lastTransaction || {
     id: 'QT98472910482',
@@ -24,26 +27,34 @@ export const PaymentSuccessScreen: React.FC = () => {
   };
 
   const displayTitle = t(txn.title, txn.title);
+  const isAr = language === 'العربية' || language === 'ar';
 
   const handleDone = () => {
     navigateTo('HOME');
   };
 
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: 'QTPay Receipt',
-        text: `${language === 'العربية' ? 'تم التحويل بنجاح!' : 'Payment Successful!'} ${formatCurrency(txn.amount, language)} ${language === 'العربية' ? 'إلى' : 'paid to'} ${displayTitle}. Ref: ${txn.utr}`,
-      }).catch(() => {});
-    } else {
-      setDownloadMsg(true);
-      setTimeout(() => setDownloadMsg(false), 2500);
+  const handleShare = async () => {
+    setIsProcessingReceipt(true);
+    try {
+      await receiptGenerator.shareReceipt(txn, displayTitle, isAr);
+    } catch {
+      // fallback
+    } finally {
+      setIsProcessingReceipt(false);
     }
   };
 
-  const handleDownloadReceipt = () => {
-    setDownloadMsg(true);
-    setTimeout(() => setDownloadMsg(false), 2500);
+  const handleDownloadReceipt = async () => {
+    setIsProcessingReceipt(true);
+    try {
+      await receiptGenerator.downloadReceipt(txn, displayTitle, isAr);
+      setDownloadMsg(true);
+      setTimeout(() => setDownloadMsg(false), 3000);
+    } catch {
+      // ignore
+    } finally {
+      setIsProcessingReceipt(false);
+    }
   };
 
   return (
@@ -128,10 +139,10 @@ export const PaymentSuccessScreen: React.FC = () => {
 
         {/* Action Buttons */}
         <div style={{ display: 'flex', gap: '12px', marginBottom: '14px' }}>
-          <SecondaryButton onClick={handleShare}>
+          <SecondaryButton onClick={handleShare} disabled={isProcessingReceipt}>
             <Share2 size={16} /> {t('btn.share', 'Share')}
           </SecondaryButton>
-          <SecondaryButton onClick={handleDownloadReceipt}>
+          <SecondaryButton onClick={handleDownloadReceipt} disabled={isProcessingReceipt}>
             <FileText size={16} /> {language === 'العربية' ? 'الإيصال' : 'Receipt'}
           </SecondaryButton>
         </div>

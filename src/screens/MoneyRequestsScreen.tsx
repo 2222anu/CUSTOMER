@@ -1,12 +1,14 @@
-import React from 'react';
-import { Check, X, ArrowDownLeft } from 'lucide-react';
+import React, { useState } from 'react';
+import { Check, X, ArrowDownLeft, Users, CheckCircle2 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useApp } from '../state/AppContext';
 import { formatSaudiCurrency, translateText } from '../utils/i18n';
 
 export const MoneyRequestsScreen: React.FC = () => {
-  const { moneyRequests, openPinModal, completePayment, navigateTo, language, t } = useApp();
+  const { moneyRequests, openPinModal, completePayment, declineMoneyRequest, navigateTo, language, t } = useApp();
+  const [declinedFeedback, setDeclinedFeedback] = useState<string | null>(null);
+  const isAr = language === 'العربية' || language === 'ar';
 
   const handlePayRequest = (req: typeof moneyRequests[0]) => {
     openPinModal({
@@ -25,11 +27,89 @@ export const MoneyRequestsScreen: React.FC = () => {
     });
   };
 
+  const handleDeclineRequest = (req: typeof moneyRequests[0]) => {
+    declineMoneyRequest(req.id);
+    setDeclinedFeedback(
+      isAr
+        ? `تم رفض طلب الدفع من ${req.requesterName}`
+        : `Declined payment request from ${req.requesterName}`
+    );
+    setTimeout(() => setDeclinedFeedback(null), 3000);
+  };
+
   return (
-    <div className="fade-in" style={{ backgroundColor: '#080c14', minHeight: '100vh', paddingBottom: '32px', color: '#FFFFFF' }}>
+    <div className="fade-in" style={{ backgroundColor: '#080c14', minHeight: '100vh', paddingBottom: '96px', color: '#FFFFFF' }}>
       <AppHeader title={translateText('Money Requests', language)} showBack showSettings={false} />
 
       <div style={{ padding: '20px' }}>
+        {/* Banner with Split Expenses Shortcut */}
+        <div
+          onClick={() => navigateTo('SPLIT_EXPENSES')}
+          className="interactive-tap"
+          style={{
+            backgroundColor: 'var(--color-surface, #111726)',
+            border: '1px solid var(--brand-green-border, rgba(127, 232, 127, 0.35))',
+            borderRadius: '16px',
+            padding: '16px',
+            marginBottom: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            cursor: 'pointer',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '12px',
+                backgroundColor: 'var(--brand-green-tint, rgba(127, 232, 127, 0.14))',
+                color: 'var(--brand-green, #7FE87F)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Users size={20} />
+            </div>
+            <div>
+              <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF' }}>
+                {isAr ? 'تقسيم المصروفات والفواتير' : 'Split Expenses with Friends'}
+              </div>
+              <div style={{ fontSize: '12px', color: '#8E9BAE', marginTop: '2px' }}>
+                {isAr ? 'قسّم الفواتير بالتساوي وأرسل طلبات فورية' : 'Split bills equally and send Sarie requests'}
+              </div>
+            </div>
+          </div>
+          <span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--brand-green, #7FE87F)' }}>
+            {isAr ? 'فتح' : 'Open'} →
+          </span>
+        </div>
+
+        {/* Feedback Alert on Decline */}
+        {declinedFeedback && (
+          <div
+            className="fade-in"
+            style={{
+              backgroundColor: 'rgba(239, 68, 68, 0.15)',
+              border: '1px solid rgba(239, 68, 68, 0.3)',
+              borderRadius: '12px',
+              padding: '12px 16px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              color: '#EF4444',
+              fontSize: '13px',
+              fontWeight: 700,
+              marginBottom: '16px',
+            }}
+          >
+            <CheckCircle2 size={16} color="#EF4444" />
+            <span>{declinedFeedback}</span>
+          </div>
+        )}
+
         {moneyRequests.length === 0 ? (
           <div
             style={{
@@ -156,12 +236,14 @@ export const MoneyRequestsScreen: React.FC = () => {
 
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button
+                  type="button"
+                  onClick={() => handleDeclineRequest(req)}
                   className="interactive-tap"
                   style={{
                     flex: 1,
                     backgroundColor: 'var(--color-surface-elevated, #182236)',
-                    border: '1px solid var(--color-border, rgba(255, 255, 255, 0.06))',
-                    color: '#A2A2BA',
+                    border: '1px solid rgba(239, 68, 68, 0.3)',
+                    color: '#EF4444',
                     borderRadius: '12px',
                     padding: '12px',
                     fontWeight: 800,
@@ -171,6 +253,7 @@ export const MoneyRequestsScreen: React.FC = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '4px',
+                    transition: 'all 0.15s ease',
                   }}
                 >
                   <X size={16} /> {translateText('Decline', language)}
@@ -188,4 +271,3 @@ export const MoneyRequestsScreen: React.FC = () => {
     </div>
   );
 };
-

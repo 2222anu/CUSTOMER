@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useApp } from '../state/AppContext';
 import { toArabicNumerals } from '../utils/i18n';
 
 interface PinPadProps {
   length?: number;
   onComplete: (pin: string) => void;
+  onClearError?: () => void;
   error?: string;
   successMessage?: string;
   customTitle?: string;
@@ -13,6 +14,7 @@ interface PinPadProps {
 export const PinPad: React.FC<PinPadProps> = ({
   length = 4,
   onComplete,
+  onClearError,
   error,
   successMessage,
   customTitle,
@@ -20,35 +22,65 @@ export const PinPad: React.FC<PinPadProps> = ({
   const { language } = useApp();
   const [pin, setPin] = useState<string>('');
   const [isShaking, setIsShaking] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (error) {
       setIsShaking(true);
-      const timer = setTimeout(() => {
+      setHasError(true);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => {
         setIsShaking(false);
         setPin('');
       }, 500);
-      return () => clearTimeout(timer);
+      return () => {
+        if (timerRef.current) clearTimeout(timerRef.current);
+      };
+    } else {
+      setHasError(false);
+      setIsShaking(false);
     }
   }, [error]);
 
-  const handleKeyPress = (num: string) => {
-    if (pin.length < length) {
-      const nextPin = pin + num;
-      setPin(nextPin);
-      if (nextPin.length === length) {
-        setTimeout(() => {
-          onComplete(nextPin);
-        }, 120);
+  const handleKeyPress = useCallback(
+    (num: string) => {
+      if (hasError || error) {
+        setHasError(false);
+        setIsShaking(false);
+        if (timerRef.current) clearTimeout(timerRef.current);
+        if (onClearError) onClearError();
+        setPin(num);
+        return;
       }
-    }
-  };
 
-  const handleDelete = () => {
-    if (pin.length > 0) {
-      setPin((prev) => prev.slice(0, -1));
+      setPin((prev) => {
+        if (prev.length < length) {
+          const nextPin = prev + num;
+          if (nextPin.length === length) {
+            setTimeout(() => {
+              onComplete(nextPin);
+            }, 120);
+          }
+          return nextPin;
+        }
+        return prev;
+      });
+    },
+    [hasError, error, length, onClearError, onComplete]
+  );
+
+  const handleDelete = useCallback(() => {
+    if (hasError || error) {
+      setHasError(false);
+      setIsShaking(false);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      if (onClearError) onClearError();
+      setPin('');
+      return;
     }
-  };
+    setPin((prev) => (prev.length > 0 ? prev.slice(0, -1) : ''));
+  }, [hasError, error, onClearError]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -61,14 +93,14 @@ export const PinPad: React.FC<PinPadProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [pin, length]);
+  }, [handleKeyPress, handleDelete]);
 
   // Determine Title Text and Color
   let titleText = customTitle;
   let titleColor = '#9ca3af';
 
-  if (error) {
-    titleText = error;
+  if (error || hasError) {
+    titleText = error || (language === 'العربية' ? 'الرمز غير صحيح، حاول مرة أخرى' : 'Incorrect PIN, Try Again');
     titleColor = '#f87171';
   } else if (successMessage) {
     titleText = successMessage;
@@ -100,9 +132,9 @@ export const PinPad: React.FC<PinPadProps> = ({
             letterSpacing: '1.5px',
             color: titleColor,
             textTransform: 'uppercase',
-            fontWeight: 600,
+            fontWeight: 700,
             marginBottom: '16px',
-            transition: 'color 0.2s',
+            transition: 'color 0.2s ease',
           }}
         >
           {titleText}
@@ -116,33 +148,41 @@ export const PinPad: React.FC<PinPadProps> = ({
           style={{
             display: 'flex',
             justifyContent: 'center',
-            gap: '12px',
+            gap: '14px',
             direction: 'ltr',
           }}
         >
           {Array.from({ length }).map((_, index) => {
-            const isFilled = index < pin.length;
-            const isError = Boolean(error);
+            const isErrorDot = isShaking;
+            const isFilled = !isShaking && index < pin.length;
+
             return (
               <div
                 key={index}
-                className={`dot ${isFilled ? 'active' : ''} ${isError ? 'error' : ''}`}
+                className={`dot ${isFilled ? 'active' : ''} ${isErrorDot ? 'error' : ''}`}
                 style={{
-                  width: '12px',
-                  height: '12px',
+                  width: '14px',
+                  height: '14px',
                   borderRadius: '50%',
-                  backgroundColor: isError
+                  backgroundColor: isErrorDot
                     ? '#f87171'
                     : isFilled
                     ? '#7FE87F'
-                    : 'rgba(255, 255, 255, 0.1)',
-                  transform: isFilled ? 'scale(1.2)' : 'scale(1)',
-                  boxShadow: isError
-                    ? '0 0 12px rgba(248, 113, 113, 0.5)'
+                    : 'rgba(255, 255, 255, 0.12)',
+                  transform: isErrorDot
+                    ? 'scale(1.15)'
                     : isFilled
-                    ? '0 0 12px rgba(127, 232, 127, 0.5)'
+                    ? 'scale(1.2)'
+                    : 'scale(1)',
+                  boxShadow: isErrorDot
+                    ? '0 0 12px rgba(248, 113, 113, 0.6)'
+                    : isFilled
+                    ? '0 0 12px rgba(127, 232, 127, 0.6)'
                     : 'none',
-                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                  border: isFilled || isErrorDot
+                    ? 'none'
+                    : '1px solid rgba(255, 255, 255, 0.18)',
+                  transition: 'all 0.18s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}
               />
             );
@@ -231,3 +271,4 @@ export const PinPad: React.FC<PinPadProps> = ({
     </div>
   );
 };
+

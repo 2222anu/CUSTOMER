@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BottomSheet } from '../components/BottomSheet';
 import { PinPad } from '../components/PinPad';
 import { useApp } from '../state/AppContext';
@@ -8,6 +8,14 @@ export const PayBillPinModal: React.FC = () => {
   const { isPinModalOpen, closePinModal, pendingPaymentData, bankAccounts, t, language, verifyUserPin } = useApp();
   const [error, setError] = useState<string>('');
   const [isVerifying, setIsVerifying] = useState<boolean>(false);
+
+  // Reset errors whenever the modal opens or closes
+  useEffect(() => {
+    if (isPinModalOpen) {
+      setError('');
+      setIsVerifying(false);
+    }
+  }, [isPinModalOpen]);
 
   const primaryBank = bankAccounts.find((b) => b.isPrimary) || bankAccounts[0];
 
@@ -22,6 +30,8 @@ export const PayBillPinModal: React.FC = () => {
     setIsVerifying(true);
     setError('');
     try {
+      // Fast feedback delay for secure tactile feel
+      await new Promise((res) => setTimeout(res, 120));
       const isValid = verifyUserPin(pin);
       if (isValid) {
         closePinModal();
@@ -87,6 +97,7 @@ export const PayBillPinModal: React.FC = () => {
         <PinPad
           length={4}
           onComplete={handlePinComplete}
+          onClearError={() => setError('')}
           error={error}
           customTitle={
             isVerifying
@@ -94,7 +105,23 @@ export const PayBillPinModal: React.FC = () => {
               : (language === 'العربية' ? 'أدخل الرمز السري المكون من ٤ أرقام' : 'Enter 4-Digit PIN')
           }
         />
+
+        {/* Subtle Demo Helper */}
+        <div
+          style={{
+            marginTop: '14px',
+            textAlign: 'center',
+            fontSize: '11px',
+            color: '#6b7280',
+            letterSpacing: '0.3px',
+          }}
+        >
+          {language === 'العربية'
+            ? 'الرمز الافتراضي: 1234'
+            : 'Default PIN: 1234'}
+        </div>
       </div>
     </BottomSheet>
   );
 };
+

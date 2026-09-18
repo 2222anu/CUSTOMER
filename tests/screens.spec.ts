@@ -226,12 +226,19 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     // PIN Modal should open
     await expect(page.getByText(/PIN/i).first()).toBeVisible();
 
-    // Type 4-digit PIN
+    // 1. Type wrong 4-digit PIN first
+    await page.keyboard.type('9999');
+    await expect(page.getByText(/Incorrect PIN, Try Again|الرمز غير صحيح/i)).toBeVisible({ timeout: 2000 });
+
+    // Wait for shake animation to finish resetting dots
+    await page.waitForTimeout(600);
+
+    // 2. Type correct 4-digit PIN to recover and proceed
     await page.keyboard.type('1234');
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(400);
 
     // Payment Success Screen
-    await expect(page.getByText('Payment Successful')).toBeVisible();
+    await expect(page.getByText('Payment Successful')).toBeVisible({ timeout: 4000 });
     await expect(page.getByText('Tariq Al-Otaibi').first()).toBeVisible();
     await expect(page.getByText(/Reference|UTR|SARIE/i).first()).toBeVisible();
 
@@ -242,6 +249,7 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
 
     expect(consoleErrors).toEqual([]);
   });
+
 
   test('Electricity Bill Fetch and Payment Flow', async () => {
     await page.goto(getAppUrl('screen=ELECTRICITY'));
@@ -390,6 +398,36 @@ test.describe.serial('QtPay Comprehensive Flow Audit & Quality Verification', ()
     }
     expect(consoleErrors).toEqual([]);
   });
+
+  test('Home Screen Bank Card Check Balance PIN flow with error recovery and balance reveal', async () => {
+    await page.goto(getAppUrl('screen=HOME'));
+    await page.waitForLoadState('domcontentloaded');
+
+    // Find and click "Check Balance" on the bank card
+    const checkBalanceBtn = page.getByRole('button', { name: /Check Balance|عرض الرصيد/i }).first();
+    await expect(checkBalanceBtn).toBeVisible({ timeout: 5000 });
+    await checkBalanceBtn.click();
+
+    // PIN Modal should appear with "Enter PIN to Check Balance"
+    await expect(page.getByText(/Enter PIN to Check Balance|الرمز السري للرصيد/i)).toBeVisible();
+
+    // 1. Enter wrong PIN first
+    await page.keyboard.type('0000');
+    await expect(page.getByText(/Incorrect PIN, Try Again|الرمز غير صحيح/i)).toBeVisible({ timeout: 2000 });
+
+    // Wait for shake animation & dots reset
+    await page.waitForTimeout(600);
+
+    // 2. Enter correct PIN (1234)
+    await page.keyboard.type('1234');
+    await page.waitForTimeout(500);
+
+    // Modal should close and balance should be revealed on the bank card
+    await expect(page.getByText(/SAR\s*[\d,]+\.\d{2}|ر\.س/i).first()).toBeVisible({ timeout: 3000 });
+
+    expect(consoleErrors).toEqual([]);
+  });
 });
+
 
 

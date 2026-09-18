@@ -8,7 +8,7 @@ import { useApp } from '../state/AppContext';
 import { translateText } from '../utils/i18n';
 
 export const UPISettingsScreen: React.FC = () => {
-  const { user, bankAccounts, setPrimaryBank, navigateTo, language, t } = useApp();
+  const { user, bankAccounts, setPrimaryBank, navigateTo, language, t, verifyUserPin, setUserPin } = useApp();
   const isAr = language === 'العربية' || language === 'ar';
   const [copied, setCopied] = useState(false);
   const [isPinModalOpen, setIsPinModalOpen] = useState(false);
@@ -36,6 +36,10 @@ export const UPISettingsScreen: React.FC = () => {
       setPinError(translateText('Old PIN must be 4 digits', language));
       return;
     }
+    if (!verifyUserPin(oldPin)) {
+      setPinError(language === 'العربية' ? 'الرمز القديم غير صحيح' : 'Old PIN is incorrect (Default: 1234)');
+      return;
+    }
     if (newPin.length !== 4) {
       setPinError(translateText('New PIN must be 4 digits', language));
       return;
@@ -45,6 +49,7 @@ export const UPISettingsScreen: React.FC = () => {
       return;
     }
 
+    setUserPin(newPin);
     setPinSuccess(true);
     setTimeout(() => {
       setPinSuccess(false);
